@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0EBB5EE41BD9D1A00061962B /* EETentBlur2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB5EE31BD9D1A00061962B /* EETentBlur2D.cpp */; };
+		0EBB5EE51BD9D1A00061962B /* EETentBlur2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB5EE31BD9D1A00061962B /* EETentBlur2D.cpp */; };
 		1AC6FB21180E996B004C840B /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAF9180E9839004C840B /* libcocos2d Mac.a */; };
 		1AC6FB30180E99EB004C840B /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FB07180E9839004C840B /* libcocos2d iOS.a */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -45,46 +47,20 @@
 		521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 521A8E6219F0C34300D177D7 /* Default-667h@2x.png */; };
 		521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 521A8E6319F0C34300D177D7 /* Default-736h@3x.png */; };
 		52B47A471A53D09C004E4C60 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52B47A461A53D09B004E4C60 /* Security.framework */; };
-		6C32DC441BD67791007613F9 /* EEBoxBlur1D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C32DC431BD67791007613F9 /* EEBoxBlur1D.cpp */; settings = {ASSET_TAGS = (); }; };
-		6C32DC451BD67791007613F9 /* EEBoxBlur1D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C32DC431BD67791007613F9 /* EEBoxBlur1D.cpp */; settings = {ASSET_TAGS = (); }; };
-		6C32DC4F1BD68A0E007613F9 /* CCBUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C32DC4D1BD68A0E007613F9 /* CCBUtils.cpp */; settings = {ASSET_TAGS = (); }; };
-		6C32DC501BD68A0E007613F9 /* CCBUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C32DC4D1BD68A0E007613F9 /* CCBUtils.cpp */; settings = {ASSET_TAGS = (); }; };
-		6C32DC521BD68A24007613F9 /* Resources-gen in Resources */ = {isa = PBXBuildFile; fileRef = 6C32DC511BD68A24007613F9 /* Resources-gen */; settings = {ASSET_TAGS = (); }; };
-		6C32DC531BD68A24007613F9 /* Resources-gen in Resources */ = {isa = PBXBuildFile; fileRef = 6C32DC511BD68A24007613F9 /* Resources-gen */; settings = {ASSET_TAGS = (); }; };
-		6C32DC561BD692CF007613F9 /* EEBoxBlur2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C32DC551BD692CF007613F9 /* EEBoxBlur2D.cpp */; settings = {ASSET_TAGS = (); }; };
-		6C32DC571BD692CF007613F9 /* EEBoxBlur2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C32DC551BD692CF007613F9 /* EEBoxBlur2D.cpp */; settings = {ASSET_TAGS = (); }; };
-		6C7A9ABC1BD9335600199AC0 /* EETentBlur1D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C7A9ABB1BD9335600199AC0 /* EETentBlur1D.cpp */; settings = {ASSET_TAGS = (); }; };
-		6C7A9ABD1BD9335600199AC0 /* EETentBlur1D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C7A9ABB1BD9335600199AC0 /* EETentBlur1D.cpp */; settings = {ASSET_TAGS = (); }; };
-		6CAC26D21BD4111000F11F3A /* EECheckBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26A81BD4111000F11F3A /* EECheckBox.cpp */; settings = {ASSET_TAGS = (); }; };
-		6CAC26D31BD4111000F11F3A /* EECheckBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26A81BD4111000F11F3A /* EECheckBox.cpp */; settings = {ASSET_TAGS = (); }; };
-		6CAC26D41BD4111000F11F3A /* EEControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26AA1BD4111000F11F3A /* EEControl.cpp */; settings = {ASSET_TAGS = (); }; };
-		6CAC26D51BD4111000F11F3A /* EEControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26AA1BD4111000F11F3A /* EEControl.cpp */; settings = {ASSET_TAGS = (); }; };
-		6CAC26D61BD4111000F11F3A /* EEData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26AC1BD4111000F11F3A /* EEData.cpp */; settings = {ASSET_TAGS = (); }; };
-		6CAC26D71BD4111000F11F3A /* EEData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26AC1BD4111000F11F3A /* EEData.cpp */; settings = {ASSET_TAGS = (); }; };
-		6CAC26D81BD4111000F11F3A /* EEDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26AE1BD4111000F11F3A /* EEDialog.cpp */; settings = {ASSET_TAGS = (); }; };
-		6CAC26D91BD4111000F11F3A /* EEDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26AE1BD4111000F11F3A /* EEDialog.cpp */; settings = {ASSET_TAGS = (); }; };
-		6CAC26DA1BD4111000F11F3A /* EEDialogManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26B11BD4111000F11F3A /* EEDialogManager.cpp */; settings = {ASSET_TAGS = (); }; };
-		6CAC26DB1BD4111000F11F3A /* EEDialogManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26B11BD4111000F11F3A /* EEDialogManager.cpp */; settings = {ASSET_TAGS = (); }; };
-		6CAC26DC1BD4111000F11F3A /* EEDynamicValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26B31BD4111000F11F3A /* EEDynamicValue.cpp */; settings = {ASSET_TAGS = (); }; };
-		6CAC26DD1BD4111000F11F3A /* EEDynamicValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26B31BD4111000F11F3A /* EEDynamicValue.cpp */; settings = {ASSET_TAGS = (); }; };
-		6CAC26DE1BD4111000F11F3A /* EEEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26B51BD4111000F11F3A /* EEEvent.cpp */; settings = {ASSET_TAGS = (); }; };
-		6CAC26DF1BD4111000F11F3A /* EEEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26B51BD4111000F11F3A /* EEEvent.cpp */; settings = {ASSET_TAGS = (); }; };
-		6CAC26E21BD4111000F11F3A /* EEGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26BB1BD4111000F11F3A /* EEGesture.cpp */; settings = {ASSET_TAGS = (); }; };
-		6CAC26E31BD4111000F11F3A /* EEGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26BB1BD4111000F11F3A /* EEGesture.cpp */; settings = {ASSET_TAGS = (); }; };
-		6CAC26E41BD4111000F11F3A /* EEGroupNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26BE1BD4111000F11F3A /* EEGroupNode.cpp */; settings = {ASSET_TAGS = (); }; };
-		6CAC26E51BD4111000F11F3A /* EEGroupNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26BE1BD4111000F11F3A /* EEGroupNode.cpp */; settings = {ASSET_TAGS = (); }; };
-		6CAC26E61BD4111000F11F3A /* EESha1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26C41BD4111000F11F3A /* EESha1.cpp */; settings = {ASSET_TAGS = (); }; };
-		6CAC26E71BD4111000F11F3A /* EESha1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26C41BD4111000F11F3A /* EESha1.cpp */; settings = {ASSET_TAGS = (); }; };
-		6CAC26E81BD4111000F11F3A /* EETouchListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26C71BD4111000F11F3A /* EETouchListener.cpp */; settings = {ASSET_TAGS = (); }; };
-		6CAC26E91BD4111000F11F3A /* EETouchListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26C71BD4111000F11F3A /* EETouchListener.cpp */; settings = {ASSET_TAGS = (); }; };
-		6CAC26EA1BD4111000F11F3A /* EETouchManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26CA1BD4111000F11F3A /* EETouchManager.cpp */; settings = {ASSET_TAGS = (); }; };
-		6CAC26EB1BD4111000F11F3A /* EETouchManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26CA1BD4111000F11F3A /* EETouchManager.cpp */; settings = {ASSET_TAGS = (); }; };
-		6CAC26EC1BD4111000F11F3A /* EEUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26CC1BD4111000F11F3A /* EEUtils.cpp */; settings = {ASSET_TAGS = (); }; };
-		6CAC26ED1BD4111000F11F3A /* EEUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26CC1BD4111000F11F3A /* EEUtils.cpp */; settings = {ASSET_TAGS = (); }; };
-		6CAC26F61BD411BB00F11F3A /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26F21BD411BB00F11F3A /* AppDelegate.cpp */; settings = {ASSET_TAGS = (); }; };
-		6CAC26F71BD411BB00F11F3A /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26F21BD411BB00F11F3A /* AppDelegate.cpp */; settings = {ASSET_TAGS = (); }; };
-		6CAC26F81BD411BB00F11F3A /* TestScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26F41BD411BB00F11F3A /* TestScene.cpp */; settings = {ASSET_TAGS = (); }; };
-		6CAC26F91BD411BB00F11F3A /* TestScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26F41BD411BB00F11F3A /* TestScene.cpp */; settings = {ASSET_TAGS = (); }; };
+		6C32DC441BD67791007613F9 /* EEBoxBlur1D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C32DC431BD67791007613F9 /* EEBoxBlur1D.cpp */; };
+		6C32DC451BD67791007613F9 /* EEBoxBlur1D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C32DC431BD67791007613F9 /* EEBoxBlur1D.cpp */; };
+		6C32DC4F1BD68A0E007613F9 /* CCBUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C32DC4D1BD68A0E007613F9 /* CCBUtils.cpp */; };
+		6C32DC501BD68A0E007613F9 /* CCBUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C32DC4D1BD68A0E007613F9 /* CCBUtils.cpp */; };
+		6C32DC521BD68A24007613F9 /* Resources-gen in Resources */ = {isa = PBXBuildFile; fileRef = 6C32DC511BD68A24007613F9 /* Resources-gen */; };
+		6C32DC531BD68A24007613F9 /* Resources-gen in Resources */ = {isa = PBXBuildFile; fileRef = 6C32DC511BD68A24007613F9 /* Resources-gen */; };
+		6C32DC561BD692CF007613F9 /* EEBoxBlur2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C32DC551BD692CF007613F9 /* EEBoxBlur2D.cpp */; };
+		6C32DC571BD692CF007613F9 /* EEBoxBlur2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C32DC551BD692CF007613F9 /* EEBoxBlur2D.cpp */; };
+		6C7A9ABC1BD9335600199AC0 /* EETentBlur1D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C7A9ABB1BD9335600199AC0 /* EETentBlur1D.cpp */; };
+		6C7A9ABD1BD9335600199AC0 /* EETentBlur1D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C7A9ABB1BD9335600199AC0 /* EETentBlur1D.cpp */; };
+		6CAC26F61BD411BB00F11F3A /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26F21BD411BB00F11F3A /* AppDelegate.cpp */; };
+		6CAC26F71BD411BB00F11F3A /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26F21BD411BB00F11F3A /* AppDelegate.cpp */; };
+		6CAC26F81BD411BB00F11F3A /* TestScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26F41BD411BB00F11F3A /* TestScene.cpp */; };
+		6CAC26F91BD411BB00F11F3A /* TestScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26F41BD411BB00F11F3A /* TestScene.cpp */; };
 		8262943E1AAF051F00CB7CF7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8262943D1AAF051F00CB7CF7 /* Security.framework */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
@@ -129,6 +105,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0EBB5EE31BD9D1A00061962B /* EETentBlur2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EETentBlur2D.cpp; sourceTree = "<group>"; };
 		1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
 		1ACB3243164770DE00914215 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../../cocos2dx/platform/third_party/ios/libraries/libcurl.a; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -180,49 +157,12 @@
 		6C32DC541BD68A34007613F9 /* TemplateLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TemplateLoader.h; sourceTree = "<group>"; };
 		6C32DC551BD692CF007613F9 /* EEBoxBlur2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEBoxBlur2D.cpp; sourceTree = "<group>"; };
 		6C7A9ABB1BD9335600199AC0 /* EETentBlur1D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EETentBlur1D.cpp; sourceTree = "<group>"; };
-		6CAC26A31BD4111000F11F3A /* EEAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEAnalytics.h; sourceTree = "<group>"; };
-		6CAC26A81BD4111000F11F3A /* EECheckBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EECheckBox.cpp; sourceTree = "<group>"; };
-		6CAC26A91BD4111000F11F3A /* EECheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EECheckBox.h; sourceTree = "<group>"; };
-		6CAC26AA1BD4111000F11F3A /* EEControl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEControl.cpp; sourceTree = "<group>"; };
-		6CAC26AB1BD4111000F11F3A /* EEControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEControl.h; sourceTree = "<group>"; };
-		6CAC26AC1BD4111000F11F3A /* EEData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEData.cpp; sourceTree = "<group>"; };
-		6CAC26AD1BD4111000F11F3A /* EEData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEData.h; sourceTree = "<group>"; };
-		6CAC26AE1BD4111000F11F3A /* EEDialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDialog.cpp; sourceTree = "<group>"; };
-		6CAC26AF1BD4111000F11F3A /* EEDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEDialog.h; sourceTree = "<group>"; };
-		6CAC26B01BD4111000F11F3A /* EEDialogManager-Impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EEDialogManager-Impl.h"; sourceTree = "<group>"; };
-		6CAC26B11BD4111000F11F3A /* EEDialogManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDialogManager.cpp; sourceTree = "<group>"; };
-		6CAC26B21BD4111000F11F3A /* EEDialogManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEDialogManager.h; sourceTree = "<group>"; };
-		6CAC26B31BD4111000F11F3A /* EEDynamicValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDynamicValue.cpp; sourceTree = "<group>"; };
-		6CAC26B41BD4111000F11F3A /* EEDynamicValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEDynamicValue.h; sourceTree = "<group>"; };
-		6CAC26B51BD4111000F11F3A /* EEEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEEvent.cpp; sourceTree = "<group>"; };
-		6CAC26B61BD4111000F11F3A /* EEEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEEvent.h; sourceTree = "<group>"; };
 		6CAC26B81BD4111000F11F3A /* EEForward.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEForward.hpp; sourceTree = "<group>"; };
-		6CAC26B91BD4111000F11F3A /* EEFunctionTraits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEFunctionTraits.h; sourceTree = "<group>"; };
-		6CAC26BA1BD4111000F11F3A /* EEGesture-Impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EEGesture-Impl.h"; sourceTree = "<group>"; };
-		6CAC26BB1BD4111000F11F3A /* EEGesture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEGesture.cpp; sourceTree = "<group>"; };
-		6CAC26BC1BD4111000F11F3A /* EEGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEGesture.h; sourceTree = "<group>"; };
-		6CAC26BD1BD4111000F11F3A /* EEGroupNode-Impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EEGroupNode-Impl.h"; sourceTree = "<group>"; };
-		6CAC26BE1BD4111000F11F3A /* EEGroupNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEGroupNode.cpp; sourceTree = "<group>"; };
-		6CAC26BF1BD4111000F11F3A /* EEGroupNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEGroupNode.h; sourceTree = "<group>"; };
-		6CAC26C01BD4111000F11F3A /* EEGroupNodeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEGroupNodeDelegate.h; sourceTree = "<group>"; };
-		6CAC26C11BD4111000F11F3A /* EEHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEHeader.h; sourceTree = "<group>"; };
-		6CAC26C21BD4111000F11F3A /* EEJni.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEJni.h; sourceTree = "<group>"; };
 		6CAC26C31BD4111000F11F3A /* EEMacro.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEMacro.hpp; sourceTree = "<group>"; };
-		6CAC26C41BD4111000F11F3A /* EESha1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EESha1.cpp; sourceTree = "<group>"; };
-		6CAC26C51BD4111000F11F3A /* EESha1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EESha1.h; sourceTree = "<group>"; };
-		6CAC26C61BD4111000F11F3A /* EETouchListener-Impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EETouchListener-Impl.h"; sourceTree = "<group>"; };
-		6CAC26C71BD4111000F11F3A /* EETouchListener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EETouchListener.cpp; sourceTree = "<group>"; };
-		6CAC26C81BD4111000F11F3A /* EETouchListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EETouchListener.h; sourceTree = "<group>"; };
-		6CAC26C91BD4111000F11F3A /* EETouchManager-Impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EETouchManager-Impl.h"; sourceTree = "<group>"; };
-		6CAC26CA1BD4111000F11F3A /* EETouchManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EETouchManager.cpp; sourceTree = "<group>"; };
-		6CAC26CB1BD4111000F11F3A /* EETouchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EETouchManager.h; sourceTree = "<group>"; };
-		6CAC26CC1BD4111000F11F3A /* EEUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEUtils.cpp; sourceTree = "<group>"; };
-		6CAC26CD1BD4111000F11F3A /* EEUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEUtils.h; sourceTree = "<group>"; };
 		6CAC26F21BD411BB00F11F3A /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
 		6CAC26F31BD411BB00F11F3A /* AppDelegate.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AppDelegate.hpp; sourceTree = "<group>"; };
 		6CAC26F41BD411BB00F11F3A /* TestScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestScene.cpp; sourceTree = "<group>"; };
 		6CAC26F51BD411BB00F11F3A /* TestScene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TestScene.hpp; sourceTree = "<group>"; };
-		6CAC26FA1BD4141E00F11F3A /* EEConfig.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EEConfig.hpp; sourceTree = "<group>"; };
 		8262943D1AAF051F00CB7CF7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -424,6 +364,7 @@
 				6C32DC431BD67791007613F9 /* EEBoxBlur1D.cpp */,
 				6C32DC551BD692CF007613F9 /* EEBoxBlur2D.cpp */,
 				6C7A9ABB1BD9335600199AC0 /* EETentBlur1D.cpp */,
+				0EBB5EE31BD9D1A00061962B /* EETentBlur2D.cpp */,
 			);
 			name = Image;
 			sourceTree = "<group>";
@@ -439,7 +380,6 @@
 		6CAC26EF1BD4113F00F11F3A /* Deprecated */ = {
 			isa = PBXGroup;
 			children = (
-				6CAC26A31BD4111000F11F3A /* EEAnalytics.h */,
 			);
 			name = Deprecated;
 			sourceTree = "<group>";
@@ -447,46 +387,10 @@
 		6CAC26F01BD411A500F11F3A /* EE Library */ = {
 			isa = PBXGroup;
 			children = (
-				6CAC26FA1BD4141E00F11F3A /* EEConfig.hpp */,
 				6CAC26C31BD4111000F11F3A /* EEMacro.hpp */,
 				6CAC26B81BD4111000F11F3A /* EEForward.hpp */,
 				6CAC26EF1BD4113F00F11F3A /* Deprecated */,
 				6CAC26EE1BD4111B00F11F3A /* Components */,
-				6CAC26A81BD4111000F11F3A /* EECheckBox.cpp */,
-				6CAC26A91BD4111000F11F3A /* EECheckBox.h */,
-				6CAC26AA1BD4111000F11F3A /* EEControl.cpp */,
-				6CAC26AB1BD4111000F11F3A /* EEControl.h */,
-				6CAC26AC1BD4111000F11F3A /* EEData.cpp */,
-				6CAC26AD1BD4111000F11F3A /* EEData.h */,
-				6CAC26AE1BD4111000F11F3A /* EEDialog.cpp */,
-				6CAC26AF1BD4111000F11F3A /* EEDialog.h */,
-				6CAC26B01BD4111000F11F3A /* EEDialogManager-Impl.h */,
-				6CAC26B11BD4111000F11F3A /* EEDialogManager.cpp */,
-				6CAC26B21BD4111000F11F3A /* EEDialogManager.h */,
-				6CAC26B31BD4111000F11F3A /* EEDynamicValue.cpp */,
-				6CAC26B41BD4111000F11F3A /* EEDynamicValue.h */,
-				6CAC26B51BD4111000F11F3A /* EEEvent.cpp */,
-				6CAC26B61BD4111000F11F3A /* EEEvent.h */,
-				6CAC26B91BD4111000F11F3A /* EEFunctionTraits.h */,
-				6CAC26BA1BD4111000F11F3A /* EEGesture-Impl.h */,
-				6CAC26BB1BD4111000F11F3A /* EEGesture.cpp */,
-				6CAC26BC1BD4111000F11F3A /* EEGesture.h */,
-				6CAC26BD1BD4111000F11F3A /* EEGroupNode-Impl.h */,
-				6CAC26BE1BD4111000F11F3A /* EEGroupNode.cpp */,
-				6CAC26BF1BD4111000F11F3A /* EEGroupNode.h */,
-				6CAC26C01BD4111000F11F3A /* EEGroupNodeDelegate.h */,
-				6CAC26C11BD4111000F11F3A /* EEHeader.h */,
-				6CAC26C21BD4111000F11F3A /* EEJni.h */,
-				6CAC26C41BD4111000F11F3A /* EESha1.cpp */,
-				6CAC26C51BD4111000F11F3A /* EESha1.h */,
-				6CAC26C61BD4111000F11F3A /* EETouchListener-Impl.h */,
-				6CAC26C71BD4111000F11F3A /* EETouchListener.cpp */,
-				6CAC26C81BD4111000F11F3A /* EETouchListener.h */,
-				6CAC26C91BD4111000F11F3A /* EETouchManager-Impl.h */,
-				6CAC26CA1BD4111000F11F3A /* EETouchManager.cpp */,
-				6CAC26CB1BD4111000F11F3A /* EETouchManager.h */,
-				6CAC26CC1BD4111000F11F3A /* EEUtils.cpp */,
-				6CAC26CD1BD4111000F11F3A /* EEUtils.h */,
 				6C32DC3A1BD66E62007613F9 /* EENonCopyable.hpp */,
 			);
 			name = "EE Library";
@@ -640,28 +544,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6CAC26DC1BD4111000F11F3A /* EEDynamicValue.cpp in Sources */,
-				6CAC26E41BD4111000F11F3A /* EEGroupNode.cpp in Sources */,
 				6CAC26F81BD411BB00F11F3A /* TestScene.cpp in Sources */,
-				6CAC26E81BD4111000F11F3A /* EETouchListener.cpp in Sources */,
 				6C32DC4F1BD68A0E007613F9 /* CCBUtils.cpp in Sources */,
-				6CAC26E61BD4111000F11F3A /* EESha1.cpp in Sources */,
 				6C32DC561BD692CF007613F9 /* EEBoxBlur2D.cpp in Sources */,
-				6CAC26D21BD4111000F11F3A /* EECheckBox.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
-				6CAC26EA1BD4111000F11F3A /* EETouchManager.cpp in Sources */,
-				6CAC26EC1BD4111000F11F3A /* EEUtils.cpp in Sources */,
-				6CAC26DE1BD4111000F11F3A /* EEEvent.cpp in Sources */,
 				6CAC26F61BD411BB00F11F3A /* AppDelegate.cpp in Sources */,
 				6C7A9ABC1BD9335600199AC0 /* EETentBlur1D.cpp in Sources */,
-				6CAC26E21BD4111000F11F3A /* EEGesture.cpp in Sources */,
-				6CAC26DA1BD4111000F11F3A /* EEDialogManager.cpp in Sources */,
-				6CAC26D81BD4111000F11F3A /* EEDialog.cpp in Sources */,
-				6CAC26D41BD4111000F11F3A /* EEControl.cpp in Sources */,
 				6C32DC441BD67791007613F9 /* EEBoxBlur1D.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
-				6CAC26D61BD4111000F11F3A /* EEData.cpp in Sources */,
+				0EBB5EE41BD9D1A00061962B /* EETentBlur2D.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -669,25 +561,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6CAC26D31BD4111000F11F3A /* EECheckBox.cpp in Sources */,
 				6C32DC451BD67791007613F9 /* EEBoxBlur1D.cpp in Sources */,
-				6CAC26E51BD4111000F11F3A /* EEGroupNode.cpp in Sources */,
+				0EBB5EE51BD9D1A00061962B /* EETentBlur2D.cpp in Sources */,
 				6CAC26F71BD411BB00F11F3A /* AppDelegate.cpp in Sources */,
 				6C7A9ABD1BD9335600199AC0 /* EETentBlur1D.cpp in Sources */,
-				6CAC26DB1BD4111000F11F3A /* EEDialogManager.cpp in Sources */,
-				6CAC26ED1BD4111000F11F3A /* EEUtils.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
-				6CAC26E71BD4111000F11F3A /* EESha1.cpp in Sources */,
-				6CAC26DF1BD4111000F11F3A /* EEEvent.cpp in Sources */,
-				6CAC26D91BD4111000F11F3A /* EEDialog.cpp in Sources */,
 				6CAC26F91BD411BB00F11F3A /* TestScene.cpp in Sources */,
-				6CAC26E31BD4111000F11F3A /* EEGesture.cpp in Sources */,
-				6CAC26D71BD4111000F11F3A /* EEData.cpp in Sources */,
-				6CAC26EB1BD4111000F11F3A /* EETouchManager.cpp in Sources */,
-				6CAC26E91BD4111000F11F3A /* EETouchListener.cpp in Sources */,
 				6C32DC571BD692CF007613F9 /* EEBoxBlur2D.cpp in Sources */,
-				6CAC26DD1BD4111000F11F3A /* EEDynamicValue.cpp in Sources */,
-				6CAC26D51BD4111000F11F3A /* EEControl.cpp in Sources */,
 				6C32DC501BD68A0E007613F9 /* CCBUtils.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

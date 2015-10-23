@@ -40,7 +40,7 @@ public:
     void pressed128pxButton(cocos2d::Ref*, cocos2d::extension::Control::EventType);
     void pressed256pxButton(cocos2d::Ref*, cocos2d::extension::Control::EventType);
     
-    void pressedGaussianBlur(cocos2d::Ref*, cocos2d::extension::Control::EventType);
+    void pressedTentBlur1D(cocos2d::Ref*, cocos2d::extension::Control::EventType);
     void pressedBoxBlur1D(cocos2d::Ref*, cocos2d::extension::Control::EventType);
     void pressedBoxBlur2D(cocos2d::Ref*, cocos2d::extension::Control::EventType);
     
@@ -48,7 +48,7 @@ public:
     
     enum class Filter {
         None,
-        GaussianBlur,
+        TentBlur1D,
         BoxBlur1D,
         BoxBlur2D
     } _filter;

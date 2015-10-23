@@ -7,6 +7,7 @@
 //
 
 #include "EEImage.hpp"
+#include "cocos2d.h"
 
 namespace_ee_begin
 void Image::boxBlur2D(cocos2d::Image* image, unsigned range) {

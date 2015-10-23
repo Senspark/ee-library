@@ -1,4 +1,5 @@
 #include "AppDelegate.hpp"
+#include "cocos2d.h"
 #include "TestScene.hpp"
 #include "CCBUtils.hpp"
 
@@ -44,7 +45,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
 
     // Set the design resolution
-    glView->setDesignResolutionSize(480, 320, ResolutionPolicy::NO_BORDER);
+    glView->setDesignResolutionSize(480, 320, ResolutionPolicy::FIXED_HEIGHT);
     auto&& frameSize = glView->getFrameSize();
 
     register_all_packages();

@@ -40,17 +40,19 @@ public:
     void pressed128pxButton(cocos2d::Ref*, cocos2d::extension::Control::EventType);
     void pressed256pxButton(cocos2d::Ref*, cocos2d::extension::Control::EventType);
     
-    void pressedTentBlur1D(cocos2d::Ref*, cocos2d::extension::Control::EventType);
     void pressedBoxBlur1D(cocos2d::Ref*, cocos2d::extension::Control::EventType);
+    void pressedBoxBlur1Dx2(cocos2d::Ref*, cocos2d::extension::Control::EventType);
     void pressedBoxBlur2D(cocos2d::Ref*, cocos2d::extension::Control::EventType);
+    void pressedTentBlur1D(cocos2d::Ref*, cocos2d::extension::Control::EventType);
     
     int _range;
     
     enum class Filter {
         None,
-        TentBlur1D,
         BoxBlur1D,
-        BoxBlur2D
+        BoxBlur1Dx2,
+        BoxBlur2D,
+        TentBlur1D,
     } _filter;
     
     void updateRange(int range);

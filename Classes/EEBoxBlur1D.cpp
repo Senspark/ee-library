@@ -11,100 +11,104 @@
 
 namespace_ee_begin
 namespace_anonymous_begin
-void boxBlurHorizontal(unsigned char* pixels, int width, int height, int range) {
+void internalBoxBlur1D(unsigned char* pixels, unsigned width, unsigned height, unsigned range, unsigned iterations) {
+    unsigned kernelSize = range * 2 + 1;
+    
+    constexpr unsigned Bits = 24;
+    auto numerators = new unsigned[kernelSize + 1];
+    for (unsigned size = 1; size <= kernelSize; ++size) {
+        numerators[size] = (1 << Bits) / size;
+    }
+    
     auto buffer = new unsigned char[width * 4];
-    for (int row = 0; row < height; ++row) {
-        unsigned hits = 0;
-        unsigned sumR = 0;
-        unsigned sumG = 0;
-        unsigned sumB = 0;
-        auto oldPixel = pixels;
-        auto newPixel = pixels;
-        auto newColor = buffer;
-        for (int col = -range; col < width; ++col) {
-            int oldIndex = col - range - 1;
-            if (oldIndex >= 0) {
-                sumR -= *oldPixel++;
-                sumG -= *oldPixel++;
-                sumB -= *oldPixel++;
-                oldPixel++;
-                hits--;
+    auto sumR = new unsigned[width + 1]; sumR[0] = 0;
+    auto sumG = new unsigned[width + 1]; sumG[0] = 0;
+    auto sumB = new unsigned[width + 1]; sumB[0] = 0;
+    
+    auto sumInR = sumR;
+    auto sumInG = sumG;
+    auto sumInB = sumB;
+    auto sumOutR = sumR;
+    auto sumOutG = sumG;
+    auto sumOutB = sumB;
+    
+    auto inPixel = pixels;
+    auto newPixel = buffer;
+    
+    auto shiftSumIn = [&] {
+        ++sumInR;
+        ++sumInG;
+        ++sumInB;
+    };
+    auto shiftSumOut = [&] {
+        ++sumOutR;
+        ++sumOutG;
+        ++sumOutB;
+    };
+    auto addPixel = [&] {
+        *(sumInR + 1) = *sumInR + *inPixel++;
+        *(sumInG + 1) = *sumInG + *inPixel++;
+        *(sumInB + 1) = *sumInB + *inPixel++;
+        inPixel++;
+    };
+    auto updatePixel = [&](unsigned size) {
+        *newPixel++ = (unsigned char) (((*sumInR - *sumOutR) * numerators[size]) >> Bits);
+        *newPixel++ = (unsigned char) (((*sumInG - *sumOutG) * numerators[size]) >> Bits);
+        *newPixel++ = (unsigned char) (((*sumInB - *sumOutB) * numerators[size]) >> Bits);
+        *newPixel++ = 0xFF;
+    };
+    
+    for (unsigned row = 0; row < height; ++row) {
+        for (unsigned iteration = 0; iteration < iterations; ++iteration) {
+            sumInR = sumOutR = sumR;
+            sumInG = sumOutG = sumG;
+            sumInB = sumOutB = sumB;
+            inPixel = pixels;
+            newPixel = buffer;
+            std::memset(buffer, 0, width * 4);
+            for (unsigned col = 0; col < range; ++col) {
+                addPixel();
+                shiftSumIn();
             }
-            int newIndex = col + range;
-            if (newIndex < width) {
-                sumR += *newPixel++;
-                sumG += *newPixel++;
-                sumB += *newPixel++;
-                newPixel++;
-                hits++;
+            for (unsigned col = range; col <= range + range; ++col) {
+                addPixel();
+                shiftSumIn();
+                updatePixel(col + 1);
             }
-            if (col >= 0) {
-                *newColor++ = sumR / hits;
-                *newColor++ = sumG / hits;
-                *newColor++ = sumB / hits;
-                *newColor++ = 255;
+            for (unsigned col = range + range + 1; col < width; ++col) {
+                addPixel();
+                shiftSumIn();            
+                shiftSumOut();
+                updatePixel(kernelSize);
+            }
+            for (unsigned col = 0; col < range; ++col) {
+                shiftSumOut();
+                updatePixel(kernelSize - col - 1);
             }
         }
         std::memcpy(pixels, buffer, width * 4);
-        pixels += width * 4;
+        pixels = inPixel;
     }
+    
     delete[] buffer;
-}
-
-void boxBlurVertical(unsigned char* pixels, int width, int height, int range) {
-    auto buffer = new unsigned char[height * 4];
-    for (int col = 0; col < width; ++col) {
-        unsigned hits = 0;
-        unsigned sumR = 0;
-        unsigned sumG = 0;
-        unsigned sumB = 0;
-        auto oldPixel = pixels;
-        auto newPixel = pixels;
-        auto newColor = buffer;
-        for (int row = -range; row < height; ++row) {
-            int oldIndex = row - range - 1;
-            if (oldIndex >= 0) {
-                sumR -= *oldPixel;
-                sumG -= *(oldPixel + 1);
-                sumB -= *(oldPixel + 2);
-                oldPixel += 4 * width;
-                hits--;
-            }
-            int newIndex = row + range;
-            if (newIndex < height) {
-                sumR += *newPixel;
-                sumG += *(newPixel + 1);
-                sumB += *(newPixel + 2);
-                newPixel += 4 * width;
-                hits++;
-            }
-            if (row >= 0) {
-                *newColor++ = sumR / hits;
-                *newColor++ = sumG / hits;
-                *newColor++ = sumB / hits;
-                *newColor++ = 255;
-            }
-        }
-        for (int row = 0; row < height; ++row) {
-            std::memcpy(pixels + row * 4 * width, buffer + row * 4, 4);
-        }
-        pixels += 4;
-    }
-    delete[] buffer;
+    delete[] sumR;
+    delete[] sumG;
+    delete[] sumB;
+    delete[] numerators;
 }
 namespace_anonymous_end
 
-void Image::boxBlur1D(cocos2d::Image* image, unsigned range) {
-    boxBlur1D(image->getData(), (unsigned) image->getWidth(), (unsigned) image->getHeight(), range);
-}
-
-/**
- * Fast implementation of box blur using sliding window algorithm with two passes.
- * https://lotsacode.wordpress.com/2010/12/08/fast-blur-box-blur-with-accumulator/
- * Complexity: O(width * height + range)
- */
-void Image::boxBlur1D(unsigned char* pixels, unsigned width, unsigned height, unsigned range) {
-    boxBlurHorizontal(pixels, width, height, range);
-    boxBlurVertical(pixels, width, height, range);
+void Image::boxBlur1D(cocos2d::Image* image, unsigned range, unsigned iterations) {
+    auto pixels = image->getData();
+    auto width = (unsigned) image->getWidth();
+    auto height = (unsigned) image->getHeight();
+    auto buffer = new unsigned char[width * height * 4];
+    auto pixelsPtr = reinterpret_cast<unsigned*>(pixels);
+    auto bufferPtr = reinterpret_cast<unsigned*>(buffer);
+    internalBoxBlur1D(pixels, width, height, range, iterations);
+    transpose(pixelsPtr, bufferPtr, width, height);
+    internalBoxBlur1D(buffer, height, width, range, iterations);
+    transpose(bufferPtr, pixelsPtr, height, width);
+    delete[] buffer;
 }
 namespace_ee_end

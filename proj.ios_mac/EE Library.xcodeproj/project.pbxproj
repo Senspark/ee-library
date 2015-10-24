@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0EBB5EE41BD9D1A00061962B /* EETentBlur2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB5EE31BD9D1A00061962B /* EETentBlur2D.cpp */; };
-		0EBB5EE51BD9D1A00061962B /* EETentBlur2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB5EE31BD9D1A00061962B /* EETentBlur2D.cpp */; };
 		1AC6FB21180E996B004C840B /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAF9180E9839004C840B /* libcocos2d Mac.a */; };
 		1AC6FB30180E99EB004C840B /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FB07180E9839004C840B /* libcocos2d iOS.a */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -57,6 +55,8 @@
 		6C32DC571BD692CF007613F9 /* EEBoxBlur2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C32DC551BD692CF007613F9 /* EEBoxBlur2D.cpp */; };
 		6C7A9ABC1BD9335600199AC0 /* EETentBlur1D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C7A9ABB1BD9335600199AC0 /* EETentBlur1D.cpp */; };
 		6C7A9ABD1BD9335600199AC0 /* EETentBlur1D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C7A9ABB1BD9335600199AC0 /* EETentBlur1D.cpp */; };
+		6C7A9AC81BDB841A00199AC0 /* EEImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C7A9AC71BDB841A00199AC0 /* EEImage.cpp */; settings = {ASSET_TAGS = (); }; };
+		6C7A9AC91BDB841A00199AC0 /* EEImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C7A9AC71BDB841A00199AC0 /* EEImage.cpp */; settings = {ASSET_TAGS = (); }; };
 		6CAC26F61BD411BB00F11F3A /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26F21BD411BB00F11F3A /* AppDelegate.cpp */; };
 		6CAC26F71BD411BB00F11F3A /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26F21BD411BB00F11F3A /* AppDelegate.cpp */; };
 		6CAC26F81BD411BB00F11F3A /* TestScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CAC26F41BD411BB00F11F3A /* TestScene.cpp */; };
@@ -105,7 +105,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0EBB5EE31BD9D1A00061962B /* EETentBlur2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EETentBlur2D.cpp; sourceTree = "<group>"; };
 		1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
 		1ACB3243164770DE00914215 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../../cocos2dx/platform/third_party/ios/libraries/libcurl.a; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -157,6 +156,7 @@
 		6C32DC541BD68A34007613F9 /* TemplateLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TemplateLoader.h; sourceTree = "<group>"; };
 		6C32DC551BD692CF007613F9 /* EEBoxBlur2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEBoxBlur2D.cpp; sourceTree = "<group>"; };
 		6C7A9ABB1BD9335600199AC0 /* EETentBlur1D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EETentBlur1D.cpp; sourceTree = "<group>"; };
+		6C7A9AC71BDB841A00199AC0 /* EEImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEImage.cpp; sourceTree = "<group>"; };
 		6CAC26B81BD4111000F11F3A /* EEForward.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEForward.hpp; sourceTree = "<group>"; };
 		6CAC26C31BD4111000F11F3A /* EEMacro.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEMacro.hpp; sourceTree = "<group>"; };
 		6CAC26F21BD411BB00F11F3A /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
@@ -361,10 +361,10 @@
 			isa = PBXGroup;
 			children = (
 				6C32DC3D1BD67074007613F9 /* EEImage.hpp */,
+				6C7A9AC71BDB841A00199AC0 /* EEImage.cpp */,
 				6C32DC431BD67791007613F9 /* EEBoxBlur1D.cpp */,
 				6C32DC551BD692CF007613F9 /* EEBoxBlur2D.cpp */,
 				6C7A9ABB1BD9335600199AC0 /* EETentBlur1D.cpp */,
-				0EBB5EE31BD9D1A00061962B /* EETentBlur2D.cpp */,
 			);
 			name = Image;
 			sourceTree = "<group>";
@@ -550,10 +550,10 @@
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				6CAC26F61BD411BB00F11F3A /* AppDelegate.cpp in Sources */,
+				6C7A9AC81BDB841A00199AC0 /* EEImage.cpp in Sources */,
 				6C7A9ABC1BD9335600199AC0 /* EETentBlur1D.cpp in Sources */,
 				6C32DC441BD67791007613F9 /* EEBoxBlur1D.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
-				0EBB5EE41BD9D1A00061962B /* EETentBlur2D.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,8 +561,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C7A9AC91BDB841A00199AC0 /* EEImage.cpp in Sources */,
 				6C32DC451BD67791007613F9 /* EEBoxBlur1D.cpp in Sources */,
-				0EBB5EE51BD9D1A00061962B /* EETentBlur2D.cpp in Sources */,
 				6CAC26F71BD411BB00F11F3A /* AppDelegate.cpp in Sources */,
 				6C7A9ABD1BD9335600199AC0 /* EETentBlur1D.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,

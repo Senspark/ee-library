@@ -10,11 +10,8 @@
 #include "cocos2d.h"
 
 namespace_ee_begin
-void Image::boxBlur2D(cocos2d::Image* image, unsigned range) {
-    boxBlur2D(image->getData(), (unsigned) image->getWidth(), (unsigned) image->getHeight(), range);
-}
-
-void Image::boxBlur2D(unsigned char* pixels, unsigned width, unsigned height, unsigned range) {
+namespace_anonymous_begin
+void internalBoxBlur2D(unsigned char* pixels, unsigned width, unsigned height, unsigned range) {
     unsigned kernelSize = range * 2 + 1;
     CC_ASSERT(kernelSize < width && kernelSize < height);
     
@@ -24,33 +21,33 @@ void Image::boxBlur2D(unsigned char* pixels, unsigned width, unsigned height, un
     auto inPixel = pixels;
     auto outPixel = pixels;
     
-    auto __vertSumR = new unsigned[width]();
-    auto __vertSumG = new unsigned[width]();
-    auto __vertSumB = new unsigned[width]();
-    auto __horiSumR = new unsigned[width + 1]; __horiSumR[0] = 0;
-    auto __horiSumG = new unsigned[width + 1]; __horiSumG[0] = 0;
-    auto __horiSumB = new unsigned[width + 1]; __horiSumB[0] = 0;
+    auto vertPrefixSumR = new unsigned[width]();
+    auto vertPrefixSumG = new unsigned[width]();
+    auto vertPrefixSumB = new unsigned[width]();
+    auto horiPrefixSumR = new unsigned[width + 1]; horiPrefixSumR[0] = 0;
+    auto horiPrefixSumG = new unsigned[width + 1]; horiPrefixSumG[0] = 0;
+    auto horiPrefixSumB = new unsigned[width + 1]; horiPrefixSumB[0] = 0;
     auto buffer = new unsigned char[height * width * 4];
     
     auto newPixel = buffer;
-    auto vertSumR = __vertSumR;
-    auto vertSumG = __vertSumG;
-    auto vertSumB = __vertSumB;
-    auto horiSumInR = __horiSumR;
-    auto horiSumInG = __horiSumG;
-    auto horiSumInB = __horiSumB;
-    auto horiSumOutR = __horiSumR;
-    auto horiSumOutG = __horiSumG;
-    auto horiSumOutB = __horiSumB;
+    auto vertSumR = vertPrefixSumR;
+    auto vertSumG = vertPrefixSumG;
+    auto vertSumB = vertPrefixSumB;
+    auto horiSumInR = horiPrefixSumR;
+    auto horiSumInG = horiPrefixSumG;
+    auto horiSumInB = horiPrefixSumB;
+    auto horiSumOutR = horiPrefixSumR;
+    auto horiSumOutG = horiPrefixSumG;
+    auto horiSumOutB = horiPrefixSumB;
     auto resetVertSum = [&] {
-        vertSumR = __vertSumR;
-        vertSumG = __vertSumG;
-        vertSumB = __vertSumB;
+        vertSumR = vertPrefixSumR;
+        vertSumG = vertPrefixSumG;
+        vertSumB = vertPrefixSumB;
     };
     auto resetHoriSum = [&] {
-        horiSumInR = horiSumOutR = __horiSumR;
-        horiSumInG = horiSumOutG = __horiSumG;
-        horiSumInB = horiSumOutB = __horiSumB;
+        horiSumInR = horiSumOutR = horiPrefixSumR;
+        horiSumInG = horiSumOutG = horiPrefixSumG;
+        horiSumInB = horiSumOutB = horiPrefixSumB;
     };
     auto updateHoriSum = [&] {
         *(horiSumInR + 1) = *horiSumInR + *vertSumR;
@@ -195,12 +192,17 @@ void Image::boxBlur2D(unsigned char* pixels, unsigned width, unsigned height, un
     }
     std::memcpy(pixels, buffer, width * height * 4);
     
-    delete[] __vertSumR;
-    delete[] __vertSumG;
-    delete[] __vertSumB;
-    delete[] __horiSumR;
-    delete[] __horiSumG;
-    delete[] __horiSumB;
+    delete[] vertPrefixSumR;
+    delete[] vertPrefixSumG;
+    delete[] vertPrefixSumB;
+    delete[] horiPrefixSumR;
+    delete[] horiPrefixSumG;
+    delete[] horiPrefixSumB;
     delete[] buffer;
+}
+namespace_anonymous_end
+
+void Image::boxBlur2D(cocos2d::Image* image, unsigned range) {
+    internalBoxBlur2D(image->getData(), (unsigned) image->getWidth(), (unsigned) image->getHeight(), range);
 }
 namespace_ee_end

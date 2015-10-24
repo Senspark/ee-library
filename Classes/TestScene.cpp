@@ -54,14 +54,15 @@ cocos2d::extension::Control::Handler TestScene::Impl::onResolveCCBCCControlSelec
     CCB_SELECTORRESOLVER_CCCONTROL_GLUE(this, "pressed64pxButton", Impl::pressed64pxButton);
     CCB_SELECTORRESOLVER_CCCONTROL_GLUE(this, "pressed128pxButton", Impl::pressed128pxButton);
     CCB_SELECTORRESOLVER_CCCONTROL_GLUE(this, "pressed256pxButton", Impl::pressed256pxButton);
-    CCB_SELECTORRESOLVER_CCCONTROL_GLUE(this, "pressedTentBlur1D", Impl::pressedTentBlur1D);
     CCB_SELECTORRESOLVER_CCCONTROL_GLUE(this, "pressedBoxBlur1D", Impl::pressedBoxBlur1D);
+    CCB_SELECTORRESOLVER_CCCONTROL_GLUE(this, "pressedBoxBlur1Dx2", Impl::pressedBoxBlur1Dx2);
     CCB_SELECTORRESOLVER_CCCONTROL_GLUE(this, "pressedBoxBlur2D", Impl::pressedBoxBlur2D);
+    CCB_SELECTORRESOLVER_CCCONTROL_GLUE(this, "pressedTentBlur1D", Impl::pressedTentBlur1D);
     return nullptr;
 }
 
 void TestScene::Impl::pressedReset(cocos2d::Ref*, cocos2d::extension::Control::EventType) {
-    _imageSprite->setTexture("background.jpg");
+    _imageSprite->setTexture("background-x2.jpg");
 }
 
 void TestScene::Impl::pressedProcess(cocos2d::Ref*, cocos2d::extension::Control::EventType) {
@@ -85,14 +86,17 @@ void TestScene::Impl::pressedProcess(cocos2d::Ref*, cocos2d::extension::Control:
         auto current = std::chrono::system_clock::now().time_since_epoch().count();
         cocos2d::log("Render time: %lld ms", (current - start) / 1000);
         switch (_filter) {
-            case Filter::TentBlur1D:
-                ee::Image::tentBlur1D(image, _range);
-                break;
             case Filter::BoxBlur1D:
                 ee::Image::boxBlur1D(image, _range);
                 break;
+            case Filter::BoxBlur1Dx2:
+                ee::Image::boxBlur1D(image, _range, 2);
+                break;
             case Filter::BoxBlur2D:
                 ee::Image::boxBlur2D(image, _range);
+                break;
+            case Filter::TentBlur1D:
+                ee::Image::tentBlur1D(image, _range);
                 break;
             default: CC_ASSERT(false);
         }
@@ -118,9 +122,10 @@ void TestScene::Impl::pressed64pxButton(cocos2d::Ref*, cocos2d::extension::Contr
 void TestScene::Impl::pressed128pxButton(cocos2d::Ref*, cocos2d::extension::Control::EventType) { updateRange(128); }
 void TestScene::Impl::pressed256pxButton(cocos2d::Ref*, cocos2d::extension::Control::EventType) { updateRange(256); }
 
-void TestScene::Impl::pressedTentBlur1D(cocos2d::Ref*, cocos2d::extension::Control::EventType) { updateFilter(Filter::TentBlur1D); }
 void TestScene::Impl::pressedBoxBlur1D(cocos2d::Ref*, cocos2d::extension::Control::EventType) { updateFilter(Filter::BoxBlur1D); }
+void TestScene::Impl::pressedBoxBlur1Dx2(cocos2d::Ref*, cocos2d::extension::Control::EventType) { updateFilter(Filter::BoxBlur1Dx2); }
 void TestScene::Impl::pressedBoxBlur2D(cocos2d::Ref*, cocos2d::extension::Control::EventType) { updateFilter(Filter::BoxBlur2D); }
+void TestScene::Impl::pressedTentBlur1D(cocos2d::Ref*, cocos2d::extension::Control::EventType) { updateFilter(Filter::TentBlur1D); }
 
 void TestScene::Impl::updateRange(int range) {
     _range = range;
@@ -130,9 +135,10 @@ void TestScene::Impl::updateRange(int range) {
 void TestScene::Impl::updateFilter(Filter filter) {
     std::string filterName;
     switch (filter) {
-        case Filter::TentBlur1D: filterName = "Tent Blur 1D"; break;
         case Filter::BoxBlur1D: filterName = "Box Blur 1D"; break;
+        case Filter::BoxBlur1Dx2: filterName = "Box Blur 1D x2"; break;
         case Filter::BoxBlur2D: filterName = "Box Blur 2D"; break;
+        case Filter::TentBlur1D: filterName = "Tent Blur 1D"; break;
         default: CC_ASSERT(false);
     }
     _filter = filter;

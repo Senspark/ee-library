@@ -1,0 +1,494 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6C2E7D551BDE048D008F5EF3 /* EECocosUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A78C1BDDCAF800D0597F /* EECocosUtils.cpp */; };
+		6C2E7D561BDE0497008F5EF3 /* EEImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C7A9AC71BDB841A00199AC0 /* EEImage.cpp */; };
+		6C2E7D571BDE0497008F5EF3 /* EEBoxBlur1D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C32DC431BD67791007613F9 /* EEBoxBlur1D.cpp */; settings = {COMPILER_FLAGS = "-O3"; }; };
+		6C2E7D581BDE0497008F5EF3 /* EEBoxBlur2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C32DC551BD692CF007613F9 /* EEBoxBlur2D.cpp */; settings = {COMPILER_FLAGS = "-O3"; }; };
+		6C2E7D591BDE0497008F5EF3 /* EETentBlur1D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C7A9ABB1BD9335600199AC0 /* EETentBlur1D.cpp */; settings = {COMPILER_FLAGS = "-O3"; }; };
+		6C2E7D5A1BDE04AB008F5EF3 /* EECheckBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A7A81BDDDAC300D0597F /* EECheckBox.cpp */; };
+		6C2E7D5B1BDE04AB008F5EF3 /* EEControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A7AD1BDDDAC300D0597F /* EEControl.cpp */; };
+		6C2E7D5C1BDE04AB008F5EF3 /* EEData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A7AF1BDDDAC300D0597F /* EEData.cpp */; };
+		6C2E7D5D1BDE04AB008F5EF3 /* EEDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A7B11BDDDAC300D0597F /* EEDialog.cpp */; };
+		6C2E7D5E1BDE04AB008F5EF3 /* EEDialogManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A7B41BDDDAC300D0597F /* EEDialogManager.cpp */; };
+		6C2E7D5F1BDE04AB008F5EF3 /* EEDynamicValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A7B61BDDDAC300D0597F /* EEDynamicValue.cpp */; };
+		6C2E7D601BDE04AB008F5EF3 /* EEEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A7B81BDDDAC300D0597F /* EEEvent.cpp */; };
+		6C2E7D611BDE04AB008F5EF3 /* EEGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A7BD1BDDDAC300D0597F /* EEGesture.cpp */; };
+		6C2E7D621BDE04AB008F5EF3 /* EEGroupNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A7C01BDDDAC300D0597F /* EEGroupNode.cpp */; };
+		6C2E7D631BDE04AB008F5EF3 /* EESha1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A7CA1BDDDAC300D0597F /* EESha1.cpp */; };
+		6C2E7D641BDE04AB008F5EF3 /* EETouchListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A7CE1BDDDAC300D0597F /* EETouchListener.cpp */; };
+		6C2E7D651BDE04AB008F5EF3 /* EETouchManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A7D11BDDDAC300D0597F /* EETouchManager.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1AC6FAF8180E9839004C840B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1551A33F158F2AB200E66CFE;
+			remoteInfo = "cocos2dx Mac";
+		};
+		1AC6FB06180E9839004C840B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A07A4D641783777C0073F6A7;
+			remoteInfo = "cocos2dx iOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6C43A8041BDDDF1800D0597F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
+		6C2E7D501BDDFB94008F5EF3 /* ee-library-mobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "ee-library-mobile.a"; path = "/Volumes/SSD-Xcode/Android/projects/ee-library/proj.ios_mac/build/Debug-iphoneos/ee-library-mobile.a"; sourceTree = "<absolute>"; };
+		6C32DC3A1BD66E62007613F9 /* EENonCopyable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EENonCopyable.hpp; sourceTree = "<group>"; };
+		6C32DC3D1BD67074007613F9 /* EEImage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEImage.hpp; sourceTree = "<group>"; };
+		6C32DC431BD67791007613F9 /* EEBoxBlur1D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEBoxBlur1D.cpp; sourceTree = "<group>"; };
+		6C32DC551BD692CF007613F9 /* EEBoxBlur2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEBoxBlur2D.cpp; sourceTree = "<group>"; };
+		6C43A7871BDDCA4600D0597F /* EEHeader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EEHeader.hpp; sourceTree = "<group>"; };
+		6C43A78C1BDDCAF800D0597F /* EECocosUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EECocosUtils.cpp; sourceTree = "<group>"; };
+		6C43A78D1BDDCAF800D0597F /* EECocosUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EECocosUtils.hpp; sourceTree = "<group>"; };
+		6C43A7A51BDDDAC300D0597F /* EEAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEAnalytics.h; sourceTree = "<group>"; };
+		6C43A7A81BDDDAC300D0597F /* EECheckBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EECheckBox.cpp; sourceTree = "<group>"; };
+		6C43A7A91BDDDAC300D0597F /* EECheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EECheckBox.h; sourceTree = "<group>"; };
+		6C43A7AD1BDDDAC300D0597F /* EEControl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEControl.cpp; sourceTree = "<group>"; };
+		6C43A7AE1BDDDAC300D0597F /* EEControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEControl.h; sourceTree = "<group>"; };
+		6C43A7AF1BDDDAC300D0597F /* EEData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEData.cpp; sourceTree = "<group>"; };
+		6C43A7B01BDDDAC300D0597F /* EEData.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEData.hpp; sourceTree = "<group>"; };
+		6C43A7B11BDDDAC300D0597F /* EEDialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDialog.cpp; sourceTree = "<group>"; };
+		6C43A7B21BDDDAC300D0597F /* EEDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEDialog.h; sourceTree = "<group>"; };
+		6C43A7B31BDDDAC300D0597F /* EEDialogManager-Impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EEDialogManager-Impl.h"; sourceTree = "<group>"; };
+		6C43A7B41BDDDAC300D0597F /* EEDialogManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDialogManager.cpp; sourceTree = "<group>"; };
+		6C43A7B51BDDDAC300D0597F /* EEDialogManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEDialogManager.h; sourceTree = "<group>"; };
+		6C43A7B61BDDDAC300D0597F /* EEDynamicValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDynamicValue.cpp; sourceTree = "<group>"; };
+		6C43A7B71BDDDAC300D0597F /* EEDynamicValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEDynamicValue.h; sourceTree = "<group>"; };
+		6C43A7B81BDDDAC300D0597F /* EEEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEEvent.cpp; sourceTree = "<group>"; };
+		6C43A7B91BDDDAC300D0597F /* EEEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEEvent.h; sourceTree = "<group>"; };
+		6C43A7BB1BDDDAC300D0597F /* EEFunctionTraits.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEFunctionTraits.hpp; sourceTree = "<group>"; };
+		6C43A7BC1BDDDAC300D0597F /* EEGesture-Impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EEGesture-Impl.h"; sourceTree = "<group>"; };
+		6C43A7BD1BDDDAC300D0597F /* EEGesture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEGesture.cpp; sourceTree = "<group>"; };
+		6C43A7BE1BDDDAC300D0597F /* EEGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEGesture.h; sourceTree = "<group>"; };
+		6C43A7BF1BDDDAC300D0597F /* EEGroupNode-Impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EEGroupNode-Impl.h"; sourceTree = "<group>"; };
+		6C43A7C01BDDDAC300D0597F /* EEGroupNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEGroupNode.cpp; sourceTree = "<group>"; };
+		6C43A7C11BDDDAC300D0597F /* EEGroupNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEGroupNode.h; sourceTree = "<group>"; };
+		6C43A7C21BDDDAC300D0597F /* EEGroupNodeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEGroupNodeDelegate.h; sourceTree = "<group>"; };
+		6C43A7C71BDDDAC300D0597F /* EEJni.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEJni.h; sourceTree = "<group>"; };
+		6C43A7C81BDDDAC300D0597F /* EEMacro.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEMacro.hpp; sourceTree = "<group>"; };
+		6C43A7CA1BDDDAC300D0597F /* EESha1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EESha1.cpp; sourceTree = "<group>"; };
+		6C43A7CB1BDDDAC300D0597F /* EESha1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EESha1.h; sourceTree = "<group>"; };
+		6C43A7CD1BDDDAC300D0597F /* EETouchListener-Impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EETouchListener-Impl.h"; sourceTree = "<group>"; };
+		6C43A7CE1BDDDAC300D0597F /* EETouchListener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EETouchListener.cpp; sourceTree = "<group>"; };
+		6C43A7CF1BDDDAC300D0597F /* EETouchListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EETouchListener.h; sourceTree = "<group>"; };
+		6C43A7D01BDDDAC300D0597F /* EETouchManager-Impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EETouchManager-Impl.h"; sourceTree = "<group>"; };
+		6C43A7D11BDDDAC300D0597F /* EETouchManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EETouchManager.cpp; sourceTree = "<group>"; };
+		6C43A7D21BDDDAC300D0597F /* EETouchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EETouchManager.h; sourceTree = "<group>"; };
+		6C43A7D31BDDDAC300D0597F /* EEUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEUtils.hpp; sourceTree = "<group>"; };
+		6C7A9ABB1BD9335600199AC0 /* EETentBlur1D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EETentBlur1D.cpp; sourceTree = "<group>"; };
+		6C7A9AC71BDB841A00199AC0 /* EEImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEImage.cpp; sourceTree = "<group>"; };
+		6CAC26B81BD4111000F11F3A /* EEForward.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEForward.hpp; sourceTree = "<group>"; };
+		6CAC26C31BD4111000F11F3A /* EEMacro.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEMacro.hpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6C43A8031BDDDF1800D0597F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1AC6FAE6180E9839004C840B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1AC6FAF9180E9839004C840B /* libcocos2d Mac.a */,
+				1AC6FB07180E9839004C840B /* libcocos2d iOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */,
+				46880B8319C43A87006E1F66 /* Classes */,
+				6C2E7D6C1BDE05D3008F5EF3 /* Products */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		46880B8319C43A87006E1F66 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				6CAC26C31BD4111000F11F3A /* EEMacro.hpp */,
+				6CAC26B81BD4111000F11F3A /* EEForward.hpp */,
+				6C43A7871BDDCA4600D0597F /* EEHeader.hpp */,
+				6C43A7A51BDDDAC300D0597F /* EEAnalytics.h */,
+				6C32DC3A1BD66E62007613F9 /* EENonCopyable.hpp */,
+				6C43A78C1BDDCAF800D0597F /* EECocosUtils.cpp */,
+				6C43A78D1BDDCAF800D0597F /* EECocosUtils.hpp */,
+				6C43A7F61BDDDAEC00D0597F /* Image */,
+				6C43A7A81BDDDAC300D0597F /* EECheckBox.cpp */,
+				6C43A7A91BDDDAC300D0597F /* EECheckBox.h */,
+				6C43A7AD1BDDDAC300D0597F /* EEControl.cpp */,
+				6C43A7AE1BDDDAC300D0597F /* EEControl.h */,
+				6C43A7AF1BDDDAC300D0597F /* EEData.cpp */,
+				6C43A7B01BDDDAC300D0597F /* EEData.hpp */,
+				6C43A7B11BDDDAC300D0597F /* EEDialog.cpp */,
+				6C43A7B21BDDDAC300D0597F /* EEDialog.h */,
+				6C43A7B31BDDDAC300D0597F /* EEDialogManager-Impl.h */,
+				6C43A7B41BDDDAC300D0597F /* EEDialogManager.cpp */,
+				6C43A7B51BDDDAC300D0597F /* EEDialogManager.h */,
+				6C43A7B61BDDDAC300D0597F /* EEDynamicValue.cpp */,
+				6C43A7B71BDDDAC300D0597F /* EEDynamicValue.h */,
+				6C43A7B81BDDDAC300D0597F /* EEEvent.cpp */,
+				6C43A7B91BDDDAC300D0597F /* EEEvent.h */,
+				6C43A7BB1BDDDAC300D0597F /* EEFunctionTraits.hpp */,
+				6C43A7BC1BDDDAC300D0597F /* EEGesture-Impl.h */,
+				6C43A7BD1BDDDAC300D0597F /* EEGesture.cpp */,
+				6C43A7BE1BDDDAC300D0597F /* EEGesture.h */,
+				6C43A7BF1BDDDAC300D0597F /* EEGroupNode-Impl.h */,
+				6C43A7C01BDDDAC300D0597F /* EEGroupNode.cpp */,
+				6C43A7C11BDDDAC300D0597F /* EEGroupNode.h */,
+				6C43A7C21BDDDAC300D0597F /* EEGroupNodeDelegate.h */,
+				6C43A7C71BDDDAC300D0597F /* EEJni.h */,
+				6C43A7C81BDDDAC300D0597F /* EEMacro.hpp */,
+				6C43A7CA1BDDDAC300D0597F /* EESha1.cpp */,
+				6C43A7CB1BDDDAC300D0597F /* EESha1.h */,
+				6C43A7CD1BDDDAC300D0597F /* EETouchListener-Impl.h */,
+				6C43A7CE1BDDDAC300D0597F /* EETouchListener.cpp */,
+				6C43A7CF1BDDDAC300D0597F /* EETouchListener.h */,
+				6C43A7D01BDDDAC300D0597F /* EETouchManager-Impl.h */,
+				6C43A7D11BDDDAC300D0597F /* EETouchManager.cpp */,
+				6C43A7D21BDDDAC300D0597F /* EETouchManager.h */,
+				6C43A7D31BDDDAC300D0597F /* EEUtils.hpp */,
+			);
+			name = Classes;
+			path = ../Classes;
+			sourceTree = "<group>";
+		};
+		6C2E7D6C1BDE05D3008F5EF3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6C43A7F61BDDDAEC00D0597F /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				6C32DC3D1BD67074007613F9 /* EEImage.hpp */,
+				6C7A9AC71BDB841A00199AC0 /* EEImage.cpp */,
+				6C32DC431BD67791007613F9 /* EEBoxBlur1D.cpp */,
+				6C32DC551BD692CF007613F9 /* EEBoxBlur2D.cpp */,
+				6C7A9ABB1BD9335600199AC0 /* EETentBlur1D.cpp */,
+			);
+			name = Image;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6C43A8051BDDDF1800D0597F /* ee-library-mobile */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6C43A80D1BDDDF1900D0597F /* Build configuration list for PBXNativeTarget "ee-library-mobile" */;
+			buildPhases = (
+				6C43A8021BDDDF1800D0597F /* Sources */,
+				6C43A8031BDDDF1800D0597F /* Frameworks */,
+				6C43A8041BDDDF1800D0597F /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ee-library-mobile";
+			productName = "ee-library";
+			productReference = 6C2E7D501BDDFB94008F5EF3 /* ee-library-mobile.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				TargetAttributes = {
+					6C43A8051BDDDF1800D0597F = {
+						CreatedOnToolsVersion = 7.1;
+					};
+				};
+			};
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "ee-library" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			productRefGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 1AC6FAE6180E9839004C840B /* Products */;
+					ProjectRef = 1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				6C43A8051BDDDF1800D0597F /* ee-library-mobile */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		1AC6FAF9180E9839004C840B /* libcocos2d Mac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libcocos2d Mac.a";
+			remoteRef = 1AC6FAF8180E9839004C840B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1AC6FB07180E9839004C840B /* libcocos2d iOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libcocos2d iOS.a";
+			remoteRef = 1AC6FB06180E9839004C840B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6C43A8021BDDDF1800D0597F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C2E7D5F1BDE04AB008F5EF3 /* EEDynamicValue.cpp in Sources */,
+				6C2E7D631BDE04AB008F5EF3 /* EESha1.cpp in Sources */,
+				6C2E7D5A1BDE04AB008F5EF3 /* EECheckBox.cpp in Sources */,
+				6C2E7D551BDE048D008F5EF3 /* EECocosUtils.cpp in Sources */,
+				6C2E7D571BDE0497008F5EF3 /* EEBoxBlur1D.cpp in Sources */,
+				6C2E7D601BDE04AB008F5EF3 /* EEEvent.cpp in Sources */,
+				6C2E7D621BDE04AB008F5EF3 /* EEGroupNode.cpp in Sources */,
+				6C2E7D651BDE04AB008F5EF3 /* EETouchManager.cpp in Sources */,
+				6C2E7D641BDE04AB008F5EF3 /* EETouchListener.cpp in Sources */,
+				6C2E7D611BDE04AB008F5EF3 /* EEGesture.cpp in Sources */,
+				6C2E7D581BDE0497008F5EF3 /* EEBoxBlur2D.cpp in Sources */,
+				6C2E7D561BDE0497008F5EF3 /* EEImage.cpp in Sources */,
+				6C2E7D5E1BDE04AB008F5EF3 /* EEDialogManager.cpp in Sources */,
+				6C2E7D5D1BDE04AB008F5EF3 /* EEDialog.cpp in Sources */,
+				6C2E7D5B1BDE04AB008F5EF3 /* EEControl.cpp in Sources */,
+				6C2E7D591BDE0497008F5EF3 /* EETentBlur1D.cpp in Sources */,
+				6C2E7D5C1BDE04AB008F5EF3 /* EEData.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		6C43A80E1BDDDF1900D0597F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				EXECUTABLE_PREFIX = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					CC_TARGET_OS_IPHONE,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6C43A80F1BDDDF1900D0597F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = "";
+				GCC_PREPROCESSOR_DEFINITIONS = CC_TARGET_OS_IPHONE;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_ASSIGN_ENUM = YES;
+				CLANG_WARN_CXX0X_EXTENSIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				CLANG_WARN_NULLABLE_TO_NONNULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES_AGGRESSIVE;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../cocos2d",
+					"$(SRCROOT)/../cocos2d/cocos",
+					"$(SRCROOT)/../cocos2d/cocos/base",
+					"$(SRCROOT)/../cocos2d/cocos/physics",
+					"$(SRCROOT)/../cocos2d/cocos/math",
+					"$(SRCROOT)/../cocos2d/cocos/2d",
+					"$(SRCROOT)/../cocos2d/cocos/ui",
+					"$(SRCROOT)/../cocos2d/cocos/network",
+					"$(SRCROOT)/../cocos2d/cocos/audio/include",
+					"$(SRCROOT)/../cocos2d/cocos/editor-support",
+					"$(SRCROOT)/../cocos2d/extensions",
+					"$(SRCROOT)/../cocos2d/external",
+					"$(SRCROOT)/../cocos2d/external/chipmunk/include/chipmunk",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_ASSIGN_ENUM = YES;
+				CLANG_WARN_CXX0X_EXTENSIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				CLANG_WARN_NULLABLE_TO_NONNULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES_AGGRESSIVE;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../cocos2d",
+					"$(SRCROOT)/../cocos2d/cocos",
+					"$(SRCROOT)/../cocos2d/cocos/base",
+					"$(SRCROOT)/../cocos2d/cocos/physics",
+					"$(SRCROOT)/../cocos2d/cocos/math",
+					"$(SRCROOT)/../cocos2d/cocos/2d",
+					"$(SRCROOT)/../cocos2d/cocos/ui",
+					"$(SRCROOT)/../cocos2d/cocos/network",
+					"$(SRCROOT)/../cocos2d/cocos/audio/include",
+					"$(SRCROOT)/../cocos2d/cocos/editor-support",
+					"$(SRCROOT)/../cocos2d/extensions",
+					"$(SRCROOT)/../cocos2d/external",
+					"$(SRCROOT)/../cocos2d/external/chipmunk/include/chipmunk",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6C43A80D1BDDDF1900D0597F /* Build configuration list for PBXNativeTarget "ee-library-mobile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6C43A80E1BDDDF1900D0597F /* Debug */,
+				6C43A80F1BDDDF1900D0597F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "ee-library" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

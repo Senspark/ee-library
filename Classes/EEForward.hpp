@@ -43,6 +43,7 @@ class Animation;
 class ActionEase;
 class ActionFloat;
 class ActionInterval;
+class Texture2D;
 struct Color3B;
 struct Color4B;
 struct Color4F;

@@ -1,7 +1,6 @@
 #include "TestScene-Impl.hpp"
 #include "cocos2d.h"
-#include "EEMacro.hpp"
-#include "EEImage.hpp"
+#include "EEHeader.hpp"
 #include "CCBUtils.hpp"
 
 TestScene* TestScene::create() {
@@ -62,18 +61,18 @@ cocos2d::extension::Control::Handler TestScene::Impl::onResolveCCBCCControlSelec
 }
 
 void TestScene::Impl::pressedReset(cocos2d::Ref*, cocos2d::extension::Control::EventType) {
-    _imageSprite->setTexture("background-x2.jpg");
+    _imageSprite->setTexture("background.jpg");
 }
 
 void TestScene::Impl::pressedProcess(cocos2d::Ref*, cocos2d::extension::Control::EventType) {
     if (_filter == Filter::None || _range == 0) {
         return;
     }
-    int width = (int) _imageSprite->getContentSize().width;
-    int height = (int) _imageSprite->getContentSize().height;
+    float scale = 1.0f;
+    int width = (int) _imageSprite->getContentSize().width * scale;
+    int height = (int) _imageSprite->getContentSize().height * scale;
     auto render = cocos2d::RenderTexture::create(width, height);
     render->begin();
-    _imageSprite->setScale(1.0f);
     _imageSprite->visit();
     render->end();
     

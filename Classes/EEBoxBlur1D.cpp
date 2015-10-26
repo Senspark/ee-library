@@ -13,6 +13,7 @@ namespace_ee_begin
 namespace_anonymous_begin
 void internalBoxBlur1D(unsigned char* pixels, unsigned width, unsigned height, unsigned range, unsigned iterations) {
     unsigned kernelSize = range * 2 + 1;
+    CC_ASSERT(kernelSize < width && kernelSize < height);
     
     constexpr unsigned Bits = 24;
     auto numerators = new unsigned[kernelSize + 1];
@@ -65,7 +66,6 @@ void internalBoxBlur1D(unsigned char* pixels, unsigned width, unsigned height, u
             sumInB = sumOutB = sumB;
             inPixel = pixels;
             newPixel = buffer;
-            std::memset(buffer, 0, width * 4);
             for (unsigned col = 0; col < range; ++col) {
                 addPixel();
                 shiftSumIn();
@@ -77,7 +77,7 @@ void internalBoxBlur1D(unsigned char* pixels, unsigned width, unsigned height, u
             }
             for (unsigned col = range + range + 1; col < width; ++col) {
                 addPixel();
-                shiftSumIn();            
+                shiftSumIn();
                 shiftSumOut();
                 updatePixel(kernelSize);
             }
@@ -85,8 +85,8 @@ void internalBoxBlur1D(unsigned char* pixels, unsigned width, unsigned height, u
                 shiftSumOut();
                 updatePixel(kernelSize - col - 1);
             }
+            std::memcpy(pixels, buffer, width * 4);
         }
-        std::memcpy(pixels, buffer, width * 4);
         pixels = inPixel;
     }
     

@@ -55,8 +55,8 @@
 						<string>ScaleLock</string>
 						<key>value</key>
 						<array>
-							<real>0.5</real>
-							<real>0.5</real>
+							<real>1</real>
+							<real>1</real>
 							<true/>
 							<integer>0</integer>
 						</array>
@@ -77,7 +77,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>background-x2.jpg</string>
+							<string>background.jpg</string>
 						</array>
 					</dict>
 					<dict>

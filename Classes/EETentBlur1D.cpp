@@ -118,8 +118,8 @@ void internalTentBlur1D(unsigned char* pixels, unsigned width, unsigned height, 
                 shiftSumOut();
                 updatePixel(kernelSize - col - 1);
             }
+            std::memcpy(pixels, buffer, width * 4);
         }
-        std::memcpy(pixels, buffer, width * 4);
         pixels = inPixel;
     }
     

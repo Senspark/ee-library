@@ -1,371 +1,256 @@
+//
+//  EETouchListener__.cpp
+//  ee-library
+//
+//  Created by enrevol on 10/28/15.
+//
+//
+
 #include "EETouchListener-Impl.hpp"
 #include "EETouchManager.hpp"
 #include "cocos2d.h"
 
 namespace_ee_begin
-TouchListenerNode::TouchListenerNode(cocos2d::Node* instance)
-: _instance(instance)
-, _buttonState(ButtonState::Normal)
-, _impl(new Impl(this)) {}
+TouchListener::TouchListener()
+: _impl(new Impl(this))
+{}
 
-TouchListenerNode::~TouchListenerNode() {}
+TouchListener::~TouchListener() {}
 
-cocos2d::EventListenerTouchOneByOne* TouchListenerNode::getEventListener() const {
-    return _impl->_listener;
-}
-    
-void TouchListenerNode::setHitCount(unsigned count) {
-    _impl->_hitCount = count;
+void TouchListener::setTouchType(TouchType type) {
+    _impl->_touchType = type;
 }
 
-void TouchListenerNode::setState(int state) {
-    _impl->_state = state;
-    updateState();
+TouchType TouchListener::getTouchType() const {
+    return _impl->_touchType;
 }
 
-int TouchListenerNode::getState() const {
-    return _impl->_state;
+bool TouchListener::isEnabled() const {
+    return _impl->_listener->isEnabled();
+}
+void TouchListener::setEnabled(bool enabled) {
+    _impl->_listener->setEnabled(enabled);
 }
 
-void TouchListenerNode::toggleState(int state) {
-    _impl->_state ^= state;
-    updateState();
+void TouchListener::setSwallowTouches(bool needSwallow) {
+    _impl->_listener->setSwallowTouches(needSwallow);
 }
 
-void TouchListenerNode::enableState(int state) {
-    _impl->_state |= state;
-    updateState();
+bool TouchListener::isSwallowTouches() {
+    return _impl->_listener->isSwallowTouches();
 }
 
-void TouchListenerNode::disableState(int state) {
-    _impl->_state &= ~state;
-    updateState();
+void TouchListener::setBaseScale(float scale) {
+    _impl->_baseScale = scale;
 }
 
-bool TouchListenerNode::checkState(int state) const {
-    return (_impl->_state & state) != TouchState::None;
+void TouchListener::setZoomScaleRatio(float ratio) {
+    _impl->_zoomScaleRatio = ratio;
 }
 
-void TouchListenerNode::setCallback(TouchState::Callback callbackType, const std::function<void(cocos2d::Touch*, cocos2d::Event*)>& callback) {
-    switch (callbackType) {
-        case TouchState::TouchBegan: _impl->_callbackList[0] = callback; break;
-        case TouchState::TouchMoved: _impl->_callbackList[1] = callback; break;
-        case TouchState::TouchUpInside: _impl->_callbackList[2] = callback; break;
-        case TouchState::TouchUpOutside: _impl->_callbackList[3] = callback; break;
-    }
+float TouchListener::getZoomScaleRatio() const {
+    return _impl->_zoomScaleRatio;
 }
 
-const std::function<void(cocos2d::Touch*, cocos2d::Event*)>& TouchListenerNode::getCallback(TouchState::Callback callbackType) const {
-    switch (callbackType) {
-        case TouchState::TouchBegan: return _impl->_callbackList[0];
-        case TouchState::TouchMoved: return _impl->_callbackList[1];
-        case TouchState::TouchUpInside: return _impl->_callbackList[2];
-        case TouchState::TouchUpOutside: return _impl->_callbackList[3];
-    }
-    CC_ASSERT(false);
-}
-    
-void TouchListenerNode::setStateChangedCallback(const std::function<void(ButtonState)>& callback) {
-    _impl->_stateChangedCallback = callback;
-}
-    
-const std::function<void(ButtonState)>& TouchListenerNode::getStateChangedCallback() const {
-    return _impl->_stateChangedCallback;
+void TouchListener::setZoomDuration(float duration) {
+    _impl->_zoomDuration = duration;
 }
 
-void TouchListenerNode::updateState() {
-    CC_ASSERT((_impl->_state | TouchState::TouchBeganInside | TouchState::TouchBeganOutside) != _impl->_state);
-    if (isEnabled() == false) {
-        updateState(ButtonState::Disabled);
+float TouchListener::getZoomDuration() const {
+    return _impl->_zoomDuration;
+}
+
+void TouchListener::setTouchBeganCallback(const TouchEventCallback& callback) {
+    _impl->_touchBeganCallback = callback;
+}
+
+void TouchListener::setTouchMovedCallback(const TouchEventCallback& callback) {
+    _impl->_touchMovedCallback = callback;
+}
+
+void TouchListener::setTouchUpCallback(const TouchEventCallback& callback) {
+    _impl->_touchUpCallback = callback;
+}
+
+void TouchListener::setTouchMovedThreshold(float delta) {
+    _impl->_moveThreshold = delta;
+}
+
+void TouchListener::updateState() {
+    if (isEnabled()) {
+        updateState(_impl->_buttonState);
     } else {
-        updateState(_buttonState);
+        updateState(ButtonState::Disabled);
     }
 }
 
-void TouchListenerNode::updateState(ButtonState state) {
+void TouchListener::updateState(ButtonState state) {
     if (state != ButtonState::Disabled) {
-        _buttonState = state;
-    }
-    if (checkState(TouchState::StateChanged) && getStateChangedCallback() != nullptr) {
-        getStateChangedCallback()(state);
+        _impl->_buttonState = state;
     }
 }
 
-ButtonState TouchListenerNode::getButtonState() const {
-    if (isEnabled()) return _buttonState;
-    return ButtonState::Disabled;
-}
-
-void TouchListenerNode::setBaseScale(float scale) {
-    setBaseScale(scale, scale);
-}
-    
-void TouchListenerNode::setBaseScale(float scaleX, float scaleY) {
-    setBaseScaleX(scaleX);
-    setBaseScaleY(scaleY);
-}
-    
-void TouchListenerNode::setBaseScaleX(float scaleX) {
-    _impl->_baseScaleX = scaleX;
-}
-    
-void TouchListenerNode::setBaseScaleY(float scaleY) {
-    _impl->_baseScaleY = scaleY;
-}
-
-TouchListenerNode::Impl::Impl(TouchListenerNode* base)
-: _state(TouchState::None)
+TouchListener::Impl::Impl(TouchListener* base)
+: _base(base)
+, _shouldCancel(false)
+, _moveThreshold(0)
 , _isInside(false)
-, _listener(nullptr)
-, _hitCount(std::numeric_limits<unsigned>::max())
-, _baseScaleX(1.0f)
-, _baseScaleY(1.0f)
-, _base(base) {
-    addListener();
+, _state(0)
+, _buttonState(ButtonState::Normal)
+, _baseScale(1.0f)
+, _zoomScaleRatio(1.15f)
+, _zoomDuration(0.04f)
+{}
+
+void TouchListener::Impl::addListener() {
+    _listener = cocos2d::EventListenerTouchOneByOne::create();
+    _listener->onTouchBegan = CC_CALLBACK_2(Impl::onTouchBegan, this);
+    _listener->onTouchMoved = CC_CALLBACK_2(Impl::onTouchMoved, this);
+    _listener->onTouchEnded = CC_CALLBACK_2(Impl::onTouchEnded, this);
+    _listener->onTouchCancelled = CC_CALLBACK_2(Impl::onTouchCanceled, this);
 }
 
-void TouchListenerNode::Impl::addListener() {
-    const int ScaleUpTag = 999;
-    const int OtherActionTag = 1000;
-    
-    _listener = cocos2d::EventListenerTouchOneByOne::create();
-    _listener->onTouchBegan = [this, ScaleUpTag, OtherActionTag](cocos2d::Touch* touch, cocos2d::Event* event) {
-        bool ret = false;
-        _base->_instance->retain();
-        if (TouchManager::getInstance()->isLocked() == false && _hitCount > 0) {
-            // Check whether the button is enabled.
-            if (_base->checkState(TouchState::Enable)) {
-                // Check whether the button is actually visible.
-                if (_base->isActuallyVisible()) {
-                    // Check whether the touch position is inside the button area.
-                    _isInside = _base->isTouchInside(touch);
-                    // Touch began have to be inside to trigger the event.
-                    if (_base->checkState(TouchState::TouchBeganInside)) {
-                        if ((ret = _isInside)) {
-                            // Touch began callback.
-                            if (_base->checkState(TouchState::TouchBegan) && _base->getCallback(TouchState::TouchBegan) != nullptr) {
-                                _base->getCallback(TouchState::TouchBegan)(touch, event);
-                            }
-                            // Check whether the button supports zoom-in feature.
-                            if (_base->checkState(TouchState::Zoom)) {
-                                // Stop all zoom-in related actions.
-                                _base->_instance->stopActionByTag(OtherActionTag);
-                                _base->_instance->stopActionByTag(ScaleUpTag);
-                                // Create zoom-in action.
-                                auto press = cocos2d::ScaleTo::create(_base->getScaleDuration(), _baseScaleX * _base->getScaleRatio(), _baseScaleY * _base->getScaleRatio());
-                                press->setTag(ScaleUpTag);
-                                _base->_instance->runAction(press);
-                            }
-                            // Check whether the button supports toggle feature.
-                            if (_base->checkState(TouchState::Toggle)) {
-                                _base->updateState(ButtonState::Pressed);
-                            }
-                        }
-                    } else if (_base->checkState(TouchState::TouchBeganOutside)) {
-                        // Touch began have to be outside to trigger the event.
-                        if ((ret = (_isInside == false))) {
-                            // Touch began callback.
-                            if (_base->checkState(TouchState::TouchBegan) && _base->getCallback(TouchState::TouchBegan) != nullptr) {
-                                _base->getCallback(TouchState::TouchBegan)(touch, event);
-                            }
-                        }
-                    }
+bool TouchListener::Impl::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event) {
+    bool ret = false;
+    auto instance = _base->getInstance();
+    instance->retain();
+    // Check whether touch is locked.
+    if (TouchManager::getInstance()->isLocked() == false) {
+        // Reset cancel flag.
+        _shouldCancel = false;
+        // Check whether touch is inside.
+        _isInside = isTouchInside(touch);
+        // Touch inside type.
+        if (_touchType == TouchType::Inside) {
+            if (_isInside) {
+                ret = true;
+                if (_zoomScaleRatio != 1.0f) {
+                    // Run zoom action.
+                    instance->stopActionByTag(ZoomActionTag);
+                    instance->stopActionByTag(OtherActionTag);
+                    auto press = cocos2d::ScaleTo::create(_zoomDuration, _baseScale * _zoomScaleRatio);
+                    press->setTag(ZoomActionTag);
+                    instance->runAction(press);
                 }
-            }
-        }
-        if (ret) {
-            if (_base->checkState(TouchState::TouchBeganInside)) {
+                // Update state.
+                _base->updateState(ButtonState::Pressed);
+                // Lock touch.
                 TouchManager::getInstance()->lock(touch);
             }
-        }
-        _base->_instance->release();
-        return ret;
-    };
-    
-    _listener->onTouchMoved = [this, ScaleUpTag, OtherActionTag](cocos2d::Touch* touch, cocos2d::Event* event) {
-        // Detect same touch location.
-        if (touch->getDelta() != cocos2d::Vec2::ZERO) {
-            // Check whether the button is actually visible.
-            if (_base->isActuallyVisible()) {
-                _base->_instance->retain();
-                CC_ASSERT(_base->checkState(TouchState::Enable));
-                // Touch moved callback.
-                if (_base->checkState(TouchState::TouchMoved) && _base->getCallback(TouchState::TouchMoved) != nullptr) {
-                    _base->getCallback(TouchState::TouchMoved)(touch, event);
-                }
-                bool wasInside = _isInside;
-                _isInside = _base->isTouchInside(touch);
-                // Check whether the button supports zoom-in or toggle feature.
-                if (_base->checkState(TouchState::Zoom) || _base->checkState(TouchState::Toggle)) {
-                    if (_isInside != wasInside) {
-                        // Check whether the button supports zoom-in feature.
-                        if (_base->checkState(TouchState::Zoom)) {
-                            // Stop all zoom-in related actions.
-                            _base->_instance->stopActionByTag(OtherActionTag);
-                            _base->_instance->stopActionByTag(ScaleUpTag);
-                            if (_isInside) {
-                                float ratio = (_baseScaleX * _base->getScaleRatio() - _base->_instance->getScaleX()) / (_baseScaleX * _base->getScaleRatio() - _baseScaleX);
-                                auto press = cocos2d::ScaleTo::create(_base->getScaleDuration() * ratio, _baseScaleX * _base->getScaleRatio(), _baseScaleY * _base->getScaleRatio());
-                                press->setTag(ScaleUpTag);
-                                _base->_instance->runAction(press);
-                            } else {
-                                float ratio = (_base->_instance->getScaleX() - _baseScaleX) / (_baseScaleX * _base->getScaleRatio() - _baseScaleX);
-                                auto normal = cocos2d::ScaleTo::create(_base->getScaleDuration() * ratio, _baseScaleX, _baseScaleY);
-                                normal->setTag(OtherActionTag);
-                                _base->_instance->runAction(normal);
-                            }
-                        }
-                        // Check whether the button supports toggle feature.
-                        if (_base->checkState(TouchState::Toggle)) {
-                            if (_isInside) {
-                                _base->updateState(ButtonState::Pressed);
-                            } else {
-                                _base->updateState(ButtonState::Normal);
-                            }
-                        }
-                    }
-                }
-                _base->_instance->release();
-            }
-        }
-    };
-    
-    _listener->onTouchCancelled = _listener->onTouchEnded = [this, ScaleUpTag, OtherActionTag](cocos2d::Touch* touch, cocos2d::Event* event) {
-        CC_ASSERT(_base->checkState(TouchState::Enable));
-        // Check whether the button is actually visible.
-        if (_base->isActuallyVisible()) {
-            // Check whether the button supports zoom-in feature.
-            _base->_instance->retain();
-            if (_base->checkState(TouchState::Zoom)) {
-                if (_isInside) {
-                    // Get the current zoom-in action.
-                    auto currentAction = static_cast<cocos2d::ScaleTo*>(_base->_instance->getActionByTag(ScaleUpTag));
-                    cocos2d::Vector<cocos2d::FiniteTimeAction*> actions;
-                    actions.reserve(3);
-                    if (currentAction != nullptr) {
-                        if (currentAction->isDone() == false) {
-                            float remaining = _base->getScaleDuration() - currentAction->getElapsed();
-                            auto delay = cocos2d::DelayTime::create(remaining);
-                            actions.pushBack(delay);
-                        }
-                    }
-                    auto normal = cocos2d::ScaleTo::create(_base->getScaleDuration(), _baseScaleX, _baseScaleY);
-                    actions.pushBack(normal);
-                    auto callFunc = cocos2d::CallFunc::create([touch, event, this]() {
-                        if (_base->checkState(TouchState::TouchUpInside) && _base->getCallback(TouchState::TouchUpInside) != nullptr) {
-                            _base->getCallback(TouchState::TouchUpInside)(touch, event);
-                        }
-                        --_hitCount;
-                        TouchManager::getInstance()->unlock();
-                    });
-                    actions.pushBack(callFunc);
-                    auto sequence = cocos2d::Sequence::create(actions);
-                    sequence->setTag(OtherActionTag);
-                    _base->_instance->runAction(sequence);
-                }
-            }
-            // Check whether the button supports toggle feature.
-            if (_base->checkState(TouchState::Toggle)) {
-                if (_isInside) {
-                    _base->updateState(ButtonState::Normal);
-                }
-            }
-            if (_base->checkState(TouchState::Zoom) == false) {
-                if (_isInside) {
-                    if (_base->checkState(TouchState::TouchUpInside) && _base->getCallback(TouchState::TouchUpInside) != nullptr) {
-                        --_hitCount;
-                        _base->getCallback(TouchState::TouchUpInside)(touch, event);
-                    }
-                }
-            }
+        } else {
+            // Touch outside type.
             if (_isInside == false) {
-                if (_base->checkState(TouchState::TouchUpOutside) && _base->getCallback(TouchState::TouchUpOutside) != nullptr) {
-                    --_hitCount;
-                    _base->getCallback(TouchState::TouchUpOutside)(touch, event);
-                }
+                // We should not lock touch outside.
+                ret = true;
             }
-            if ((_base->checkState(TouchState::Zoom) && _isInside) == false) {
-                TouchManager::getInstance()->unlock();
-            }
-            _isInside = false;
-            _base->_instance->release();
         }
-    };
-    
-    _base->_instance->getEventDispatcher()->addEventListenerWithSceneGraphPriority(_listener, _base->_instance);
-}
-
-bool TouchListenerNode::isTouchInside(cocos2d::Touch* touch) const {
-    auto&& position = _instance->getParent()->convertToNodeSpace(touch->getLocation());
-    auto&& box = _instance->getBoundingBox();
-    return box.containsPoint(position);
-}
-    
-bool TouchListenerNode::isActuallyVisible() const {
-    bool ret = true;
-    for (auto node = _instance; node != nullptr && ret; node = node->getParent()) {
-        ret = node->isVisible();
+        // Invoke callback.
+        if (_touchBeganCallback) {
+            _touchBeganCallback(touch, event);
+        }
+        ret = true;
     }
+    instance->release();
     return ret;
 }
 
-TouchListenerSprite::TouchListenerSprite(cocos2d::Sprite* instance)
-: TouchListenerNode(instance)
-, _impl(new Impl()) {}
-
-TouchListenerSprite::~TouchListenerSprite() {}
-
-TouchListenerSprite::Impl::Impl()
-: _normalSpriteFrame(nullptr)
-, _pressedSpriteFrame(nullptr)
-, _disabledSpriteFrame(nullptr) {}
-
-TouchListenerSprite::Impl::~Impl() {
-    if (_normalSpriteFrame != nullptr) {
-        _normalSpriteFrame->release();
+void TouchListener::Impl::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event) {
+    // Check whether its the same position.
+    if (touch->getDelta() == cocos2d::Vec2::ZERO) {
+        return;
     }
-    if (_pressedSpriteFrame != nullptr) {
-        _pressedSpriteFrame->release();
+    // Check whether touch should be cancelled.
+    float delta = std::max(std::abs(touch->getDelta().x), std::abs(touch->getDelta().y));
+    if (_moveThreshold < delta) {
+        _shouldCancel = true;
     }
-    if (_disabledSpriteFrame != nullptr) {
-        _disabledSpriteFrame->release();
+    auto instance = _base->getInstance();
+    instance->retain();
+    bool wasInside = _isInside;
+    _isInside = isTouchInside(touch);
+    if (wasInside != _isInside) {
+        // Touch inside type.
+        if (_touchType == TouchType::Inside) {
+            instance->stopActionByTag(ZoomActionTag);
+            float finalScale = _baseScale * _zoomScaleRatio;
+            float currentScale = instance->getScaleX();
+            if (_isInside) {
+                float ratio = (finalScale - currentScale) / (finalScale - _baseScale);
+                auto press = cocos2d::ScaleTo::create(_zoomDuration * ratio, finalScale);
+                press->setTag(ZoomActionTag);
+                instance->runAction(press);
+            } else {
+                float ratio = (currentScale - _baseScale) / (finalScale - _baseScale);
+                auto normal = cocos2d::ScaleTo::create(_zoomDuration * ratio, _baseScale);
+                normal->setTag(OtherActionTag);
+                instance->runAction(normal);
+            }
+        } else {
+            // Touch outside type does nothing.
+        }
+        // Update state.
+        if (_isInside) {
+            _base->updateState(ButtonState::Pressed);
+        } else {
+            _base->updateState(ButtonState::Normal);
+        }
     }
+    // Invoke callback.
+    if (_touchMovedCallback) {
+        _touchMovedCallback(touch, event);
+    }
+    instance->release();
 }
 
-cocos2d::SpriteFrame* TouchListenerSprite::getSpriteFrameForState(ButtonState state) const {
-    cocos2d::SpriteFrame* ret = nullptr;
-    switch (state) {
-        case ButtonState::Normal: ret = _impl->_normalSpriteFrame; break;
-        case ButtonState::Pressed: ret = _impl->_pressedSpriteFrame; break;
-        case ButtonState::Disabled: ret = _impl->_disabledSpriteFrame; break;
+void TouchListener::Impl::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) {
+    auto instance = _base->getInstance();
+    instance->retain();
+    // Touch inside type.
+    if (_touchType == TouchType::Inside) {
+        // Run zoom action.
+        if (_zoomScaleRatio != 1.0f) {
+            if (_isInside) {
+                auto currentAction = static_cast<cocos2d::ScaleTo*>(instance->getActionByTag(ZoomActionTag));
+                cocos2d::Vector<cocos2d::FiniteTimeAction*> actions;
+                actions.reserve(3);
+                if (currentAction != nullptr && currentAction->isDone() == false) {
+                    float remaining = _zoomDuration - currentAction->getElapsed();
+                    auto delay = cocos2d::DelayTime::create(remaining);
+                    actions.pushBack(delay);
+                }
+                auto normal = cocos2d::ScaleTo::create(_zoomDuration, _baseScale);
+                actions.pushBack(normal);
+                auto callFunc = cocos2d::CallFunc::create([touch, event, this] {
+                    if (_shouldCancel == false) {
+                        if (_touchUpCallback) {
+                            _touchUpCallback(touch, event);
+                        }
+                    }
+                    TouchManager::getInstance()->unlock(touch);
+                });
+                actions.pushBack(callFunc);
+                auto sequence = cocos2d::Sequence::create(actions);
+                sequence->setTag(OtherActionTag);
+                instance->runAction(sequence);
+            }
+        } else {
+            
+        }
+    } else {
+        if (_shouldCancel == false) {
+            if (_touchUpCallback) {
+                _touchUpCallback(touch, event);
+            }
+        }
     }
-    return ret;
+    // Update state.
+    if (_isInside) {
+        _base->updateState(ButtonState::Normal);
+    }
+    instance->release();
 }
 
-void TouchListenerSprite::setSpriteFrameForState(ButtonState state, const std::string& spriteFrameName) {
-    setSpriteFrameForState(state, cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(spriteFrameName));
-}
-
-void TouchListenerSprite::setSpriteFrameForState(ButtonState state, cocos2d::SpriteFrame* spriteFrame) {
-    cocos2d::SpriteFrame** stateSpriteFrame = nullptr;
-    switch (state) {
-        case ButtonState::Normal: stateSpriteFrame = &_impl->_normalSpriteFrame; break;
-        case ButtonState::Pressed: stateSpriteFrame = &_impl->_pressedSpriteFrame; break;
-        case ButtonState::Disabled: stateSpriteFrame = &_impl->_disabledSpriteFrame; break;
-    }
-    if (*stateSpriteFrame != nullptr) {
-        (*stateSpriteFrame)->release();
-    }
-    (*stateSpriteFrame) = spriteFrame;
-    (*stateSpriteFrame)->retain();
-    updateState();
-}
-
-void TouchListenerSprite::updateState(ButtonState state) {
-    TouchListenerNode::updateState(state);
-    auto sprite = getSpriteFrameForState(state);
-    if (sprite != nullptr) {
-        static_cast<cocos2d::Sprite*>(_instance)->setSpriteFrame(sprite);
-    }
+void TouchListener::Impl::onTouchCanceled(cocos2d::Touch* touch, cocos2d::Event* event) {
+    TouchManager::getInstance()->unlock(touch);
 }
 namespace_ee_end

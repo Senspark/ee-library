@@ -29,7 +29,7 @@ void addAnimationToButton(cocos2d::Node* button);
  * This capture process is slow because it uses glReadPixels.
  * @param afterCaptured is the callback.
  */
-void captureScreenInPoints(const std::function<void(cocos2d::Image*)>& afterCaptured);
+void captureScreenInPixels(const std::function<void(cocos2d::Image*)>& afterCaptured);
 
 /**
  * Captures screenshot in points, i.e. scene size.
@@ -37,7 +37,7 @@ void captureScreenInPoints(const std::function<void(cocos2d::Image*)>& afterCapt
  * @param afterCaptured is the callback.
  * @param scale is the scene scale.
  */
-void captureScreenInPixels(const std::function<void(cocos2d::Image*)>& afterCaptured, float scale);
+void captureScreenInPoints(const std::function<void(cocos2d::Image*)>& afterCaptured, float scale);
 
 /**
  * Downloads image given its url.

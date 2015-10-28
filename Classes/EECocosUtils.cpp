@@ -86,7 +86,7 @@ void addAnimationToButton(cocos2d::Node* button) {
     }, [] { return cocos2d::random(0.0f, 1.0f) * 2.0f + 5.0f; }, [] { return 4.0f; });
 }
 
-void captureScreenInPoints(const std::function<void(cocos2d::Image*)>& afterCaptured) {
+void captureScreenInPixels(const std::function<void(cocos2d::Image*)>& afterCaptured) {
     static cocos2d::CustomCommand captureScreenCommand;
     captureScreenCommand.init(std::numeric_limits<float>::max());
     captureScreenCommand.func = [afterCaptured] {
@@ -143,7 +143,7 @@ void captureScreenInPoints(const std::function<void(cocos2d::Image*)>& afterCapt
     cocos2d::Director::getInstance()->getRenderer()->addCommand(&captureScreenCommand);
 }
 
-void captureScreenInPixels(const std::function<void(cocos2d::Image*)>& afterCaptured, float scale) {
+void captureScreenInPoints(const std::function<void(cocos2d::Image*)>& afterCaptured, float scale) {
     auto scene = cocos2d::Director::getInstance()->getRunningScene();
     auto&& size = cocos2d::Director::getInstance()->getWinSize() * scale;
     int width = (int) size.width;

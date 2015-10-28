@@ -1,48 +1,53 @@
 //
-//  EETouchListener-Impl.h
-//  roll-eat
+//  EETouchListenerNode-Impl.hpp
+//  ee-library
 //
-//  Created by enrevol on 9/2/15.
+//  Created by enrevol on 10/28/15.
 //
 //
 
-#ifndef EE_LIBRARY_TOUCH_LISTENER_IMPL_H
-#define EE_LIBRARY_TOUCH_LISTENER_IMPL_H
+#ifndef EE_LIBRARY_TOUCH_LISTENER_IMPL_HPP
+#define EE_LIBRARY_TOUCH_LISTENER_IMPL_HPP
 
 #include "EETouchListener.hpp"
 
 namespace_ee_begin
-class TouchListenerNode::Impl {
+class TouchListener::Impl {
 public:
-    Impl(TouchListenerNode* base);
+    Impl(TouchListener* base);
     
     void addListener();
-
+    bool isTouchInside(cocos2d::Touch* touch) const;
+    
+    bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event);
+    void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event);
+    void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event);
+    void onTouchCanceled(cocos2d::Touch* touch, cocos2d::Event* event);
+    
+    TouchListener* _base;
+    
+    bool _shouldCancel;
+    float _moveThreshold;
+    
     bool _isInside;
     int _state;
     
-    float _baseScaleX;
-    float _baseScaleY;
+    ButtonState _buttonState;
+    TouchType _touchType;
     
-    unsigned _hitCount;
+    float _baseScale;
+    float _zoomScaleRatio;
+    float _zoomDuration;
     
-    TouchListenerNode* _base;
-    
-    std::function<void(cocos2d::Touch*, cocos2d::Event*)> _callbackList[4];
-    std::function<void(ButtonState)> _stateChangedCallback;
+    TouchEventCallback _touchBeganCallback;
+    TouchEventCallback _touchMovedCallback;
+    TouchEventCallback _touchUpCallback;
     
     cocos2d::EventListenerTouchOneByOne* _listener;
-};
     
-class TouchListenerSprite::Impl {
-public:
-    Impl();
-    virtual ~Impl();
-    
-    cocos2d::SpriteFrame* _normalSpriteFrame;
-    cocos2d::SpriteFrame* _pressedSpriteFrame;
-    cocos2d::SpriteFrame* _disabledSpriteFrame;
+    static constexpr int ZoomActionTag = 999;
+    static constexpr int OtherActionTag = 1000;
 };
 namespace_ee_end
 
-#endif // EE_LIBRARY_TOUCH_LISTENER_IMPL_H
+#endif /* EE_LIBRARY_TOUCH_LISTENER_IMPL_HPP */

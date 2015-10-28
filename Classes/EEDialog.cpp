@@ -6,8 +6,8 @@
 //
 //
 
-#include "EEDialog.h"
-#include "EEDialogManager.h"
+#include "EEDialog.hpp"
+#include "EEDialogManager.hpp"
 #include "cocos2d.h"
 
 namespace_ee_begin

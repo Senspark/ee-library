@@ -9,7 +9,7 @@
 #ifndef EE_LIBRARY_GESTURE_IMPL_H
 #define EE_LIBRARY_GESTURE_IMPL_H
 
-#include "EEGesture.h"
+#include "EEGesture.hpp"
 #include "math/Vec2.h"
 #include "math/CCGeometry.h"
 

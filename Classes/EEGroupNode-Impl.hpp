@@ -9,7 +9,7 @@
 #ifndef EE_LIBRARY_GROUP_NODE_IMPL_H
 #define EE_LIBRARY_GROUP_NODE_IMPL_H
 
-#include "EEGroupNode.h"
+#include "EEGroupNode.hpp"
 
 #include <vector>
 

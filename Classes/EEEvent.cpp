@@ -6,7 +6,7 @@
 //
 //
 
-#include "EEEvent.h"
+#include "EEEvent.hpp"
 #include "cocos2d.h"
 
 namespace_ee_begin

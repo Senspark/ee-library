@@ -130,6 +130,7 @@ class DataInfoBase : public NonCopyable {
 protected:
     DataInfoBase(std::string key) : _key(std::move(key)) {}
     
+    DataInfoBase(DataInfoBase&&) = default;
     DataInfoBase& operator=(DataInfoBase&&) = delete;
     
     std::string _key;

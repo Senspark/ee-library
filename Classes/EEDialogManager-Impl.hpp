@@ -9,7 +9,7 @@
 #ifndef EE_LIBRARY_DIALOG_MANAGER_IMPL_H
 #define EE_LIBRARY_DIALOG_MANAGER_IMPL_H
 
-#include "EEDialogManager.h"
+#include "EEDialogManager.hpp"
 #include <vector>
 
 namespace_ee_begin

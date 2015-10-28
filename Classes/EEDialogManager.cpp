@@ -6,9 +6,9 @@
 //
 //
 
-#include "EEDialogManager-Impl.h"
+#include "EEDialogManager-Impl.hpp"
 
-#include "EEDialog.h"
+#include "EEDialog.hpp"
 #include "EECocosUtils.hpp"
 #include "cocos2d.h"
 
@@ -26,17 +26,14 @@ void DialogManager::hideDialog() {
     
 void DialogManager::pushDialog(cocos2d::Node* container, Dialog* dialog, int localZOrder) {
     auto parent = getRunningNode();
-    // Check whether it was added.
-    if (parent != container) {
-        // Pause parent.
-        pauseAll(parent);
-        // Push dialog to stack.
-        auto ptr = static_cast<Impl*>(this);
-        container->retain();
-        ptr->_dialogStack.emplace_back(container, dialog);
-        // Add dialog to scene.
-        parent->addChild(container, localZOrder);
-    }
+    // Pause parent.
+    pauseAll(parent);
+    // Push dialog to stack.
+    auto ptr = static_cast<Impl*>(this);
+    container->retain();
+    ptr->_dialogStack.emplace_back(container, dialog);
+    // Add dialog to scene.
+    parent->addChild(container, localZOrder);
 }
 
 void DialogManager::popDialog(Dialog* dialog) {

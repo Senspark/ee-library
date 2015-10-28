@@ -2,7 +2,7 @@
 #define EE_LIBRARY_CONTROL_H
 
 #include "EEForward.hpp"
-#include "EETouchListener.h"
+#include "EETouchListener.hpp"
 #include "cocosbuilder/CCSpriteLoader.h"
 #include "2d/CCSprite.h"
 

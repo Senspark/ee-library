@@ -1,0 +1,74 @@
+//
+//  EECrc.cpp
+//  roll-eat
+//
+//  Created by Tran Van Tuan on 10/9/15.
+//
+//
+
+#include "EECrytography.hpp"
+
+#include <algorithm>
+#include <array>
+#include <cstdint>
+#include <numeric>
+
+namespace_ee_begin
+NAMESPACE_BEGIN(crc)
+namespace_anonymous_begin
+std::array<std::uint_fast32_t, 256> generate_crc_lookup_table() noexcept {
+    auto const reversed_polynomial = std::uint_fast32_t{0xEDB88320uL};
+    
+    // This is a function object that calculates the checksum for a value,
+    // then increments the value, starting from zero.
+    struct byte_checksum {
+        std::uint_fast32_t operator()() noexcept {
+            auto checksum = static_cast<std::uint_fast32_t>(n++);
+            
+            for (auto i = 0; i < 8; ++i) {
+                checksum = (checksum >> 1) ^ ((checksum & 0x1u) ? reversed_polynomial : 0);
+            }
+            
+            return checksum;
+        }
+        
+        unsigned n = 0;
+    };
+    
+    auto table = std::array<std::uint_fast32_t, 256>{};
+    std::generate(table.begin(), table.end(), byte_checksum{});
+    
+    return table;
+}
+namespace_anonymous_end
+
+// Calculates the CRC for any sequence of values. (You could use type traits and a
+// static assert to ensure the values can be converted to 8 bits.)
+template<class InputIterator>
+std::uint_fast32_t crc(InputIterator first, InputIterator last) {
+    // Generate lookup table only on first use then cache it - this is thread-safe.
+    static auto const table = generate_crc_lookup_table();
+    
+    // Calculate the checksum - make sure to clip to 32 bits, for systems that don't
+    // have a true (fast) 32-bit type.
+    return std::uint_fast32_t{0xFFFFFFFFuL} &
+    ~std::accumulate(first, last,
+                     ~std::uint_fast32_t{0} & std::uint_fast32_t{0xFFFFFFFFuL},
+                     [](std::uint_fast32_t checksum, std::uint_fast8_t value)
+                     { return table[(checksum ^ value) & 0xFFu] ^ (checksum >> 8); });
+}
+NAMESPACE_END(crc)
+    
+std::string generateCrc(const std::string& input) {
+    auto output = crc::crc(input.begin(), input.end());
+    std::string ret;
+    ret.reserve(8);
+    static const char* digits = "0123456789abcdef";
+    for (int index = 0; index < 8; ++index) {
+        ret += digits[output & 0xf];
+        output >>= 4;
+    }
+    std::reverse(ret.begin(), ret.end());
+    return ret;
+}
+namespace_ee_end

@@ -29,7 +29,7 @@ void internalTranspose(unsigned rowBegin, unsigned rowEnd, unsigned colBegin, un
 }
 namespace_anonymous_end
 
-void Image::transpose(unsigned* src, unsigned* dst, unsigned srcWidth, unsigned srcHeight) {
+void transpose(unsigned* src, unsigned* dst, unsigned srcWidth, unsigned srcHeight) {
     internalTranspose(0, srcHeight, 0, srcWidth, src, dst, srcWidth, srcHeight);
 }
 namespace_ee_end

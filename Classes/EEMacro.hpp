@@ -3,12 +3,6 @@
 
 #include "platform/CCPlatformMacros.h"
 
-#define EE_LIBRARY_LOG_VERBOSE
-#define EE_LIBRARY_LOG_DEBUG
-#define EE_LIBRARY_LOG_INFO
-#define EE_LIBRARY_LOG_WARN
-#define EE_LIBRARY_LOG_ERROR
-
 #define NAMESPACE_BEGIN(name) namespace name {
 #define NAMESPACE_END(name) }
 #define namespace_ee_begin NAMESPACE_BEGIN(ee)

@@ -1,5 +1,5 @@
-#include "EEControl.h"
-#include "EETouchListener-Impl.h"
+#include "EEControl.hpp"
+#include "EETouchListener-Impl.hpp"
 
 namespace_ee_begin
 void NodeButtonLoader::onHandlePropTypeScaleLock(cocos2d::Node* pNode, cocos2d::Node* pParent, const char* pPropertyName, float* pScaleLock, cocosbuilder::CCBReader* ccbReader) {

@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6C2E7D531BDE042B008F5EF3 /* ee-library-mobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C2F2DCE1BDDEB74001F91C5 /* ee-library-mobile.a */; };
 		6C2E7D6B1BDE0596008F5EF3 /* Resources-gen in Resources */ = {isa = PBXBuildFile; fileRef = 6C43A8421BDDE13600D0597F /* Resources-gen */; };
+		6C2E7D701BDE0A21008F5EF3 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C2E7D6F1BDE0A21008F5EF3 /* libz.1.dylib */; };
+		6C2E7D751BDE0B90008F5EF3 /* ee-library-mobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C2F2DCE1BDDEB74001F91C5 /* ee-library-mobile.a */; };
 		6C43A87D1BDDE26300D0597F /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A81A1BDDE0FE00D0597F /* AppDelegate.cpp */; };
 		6C43A87E1BDDE26600D0597F /* CCBUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A81C1BDDE0FE00D0597F /* CCBUtils.cpp */; };
 		6C43A87F1BDDE26900D0597F /* TestScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A8201BDDE0FE00D0597F /* TestScene.cpp */; };
@@ -40,7 +41,6 @@
 		6C43A8B41BDDE7BB00D0597F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C43A8B31BDDE7BB00D0597F /* AudioToolbox.framework */; };
 		6C43A8B61BDDE7C400D0597F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C43A8B51BDDE7C400D0597F /* SystemConfiguration.framework */; };
 		6C43A8B81BDDE7CF00D0597F /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C43A8B71BDDE7CF00D0597F /* CoreMotion.framework */; };
-		6C43A8BA1BDDE7DF00D0597F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C43A8B91BDDE7DF00D0597F /* libz.tbd */; };
 		6C43A8C31BDDEA0C00D0597F /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C43A8C21BDDEA0C00D0597F /* GameController.framework */; };
 		6C43A8C51BDDEA2400D0597F /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C43A8C41BDDEA2400D0597F /* MediaPlayer.framework */; };
 /* End PBXBuildFile section */
@@ -84,6 +84,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6C2E7D6D1BDE0887008F5EF3 /* dylib1.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = dylib1.o; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.1.sdk/usr/lib/dylib1.o; sourceTree = DEVELOPER_DIR; };
+		6C2E7D6F1BDE0A21008F5EF3 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = ../../../../../../../usr/lib/libz.1.dylib; sourceTree = "<group>"; };
 		6C43A8101BDDE07E00D0597F /* ee-library.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ee-library.xcodeproj"; path = "../../proj.ios_mac/ee-library.xcodeproj"; sourceTree = "<group>"; };
 		6C43A81A1BDDE0FE00D0597F /* AppDelegate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
 		6C43A81B1BDDE0FE00D0597F /* AppDelegate.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AppDelegate.hpp; sourceTree = "<group>"; };
@@ -144,10 +146,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6C2E7D531BDE042B008F5EF3 /* ee-library-mobile.a in Frameworks */,
+				6C2E7D751BDE0B90008F5EF3 /* ee-library-mobile.a in Frameworks */,
+				6C2E7D701BDE0A21008F5EF3 /* libz.1.dylib in Frameworks */,
 				6C43A8C51BDDEA2400D0597F /* MediaPlayer.framework in Frameworks */,
 				6C43A8C31BDDEA0C00D0597F /* GameController.framework in Frameworks */,
-				6C43A8BA1BDDE7DF00D0597F /* libz.tbd in Frameworks */,
 				6C43A8B81BDDE7CF00D0597F /* CoreMotion.framework in Frameworks */,
 				6C43A8B61BDDE7C400D0597F /* SystemConfiguration.framework in Frameworks */,
 				6C43A8B41BDDE7BB00D0597F /* AudioToolbox.framework in Frameworks */,
@@ -271,6 +273,8 @@
 		6C43A8BF1BDDE9E400D0597F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6C2E7D6F1BDE0A21008F5EF3 /* libz.1.dylib */,
+				6C2E7D6D1BDE0887008F5EF3 /* dylib1.o */,
 				6C43A8C41BDDEA2400D0597F /* MediaPlayer.framework */,
 				6C43A8C21BDDEA0C00D0597F /* GameController.framework */,
 				6C43A8B91BDDE7DF00D0597F /* libz.tbd */,
@@ -511,6 +515,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -555,6 +560,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

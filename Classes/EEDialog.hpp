@@ -10,7 +10,7 @@
 #define EE_LIBRARY_DIALOG_H
 
 #include "EEForward.hpp"
-#include "EEControl.h"
+#include "EEControl.hpp"
 
 namespace_ee_begin
 class Dialog : public NodeButton {

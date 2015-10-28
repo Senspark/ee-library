@@ -1,4 +1,4 @@
-#include "EEGesture-Impl.h"
+#include "EEGesture-Impl.hpp"
 #include "cocos2d.h"
 
 namespace_ee_begin

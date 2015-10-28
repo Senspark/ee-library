@@ -98,7 +98,7 @@ void internalBoxBlur1D(unsigned char* pixels, unsigned width, unsigned height, u
 }
 namespace_anonymous_end
 
-void Image::boxBlur1D(cocos2d::Image* image, unsigned range, unsigned iterations) {
+void boxBlur1D(cocos2d::Image* image, unsigned range, unsigned iterations) {
     auto pixels = image->getData();
     auto width = (unsigned) image->getWidth();
     auto height = (unsigned) image->getHeight();

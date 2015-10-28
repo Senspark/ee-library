@@ -202,7 +202,7 @@ void internalBoxBlur2D(unsigned char* pixels, unsigned width, unsigned height, u
 }
 namespace_anonymous_end
 
-void Image::boxBlur2D(cocos2d::Image* image, unsigned range) {
+void boxBlur2D(cocos2d::Image* image, unsigned range) {
     internalBoxBlur2D(image->getData(), (unsigned) image->getWidth(), (unsigned) image->getHeight(), range);
 }
 namespace_ee_end

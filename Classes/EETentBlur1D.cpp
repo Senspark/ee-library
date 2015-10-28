@@ -131,7 +131,7 @@ void internalTentBlur1D(unsigned char* pixels, unsigned width, unsigned height, 
 }
 namespace_anonymous_end
 
-void Image::tentBlur1D(cocos2d::Image* image, unsigned range, unsigned iterations) {
+void tentBlur1D(cocos2d::Image* image, unsigned range, unsigned iterations) {
     auto pixels = image->getData();
     auto width = (unsigned) image->getWidth();
     auto height = (unsigned) image->getHeight();

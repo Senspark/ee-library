@@ -6,7 +6,7 @@
 //
 //
 
-#include "EECheckBox.h"
+#include "EECheckBox.hpp"
 
 namespace_ee_begin
 bool CheckBoxBase::isChecked() const {

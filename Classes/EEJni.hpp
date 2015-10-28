@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef EE_LIBRARY_JNI_H
-#define EE_LIBRARY_JNI_H
+#ifndef EE_LIBRARY_JNI_HPP
+#define EE_LIBRARY_JNI_HPP
 
 #include "EEMacro.hpp"
 
@@ -41,4 +41,4 @@ private:
 };
 namespace_ee_end
 
-#endif // EE_LIBRARY_JNI_H
+#endif // EE_LIBRARY_JNI_HPP

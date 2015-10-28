@@ -9,7 +9,7 @@
 #ifndef EE_LIBRARY_TOUCH_LISTENER_IMPL_H
 #define EE_LIBRARY_TOUCH_LISTENER_IMPL_H
 
-#include "EETouchListener.h"
+#include "EETouchListener.hpp"
 
 namespace_ee_begin
 class TouchListenerNode::Impl {

@@ -6,7 +6,7 @@
 //
 //
 
-#include "EETouchManager-Impl.h"
+#include "EETouchManager-Impl.hpp"
 #include "EEMacro.hpp"
 #include "cocos2d.h"
 

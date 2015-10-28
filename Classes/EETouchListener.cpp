@@ -1,5 +1,5 @@
-#include "EETouchListener-Impl.h"
-#include "EETouchManager.h"
+#include "EETouchListener-Impl.hpp"
+#include "EETouchManager.hpp"
 #include "cocos2d.h"
 
 namespace_ee_begin
@@ -174,7 +174,9 @@ void TouchListenerNode::Impl::addListener() {
             }
         }
         if (ret) {
-            TouchManager::getInstance()->lock(touch);
+            if (_base->checkState(TouchState::TouchBeganInside)) {
+                TouchManager::getInstance()->lock(touch);
+            }
         }
         _base->_instance->release();
         return ret;

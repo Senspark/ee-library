@@ -6,7 +6,7 @@
 //
 //
 
-#include "EEDynamicValue.h"
+#include "EEDynamicValue.hpp"
 #include "base/ccRandom.h"
 
 #include <memory>

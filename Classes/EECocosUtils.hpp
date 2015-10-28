@@ -13,6 +13,7 @@
 #include "EEForward.hpp"
 
 #include <functional>
+#include <string>
 
 namespace_ee_begin
 void runActionRecursively(cocos2d::Node* target, const std::function<void(cocos2d::Node*)>& actionFunc);
@@ -23,13 +24,28 @@ void resumeAll(cocos2d::Node* target);
 void runAction(cocos2d::Node* target, std::function<void(cocos2d::Node*)> actionFunc, std::function<float()> delayFunc, std::function<float()> initialDelayFunc = nullptr);
 void addAnimationToButton(cocos2d::Node* button);
 
-/// Captures screenshot with callback.
-void captureScreen(const std::function<void(cocos2d::Image*)>& afterCaptured);
+/**
+ * Captures screenshot in points, i.e. devices screen size.
+ * This capture process is slow because it uses glReadPixels.
+ * @param afterCaptured is the callback.
+ */
+void captureScreenInPoints(const std::function<void(cocos2d::Image*)>& afterCaptured);
 
-/// Captures screenshot in point with callback.
-void captureScreenInPoints(const std::function<void(cocos2d::Image*)>& afterCapture, float scale);
+/**
+ * Captures screenshot in points, i.e. scene size.
+ * This capture process is faster than `captureScreenInPoints` because it uses FBO.
+ * @param afterCaptured is the callback.
+ * @param scale is the scene scale.
+ */
+void captureScreenInPixels(const std::function<void(cocos2d::Image*)>& afterCaptured, float scale);
 
-void downloadImage(const char* imageUrl, const std::function<void(cocos2d::Texture2D*)>& callback);
+/**
+ * Downloads image given its url.
+ * Downloaded image is automatically stored in the texture cache for faster later retrieving.
+ * @param imageUrl is the url of the image.
+ * @param afterDownloaded is the callback.
+ */
+void downloadImage(const std::string& imageUrl, const std::function<void(cocos2d::Texture2D*)>& afterDownloaded);
 namespace_ee_end
 
 #endif /* EE_LIBRARY_COCOS_UTILS_HPP */

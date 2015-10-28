@@ -34,10 +34,10 @@
  Gregory Petrosyan
  */
 
-#include "EESha1.h"
+#include "EECrytography.hpp"
 
 namespace_ee_begin
-namespace_sha1_begin
+NAMESPACE_BEGIN(sha1)
 namespace_anonymous_begin
 // Rotate an integer value to left.
 unsigned rol(const unsigned value, const unsigned steps) {
@@ -105,6 +105,19 @@ void innerHash(unsigned* result, unsigned* w) {
 }
 namespace_anonymous_end
 
+/**
+ * @param src points to any kind of data to be hashed.
+ * @param byteLength is the number of bytes to hash from the src pointer.
+ * @param hash should points to a buffer of at least 20 bytes of size for storing the SHA-1 result in.
+ */
+void calc(const void* src, const int byteLength, unsigned char* hash);
+
+/**
+ * @param hash is 20 bytes of SHA-1 hash. This is the same data that is the result from the calc function.
+ * @param hexString should point to a buffer of at least 41 bytes of size for storing the hexadecimal representation of the hash. A zero will be written at position 40, so the buffer will be a valid zero ended string.
+ */
+void convertByteToHexString(const unsigned char* hash, char* hexString);
+
 void calc(const void* src, const int byteLength, unsigned char* hash) {
     // Init the result array.
     unsigned result[5] = { 0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476, 0xc3d2e1f0 };
@@ -164,13 +177,13 @@ void convertByteToHexString(const unsigned char* hash, char* hexString) {
     }
     hexString[40] = 0;
 }
+NAMESPACE_END(sha1)
 
-std::string generate(const std::string& input) {
+std::string generateSha1(const std::string& input) {
     unsigned char hash[20];
-    calc(input.c_str(), static_cast<int>(input.size()), hash);
+    sha1::calc(input.c_str(), static_cast<int>(input.size()), hash);
     char hexString[41];
-    convertByteToHexString(hash, hexString);
+    sha1::convertByteToHexString(hash, hexString);
     return hexString;
 }
-namespace_sha1_end
 namespace_ee_end

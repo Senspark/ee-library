@@ -6,9 +6,9 @@
 //
 //
 
-#include "EEGroupNode-Impl.h"
-#include "EEGroupNodeDelegate.h"
-#include "EETouchListener.h"
+#include "EEGroupNode-Impl.hpp"
+#include "EEGroupNodeDelegate.hpp"
+#include "EETouchListener.hpp"
 #include "cocos2d.h"
 #include "CocosGUI.h"
 

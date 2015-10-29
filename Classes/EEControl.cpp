@@ -1,20 +1,61 @@
 #include "EEControl.hpp"
-#include "EETouchListener-Impl.hpp"
+#include "cocos2d.h"
 
 namespace_ee_begin
-void NodeButtonLoader::onHandlePropTypeScaleLock(cocos2d::Node* pNode, cocos2d::Node* pParent, const char* pPropertyName, float* pScaleLock, cocosbuilder::CCBReader* ccbReader) {
-    NodeLoader::onHandlePropTypeScaleLock(pNode, pParent, pPropertyName, pScaleLock, ccbReader);
-    static_cast<NodeButton*>(pNode)->setBaseScale(pScaleLock[0], pScaleLock[1]);
+Button::~Button() {
+    if (_normalSpriteFrame != nullptr) {
+        _normalSpriteFrame->release();
+    }
+    if (_pressedSpriteFrame != nullptr) {
+        _pressedSpriteFrame->release();
+    }
+    if (_disabledSpriteFrame != nullptr) {
+        _disabledSpriteFrame->release();
+    }
 }
 
-void ButtonLoader::onHandlePropTypeScaleLock(cocos2d::Node* pNode, cocos2d::Node* pParent, const char* pPropertyName, float* pScaleLock, cocosbuilder::CCBReader* ccbReader) {
-    SpriteLoader::onHandlePropTypeScaleLock(pNode, pParent, pPropertyName, pScaleLock, ccbReader);
-    static_cast<Button*>(pNode)->setBaseScale(pScaleLock[0], pScaleLock[1]);
+cocos2d::SpriteFrame* Button::getSpriteFrameForState(ButtonState state) const {
+    cocos2d::SpriteFrame* ret = nullptr;
+    switch (state) {
+        case ButtonState::Normal: ret = _normalSpriteFrame; break;
+        case ButtonState::Pressed: ret = _pressedSpriteFrame; break;
+        case ButtonState::Disabled: ret = _disabledSpriteFrame; break;
+    }
+    return ret;
 }
-    
-void ButtonLoader::onHandlePropTypeSpriteFrame(cocos2d::Node* pNode, cocos2d::Node* pParent, const char* pPropertyName, cocos2d::SpriteFrame* pSpriteFrame, cocosbuilder::CCBReader* ccbReader) {
-    SpriteLoader::onHandlePropTypeSpriteFrame(pNode, pParent, pPropertyName, pSpriteFrame, ccbReader);
-    pSpriteFrame->retain();
-    static_cast<Button*>(pNode)->_impl->_normalSpriteFrame = pSpriteFrame;    
+
+void Button::setSpriteFrameForState(ButtonState state, const std::string& spriteFrameName) {
+    auto frame = cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(spriteFrameName);
+    setSpriteFrameForState(state, frame);
+}
+
+void Button::setSpriteFrameForState(ButtonState state, cocos2d::SpriteFrame* spriteFrame) {
+    decltype(&_normalSpriteFrame) frame = nullptr;
+    switch (state) {
+        case ButtonState::Normal: frame = &_normalSpriteFrame; break;
+        case ButtonState::Pressed: frame = &_pressedSpriteFrame; break;
+        case ButtonState::Disabled: frame = &_disabledSpriteFrame; break;
+    }
+    if (*frame != nullptr) {
+        (*frame)->release();
+    }
+    (*frame) = spriteFrame;
+    (*frame)->retain();
+    updateState();
+}
+
+void Button::setSpriteFrame(cocos2d::SpriteFrame* spriteFrame) {
+    Sprite::setSpriteFrame(spriteFrame);
+    spriteFrame->retain();
+    _normalSpriteFrame = spriteFrame;
+}
+
+void Button::updateState(ButtonState state) {
+    TouchListener::updateState(state);
+    auto sprite = getSpriteFrameForState(state);
+    if (sprite == nullptr) {
+        sprite = getSpriteFrameForState(ButtonState::Normal);
+    }
+    setSpriteFrame(sprite);
 }
 namespace_ee_end

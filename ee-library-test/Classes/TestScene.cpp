@@ -69,8 +69,8 @@ void TestScene::Impl::pressedProcess(cocos2d::Ref*, cocos2d::extension::Control:
         return;
     }
     float scale = 1.0f;
-    int width = (int) _imageSprite->getContentSize().width * scale;
-    int height = (int) _imageSprite->getContentSize().height * scale;
+    int width = (int) (_imageSprite->getContentSize().width * scale);
+    int height = (int) (_imageSprite->getContentSize().height * scale);
     auto render = cocos2d::RenderTexture::create(width, height);
     render->begin();
     _imageSprite->visit();
@@ -86,16 +86,16 @@ void TestScene::Impl::pressedProcess(cocos2d::Ref*, cocos2d::extension::Control:
         cocos2d::log("Render time: %lld ms", (current - start) / 1000);
         switch (_filter) {
             case Filter::BoxBlur1D:
-                ee::Image::boxBlur1D(image, _range);
+                ee::boxBlur1D(image, (unsigned) _range);
                 break;
             case Filter::BoxBlur1Dx2:
-                ee::Image::boxBlur1D(image, _range, 2);
+                ee::boxBlur1D(image, (unsigned) _range, 2);
                 break;
             case Filter::BoxBlur2D:
-                ee::Image::boxBlur2D(image, _range);
+                ee::boxBlur2D(image, (unsigned) _range);
                 break;
             case Filter::TentBlur1D:
-                ee::Image::tentBlur1D(image, _range);
+                ee::tentBlur1D(image, (unsigned) _range);
                 break;
             default: CC_ASSERT(false);
         }

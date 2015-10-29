@@ -18,7 +18,7 @@ public:
     static TouchManager* getInstance();
     
     void lock(cocos2d::Touch* touch);
-    void unlock();
+    void unlock(cocos2d::Touch* touch);
     
     bool isLocked();
     

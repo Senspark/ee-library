@@ -35,6 +35,8 @@ public:
     void setTouchType(TouchType type);
     TouchType getTouchType() const;
     
+    ButtonState getButtonState() const;
+    
     /// Checks whether the touch listener is enabled.
     /// Default is false.
     bool isEnabled() const;
@@ -58,6 +60,9 @@ public:
     void setZoomDuration(float duration);
     float getZoomDuration() const;
     
+    /// Inside checker.
+    void setInsideChecker(const std::function<bool(cocos2d::Touch*)>& checker);
+    
     /// Common touch listeners.
     void setTouchBeganCallback(const TouchEventCallback& callback);
     void setTouchMovedCallback(const TouchEventCallback& callback);
@@ -75,6 +80,7 @@ protected:
     TouchListener();
     virtual ~TouchListener();
     
+    void updateState();
     virtual void updateState(ButtonState state);
     
     class Impl;
@@ -82,9 +88,6 @@ protected:
     std::unique_ptr<Impl> _impl;
     
     virtual cocos2d::Node* getInstance() = 0;
-    
-private:
-    void updateState();
 };
 namespace_ee_end
 

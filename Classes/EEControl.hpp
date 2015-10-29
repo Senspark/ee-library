@@ -4,36 +4,39 @@
 #include "EEForward.hpp"
 #include "EETouchListener.hpp"
 #include "cocosbuilder/CCSpriteLoader.h"
-#include "2d/CCSprite.h"
+#include "CCSprite.h"
 
 namespace_ee_begin
-class NodeButton : public cocos2d::Node, public TouchListenerNode {
+class NodeButton : public cocos2d::Node, public TouchListener {
 public:
     CREATE_FUNC(NodeButton);
-    NodeButton() : TouchListenerNode(this) {}
-};
-
-class NodeButtonLoader : public cocosbuilder::NodeLoader {
-public:
-    CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(NodeButtonLoader, loader);
+    
 protected:
-    CCB_VIRTUAL_NEW_AUTORELEASE_CREATECCNODE_METHOD(NodeButton);
-    virtual void onHandlePropTypeScaleLock(cocos2d::Node* pNode, cocos2d::Node* pParent, const char* pPropertyName, float* pScaleLock, cocosbuilder::CCBReader* ccbReader) override;
+    virtual cocos2d::Node* getInstance() override { return this; }
 };
 
-class Button : public cocos2d::Sprite, public TouchListenerSprite {
+class Button : public cocos2d::Sprite, public TouchListener {
 public:
     CREATE_FUNC(Button);
-    Button() : TouchListenerSprite(this) {}
-};
-
-class ButtonLoader : public cocosbuilder::SpriteLoader {
-public:
-    CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(ButtonLoader, loader);
+    
+    cocos2d::SpriteFrame* getSpriteFrameForState(ButtonState state) const;
+    void setSpriteFrameForState(ButtonState state, const std::string& spriteFrameName);
+    void setSpriteFrameForState(ButtonState state, cocos2d::SpriteFrame* spriteFrame);
+    
+    virtual void setSpriteFrame(cocos2d::SpriteFrame* spriteFrame) override;
+    
 protected:
-    CCB_VIRTUAL_NEW_AUTORELEASE_CREATECCNODE_METHOD(Button);
-    virtual void onHandlePropTypeScaleLock(cocos2d::Node* pNode, cocos2d::Node* pParent, const char* pPropertyName, float* pScaleLock, cocosbuilder::CCBReader* ccbReader) override;
-    virtual void onHandlePropTypeSpriteFrame(cocos2d::Node* pNode, cocos2d::Node* pParent, const char* pPropertyName, cocos2d::SpriteFrame* pSpriteFrame, cocosbuilder::CCBReader* ccbReader) override;
+    virtual ~Button();
+    
+    using TouchListener::updateState;
+    virtual void updateState(ButtonState state) override;
+    
+    virtual cocos2d::Node* getInstance() override { return this; }
+    
+private:
+    cocos2d::SpriteFrame* _normalSpriteFrame;
+    cocos2d::SpriteFrame* _pressedSpriteFrame;
+    cocos2d::SpriteFrame* _disabledSpriteFrame;
 };
 namespace_ee_end
 

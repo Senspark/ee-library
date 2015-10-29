@@ -18,25 +18,25 @@ TouchManager* TouchManager::getInstance() {
     
 void TouchManager::lock(cocos2d::Touch* touch) {
     LOG_FUNC();
-    auto ptr = static_cast<Impl*>(this);
+    auto impl = static_cast<Impl*>(this);
     touch->retain();
-    ptr->_activeTouch = touch;
+    impl->_activeTouch = touch;
 }
     
-void TouchManager::unlock() {
+void TouchManager::unlock(cocos2d::Touch* touch) {
     LOG_FUNC();
-    auto ptr = static_cast<Impl*>(this);
-    if (ptr->_activeTouch != nullptr) {
-        ptr->_activeTouch->release();
-        ptr->_activeTouch = nullptr;
+    auto impl = static_cast<Impl*>(this);
+    if (touch == impl->_activeTouch) {
+        impl->_activeTouch->release();
+        impl->_activeTouch = nullptr;
     }
 }
 
 bool TouchManager::isLocked() {
-    auto ptr = static_cast<Impl*>(this);
-    if (ptr->_activeTouch != nullptr && ptr->_activeTouch->getReferenceCount() == 1) {
-        unlock();
+    auto impl = static_cast<Impl*>(this);
+    if (impl->_activeTouch != nullptr && impl->_activeTouch->getReferenceCount() == 1) {
+        unlock(impl->_activeTouch);
     }
-    return ptr->_activeTouch != nullptr;
+    return impl->_activeTouch != nullptr;
 }
 namespace_ee_end

@@ -12,8 +12,19 @@
 
 namespace_ee_begin
 TouchListener::TouchListener()
-: _impl(new Impl(this))
-{}
+: _impl(new Impl(this)) {
+    setInsideChecker([this](cocos2d::Touch* touch) {
+        bool ret = false;
+        auto instance = getInstance();
+        auto&& localPosition = instance->convertToNodeSpace(touch->getLocation());
+        auto&& contentSize = instance->getContentSize();
+        if (0 <= localPosition.x && localPosition.x <= contentSize.width &&
+            0 <= localPosition.y && localPosition.y <= contentSize.height) {
+            ret = true;
+        }
+        return ret;
+    });
+}
 
 TouchListener::~TouchListener() {}
 
@@ -23,6 +34,10 @@ void TouchListener::setTouchType(TouchType type) {
 
 TouchType TouchListener::getTouchType() const {
     return _impl->_touchType;
+}
+
+ButtonState TouchListener::getButtonState() const {
+    return _impl->_buttonState;
 }
 
 bool TouchListener::isEnabled() const {
@@ -58,6 +73,10 @@ void TouchListener::setZoomDuration(float duration) {
 
 float TouchListener::getZoomDuration() const {
     return _impl->_zoomDuration;
+}
+
+void TouchListener::setInsideChecker(const std::function<bool(cocos2d::Touch*)>& checker) {
+    _impl->_insideChecker = checker;
 }
 
 void TouchListener::setTouchBeganCallback(const TouchEventCallback& callback) {
@@ -142,13 +161,17 @@ bool TouchListener::Impl::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* ev
             if (_isInside == false) {
                 // We should not lock touch outside.
                 ret = true;
+                if (_zoomScaleRatio != 1.0f) {
+                    CCLOG("Touch outside does not work with zoom-in.");
+                }
             }
         }
-        // Invoke callback.
-        if (_touchBeganCallback) {
-            _touchBeganCallback(touch, event);
+        if (ret) {
+            // Invoke callback.
+            if (_touchBeganCallback) {
+                _touchBeganCallback(touch, event);
+            }
         }
-        ret = true;
     }
     instance->release();
     return ret;
@@ -171,28 +194,33 @@ void TouchListener::Impl::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* ev
     if (wasInside != _isInside) {
         // Touch inside type.
         if (_touchType == TouchType::Inside) {
-            instance->stopActionByTag(ZoomActionTag);
-            float finalScale = _baseScale * _zoomScaleRatio;
-            float currentScale = instance->getScaleX();
+            if (_zoomScaleRatio != 1.0f) {
+                instance->stopActionByTag(ZoomActionTag);
+                float finalScale = _baseScale * _zoomScaleRatio;
+                float currentScale = instance->getScaleX();
+                if (_isInside) {
+                    float ratio = (finalScale - currentScale) / (finalScale - _baseScale);
+                    auto press = cocos2d::ScaleTo::create(_zoomDuration * ratio, finalScale);
+                    press->setTag(ZoomActionTag);
+                    instance->runAction(press);
+                } else {
+                    float ratio = (currentScale - _baseScale) / (finalScale - _baseScale);
+                    auto normal = cocos2d::ScaleTo::create(_zoomDuration * ratio, _baseScale);
+                    normal->setTag(OtherActionTag);
+                    instance->runAction(normal);
+                }
+            }
+            // Update state.
             if (_isInside) {
-                float ratio = (finalScale - currentScale) / (finalScale - _baseScale);
-                auto press = cocos2d::ScaleTo::create(_zoomDuration * ratio, finalScale);
-                press->setTag(ZoomActionTag);
-                instance->runAction(press);
+                _base->updateState(ButtonState::Pressed);
             } else {
-                float ratio = (currentScale - _baseScale) / (finalScale - _baseScale);
-                auto normal = cocos2d::ScaleTo::create(_zoomDuration * ratio, _baseScale);
-                normal->setTag(OtherActionTag);
-                instance->runAction(normal);
+                _base->updateState(ButtonState::Normal);
             }
         } else {
             // Touch outside type does nothing.
-        }
-        // Update state.
-        if (_isInside) {
-            _base->updateState(ButtonState::Pressed);
-        } else {
-            _base->updateState(ButtonState::Normal);
+            if (_zoomScaleRatio != 1.0f) {
+                CCLOG("Touch outside does not work with zoom-in.");
+            }
         }
     }
     // Invoke callback.
@@ -234,12 +262,24 @@ void TouchListener::Impl::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* ev
                 instance->runAction(sequence);
             }
         } else {
-            
+            if (_isInside) {
+                if (_shouldCancel == false) {
+                    if (_touchUpCallback) {
+                        _touchUpCallback(touch, event);
+                    }
+                }
+                TouchManager::getInstance()->unlock(touch);
+            }
         }
     } else {
-        if (_shouldCancel == false) {
-            if (_touchUpCallback) {
-                _touchUpCallback(touch, event);
+        if (_zoomScaleRatio != 1.0f) {
+            CCLOG("Touch outside does not work with zoom-in.");
+        }
+        if (_isInside == false) {
+            if (_shouldCancel == false) {
+                if (_touchUpCallback) {
+                    _touchUpCallback(touch, event);
+                }
             }
         }
     }

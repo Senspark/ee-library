@@ -22,10 +22,11 @@
 		6C2E7D611BDE04AB008F5EF3 /* EEGesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A7BD1BDDDAC300D0597F /* EEGesture.cpp */; };
 		6C2E7D621BDE04AB008F5EF3 /* EEGroupNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A7C01BDDDAC300D0597F /* EEGroupNode.cpp */; };
 		6C2E7D631BDE04AB008F5EF3 /* EESha1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A7CA1BDDDAC300D0597F /* EESha1.cpp */; };
-		6C2E7D641BDE04AB008F5EF3 /* EETouchListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A7CE1BDDDAC300D0597F /* EETouchListener.cpp */; };
 		6C2E7D651BDE04AB008F5EF3 /* EETouchManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A7D11BDDDAC300D0597F /* EETouchManager.cpp */; };
 		6C2E7D851BDE14D4008F5EF3 /* EECrc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C2E7D831BDE14D4008F5EF3 /* EECrc.cpp */; };
 		6C2E7D881BDE1A1B008F5EF3 /* EEBackButtonListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C2E7D861BDE1A1B008F5EF3 /* EEBackButtonListener.cpp */; };
+		6C4A983E1BE1B620008B089A /* EEControlLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C4A983C1BE1B620008B089A /* EEControlLoader.cpp */; };
+		6C5473741BE0C08E008F06A7 /* EETouchListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C5473731BE0C08E008F06A7 /* EETouchListener.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		6C32DC3D1BD67074007613F9 /* EEImage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEImage.hpp; sourceTree = "<group>"; };
 		6C32DC431BD67791007613F9 /* EEBoxBlur1D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEBoxBlur1D.cpp; sourceTree = "<group>"; };
 		6C32DC551BD692CF007613F9 /* EEBoxBlur2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEBoxBlur2D.cpp; sourceTree = "<group>"; };
+		6C3A213E1BE08B4A0074C7F5 /* EETouchListener.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EETouchListener.hpp; sourceTree = "<group>"; };
 		6C43A7871BDDCA4600D0597F /* EEHeader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EEHeader.hpp; sourceTree = "<group>"; };
 		6C43A78C1BDDCAF800D0597F /* EECocosUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EECocosUtils.cpp; sourceTree = "<group>"; };
 		6C43A78D1BDDCAF800D0597F /* EECocosUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EECocosUtils.hpp; sourceTree = "<group>"; };
@@ -96,13 +98,14 @@
 		6C43A7C71BDDDAC300D0597F /* EEJni.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEJni.hpp; sourceTree = "<group>"; };
 		6C43A7C81BDDDAC300D0597F /* EEMacro.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEMacro.hpp; sourceTree = "<group>"; };
 		6C43A7CA1BDDDAC300D0597F /* EESha1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EESha1.cpp; sourceTree = "<group>"; };
-		6C43A7CD1BDDDAC300D0597F /* EETouchListener-Impl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "EETouchListener-Impl.hpp"; sourceTree = "<group>"; };
-		6C43A7CE1BDDDAC300D0597F /* EETouchListener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EETouchListener.cpp; sourceTree = "<group>"; };
-		6C43A7CF1BDDDAC300D0597F /* EETouchListener.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EETouchListener.hpp; sourceTree = "<group>"; };
 		6C43A7D01BDDDAC300D0597F /* EETouchManager-Impl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "EETouchManager-Impl.hpp"; sourceTree = "<group>"; };
 		6C43A7D11BDDDAC300D0597F /* EETouchManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EETouchManager.cpp; sourceTree = "<group>"; };
 		6C43A7D21BDDDAC300D0597F /* EETouchManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EETouchManager.hpp; sourceTree = "<group>"; };
 		6C43A7D31BDDDAC300D0597F /* EEUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEUtils.hpp; sourceTree = "<group>"; };
+		6C4A983C1BE1B620008B089A /* EEControlLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEControlLoader.cpp; sourceTree = "<group>"; };
+		6C4A983D1BE1B620008B089A /* EEControlLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEControlLoader.hpp; sourceTree = "<group>"; };
+		6C5473731BE0C08E008F06A7 /* EETouchListener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EETouchListener.cpp; sourceTree = "<group>"; };
+		6C54737B1BE0C7B0008F06A7 /* EETouchListener-Impl.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "EETouchListener-Impl.hpp"; sourceTree = "<group>"; };
 		6C5AEB3E1BDF1BF1004C98A2 /* EECrytography.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EECrytography.hpp; sourceTree = "<group>"; };
 		6C5AEB3F1BDF265E004C98A2 /* EENonMovable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EENonMovable.hpp; sourceTree = "<group>"; };
 		6C5AEB401BDF26FA004C98A2 /* EENonConstructible.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EENonConstructible.hpp; sourceTree = "<group>"; };
@@ -162,8 +165,6 @@
 				6C43A7F61BDDDAEC00D0597F /* Image */,
 				6C43A7A81BDDDAC300D0597F /* EECheckBox.cpp */,
 				6C43A7A91BDDDAC300D0597F /* EECheckBox.hpp */,
-				6C43A7AD1BDDDAC300D0597F /* EEControl.cpp */,
-				6C43A7AE1BDDDAC300D0597F /* EEControl.hpp */,
 				6C5AEB3B1BDF1B9F004C98A2 /* Crytography */,
 				6C2E7D891BDE1E12008F5EF3 /* Listener */,
 				6C43A7AF1BDDDAC300D0597F /* EEData.cpp */,
@@ -204,14 +205,18 @@
 		6C2E7D891BDE1E12008F5EF3 /* Listener */ = {
 			isa = PBXGroup;
 			children = (
-				6C43A7CD1BDDDAC300D0597F /* EETouchListener-Impl.hpp */,
-				6C43A7CE1BDDDAC300D0597F /* EETouchListener.cpp */,
-				6C43A7CF1BDDDAC300D0597F /* EETouchListener.hpp */,
 				6C43A7D01BDDDAC300D0597F /* EETouchManager-Impl.hpp */,
 				6C43A7D11BDDDAC300D0597F /* EETouchManager.cpp */,
 				6C43A7D21BDDDAC300D0597F /* EETouchManager.hpp */,
 				6C2E7D861BDE1A1B008F5EF3 /* EEBackButtonListener.cpp */,
 				6C2E7D871BDE1A1B008F5EF3 /* EEBackButtonListener.hpp */,
+				6C5473731BE0C08E008F06A7 /* EETouchListener.cpp */,
+				6C3A213E1BE08B4A0074C7F5 /* EETouchListener.hpp */,
+				6C54737B1BE0C7B0008F06A7 /* EETouchListener-Impl.hpp */,
+				6C43A7AD1BDDDAC300D0597F /* EEControl.cpp */,
+				6C43A7AE1BDDDAC300D0597F /* EEControl.hpp */,
+				6C4A983C1BE1B620008B089A /* EEControlLoader.cpp */,
+				6C4A983D1BE1B620008B089A /* EEControlLoader.hpp */,
 			);
 			name = Listener;
 			sourceTree = "<group>";
@@ -336,8 +341,8 @@
 				6C2E7D571BDE0497008F5EF3 /* EEBoxBlur1D.cpp in Sources */,
 				6C2E7D601BDE04AB008F5EF3 /* EEEvent.cpp in Sources */,
 				6C2E7D621BDE04AB008F5EF3 /* EEGroupNode.cpp in Sources */,
+				6C5473741BE0C08E008F06A7 /* EETouchListener.cpp in Sources */,
 				6C2E7D651BDE04AB008F5EF3 /* EETouchManager.cpp in Sources */,
-				6C2E7D641BDE04AB008F5EF3 /* EETouchListener.cpp in Sources */,
 				6C2E7D611BDE04AB008F5EF3 /* EEGesture.cpp in Sources */,
 				6C2E7D851BDE14D4008F5EF3 /* EECrc.cpp in Sources */,
 				6C2E7D581BDE0497008F5EF3 /* EEBoxBlur2D.cpp in Sources */,
@@ -347,6 +352,7 @@
 				6C2E7D5B1BDE04AB008F5EF3 /* EEControl.cpp in Sources */,
 				6C2E7D591BDE0497008F5EF3 /* EETentBlur1D.cpp in Sources */,
 				6C2E7D5C1BDE04AB008F5EF3 /* EEData.cpp in Sources */,
+				6C4A983E1BE1B620008B089A /* EEControlLoader.cpp in Sources */,
 				6C2E7D881BDE1A1B008F5EF3 /* EEBackButtonListener.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

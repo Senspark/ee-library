@@ -39,6 +39,8 @@ public:
     float _zoomScaleRatio;
     float _zoomDuration;
     
+    std::function<bool(cocos2d::Touch*)> _insideChecker;
+    
     TouchEventCallback _touchBeganCallback;
     TouchEventCallback _touchMovedCallback;
     TouchEventCallback _touchUpCallback;

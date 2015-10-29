@@ -13,15 +13,14 @@
 namespace_ee_begin
 bool Dialog::init() {
     // Close the dialog when pressing its outer.
-    setState(TouchState::TouchBeganOutside | TouchState::TouchUpOutside);
-    setTouchUpOutsideCallback(CC_CALLBACK_0(Dialog::hide, this));
+    setTouchType(TouchType::Outside);
+    setTouchUpCallback(CC_CALLBACK_0(Dialog::hide, this));
     return true;
 }
     
 void Dialog::onEnter() {
     NodeButton::onEnter();
     setEnabled(true);
-    setHitCount(1);
 }
     
 void Dialog::onExit() {

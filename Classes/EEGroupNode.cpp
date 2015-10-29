@@ -58,7 +58,7 @@ void GroupNode::maximize() {
         };
         auto changePosition = _impl->createMaximizeAction(cocos2d::ActionFloat::create(duration, button->getPositionX(), maxPositionX, setter));
         auto callFunc = cocos2d::CallFunc::create([button, delegate] {
-            auto listener = dynamic_cast<TouchListenerNode*>(button);
+            auto listener = dynamic_cast<TouchListener*>(button);
             if (listener != nullptr) {
                 listener->setEnabled(true);
             }
@@ -98,7 +98,7 @@ void GroupNode::minimize() {
     for (auto&& buttonInfo : _impl->_buttonList) {
         auto button = buttonInfo.first;
         auto delegate = dynamic_cast<GroupNodeDelegate*>(button);
-        auto listener = dynamic_cast<TouchListenerNode*>(button);
+        auto listener = dynamic_cast<TouchListener*>(button);
         if (listener != nullptr) {
             listener->setEnabled(false);
         }
@@ -146,7 +146,7 @@ void GroupNode::instantlyMaximize() {
         float maxPositionX = buttonInfo.second;
         button->setPositionX(maxPositionX);
         button->setVisible(true);
-        auto listener = dynamic_cast<TouchListenerNode*>(button);
+        auto listener = dynamic_cast<TouchListener*>(button);
         if (listener != nullptr) {
             listener->setEnabled(true);
         }
@@ -159,7 +159,7 @@ void GroupNode::instantlyMinimize() {
         auto button = buttonInfo.first;
         button->setPositionX(_impl->_minPositionX);
         button->setVisible(false);
-        auto listener = dynamic_cast<TouchListenerNode*>(button);
+        auto listener = dynamic_cast<TouchListener*>(button);
         if (listener != nullptr) {
             listener->setEnabled(false);
         }

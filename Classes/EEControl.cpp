@@ -84,18 +84,14 @@ void Button::setSpriteFrameForState(ButtonState state, cocos2d::SpriteFrame* spr
     updateState();
 }
 
-void Button::setSpriteFrame(cocos2d::SpriteFrame* spriteFrame) {
-    Sprite::setSpriteFrame(spriteFrame);
-    spriteFrame->retain();
-    _normalSpriteFrame = spriteFrame;
-}
-
 void Button::updateState(ButtonState state) {
     TouchListener::updateState(state);
     auto sprite = getSpriteFrameForState(state);
     if (sprite == nullptr) {
         sprite = getSpriteFrameForState(ButtonState::Normal);
     }
-    setSpriteFrame(sprite);
+    if (sprite != nullptr) {
+        setSpriteFrame(sprite);
+    }
 }
 namespace_ee_end

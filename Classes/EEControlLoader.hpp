@@ -29,6 +29,7 @@ public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(ButtonLoader, loader);
 protected:
     virtual cocos2d::Sprite* createNode(cocos2d::Node* pParent, cocosbuilder::CCBReader* ccbReader) override;
+    virtual void onHandlePropTypeSpriteFrame(cocos2d::Node* pNode, cocos2d::Node* pParent, const char* pPropertyName, cocos2d::SpriteFrame* pSpriteFrame, cocosbuilder::CCBReader* ccbReader) override;
     virtual void onHandlePropTypeScaleLock(cocos2d::Node* pNode, cocos2d::Node* pParent, const char* pPropertyName, float* pScaleLock, cocosbuilder::CCBReader* ccbReader) override;
 };
 namespace_ee_end

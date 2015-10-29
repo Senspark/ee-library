@@ -28,10 +28,7 @@ public:
     cocos2d::SpriteFrame* getSpriteFrameForState(ButtonState state) const;
     void setSpriteFrameForState(ButtonState state, const std::string& spriteFrameName);
     void setSpriteFrameForState(ButtonState state, cocos2d::SpriteFrame* spriteFrame);
-    
-    using Sprite::setSpriteFrame;
-    virtual void setSpriteFrame(cocos2d::SpriteFrame* spriteFrame) override;
-    
+        
 protected:
     virtual ~Button();
     

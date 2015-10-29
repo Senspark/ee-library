@@ -46,7 +46,10 @@ TouchType TouchListener::getTouchType() const {
 }
 
 ButtonState TouchListener::getButtonState() const {
-    return _impl->_buttonState;
+    if (isEnabled()) {
+        return _impl->_buttonState;
+    }
+    return ButtonState::Disabled;
 }
 
 bool TouchListener::isEnabled() const {
@@ -54,6 +57,7 @@ bool TouchListener::isEnabled() const {
 }
 void TouchListener::setEnabled(bool enabled) {
     _impl->_listener->setEnabled(enabled);
+    updateState();
 }
 
 void TouchListener::setSwallowTouches(bool needSwallow) {
@@ -213,7 +217,7 @@ bool TouchListener::Impl::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* ev
             if (_isInside == false) {
                 // We should not lock touch outside.
                 ret = true;
-                if (_zoomScaleRatio != 1.0f) {
+                if (_isZoom) {
                     CCLOG("Touch outside does not work with zoom-in.");
                 }
             }
@@ -271,7 +275,7 @@ void TouchListener::Impl::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* ev
             }
         } else {
             // Touch outside type does nothing.
-            if (_zoomScaleRatio != 1.0f) {
+            if (_isZoom) {
                 CCLOG("Touch outside does not work with zoom-in.");
             }
         }
@@ -324,7 +328,7 @@ void TouchListener::Impl::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* ev
             }
         }
     } else {
-        if (_zoomScaleRatio != 1.0f) {
+        if (_isZoom) {
             CCLOG("Touch outside does not work with zoom-in.");
         }
         if (_isInside == false) {

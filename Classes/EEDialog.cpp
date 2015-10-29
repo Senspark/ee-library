@@ -28,11 +28,11 @@ bool Dialog::init() {
 }
     
 void Dialog::onEnter() {
-    NodeButton::onEnter();
+    ActiveNodeButton::onEnter();
 }
     
 void Dialog::onExit() {
-    NodeButton::onExit();    
+    ActiveNodeButton::onExit();    
 }
     
 void Dialog::pushDialog(cocos2d::Node* container, Dialog* dialog, int localZOrder) {

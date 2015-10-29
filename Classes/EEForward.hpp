@@ -72,17 +72,14 @@ namespace ee {
 enum class ButtonState;
 class NodeButton;
 class Button;
-class Bitset;
+class ActiveNodeButton;
+class ActiveButton;
 class Dialog;
 class CheckBox;
 class CheckAllBox;
     
 template<class... Args>
 class DataInfo;
-template<class T, class... Args>
-class DataInfo<T, Args...>;
-template<class T>
-class DataInfo<T>;
 
 template<class... Args>
 class Event;

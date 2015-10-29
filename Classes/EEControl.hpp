@@ -1,5 +1,5 @@
-#ifndef EE_LIBRARY_CONTROL_H
-#define EE_LIBRARY_CONTROL_H
+#ifndef EE_LIBRARY_CONTROL_HPP
+#define EE_LIBRARY_CONTROL_HPP
 
 #include "EEForward.hpp"
 #include "EETouchListener.hpp"
@@ -7,31 +7,38 @@
 #include "CCSprite.h"
 
 namespace_ee_begin
+/**
+ * NodeButton = cocos2d::Node + handle touches.
+ */
 class NodeButton : public cocos2d::Node, public TouchListener {
 public:
-    CREATE_FUNC(NodeButton);
+    static NodeButton* create();
     
 protected:
-    virtual cocos2d::Node* getInstance() override { return this; }
+    virtual bool init() override;
 };
 
+/**
+ * Button = cocos2d::Sprite + handle touches.
+ */
 class Button : public cocos2d::Sprite, public TouchListener {
 public:
-    CREATE_FUNC(Button);
+    static Button* create();
     
     cocos2d::SpriteFrame* getSpriteFrameForState(ButtonState state) const;
     void setSpriteFrameForState(ButtonState state, const std::string& spriteFrameName);
     void setSpriteFrameForState(ButtonState state, cocos2d::SpriteFrame* spriteFrame);
     
+    using Sprite::setSpriteFrame;
     virtual void setSpriteFrame(cocos2d::SpriteFrame* spriteFrame) override;
     
 protected:
     virtual ~Button();
     
+    virtual bool init() override;
+    
     using TouchListener::updateState;
     virtual void updateState(ButtonState state) override;
-    
-    virtual cocos2d::Node* getInstance() override { return this; }
     
 private:
     cocos2d::SpriteFrame* _normalSpriteFrame;
@@ -40,4 +47,4 @@ private:
 };
 namespace_ee_end
 
-#endif // EE_LIBRARY_CONTROL_H
+#endif // EE_LIBRARY_CONTROL_HPP

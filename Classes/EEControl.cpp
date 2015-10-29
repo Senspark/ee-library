@@ -2,6 +2,37 @@
 #include "cocos2d.h"
 
 namespace_ee_begin
+NodeButton* NodeButton::create() {
+    auto ret = new (std::nothrow) NodeButton();
+    if (ret != nullptr && ret->init()) {
+        ret->autorelease();
+    } else {
+        delete ret;
+        ret = nullptr;
+    }
+    return ret;
+}
+
+bool NodeButton::init() {
+    if (Node::init() == false) {
+        return false;
+    }
+    setListeningNode(this);
+    addListener();
+    return true;
+}
+
+Button* Button::create() {
+    auto ret = new (std::nothrow) Button();
+    if (ret != nullptr && ret->init()) {
+        ret->autorelease();
+    } else {
+        delete ret;
+        ret = nullptr;
+    }
+    return ret;
+}
+
 Button::~Button() {
     if (_normalSpriteFrame != nullptr) {
         _normalSpriteFrame->release();
@@ -12,6 +43,15 @@ Button::~Button() {
     if (_disabledSpriteFrame != nullptr) {
         _disabledSpriteFrame->release();
     }
+}
+
+bool Button::init() {
+    if (Sprite::init() == false) {
+        return false;
+    }
+    setListeningNode(this);
+    addListener();
+    return true;
 }
 
 cocos2d::SpriteFrame* Button::getSpriteFrameForState(ButtonState state) const {

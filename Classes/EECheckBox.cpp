@@ -8,6 +8,8 @@
 
 #include "EECheckBox.hpp"
 
+#include <algorithm>
+
 namespace_ee_begin
 bool CheckBoxBase::isChecked() const {
     return _isChecked;

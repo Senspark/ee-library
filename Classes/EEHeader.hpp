@@ -30,5 +30,8 @@
 #include "EEGroupNode.hpp"
 #include "EECheckBox.hpp"
 #include "EEBackButtonListener.hpp"
+#include "EEControl.hpp"
+#include "EEActiveControl.hpp"
+#include "EEControlLoader.hpp"
 
 #endif /* EE_LIBRARY_HEADER_HPP */

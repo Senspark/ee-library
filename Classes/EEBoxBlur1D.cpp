@@ -9,6 +9,8 @@
 #include "EEImage.hpp"
 #include "cocos2d.h"
 
+#include <cstring>
+
 namespace_ee_begin
 namespace_anonymous_begin
 void internalBoxBlur1D(unsigned char* pixels, unsigned width, unsigned height, unsigned range, unsigned iterations) {

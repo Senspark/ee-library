@@ -10,7 +10,6 @@
 #define EE_LIBRARY_TOUCH_MANAGER_IMPL_H
 
 #include "EETouchManager.hpp"
-#include <unordered_set>
 
 namespace_ee_begin
 class TouchManager::Impl : public TouchManager {

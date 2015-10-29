@@ -10,21 +10,44 @@
 #define EE_LIBRARY_DIALOG_H
 
 #include "EEForward.hpp"
-#include "EEControl.hpp"
+#include "EEActiveControl.hpp"
+
+#include <functional>
 
 namespace_ee_begin
-class Dialog : public NodeButton {
+class Dialog : public ActiveNodeButton {
 public:
+    using Callback1 = std::function<void()>;
+    using Callback2 = std::function<void(cocos2d::Node*, Dialog*)>;
+    
     virtual void show(int localZOrder) = 0;
     virtual void hide() = 0;
     
+    Dialog* addOnShowBeganCallback(const Callback1& callback, int priority = 0);
+    Dialog* addOnShowEndedCallback(const Callback2& callback, int priority = 0);
+    Dialog* addOnHideBeganCallback(const Callback2& callback, int priority = 0);
+    Dialog* addOnHideEndedCallback(const Callback1& callback, int priority = 0);
+    
 protected:
+    Dialog();
+    virtual ~Dialog();
+    
     virtual bool init() override;
     virtual void onEnter() override;
     virtual void onExit() override;
     
+    void invokeOnShowBeganCallbacks();
+    void invokeOnShowEndedCallbacks();
+    void invokeOnHideBeganCallbacks();
+    void invokeOnHideEndedCallbacks();
+    
     static void pushDialog(cocos2d::Node* container, Dialog* dialog, int localZOrder);
     static void popDialog(Dialog* dialog);
+    
+private:
+    class Impl;
+    friend class Impl;
+    std::unique_ptr<Impl> _impl;
 };
 namespace_ee_end
 

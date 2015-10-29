@@ -16,15 +16,13 @@ class TouchListener::Impl {
 public:
     Impl(TouchListener* base);
     
-    void addListener();
-    bool isTouchInside(cocos2d::Touch* touch) const;
-    
     bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event);
     void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event);
     void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event);
     void onTouchCanceled(cocos2d::Touch* touch, cocos2d::Event* event);
     
     TouchListener* _base;
+    cocos2d::Node* _listeningNode;
     
     bool _shouldCancel;
     float _moveThreshold;
@@ -35,7 +33,10 @@ public:
     ButtonState _buttonState;
     TouchType _touchType;
     
-    float _baseScale;
+    float _baseScaleX;
+    float _baseScaleY;
+    
+    bool _isZoom;
     float _zoomScaleRatio;
     float _zoomDuration;
     

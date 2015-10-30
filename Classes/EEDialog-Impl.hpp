@@ -18,6 +18,9 @@ class Dialog::Impl {
 public:
     Impl(Dialog* base);
     
+    bool _isShowing;
+    bool _isHiding;
+    
     Dialog* _base;
     
     using Callback1Info = std::pair<int, Callback1>;

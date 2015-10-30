@@ -34,6 +34,20 @@ void Dialog::onEnter() {
 void Dialog::onExit() {
     ActiveNodeButton::onExit();    
 }
+
+void Dialog::show(int localZOrder) {
+    if (_impl->_isShowing == false) {
+        _impl->_isShowing = true;
+        internalShow(localZOrder);
+    }
+}
+
+void Dialog::hide() {
+    if (_impl->_isHiding == false) {
+        _impl->_isHiding = true;
+        internalHide();
+    }
+}
     
 void Dialog::pushDialog(cocos2d::Node* container, Dialog* dialog, int localZOrder) {
     DialogManager::getInstance()->pushDialog(container, dialog, localZOrder);
@@ -43,35 +57,59 @@ void Dialog::popDialog(Dialog* dialog) {
     DialogManager::getInstance()->popDialog(dialog);
 }
 
+Dialog* Dialog::addOnShowBeganCallback(const Callback1& callback, int priority) {
+    _impl->_onShowBeganCallbacks.emplace_back(priority, callback);
+    return this;
+}
+
+Dialog* Dialog::addOnShowEndedCallback(const Callback2& callback, int priority) {
+    _impl->_onShowEndedCallbacks.emplace_back(priority, callback);
+    return this;
+}
+
+Dialog* Dialog::addOnHideBeganCallback(const Callback2& callback, int priority) {
+    _impl->_onHideBeganCallbacks.emplace_back(priority, callback);
+    return this;
+}
+
+Dialog* Dialog::addOnHideEndedCallback(const Callback1& callback, int priority) {
+    _impl->_onHideEndedCallbacks.emplace_back(priority, callback);
+    return this;
+}
+
 void Dialog::invokeOnShowBeganCallbacks() {
+    DialogManager::getInstance()->lock(this);
     _impl->invokeCallback1(_impl->_onShowBeganCallbacks);
 }
 
 void Dialog::invokeOnShowEndedCallbacks() {
+    DialogManager::getInstance()->unlock(this);
     _impl->invokeCallback2(_impl->_onShowEndedCallbacks);
 }
 
 void Dialog::invokeOnHideBeganCallbacks() {
+    DialogManager::getInstance()->lock(this);
     _impl->invokeCallback2(_impl->_onHideBeganCallbacks);
 }
 
 void Dialog::invokeOnHideEndedCallbacks() {
+    DialogManager::getInstance()->unlock(this);
     _impl->invokeCallback1(_impl->_onHideEndedCallbacks);
 }
 
 Dialog::Impl::Impl(Dialog* base)
 : _base(base)
+, _isShowing(false)
+, _isHiding(false)
 {}
 
 void Dialog::Impl::invokeCallback1(std::vector<Callback1Info>& infos) {
     std::stable_sort(infos.begin(), infos.end(), [](const Callback1Info& lhs, const Callback1Info& rhs) {
         return lhs.first < rhs.first;
     });
-    _base->retain();
     for (auto&& info : infos) {
         info.second();
     }
-    _base->release();
 }
 
 void Dialog::Impl::invokeCallback2(std::vector<Callback2Info>& infos) {

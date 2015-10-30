@@ -17,6 +17,7 @@ class DialogManager {
 public:
     static DialogManager* getInstance();
     
+    Dialog* getCurrentDialog() const;
     void hideDialog();
     
     cocos2d::Node* getRunningNode();
@@ -27,6 +28,9 @@ private:
     
     void pushDialog(cocos2d::Node* container, Dialog* dialog, int localZOrder);
     void popDialog(Dialog* dialog);
+    
+    void lock(Dialog* dialog);
+    void unlock(Dialog* dialog);
     
     class Impl;   
 };

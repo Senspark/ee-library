@@ -17,26 +17,30 @@ DialogManager* DialogManager::getInstance() {
     static Impl sharedInstance;
     return &sharedInstance;
 }
+
+Dialog* DialogManager::getCurrentDialog() const {
+    auto impl = static_cast<const Impl*>(this);
+    CC_ASSERT(impl->_dialogStack.empty() == false);
+    return impl->_dialogStack.back().dialog;
+}
     
 void DialogManager::hideDialog() {
-    auto ptr = static_cast<Impl*>(this);
-    CC_ASSERT(ptr->_dialogStack.empty() == false);
-    ptr->_dialogStack.back().dialog->hide();
+    auto impl = static_cast<Impl*>(this);
+    CC_ASSERT(impl->_dialogStack.empty() == false);
+    impl->_dialogStack.back().dialog->hide();
 }
     
 void DialogManager::pushDialog(cocos2d::Node* container, Dialog* dialog, int localZOrder) {
-    auto parent = getRunningNode();
-    // Pause parent.
-    pauseAll(parent);
-    // Push dialog to stack.
-    auto ptr = static_cast<Impl*>(this);
+    LOG_FUNC();
+    auto impl = static_cast<Impl*>(this);
     container->retain();
-    ptr->_dialogStack.emplace_back(container, dialog);
-    // Add dialog to scene.
-    parent->addChild(container, localZOrder);
+    dialog->retain();
+    impl->_dialogQueue.emplace(container, dialog, localZOrder);
+    impl->processDialogQueue();
 }
 
 void DialogManager::popDialog(Dialog* dialog) {
+    LOG_FUNC();
     auto parent = getParentNode();
     auto ptr = static_cast<Impl*>(this);
     auto&& info = ptr->_dialogStack.back();
@@ -50,6 +54,20 @@ void DialogManager::popDialog(Dialog* dialog) {
         // Resume scene.
         resumeAll(parent);
     }
+}
+
+void DialogManager::lock(Dialog* dialog) {
+    LOG_FUNC();
+    auto impl = static_cast<Impl*>(this);
+    impl->updateCurrentScene();
+    impl->_lockingDialog.insert(dialog);
+}
+
+void DialogManager::unlock(Dialog* dialog) {
+    LOG_FUNC();
+    auto impl = static_cast<Impl*>(this);
+    impl->_lockingDialog.erase(dialog);
+    impl->processDialogQueue();
 }
 
 cocos2d::Node* DialogManager::getRunningNode() {
@@ -86,6 +104,31 @@ void DialogManager::Impl::updateCurrentScene() {
             container->removeFromParent();
             container->release();
             _dialogStack.pop_back();
+        }
+        _lockingDialog.clear();
+    }
+}
+
+void DialogManager::Impl::internalPushDialog(const PushDialogInfo& info) {
+    LOG_FUNC();
+    auto parent = getRunningNode();
+    // Pause parent.
+    pauseAll(parent);
+    // Push dialog to stack.
+    info.container->retain();
+    _dialogStack.emplace_back(info.container, info.dialog);
+    // Add dialog to scene.
+    parent->addChild(info.container, info.localZOrder);
+}
+
+void DialogManager::Impl::processDialogQueue() {
+    if (_lockingDialog.empty()) {
+        if (_dialogQueue.empty() == false) {
+            auto&& front = _dialogQueue.front();
+            internalPushDialog(front);
+            front.container->release();
+            front.dialog->release();
+            _dialogQueue.pop();
         }
     }
 }

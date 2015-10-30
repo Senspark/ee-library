@@ -104,8 +104,11 @@ public:
     }
     
     /// Ignores touch end when touch move delta exceeds the given delta.
-    /// Defaults is 0.
+    /// Default is 2.0f.
     void setTouchMovedThreshold(float delta);
+    /// Default is false.
+    void setCancelTouchEnd(bool cancel);
+    bool isCancelTouchEnd() const;
     
 protected:
     TouchListener();

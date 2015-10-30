@@ -16,6 +16,8 @@ class TouchListener::Impl {
 public:
     Impl(TouchListener* base);
     
+    bool isActuallyVisible() const;
+    
     bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event);
     void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event);
     void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event);
@@ -26,6 +28,7 @@ public:
     
     bool _shouldCancel;
     float _moveThreshold;
+    bool _isCancelTouchEnd;
     
     bool _isInside;
     int _state;

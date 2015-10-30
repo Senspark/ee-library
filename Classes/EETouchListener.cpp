@@ -142,6 +142,14 @@ void TouchListener::setTouchMovedThreshold(float delta) {
     _impl->_moveThreshold = delta;
 }
 
+void TouchListener::setCancelTouchEnd(bool cancel) {
+    _impl->_isCancelTouchEnd = cancel;
+}
+
+bool TouchListener::isCancelTouchEnd() const {
+    return _impl->_isCancelTouchEnd;
+}
+
 void TouchListener::updateState() {
     if (isEnabled()) {
         updateState(_impl->_buttonState);
@@ -159,7 +167,8 @@ void TouchListener::updateState(ButtonState state) {
 TouchListener::Impl::Impl(TouchListener* base)
 : _base(base)
 , _shouldCancel(false)
-, _moveThreshold(0)
+, _moveThreshold(2.0f)
+, _isCancelTouchEnd(false)
 , _isInside(false)
 , _state(0)
 , _buttonState(ButtonState::Normal)
@@ -186,11 +195,19 @@ TouchListener::Impl::Impl(TouchListener* base)
     };
 }
 
+bool TouchListener::Impl::isActuallyVisible() const {
+    bool ret = true;
+    for (auto node = _listeningNode; node != nullptr && ret; node = node->getParent()) {
+        ret = node->isVisible();
+    }
+    return ret;
+}
+
 bool TouchListener::Impl::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event) {
     bool ret = false;
     _listeningNode->retain();
     // Check whether touch is locked.
-    if (TouchManager::getInstance()->isLocked() == false) {
+    if (TouchManager::getInstance()->isLocked() == false && isActuallyVisible()) {
         // Reset cancel flag.
         _shouldCancel = false;
         // Check whether touch is inside.
@@ -239,9 +256,11 @@ void TouchListener::Impl::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* ev
         return;
     }
     // Check whether touch should be cancelled.
-    float delta = std::max(std::abs(touch->getDelta().x), std::abs(touch->getDelta().y));
-    if (_moveThreshold < delta) {
-        _shouldCancel = true;
+    if (_isCancelTouchEnd) {
+        float delta = std::max(std::abs(touch->getDelta().x), std::abs(touch->getDelta().y));
+        if (_moveThreshold < delta) {
+            _shouldCancel = true;
+        }
     }
     _listeningNode->retain();
     bool wasInside = _isInside;

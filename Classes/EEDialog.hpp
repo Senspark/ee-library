@@ -20,8 +20,8 @@ public:
     using Callback1 = std::function<void()>;
     using Callback2 = std::function<void(cocos2d::Node*, Dialog*)>;
     
-    virtual void show(int localZOrder) = 0;
-    virtual void hide() = 0;
+    void show(int localZOrder = 0);
+    void hide();
     
     Dialog* addOnShowBeganCallback(const Callback1& callback, int priority = 0);
     Dialog* addOnShowEndedCallback(const Callback2& callback, int priority = 0);
@@ -29,6 +29,9 @@ public:
     Dialog* addOnHideEndedCallback(const Callback1& callback, int priority = 0);
     
 protected:
+    virtual void internalShow(int localZOrder) = 0;
+    virtual void internalHide() = 0;
+    
     Dialog();
     virtual ~Dialog();
     

@@ -3,12 +3,12 @@
 
 #include "platform/CCPlatformMacros.h"
 
-#define NAMESPACE_BEGIN(name) namespace name {
-#define NAMESPACE_END(name) }
-#define namespace_ee_begin NAMESPACE_BEGIN(ee)
-#define namespace_ee_end NAMESPACE_END(ee)
-#define namespace_anonymous_begin NAMESPACE_BEGIN()
-#define namespace_anonymous_end NAMESPACE_END()
+#define NAMESPACE_BEGIN(name)       namespace name {
+#define NAMESPACE_END(name)         }
+#define namespace_ee_begin          NAMESPACE_BEGIN(ee)
+#define namespace_ee_end            NAMESPACE_END(ee)
+#define namespace_anonymous_begin   NAMESPACE_BEGIN()
+#define namespace_anonymous_end     NAMESPACE_END()
 
 // cocosbuilder member variable assigner glue weak.
 #define CCB_MEMBERVARIABLEASSIGNER_GLUE_WEAK_EX(variableName) \
@@ -21,10 +21,10 @@
 /// Counts number of arguments.
 #define COUNT_ARGS_HELPER(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, N, ...) N
 #if defined(_MSC_VER)
-#   define COUNT_ARGS_MSC(...) COUNT_ARGS_HELPER __VA_ARGS__
-#   define COUNT_ARGS(...) COUNT_ARGS_MSC((0, ## __VA_ARGS__, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0))
+#   define COUNT_ARGS_MSC(...)  COUNT_ARGS_HELPER __VA_ARGS__
+#   define COUNT_ARGS(...)      COUNT_ARGS_MSC((0, ## __VA_ARGS__, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0))
 #else
-#   define COUNT_ARGS(...) COUNT_ARGS_HELPER(0, ## __VA_ARGS__, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
+#   define COUNT_ARGS(...)      COUNT_ARGS_HELPER(0, ## __VA_ARGS__, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
 #endif
 
 /// Gets the first argument.

@@ -23,9 +23,16 @@ Dialog* DialogManager::getCurrentDialog() const {
     CC_ASSERT(impl->_dialogStack.empty() == false);
     return impl->_dialogStack.back().dialog;
 }
+
+cocos2d::Scene* DialogManager::getCurrentScene() {
+    auto impl = static_cast<Impl*>(this);
+    impl->updateCurrentScene();
+    return impl->_lastScene;
+}
     
 void DialogManager::hideDialog() {
     auto impl = static_cast<Impl*>(this);
+    CC_ASSERT(impl->_dialogQueue.empty());
     CC_ASSERT(impl->_dialogStack.empty() == false);
     impl->_dialogStack.back().dialog->hide();
 }
@@ -97,6 +104,10 @@ cocos2d::Node* DialogManager::getParentNode() {
     
 void DialogManager::Impl::updateCurrentScene() {
     auto currentScene = cocos2d::Director::getInstance()->getRunningScene();
+    auto transition = dynamic_cast<cocos2d::TransitionScene*>(currentScene);
+    if (transition != nullptr) {
+        currentScene = transition->getInScene();
+    }
     if (currentScene != _lastScene) {
         _lastScene = currentScene;
         while (_dialogStack.empty() == false) {

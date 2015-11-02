@@ -144,6 +144,7 @@ template<class T>
 class DataInfo<T> : public DataInfoBase {
 public:
     using ValueType = typename std::decay<T>::type;
+    using FormatArgs = std::tuple<>;
     
     explicit DataInfo(std::string key, T otherValue = T())
         : DataInfoBase(std::move(key))
@@ -212,6 +213,7 @@ template<class T, class... Args>
 class DataInfo<T, Args...> : public DataInfoBase {
 public:
     using ValueType = typename std::decay<T>::type;
+    using FormatArgs = std::tuple<Args...>;
     
     explicit DataInfo(std::string key, T otherValue = T())
         : DataInfoBase(std::move(key))

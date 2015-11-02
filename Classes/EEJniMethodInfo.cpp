@@ -10,14 +10,22 @@
 #include "EEJniUtils.hpp"
 
 namespace_ee_begin
-JniMethodInfo::JniMethodInfo(jclass classId, jmethodID methodId)
-: classId(classId)
-, methodId(methodId)
+JniMethodInfo::JniMethodInfo(jclass clazz, jmethodID methodId)
+: _clazz(clazz)
+, _methodId(methodId)
 {}
 
 JniMethodInfo::~JniMethodInfo() {
-    if (classId != nullptr) {
-        JniUtils::getJNIEnv()->DeleteLocalRef(classId);
+    if (_clazz != nullptr) {
+        JniUtils::getJNIEnv()->DeleteLocalRef(_clazz);
     }
+}
+
+jclass JniMethodInfo::getClass() const {
+    return _clazz;
+}
+
+jmethodID JniMethodInfo::getMethodId() const {
+    return _methodId;
 }
 namespace_ee_end

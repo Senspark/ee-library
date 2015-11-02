@@ -193,6 +193,19 @@ struct JniToCppConverter<std::string> {
     }
 };
 
+template<>
+struct JniToCppConverter<int> {
+    /// Converts Integer to int.
+    static int convert(jobject obj) {
+        return JniUtils::toInt(obj);
+    }
+    
+    /// Converts jint to int;
+    static int convert(jint obj) {
+        return static_cast<int>(obj);
+    }
+};
+
 /// Convert to std::vector<std::string>.
 template<>
 struct JniToCppConverter<std::vector<std::string>> {
@@ -216,6 +229,20 @@ struct JniToCppConverter<std::vector<jobject>> {
         return JniUtils::toVectorJObject((jobjectArray) obj);
     }
 };
+
+/**
+ * Deduces the signature of a JNI method according to the variadic params and the return type.
+ */
+template<class T, class... Args>
+const char* getJniSignature() {
+    return Concatenate<
+            CompileTimeString<'('>, // Left parenthesis.
+            typename CppToJniConverter<Args>::JniType..., // Params signature.
+            CompileTimeString<')'>, // Right parenthesis.
+            typename CppToJniConverter<T>::JniType, // Return type signature.
+            CompileTimeString<'\0'>>
+            ::Result::value();
+}
 namespace_ee_end
 
 #endif /* EE_LIBRARY_JNI_CONVERTER_HPP */

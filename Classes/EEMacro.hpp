@@ -55,4 +55,9 @@
 #   define LOG_FULL_FORMAT(format, ...)
 #endif
 
+#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+#   define EE_LOGD(...) __android_log_print(ANDROID_LOG_DEBUG, "EE Library", __VA_ARGS__)
+#   define EE_LOGE(...) __android_log_print(ANDROID_LOG_ERROR, "EE Library", __VA_ARGS__)
+#endif
+
 #endif // EE_LIBRARY_MACRO_H

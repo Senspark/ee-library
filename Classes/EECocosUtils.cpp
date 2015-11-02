@@ -7,8 +7,7 @@
 //
 
 #include "EECocosUtils.hpp"
-
-#include "EEImage.hpp"
+#include "EEDialogManager.hpp"
 #include "cocos2d.h"
 #include "network/HttpClient.h"
 
@@ -144,7 +143,8 @@ void captureScreenInPixels(const std::function<void(cocos2d::Image*)>& afterCapt
 }
 
 void captureScreenInPoints(const std::function<void(cocos2d::Image*)>& afterCaptured, float scale) {
-    auto scene = cocos2d::Director::getInstance()->getRunningScene();
+    auto scene = DialogManager::getInstance()->getCurrentScene();
+    // auto scene = cocos2d::Director::getInstance()->getRunningScene();
     auto&& size = cocos2d::Director::getInstance()->getWinSize() * scale;
     int width = (int) size.width;
     int height = (int) size.height;
@@ -157,15 +157,27 @@ void captureScreenInPoints(const std::function<void(cocos2d::Image*)>& afterCapt
     scene->visit();
     renderer->end();
     
+    // Retain visited nodes to ensure their custom commands don't release.
+    std::vector<cocos2d::Node*> visitedNodes;
+    runActionRecursively(scene, [&visitedNodes](cocos2d::Node* node) {
+        node->retain();
+        visitedNodes.push_back(node);
+    });
+    CCLOG("Visited nodes count = %d", (int) visitedNodes.size());
+    
     static cocos2d::CustomCommand captureScreenCommand;
     captureScreenCommand.init(std::numeric_limits<float>::max());
-    captureScreenCommand.func = [renderer, scene, afterCaptured] {
+    captureScreenCommand.func = [visitedNodes, renderer, scene, afterCaptured] {
         auto image = renderer->newImage();
         afterCaptured(image);
         image->release();
         // Reset scale and anchor point.
         scene->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE);
         scene->setScale(1.0f);
+        // Release visited nodes.
+        for (auto node : visitedNodes) {
+            node->release();
+        }
     };
     cocos2d::Director::getInstance()->getRenderer()->addCommand(&captureScreenCommand);
 }

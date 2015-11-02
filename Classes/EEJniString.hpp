@@ -13,7 +13,7 @@
 #include "jni.h"
 
 namespace_ee_begin
-class JniString {
+class CC_DEPRECATED_ATTRIBUTE JniString {
 public:
     JniString(JNIEnv* env, jstring javaString)
         : _env(env)
@@ -28,6 +28,10 @@ public:
         return _nativeString;
     }
     
+    operator std::string() const {
+        return _nativeString;
+    }
+
     JniString(const JniString&) = delete;
     JniString(JniString&&) = delete;
     JniString& operator=(const JniString&) = delete;

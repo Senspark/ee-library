@@ -17,11 +17,15 @@
 namespace_ee_begin
 class JniMethodInfo final {
 public:
-    jclass classId;
-    jmethodID methodId;
-    
-    JniMethodInfo(jclass classId, jmethodID methodId);
+    JniMethodInfo(jclass clazz, jmethodID methodId);
     ~JniMethodInfo();
+    
+    jclass getClass() const;
+    jmethodID getMethodId() const;
+    
+private:
+    jclass _clazz;
+    jmethodID _methodId;
 };
 namespace_ee_end
 

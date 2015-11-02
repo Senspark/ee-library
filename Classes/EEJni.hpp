@@ -19,27 +19,28 @@
 #include "EEJniCaller.hpp"
 #include "EEJniConverter.hpp"
 #include "EEJniDestructor.hpp"
+#include "EEJniFieldInfo.hpp"
 #include "EEJniMethodInfo.hpp"
 
 #include <jni.h>
 
 namespace_ee_begin
-#pragma mark JNI Signature Utilities
 /**
- * Deduces the signature of a JNI method according to the variadic params and the return type.
+ * Generic call to instance method.
+ * @param instance The object instance.
+ * @parem methodName The method name.
+ * @param args Input arguments (if available).
+ * @return result whose type is T.
  */
-template<class T, class... Args>
-const char* getJniSignature(Args...) {
-    return Concatenate<
-            CompileTimeString<'('>, //left parenthesis
-            typename CppToJniConverter<Args>::JniType..., //params signature
-            CompileTimeString<')'>, //right parenthesis
-            typename CppToJniConverter<T>::JniType,
-            CompileTimeString<'\0'>> //return type signature
-            ::Result::value();
+template<class T = void, class... Args>
+T call(jobject instance, const std::string& methodName, const Args&... args) {
+    EE_LOGD("call: methodName = %s", methodName.c_str());
+    static constexpr uint8_t Arity = sizeof...(Args);
+    JNIEnv* env = JniUtils::getJNIEnv();
+    auto&& methodInfo = JniUtils::getMethodInfo(instance, methodName, getJniSignature<T, Args...>());
+    JniParamDestructor<Arity> paramDestructor(env);
+    return JniCaller<T, decltype(CppToJniConverter<Args>::convert(args))...>::call(env, instance, methodInfo->getMethodId(), jniParamConverter<Args>(args, paramDestructor)...);
 }
-
-#pragma mark Public API
 
 /**
  * Generic call to static method.
@@ -53,75 +54,65 @@ const char* getJniSignature(Args...) {
  */
 template<class T = void, class... Args>
 T callStatic(const std::string& className, const std::string& methodName, const Args&... args) {
+    EE_LOGD("callStatic: className = %s methodName = %s", className.c_str(), methodName.c_str());
     static constexpr uint8_t Arity = sizeof...(Args);
-    JNIEnv* jniEnv = JniUtils::getJNIEnvAttach();
-    auto&& methodInfo = JniUtils::getStaticMethodInfo(className, methodName, getJniSignature<T, Args...>(args...));
-    JniParamDestructor<Arity> paramDestructor(jniEnv);
-    return JniCaller<T, decltype(CppToJniConverter<Args>::convert(args))...>::callStatic(jniEnv, methodInfo->classId, methodInfo->methodId, jniParamConverter<Args>(args, paramDestructor)...);
-}
-
-/**
- * Generic call to instance method.
- * @param instance The object instance.
- * @param className The class name.
- * @parem methodName The method name
- * @param args Input arguments (if available).
- * @return result whose type is T.
- */
-template<class T = void, class... Args>
-T call(jobject instance, const std::string& className, const std::string& methodName, const Args&... args) {
-    static constexpr uint8_t Arity = sizeof...(Args);
-    JNIEnv* jniEnv = JniUtils::getJNIEnvAttach();
-    auto&& methodInfo = JniUtils::getMethodInfo(className, methodName, getJniSignature<T, Args...>(args...));
-    JniParamDestructor<Arity> paramDestructor(jniEnv);
-    return JniCaller<T, decltype(CppToJniConverter<Args>::convert(args))...>::callInstance(jniEnv, instance, methodInfo->methodId, jniParamConverter<Args>(args, paramDestructor)...);
+    JNIEnv* env = JniUtils::getJNIEnv();
+    auto&& methodInfo = JniUtils::getStaticMethodInfo(className, methodName, getJniSignature<T, Args...>());
+    JniParamDestructor<Arity> paramDestructor(env);
+    return JniCaller<T, decltype(CppToJniConverter<Args>::convert(args))...>::callStatic(env, methodInfo->getClass(), methodInfo->getMethodId(), jniParamConverter<Args>(args, paramDestructor)...);
 }
 
 /**
  * Retrieves a field in the given object instance.
  * @param instance The object instance.
- * @param propertyName The property name.
- * @return Value of the property.
+ * @param fieldName The field name.
+ * @return Value of the field.
  */
 template<class T>
-T getField(jobject instance, const std::string& propertyName) {
-    JNIEnv* jniEnv = JniUtils::getJNIEnvAttach();
-    jclass clazz = jniEnv->GetObjectClass(instance);
+T getField(jobject instance, const std::string& fieldName) {
+    EE_LOGD("getField: fieldName = %s", fieldName.c_str());
+    JNIEnv* env = JniUtils::getJNIEnv();
     const char* signature = Concatenate<typename CppToJniConverter<T>::JniType, CompileTimeString<'\0'>>::Result::value();
-    jfieldID fid = jniEnv->GetFieldID(clazz, propertyName.c_str(), signature);
-    return JniCaller<T>::getField(jniEnv, instance, fid);
+    auto&& fieldInfo = JniUtils::getFieldInfo(instance, fieldName, signature);
+    return JniCaller<T>::getField(env, instance, fieldInfo->getFieldId());
 }
 
-// jobject global ref wrapper class.
-struct JniObject {
-    std::string jniClassName;
-    jobject instance = nullptr;
+/**
+ * Retrieves a static field in the given class.
+ * @param className The class name.
+ * @param fieldName The static field name.
+ * @return Value of the static field.
+ */
+template<class T>
+T getStaticField(const std::string& className, const std::string& fieldName) {
+    EE_LOGD("getStaticField: className = %s fieldName = %s", className.c_str(), fieldName.c_str());
+    JNIEnv* env = JniUtils::getJNIEnv();
+    const char* signature = Concatenate<typename CppToJniConverter<T>::JniType, CompileTimeString<'\0'>>::Result::value();
+    auto&& fieldInfo = JniUtils::getStaticFieldInfo(className, fieldName, signature);
+    return JniCaller<T>::getStaticField(env, fieldInfo->getClass(), fieldInfo->getFieldId());
+}
 
-    ~JniObject() {
-        if (instance != nullptr) {
-            auto jniEnv = JniUtils::getJNIEnv();
-            jniEnv->DeleteGlobalRef(instance);
-        }
-    }
-    
-    template<class... Args>
-    static std::shared_ptr<JniObject> create(const std::string& className, Args&&... args) {
-        static constexpr uint8_t Arity = sizeof...(Args);
-        auto&& result = new JniObject();
-        auto&& jniEnv = JniUtils::getJNIEnvAttach();
-        auto&& methodInfo = JniUtils::getMethodInfo(className, "<init>", getJniSignature<void, Args...>(args...));
-        JniParamDestructor<Arity> paramDestructor(jniEnv);
-        result->instance = jniEnv->NewObject(methodInfo->classId, methodInfo->methodId, jniParamConverter<Args>(args, paramDestructor)...);
-        result->instance = jniEnv->NewGlobalRef(result->instance);
-        result->jniClassName = className;
-        return std::make_shared<JniObject>(result);
-    }
+template<class T>
+void setField(jobject instance, const std::string& fieldName, const T& value) {
+    EE_LOGD("setField: fieldName = %s", fieldName.c_str());
+    JNIEnv* env = JniUtils::getJNIEnv();
+    const char* signature = Concatenate<typename CppToJniConverter<T>::JniType, CompileTimeString<'\0'>>::Result::value();
+    auto&& fieldInfo = JniUtils::getFieldInfo(instance, fieldName, signature);
+    JniParamDestructor<1> paramDestructor(env);
+    JniCaller<T>::setField(env, instance, fieldInfo->getFieldId(), jniParamConverter<1>(value, paramDestructor));
+}
 
-    template<class T = void, class... Args>
-    T call(const std::string& methodName, Args&&... args) const {
-        return ee::call<T, Args...>(instance, jniClassName, methodName, std::forward<Args>(args)...);
-    }
-};
+template<class T>
+void setStaticField(const std::string& className, const std::string& fieldName, const T& value) {
+    EE_LOGD("setStaticField: className = %s fieldName = %s", className.c_str(), fieldName.c_str());
+    JNIEnv* env = JniUtils::getJNIEnv();
+    const char* signature = Concatenate<typename CppToJniConverter<T>::JniType, CompileTimeString<'\0'>>::Result::value();
+    auto&& fieldInfo = JniUtils::getStaticFieldInfo(className, fieldName, signature);
+    JniParamDestructor<1> paramDestructor(env);
+    JniCaller<T>::setStaticField(env, fieldInfo->getClass(), fieldInfo->getFieldId(), jniParamConverter<1>(value, paramDestructor));
+}
+
+void setStaticField(const std::string& className, const std::string& fieldName, const char* signature, jobject value);
 namespace_ee_end
 
 #endif /* EE_LIBRARY_JNI_HPP */

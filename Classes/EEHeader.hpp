@@ -33,5 +33,19 @@
 #include "EEControl.hpp"
 #include "EEActiveControl.hpp"
 #include "EEControlLoader.hpp"
+#include "EEConstexprString.hpp"
+
+#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+#   include "EEJni.hpp"
+#   include "EEJniCaller.hpp"
+#   include "EEJniConverter.hpp"
+#   include "EEJniDestructor.hpp"
+#   include "EEJniException.hpp"
+#   include "EEJniFieldInfo.hpp"
+#   include "EEJniMethodInfo.hpp"
+#   include "EEJniObject.hpp"
+#   include "EEJniString.hpp"
+#   include "EEJniUtils.hpp"
+#endif
 
 #endif /* EE_LIBRARY_HEADER_HPP */

@@ -7,7 +7,9 @@
 //
 
 #include "EEJniUtils.hpp"
+#include "EEJni.hpp"
 #include "EEJniException.hpp"
+#include "EEJniFieldInfo.hpp"
 #include "EEJniMethodInfo.hpp"
 
 #include <utility>
@@ -36,15 +38,15 @@ jstring JniUtils::toJString(const char* str) {
 }
 
 jobjectArray JniUtils::toJObjectArray(const std::vector<std::string>& data) {
-    jclass classId = env->FindClass("java/lang/String");
+    jclass clazz = env->FindClass("java/lang/String");
     jint size = data.size();
-    jobjectArray joa = env->NewObjectArray(size, classId, 0);
+    jobjectArray joa = env->NewObjectArray(size, clazz, 0);
 
     for (int i = 0; i < size; i++) {
         jstring jstr = toJString(data[i]);
         env->SetObjectArrayElement(joa, i, jstr);
     }
-    env->DeleteLocalRef(classId);
+    env->DeleteLocalRef(clazz);
 
     checkException();
     return joa;
@@ -67,6 +69,15 @@ std::string JniUtils::toString(jstring str) {
     env->ReleaseStringUTFChars(str, chars);
     checkException();
     return s;
+}
+
+int JniUtils::toInt(jobject obj) {
+    if (obj == nullptr) {
+        return 0;
+    }
+    int ret = call<int>(obj, "intValue");
+    // CCLOG("toInt ret = %d", ret);
+    return ret;
 }
 
 std::vector<std::string> JniUtils::toVectorString(jobjectArray array) {
@@ -107,45 +118,84 @@ std::vector<jobject> JniUtils::toVectorJObject(jobjectArray array) {
     return result;
 }
 
-std::shared_ptr<JniMethodInfo> JniUtils::getStaticMethodInfo(const std::string& className, const std::string& methodName, const char* signature) {
-    jclass classId = nullptr;
-    jmethodID methodId = nullptr;
-
-    classId = env->FindClass(className.c_str());
+std::shared_ptr<JniFieldInfo> JniUtils::getStaticFieldInfo(const std::string& className, const std::string& fieldName, const char* signature) {
+    jclass clazz = env->FindClass(className.c_str());
     checkException();
-
-    if (classId == nullptr) {
+    if (clazz == nullptr) {
         throw JniException(std::string("Could not find the given class: ") + className);
     }
 
-    methodId = env->GetStaticMethodID(classId, methodName.c_str(), signature);
+    jfieldID fieldId = env->GetStaticFieldID(clazz, fieldName.c_str(), signature);
     checkException();
-
-    if (methodId == nullptr) {
-        throw JniException(std::string("Could not find the given '") + methodName + std::string("' static method in the given '") + className + std::string("' class using the '") + signature + std::string("' signature."));
+    if (fieldId == nullptr) {
+        throw JniException(std::string("Could not find the given '") + fieldName + std::string("' static field in the given '") + className + std::string("' class using the '") + signature + std::string("' signature."));
     }
 
-    return std::make_shared<JniMethodInfo>(JniMethodInfo(classId, methodId));
+    return std::make_shared<JniFieldInfo>(clazz, fieldId);
 }
 
-std::shared_ptr<JniMethodInfo> JniUtils::getMethodInfo(const std::string& className, const std::string& methodName, const char* signature) {
-    jclass classId = nullptr;
-    jmethodID methodId = nullptr;
-    classId = env->FindClass(className.c_str());
-
+std::shared_ptr<JniFieldInfo> JniUtils::getFieldInfo(jobject instance, const std::string& fieldName, const char* signature) {
+    jclass clazz = env->GetObjectClass(instance);
     checkException();
-    if (classId == nullptr) {
+    if (clazz == nullptr) {
+        throw JniException("Could not find instance class.");
+    }
+
+    jfieldID fieldId = env->GetFieldID(clazz, fieldName.c_str(), signature);
+    checkException();
+    if (fieldId == nullptr) {
+        throw JniException(std::string("Could not find the given '") + fieldName + std::string("' field in instance class using the '") + signature + std::string("' signature."));
+    }
+
+    return std::make_shared<JniFieldInfo>(clazz, fieldId);
+}
+
+std::shared_ptr<JniMethodInfo> JniUtils::getStaticMethodInfo(const std::string& className, const std::string& methodName, const char* signature) {
+    jclass clazz = env->FindClass(className.c_str());
+    checkException();
+    if (clazz == nullptr) {
         throw JniException(std::string("Could not find the given class: ") + className);
     }
 
-    methodId = env->GetMethodID(classId, methodName.c_str(), signature);
+    jmethodID methodId = env->GetStaticMethodID(clazz, methodName.c_str(), signature);
     checkException();
-
     if (methodId == nullptr) {
         throw JniException(std::string("Could not find the given '") + methodName + std::string("' static method in the given '") + className + std::string("' class using the '") + signature + std::string("' signature."));
     }
 
-    return std::make_shared<JniMethodInfo>(JniMethodInfo(classId, methodId));
+    return std::make_shared<JniMethodInfo>(clazz, methodId);
+}
+
+std::shared_ptr<JniMethodInfo> JniUtils::getMethodInfo(jobject instance, const std::string& methodName, const char* signature) {
+    jclass clazz = env->GetObjectClass(instance);
+    checkException();
+    if (clazz == nullptr) {
+        throw JniException("Could not find instance class.");
+    }
+
+    jmethodID methodId = env->GetMethodID(clazz, methodName.c_str(), signature);
+    checkException();
+    if (methodId == nullptr) {
+        throw JniException(std::string("Could not find the given '") + methodName + std::string("' method in instance class using the '") + signature + std::string("' signature."));
+    }
+
+    return std::make_shared<JniMethodInfo>(clazz, methodId);
+}
+
+std::shared_ptr<JniMethodInfo> JniUtils::getConstructorInfo(const std::string& className, const char* signature) {
+    jclass clazz = env->FindClass(className.c_str());
+    checkException();
+    if (clazz == nullptr) {
+        throw JniException(std::string("Could not find the given class: ") + className);
+    }
+
+    jmethodID methodId = env->GetMethodID(clazz, "<init>", signature);
+    checkException();
+    if (methodId == nullptr) {
+        throw JniException(std::string("Could not find the constructor method in the given '") + className + std::string("' class using the '") + signature + std::string("' signature."));
+    }
+
+    return std::make_shared<JniMethodInfo>(clazz, methodId);
 }
 
 void JniUtils::checkException() {
@@ -153,8 +203,11 @@ void JniUtils::checkException() {
         jthrowable jthrowable = env->ExceptionOccurred();
         env->ExceptionDescribe();
         env->ExceptionClear();
-        auto&& methodInfo = getMethodInfo("java/lang/Throwable", "getMessage", "()Ljava/lang/String;");
-        std::string exceptionMessage = toString(reinterpret_cast<jstring>(env->CallObjectMethod(jthrowable, methodInfo->methodId)));
+        jclass clazz = env->FindClass("java/lang/Throwable");
+        jmethodID methodId = env->GetMethodID(clazz, "getMessage", "()Ljava/lang/String;");
+        // auto&& methodInfo = getMethodInfo("java/lang/Throwable", "getMessage", "()Ljava/lang/String;");
+        std::string exceptionMessage = toString(reinterpret_cast<jstring>(env->CallObjectMethod(jthrowable, methodId)));
+        env->DeleteLocalRef(clazz);
         throw new JniException(exceptionMessage);
     }
 }

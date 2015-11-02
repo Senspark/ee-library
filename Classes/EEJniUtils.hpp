@@ -18,6 +18,7 @@
 
 namespace_ee_begin
 class JniMethodInfo;
+class JniFieldInfo;
 
 class JniUtils final {
 public:
@@ -47,15 +48,23 @@ public:
     /// Converts String to std::string.
     static std::string toString(jstring str);
 
+    /// Converts Integer to int.
+    static int toInt(jobject obj);
+
     /// Converts String[] to std::vector<std::string>.
     static std::vector<std::string> toVectorString(jobjectArray array);
 
     /// Converts byte[] to std::vector<uint8_t>.
-    static std::vector<uint8_t> toVectorByte(jbyteArray);
-    static std::vector<jobject> toVectorJObject(jobjectArray);
+    static std::vector<uint8_t> toVectorByte(jbyteArray array);
+    static std::vector<jobject> toVectorJObject(jobjectArray array);
+    
+    static std::shared_ptr<JniFieldInfo> getStaticFieldInfo(const std::string& className, const std::string& fieldName, const char* signature);
+    static std::shared_ptr<JniFieldInfo> getFieldInfo(jobject instance, const std::string& fieldName, const char* signature);
 
     static std::shared_ptr<JniMethodInfo> getStaticMethodInfo(const std::string& className, const std::string& methodName, const char* signature);
-    static std::shared_ptr<JniMethodInfo> getMethodInfo(const std::string& className, const std::string& methodName, const char* signature);
+    static std::shared_ptr<JniMethodInfo> getMethodInfo(jobject instance, const std::string& methodName, const char* signature);
+
+    static std::shared_ptr<JniMethodInfo> getConstructorInfo(const std::string& className, const char* signature);
 
     static void checkException();
 

@@ -23,6 +23,8 @@ public:
     cocos2d::Node* getRunningNode();
     cocos2d::Node* getParentNode();
     
+    cocos2d::Scene* getCurrentScene();
+    
 private:
     friend class Dialog;
     

@@ -106,7 +106,13 @@ struct GetTupleIndex<T, std::tuple<U, Ts...>> {
     enum { Index = 1 + GetTupleIndex<T, std::tuple<Ts...>>::Index };
 };
     
-/// Sequence builder.
+/**
+ * Sequence builder.
+ *
+ * Example:
+ * - SequenceGenerator<3>::Type is Sequence<0, 1, 2>.
+ * - SequenceGenerator<0>::Type is Sequence<>.
+ */
 template<std::size_t...>
 struct Sequence {};
     
@@ -118,7 +124,25 @@ struct SequenceGenerator<0, S...> {
     using Type = Sequence<S...>;
 };
 
-// Reverse range for loop.
+/// Runtime index for tuple.
+template<std::size_t Index, class Tuple, class Functor>
+void applyOne(Tuple& t, Functor f) {
+    f(std::get<Index>(t));
+}
+
+template<class Tuple, class Functor, std::size_t... Indices>
+void apply(Tuple& t, std::size_t index, Functor f, Sequence<Indices...>) {
+    using FuncType = void(Tuple&, Functor);
+    static constexpr FuncType* Functions[] = { &applyOne<Indices, Tuple, Functor>... };
+    Functions[index](t, f);
+}
+
+template<class Tuple, class Functor>
+void apply(Tuple& t, std::size_t index, Functor f) {
+    apply(t, index, f, typename SequenceGenerator<std::tuple_size<Tuple>::value>::Type());
+}
+
+/// Reverse range for loop.
 template<class T>
 class ReverseWrapper {
 public:
@@ -129,7 +153,7 @@ public:
 private:
     T& _container;
 };
-    
+
 template<class T>
 class ReverseWrapper<const T> {
 public:

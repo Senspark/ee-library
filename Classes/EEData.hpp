@@ -127,6 +127,11 @@ template<class T>
 T getInfoHelper(const char* key, const T& defaultValue);
 
 class DataInfoBase : public NonCopyable {
+public:
+    const std::string& getKey() const {
+        return _key;
+    }
+    
 protected:
     DataInfoBase(std::string key) : _key(std::move(key)) {}
     

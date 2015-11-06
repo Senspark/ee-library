@@ -5,6 +5,8 @@
 #include "EEMacro.hpp"
 
 #include <vector>
+#include <memory>
+#include <utility>
 
 namespace_ee_begin
 class Gesture {

@@ -39,6 +39,7 @@
 #   include "EEJni.hpp"
 #   include "EEJniCaller.hpp"
 #   include "EEJniConverter.hpp"
+#   include "EEJniDataInfo.hpp"
 #   include "EEJniDestructor.hpp"
 #   include "EEJniException.hpp"
 #   include "EEJniFieldInfo.hpp"

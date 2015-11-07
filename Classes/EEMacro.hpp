@@ -7,6 +7,8 @@
 #define NAMESPACE_END(name)         }
 #define namespace_ee_begin          NAMESPACE_BEGIN(ee)
 #define namespace_ee_end            NAMESPACE_END(ee)
+#define namespace_detail_begin      NAMESPACE_BEGIN(detail)
+#define namespace_detail_end        NAMESPACE_END(detail)
 #define namespace_anonymous_begin   NAMESPACE_BEGIN()
 #define namespace_anonymous_end     NAMESPACE_END()
 

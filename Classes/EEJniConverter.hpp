@@ -194,6 +194,13 @@ struct JniToCppConverter<std::string> {
 };
 
 template<>
+struct JniToCppConverter<bool> {
+    static bool convert(jobject obj) {
+        return static_cast<bool>(obj);
+    }
+};
+
+template<>
 struct JniToCppConverter<int> {
     /// Converts Integer to int.
     static int convert(jobject obj) {

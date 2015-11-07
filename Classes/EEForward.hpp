@@ -80,9 +80,18 @@ class CheckAllBox;
     
 template<class... Args>
 class DataInfo;
-
+    
 template<class... Args>
-class Event;
+class JniDataInfo;
+    
+template<class... Args>
+class EventInfo;
+    
+template<class... Args>
+class JniEventInfo;
+    
+template<class... Args>
+using Event [[deprecated("Use EventInfo instead.")]] = EventInfo<Args...>;
 } // namespace utils
 
 namespace soomla {

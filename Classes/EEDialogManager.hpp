@@ -13,6 +13,8 @@
 #include "EEMacro.hpp"
 
 namespace_ee_begin
+class Dialog;
+
 class DialogManager {
 public:
     static DialogManager* getInstance();

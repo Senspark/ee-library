@@ -12,6 +12,8 @@
 #include "EEForward.hpp"
 #include "EEMacro.hpp"
 
+#include <functional>
+
 namespace_ee_begin
 class Dialog;
 
@@ -29,6 +31,8 @@ public:
     
 private:
     friend class Dialog;
+    
+    void addToQueue(const std::function<void()>& callback);
     
     void pushDialog(cocos2d::Node* container, Dialog* dialog, int localZOrder);
     void popDialog(Dialog* dialog);

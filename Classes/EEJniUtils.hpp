@@ -29,6 +29,8 @@ public:
         return env;
     }
     
+    static void setJniEnv(JNIEnv* env);
+    
     static JNIEnv* getJNIEnvAttach();
 
     /// Converts const char* to String

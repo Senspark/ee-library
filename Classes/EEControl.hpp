@@ -10,7 +10,7 @@ namespace_ee_begin
 /**
  * NodeButton = cocos2d::Node + handle touches.
  */
-class NodeButton : public cocos2d::Node, public TouchListener {
+class NodeButton : public virtual cocos2d::Node, public TouchListener {
 public:
     static NodeButton* create();
     

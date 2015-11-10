@@ -51,6 +51,10 @@ template<> float getInfoHelper(const char* key, const float& defaultValue) {
 }
 
 namespace_detail_begin
+const std::string& DataInfoBase::getKey() const {
+    return _key;
+}
+
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
 class JniDataInfoManager {
 public:
@@ -71,16 +75,20 @@ public:
                 break;
             }
         }
+        CC_ASSERT(ret != nullptr);
         return ret;
     }
     
     void set(jlong pointer, jobjectArray objects) const {
+        bool ret = false;
         for (auto info : _infos) {
             if ((jlong) info == pointer) {
                 (*info).jniSet(objects);
+                ret = true;
                 break;
             }
         }
+        CC_ASSERT(ret);
     }
     
 private:
@@ -114,14 +122,23 @@ namespace_ee_end
 
 namespace_anonymous_begin
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
-void Java_com_senspark_ee_DataInfo_set(JNIEnv* env, jobject thiz, jlong pointer, jobjectArray objects) {
+extern "C" {
+void Java_com_ee_library_DataInfo_set(JNIEnv* env, jobject thiz, jlong pointer, jobjectArray objects) {
     EE_LOGD("%s", __PRETTY_FUNCTION__);
+    JNIEnv* currentEnv = ee::JniUtils::getJNIEnv();
+    ee::JniUtils::setJniEnv(env);
     ee::detail::JniDataInfoManager::getInstance()->set(pointer, objects);
+    ee::JniUtils::setJniEnv(currentEnv);
 }
 
-jobject Java_com_senspark_ee_DataInfo_get(JNIEnv* env, jobject thiz, jlong pointer, jobjectArray objects) {
+jobject Java_com_ee_library_DataInfo_get(JNIEnv* env, jobject thiz, jlong pointer, jobjectArray objects) {
     EE_LOGD("%s", __PRETTY_FUNCTION__);
-    return ee::detail::JniDataInfoManager::getInstance()->get(pointer, objects);
+    JNIEnv* currentEnv = ee::JniUtils::getJNIEnv();
+    ee::JniUtils::setJniEnv(env);
+    jobject ret = ee::detail::JniDataInfoManager::getInstance()->get(pointer, objects);
+    ee::JniUtils::setJniEnv(currentEnv);
+    return ret;
 }
+} // extern "C"
 #endif
 namespace_anonymous_end

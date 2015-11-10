@@ -25,12 +25,16 @@ void JniUtils::init(JavaVM* vm, JNIEnv* jniEnv) {
 
 JNIEnv* JniUtils::getJNIEnvAttach() {
     if (javaVM != nullptr) {
-        int status = javaVM->AttachCurrentThread(&env, NULL);
+        int status = javaVM->AttachCurrentThread(&env, nullptr);
         if (status < 0) {
             throw JniException("Could not attach the JNI environment to the current thread.");
         }
     }
     return env;
+}
+
+void JniUtils::setJniEnv(JNIEnv* env) {
+    JniUtils::env = env;
 }
 
 jstring JniUtils::toJString(const char* str) {

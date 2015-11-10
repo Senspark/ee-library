@@ -42,8 +42,13 @@ std::string createKey(T&& value, Args&&... args) {
 }
 
 class DataInfoBase : public NonCopyable {
+public:
+    const std::string& getKey() const;
+
 protected:
-    DataInfoBase(std::string key) : _key(std::move(key)) {}
+    DataInfoBase(std::string key) : _key(std::move(key)) {
+        
+    }
     
     DataInfoBase(DataInfoBase&&) = default;
     DataInfoBase& operator=(DataInfoBase&&) = delete;
@@ -217,6 +222,7 @@ public:
 
     using DataInfo<T>::get;
     using DataInfo<T>::set;
+    using DataInfo<T>::operator=;
     
 protected:
     using DataInfo<T>::_key;

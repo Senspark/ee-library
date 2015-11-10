@@ -38,14 +38,14 @@ void Dialog::onExit() {
 void Dialog::show(int localZOrder) {
     if (_impl->_isShowing == false) {
         _impl->_isShowing = true;
-        internalShow(localZOrder);
+        DialogManager::getInstance()->addToQueue(CC_CALLBACK_0(Dialog::internalShow, this, localZOrder));
     }
 }
 
 void Dialog::hide() {
     if (_impl->_isHiding == false) {
         _impl->_isHiding = true;
-        internalHide();
+        DialogManager::getInstance()->addToQueue(CC_CALLBACK_0(Dialog::internalHide, this));
     }
 }
     

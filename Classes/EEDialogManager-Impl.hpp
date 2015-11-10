@@ -11,19 +11,19 @@
 
 #include "EEDialogManager.hpp"
 
-#include <queue>
+#include <deque>
+#include <memory>
+#include <utility>
 #include <vector>
-#include <unordered_set>
 
 namespace_ee_begin
 class DialogManager::Impl : public DialogManager {
 public:
     void updateCurrentScene();
-    void processDialogQueue();
+    void processActionQueue();
     
     cocos2d::Scene* _lastScene;
-    
-    std::unordered_set<Dialog*> _lockingDialog;
+    Dialog* _lockingDialog;
     
     struct DialogInfo {
         DialogInfo(cocos2d::Node* _container, Dialog* _dialog)
@@ -35,21 +35,7 @@ public:
         Dialog* dialog;
     };
     
-    struct PushDialogInfo {
-        PushDialogInfo(cocos2d::Node* _container, Dialog* _dialog, int _localZOrder)
-        : container(_container)
-        , dialog(_dialog)
-        , localZOrder(_localZOrder)
-        {}
-                       
-        cocos2d::Node* container;
-        Dialog* dialog;
-        int localZOrder;
-    };
-    
-    void internalPushDialog(const PushDialogInfo& info);
-    
-    std::queue<PushDialogInfo> _dialogQueue;
+    std::deque<std::function<void()>> _actionQueue;
     std::vector<DialogInfo> _dialogStack;
 };
 namespace_ee_end

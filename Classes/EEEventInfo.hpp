@@ -31,6 +31,8 @@ namespace_detail_begin
 class EventInfoBase : public NonCopyable, public NonMovable {
 public:
     void removeListeners() const;
+
+    const std::string& getKey() const;
     
 protected:
     EventInfoBase(std::string key) : _key(std::move(key)) {}
@@ -116,6 +118,7 @@ public:
     using typename EventInfo<Args...>::DataType;
     
     using EventInfo<Args...>::EventInfo;
+    using EventInfo<Args...>::dispatch;
     
 protected:
     using EventInfo<Args...>::_key;
@@ -159,6 +162,7 @@ protected:
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
 protected:
     virtual void jniDispatch(jobjectArray objects) const override {
+        EE_LOGD("JniEventInfo::dispatch %s", _key.c_str());
         auto&& convertedObjects = JniUtils::toVectorJObject(objects);
         CC_ASSERT(convertedObjects.size() == 0);
         dispatch();

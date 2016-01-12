@@ -22,7 +22,6 @@ void pauseAll(cocos2d::Node* target);
 void resumeAll(cocos2d::Node* target);
 
 void runAction(cocos2d::Node* target, std::function<void(cocos2d::Node*)> actionFunc, std::function<float()> delayFunc, std::function<float()> initialDelayFunc = nullptr);
-void addAnimationToButton(cocos2d::Node* button);
 
 /**
  * Captures screenshot in points, i.e. devices screen size.

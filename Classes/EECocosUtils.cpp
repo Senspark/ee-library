@@ -47,44 +47,6 @@ void runAction(cocos2d::Node* target, std::function<void(cocos2d::Node*)> action
     target->runAction(sequence);
 }
 
-void addAnimationToButton(cocos2d::Node* button) {
-    auto ease = [](cocos2d::ActionInterval* action) -> cocos2d::ActionEase* {
-        switch (cocos2d::random(0, 1)) {
-            case 0: return cocos2d::EaseIn::create(action, 0.5f);
-            case 1: return cocos2d::EaseOut::create(action, 0.5f);
-        }
-        return nullptr;
-    };
-    
-    // ScaleX.
-    runAction(button, [ease](cocos2d::Node* node) {
-        float value = cocos2d::random(0, 1) ? 1.1f : 0.9f;
-        auto callback = [node](float scaleX) { node->setScaleX(scaleX); };
-        auto scale = cocos2d::ActionFloat::create(0.2f, 1.0f, value, callback);
-        auto scaleBack = cocos2d::ActionFloat::create(0.2f, value, 1.0f, callback);
-        auto sequence = cocos2d::Sequence::create(ease(scale), ease(scaleBack), nullptr);
-        node->runAction(sequence);
-    }, [] { return cocos2d::random(0.0f, 1.0f) * 2.0f + 5.0f; });
-    
-    // ScaleY.
-    runAction(button, [ease](cocos2d::Node* node) {
-        float value = cocos2d::random(0, 1) ? 1.1f : 0.9f;
-        auto callback = [node](float scaleY) { node->setScaleY(scaleY); };
-        auto scale = cocos2d::ActionFloat::create(0.2f, 1.0f, value, callback);
-        auto scaleBack = cocos2d::ActionFloat::create(0.2f, value, 1.0f, callback);
-        auto sequence = cocos2d::Sequence::create(ease(scale), ease(scaleBack), nullptr);
-        node->runAction(sequence);
-    }, [] { return cocos2d::random(0.0f, 1.0f) * 2.0f + 5.0f; }, [] { return 2.0f; });
-    
-    // Rotate.
-    runAction(button, [ease](cocos2d::Node* node) {
-        auto rotate = cocos2d::RotateTo::create(0.2f, cocos2d::random(0, 1) ? -2.0f : 2.0f);
-        auto rotateBack = cocos2d::RotateTo::create(0.2f, 0);
-        auto sequence = cocos2d::Sequence::create(ease(rotate), ease(rotateBack), nullptr);
-        node->runAction(sequence);
-    }, [] { return cocos2d::random(0.0f, 1.0f) * 2.0f + 5.0f; }, [] { return 4.0f; });
-}
-
 void captureScreenInPixels(const std::function<void(cocos2d::Image*)>& afterCaptured) {
     static cocos2d::CustomCommand captureScreenCommand;
     captureScreenCommand.init(std::numeric_limits<float>::max());

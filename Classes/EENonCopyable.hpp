@@ -14,7 +14,7 @@
 namespace_ee_begin
 class NonCopyable {
 public:
-    NonCopyable() = default;
+    constexpr NonCopyable() = default;
     NonCopyable(const NonCopyable&) = delete;
     NonCopyable(NonCopyable&&) = default;
     NonCopyable& operator=(const NonCopyable&) = delete;

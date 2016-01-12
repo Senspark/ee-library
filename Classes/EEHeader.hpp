@@ -1,6 +1,6 @@
 //
 //  EEHeader.hpp
-//  EE Library
+//  ee-library
 //
 //  Created by enrevol on 10/26/15.
 //

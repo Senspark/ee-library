@@ -1,7 +1,15 @@
+//
+//  EEMacro.hpp
+//  ee-library
+//
+//  Created by enrevol.
+//
+//
+
 #ifndef EE_LIBRARY_MACRO_H
 #define EE_LIBRARY_MACRO_H
 
-#include "platform/CCPlatformMacros.h"
+#include "cocos2d.h"
 
 #define NAMESPACE_BEGIN(name)       namespace name {
 #define NAMESPACE_END(name)         }

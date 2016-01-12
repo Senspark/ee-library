@@ -1,6 +1,6 @@
 //
 //  EEForward.hpp
-//  roll-eat
+//  ee-library.
 //
 //  Created by Hoang Le Hai on 7/20/15.
 //

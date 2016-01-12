@@ -8,8 +8,8 @@
 
 #include "EECocosUtils.hpp"
 #include "EEDialogManager.hpp"
-#include "cocos2d.h"
-#include "network/HttpClient.h"
+
+#include "HttpClient.h"
 
 #include <cstring>
 
@@ -58,7 +58,8 @@ void captureScreenInPixels(const std::function<void(cocos2d::Image*)>& afterCapt
         GLsizei height = static_cast<GLsizei>(frameSize.height);
         
         do {
-            auto buffer = new GLubyte[width * height * 4];
+            std::size_t arraySize = (std::size_t)(width) * (std::size_t)(height) * 4;
+            auto buffer = std::make_unique<GLubyte[]>(arraySize);
             glPixelStorei(GL_PACK_ALIGNMENT, 1);
             
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8)
@@ -68,10 +69,10 @@ void captureScreenInPixels(const std::function<void(cocos2d::Image*)>& afterCapt
             CCASSERT(width * height == static_cast<int>(renderTargetSize.width * renderTargetSize.height), "The frame size is not matched");
             glReadPixels(0, 0, (int) renderTargetSize.width, (int) renderTargetSize.height, GL_RGBA, GL_UNSIGNED_BYTE, buffer.get());
 #else
-            glReadPixels(0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+            glReadPixels(0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, buffer.get());
 #endif
             
-            auto flippedBuffer = new GLubyte[width * height * 4];
+            auto flippedBuffer = std::make_unique<GLubyte[]>(arraySize);
             
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8)
             if (width == static_cast<int>(renderTargetSize.width)) {
@@ -89,16 +90,13 @@ void captureScreenInPixels(const std::function<void(cocos2d::Image*)>& afterCapt
             }
 #else
             for (int row = 0; row < height; ++row) {
-                std::memcpy(flippedBuffer + (height - row - 1) * width * 4, buffer + row * width * 4, (unsigned) width * 4);
+                std::memcpy(flippedBuffer.get() + (height - row - 1) * width * 4, buffer.get() + row * width * 4, (unsigned) width * 4);
             }
-            delete[] buffer;
 #endif
-            auto image = new (std::nothrow) cocos2d::Image();
-            image->initWithRawData(flippedBuffer, width * height * 4, width, height, 8);
+            auto image = new cocos2d::Image();
+            image->initWithRawData(flippedBuffer.get(), width * height * 4, width, height, 8);
             afterCaptured(image);
             image->release();
-            
-            delete[] flippedBuffer;
         } while (false);
     };
     cocos2d::Director::getInstance()->getRenderer()->addCommand(&captureScreenCommand);
@@ -150,10 +148,11 @@ void downloadImage(const std::string& imageUrl, const std::function<void(cocos2d
     if (cachedTexture != nullptr) {
         afterDownloaded(cachedTexture);
     } else {
-        auto request = new (std::nothrow) cocos2d::network::HttpRequest();
+        auto request = new cocos2d::network::HttpRequest();
         request->setUrl(imageUrl.c_str());
         request->setRequestType(cocos2d::network::HttpRequest::Type::GET);
         request->setResponseCallback([imageUrl, afterDownloaded](cocos2d::network::HttpClient* client, cocos2d::network::HttpResponse* response) {
+            CC_UNUSED_PARAM(client);
             cocos2d::Image* image = nullptr;
             do {
                 CC_BREAK_IF(response == nullptr || response->isSucceed() == false);
@@ -166,7 +165,7 @@ void downloadImage(const std::string& imageUrl, const std::function<void(cocos2d
                 // GIF images are not supported by cocos2d-x.
                 CC_BREAK_IF((*buffer)[0] == 'G' && (*buffer)[1] == 'I' && (*buffer)[2] == 'F');
                 
-                image = new (std::nothrow) cocos2d::Image();
+                image = new cocos2d::Image();
                 image->initWithImageData(reinterpret_cast<unsigned char*>(&(buffer->front())), (ssize_t) buffer->size());
             } while (false);
             

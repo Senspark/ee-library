@@ -14,7 +14,7 @@
 namespace_ee_begin
 class NonMovable {
 public:
-    NonMovable() = default;
+    constexpr NonMovable() = default;
     NonMovable(const NonMovable&) = default;
     NonMovable(NonMovable&&) = delete;
     NonMovable& operator=(const NonMovable&) = default;

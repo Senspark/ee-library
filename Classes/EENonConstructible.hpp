@@ -14,7 +14,7 @@
 namespace_ee_begin
 class NonConstructible {
 public:
-    NonConstructible() = delete;
+    constexpr NonConstructible() = delete;
 };
 namespace_ee_end
 

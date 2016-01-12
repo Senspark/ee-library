@@ -13,6 +13,8 @@
 #include "EEActiveControl.hpp"
 
 #include <functional>
+#include <memory>
+#include <utility>
 
 namespace_ee_begin
 class Dialog : public ActiveNodeButton {

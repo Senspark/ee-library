@@ -39,9 +39,11 @@ class TouchListener {
 public:
     using TouchEventCallback = std::function<void(cocos2d::Touch*, cocos2d::Event*)>;
     
-    CC_DEPRECATED_ATTRIBUTE cocos2d::EventListenerTouchOneByOne* getEventListener() const;
+    [[deprecated("Use setSwallowTouches instead.")]]
+    cocos2d::EventListenerTouchOneByOne* getEventListener() const;
     
-    CC_DEPRECATED_ATTRIBUTE void enableState(int state);
+    [[deprecated("Use setEnabled and setZoom instead.")]]
+    void enableState(int state);
     
     /// Touch type.
     /// Default is inside.
@@ -95,11 +97,13 @@ public:
     
     const TouchEventCallback& getTouchUpCallback() const;
     
-    CC_DEPRECATED_ATTRIBUTE void setTouchUpInsideCallback(const TouchEventCallback& callback) {
+    [[deprecated("Use setTouchUpCallback instead.")]]
+    void setTouchUpInsideCallback(const TouchEventCallback& callback) {
         setTouchUpCallback(callback);
     }
     
-    CC_DEPRECATED_ATTRIBUTE void setTouchUpOutsideCallback(const TouchEventCallback& callback) {
+    [[deprecated("Use setTouchUpCallback instead.")]]
+    void setTouchUpOutsideCallback(const TouchEventCallback& callback) {
         setTouchUpCallback(callback);
     }
     

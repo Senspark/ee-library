@@ -15,6 +15,13 @@
 
 namespace_ee_begin
 namespace_detail_begin
+int EventInfoBase::counter = 0;
+
+EventInfoBase::EventInfoBase(std::string key)
+: _id(counter++)
+, _key(std::move(key))
+{}
+
 void EventInfoBase::removeListeners() const {
     cocos2d::Director::getInstance()->getEventDispatcher()->removeCustomEventListeners(_key);
 }
@@ -24,11 +31,11 @@ const std::string& EventInfoBase::getKey() const {
 }
     
 cocos2d::EventListenerCustom* EventInfoBase::addListenerHelper(const std::function<void(cocos2d::EventCustom*)>& callback) const {
-    return cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(_key, callback);
+    return cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(toString(_id, _key), callback);
 }
 
 void EventInfoBase::dispatchHelper(void* data) const {
-    cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(_key, data);
+    cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(toString(_id, _key), data);
 }
 
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
@@ -90,11 +97,10 @@ extern "C" {
 void Java_com_ee_library_EventInfo_dispatch(JNIEnv* env, jobject thiz, jlong pointer, jobjectArray objects) {
     EE_LOGD("%s", __PRETTY_FUNCTION__);
     JNIEnv* currentEnv = ee::JniUtils::getJNIEnv();
-    objects = (jobjectArray) env->NewGlobalRef(objects);
+    objects = static_cast<jobjectArray>(env->NewGlobalRef(objects));
     cocos2d::Director::getInstance()->getScheduler()->performFunctionInCocosThread([pointer, objects] {
         JNIEnv* oldEnv = ee::JniUtils::getJNIEnv();
         JNIEnv* thisEnv = ee::JniUtils::getJNIEnvAttach();
-        ee::JniUtils::setJniEnv(thisEnv);
         ee::detail::JniEventInfoManager::getInstance()->dispatch(pointer, objects);
         thisEnv->DeleteGlobalRef(objects);
         ee::JniUtils::setJniEnv(oldEnv);

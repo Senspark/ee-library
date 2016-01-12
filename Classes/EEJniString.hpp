@@ -13,7 +13,7 @@
 #include "jni.h"
 
 namespace_ee_begin
-class CC_DEPRECATED_ATTRIBUTE JniString {
+class [[deprecated("Use ee::JniToCppConverter::toString instead.")]] JniString {
 public:
     JniString(JNIEnv* env, jstring javaString)
         : _env(env)

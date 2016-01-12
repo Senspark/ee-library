@@ -11,11 +11,13 @@
 
 #include "EEMacro.hpp"
 #include "EENonCopyable.hpp"
+#include "EEUtils.hpp"
 
 #include <string>
 
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
 #   include "EEFunctionTraits.hpp"
+#   include "EEJniBoxedType.hpp"
 #   include "EEJniObject.hpp"
 #   include "EEJniUtils.hpp"
 #   include "EEJniConverter.hpp"
@@ -230,19 +232,20 @@ protected:
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
 protected:
     virtual jobject jniGet(jobjectArray objects) const override {
-        auto&& convertedObjects = JniUtils::toVectorJObject(objects);
+        auto&& convertedObjects = JniToCppConverter::toVectorObject(objects);
         CC_ASSERT(convertedObjects.size() == 0);
         auto&& value = get();
         EE_LOGD("JniDataInfo::get: key = %s value = %s", _key.c_str(), toString(value).c_str());
-        jobject ret = (jobject) CppToJniConverter<ValueType>::convert(value);
+        jobject ret = detail::CppToJni<MakeBoxedTypeT<ValueType>>::convert(value);
         return ret;
     }
     
     virtual void jniSet(jobjectArray objects) const override {
-        auto&& convertedObjects = JniUtils::toVectorJObject(objects);
+        auto&& convertedObjects = JniToCppConverter::toVectorObject(objects);
         CC_ASSERT(convertedObjects.size() == 1);
-        auto&& value = JniToCppConverter<ValueType>::convert(convertedObjects.at(0));
+        auto&& value = detail::JniToCpp<ValueType>::convert(convertedObjects.at(0));
         EE_LOGD("JniDataInfo::set: key = %s value = %s", _key.c_str(), toString(value).c_str());
+        JniUtils::getJNIEnv()->DeleteLocalRef(convertedObjects.front());
         set(value);
     }
     
@@ -294,21 +297,29 @@ protected:
 private:
     template<std::size_t... Indices>
     jobject internalGetter(jobjectArray objects, Sequence<Indices...>) const {
-        auto&& convertedObjects = JniUtils::toVectorJObject(objects);
+        auto&& convertedObjects = JniToCppConverter::toVectorObject(objects);
         CC_ASSERT(convertedObjects.size() == sizeof...(Indices));
-        auto&& value = get(JniToCppConverter<Args>::convert(convertedObjects.at(Indices))...);
+        auto&& value = get(detail::JniToCpp<Args>::convert(convertedObjects.at(Indices))...);
         EE_LOGD("JniDataInfo::get: key = %s value = %s", _key.c_str(), toString(value).c_str());
-        jobject ret = (jobject) CppToJniConverter<ValueType>::convert(value);
+        for (jobject obj : convertedObjects) {
+            JniUtils::getJNIEnv()->DeleteLocalRef(obj);
+        }
+        jobject ret = detail::CppToJni<MakeBoxedTypeT<ValueType>>::convert(value);
         return ret;
     }
     
     template<std::size_t... Indices>
     void internalSetter(jobjectArray objects, Sequence<Indices...>) const {
-        auto&& convertedObjects = JniUtils::toVectorJObject(objects);
+        EE_LOGD("%s multi-args begin.", __PRETTY_FUNCTION__);
+        auto&& convertedObjects = JniToCppConverter::toVectorObject(objects);
         CC_ASSERT(convertedObjects.size() == sizeof...(Indices) + 1);
-        auto&& value = JniToCppConverter<ValueType>::convert(convertedObjects.at(0));
+        auto&& value = detail::JniToCpp<ValueType>::convert(convertedObjects.at(0));
         EE_LOGD("JniDataInfo::set: key = %s value = %s", _key.c_str(), toString(value).c_str());
-        set(value, JniToCppConverter<Args>::convert(convertedObjects.at(Indices + 1))...);
+        set(value, detail::JniToCpp<Args>::convert(convertedObjects.at(Indices + 1))...);
+        for (jobject obj : convertedObjects) {
+            JniUtils::getJNIEnv()->DeleteLocalRef(obj);
+        }
+        EE_LOGD("%s multi-args end.", __PRETTY_FUNCTION__);
     }
 #endif
 };

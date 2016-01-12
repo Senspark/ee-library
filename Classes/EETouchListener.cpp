@@ -343,8 +343,8 @@ void TouchListener::Impl::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* ev
                         _touchUpCallback(touch, event);
                     }
                 }
-                TouchManager::getInstance()->unlock(touch);
             }
+            TouchManager::getInstance()->unlock(touch);
         }
     } else {
         if (_isZoom) {

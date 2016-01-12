@@ -9,67 +9,12 @@
 #ifndef EE_LIBRARY_FORWARD_H
 #define EE_LIBRARY_FORWARD_H
 
-namespace cocos2d {
-class Ref;
-class Node;
-class ClippingNode;
-class ClippingRectangleNode;
-class Scene;
-class Layer;
-class Sprite;
-class SpriteFrame;
-class Image;
-class Label;
-class Value;
-class Vec2;
-using Point = Vec2;
-class __Array;
-using Array = __Array;
-class __Dictionary;
-using Dictionary = __Dictionary;
-class Event;
-class EventCustom;
-class EventDispatcher;
-class EventListenerCustom;
-class EventListenerKeyboard;
-class EventListenerTouchOneByOne;
-class EventListenerTouchAllAtOnce;
-class Touch;
-class Size;
-class ProgressTimer;
-class Rect;
-class ParticleSystemQuad;
-class Animation;
-class ActionEase;
-class ActionFloat;
-class ActionInterval;
-class Texture2D;
-struct Color3B;
-struct Color4B;
-struct Color4F;
-namespace extension {
-class ScrollView;
-class ControlButton;
-} // namespace extension
-namespace network {
-class HttpClient;
-class HttpResponse;
-} // namespace network
-namespace ui {
-class Scale9Sprite;
-} // namespace ui
-} // namespace cocos2d
-
-namespace CocosDenshion {
-class SimpleAudioEngine;
-} // namespace CocosDenshion
-
-namespace spine {
-class SkeletonAnimation;
-} // namespace spine
+#include <bitset>
+#include <cstdint>
 
 namespace ee {
 enum class ButtonState;
+    
 class NodeButton;
 class Button;
 class ActiveNodeButton;
@@ -92,14 +37,15 @@ class JniEventInfo;
     
 template<class... Args>
 using Event [[deprecated("Use EventInfo instead.")]] = EventInfo<Args...>;
+    
+template<class MaskType>
+class State;
+    
+using State8   = State<std::uint8_t>;
+using State16  = State<std::uint16_t>;
+using State32  = State<std::uint32_t>;
+using State64  = State<std::uint64_t>;
+using State128 = State<std::bitset<128>>;
 } // namespace utils
-
-namespace soomla {
-class CCVirtualCurrency;
-class CCVirtualCurrencyPack;
-class CCSingleUseVG;
-class CCSingleUsePackVG;
-class CCError;
-} // namespace soomla
 
 #endif // EE_LIBRARY_FORWARD_H

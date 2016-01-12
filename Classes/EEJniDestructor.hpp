@@ -51,13 +51,44 @@ struct JniParamDestructor<0> final {
     }
 };
 
-// Helper template to decide when a jni type must be destroyed (by adding the ref to the JNIParamDestructor struct).
-template<class T, class D>
-struct JniDestructorDecider {
-    // By default the template ignores destruction (for primitive types)
-    static void decide(T jniParam, D& destructor) {
+/// JNI param conversor helper: Converts the parameter to JNI and adds it to the destructor if needed.
+class JniParam final {
+public:
+    template<class T, class D>
+    static auto convert(const T& arg, D& destructor) {
+        auto result = detail::CppToJni<T>::convert(arg);
+        decide(result, destructor);
+        return result;
+    }
+    
+private:
+    /// Helper template to decide when a jni type must be destroyed (by adding the ref to the JNIParamDestructor struct).
+    template<class T, class D>
+    inline static void decide(T jniParam, D& destructor) {
+        constexpr bool NeedToDestroy = (std::is_same<T, jstring>::value ||
+                                        std::is_same<T, jobject>::value ||
+                                        std::is_same<T, jbyteArray>::value ||
+                                        std::is_same<T, jbooleanArray>::value ||
+                                        std::is_same<T, jshortArray>::value ||
+                                        std::is_same<T, jcharArray>::value ||
+                                        std::is_same<T, jintArray>::value ||
+                                        std::is_same<T, jlongArray>::value ||
+                                        std::is_same<T, jfloatArray>::value ||
+                                        std::is_same<T, jdoubleArray>::value);
+        internalDecide<T, D>(std::integral_constant<bool, NeedToDestroy>(), jniParam, destructor);
+    }
+
+    template<class T, class D>
+    inline static void internalDecide(std::true_type, T jniParam, D& destructor) {
+        destructor.add(jniParam);
+    }
+
+    template<class T, class D>
+    inline static void internalDecide(std::false_type, T, D&) {
         static_assert(std::is_same<T, int8_t>::value ||
                       std::is_same<T, uint8_t>::value ||
+                      std::is_same<T, int16_t>::value ||
+                      std::is_same<T, uint16_t>::value ||
                       std::is_same<T, int32_t>::value ||
                       std::is_same<T, uint32_t>::value ||
                       std::is_same<T, int64_t>::value ||
@@ -65,42 +96,6 @@ struct JniDestructorDecider {
                       "Wrong typename");
     }
 };
-
-template<class D>
-struct JniDestructorDecider<jobject, D> {
-    static void decide(jobject obj, D& destructor) {
-        destructor.add(obj);
-    }
-};
-
-template<class D>
-struct JniDestructorDecider<jbyteArray, D> {
-    static void decide(jbyteArray obj, D& destructor) {
-        destructor.add((jobject) obj);
-    }
-};
-
-template<class D>
-struct JniDestructorDecider<jobjectArray, D> {
-    static void decide(jobjectArray obj, D& destructor) {
-        destructor.add((jobject) obj);
-    }
-};
-
-template<class D>
-struct JniDestructorDecider<jstring, D> {
-    static void decide(jstring obj, D& destructor) {
-        destructor.add((jobject) obj);
-    }
-};
-
-// JNI param conversor helper: Converts the parameter to JNI and adds it to the destructor if needed.
-template<class T, class D>
-auto jniParamConverter(const T& arg, D& destructor) -> decltype(CppToJniConverter<T>::convert(arg)) {
-    auto result = CppToJniConverter<T>::convert(arg);
-    JniDestructorDecider<decltype(result), D>::decide(result, destructor);
-    return result;
-}
 namespace_ee_end
 
 #endif /* EE_LIBRARY_JNI_DESTRUCTOR_HPP */

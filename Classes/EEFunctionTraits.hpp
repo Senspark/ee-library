@@ -14,8 +14,10 @@
 #include <tuple>
 
 namespace_ee_begin
+namespace_detail_begin
 /// This is a Dummy class.
 struct Dummy {};
+namespace_detail_end
 
 /// Lambda.
 template<class T>
@@ -46,11 +48,11 @@ struct FunctionTraits<R(T::*)(Args...) const> : FunctionTraits<R(T::*)(Args...)>
 
 /// Static function pointer.
 template<class R, class... Args>
-struct FunctionTraits<R(*)(Args...)> : FunctionTraits<R(Dummy::*)(Args...)>{};
+struct FunctionTraits<R(*)(Args...)> : FunctionTraits<R(detail::Dummy::*)(Args...)>{};
 
 /// Non-const member function pointer with zero argument.
 template<class R, class T>
-struct FunctionTraits<R(T::*)()> : FunctionTraits<R(T::*)(Dummy)>{};
+struct FunctionTraits<R(T::*)()> : FunctionTraits<R(T::*)(detail::Dummy)>{};
 
 /// Const member function pointer with zero argument.
 template<class R, class T>
@@ -58,7 +60,7 @@ struct FunctionTraits<R(T::*)() const> : FunctionTraits<R(T::*)()>{};
 
 /// Static function pointer with zero argument.
 template<class R>
-struct FunctionTraits<R(*)> : FunctionTraits<R(Dummy::*)()>{};
+struct FunctionTraits<R(*)> : FunctionTraits<R(detail::Dummy::*)()>{};
 
 /// Resolve overloaded member function pointer.
 template<class... Args>
@@ -126,16 +128,18 @@ struct SequenceGenerator<0, S...> {
     using Type = Sequence<S...>;
 };
 
+namespace_detail_begin
 /// Runtime index for tuple.
 template<std::size_t Index, class Tuple, class Functor>
 void applyOne(Tuple& t, Functor f) {
     f(std::get<Index>(t));
 }
+namespace_detail_end
 
 template<class Tuple, class Functor, std::size_t... Indices>
 void apply(Tuple& t, std::size_t index, Functor f, Sequence<Indices...>) {
     using FuncType = void(Tuple&, Functor);
-    static constexpr FuncType* Functions[] = { &applyOne<Indices, Tuple, Functor>... };
+    static constexpr FuncType* Functions[] = { &detail::applyOne<Indices, Tuple, Functor>... };
     Functions[index](t, f);
 }
 
@@ -144,6 +148,7 @@ void apply(Tuple& t, std::size_t index, Functor f) {
     apply(t, index, f, typename SequenceGenerator<std::tuple_size<Tuple>::value>::Type());
 }
 
+namespace_detail_begin
 /// Reverse range for loop.
 template<class T>
 class ReverseWrapper {
@@ -166,15 +171,16 @@ public:
 private:
     const T& _container;
 };
+namespace_detail_end
     
 template<class T>
-ReverseWrapper<T> reverse(T& container) {
-    return ReverseWrapper<T>(container);
+detail::ReverseWrapper<T> reverse(T& container) {
+    return detail::ReverseWrapper<T>(container);
 }
     
 template<class T>
-ReverseWrapper<const T> reverse(const T& container) {
-    return ReverseWrapper<const T>(container);
+detail::ReverseWrapper<const T> reverse(const T& container) {
+    return detail::ReverseWrapper<const T>(container);
 }
 namespace_ee_end
 

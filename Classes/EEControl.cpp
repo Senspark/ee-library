@@ -33,18 +33,6 @@ Button* Button::create() {
     return ret;
 }
 
-Button::~Button() {
-    if (_normalSpriteFrame != nullptr) {
-        _normalSpriteFrame->release();
-    }
-    if (_pressedSpriteFrame != nullptr) {
-        _pressedSpriteFrame->release();
-    }
-    if (_disabledSpriteFrame != nullptr) {
-        _disabledSpriteFrame->release();
-    }
-}
-
 bool Button::init() {
     if (Sprite::init() == false) {
         return false;
@@ -76,11 +64,7 @@ void Button::setSpriteFrameForState(ButtonState state, cocos2d::SpriteFrame* spr
         case ButtonState::Pressed: frame = &_pressedSpriteFrame; break;
         case ButtonState::Disabled: frame = &_disabledSpriteFrame; break;
     }
-    if (*frame != nullptr) {
-        (*frame)->release();
-    }
     (*frame) = spriteFrame;
-    (*frame)->retain();
     updateState();
 }
 

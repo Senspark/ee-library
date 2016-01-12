@@ -10,6 +10,7 @@
 #define EE_LIBRARY_DIALOG_MANAGER_IMPL_H
 
 #include "EEDialogManager.hpp"
+#include "cocos2d.h"
 
 #include <deque>
 #include <memory>
@@ -31,7 +32,7 @@ public:
         , dialog(_dialog)
         {}
         
-        cocos2d::Node* container;
+        cocos2d::RefPtr<cocos2d::Node> container;
         Dialog* dialog;
     };
     

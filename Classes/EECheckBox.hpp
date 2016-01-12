@@ -17,8 +17,11 @@
 namespace_ee_begin
 class CheckBox;
 
+namespace_detail_begin
 class CheckBoxBase {
 public:
+    virtual ~CheckBoxBase();
+    
     bool isChecked() const;
     virtual void setChecked(bool checked);
     
@@ -34,8 +37,9 @@ private:
     bool _isChecked;
     std::function<void(bool)> _onStateChangedCallback;
 };
+namespace_detail_end
 
-class CheckAllBox : public CheckBoxBase {
+class CheckAllBox : public detail::CheckBoxBase {
 public:
     void addCheckBox(CheckBox* checkBox);
     
@@ -61,7 +65,7 @@ private:
     std::vector<CheckBox*> _checkBoxList;
 };
 
-class CheckBox : public CheckBoxBase {
+class CheckBox : public detail::CheckBoxBase {
 public:
     virtual void setChecked(bool checked) override;
     

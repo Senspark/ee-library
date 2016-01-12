@@ -54,7 +54,6 @@ void DialogManager::pushDialog(cocos2d::Node* container, Dialog* dialog, int loc
     // Pause parent.
     pauseAll(parent);
     // Push dialog to stack.
-    container->retain();
     impl->_dialogStack.emplace_back(container, dialog);
     // Add dialog to scene.
     parent->addChild(container, localZOrder);
@@ -69,7 +68,6 @@ void DialogManager::popDialog(Dialog* dialog) {
     CC_ASSERT(dialog == dialogInfo.dialog);
     // Remove dialog from stack.
     dialogInfo.container->removeFromParent();
-    dialogInfo.container->release();
     // Pop dialog from stack.
     impl->_dialogStack.pop_back();
     // Resume scene.
@@ -138,7 +136,6 @@ void DialogManager::Impl::updateCurrentScene() {
         while (_dialogStack.empty() == false) {
             auto container = _dialogStack.back().container;
             container->removeFromParent();
-            container->release();
             _dialogStack.pop_back();
         }
         _lockingDialog = nullptr;

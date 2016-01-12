@@ -14,6 +14,8 @@
 namespace_ee_begin
 class GroupNodeDelegate {
 protected:
+    virtual ~GroupNodeDelegate() {}
+    
     friend class GroupNode;
     
     virtual void onMinimizationBegan() {}

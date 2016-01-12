@@ -125,10 +125,16 @@ namespace_anonymous_begin
 extern "C" {
 void Java_com_ee_library_DataInfo_set(JNIEnv* env, jobject thiz, jlong pointer, jobjectArray objects) {
     EE_LOGD("%s", __PRETTY_FUNCTION__);
-    JNIEnv* currentEnv = ee::JniUtils::getJNIEnv();
-    ee::JniUtils::setJniEnv(env);
-    ee::detail::JniDataInfoManager::getInstance()->set(pointer, objects);
-    ee::JniUtils::setJniEnv(currentEnv);
+    objects = static_cast<jobjectArray>(env->NewGlobalRef(objects));
+    cocos2d::Director::getInstance()->getScheduler()->performFunctionInCocosThread([pointer, objects] {
+        EE_LOGD("%s begin.", __PRETTY_FUNCTION__);
+        JNIEnv* oldEnv = ee::JniUtils::getJNIEnv();
+        JNIEnv* thisEnv = ee::JniUtils::getJNIEnvAttach();
+        ee::detail::JniDataInfoManager::getInstance()->set(pointer, objects);
+        thisEnv->DeleteGlobalRef(objects);
+        ee::JniUtils::setJniEnv(oldEnv);
+        EE_LOGD("%s end.", __PRETTY_FUNCTION__);
+    });
 }
 
 jobject Java_com_ee_library_DataInfo_get(JNIEnv* env, jobject thiz, jlong pointer, jobjectArray objects) {

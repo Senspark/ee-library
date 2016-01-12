@@ -36,6 +36,7 @@ typename std::decay<T>::type min(T&& x, Args&&... args) {
     return ret;
 }
 
+namespace_detail_begin
 // Termination function.
 template<class T>
 void toStringHelper(std::stringstream& ss, T&& value) {
@@ -47,13 +48,14 @@ void toStringHelper(std::stringstream& ss, T&& value, Args&&... args) {
     ss << std::forward<T>(value);
     toStringHelper(ss, std::forward<Args>(args)...);
 }
+namespace_detail_end
 
 template<class... Args>
 std::string toString(Args&&... args) {
     static std::stringstream ss;
     ss.str(std::string());
     ss.clear();
-    toStringHelper(ss, std::forward<Args>(args)...);
+    detail::toStringHelper(ss, std::forward<Args>(args)...);
     return ss.str();
 }
 namespace_ee_end

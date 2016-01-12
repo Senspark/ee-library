@@ -3,14 +3,14 @@
 
 #include "EEForward.hpp"
 #include "EETouchListener.hpp"
-#include "cocosbuilder/CCSpriteLoader.h"
-#include "CCSprite.h"
+#include "CocosBuilder.h"
+#include "cocos2d.h"
 
 namespace_ee_begin
 /**
  * NodeButton = cocos2d::Node + handle touches.
  */
-class NodeButton : public virtual cocos2d::Node, public TouchListener {
+class NodeButton : public cocos2d::Node, public TouchListener {
 public:
     static NodeButton* create();
     
@@ -29,18 +29,18 @@ public:
     void setSpriteFrameForState(ButtonState state, const std::string& spriteFrameName);
     void setSpriteFrameForState(ButtonState state, cocos2d::SpriteFrame* spriteFrame);
         
-protected:
-    virtual ~Button();
-    
+protected:    
     virtual bool init() override;
     
     using TouchListener::updateState;
     virtual void updateState(ButtonState state) override;
     
 private:
-    cocos2d::SpriteFrame* _normalSpriteFrame;
-    cocos2d::SpriteFrame* _pressedSpriteFrame;
-    cocos2d::SpriteFrame* _disabledSpriteFrame;
+    using Sprite::setSpriteFrame;
+    
+    cocos2d::RefPtr<cocos2d::SpriteFrame> _normalSpriteFrame;
+    cocos2d::RefPtr<cocos2d::SpriteFrame> _pressedSpriteFrame;
+    cocos2d::RefPtr<cocos2d::SpriteFrame> _disabledSpriteFrame;
 };
 namespace_ee_end
 

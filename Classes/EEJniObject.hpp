@@ -27,7 +27,7 @@ public:
         JNIEnv* env = JniUtils::getJNIEnv();
         auto&& methodInfo = JniUtils::getConstructorInfo(className, getJniSignature<void, Args...>());
         JniParamDestructor<Arity> paramDestructor(env);
-        jobject instance = env->NewObject(methodInfo->getClass(), methodInfo->getMethodId(), jniParamConverter<Args>(args, paramDestructor)...);
+        jobject instance = env->NewObject(methodInfo->getClass(), methodInfo->getMethodId(), JniParam::convert<Args>(args, paramDestructor)...);
         instance = env->NewGlobalRef(instance);
         return std::make_shared<JniObject>(instance, className);
     }

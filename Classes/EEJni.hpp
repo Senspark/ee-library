@@ -16,6 +16,7 @@
 
 #include "EEMacro.hpp"
 #include "EEConstexprString.hpp"
+#include "EEFunctionTraits.hpp"
 #include "EEJniCaller.hpp"
 #include "EEJniConverter.hpp"
 #include "EEJniDestructor.hpp"
@@ -39,7 +40,7 @@ T call(jobject instance, const std::string& methodName, const Args&... args) {
     JNIEnv* env = JniUtils::getJNIEnvAttach();
     auto&& methodInfo = JniUtils::getMethodInfo(instance, methodName, getJniSignature<T, Args...>());
     JniParamDestructor<Arity> paramDestructor(env);
-    return JniCaller<T, decltype(CppToJniConverter<Args>::convert(args))...>::call(env, instance, methodInfo->getMethodId(), jniParamConverter<Args>(args, paramDestructor)...);
+    return JniCaller<T, decltype(detail::CppToJni<Args>::convert(args))...>::call(env, instance, methodInfo->getMethodId(), JniParam::convert<Args>(args, paramDestructor)...);
 }
 
 /**
@@ -59,7 +60,7 @@ T callStatic(const std::string& className, const std::string& methodName, const 
     JNIEnv* env = JniUtils::getJNIEnvAttach();
     auto&& methodInfo = JniUtils::getStaticMethodInfo(className, methodName, getJniSignature<T, Args...>());
     JniParamDestructor<Arity> paramDestructor(env);
-    return JniCaller<T, decltype(CppToJniConverter<Args>::convert(args))...>::callStatic(env, methodInfo->getClass(), methodInfo->getMethodId(), jniParamConverter<Args>(args, paramDestructor)...);
+    return JniCaller<T, decltype(detail::CppToJni<Args>::convert(args))...>::callStatic(env, methodInfo->getClass(), methodInfo->getMethodId(), JniParam::convert<Args>(args, paramDestructor)...);
 }
 
 /**
@@ -72,7 +73,7 @@ template<class T>
 T getField(jobject instance, const std::string& fieldName) {
     EE_LOGD("getField: fieldName = %s", fieldName.c_str());
     JNIEnv* env = JniUtils::getJNIEnvAttach();
-    const char* signature = Concatenate<typename CppToJniConverter<T>::JniType, CompileTimeString<'\0'>>::Result::value();
+    const char* signature = Concatenate<typename detail::CppToJni<T>::JniType, CompileTimeString<'\0'>>::Result::value();
     auto&& fieldInfo = JniUtils::getFieldInfo(instance, fieldName, signature);
     return JniCaller<T>::getField(env, instance, fieldInfo->getFieldId());
 }
@@ -87,7 +88,7 @@ template<class T>
 T getStaticField(const std::string& className, const std::string& fieldName) {
     EE_LOGD("getStaticField: className = %s fieldName = %s", className.c_str(), fieldName.c_str());
     JNIEnv* env = JniUtils::getJNIEnvAttach();
-    const char* signature = Concatenate<typename CppToJniConverter<T>::JniType, CompileTimeString<'\0'>>::Result::value();
+    const char* signature = Concatenate<typename detail::CppToJni<T>::JniType, CompileTimeString<'\0'>>::Result::value();
     auto&& fieldInfo = JniUtils::getStaticFieldInfo(className, fieldName, signature);
     return JniCaller<T>::getStaticField(env, fieldInfo->getClass(), fieldInfo->getFieldId());
 }
@@ -96,20 +97,20 @@ template<class T>
 void setField(jobject instance, const std::string& fieldName, const T& value) {
     EE_LOGD("setField: fieldName = %s", fieldName.c_str());
     JNIEnv* env = JniUtils::getJNIEnvAttach();
-    const char* signature = Concatenate<typename CppToJniConverter<T>::JniType, CompileTimeString<'\0'>>::Result::value();
+    const char* signature = Concatenate<typename detail::CppToJni<T>::JniType, CompileTimeString<'\0'>>::Result::value();
     auto&& fieldInfo = JniUtils::getFieldInfo(instance, fieldName, signature);
     JniParamDestructor<1> paramDestructor(env);
-    JniCaller<T>::setField(env, instance, fieldInfo->getFieldId(), jniParamConverter<1>(value, paramDestructor));
+    JniCaller<T>::setField(env, instance, fieldInfo->getFieldId(), JniParam::convert<T>(value, paramDestructor));
 }
 
 template<class T>
 void setStaticField(const std::string& className, const std::string& fieldName, const T& value) {
     EE_LOGD("setStaticField: className = %s fieldName = %s", className.c_str(), fieldName.c_str());
     JNIEnv* env = JniUtils::getJNIEnvAttach();
-    const char* signature = Concatenate<typename CppToJniConverter<T>::JniType, CompileTimeString<'\0'>>::Result::value();
+    const char* signature = Concatenate<typename detail::CppToJni<T>::JniType, CompileTimeString<'\0'>>::Result::value();
     auto&& fieldInfo = JniUtils::getStaticFieldInfo(className, fieldName, signature);
     JniParamDestructor<1> paramDestructor(env);
-    JniCaller<T>::setStaticField(env, fieldInfo->getClass(), fieldInfo->getFieldId(), jniParamConverter<1>(value, paramDestructor));
+    JniCaller<T>::setStaticField(env, fieldInfo->getClass(), fieldInfo->getFieldId(), JniParam::convert<T>(value, paramDestructor));
 }
 
 void setStaticField(const std::string& className, const std::string& fieldName, const char* signature, jobject value);

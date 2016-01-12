@@ -14,7 +14,7 @@
 
 // cocosbuilder member variable assigner glue weak.
 #define CCB_MEMBERVARIABLEASSIGNER_GLUE_WEAK_EX(variableName) \
-    CCB_MEMBERVARIABLEASSIGNER_GLUE_WEAK(this, # variableName, decltype(_ ## variableName), _ ## variableName)
+    CCB_MEMBERVARIABLEASSIGNER_GLUE_WEAK(this, # variableName, std::remove_reference_t<decltype(_ ## variableName)>, _ ## variableName)
 
 /// Concatenates two string literals.
 #define STRCAT_HELPER(x, y)     x ## y

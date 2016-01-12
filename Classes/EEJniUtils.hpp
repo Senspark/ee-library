@@ -12,6 +12,7 @@
 #include "EEMacro.hpp"
 #include "jni.h"
 
+#include <cstdint>
 #include <memory>
 #include <string>
 #include <vector>
@@ -20,6 +21,9 @@ namespace_ee_begin
 class JniMethodInfo;
 class JniFieldInfo;
 
+/**
+ * JNI Utils class.
+ */
 class JniUtils final {
 public:
     /// Initializes JNI.
@@ -31,34 +35,7 @@ public:
     
     static void setJniEnv(JNIEnv* env);
     
-    static JNIEnv* getJNIEnvAttach();
-
-    /// Converts const char* to String
-    static jstring toJString(const char* str);
-
-    /// Converts std::string to String.
-    static jstring toJString(const std::string& str) {
-        return toJString(str.c_str());
-    }
-    
-    /// Converts std::vector<std::string> to String[].
-    static jobjectArray toJObjectArray(const std::vector<std::string>& data);
-
-    /// Converts std::vector<uint8_t> to byte[].
-    static jbyteArray toJObjectArray(const std::vector<uint8_t>& data);
-
-    /// Converts String to std::string.
-    static std::string toString(jstring str);
-
-    /// Converts Integer to int.
-    static int toInt(jobject obj);
-
-    /// Converts String[] to std::vector<std::string>.
-    static std::vector<std::string> toVectorString(jobjectArray array);
-
-    /// Converts byte[] to std::vector<uint8_t>.
-    static std::vector<uint8_t> toVectorByte(jbyteArray array);
-    static std::vector<jobject> toVectorJObject(jobjectArray array);
+    static JNIEnv* getJNIEnvAttach();    
     
     static std::shared_ptr<JniFieldInfo> getStaticFieldInfo(const std::string& className, const std::string& fieldName, const char* signature);
     static std::shared_ptr<JniFieldInfo> getFieldInfo(jobject instance, const std::string& fieldName, const char* signature);

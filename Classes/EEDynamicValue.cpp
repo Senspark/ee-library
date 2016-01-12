@@ -57,11 +57,9 @@ T DynamicValue<T>::get() const {
 
 template<class T>
 void DynamicValue<T>::set(T value) {
-    _value.release();
-    _random.release();
     const unsigned intValue = *reinterpret_cast<const unsigned*>(&value);
-    _random = std::unique_ptr<unsigned>(new unsigned(cocos2d::random<unsigned>(0, 0xFFFFFFFF)));
-    _value = std::unique_ptr<unsigned>(new unsigned((*_random) ^ intValue));
+    _random = std::make_unique<unsigned>(cocos2d::random<unsigned>(0, std::numeric_limits<unsigned>::max()));
+    _value = std::make_unique<unsigned>((*_random) ^ intValue);
 }
 
 template<class T>

@@ -18,7 +18,7 @@ template<class T, class... Args>
 struct JniCaller {
     static T call(JNIEnv* env, jobject instance, jmethodID methodId, Args... args) {
         auto obj = env->CallObjectMethod(instance, methodId, args...);
-        T result = JniToCppConverter<T>::convert(obj);
+        T result = detail::JniToCpp<T>::convert(obj);
         if (obj != nullptr) {
             env->DeleteLocalRef(obj);
         }
@@ -27,7 +27,7 @@ struct JniCaller {
 
     static T callStatic(JNIEnv* env, jclass clazz, jmethodID methodId, Args... args) {
         auto obj = env->CallStaticObjectMethod(clazz, methodId, args...);
-        T result = JniToCppConverter<T>::convert(obj);
+        T result = detail::JniToCpp<T>::convert(obj);
         if (obj != nullptr) {
             env->DeleteLocalRef(obj);
         }
@@ -36,7 +36,7 @@ struct JniCaller {
 
     static T getField(JNIEnv* env, jobject instance, jfieldID fieldId) {
         auto obj = env->GetObjectField(instance, fieldId);
-        T result = JniToCppConverter<T>::convert(obj);
+        T result = detail::JniToCpp<T>::convert(obj);
         if (obj != nullptr) {
             env->DeleteLocalRef(obj);
         }
@@ -45,7 +45,7 @@ struct JniCaller {
 
     static T getStaticField(JNIEnv* env, jclass clazz, jfieldID fieldId) {
         auto obj = env->GetStaticObjectField(clazz, fieldId);
-        T result = JniToCppConverter<T>::convert(obj);
+        T result = detail::JniToCpp<T>::convert(obj);
         if (obj != nullptr) {
             env->DeleteLocalRef(obj);
         }

@@ -19,7 +19,6 @@ TouchManager* TouchManager::getInstance() {
 void TouchManager::lock(cocos2d::Touch* touch) {
     LOG_FUNC();
     auto impl = static_cast<Impl*>(this);
-    touch->retain();
     impl->_activeTouch = touch;
 }
     
@@ -27,7 +26,6 @@ void TouchManager::unlock(cocos2d::Touch* touch) {
     LOG_FUNC();
     auto impl = static_cast<Impl*>(this);
     if (touch == impl->_activeTouch) {
-        impl->_activeTouch->release();
         impl->_activeTouch = nullptr;
     }
 }

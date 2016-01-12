@@ -11,6 +11,9 @@
 #include <algorithm>
 
 namespace_ee_begin
+namespace_detail_begin
+CheckBoxBase::~CheckBoxBase() {}
+
 bool CheckBoxBase::isChecked() const {
     return _isChecked;
 }
@@ -36,6 +39,7 @@ void CheckBoxBase::setChecked(bool checked) {
 void CheckBoxBase::setOnStateChangedCallback(const std::function<void(bool)>& callback) {
     _onStateChangedCallback = callback;
 }
+namespace_detail_end
     
 void CheckAllBox::addCheckBox(CheckBox* checkBox) {
     _checkBoxList.push_back(checkBox);

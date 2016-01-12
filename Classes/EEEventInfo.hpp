@@ -35,13 +35,16 @@ public:
     const std::string& getKey() const;
     
 protected:
-    EventInfoBase(std::string key) : _key(std::move(key)) {}
+    EventInfoBase(std::string key);
     
     cocos2d::EventListenerCustom* addListenerHelper(const std::function<void(cocos2d::EventCustom*)>& callback) const;
     
     void dispatchHelper(void* data) const;
     
+    const int _id;
     const std::string _key;
+    
+    static int counter;
 };
 
 class JniEventInfoBase {
@@ -142,9 +145,12 @@ protected:
 private:
     template<std::size_t... Indices>
     void internalDispatch(jobjectArray objects, Sequence<Indices...>) const {
-        auto&& convertedObjects = JniUtils::toVectorJObject(objects);
+        auto&& convertedObjects = JniToCppConverter::toVectorObject(objects);
         CC_ASSERT(convertedObjects.size() == sizeof...(Args));
-        dispatch(JniToCppConverter<Args>::convert(convertedObjects.at(Indices))...);
+        dispatch(detail::JniToCpp<Args>::convert(convertedObjects.at(Indices))...);
+        for (jobject obj : convertedObjects) {
+            JniUtils::getJNIEnv()->DeleteLocalRef(obj);
+        }
     }
 #endif
 };
@@ -163,7 +169,7 @@ protected:
 protected:
     virtual void jniDispatch(jobjectArray objects) const override {
         EE_LOGD("JniEventInfo::dispatch %s", _key.c_str());
-        auto&& convertedObjects = JniUtils::toVectorJObject(objects);
+        auto&& convertedObjects = JniToCppConverter::toVectorObject(objects);
         CC_ASSERT(convertedObjects.size() == 0);
         dispatch();
     }

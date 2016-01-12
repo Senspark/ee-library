@@ -35,9 +35,11 @@
 #include "EEActiveControl.hpp"
 #include "EEControlLoader.hpp"
 #include "EEConstexprString.hpp"
+#include "EEGenericLoader.hpp"
 
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
 #   include "EEJni.hpp"
+#   include "EEJniBoxedType.hpp"
 #   include "EEJniCaller.hpp"
 #   include "EEJniConverter.hpp"
 #   include "EEJniDestructor.hpp"

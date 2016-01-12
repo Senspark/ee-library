@@ -221,22 +221,30 @@
 				6C43A7BC1BDDDAC300D0597F /* EEGesture-Impl.hpp */,
 				6C43A7BD1BDDDAC300D0597F /* EEGesture.cpp */,
 				6C43A7BE1BDDDAC300D0597F /* EEGesture.hpp */,
-				6C48084F1C0551B70023E34D /* EEGesture__.cpp */,
-				6C4808501C0551B70023E34D /* EEGesture__.hpp */,
-				6C4808541C05593C0023E34D /* EEGesture-Impl__.hpp */,
 				6C43A7BF1BDDDAC300D0597F /* EEGroupNode-Impl.hpp */,
 				6C43A7C01BDDDAC300D0597F /* EEGroupNode.cpp */,
 				6C43A7C11BDDDAC300D0597F /* EEGroupNode.hpp */,
 				6C43A7C21BDDDAC300D0597F /* EEGroupNodeDelegate.hpp */,
 				6C43A7D31BDDDAC300D0597F /* EEUtils.hpp */,
-				6CAE71A21C0562E800ECD783 /* EEProjection.cpp */,
-				6CAE71A31C0562E800ECD783 /* EEProjection.hpp */,
-				6CAE71B11C0593E200ECD783 /* EEProjection-Impl.hpp */,
 				6CC3596C1C0C0792007DC4CF /* EEState.hpp */,
 				6CC359701C0C0F2E007DC4CF /* EEState.cpp */,
+				6C19528D1C44DA0D00185F01 /* Experimental */,
 			);
 			name = Classes;
 			path = ../Classes;
+			sourceTree = "<group>";
+		};
+		6C19528D1C44DA0D00185F01 /* Experimental */ = {
+			isa = PBXGroup;
+			children = (
+				6CAE71A21C0562E800ECD783 /* EEProjection.cpp */,
+				6CAE71A31C0562E800ECD783 /* EEProjection.hpp */,
+				6CAE71B11C0593E200ECD783 /* EEProjection-Impl.hpp */,
+				6C48084F1C0551B70023E34D /* EEGesture__.cpp */,
+				6C4808501C0551B70023E34D /* EEGesture__.hpp */,
+				6C4808541C05593C0023E34D /* EEGesture-Impl__.hpp */,
+			);
+			name = Experimental;
 			sourceTree = "<group>";
 		};
 		6C2E7D731BDE0B7D008F5EF3 /* Products */ = {

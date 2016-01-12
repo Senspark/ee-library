@@ -61,14 +61,14 @@ NAMESPACE_END(crc)
     
 std::string generateCrc(const std::string& input) {
     auto output = crc::crc(input.begin(), input.end());
-    std::string ret;
-    ret.reserve(8);
-    static const char* digits = "0123456789abcdef";
-    for (int index = 0; index < 8; ++index) {
-        ret += digits[output & 0xf];
+    std::string result;
+    result.reserve(8);
+    constexpr const char* Digits = "0123456789abcdef";
+    for (auto index = 0; index < 8; ++index) {
+        result += Digits[output & 0xf];
         output >>= 4;
     }
-    std::reverse(ret.begin(), ret.end());
-    return ret;
+    std::reverse(result.begin(), result.end());
+    return result;
 }
 namespace_ee_end

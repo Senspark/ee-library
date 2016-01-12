@@ -10,12 +10,14 @@
 
 namespace_ee_begin
 namespace_anonymous_begin
-void internalTranspose(unsigned rowBegin, unsigned rowEnd, unsigned colBegin, unsigned colEnd, unsigned* src, unsigned* dst, unsigned srcWidth, unsigned srcHeight) {
+void internalTranspose(std::uint_fast32_t rowBegin, std::uint_fast32_t rowEnd,
+                       std::uint_fast32_t colBegin, std::uint_fast32_t colEnd,
+                       std::uint32_t* src, std::uint32_t* dst, std::uint_fast32_t srcWidth, std::uint_fast32_t srcHeight) {
     auto deltaRow = rowEnd - rowBegin;
     auto deltaCol = colEnd - colBegin;
     if (deltaRow <= 16 && deltaCol <= 16) {
-        for (unsigned col = colBegin; col < colEnd; ++col) {
-            for (unsigned row = rowBegin; row < rowEnd; ++row) {
+        for (auto col = colBegin; col < colEnd; ++col) {
+            for (auto row = rowBegin; row < rowEnd; ++row) {
                 dst[col * srcHeight + row] = src[row * srcWidth + col];
             }
         }
@@ -29,7 +31,7 @@ void internalTranspose(unsigned rowBegin, unsigned rowEnd, unsigned colBegin, un
 }
 namespace_anonymous_end
 
-void transpose(unsigned* src, unsigned* dst, unsigned srcWidth, unsigned srcHeight) {
+void transpose(std::uint32_t* src, std::uint32_t* dst, std::uint_fast32_t srcWidth, std::uint_fast32_t srcHeight) {
     internalTranspose(0, srcHeight, 0, srcWidth, src, dst, srcWidth, srcHeight);
 }
 namespace_ee_end

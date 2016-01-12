@@ -13,21 +13,21 @@
 
 namespace_ee_begin
 namespace_anonymous_begin
-void internalTentBlur1D(unsigned char* pixels, unsigned width, unsigned height, unsigned range, unsigned iterations) {
-    unsigned kernelSize = range * 2 + 1;
+void internalTentBlur1D(std::uint8_t* pixels, std::uint_fast32_t width, std::uint_fast32_t height, std::uint_fast32_t range, std::uint_fast32_t iterations) {
+    std::uint_fast32_t kernelSize = range * 2 + 1;
     CC_ASSERT(kernelSize < width && kernelSize < height);
     
-    constexpr unsigned Bits = 24;
-    auto numerators = new unsigned[kernelSize + 1];
-    for (unsigned size = 1, weight = 0; size <= kernelSize; ++size) {
+    constexpr std::uint_fast32_t Bits = 24;
+    std::uint_fast32_t numerators[kernelSize + 1];
+    for (std::uint_fast32_t size = 1, weight = 0; size <= kernelSize; ++size) {
         weight += (size <= range) ? size : (kernelSize - size + 1);
         numerators[size] = (1 << Bits) / weight;
     }
     
-    auto prefixSumR = new unsigned[width + 1]; prefixSumR[0] = 0;
-    auto prefixSumG = new unsigned[width + 1]; prefixSumG[0] = 0;
-    auto prefixSumB = new unsigned[width + 1]; prefixSumB[0] = 0;
-    auto buffer = new unsigned char[width * 4];
+    auto prefixSumR = new std::uint_fast32_t[width + 1]; prefixSumR[0] = 0;
+    auto prefixSumG = new std::uint_fast32_t[width + 1]; prefixSumG[0] = 0;
+    auto prefixSumB = new std::uint_fast32_t[width + 1]; prefixSumB[0] = 0;
+    auto buffer = new std::uint8_t[width * 4];
     
     auto newPixel = buffer;
     auto sumInR = prefixSumR;
@@ -39,9 +39,9 @@ void internalTentBlur1D(unsigned char* pixels, unsigned width, unsigned height, 
     auto sumOutR = prefixSumR;
     auto sumOutG = prefixSumG;
     auto sumOutB = prefixSumB;
-    unsigned sumR = 0;
-    unsigned sumG = 0;
-    unsigned sumB = 0;
+    std::uint_fast32_t sumR = 0;
+    std::uint_fast32_t sumG = 0;
+    std::uint_fast32_t sumB = 0;
     
     auto inPixel = pixels;
     
@@ -76,27 +76,27 @@ void internalTentBlur1D(unsigned char* pixels, unsigned width, unsigned height, 
         sumG -= *sumMidG - *sumOutG;
         sumB -= *sumMidB - *sumOutB;
     };
-    auto updatePixel = [&](unsigned size) {
-        *newPixel++ = (unsigned char) ((sumR * numerators[size]) >> Bits);
-        *newPixel++ = (unsigned char) ((sumG * numerators[size]) >> Bits);
-        *newPixel++ = (unsigned char) ((sumB * numerators[size]) >> Bits);
+    auto updatePixel = [&](std::uint_fast32_t size) {
+        *newPixel++ = static_cast<std::uint8_t>((sumR * numerators[size]) >> Bits);
+        *newPixel++ = static_cast<std::uint8_t>((sumG * numerators[size]) >> Bits);
+        *newPixel++ = static_cast<std::uint8_t>((sumB * numerators[size]) >> Bits);
         *newPixel++ = 0xFF;
     };
     
-    for (unsigned row = 0; row < height; ++row) {
-        for (unsigned iteration = 0; iteration < iterations; ++iteration) {
+    for (std::uint_fast32_t row = 0; row < height; ++row) {
+        for (std::uint_fast32_t iteration = 0; iteration < iterations; ++iteration) {
             sumR = sumG = sumB = 0;
             sumInR = sumMidR = sumOutR = prefixSumR;
             sumInG = sumMidG = sumOutG = prefixSumG;
             sumInB = sumMidB = sumOutB = prefixSumB;
             inPixel = pixels;
             newPixel = buffer;
-            for (unsigned col = 0; col < range; ++col) {
+            for (std::uint_fast32_t col = 0; col < range; ++col) {
                 addPixel();
                 shiftSumIn();
                 addSum();
             }
-            for (unsigned col = range; col <= range + range; ++col) {
+            for (std::uint_fast32_t col = range; col <= range + range; ++col) {
                 addPixel();
                 shiftSumIn();
                 addSum();
@@ -104,7 +104,7 @@ void internalTentBlur1D(unsigned char* pixels, unsigned width, unsigned height, 
                 shiftSumMid();
                 updatePixel(col + 1);
             }
-            for (unsigned col = range + range + 1; col < width; ++col) {
+            for (std::uint_fast32_t col = range + range + 1; col < width; ++col) {
                 addPixel();
                 shiftSumIn();
                 addSum();
@@ -113,7 +113,7 @@ void internalTentBlur1D(unsigned char* pixels, unsigned width, unsigned height, 
                 shiftSumOut();
                 updatePixel(kernelSize);
             }
-            for (unsigned col = 0; col < range; ++col) {
+            for (std::uint_fast32_t col = 0; col < range; ++col) {
                 addSum();
                 removeSum();
                 shiftSumMid();
@@ -129,17 +129,16 @@ void internalTentBlur1D(unsigned char* pixels, unsigned width, unsigned height, 
     delete[] prefixSumR;
     delete[] prefixSumG;
     delete[] prefixSumB;
-    delete[] numerators;
 }
 namespace_anonymous_end
 
-void tentBlur1D(cocos2d::Image* image, unsigned range, unsigned iterations) {
+void tentBlur1D(cocos2d::Image* image, std::uint_fast32_t range, std::uint_fast32_t iterations) {
     auto pixels = image->getData();
-    auto width = (unsigned) image->getWidth();
-    auto height = (unsigned) image->getHeight();
-    auto buffer = new unsigned char[width * height * 4];
-    auto pixelsPtr = reinterpret_cast<unsigned*>(pixels);
-    auto bufferPtr = reinterpret_cast<unsigned*>(buffer);
+    auto width = static_cast<std::uint_fast32_t>(image->getWidth());
+    auto height = static_cast<std::uint_fast32_t>(image->getHeight());
+    auto buffer = new std::uint8_t[width * height * 4];
+    auto pixelsPtr = reinterpret_cast<std::uint32_t*>(pixels);
+    auto bufferPtr = reinterpret_cast<std::uint32_t*>(buffer);
     internalTentBlur1D(pixels, width, height, range, iterations);
     transpose(pixelsPtr, bufferPtr, width, height);
     internalTentBlur1D(buffer, height, width, range, iterations);

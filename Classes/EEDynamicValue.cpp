@@ -7,18 +7,17 @@
 //
 
 #include "EEDynamicValue.hpp"
-#include "base/ccRandom.h"
-
-#include <memory>
 
 namespace_ee_begin
 template<class T>
 DynamicValue<T>::DynamicValue()
-    : _value(new unsigned())
-    , _random(new unsigned()) {}
+: _value(new std::uint32_t())
+, _random(new std::uint32_t())
+{}
 
 template<class T>
-DynamicValue<T>::~DynamicValue() {}
+DynamicValue<T>::~DynamicValue()
+{}
     
 template<class T>
 DynamicValue<T>::DynamicValue(T value) : DynamicValue() {
@@ -50,21 +49,22 @@ DynamicValue<T>& DynamicValue<T>::operator=(DynamicValue&& other) {
     
 template<class T>
 T DynamicValue<T>::get() const {
-    unsigned intValue = (*_value) ^ (*_random);
+    auto intValue = (*_value) ^ (*_random);
     T ret = *reinterpret_cast<T*>(&intValue);
     return ret;
 }
 
 template<class T>
-void DynamicValue<T>::set(T value) {
-    const unsigned intValue = *reinterpret_cast<const unsigned*>(&value);
-    _random = std::make_unique<unsigned>(cocos2d::random<unsigned>(0, std::numeric_limits<unsigned>::max()));
-    _value = std::make_unique<unsigned>((*_random) ^ intValue);
+DynamicValue<T>& DynamicValue<T>::set(T value) {
+    auto&& intValue = *reinterpret_cast<const std::uint32_t*>(&value);
+    _random = std::make_unique<std::uint32_t>(cocos2d::random<std::uint32_t>(0, std::numeric_limits<std::uint32_t>::max()));
+    _value = std::make_unique<std::uint32_t>((*_random) ^ intValue);
+    return *this;
 }
 
 template<class T>
-void DynamicValue<T>::add(T amount) {
-    set(get() + amount);
+DynamicValue<T>& DynamicValue<T>::add(T amount) {
+    return set(get() + amount);
 }
 
 // Implicit conversion.
@@ -94,15 +94,17 @@ DynamicValue<T>& DynamicValue<T>::operator-=(T value) {
 // Post-increment operator.
 template<class T>
 DynamicValue<T> DynamicValue<T>::operator++(int) {
-    auto ret = DynamicValue(get() + 1);
-    return ret;
+    auto result = *this;
+    add(+1);
+    return result;
 }
 
 // Post-decrement operator.
 template<class T>
 DynamicValue<T> DynamicValue<T>::operator--(int) {
-    auto ret = DynamicValue<T>(get() - 1);
-    return ret;
+    auto result = *this;
+    add(-1);
+    return result;
 }
 
 // Pre-increment operator.

@@ -13,23 +13,23 @@
 
 namespace_ee_begin
 namespace_anonymous_begin
-void internalBoxBlur2D(unsigned char* pixels, unsigned width, unsigned height, unsigned range) {
-    unsigned kernelSize = range * 2 + 1;
+void internalBoxBlur2D(std::uint8_t* pixels, std::uint_fast32_t width, std::uint_fast32_t height, std::uint_fast32_t range) {
+    std::uint_fast32_t kernelSize = range * 2 + 1;
     CC_ASSERT(kernelSize < width && kernelSize < height);
     
-    constexpr unsigned Bits = 24;
-    const unsigned Numerator = (1 << Bits) / (kernelSize * kernelSize);
+    constexpr std::uint_fast32_t Bits = 24;
+    const std::uint_fast32_t Numerator = (1 << Bits) / (kernelSize * kernelSize);
     
     auto inPixel = pixels;
     auto outPixel = pixels;
     
-    auto vertPrefixSumR = new unsigned[width]();
-    auto vertPrefixSumG = new unsigned[width]();
-    auto vertPrefixSumB = new unsigned[width]();
-    auto horiPrefixSumR = new unsigned[width + 1]; horiPrefixSumR[0] = 0;
-    auto horiPrefixSumG = new unsigned[width + 1]; horiPrefixSumG[0] = 0;
-    auto horiPrefixSumB = new unsigned[width + 1]; horiPrefixSumB[0] = 0;
-    auto buffer = new unsigned char[height * width * 4];
+    auto vertPrefixSumR = new std::uint_fast32_t[width]();
+    auto vertPrefixSumG = new std::uint_fast32_t[width]();
+    auto vertPrefixSumB = new std::uint_fast32_t[width]();
+    auto horiPrefixSumR = new std::uint_fast32_t[width + 1]; horiPrefixSumR[0] = 0;
+    auto horiPrefixSumG = new std::uint_fast32_t[width + 1]; horiPrefixSumG[0] = 0;
+    auto horiPrefixSumB = new std::uint_fast32_t[width + 1]; horiPrefixSumB[0] = 0;
+    auto buffer = new std::uint8_t[height * width * 4];
     
     auto newPixel = buffer;
     auto vertSumR = vertPrefixSumR;
@@ -83,42 +83,42 @@ void internalBoxBlur2D(unsigned char* pixels, unsigned width, unsigned height, u
         ++horiSumOutG;
         ++horiSumOutB;
     };
-    auto updatePixel = [&](unsigned hits) {
-        *newPixel++ = (unsigned char) ((*horiSumInR - *horiSumOutR) / hits);
-        *newPixel++ = (unsigned char) ((*horiSumInG - *horiSumOutG) / hits);
-        *newPixel++ = (unsigned char) ((*horiSumInB - *horiSumOutB) / hits);
+    auto updatePixel = [&](std::uint_fast32_t hits) {
+        *newPixel++ = static_cast<std::uint8_t>((*horiSumInR - *horiSumOutR) / hits);
+        *newPixel++ = static_cast<std::uint8_t>((*horiSumInG - *horiSumOutG) / hits);
+        *newPixel++ = static_cast<std::uint8_t>((*horiSumInB - *horiSumOutB) / hits);
         *newPixel++ = 0xFF;
     };
     auto updatePixelFullKernel = [&] {
-        *newPixel++ = (unsigned char) (((*horiSumInR - *horiSumOutR) * Numerator) >> Bits);
-        *newPixel++ = (unsigned char) (((*horiSumInG - *horiSumOutG) * Numerator) >> Bits);
-        *newPixel++ = (unsigned char) (((*horiSumInB - *horiSumOutB) * Numerator) >> Bits);
+        *newPixel++ = static_cast<std::uint8_t>(((*horiSumInR - *horiSumOutR) * Numerator) >> Bits);
+        *newPixel++ = static_cast<std::uint8_t>(((*horiSumInG - *horiSumOutG) * Numerator) >> Bits);
+        *newPixel++ = static_cast<std::uint8_t>(((*horiSumInB - *horiSumOutB) * Numerator) >> Bits);
         *newPixel++ = 0xFF;
     };
-    for (unsigned row = 0; row < range; ++row) {
+    for (std::uint_fast32_t row = 0; row < range; ++row) {
         resetVertSum();
-        for (unsigned col = 0; col < width; ++col) {
+        for (std::uint_fast32_t col = 0; col < width; ++col) {
             addPixel();
             shiftVertSum();
         }
     }
-    for (unsigned row = range; row <= range + range; ++row) {
+    for (std::uint_fast32_t row = range; row <= range + range; ++row) {
         resetVertSum();
         resetHoriSum();
-        for (unsigned col = 0; col < range; ++col) {
+        for (std::uint_fast32_t col = 0; col < range; ++col) {
             addPixel();
             updateHoriSum();
             shiftVertSum();
             shiftHoriSumIn();
         }
-        for (unsigned col = range; col <= range + range; ++col) {
+        for (std::uint_fast32_t col = range; col <= range + range; ++col) {
             addPixel();
             updateHoriSum();
             shiftVertSum();
             shiftHoriSumIn();
             updatePixel((row + 1) * (col + 1));
         }
-        for (unsigned col = range + range + 1; col < width; ++col) {
+        for (std::uint_fast32_t col = range + range + 1; col < width; ++col) {
             addPixel();
             updateHoriSum();
             shiftVertSum();
@@ -126,22 +126,22 @@ void internalBoxBlur2D(unsigned char* pixels, unsigned width, unsigned height, u
             shiftHoriSumOut();
             updatePixel((row + 1) * kernelSize);
         }
-        for (unsigned col = 0; col < range; ++col) {
+        for (std::uint_fast32_t col = 0; col < range; ++col) {
             shiftHoriSumOut();
             updatePixel((row + 1) * (kernelSize - col - 1));
         }
     }
-    for (unsigned row = range + range + 1; row < height; ++row) {
+    for (std::uint_fast32_t row = range + range + 1; row < height; ++row) {
         resetVertSum();
         resetHoriSum();
-        for (unsigned col = 0; col < range; ++col) {
+        for (std::uint_fast32_t col = 0; col < range; ++col) {
             addPixel();
             removePixel();
             updateHoriSum();
             shiftVertSum();
             shiftHoriSumIn();
         }
-        for (unsigned col = range; col <= range + range; ++col) {
+        for (std::uint_fast32_t col = range; col <= range + range; ++col) {
             addPixel();
             removePixel();
             updateHoriSum();
@@ -149,7 +149,7 @@ void internalBoxBlur2D(unsigned char* pixels, unsigned width, unsigned height, u
             shiftHoriSumIn();
             updatePixel(kernelSize * (col + 1));
         }
-        for (unsigned col = range + range + 1; col < width; ++col) {
+        for (std::uint_fast32_t col = range + range + 1; col < width; ++col) {
             addPixel();
             removePixel();
             updateHoriSum();
@@ -158,28 +158,28 @@ void internalBoxBlur2D(unsigned char* pixels, unsigned width, unsigned height, u
             shiftHoriSumOut();
             updatePixelFullKernel();
         }
-        for (unsigned col = 0; col < range; ++col) {
+        for (std::uint_fast32_t col = 0; col < range; ++col) {
             shiftHoriSumOut();
             updatePixel(kernelSize * (kernelSize - col - 1));
         }
     }
-    for (unsigned row = 0; row < range; ++row) {
+    for (std::uint_fast32_t row = 0; row < range; ++row) {
         resetVertSum();
         resetHoriSum();
-        for (unsigned col = 0; col < range; ++col) {
+        for (std::uint_fast32_t col = 0; col < range; ++col) {
             removePixel();
             updateHoriSum();
             shiftVertSum();
             shiftHoriSumIn();
         }
-        for (unsigned col = range; col <= range + range; ++col) {
+        for (std::uint_fast32_t col = range; col <= range + range; ++col) {
             removePixel();
             updateHoriSum();
             shiftVertSum();
             shiftHoriSumIn();
             updatePixel((kernelSize - row - 1) * (col + 1));
         }
-        for (unsigned col = range + range + 1; col < width; ++col) {
+        for (std::uint_fast32_t col = range + range + 1; col < width; ++col) {
             removePixel();
             updateHoriSum();
             shiftVertSum();
@@ -187,7 +187,7 @@ void internalBoxBlur2D(unsigned char* pixels, unsigned width, unsigned height, u
             shiftHoriSumOut();
             updatePixel((kernelSize - row - 1) * kernelSize);
         }
-        for (unsigned col = 0; col < range; ++col) {
+        for (std::uint_fast32_t col = 0; col < range; ++col) {
             shiftHoriSumOut();
             updatePixel((kernelSize - row - 1) * (kernelSize - col - 1));
         }
@@ -204,7 +204,7 @@ void internalBoxBlur2D(unsigned char* pixels, unsigned width, unsigned height, u
 }
 namespace_anonymous_end
 
-void boxBlur2D(cocos2d::Image* image, unsigned range) {
-    internalBoxBlur2D(image->getData(), (unsigned) image->getWidth(), (unsigned) image->getHeight(), range);
+void boxBlur2D(cocos2d::Image* image, std::uint_fast32_t range) {
+    internalBoxBlur2D(image->getData(), static_cast<std::uint_fast32_t>(image->getWidth()), static_cast<std::uint_fast32_t>(image->getHeight()), range);
 }
 namespace_ee_end

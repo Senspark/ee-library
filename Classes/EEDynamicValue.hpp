@@ -11,11 +11,12 @@
 
 #include "EEMacro.hpp"
 
+#include <cstdint>
 #include <memory>
 
 namespace_ee_begin
 template<class T>
-class DynamicValue {
+class DynamicValue final {
 public:
     DynamicValue();
     ~DynamicValue();
@@ -29,8 +30,8 @@ public:
 
     // Getter, setter.
     T get() const;
-    void set(T value);
-    void add(T amount);
+    DynamicValue& set(T value);
+    DynamicValue& add(T amount);
 
     // Implicit conversion.
     operator T() const;
@@ -50,8 +51,8 @@ public:
     DynamicValue& operator--();
 
 private:
-    std::unique_ptr<unsigned> _value;
-    std::unique_ptr<unsigned> _random;
+    std::unique_ptr<std::uint32_t> _value;
+    std::unique_ptr<std::uint32_t> _random;
 };
 namespace_ee_end
 

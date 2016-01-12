@@ -40,29 +40,29 @@ namespace_ee_begin
 NAMESPACE_BEGIN(sha1)
 namespace_anonymous_begin
 // Rotate an integer value to left.
-unsigned rol(const unsigned value, const unsigned steps) {
+std::uint32_t rol(const std::uint32_t value, const std::uint32_t steps) {
     return (value << steps) | (value >> (32 - steps));
 }
 
-// Sets the first 16 integers in the buffert to zero.
-// Used for clearing the W buffert.
-void clearWBuffert(unsigned* buffert) {
-    for (int pos = 16; --pos >= 0;) {
-        buffert[pos] = 0;
+// Sets the first 16 integers in the buffer to zero.
+// Used for clearing the W buffer.
+void clearWBuffert(std::uint32_t* buffer) {
+    for (std::uint_fast32_t pos = 16; ~(--pos);) {
+        buffer[pos] = 0;
     }
 }
 
-void innerHash(unsigned* result, unsigned* w) {
+void innerHash(std::uint32_t* result, std::uint32_t* w) {
     auto a = result[0];
     auto b = result[1];
     auto c = result[2];
     auto d = result[3];
     auto e = result[4];
 
-    int round = 0;
+    std::uint_fast32_t round = 0;
 
     #define sha1macro(func, val) { \
-        const unsigned t = rol(a, 5) + (func) + e + val + w[round]; \
+        const std::uint_fast32_t t = rol(a, 5) + (func) + e + val + w[round]; \
 		e = d; \
 		d = c; \
 		c = rol(b, 30); \
@@ -110,7 +110,7 @@ namespace_anonymous_end
  * @param byteLength is the number of bytes to hash from the src pointer.
  * @param hash should points to a buffer of at least 20 bytes of size for storing the SHA-1 result in.
  */
-void calc(const void* src, const int byteLength, unsigned char* hash);
+void calc(const void* src, const std::size_t byteLength, unsigned char* hash);
 
 /**
  * @param hash is 20 bytes of SHA-1 hash. This is the same data that is the result from the calc function.
@@ -118,20 +118,20 @@ void calc(const void* src, const int byteLength, unsigned char* hash);
  */
 void convertByteToHexString(const unsigned char* hash, char* hexString);
 
-void calc(const void* src, const int byteLength, unsigned char* hash) {
+void calc(const void* src, const std::size_t byteLength, unsigned char* hash) {
     // Init the result array.
-    unsigned result[5] = { 0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476, 0xc3d2e1f0 };
+    std::uint32_t result[5] = { 0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476, 0xc3d2e1f0 };
 
     // Cast the void src pointer to be the byte array we can work with.
     auto sarray = static_cast<const unsigned char*>(src);
 
     // The reusable round buffer
-    unsigned w[80];
+    std::uint32_t w[80];
 
     // Loop through all complete 64byte blocks.
-    const int endOfFullBlocks = byteLength - 64;
-    int endCurrentBlock;
-    int currentBlock = 0;
+    const auto endOfFullBlocks = byteLength - 64;
+    std::size_t endCurrentBlock;
+    std::size_t currentBlock = 0;
 
     while (currentBlock <= endOfFullBlocks) {
         endCurrentBlock = currentBlock + 64;
@@ -139,10 +139,10 @@ void calc(const void* src, const int byteLength, unsigned char* hash) {
         // Init the round buffer with the 64 byte block data.
         for (int roundPos = 0; currentBlock < endCurrentBlock; currentBlock += 4) {
             // This line will swap endian on big endian and keep endian on little endian.
-            w[roundPos++] = static_cast<unsigned>(sarray[currentBlock + 3])
-                         | (static_cast<unsigned>(sarray[currentBlock + 2]) << 8)
-                         | (static_cast<unsigned>(sarray[currentBlock + 1]) << 16)
-                         | (static_cast<unsigned>(sarray[currentBlock]) << 24);
+            w[roundPos++] = static_cast<std::uint32_t>(sarray[currentBlock + 3])
+                         | (static_cast<std::uint32_t>(sarray[currentBlock + 2]) << 8)
+                         | (static_cast<std::uint32_t>(sarray[currentBlock + 1]) << 16)
+                         | (static_cast<std::uint32_t>(sarray[currentBlock]) << 24);
         }
         innerHash(result, w);
     }
@@ -150,20 +150,20 @@ void calc(const void* src, const int byteLength, unsigned char* hash) {
     // Handle the last and not full 64 byte block if existing.
     endCurrentBlock = byteLength - currentBlock;
     clearWBuffert(w);
-    int lastBlockBytes = 0;
+    std::size_t lastBlockBytes = 0;
     for (; lastBlockBytes < endCurrentBlock; ++lastBlockBytes) {
-        w[lastBlockBytes >> 2] |= static_cast<unsigned>(sarray[lastBlockBytes + currentBlock]) << ((3 - (lastBlockBytes & 3)) << 3);
+        w[lastBlockBytes >> 2] |= static_cast<std::uint32_t>(sarray[lastBlockBytes + currentBlock]) << ((3 - (lastBlockBytes & 3)) << 3);
     }
-    w[lastBlockBytes >> 2] |= static_cast<unsigned>(0x80 << ((3 - (lastBlockBytes & 3)) << 3));
+    w[lastBlockBytes >> 2] |= static_cast<std::uint32_t>(0x80 << ((3 - (lastBlockBytes & 3)) << 3));
     if (endCurrentBlock >= 56) {
         innerHash(result, w);
         clearWBuffert(w);
     }
-    w[15] = static_cast<unsigned>(byteLength << 3);
+    w[15] = static_cast<std::uint32_t>(byteLength << 3);
     innerHash(result, w);
 
     // Store hash in result pointer, and make sure we get in in the correct order on both endian models.
-    for (int hashByte = 20; --hashByte >= 0;) {
+    for (std::uint_fast32_t hashByte = 20; ~(--hashByte);) {
         hash[hashByte] = (result[hashByte >> 2] >> (((3 - hashByte) & 0x3) << 3)) & 0xff;
     }
 }
@@ -181,7 +181,7 @@ NAMESPACE_END(sha1)
 
 std::string generateSha1(const std::string& input) {
     unsigned char hash[20];
-    sha1::calc(input.c_str(), static_cast<int>(input.size()), hash);
+    sha1::calc(input.c_str(), input.size(), hash);
     char hexString[41];
     sha1::convertByteToHexString(hash, hexString);
     return hexString;

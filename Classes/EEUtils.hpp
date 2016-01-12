@@ -1,5 +1,5 @@
 //
-//  EEUtils.h
+//  EEUtils.hpp
 //  roll-eat
 //
 //  Created by Hoang Le Hai on 7/22/15.
@@ -14,30 +14,7 @@
 #include <sstream>
 
 namespace_ee_begin
-template<class T, class... Args>
-typename std::decay<T>::type max(T&& x, Args&&... args) {
-    typename std::decay<T>::type ret = x;
-    auto&& array = { args... };
-    for (auto&& value : array)
-        if (value > ret) {
-            ret = value;
-        }
-    return ret;
-}
-
-template<class T, class... Args>
-typename std::decay<T>::type min(T&& x, Args&&... args) {
-    typename std::decay<T>::type ret = x;
-    auto&& array = { std::forward<Args>(args)... };
-    for (auto&& value : array)
-        if (value < ret) {
-            ret = value;
-        }
-    return ret;
-}
-
 namespace_detail_begin
-// Termination function.
 template<class T>
 void toStringHelper(std::stringstream& ss, T&& value) {
     ss << value;

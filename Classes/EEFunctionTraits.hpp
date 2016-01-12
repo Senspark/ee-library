@@ -107,26 +107,6 @@ template<class T, class U, class... Ts>
 struct GetTupleIndex<T, std::tuple<U, Ts...>> {
     enum { Index = 1 + GetTupleIndex<T, std::tuple<Ts...>>::Index };
 };
-    
-/**
- * Sequence builder.
- *
- * Example:
- * - SequenceGenerator<3>::Type is Sequence<0, 1, 2>.
- * - SequenceGenerator<0>::Type is Sequence<>.
- */
-template<std::size_t... S>
-struct Sequence {
-    static constexpr int Arity = sizeof...(S);
-};
-
-template<std::size_t N, std::size_t... S>
-struct SequenceGenerator : SequenceGenerator<N - 1, N - 1, S...> {};
-    
-template<std::size_t... S>
-struct SequenceGenerator<0, S...> {
-    using Type = Sequence<S...>;
-};
 
 namespace_detail_begin
 /// Runtime index for tuple.

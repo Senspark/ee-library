@@ -1,7 +1,11 @@
 #include "AppDelegate.hpp"
 #include "cocos2d.h"
-#include "TestScene.hpp"
-#include "CCBUtils.hpp"
+//#include "TestScene.hpp"
+//#include "CCBUtils.hpp"
+
+#include "EEHeader.hpp"
+
+#include "BoostExample.hpp"
 
 AppDelegate::AppDelegate() {}
 
@@ -42,7 +46,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setDisplayStats(true);
     
     // set FPS. the default value is 1.0/60 if you don't call this
-    director->setAnimationInterval(1.0 / 60);
+    director->setAnimationInterval(1.0f / 60);
 
     // Set the design resolution
     glView->setDesignResolutionSize(480, 320, ResolutionPolicy::FIXED_HEIGHT);
@@ -50,13 +54,15 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     register_all_packages();
     
-    CCBUtils::initLoaders();
+    boost_example();
+    
+    // CCBUtils::initLoaders();
 
     // create a scene. it's an autorelease object
-    auto scene = TestScene::openScene();
+    // auto scene = TestScene::openScene();
 
     // run
-    director->runWithScene(scene);
+    // director->runWithScene(scene);
 
     return true;
 }

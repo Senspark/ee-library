@@ -10,3 +10,7 @@ tests/proj.ios_mac/ee-library-test.xcodeproj/xcuserdata
 tests/proj.ios_mac/ee-library-test.xcodeproj/project.xcworkspace
 source/proj.ios_mac/ee-library.xcodeproj/xcuserdata
 source/proj.ios_mac/ee-library.xcodeproj/project.xcworkspace
+src/proj.ios_mac/ee-library.xcodeproj/xcuserdata
+src/proj.ios_mac/ee-library.xcodeproj/project.xcworkspace/xcuserdata
+src/proj.ios_mac/ee-library.xcodeproj/project.xcworkspace
+boost_1_60_0/proj.ios_mac/boost.xcodeproj/xcuserdata

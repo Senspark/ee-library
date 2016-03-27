@@ -1,0 +1,783 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6C38491D1CA22FCA0020B858 /* EEEventListener.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C38491B1CA22FCA0020B858 /* EEEventListener.hpp */; };
+		6C3849231CA230750020B858 /* EEEvent.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C3849211CA230750020B858 /* EEEvent.hpp */; };
+		6C3C3C2E1CA3928300A04333 /* EEDataHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C75EC0E1C8591150006790E /* EEDataHandler.cpp */; };
+		6C3C3C301CA3947D00A04333 /* EEDataInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C3C3C2F1CA3947D00A04333 /* EEDataInfo.cpp */; };
+		6C3CAB3E1C5B5ABB0059A380 /* EEHeader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C43A7871BDDCA4600D0597F /* EEHeader.hpp */; };
+		6C3CAB3F1C5B5AC00059A380 /* EEMacro.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6CAC26C31BD4111000F11F3A /* EEMacro.hpp */; };
+		6C3CAB401C5B5AC30059A380 /* EEForward.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6CAC26B81BD4111000F11F3A /* EEForward.hpp */; };
+		6C3CAB421C5B5ACF0059A380 /* EEUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C43A7D31BDDDAC300D0597F /* EEUtils.hpp */; };
+		6C3CAB431C5B5AEA0059A380 /* EEState.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6CC3596C1C0C0792007DC4CF /* EEState.hpp */; };
+		6C42EF411C8540A50062C2C6 /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FB07180E9839004C840B /* libcocos2d iOS.a */; settings = {ATTRIBUTES = (Weak, ); }; };
+		6C42EF451C85449F0062C2C6 /* EEDynamicValue.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C43A7B71BDDDAC300D0597F /* EEDynamicValue.hpp */; };
+		6C42EF461C8547660062C2C6 /* EEEventInfo.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C43A7B91BDDDAC300D0597F /* EEEventInfo.hpp */; };
+		6C4557791C8FD392001AE09A /* Dialog.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C4557771C8FD392001AE09A /* Dialog.hpp */; };
+		6C4557801C8FDE85001AE09A /* CocosUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C43A78D1BDDCAF800D0597F /* CocosUtils.hpp */; };
+		6C468C2C1CA2F0CA00D16594 /* EEUiWidgetCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C468C2A1CA2F0CA00D16594 /* EEUiWidgetCallback.cpp */; };
+		6C468C2D1CA2F0CA00D16594 /* EEUiWidgetCallback.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C468C2B1CA2F0CA00D16594 /* EEUiWidgetCallback.hpp */; };
+		6C47AAF71CA4EAE100B3E65E /* EEUiTextLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C47AAF51CA4EAE100B3E65E /* EEUiTextLoader.cpp */; };
+		6C47AAF81CA4EAE100B3E65E /* EEUiTextLoader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C47AAF61CA4EAE100B3E65E /* EEUiTextLoader.hpp */; };
+		6C47FE491CA1B36A00FEF3BC /* EEDynamicValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A7B61BDDDAC300D0597F /* EEDynamicValue.cpp */; };
+		6C47FE4A1CA1B7EF00FEF3BC /* EEEventInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A7B81BDDDAC300D0597F /* EEEventInfo.cpp */; };
+		6C49FB9A1CA136ED00E0FE86 /* EEExtension.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C49FB991CA136ED00E0FE86 /* EEExtension.hpp */; };
+		6C49FBB11CA13D1D00E0FE86 /* EEGenericLoader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C49FBB01CA13D1D00E0FE86 /* EEGenericLoader.hpp */; };
+		6C4A4A571CA153E500E72D89 /* EEUiButtonLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C4A4A551CA153E500E72D89 /* EEUiButtonLoader.cpp */; };
+		6C4A4A581CA153E500E72D89 /* EEUiButtonLoader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C4A4A561CA153E500E72D89 /* EEUiButtonLoader.hpp */; };
+		6C53F49F1CA3FE510088580E /* EEBitManipulation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C53F49D1CA3FE510088580E /* EEBitManipulation.cpp */; };
+		6C53F4A01CA3FE510088580E /* EEBitManipulation.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C53F49E1CA3FE510088580E /* EEBitManipulation.hpp */; };
+		6C75EC111C8591150006790E /* EEDataHandler.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C75EC0F1C8591150006790E /* EEDataHandler.hpp */; };
+		6C8D55F41C86F8330047DD82 /* EEDataInfo.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C519B411BEDEC68002644FC /* EEDataInfo.hpp */; };
+		6CB0BC4D1C842ABA003D7E50 /* libboost.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CB0A2F71C84297F003D7E50 /* libboost.a */; settings = {ATTRIBUTES = (Weak, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1AC6FAF8180E9839004C840B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1551A33F158F2AB200E66CFE;
+			remoteInfo = "cocos2dx Mac";
+		};
+		1AC6FB06180E9839004C840B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A07A4D641783777C0073F6A7;
+			remoteInfo = "cocos2dx iOS";
+		};
+		6CB0A2F61C84297F003D7E50 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6CB0A2F21C84297E003D7E50 /* boost.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6CB0A2DE1C842954003D7E50;
+			remoteInfo = boost;
+		};
+		6CB0BC491C842AAF003D7E50 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6CB0A2F21C84297E003D7E50 /* boost.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6CB0A2DD1C842954003D7E50;
+			remoteInfo = boost;
+		};
+		6CB0BC4B1C842AAF003D7E50 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A07A4C241783777C0073F6A7;
+			remoteInfo = "libcocos2d iOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6C43A8041BDDDF1800D0597F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
+		6C2E7D711BDE0B69008F5EF3 /* ee-library-mobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "ee-library-mobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C2E7D831BDE14D4008F5EF3 /* EECrc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EECrc.cpp; sourceTree = "<group>"; };
+		6C2E7D861BDE1A1B008F5EF3 /* EEBackButtonListener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEBackButtonListener.cpp; sourceTree = "<group>"; };
+		6C2E7D871BDE1A1B008F5EF3 /* EEBackButtonListener.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEBackButtonListener.hpp; sourceTree = "<group>"; };
+		6C32DC3D1BD67074007613F9 /* EEImage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEImage.hpp; sourceTree = "<group>"; };
+		6C32DC431BD67791007613F9 /* EEBoxBlur1D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEBoxBlur1D.cpp; sourceTree = "<group>"; };
+		6C32DC551BD692CF007613F9 /* EEBoxBlur2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEBoxBlur2D.cpp; sourceTree = "<group>"; };
+		6C38491B1CA22FCA0020B858 /* EEEventListener.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEEventListener.hpp; sourceTree = "<group>"; };
+		6C3849211CA230750020B858 /* EEEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEEvent.hpp; sourceTree = "<group>"; };
+		6C3A213E1BE08B4A0074C7F5 /* EETouchListener.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EETouchListener.hpp; sourceTree = "<group>"; };
+		6C3AD4E31BE49CEB0052E786 /* EEJni.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEJni.hpp; sourceTree = "<group>"; };
+		6C3AD4E51BE4A24A0052E786 /* EEJniConverter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EEJniConverter.hpp; sourceTree = "<group>"; };
+		6C3AD4E71BE4A29A0052E786 /* EEConstexprString.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EEConstexprString.hpp; sourceTree = "<group>"; };
+		6C3AD4E81BE4A4A10052E786 /* EEJniUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEJniUtils.cpp; sourceTree = "<group>"; };
+		6C3AD4E91BE4A4A10052E786 /* EEJniUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEJniUtils.hpp; sourceTree = "<group>"; };
+		6C3AD4EB1BE4AAA90052E786 /* EEJniException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEJniException.cpp; sourceTree = "<group>"; };
+		6C3AD4EC1BE4AAA90052E786 /* EEJniException.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEJniException.hpp; sourceTree = "<group>"; };
+		6C3AD4EE1BE4AB330052E786 /* EEJniMethodInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEJniMethodInfo.cpp; sourceTree = "<group>"; };
+		6C3AD4EF1BE4AB330052E786 /* EEJniMethodInfo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEJniMethodInfo.hpp; sourceTree = "<group>"; };
+		6C3AD4F21BE4B0870052E786 /* EEJniCaller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEJniCaller.hpp; sourceTree = "<group>"; };
+		6C3AD4F51BE4C4F20052E786 /* EEJniDestructor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEJniDestructor.hpp; sourceTree = "<group>"; };
+		6C3C3C2F1CA3947D00A04333 /* EEDataInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDataInfo.cpp; sourceTree = "<group>"; };
+		6C3C89951BE536530049CFAE /* EEJni.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEJni.cpp; sourceTree = "<group>"; };
+		6C3D4AF71C0D37F0001A09DF /* EETransitionScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EETransitionScene.cpp; sourceTree = "<group>"; };
+		6C3D4AF81C0D37F0001A09DF /* EETransitionScene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EETransitionScene.hpp; sourceTree = "<group>"; };
+		6C3FD3A91C50E97900D2AFE2 /* Gesture-Impl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = "Gesture-Impl.hpp"; path = "experimental/Gesture-Impl.hpp"; sourceTree = "<group>"; };
+		6C3FD3AA1C50E97900D2AFE2 /* Gesture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Gesture.cpp; path = experimental/Gesture.cpp; sourceTree = "<group>"; };
+		6C3FD3AB1C50E97900D2AFE2 /* Gesture.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Gesture.hpp; path = experimental/Gesture.hpp; sourceTree = "<group>"; };
+		6C3FD3AD1C50E97900D2AFE2 /* Projection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Projection.cpp; path = experimental/Projection.cpp; sourceTree = "<group>"; };
+		6C3FD3AE1C50E97900D2AFE2 /* Projection.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Projection.hpp; path = experimental/Projection.hpp; sourceTree = "<group>"; };
+		6C43A7871BDDCA4600D0597F /* EEHeader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EEHeader.hpp; sourceTree = "<group>"; };
+		6C43A78C1BDDCAF800D0597F /* CocosUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CocosUtils.cpp; sourceTree = "<group>"; };
+		6C43A78D1BDDCAF800D0597F /* CocosUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CocosUtils.hpp; sourceTree = "<group>"; };
+		6C43A7A81BDDDAC300D0597F /* EECheckBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EECheckBox.cpp; sourceTree = "<group>"; };
+		6C43A7A91BDDDAC300D0597F /* EECheckBox.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EECheckBox.hpp; sourceTree = "<group>"; };
+		6C43A7AD1BDDDAC300D0597F /* EEControl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEControl.cpp; sourceTree = "<group>"; };
+		6C43A7AE1BDDDAC300D0597F /* EEControl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEControl.hpp; sourceTree = "<group>"; };
+		6C43A7AF1BDDDAC300D0597F /* EEData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEData.cpp; sourceTree = "<group>"; };
+		6C43A7B01BDDDAC300D0597F /* EEData.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEData.hpp; sourceTree = "<group>"; };
+		6C43A7B11BDDDAC300D0597F /* EEDialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDialog.cpp; sourceTree = "<group>"; };
+		6C43A7B21BDDDAC300D0597F /* EEDialog.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDialog.hpp; sourceTree = "<group>"; };
+		6C43A7B31BDDDAC300D0597F /* EEDialogManager-Impl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "EEDialogManager-Impl.hpp"; sourceTree = "<group>"; };
+		6C43A7B41BDDDAC300D0597F /* EEDialogManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDialogManager.cpp; sourceTree = "<group>"; };
+		6C43A7B51BDDDAC300D0597F /* EEDialogManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDialogManager.hpp; sourceTree = "<group>"; };
+		6C43A7B61BDDDAC300D0597F /* EEDynamicValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDynamicValue.cpp; sourceTree = "<group>"; };
+		6C43A7B71BDDDAC300D0597F /* EEDynamicValue.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDynamicValue.hpp; sourceTree = "<group>"; };
+		6C43A7B81BDDDAC300D0597F /* EEEventInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEEventInfo.cpp; sourceTree = "<group>"; };
+		6C43A7B91BDDDAC300D0597F /* EEEventInfo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEEventInfo.hpp; sourceTree = "<group>"; };
+		6C43A7BC1BDDDAC300D0597F /* EEGesture-Impl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "EEGesture-Impl.hpp"; sourceTree = "<group>"; };
+		6C43A7BD1BDDDAC300D0597F /* EEGesture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEGesture.cpp; sourceTree = "<group>"; };
+		6C43A7BE1BDDDAC300D0597F /* EEGesture.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEGesture.hpp; sourceTree = "<group>"; };
+		6C43A7BF1BDDDAC300D0597F /* EEGroupNode-Impl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "EEGroupNode-Impl.hpp"; sourceTree = "<group>"; };
+		6C43A7C01BDDDAC300D0597F /* EEGroupNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEGroupNode.cpp; sourceTree = "<group>"; };
+		6C43A7C11BDDDAC300D0597F /* EEGroupNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEGroupNode.hpp; sourceTree = "<group>"; };
+		6C43A7C21BDDDAC300D0597F /* EEGroupNodeDelegate.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEGroupNodeDelegate.hpp; sourceTree = "<group>"; };
+		6C43A7C71BDDDAC300D0597F /* EEJniString.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEJniString.hpp; sourceTree = "<group>"; };
+		6C43A7CA1BDDDAC300D0597F /* EESha1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EESha1.cpp; sourceTree = "<group>"; };
+		6C43A7D01BDDDAC300D0597F /* EETouchManager-Impl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "EETouchManager-Impl.hpp"; sourceTree = "<group>"; };
+		6C43A7D11BDDDAC300D0597F /* EETouchManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EETouchManager.cpp; sourceTree = "<group>"; };
+		6C43A7D21BDDDAC300D0597F /* EETouchManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EETouchManager.hpp; sourceTree = "<group>"; };
+		6C43A7D31BDDDAC300D0597F /* EEUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEUtils.hpp; sourceTree = "<group>"; };
+		6C4557761C8FD392001AE09A /* Dialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Dialog.cpp; path = x_/Dialog.cpp; sourceTree = "<group>"; };
+		6C4557771C8FD392001AE09A /* Dialog.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Dialog.hpp; path = x_/Dialog.hpp; sourceTree = "<group>"; };
+		6C468C2A1CA2F0CA00D16594 /* EEUiWidgetCallback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEUiWidgetCallback.cpp; sourceTree = "<group>"; };
+		6C468C2B1CA2F0CA00D16594 /* EEUiWidgetCallback.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEUiWidgetCallback.hpp; sourceTree = "<group>"; };
+		6C47AAF51CA4EAE100B3E65E /* EEUiTextLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEUiTextLoader.cpp; sourceTree = "<group>"; };
+		6C47AAF61CA4EAE100B3E65E /* EEUiTextLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEUiTextLoader.hpp; sourceTree = "<group>"; };
+		6C495C181BE565A600E9FE95 /* EEJniObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEJniObject.cpp; sourceTree = "<group>"; };
+		6C495C191BE565A600E9FE95 /* EEJniObject.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEJniObject.hpp; sourceTree = "<group>"; };
+		6C495C1D1BE5EA0A00E9FE95 /* EEJniFieldInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEJniFieldInfo.cpp; sourceTree = "<group>"; };
+		6C495C1E1BE5EA0A00E9FE95 /* EEJniFieldInfo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEJniFieldInfo.hpp; sourceTree = "<group>"; };
+		6C49FB961CA1354A00E0FE86 /* EECocos2dxFwd.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EECocos2dxFwd.hpp; sourceTree = "<group>"; };
+		6C49FB991CA136ED00E0FE86 /* EEExtension.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEExtension.hpp; sourceTree = "<group>"; };
+		6C49FBB01CA13D1D00E0FE86 /* EEGenericLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEGenericLoader.hpp; sourceTree = "<group>"; };
+		6C4A4A551CA153E500E72D89 /* EEUiButtonLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEUiButtonLoader.cpp; sourceTree = "<group>"; };
+		6C4A4A561CA153E500E72D89 /* EEUiButtonLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEUiButtonLoader.hpp; sourceTree = "<group>"; };
+		6C4A983C1BE1B620008B089A /* EEControlLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEControlLoader.cpp; sourceTree = "<group>"; };
+		6C4A983D1BE1B620008B089A /* EEControlLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEControlLoader.hpp; sourceTree = "<group>"; };
+		6C4A98421BE1CBA3008B089A /* EEActiveControl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEActiveControl.cpp; sourceTree = "<group>"; };
+		6C4A98431BE1CBA3008B089A /* EEActiveControl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEActiveControl.hpp; sourceTree = "<group>"; };
+		6C4A984E1BE20739008B089A /* EEDialog-Impl.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "EEDialog-Impl.hpp"; sourceTree = "<group>"; };
+		6C519B411BEDEC68002644FC /* EEDataInfo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDataInfo.hpp; sourceTree = "<group>"; };
+		6C53F49D1CA3FE510088580E /* EEBitManipulation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEBitManipulation.cpp; sourceTree = "<group>"; };
+		6C53F49E1CA3FE510088580E /* EEBitManipulation.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEBitManipulation.hpp; sourceTree = "<group>"; };
+		6C5473731BE0C08E008F06A7 /* EETouchListener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EETouchListener.cpp; sourceTree = "<group>"; };
+		6C54737B1BE0C7B0008F06A7 /* EETouchListener-Impl.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "EETouchListener-Impl.hpp"; sourceTree = "<group>"; };
+		6C5AEB3E1BDF1BF1004C98A2 /* EECrytography.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EECrytography.hpp; sourceTree = "<group>"; };
+		6C75EC0E1C8591150006790E /* EEDataHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDataHandler.cpp; sourceTree = "<group>"; };
+		6C75EC0F1C8591150006790E /* EEDataHandler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDataHandler.hpp; sourceTree = "<group>"; };
+		6C7A9ABB1BD9335600199AC0 /* EETentBlur1D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EETentBlur1D.cpp; sourceTree = "<group>"; };
+		6C7A9AC71BDB841A00199AC0 /* EEImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEImage.cpp; sourceTree = "<group>"; };
+		6C896FF71BF42DD00069D8A3 /* EEJniBoxedType.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEJniBoxedType.cpp; sourceTree = "<group>"; };
+		6C896FF81BF42DD00069D8A3 /* EEJniBoxedType.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEJniBoxedType.hpp; sourceTree = "<group>"; };
+		6CAC26B81BD4111000F11F3A /* EEForward.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEForward.hpp; sourceTree = "<group>"; };
+		6CAC26C31BD4111000F11F3A /* EEMacro.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEMacro.hpp; sourceTree = "<group>"; };
+		6CB0A2F21C84297E003D7E50 /* boost.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = boost.xcodeproj; path = ../../boost_1_60_0/proj.ios_mac/boost.xcodeproj; sourceTree = "<group>"; };
+		6CC3596C1C0C0792007DC4CF /* EEState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEState.hpp; sourceTree = "<group>"; };
+		6CC359701C0C0F2E007DC4CF /* EEState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEState.cpp; sourceTree = "<group>"; };
+		6CC43B101BF31BC600FAC807 /* EEJniConverter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EEJniConverter.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6C43A8031BDDDF1800D0597F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C42EF411C8540A50062C2C6 /* libcocos2d iOS.a in Frameworks */,
+				6CB0BC4D1C842ABA003D7E50 /* libboost.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1AC6FAE6180E9839004C840B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1AC6FAF9180E9839004C840B /* libcocos2d Mac.a */,
+				1AC6FB07180E9839004C840B /* libcocos2d iOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				6CB0A2F21C84297E003D7E50 /* boost.xcodeproj */,
+				1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */,
+				46880B8319C43A87006E1F66 /* Classes */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				6C2E7D731BDE0B7D008F5EF3 /* Products */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		46880B8319C43A87006E1F66 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				6C43A7871BDDCA4600D0597F /* EEHeader.hpp */,
+				6CAC26C31BD4111000F11F3A /* EEMacro.hpp */,
+				6CAC26B81BD4111000F11F3A /* EEForward.hpp */,
+				6C53F49D1CA3FE510088580E /* EEBitManipulation.cpp */,
+				6C53F49E1CA3FE510088580E /* EEBitManipulation.hpp */,
+				6C49FB961CA1354A00E0FE86 /* EECocos2dxFwd.hpp */,
+				6C49FB991CA136ED00E0FE86 /* EEExtension.hpp */,
+				6C49FBB01CA13D1D00E0FE86 /* EEGenericLoader.hpp */,
+				6C43A7B61BDDDAC300D0597F /* EEDynamicValue.cpp */,
+				6C43A7B71BDDDAC300D0597F /* EEDynamicValue.hpp */,
+				6C43A7D31BDDDAC300D0597F /* EEUtils.hpp */,
+				6C3C3C2C1CA3859800A04333 /* ui */,
+				6C3C3C2B1CA3858C00A04333 /* event */,
+				6C3D1EEB1BEC9FAB00B56B55 /* data */,
+				6C45577A1C8FD39D001AE09A /* _y_ */,
+				6C4557741C8FC8C4001AE09A /* _x_ */,
+			);
+			name = Classes;
+			path = ../Classes;
+			sourceTree = "<group>";
+		};
+		6C19528D1C44DA0D00185F01 /* experimental */ = {
+			isa = PBXGroup;
+			children = (
+				6C3FD3A91C50E97900D2AFE2 /* Gesture-Impl.hpp */,
+				6C3FD3AA1C50E97900D2AFE2 /* Gesture.cpp */,
+				6C3FD3AB1C50E97900D2AFE2 /* Gesture.hpp */,
+				6C3FD3AD1C50E97900D2AFE2 /* Projection.cpp */,
+				6C3FD3AE1C50E97900D2AFE2 /* Projection.hpp */,
+			);
+			name = experimental;
+			sourceTree = "<group>";
+		};
+		6C1952B51C44FD5500185F01 /* GroupNode */ = {
+			isa = PBXGroup;
+			children = (
+				6C43A7C01BDDDAC300D0597F /* EEGroupNode.cpp */,
+				6C43A7C11BDDDAC300D0597F /* EEGroupNode.hpp */,
+				6C43A7BF1BDDDAC300D0597F /* EEGroupNode-Impl.hpp */,
+				6C43A7C21BDDDAC300D0597F /* EEGroupNodeDelegate.hpp */,
+			);
+			name = GroupNode;
+			sourceTree = "<group>";
+		};
+		6C2E7D731BDE0B7D008F5EF3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6C2E7D711BDE0B69008F5EF3 /* ee-library-mobile.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6C2E7D891BDE1E12008F5EF3 /* Listener */ = {
+			isa = PBXGroup;
+			children = (
+				6C43A7D01BDDDAC300D0597F /* EETouchManager-Impl.hpp */,
+				6C43A7D11BDDDAC300D0597F /* EETouchManager.cpp */,
+				6C43A7D21BDDDAC300D0597F /* EETouchManager.hpp */,
+				6C2E7D861BDE1A1B008F5EF3 /* EEBackButtonListener.cpp */,
+				6C2E7D871BDE1A1B008F5EF3 /* EEBackButtonListener.hpp */,
+				6C5473731BE0C08E008F06A7 /* EETouchListener.cpp */,
+				6C3A213E1BE08B4A0074C7F5 /* EETouchListener.hpp */,
+				6C54737B1BE0C7B0008F06A7 /* EETouchListener-Impl.hpp */,
+				6C43A7AD1BDDDAC300D0597F /* EEControl.cpp */,
+				6C43A7AE1BDDDAC300D0597F /* EEControl.hpp */,
+				6C4A98421BE1CBA3008B089A /* EEActiveControl.cpp */,
+				6C4A98431BE1CBA3008B089A /* EEActiveControl.hpp */,
+				6C4A983C1BE1B620008B089A /* EEControlLoader.cpp */,
+				6C4A983D1BE1B620008B089A /* EEControlLoader.hpp */,
+			);
+			name = Listener;
+			sourceTree = "<group>";
+		};
+		6C3AD4DF1BE49CDB0052E786 /* Jni */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Jni;
+			sourceTree = "<group>";
+		};
+		6C3C3C2B1CA3858C00A04333 /* event */ = {
+			isa = PBXGroup;
+			children = (
+				6C43A7B81BDDDAC300D0597F /* EEEventInfo.cpp */,
+				6C43A7B91BDDDAC300D0597F /* EEEventInfo.hpp */,
+				6C3849211CA230750020B858 /* EEEvent.hpp */,
+				6C38491B1CA22FCA0020B858 /* EEEventListener.hpp */,
+			);
+			name = event;
+			sourceTree = "<group>";
+		};
+		6C3C3C2C1CA3859800A04333 /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				6C468C2A1CA2F0CA00D16594 /* EEUiWidgetCallback.cpp */,
+				6C468C2B1CA2F0CA00D16594 /* EEUiWidgetCallback.hpp */,
+				6C4A4A551CA153E500E72D89 /* EEUiButtonLoader.cpp */,
+				6C4A4A561CA153E500E72D89 /* EEUiButtonLoader.hpp */,
+				6C47AAF51CA4EAE100B3E65E /* EEUiTextLoader.cpp */,
+				6C47AAF61CA4EAE100B3E65E /* EEUiTextLoader.hpp */,
+			);
+			name = ui;
+			sourceTree = "<group>";
+		};
+		6C3D1EEB1BEC9FAB00B56B55 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				6C3C3C2F1CA3947D00A04333 /* EEDataInfo.cpp */,
+				6C519B411BEDEC68002644FC /* EEDataInfo.hpp */,
+				6C75EC0E1C8591150006790E /* EEDataHandler.cpp */,
+				6C75EC0F1C8591150006790E /* EEDataHandler.hpp */,
+			);
+			name = data;
+			sourceTree = "<group>";
+		};
+		6C43A7F61BDDDAEC00D0597F /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				6C7A9AC71BDB841A00199AC0 /* EEImage.cpp */,
+				6C32DC3D1BD67074007613F9 /* EEImage.hpp */,
+				6C32DC431BD67791007613F9 /* EEBoxBlur1D.cpp */,
+				6C32DC551BD692CF007613F9 /* EEBoxBlur2D.cpp */,
+				6C7A9ABB1BD9335600199AC0 /* EETentBlur1D.cpp */,
+			);
+			name = Image;
+			sourceTree = "<group>";
+		};
+		6C4557741C8FC8C4001AE09A /* _x_ */ = {
+			isa = PBXGroup;
+			children = (
+				6C3AD4E71BE4A29A0052E786 /* EEConstexprString.hpp */,
+				6CC359701C0C0F2E007DC4CF /* EEState.cpp */,
+				6CC3596C1C0C0792007DC4CF /* EEState.hpp */,
+				6C43A7F61BDDDAEC00D0597F /* Image */,
+				6C1952B51C44FD5500185F01 /* GroupNode */,
+				6C3AD4DF1BE49CDB0052E786 /* Jni */,
+				6C3C89951BE536530049CFAE /* EEJni.cpp */,
+				6C3AD4E31BE49CEB0052E786 /* EEJni.hpp */,
+				6C896FF71BF42DD00069D8A3 /* EEJniBoxedType.cpp */,
+				6C896FF81BF42DD00069D8A3 /* EEJniBoxedType.hpp */,
+				6C3AD4F21BE4B0870052E786 /* EEJniCaller.hpp */,
+				6CC43B101BF31BC600FAC807 /* EEJniConverter.cpp */,
+				6C3AD4E51BE4A24A0052E786 /* EEJniConverter.hpp */,
+				6C3AD4F51BE4C4F20052E786 /* EEJniDestructor.hpp */,
+				6C3AD4EB1BE4AAA90052E786 /* EEJniException.cpp */,
+				6C3AD4EC1BE4AAA90052E786 /* EEJniException.hpp */,
+				6C495C1D1BE5EA0A00E9FE95 /* EEJniFieldInfo.cpp */,
+				6C495C1E1BE5EA0A00E9FE95 /* EEJniFieldInfo.hpp */,
+				6C3AD4EE1BE4AB330052E786 /* EEJniMethodInfo.cpp */,
+				6C3AD4EF1BE4AB330052E786 /* EEJniMethodInfo.hpp */,
+				6C495C181BE565A600E9FE95 /* EEJniObject.cpp */,
+				6C495C191BE565A600E9FE95 /* EEJniObject.hpp */,
+				6C43A7C71BDDDAC300D0597F /* EEJniString.hpp */,
+				6C3AD4E81BE4A4A10052E786 /* EEJniUtils.cpp */,
+				6C3AD4E91BE4A4A10052E786 /* EEJniUtils.hpp */,
+				6C43A7A81BDDDAC300D0597F /* EECheckBox.cpp */,
+				6C43A7A91BDDDAC300D0597F /* EECheckBox.hpp */,
+				6C5AEB3B1BDF1B9F004C98A2 /* Crytography */,
+				6C2E7D891BDE1E12008F5EF3 /* Listener */,
+				6CC359791C0C3C31007DC4CF /* Layer */,
+				6C43A7AF1BDDDAC300D0597F /* EEData.cpp */,
+				6C43A7B01BDDDAC300D0597F /* EEData.hpp */,
+				6C43A7BC1BDDDAC300D0597F /* EEGesture-Impl.hpp */,
+				6C43A7BD1BDDDAC300D0597F /* EEGesture.cpp */,
+				6C43A7BE1BDDDAC300D0597F /* EEGesture.hpp */,
+				6C19528D1C44DA0D00185F01 /* experimental */,
+			);
+			name = _x_;
+			sourceTree = "<group>";
+		};
+		6C45577A1C8FD39D001AE09A /* _y_ */ = {
+			isa = PBXGroup;
+			children = (
+				6C43A78C1BDDCAF800D0597F /* CocosUtils.cpp */,
+				6C43A78D1BDDCAF800D0597F /* CocosUtils.hpp */,
+				6C4557761C8FD392001AE09A /* Dialog.cpp */,
+				6C4557771C8FD392001AE09A /* Dialog.hpp */,
+			);
+			name = _y_;
+			sourceTree = "<group>";
+		};
+		6C5AEB3B1BDF1B9F004C98A2 /* Crytography */ = {
+			isa = PBXGroup;
+			children = (
+				6C5AEB3E1BDF1BF1004C98A2 /* EECrytography.hpp */,
+				6C2E7D831BDE14D4008F5EF3 /* EECrc.cpp */,
+				6C43A7CA1BDDDAC300D0597F /* EESha1.cpp */,
+			);
+			name = Crytography;
+			sourceTree = "<group>";
+		};
+		6CB0A2F31C84297E003D7E50 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6CB0A2F71C84297F003D7E50 /* libboost.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6CC359791C0C3C31007DC4CF /* Layer */ = {
+			isa = PBXGroup;
+			children = (
+				6C43A7B11BDDDAC300D0597F /* EEDialog.cpp */,
+				6C43A7B21BDDDAC300D0597F /* EEDialog.hpp */,
+				6C4A984E1BE20739008B089A /* EEDialog-Impl.hpp */,
+				6C43A7B41BDDDAC300D0597F /* EEDialogManager.cpp */,
+				6C43A7B51BDDDAC300D0597F /* EEDialogManager.hpp */,
+				6C43A7B31BDDDAC300D0597F /* EEDialogManager-Impl.hpp */,
+				6C3D4AF71C0D37F0001A09DF /* EETransitionScene.cpp */,
+				6C3D4AF81C0D37F0001A09DF /* EETransitionScene.hpp */,
+			);
+			name = Layer;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		6C1952961C44E97F00185F01 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C4557801C8FDE85001AE09A /* CocosUtils.hpp in Headers */,
+				6C4A4A581CA153E500E72D89 /* EEUiButtonLoader.hpp in Headers */,
+				6C38491D1CA22FCA0020B858 /* EEEventListener.hpp in Headers */,
+				6C4557791C8FD392001AE09A /* Dialog.hpp in Headers */,
+				6C3CAB401C5B5AC30059A380 /* EEForward.hpp in Headers */,
+				6C49FBB11CA13D1D00E0FE86 /* EEGenericLoader.hpp in Headers */,
+				6C3CAB3E1C5B5ABB0059A380 /* EEHeader.hpp in Headers */,
+				6C75EC111C8591150006790E /* EEDataHandler.hpp in Headers */,
+				6C3CAB3F1C5B5AC00059A380 /* EEMacro.hpp in Headers */,
+				6C3CAB431C5B5AEA0059A380 /* EEState.hpp in Headers */,
+				6C53F4A01CA3FE510088580E /* EEBitManipulation.hpp in Headers */,
+				6C468C2D1CA2F0CA00D16594 /* EEUiWidgetCallback.hpp in Headers */,
+				6C42EF461C8547660062C2C6 /* EEEventInfo.hpp in Headers */,
+				6C47AAF81CA4EAE100B3E65E /* EEUiTextLoader.hpp in Headers */,
+				6C42EF451C85449F0062C2C6 /* EEDynamicValue.hpp in Headers */,
+				6C8D55F41C86F8330047DD82 /* EEDataInfo.hpp in Headers */,
+				6C3849231CA230750020B858 /* EEEvent.hpp in Headers */,
+				6C49FB9A1CA136ED00E0FE86 /* EEExtension.hpp in Headers */,
+				6C3CAB421C5B5ACF0059A380 /* EEUtils.hpp in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		6C43A8051BDDDF1800D0597F /* ee-library-mobile */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6C43A80D1BDDDF1900D0597F /* Build configuration list for PBXNativeTarget "ee-library-mobile" */;
+			buildPhases = (
+				6C43A8021BDDDF1800D0597F /* Sources */,
+				6C43A8031BDDDF1800D0597F /* Frameworks */,
+				6C43A8041BDDDF1800D0597F /* CopyFiles */,
+				6C1952961C44E97F00185F01 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6CB0BC4A1C842AAF003D7E50 /* PBXTargetDependency */,
+				6CB0BC4C1C842AAF003D7E50 /* PBXTargetDependency */,
+			);
+			name = "ee-library-mobile";
+			productName = "ee-library";
+			productReference = 6C2E7D711BDE0B69008F5EF3 /* ee-library-mobile.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				TargetAttributes = {
+					6C43A8051BDDDF1800D0597F = {
+						CreatedOnToolsVersion = 7.1;
+					};
+				};
+			};
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "ee-library" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			productRefGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 6CB0A2F31C84297E003D7E50 /* Products */;
+					ProjectRef = 6CB0A2F21C84297E003D7E50 /* boost.xcodeproj */;
+				},
+				{
+					ProductGroup = 1AC6FAE6180E9839004C840B /* Products */;
+					ProjectRef = 1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				6C43A8051BDDDF1800D0597F /* ee-library-mobile */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		1AC6FAF9180E9839004C840B /* libcocos2d Mac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libcocos2d Mac.a";
+			remoteRef = 1AC6FAF8180E9839004C840B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1AC6FB07180E9839004C840B /* libcocos2d iOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libcocos2d iOS.a";
+			remoteRef = 1AC6FB06180E9839004C840B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6CB0A2F71C84297F003D7E50 /* libboost.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libboost.a;
+			remoteRef = 6CB0A2F61C84297F003D7E50 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6C43A8021BDDDF1800D0597F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C468C2C1CA2F0CA00D16594 /* EEUiWidgetCallback.cpp in Sources */,
+				6C4A4A571CA153E500E72D89 /* EEUiButtonLoader.cpp in Sources */,
+				6C47FE4A1CA1B7EF00FEF3BC /* EEEventInfo.cpp in Sources */,
+				6C3C3C301CA3947D00A04333 /* EEDataInfo.cpp in Sources */,
+				6C47FE491CA1B36A00FEF3BC /* EEDynamicValue.cpp in Sources */,
+				6C53F49F1CA3FE510088580E /* EEBitManipulation.cpp in Sources */,
+				6C3C3C2E1CA3928300A04333 /* EEDataHandler.cpp in Sources */,
+				6C47AAF71CA4EAE100B3E65E /* EEUiTextLoader.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6CB0BC4A1C842AAF003D7E50 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = boost;
+			targetProxy = 6CB0BC491C842AAF003D7E50 /* PBXContainerItemProxy */;
+		};
+		6CB0BC4C1C842AAF003D7E50 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "libcocos2d iOS";
+			targetProxy = 6CB0BC4B1C842AAF003D7E50 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		6C43A80E1BDDDF1900D0597F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					CC_TARGET_OS_IPHONE,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7";
+			};
+			name = Debug;
+		};
+		6C43A80F1BDDDF1900D0597F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = "";
+				GCC_PREPROCESSOR_DEFINITIONS = CC_TARGET_OS_IPHONE;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7";
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++1z";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_ASSIGN_ENUM = YES;
+				CLANG_WARN_CXX0X_EXTENSIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				CLANG_WARN_NULLABLE_TO_NONNULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES_AGGRESSIVE;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"COCOS2D_DEBUG=1",
+				);
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../cocos2d",
+					"$(SRCROOT)/../cocos2d/cocos",
+					"$(SRCROOT)/../cocos2d/cocos/base",
+					"$(SRCROOT)/../cocos2d/cocos/physics",
+					"$(SRCROOT)/../cocos2d/cocos/math",
+					"$(SRCROOT)/../cocos2d/cocos/2d",
+					"$(SRCROOT)/../cocos2d/cocos/ui",
+					"$(SRCROOT)/../cocos2d/cocos/network",
+					"$(SRCROOT)/../cocos2d/cocos/audio/include",
+					"$(SRCROOT)/../cocos2d/cocos/editor-support",
+					"$(SRCROOT)/../cocos2d/extensions",
+					"$(SRCROOT)/../cocos2d/external",
+					"$(SRCROOT)/../../boost_1_60_0",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++1z";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_ASSIGN_ENUM = YES;
+				CLANG_WARN_CXX0X_EXTENSIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				CLANG_WARN_NULLABLE_TO_NONNULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES_AGGRESSIVE;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../cocos2d",
+					"$(SRCROOT)/../cocos2d/cocos",
+					"$(SRCROOT)/../cocos2d/cocos/base",
+					"$(SRCROOT)/../cocos2d/cocos/physics",
+					"$(SRCROOT)/../cocos2d/cocos/math",
+					"$(SRCROOT)/../cocos2d/cocos/2d",
+					"$(SRCROOT)/../cocos2d/cocos/ui",
+					"$(SRCROOT)/../cocos2d/cocos/network",
+					"$(SRCROOT)/../cocos2d/cocos/audio/include",
+					"$(SRCROOT)/../cocos2d/cocos/editor-support",
+					"$(SRCROOT)/../cocos2d/extensions",
+					"$(SRCROOT)/../cocos2d/external",
+					"$(SRCROOT)/../../boost_1_60_0",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SEPARATE_STRIP = YES;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6C43A80D1BDDDF1900D0597F /* Build configuration list for PBXNativeTarget "ee-library-mobile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6C43A80E1BDDDF1900D0597F /* Debug */,
+				6C43A80F1BDDDF1900D0597F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "ee-library" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

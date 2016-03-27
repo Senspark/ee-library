@@ -1,0 +1,97 @@
+//
+//  EECocos2dxFwd.hpp
+//  ee-library
+//
+//  Created by enrevol on 3/22/16.
+//
+//
+
+#ifndef EE_LIBRARY_COCOS2DX_FWD_HPP_
+#define EE_LIBRARY_COCOS2DX_FWD_HPP_
+
+#include <string>
+#include <unordered_map>
+
+namespace cocos2d {
+class Action;
+class Node;
+class DrawNode;
+class Font;
+class FontAtlas;
+class Label;
+class LabelAtlas;
+class Layer;
+class Scene;
+class Transition;
+class Menu;
+class MenuItem;
+class ClippingRectangleNode;
+class ClippingNode;
+class ParticleSystem;
+class ParticleSystemQuad;
+class Animation;
+class Sprite;
+class SpriteFrame;
+
+class Event;
+class EventCustom;
+class EventListener;
+class EventListenerCustom;
+class EventListenerKeyboard;
+class EventListenerTouchOneByOne;
+class EventListenerTouchAllAtOnce;
+class EventTouch;
+class Ref;
+
+template<class T>
+class RefPtr;
+    
+class Value;
+using ValueMap = std::unordered_map<std::string, Value>;
+
+class __Array;
+using Array = __Array;
+
+class __Bool;
+using Bool = __Bool;
+
+class __Dictionary;
+using Dictionary = __Dictionary;
+
+class __Double;
+using Double = __Double;
+
+class __Float;
+using Float = __Float;
+
+class __Integer;
+using Integer = __Integer;
+
+class __Set;
+using Set = __Set;
+
+class __String;
+using String = __String;
+
+class Vec2;
+using Point = Vec2;
+
+class Size;
+} // namespace cocos2d
+
+namespace cocos2d::ui {
+class ListView;
+class LoadingBar;
+class PageView;
+class RichText;
+class ScrollView;
+class Slider;
+class Text;
+class TextAtlas;
+class Button;
+class CheckBox;
+class RadioButton;
+class ImageView;
+} // namespace cocos2d::ui
+
+#endif /* EE_LIBRARY_COCOS2DX_FWD_HPP_ */

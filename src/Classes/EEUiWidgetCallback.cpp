@@ -9,6 +9,7 @@
 #include "EEUiWidgetCallback.hpp"
 
 NS_EE_BEGIN
+NS_DETAIL_BEGIN
 UiWidgetCallback* UiWidgetCallback::getInstance() {
     static UiWidgetCallback sharedInstance;
     return &sharedInstance;
@@ -31,4 +32,5 @@ auto UiWidgetCallback::getActiveTouchCallback() const -> const TouchCallback& {
 auto UiWidgetCallback::getActiveClickCallback() const -> const ClickCallback& {
     return _clickCallback;
 }
+NS_DETAIL_END
 NS_EE_END

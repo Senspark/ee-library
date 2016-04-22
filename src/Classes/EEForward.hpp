@@ -9,6 +9,8 @@
 #ifndef EE_LIBRARY_FORWARD_HPP_
 #define EE_LIBRARY_FORWARD_HPP_
 
+/// Forward ee library classes.
+
 namespace ee {
 template<class Np, class Lp, class... Ts>
 class GenericLoader;

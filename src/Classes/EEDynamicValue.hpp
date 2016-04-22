@@ -16,6 +16,11 @@
 #include "EEExtension.hpp"
 
 NS_EE_BEGIN
+/// Utility class to store a value that dynamically changes.
+///
+/// Useful for anticheating.
+///
+/// Currently supports @c std::int32_t and @c float.
 template<class T>
 class DynamicValue final {
 public:
@@ -29,22 +34,13 @@ public:
     DynamicValue& operator=(const DynamicValue& other);
     DynamicValue& operator=(DynamicValue&& other);
 
-    /**
-     * Getter.
-     * Retrieves the value.
-     */
+    /// Retrieves the value.
     T get() const;
     
-    /**
-     * Setter.
-     * Sets the given value.
-     */
+    /// Assigns value.
     DynamicValue& set(T value);
     
-    /**
-     * Adder
-     * Add a given amount.
-     */
+    /// Add a value.
     DynamicValue& add(T amount);
 
     /// Implicit conversion.

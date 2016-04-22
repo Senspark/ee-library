@@ -12,13 +12,26 @@
 #include <tuple>
 #include <type_traits>
 
-#include "cocosbuilder/CCNodeLoader.h"
-
 #include "EEMacro.hpp"
 #include "EECocos2dxFwd.hpp"
 #include "EEExtension.hpp"
 
+#include <cocosbuilder/CCNodeLoader.h>
+
 NS_EE_BEGIN
+/// Generic template loader for cocosbuilder.
+///
+/// Simple loader:
+/// @code
+/// your_node_loader_library->registerNodeLoader(
+///     "your_class_name_in_cocosbuilder",
+///     ee::GenericLoader<
+///         your_class_name,
+///         inherited_node_loader /// E.g: if your_class_name
+///                               /// inherits from Node, use
+///                               /// cocosbuilder::NodeLoader
+///     >::loader());
+/// @endcode
 template<class Np, class Lp, class... Ts>
 class GenericLoader final : public Lp {
 public:
@@ -47,17 +60,22 @@ public:
     }
     
 private:
-    virtual NodeType* createNode(cocos2d::Node* parent, cocosbuilder::CCBReader* reader) override {
+    virtual NodeType* createNode(cocos2d::Node* parent,
+                                 cocosbuilder::CCBReader* reader) override {
         return _callback();
     }
     
+    /// Non-templated @c create overload.
     template<class DataType, std::size_t... Indices>
-    NodeType* internalCreateNode(std::true_type, DataType&& data, std::index_sequence<Indices...>) {
+    NodeType* internalCreateNode(std::true_type, DataType&& data,
+                                 std::index_sequence<Indices...>) {
         return NodeType::create(std::get<Indices>(std::forward<DataType>(data))...);
     }
     
+    /// Templated @c create overload.
     template<class DataType, std::size_t... Indices>
-    NodeType* internalCreateNode(std::false_type, DataType&& data, std::index_sequence<Indices...>) {
+    NodeType* internalCreateNode(std::false_type, DataType&& data,
+                                 std::index_sequence<Indices...>) {
         return NodeType::template create<Ts...>(std::get<Indices>(std::forward<DataType>(data))...);
     }
     

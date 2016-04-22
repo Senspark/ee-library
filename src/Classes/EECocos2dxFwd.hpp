@@ -9,6 +9,8 @@
 #ifndef EE_LIBRARY_COCOS2DX_FWD_HPP_
 #define EE_LIBRARY_COCOS2DX_FWD_HPP_
 
+/// Forward cocos2d-x classes.
+
 #include <string>
 #include <unordered_map>
 

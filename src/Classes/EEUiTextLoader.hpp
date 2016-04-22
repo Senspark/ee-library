@@ -11,16 +11,17 @@
 
 #include "EEMacro.hpp"
 
-#include "cocosbuilder/CCNodeLoader.h"
+#include <cocosbuilder/CCNodeLoader.h>
 
 NS_EE_BEGIN
-
+/// Cocosbuilder loader for @c cocos2d::ui::Text.
 class UiTextLoader : public cocosbuilder::NodeLoader {
 public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(UiTextLoader, loader);
     
 protected:
-    virtual cocos2d::Node* createNode(cocos2d::Node* parent, cocosbuilder::CCBReader* reader) override;
+    virtual cocos2d::Node* createNode(cocos2d::Node* parent,
+                                      cocosbuilder::CCBReader* reader) override;
     
     virtual void onHandlePropTypeColor3(cocos2d::Node* node,
                                         cocos2d::Node* parent,

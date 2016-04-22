@@ -11,15 +11,18 @@
 
 #include "EEMacro.hpp"
 
-#include "GUI/CCControlExtension/CCControl.h"
-#include "ui/UIWidget.h"
+#include <GUI/CCControlExtension/CCControl.h>
+#include <ui/UIWidget.h>
 
 NS_EE_BEGIN
 NS_DETAIL_BEGIN
 struct DummyRef : public cocos2d::Ref {
     void dummyFunction(cocos2d::Ref*, cocos2d::extension::Control::EventType) {}
 };
-NS_DETAIL_END
+
+/// Converts touch callback
+/// from @c cocos2d::extension::ControlButton
+/// to @c cocos2d::ui::Button.
 class UiWidgetCallback {
 public:
     using TouchCallback = cocos2d::ui::Widget::ccWidgetTouchCallback;
@@ -40,7 +43,7 @@ private:
 
 #define CCB_SELECTORRESOLVER_CCCONTROL_TOUCH(target, selectorName, callable) \
     if (pTarget == target && std::strcmp(pSelectorName, selectorName) == 0) { \
-        ::ee::UiWidgetCallback::getInstance()->setActiveTouchCallback(callable); \
+        ::ee::detail::UiWidgetCallback::getInstance()->setActiveTouchCallback(callable); \
         return static_cast<cocos2d::extension::Control::Handler>(&::ee::detail::DummyRef::dummyFunction); \
     }
 
@@ -49,7 +52,7 @@ private:
 
 #define CCB_SELECTORRESOLVER_CCCONTROL_CLICK(target, selectorName, callable) \
     if (pTarget == target && std::strcmp(pSelectorName, selectorName) == 0) { \
-        ::ee::UiWidgetCallback::getInstance()->setActiveClickCallback(callable); \
+        ::ee::detail::UiWidgetCallback::getInstance()->setActiveClickCallback(callable); \
         return static_cast<cocos2d::extension::Control::Handler>(&::ee::detail::DummyRef::dummyFunction); \
     }
 
@@ -64,6 +67,7 @@ private:
     str = str.substr(str.rfind("::") + 2); \
     CCB_SELECTORRESOLVER_CCCONTROL_CLICK(this, str.c_str(), CC_CALLBACK_1(function, this)); \
 }
+NS_DETAIL_END
 NS_EE_END
 
 #endif /* EEUiWidgetCallback_hpp */

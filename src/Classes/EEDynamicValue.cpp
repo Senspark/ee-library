@@ -8,7 +8,7 @@
 
 #include "EEDynamicValue.hpp"
 
-#include "base/ccRandom.h"
+#include <base/ccRandom.h>
 
 NS_EE_BEGIN
 template<class T>
@@ -18,23 +18,24 @@ DynamicValue<T>::DynamicValue()
 {}
 
 template<class T>
-DynamicValue<T>::~DynamicValue()
-{}
+DynamicValue<T>::~DynamicValue() = default;
     
 template<class T>
-DynamicValue<T>::DynamicValue(T value) : DynamicValue() {
+DynamicValue<T>::DynamicValue(T value)
+: DynamicValue() {
     set(value);
 }
     
 template<class T>
-DynamicValue<T>::DynamicValue(const DynamicValue<T>& other) : DynamicValue() {
+DynamicValue<T>::DynamicValue(const DynamicValue<T>& other)
+: DynamicValue() {
     set(other);
 }
     
 template<class T>
 DynamicValue<T>::DynamicValue(DynamicValue<T>&& other)
-    : _value(std::move(other._value))
-    , _random(std::move(other._random)) {}
+: _value(std::move(other._value))
+, _random(std::move(other._random)) {}
     
 template<class T>
 DynamicValue<T>& DynamicValue<T>::operator=(const DynamicValue& other) {
@@ -59,7 +60,8 @@ T DynamicValue<T>::get() const {
 template<class T>
 DynamicValue<T>& DynamicValue<T>::set(T value) {
     auto intValue = bit_cast<StoreType>(value);
-    _random = std::make_unique<StoreType>(cocos2d::random(std::numeric_limits<StoreType>::min(), std::numeric_limits<StoreType>::max()));
+    _random = std::make_unique<StoreType>(cocos2d::random(std::numeric_limits<StoreType>::min(),
+                                                          std::numeric_limits<StoreType>::max()));
     _value = std::make_unique<std::uint32_t>((*_random) ^ intValue);
     return *this;
 }
@@ -69,7 +71,6 @@ DynamicValue<T>& DynamicValue<T>::add(T amount) {
     return set(get() + amount);
 }
 
-// Implicit conversion.
 template<class T>
 DynamicValue<T>::operator T() const {
     return get();
@@ -119,6 +120,6 @@ DynamicValue<T>& DynamicValue<T>::operator--() {
     return *this;
 }
 
-template class DynamicValue<int>;
+template class DynamicValue<std::int32_t>;
 template class DynamicValue<float>;
 NS_EE_END

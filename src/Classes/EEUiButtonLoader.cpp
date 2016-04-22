@@ -38,7 +38,8 @@ constexpr const char* PROPERTY_BACKGROUNDSPRITEFRAME_HIGHLIGHTED    = "backgroun
 constexpr const char* PROPERTY_BACKGROUNDSPRITEFRAME_DISABLED       = "backgroundSpriteFrame|3";
 NS_ANONYMOUS_END
 
-cocos2d::Node* UiButtonLoader::createNode(cocos2d::Node* parent, cocosbuilder::CCBReader* reader) {
+cocos2d::Node* UiButtonLoader::createNode(cocos2d::Node* parent,
+                                          cocosbuilder::CCBReader* reader) {
     auto result = cocos2d::ui::Button::create();
     result->setScale9Enabled(true);
     return result;
@@ -58,7 +59,9 @@ cocos2d::SpriteFrame* UiButtonLoader::parsePropTypeSpriteFrame(cocos2d::Node* no
             _textureResType = cocos2d::ui::Widget::TextureResType::LOCAL;
             auto texture = cocos2d::Director::getInstance()->getTextureCache()->addImage(spriteFile.c_str());
             if (texture != nullptr) {
-                auto bounds = cocos2d::Rect(0, 0, texture->getContentSize().width, texture->getContentSize().height);
+                auto bounds = cocos2d::Rect(0, 0,
+                                            texture->getContentSize().width,
+                                            texture->getContentSize().height);
                 spriteFrame = cocos2d::SpriteFrame::createWithTexture(texture, bounds);
             }
         } else {
@@ -92,24 +95,26 @@ void UiButtonLoader::onHandlePropTypeBlockControl(cocos2d::Node* node,
         // auto target = blockControlData->_target;
         // auto events = blockControlData->mControlEvents;
         // CCASSERT(events == cocos2d::extension::Control::EventType::TOUCH_UP_INSIDE, "Unexpected value.");
-        // button->addTouchEventListener([handler, target, events](cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType eventType) {
+        // button->addTouchEventListener([handler, target, events](cocos2d::Ref* sender,
+        //                                                         cocos2d::ui::Widget::TouchEventType eventType) {
         //     if (eventType == cocos2d::ui::Widget::TouchEventType::ENDED) {
         //         (target->*handler)(sender, cocos2d::extension::Control::EventType::TOUCH_UP_INSIDE);
         //     }
         // });
-        auto&& touchCallback = UiWidgetCallback::getInstance()->getActiveTouchCallback();
-        auto&& clickCallback = UiWidgetCallback::getInstance()->getActiveClickCallback();
+        auto&& touchCallback = detail::UiWidgetCallback::getInstance()->getActiveTouchCallback();
+        auto&& clickCallback = detail::UiWidgetCallback::getInstance()->getActiveClickCallback();
         if (touchCallback) {
             button->addTouchEventListener(touchCallback);
-            UiWidgetCallback::getInstance()->setActiveTouchCallback(nullptr);
+            detail::UiWidgetCallback::getInstance()->setActiveTouchCallback(nullptr);
         } else if (clickCallback) {
             button->addClickEventListener(clickCallback);
-            UiWidgetCallback::getInstance()->setActiveClickCallback(nullptr);
+            detail::UiWidgetCallback::getInstance()->setActiveClickCallback(nullptr);
         } else {
             CCASSERT(false, "Unexpected value.");
         }
     } else {
-        NodeLoader::onHandlePropTypeBlockControl(node, parent, propertyName, blockControlData, reader);
+        NodeLoader::onHandlePropTypeBlockControl(node, parent, propertyName,
+                                                 blockControlData, reader);
     }
 }
 
@@ -126,7 +131,8 @@ void UiButtonLoader::onHandlePropTypeCheck(cocos2d::Node* node,
     } else if (std::strcmp(propertyName, PROPERTY_SELECTED) == 0) {
         CCASSERT(false, "Unexpected arg.");
     } else {
-        NodeLoader::onHandlePropTypeCheck(node, parent, propertyName, check, reader);
+        NodeLoader::onHandlePropTypeCheck(node, parent, propertyName,
+                                          check, reader);
     }
 }
 
@@ -143,7 +149,8 @@ void UiButtonLoader::onHandlePropTypeString(cocos2d::Node* node,
     } else if (std::strcmp(propertyName, PROPERTY_TITLE_DISABLED) == 0) {
         CCASSERT(false, "Unexpected arg.");
     } else {
-        NodeLoader::onHandlePropTypeString(node, parent, propertyName, string, reader);
+        NodeLoader::onHandlePropTypeString(node, parent, propertyName,
+                                           string, reader);
     }
 }
 
@@ -160,7 +167,8 @@ void UiButtonLoader::onHandlePropTypeFontTTF(cocos2d::Node* node,
     } else if (std::strcmp(propertyName, PROPERTY_TITLETTF_DISABLED) == 0) {
         CCASSERT(false, "Unexpected arg.");
     } else {
-        NodeLoader::onHandlePropTypeFontTTF(node, parent, propertyName, fontTTF, reader);
+        NodeLoader::onHandlePropTypeFontTTF(node, parent, propertyName,
+                                            fontTTF, reader);
     }
 }
 
@@ -177,7 +185,8 @@ void UiButtonLoader::onHandlePropTypeFloatScale(cocos2d::Node* node,
     } else if (std::strcmp(propertyName, PROPERTY_TITLETTFSIZE_DISABLED) == 0) {
         CCASSERT(false, "Unexpected arg.");
     } else {
-        NodeLoader::onHandlePropTypeFloatScale(node, parent, propertyName, floatScale, reader);
+        NodeLoader::onHandlePropTypeFloatScale(node, parent, propertyName,
+                                               floatScale, reader);
     }
 }
 
@@ -190,7 +199,8 @@ void UiButtonLoader::onHandlePropTypePoint(cocos2d::Node* node,
     if (std::strcmp(propertyName, PROPERTY_LABELANCHORPOINT) == 0) {
         button->getTitleRenderer()->setAnchorPoint(point);
     } else {
-        NodeLoader::onHandlePropTypePoint(node, parent, propertyName, point, reader);
+        NodeLoader::onHandlePropTypePoint(node, parent, propertyName,
+                                          point, reader);
     }
 }
 
@@ -203,7 +213,8 @@ void UiButtonLoader::onHandlePropTypeSize(cocos2d::Node* node,
     if (std::strcmp(propertyName, PROPERTY_PREFEREDSIZE) == 0) {
         button->setContentSize(size);
     } else {
-        NodeLoader::onHandlePropTypeSize(node, parent, propertyName, size, reader);
+        NodeLoader::onHandlePropTypeSize(node, parent, propertyName,
+                                         size, reader);
     }
 }
 
@@ -212,11 +223,12 @@ void UiButtonLoader::onHandlePropTypeSpriteFrame(cocos2d::Node* node,
                                                  const char* propertyName,
                                                  cocos2d::SpriteFrame* spriteFrame,
                                                  cocosbuilder::CCBReader* reader) {
-    if (_spriteFrameName == "ccbButtonDisabled.png") {
+    if (spriteFrame == nullptr) {
+        LOG_FUNC_FORMAT("Failed to load spriteFrame: name = %s",
+                        _spriteFrameName.c_str());
         return;
     }
     auto button = dynamic_cast<cocos2d::ui::Button*>(node);
-    CCASSERT(spriteFrame != nullptr, "Unexpected args.");
     if (std::strcmp(propertyName, PROPERTY_BACKGROUNDSPRITEFRAME_NORMAL) == 0) {
         CCASSERT(_spriteFrameName.empty() == false, "Unexpected value.");
         button->loadTextureNormal(_spriteFrameName, _textureResType);
@@ -227,7 +239,8 @@ void UiButtonLoader::onHandlePropTypeSpriteFrame(cocos2d::Node* node,
         CCASSERT(_spriteFrameName.empty() == false, "Unexpected value.");
         button->loadTextureDisabled(_spriteFrameName, _textureResType);
     } else {
-        NodeLoader::onHandlePropTypeSpriteFrame(node, parent, propertyName, spriteFrame, reader);
+        NodeLoader::onHandlePropTypeSpriteFrame(node, parent, propertyName,
+                                                spriteFrame, reader);
     }
 }
 
@@ -244,7 +257,8 @@ void UiButtonLoader::onHandlePropTypeColor3(cocos2d::Node* node,
     } else if(strcmp(propertyName, PROPERTY_TITLECOLOR_DISABLED) == 0) {
         // Ignored.
     } else {
-        NodeLoader::onHandlePropTypeColor3(node, parent, propertyName, color3B, reader);
+        NodeLoader::onHandlePropTypeColor3(node, parent, propertyName,
+                                           color3B, reader);
     }
 }
 NS_EE_END

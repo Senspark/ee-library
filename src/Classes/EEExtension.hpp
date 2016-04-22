@@ -9,34 +9,80 @@
 #ifndef EE_LIBRARY_EXTENSION_HPP_
 #define EE_LIBRARY_EXTENSION_HPP_
 
+/// C++17 functions.
+
+#include <functional>
 #include <type_traits>
 
 #include "EEMacro.hpp"
 
 NS_EE_BEGIN
-/// is_same_v N3854.
-template<class T, class U>
-constexpr auto is_same_v = std::is_same<T, U>::value;
-    
-/// is_function_v.
+template<class T>
+constexpr bool is_void_v = std::is_void<T>::value;
+
+template<class T>
+constexpr bool is_null_pointer_v = std::is_null_pointer<T>::value;
+
+template<class T>
+constexpr bool is_integral_v = std::is_integral<T>::value;
+
+template<class T>
+constexpr bool is_array_v = std::is_array<T>::value;
+
+template<class T>
+constexpr bool is_pointer_v = std::is_pointer<T>::value;
+
+template<class T>
+constexpr bool is_lvalue_reference_v = std::is_lvalue_reference<T>::value;
+
+template<class T>
+constexpr bool is_rvalue_reference_v = std::is_rvalue_reference<T>::value;
+
+template<class T>
+constexpr bool is_member_object_pointer_v = std::is_member_object_pointer<T>::value;
+
+template<class T>
+constexpr bool is_member_function_pointer_v = std::is_member_function_pointer<T>::value;
+
+template<class T>
+constexpr bool is_enum_v = std::is_enum<T>::value;
+
+template<class T>
+constexpr bool is_union_v = std::is_union<T>::value;
+
+template<class T>
+constexpr bool is_class_v = std::is_class<T>::value;
+
 template<class T>
 constexpr bool is_function_v = std::is_function<T>::value;
-    
-/// is_base_of_v.
-template<class T, class U>
-constexpr bool is_base_of_v = std::is_base_of<T, U>::value;
 
-/// is_reference_v.
 template<class T>
 constexpr bool is_reference_v = std::is_reference<T>::value;
 
 template<class T>
-constexpr bool is_pod_v = std::is_pod<T>::value;
+constexpr bool is_member_pointer_v = std::is_member_pointer<T>::value;
 
-/// is_const_v.
 template<class T>
 constexpr bool is_const_v = std::is_const<T>::value;
+
+template<class T>
+constexpr bool is_pod_v = std::is_pod<T>::value;
     
+template<class T, class U>
+constexpr bool is_same_v = std::is_same<T, U>::value;
+    
+template<class T, class U>
+constexpr bool is_base_of_v = std::is_base_of<T, U>::value;
+    
+template<class From, class To>
+constexpr bool is_convertible_v = std::is_convertible<From, To>::value;
+
+template<class T>
+constexpr bool is_bind_expression_v = std::is_bind_expression<T>::value;
+
+template<class T>
+constexpr int is_placeholder_v = std::is_placeholder<T>::value;
+
 /// is_reference_wrapper.
 template<class T>
 struct is_reference_wrapper {
@@ -47,26 +93,18 @@ template<class T>
 struct is_reference_wrapper<std::reference_wrapper<T>> {
     static constexpr bool value = true;
 };
-    
-/// is_reference_wrapper_v.
+
 template<class T>
 constexpr bool is_reference_wrapper_v = is_reference_wrapper<T>::value;
-    
-/// is_member_pointer_v.
-template<class T>
-constexpr bool is_member_pointer_v = std::is_member_pointer<T>::value;
-    
-/// tuple_size_v c++17.
+
 template<class T>
 constexpr std::size_t tuple_size_v = std::tuple_size<T>::value;
-    
-/// as_const c++17.
+
 template<class T>
 constexpr std::add_const_t<T>& as_const(T& t) noexcept {
     return t;
 }
-    
-// conjunction c++17.
+
 template<class...> struct conjunction : std::true_type {};
 template<class B> struct conjunction<B> : B {};
 template<class B, class... Bs>
@@ -74,8 +112,7 @@ struct conjunction<B, Bs...> : std::conditional_t<B::value != false, conjunction
     
 template<class... Bs>
 constexpr bool conjunction_v = conjunction<Bs...>::value;
-    
-// disjunction c++17.
+
 template<class...> struct disjunction : std::false_type {};
 template<class B> struct disjunction<B> : B {};
 template<class B, class... Bs>
@@ -83,63 +120,15 @@ struct disjunction<B, Bs...> : std::conditional_t<B::value != false, B, disjunct
     
 template<class... Bs>
 constexpr bool disjunction_v = disjunction<Bs...>::value;
-    
-// bool_constant c++17.
+
 template<bool B>
 using bool_constant = std::integral_constant<bool, B>;
-    
-// negation c++17.
+
 template<class B>
 struct negation : bool_constant<!B::value> {};
     
 template<class B>
 constexpr bool negation_v = negation<B>::value;
-    
-/// bool_sequence.
-template<bool... Bs>
-using bool_sequence = std::integer_sequence<bool, Bs...>;
-
-/// bool_and.
-template<bool... Bs>
-using bool_and = std::is_same<bool_sequence<Bs...>, bool_sequence<(Bs || true)...>>;
-    
-template<bool... Bs>
-constexpr auto bool_and_v = bool_and<Bs...>::value;
-
-/// bool_or.
-template<bool... Bs>
-using bool_or = std::integral_constant<bool, !bool_and_v<!Bs...>>;
-
-template<bool... Bs>
-constexpr auto bool_or_v = bool_or<Bs...>::value;
-    
-/// enable_if_any.
-template<class R, bool... Bs>
-using enable_if_any = std::enable_if<bool_or_v<Bs...>, R>;
-    
-template<class R, bool... Bs>
-using enable_if_any_t = typename enable_if_any<R, Bs...>::type;
-
-/// enable_if_all.
-template<class R, bool... Bs>
-using enable_if_all = std::enable_if<bool_and_v<Bs...>, R>;
-
-template<class R, bool... Bs>
-using enable_if_all_t = typename enable_if_all<R, Bs...>::type;
-    
-/// are_same.
-template<class T, class... Ts>
-using are_same = bool_and<is_same_v<T, Ts>...>;
-
-template<class T, class... Ts>
-constexpr auto are_same_v = are_same<T, Ts...>::value;
-
-/// one_same
-template<class T, class... Ts>
-using one_same = disjunction<std::is_same<T, Ts>...>;
-
-template<class T, class... Ts>
-constexpr auto one_same_v = one_same<T, Ts...>::value;
     
 /// invoke c++17.
 NS_DETAIL_BEGIN
@@ -230,11 +219,18 @@ constexpr decltype(auto) apply(F&& f, Tuple&& t) {
 }
 
 /// bit_cast.
+///
+/// https://gist.github.com/socantre/3472964
 template<class Dest, class Source>
 inline Dest bit_cast(const Source& source) {
-    static_assert(sizeof(Dest) == sizeof(Source), "size of destination and source objects must be equal.");
-    static_assert(std::is_trivially_copyable<Dest>::value, "destination type must be trivially copyable.");
-    static_assert(std::is_trivially_copyable<Source>::value, "source type must be trivially copyable.");
+    static_assert(sizeof(Dest) == sizeof(Source),
+                  "size of destination and source objects must be equal.");
+    
+    static_assert(std::is_trivially_copyable<Dest>::value,
+                  "destination type must be trivially copyable.");
+    
+    static_assert(std::is_trivially_copyable<Source>::value,
+                  "source type must be trivially copyable.");
     Dest dest;
     std::memcpy(&dest, &source, sizeof(dest));
     return dest;

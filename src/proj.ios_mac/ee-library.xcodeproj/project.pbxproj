@@ -16,10 +16,10 @@
 		6C3CAB401C5B5AC30059A380 /* EEForward.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6CAC26B81BD4111000F11F3A /* EEForward.hpp */; };
 		6C3CAB421C5B5ACF0059A380 /* EEUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C43A7D31BDDDAC300D0597F /* EEUtils.hpp */; };
 		6C3CAB431C5B5AEA0059A380 /* EEState.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6CC3596C1C0C0792007DC4CF /* EEState.hpp */; };
+		6C404B4C1CBFAEE4009A4251 /* EEAsyncLoader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C404B4A1CBFAEE4009A4251 /* EEAsyncLoader.hpp */; };
 		6C42EF411C8540A50062C2C6 /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FB07180E9839004C840B /* libcocos2d iOS.a */; settings = {ATTRIBUTES = (Weak, ); }; };
 		6C42EF451C85449F0062C2C6 /* EEDynamicValue.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C43A7B71BDDDAC300D0597F /* EEDynamicValue.hpp */; };
 		6C42EF461C8547660062C2C6 /* EEEventInfo.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C43A7B91BDDDAC300D0597F /* EEEventInfo.hpp */; };
-		6C4557791C8FD392001AE09A /* Dialog.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C4557771C8FD392001AE09A /* Dialog.hpp */; };
 		6C4557801C8FDE85001AE09A /* CocosUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C43A78D1BDDCAF800D0597F /* CocosUtils.hpp */; };
 		6C468C2C1CA2F0CA00D16594 /* EEUiWidgetCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C468C2A1CA2F0CA00D16594 /* EEUiWidgetCallback.cpp */; };
 		6C468C2D1CA2F0CA00D16594 /* EEUiWidgetCallback.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C468C2B1CA2F0CA00D16594 /* EEUiWidgetCallback.hpp */; };
@@ -32,10 +32,27 @@
 		6C4A4A571CA153E500E72D89 /* EEUiButtonLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C4A4A551CA153E500E72D89 /* EEUiButtonLoader.cpp */; };
 		6C4A4A581CA153E500E72D89 /* EEUiButtonLoader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C4A4A561CA153E500E72D89 /* EEUiButtonLoader.hpp */; };
 		6C53F49F1CA3FE510088580E /* EEBitManipulation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C53F49D1CA3FE510088580E /* EEBitManipulation.cpp */; };
-		6C53F4A01CA3FE510088580E /* EEBitManipulation.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C53F49E1CA3FE510088580E /* EEBitManipulation.hpp */; };
 		6C75EC111C8591150006790E /* EEDataHandler.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C75EC0F1C8591150006790E /* EEDataHandler.hpp */; };
 		6C8D55F41C86F8330047DD82 /* EEDataInfo.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C519B411BEDEC68002644FC /* EEDataInfo.hpp */; };
 		6CB0BC4D1C842ABA003D7E50 /* libboost.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CB0A2F71C84297F003D7E50 /* libboost.a */; settings = {ATTRIBUTES = (Weak, ); }; };
+		6F79B6221CCA7FC70008EFAC /* EEHeader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C43A7871BDDCA4600D0597F /* EEHeader.hpp */; };
+		6F79B6231CCA7FC90008EFAC /* EEMacro.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6CAC26C31BD4111000F11F3A /* EEMacro.hpp */; };
+		6F79B6241CCA7FCC0008EFAC /* EEBitManipulation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C53F49D1CA3FE510088580E /* EEBitManipulation.cpp */; };
+		6F79B6251CCA7FCF0008EFAC /* EEBitManipulation.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C53F49E1CA3FE510088580E /* EEBitManipulation.hpp */; };
+		6F79B6261CCA7FD00008EFAC /* EEBitManipulation.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C53F49E1CA3FE510088580E /* EEBitManipulation.hpp */; };
+		6F79B6271CCA7FD10008EFAC /* EECocos2dxFwd.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C49FB961CA1354A00E0FE86 /* EECocos2dxFwd.hpp */; };
+		6F79B6281CCA7FD20008EFAC /* EECocos2dxFwd.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C49FB961CA1354A00E0FE86 /* EECocos2dxFwd.hpp */; };
+		6F79B6291CCA7FD50008EFAC /* EEForward.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6CAC26B81BD4111000F11F3A /* EEForward.hpp */; };
+		6F79B62A1CCA7FDB0008EFAC /* EEExtension.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C49FB991CA136ED00E0FE86 /* EEExtension.hpp */; };
+		6F79B62B1CCA7FDC0008EFAC /* EEGenericLoader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C49FBB01CA13D1D00E0FE86 /* EEGenericLoader.hpp */; };
+		6F79B62C1CCA7FDE0008EFAC /* EEDynamicValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A7B61BDDDAC300D0597F /* EEDynamicValue.cpp */; };
+		6F79B62D1CCA7FE00008EFAC /* EEDynamicValue.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C43A7B71BDDDAC300D0597F /* EEDynamicValue.hpp */; };
+		6F79B62E1CCA7FE20008EFAC /* EEUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C43A7D31BDDDAC300D0597F /* EEUtils.hpp */; };
+		6F79B6341CCA8F9A0008EFAC /* EEUiWidgetCallback.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C468C2B1CA2F0CA00D16594 /* EEUiWidgetCallback.hpp */; };
+		6F79B6351CCA8F9E0008EFAC /* EEUiButtonLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C4A4A551CA153E500E72D89 /* EEUiButtonLoader.cpp */; };
+		6F79B6361CCA8FA00008EFAC /* EEUiButtonLoader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C4A4A561CA153E500E72D89 /* EEUiButtonLoader.hpp */; };
+		6F79B6371CCA8FA20008EFAC /* EEUiTextLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C47AAF51CA4EAE100B3E65E /* EEUiTextLoader.cpp */; };
+		6F79B6381CCA8FA40008EFAC /* EEUiTextLoader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C47AAF61CA4EAE100B3E65E /* EEUiTextLoader.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +91,20 @@
 			remoteGlobalIDString = A07A4C241783777C0073F6A7;
 			remoteInfo = "libcocos2d iOS";
 		};
+		6F79B61E1CCA7FC30008EFAC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6CB0A2F21C84297E003D7E50 /* boost.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6CB0A2DD1C842954003D7E50;
+			remoteInfo = boost;
+		};
+		6F79B6201CCA7FC30008EFAC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1551A33E158F2AB200E66CFE;
+			remoteInfo = "libcocos2d Mac";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -90,7 +121,7 @@
 
 /* Begin PBXFileReference section */
 		1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
-		6C2E7D711BDE0B69008F5EF3 /* ee-library-mobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "ee-library-mobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C2E7D711BDE0B69008F5EF3 /* lib_ee_mobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = lib_ee_mobile.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C2E7D831BDE14D4008F5EF3 /* EECrc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EECrc.cpp; sourceTree = "<group>"; };
 		6C2E7D861BDE1A1B008F5EF3 /* EEBackButtonListener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEBackButtonListener.cpp; sourceTree = "<group>"; };
 		6C2E7D871BDE1A1B008F5EF3 /* EEBackButtonListener.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEBackButtonListener.hpp; sourceTree = "<group>"; };
@@ -120,6 +151,8 @@
 		6C3FD3AB1C50E97900D2AFE2 /* Gesture.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Gesture.hpp; path = experimental/Gesture.hpp; sourceTree = "<group>"; };
 		6C3FD3AD1C50E97900D2AFE2 /* Projection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Projection.cpp; path = experimental/Projection.cpp; sourceTree = "<group>"; };
 		6C3FD3AE1C50E97900D2AFE2 /* Projection.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Projection.hpp; path = experimental/Projection.hpp; sourceTree = "<group>"; };
+		6C404B491CBFAEE4009A4251 /* EEAsyncLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEAsyncLoader.cpp; sourceTree = "<group>"; };
+		6C404B4A1CBFAEE4009A4251 /* EEAsyncLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEAsyncLoader.hpp; sourceTree = "<group>"; };
 		6C43A7871BDDCA4600D0597F /* EEHeader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EEHeader.hpp; sourceTree = "<group>"; };
 		6C43A78C1BDDCAF800D0597F /* CocosUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CocosUtils.cpp; sourceTree = "<group>"; };
 		6C43A78D1BDDCAF800D0597F /* CocosUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CocosUtils.hpp; sourceTree = "<group>"; };
@@ -151,8 +184,6 @@
 		6C43A7D11BDDDAC300D0597F /* EETouchManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EETouchManager.cpp; sourceTree = "<group>"; };
 		6C43A7D21BDDDAC300D0597F /* EETouchManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EETouchManager.hpp; sourceTree = "<group>"; };
 		6C43A7D31BDDDAC300D0597F /* EEUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEUtils.hpp; sourceTree = "<group>"; };
-		6C4557761C8FD392001AE09A /* Dialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Dialog.cpp; path = x_/Dialog.cpp; sourceTree = "<group>"; };
-		6C4557771C8FD392001AE09A /* Dialog.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Dialog.hpp; path = x_/Dialog.hpp; sourceTree = "<group>"; };
 		6C468C2A1CA2F0CA00D16594 /* EEUiWidgetCallback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEUiWidgetCallback.cpp; sourceTree = "<group>"; };
 		6C468C2B1CA2F0CA00D16594 /* EEUiWidgetCallback.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEUiWidgetCallback.hpp; sourceTree = "<group>"; };
 		6C47AAF51CA4EAE100B3E65E /* EEUiTextLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEUiTextLoader.cpp; sourceTree = "<group>"; };
@@ -189,6 +220,7 @@
 		6CC3596C1C0C0792007DC4CF /* EEState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEState.hpp; sourceTree = "<group>"; };
 		6CC359701C0C0F2E007DC4CF /* EEState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEState.cpp; sourceTree = "<group>"; };
 		6CC43B101BF31BC600FAC807 /* EEJniConverter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EEJniConverter.cpp; sourceTree = "<group>"; };
+		6F79B6331CCA84F10008EFAC /* lib_ee_desktop.a */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; name = lib_ee_desktop.a; path = "/Volumes/Setup/Android/projects/ee-library/src/proj.ios_mac/build/Debug/lib_ee_desktop.a"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +230,13 @@
 			files = (
 				6C42EF411C8540A50062C2C6 /* libcocos2d iOS.a in Frameworks */,
 				6CB0BC4D1C842ABA003D7E50 /* libboost.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6F79B60F1CCA7AA00008EFAC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,11 +285,11 @@
 				6C43A7B61BDDDAC300D0597F /* EEDynamicValue.cpp */,
 				6C43A7B71BDDDAC300D0597F /* EEDynamicValue.hpp */,
 				6C43A7D31BDDDAC300D0597F /* EEUtils.hpp */,
+				6C404B481CBFAEC3009A4251 /* async */,
 				6C3C3C2C1CA3859800A04333 /* ui */,
 				6C3C3C2B1CA3858C00A04333 /* event */,
 				6C3D1EEB1BEC9FAB00B56B55 /* data */,
-				6C45577A1C8FD39D001AE09A /* _y_ */,
-				6C4557741C8FC8C4001AE09A /* _x_ */,
+				6C4557741C8FC8C4001AE09A /* experimental */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -282,7 +321,7 @@
 		6C2E7D731BDE0B7D008F5EF3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6C2E7D711BDE0B69008F5EF3 /* ee-library-mobile.a */,
+				6C2E7D711BDE0B69008F5EF3 /* lib_ee_mobile.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -350,6 +389,15 @@
 			name = data;
 			sourceTree = "<group>";
 		};
+		6C404B481CBFAEC3009A4251 /* async */ = {
+			isa = PBXGroup;
+			children = (
+				6C404B491CBFAEE4009A4251 /* EEAsyncLoader.cpp */,
+				6C404B4A1CBFAEE4009A4251 /* EEAsyncLoader.hpp */,
+			);
+			name = async;
+			sourceTree = "<group>";
+		};
 		6C43A7F61BDDDAEC00D0597F /* Image */ = {
 			isa = PBXGroup;
 			children = (
@@ -362,9 +410,11 @@
 			name = Image;
 			sourceTree = "<group>";
 		};
-		6C4557741C8FC8C4001AE09A /* _x_ */ = {
+		6C4557741C8FC8C4001AE09A /* experimental */ = {
 			isa = PBXGroup;
 			children = (
+				6C43A78C1BDDCAF800D0597F /* CocosUtils.cpp */,
+				6C43A78D1BDDCAF800D0597F /* CocosUtils.hpp */,
 				6C3AD4E71BE4A29A0052E786 /* EEConstexprString.hpp */,
 				6CC359701C0C0F2E007DC4CF /* EEState.cpp */,
 				6CC3596C1C0C0792007DC4CF /* EEState.hpp */,
@@ -402,18 +452,7 @@
 				6C43A7BE1BDDDAC300D0597F /* EEGesture.hpp */,
 				6C19528D1C44DA0D00185F01 /* experimental */,
 			);
-			name = _x_;
-			sourceTree = "<group>";
-		};
-		6C45577A1C8FD39D001AE09A /* _y_ */ = {
-			isa = PBXGroup;
-			children = (
-				6C43A78C1BDDCAF800D0597F /* CocosUtils.cpp */,
-				6C43A78D1BDDCAF800D0597F /* CocosUtils.hpp */,
-				6C4557761C8FD392001AE09A /* Dialog.cpp */,
-				6C4557771C8FD392001AE09A /* Dialog.hpp */,
-			);
-			name = _y_;
+			name = experimental;
 			sourceTree = "<group>";
 		};
 		6C5AEB3B1BDF1B9F004C98A2 /* Crytography */ = {
@@ -459,14 +498,15 @@
 				6C4557801C8FDE85001AE09A /* CocosUtils.hpp in Headers */,
 				6C4A4A581CA153E500E72D89 /* EEUiButtonLoader.hpp in Headers */,
 				6C38491D1CA22FCA0020B858 /* EEEventListener.hpp in Headers */,
-				6C4557791C8FD392001AE09A /* Dialog.hpp in Headers */,
+				6F79B6251CCA7FCF0008EFAC /* EEBitManipulation.hpp in Headers */,
 				6C3CAB401C5B5AC30059A380 /* EEForward.hpp in Headers */,
 				6C49FBB11CA13D1D00E0FE86 /* EEGenericLoader.hpp in Headers */,
 				6C3CAB3E1C5B5ABB0059A380 /* EEHeader.hpp in Headers */,
 				6C75EC111C8591150006790E /* EEDataHandler.hpp in Headers */,
+				6C404B4C1CBFAEE4009A4251 /* EEAsyncLoader.hpp in Headers */,
 				6C3CAB3F1C5B5AC00059A380 /* EEMacro.hpp in Headers */,
 				6C3CAB431C5B5AEA0059A380 /* EEState.hpp in Headers */,
-				6C53F4A01CA3FE510088580E /* EEBitManipulation.hpp in Headers */,
+				6F79B6271CCA7FD10008EFAC /* EECocos2dxFwd.hpp in Headers */,
 				6C468C2D1CA2F0CA00D16594 /* EEUiWidgetCallback.hpp in Headers */,
 				6C42EF461C8547660062C2C6 /* EEEventInfo.hpp in Headers */,
 				6C47AAF81CA4EAE100B3E65E /* EEUiTextLoader.hpp in Headers */,
@@ -475,6 +515,25 @@
 				6C3849231CA230750020B858 /* EEEvent.hpp in Headers */,
 				6C49FB9A1CA136ED00E0FE86 /* EEExtension.hpp in Headers */,
 				6C3CAB421C5B5ACF0059A380 /* EEUtils.hpp in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6F79B6101CCA7AA00008EFAC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F79B62B1CCA7FDC0008EFAC /* EEGenericLoader.hpp in Headers */,
+				6F79B62A1CCA7FDB0008EFAC /* EEExtension.hpp in Headers */,
+				6F79B62E1CCA7FE20008EFAC /* EEUtils.hpp in Headers */,
+				6F79B6221CCA7FC70008EFAC /* EEHeader.hpp in Headers */,
+				6F79B6261CCA7FD00008EFAC /* EEBitManipulation.hpp in Headers */,
+				6F79B6341CCA8F9A0008EFAC /* EEUiWidgetCallback.hpp in Headers */,
+				6F79B62D1CCA7FE00008EFAC /* EEDynamicValue.hpp in Headers */,
+				6F79B6291CCA7FD50008EFAC /* EEForward.hpp in Headers */,
+				6F79B6381CCA8FA40008EFAC /* EEUiTextLoader.hpp in Headers */,
+				6F79B6361CCA8FA00008EFAC /* EEUiButtonLoader.hpp in Headers */,
+				6F79B6231CCA7FC90008EFAC /* EEMacro.hpp in Headers */,
+				6F79B6281CCA7FD20008EFAC /* EECocos2dxFwd.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,8 +557,27 @@
 			);
 			name = "ee-library-mobile";
 			productName = "ee-library";
-			productReference = 6C2E7D711BDE0B69008F5EF3 /* ee-library-mobile.a */;
+			productReference = 6C2E7D711BDE0B69008F5EF3 /* lib_ee_mobile.a */;
 			productType = "com.apple.product-type.library.static";
+		};
+		6F79B6111CCA7AA00008EFAC /* ee-library-desktop */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6F79B61B1CCA7AA00008EFAC /* Build configuration list for PBXNativeTarget "ee-library-desktop" */;
+			buildPhases = (
+				6F79B60E1CCA7AA00008EFAC /* Sources */,
+				6F79B60F1CCA7AA00008EFAC /* Frameworks */,
+				6F79B6101CCA7AA00008EFAC /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6F79B61F1CCA7FC30008EFAC /* PBXTargetDependency */,
+				6F79B6211CCA7FC30008EFAC /* PBXTargetDependency */,
+			);
+			name = "ee-library-desktop";
+			productName = "ee-library-desktop";
+			productReference = 6F79B6331CCA84F10008EFAC /* lib_ee_desktop.a */;
+			productType = "com.apple.product-type.library.dynamic";
 		};
 /* End PBXNativeTarget section */
 
@@ -511,6 +589,9 @@
 				TargetAttributes = {
 					6C43A8051BDDDF1800D0597F = {
 						CreatedOnToolsVersion = 7.1;
+					};
+					6F79B6111CCA7AA00008EFAC = {
+						CreatedOnToolsVersion = 7.3;
 					};
 				};
 			};
@@ -540,6 +621,7 @@
 			projectRoot = "";
 			targets = (
 				6C43A8051BDDDF1800D0597F /* ee-library-mobile */,
+				6F79B6111CCA7AA00008EFAC /* ee-library-desktop */,
 			);
 		};
 /* End PBXProject section */
@@ -584,6 +666,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6F79B60E1CCA7AA00008EFAC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F79B6241CCA7FCC0008EFAC /* EEBitManipulation.cpp in Sources */,
+				6F79B6351CCA8F9E0008EFAC /* EEUiButtonLoader.cpp in Sources */,
+				6F79B62C1CCA7FDE0008EFAC /* EEDynamicValue.cpp in Sources */,
+				6F79B6371CCA8FA20008EFAC /* EEUiTextLoader.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -597,22 +690,30 @@
 			name = "libcocos2d iOS";
 			targetProxy = 6CB0BC4B1C842AAF003D7E50 /* PBXContainerItemProxy */;
 		};
+		6F79B61F1CCA7FC30008EFAC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = boost;
+			targetProxy = 6F79B61E1CCA7FC30008EFAC /* PBXContainerItemProxy */;
+		};
+		6F79B6211CCA7FC30008EFAC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "libcocos2d Mac";
+			targetProxy = 6F79B6201CCA7FC30008EFAC /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		6C43A80E1BDDDF1900D0597F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
-				CLANG_ENABLE_MODULES = YES;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				EXECUTABLE_PREFIX = "";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					CC_TARGET_OS_IPHONE,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = lib_ee_mobile;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7";
 			};
@@ -621,21 +722,54 @@
 		6C43A80F1BDDDF1900D0597F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
-				CLANG_ENABLE_MODULES = YES;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				EXECUTABLE_PREFIX = "";
-				GCC_PREPROCESSOR_DEFINITIONS = CC_TARGET_OS_IPHONE;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					CC_TARGET_OS_IPHONE,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = lib_ee_mobile;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7";
+			};
+			name = Release;
+		};
+		6F79B6181CCA7AA00008EFAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					CC_TARGET_OS_MAC,
+					CC_KEYBOARD_SUPPORT,
+					_USRDLL,
+				);
+				LD_DYLIB_INSTALL_NAME = "";
+				MACH_O_TYPE = staticlib;
+				PRODUCT_NAME = lib_ee_desktop;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		6F79B6191CCA7AA00008EFAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					CC_KEYBOARD_SUPPORT,
+					CC_TARGET_OS_MAC,
+					_USRDLL,
+				);
+				LD_DYLIB_INSTALL_NAME = "";
+				MACH_O_TYPE = staticlib;
+				PRODUCT_NAME = lib_ee_desktop;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ADDRESS_SANITIZER_CONTAINER_OVERFLOW = YES;
 				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
@@ -643,22 +777,31 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_ASSIGN_ENUM = YES;
 				CLANG_WARN_CXX0X_EXTENSIONS = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
 				CLANG_WARN_NULLABLE_TO_NONNULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
+				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES_AGGRESSIVE;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_EXTENSION = a;
+				EXECUTABLE_PREFIX = "";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"COCOS2D_DEBUG=1",
+					USE_FILE32API,
 				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -670,6 +813,7 @@
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
@@ -691,8 +835,6 @@
 					"$(SRCROOT)/../../boost_1_60_0",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -707,16 +849,29 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_ASSIGN_ENUM = YES;
 				CLANG_WARN_CXX0X_EXTENSIONS = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
 				CLANG_WARN_NULLABLE_TO_NONNULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
+				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES_AGGRESSIVE;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_EXTENSION = a;
+				EXECUTABLE_PREFIX = "";
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					USE_FILE32API,
+					NDEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -728,6 +883,7 @@
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
@@ -748,9 +904,7 @@
 					"$(SRCROOT)/../cocos2d/external",
 					"$(SRCROOT)/../../boost_1_60_0",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SEPARATE_STRIP = YES;
+				LLVM_LTO = YES;
 				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -764,6 +918,15 @@
 			buildConfigurations = (
 				6C43A80E1BDDDF1900D0597F /* Debug */,
 				6C43A80F1BDDDF1900D0597F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		6F79B61B1CCA7AA00008EFAC /* Build configuration list for PBXNativeTarget "ee-library-desktop" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F79B6181CCA7AA00008EFAC /* Debug */,
+				6F79B6191CCA7AA00008EFAC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

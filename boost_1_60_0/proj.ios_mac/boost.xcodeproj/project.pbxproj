@@ -37,6 +37,8 @@
 		6C42EF271C8530F40062C2C6 /* one_of.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = one_of.hpp; sourceTree = "<group>"; };
 		6C42EF281C8530F40062C2C6 /* partition_copy.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = partition_copy.hpp; sourceTree = "<group>"; };
 		6C42EF291C8530F40062C2C6 /* partition_point.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = partition_point.hpp; sourceTree = "<group>"; };
+		6C4716091CAD969C007E514F /* small_vector.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = small_vector.hpp; sourceTree = "<group>"; };
+		6C47160A1CAD969C007E514F /* static_vector.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = static_vector.hpp; sourceTree = "<group>"; };
 		6CB0A2DE1C842954003D7E50 /* libboost.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libboost.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CB0AFA31C8429C4003D7E50 /* algorithm.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = algorithm.hpp; sourceTree = "<group>"; };
 		6CB0AFA41C8429C4003D7E50 /* clamp.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = clamp.hpp; sourceTree = "<group>"; };
@@ -3425,6 +3427,8 @@
 				6CB0B04D1C8429C4003D7E50 /* container_fwd.hpp */,
 				6CB0B04E1C8429C4003D7E50 /* detail */,
 				6CB0B0651C8429C4003D7E50 /* new_allocator.hpp */,
+				6C4716091CAD969C007E514F /* small_vector.hpp */,
+				6C47160A1CAD969C007E514F /* static_vector.hpp */,
 				6CB0B0661C8429C4003D7E50 /* throw_exception.hpp */,
 				6CB0B0671C8429C4003D7E50 /* vector.hpp */,
 			);

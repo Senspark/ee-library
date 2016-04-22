@@ -23,5 +23,6 @@
 #include "EEDataHandler.hpp"
 #include "EEUtils.hpp"
 #include "EEBitManipulation.hpp"
+#include "EEBackButtonListener.hpp"
 
 #endif /* EE_LIBRARY_HEADER_HPP_ */

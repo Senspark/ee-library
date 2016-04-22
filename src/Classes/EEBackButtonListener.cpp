@@ -7,33 +7,41 @@
 //
 
 #include "EEBackButtonListener.hpp"
-#include "cocos2d.h"
 
-namespace_ee_begin
-void BackButtonListener::addBackButtonListener() {
-#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+#include <cocos2d.h>
+
+NS_EE_BEGIN
+NS_DETAIL_BEGIN
+void BackButtonListenerBase::registerListener(cocos2d::Node* node) {
     CC_ASSERT(_listener == nullptr);
+    
     _listener = cocos2d::EventListenerKeyboard::create();
-    _listener->onKeyReleased = [this](cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event) {
-        if (keyCode == cocos2d::EventKeyboard::KeyCode::KEY_BACK) {
-            pressedBack();
-        }
-    };
-    cocos2d::Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(_listener, getInstance());
-#endif
+    _listener->onKeyReleased = std::bind(&BackButtonListenerBase::onKeyReleased,
+                                         this,
+                                         node,
+                                         std::placeholders::_1,
+                                         std::placeholders::_2);
+    auto dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
+    dispatcher->addEventListenerWithSceneGraphPriority(_listener, node);
 }
 
-void BackButtonListener::removeBackButtonListener() {
-#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+void BackButtonListenerBase::unregisterListener() {
     CC_ASSERT(_listener != nullptr);
-    cocos2d::Director::getInstance()->getEventDispatcher()->removeEventListener(_listener);
+    
+    auto dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
+    dispatcher->removeEventListener(_listener);
     _listener = nullptr;
-#endif
 }
 
-cocos2d::Node* BackButtonListener::getInstance() {
-    auto result = dynamic_cast<cocos2d::Node*>(this);
-    CC_ASSERT(result != nullptr);
-    return result;
+void BackButtonListenerBase::onKeyReleased(cocos2d::Node* node,
+                                           cocos2d::EventKeyboard::KeyCode keyCode,
+                                           cocos2d::Event* event) {
+    if (keyCode == cocos2d::EventKeyboard::KeyCode::KEY_BACK) {
+        if (node->isRunning()) {
+            onBackButtonPressed();
+            event->stopPropagation();
+        }
+    }
 }
-namespace_ee_end
+NS_DETAIL_END
+NS_EE_END

@@ -13,16 +13,20 @@
 #include "EECocos2dxFwd.hpp"
 #include "EEForward.hpp"
 
-#include "base/CCEventListener.h"
+#include <base/CCEventListener.h>
 
 NS_EE_BEGIN
 NS_DETAIL_BEGIN
+/// Variadic arguments (custom) event listener.
 template<class... Args>
-class EventListener : public cocos2d::EventListener {
+class EventListener final : public cocos2d::EventListener {
 public:
-    using CallbackType = std::function<void(Event<Args...>*)>;
+    using EventType = Event<Args...>;
+    using CallbackType = std::function<void(EventType*)>;
     
-    static EventListener* create(const std::string& eventName, const CallbackType& callback) {
+    /// Creates an event listener with name and callback.
+    static EventListener* create(const std::string& eventName,
+                                 const CallbackType& callback) {
         auto result = new (std::nothrow) EventListener();
         if (result != nullptr && result->init(eventName, callback)) {
             result->autorelease();
@@ -46,7 +50,7 @@ private:
         _onCustomEvent = callback;
         auto listener = [this](cocos2d::Event* event) {
             if (_onCustomEvent) {
-                _onCustomEvent(dynamic_cast<Event<Args...>*>(event));
+                _onCustomEvent(dynamic_cast<EventType*>(event));
             }
         };
         return cocos2d::EventListener::init(Type::CUSTOM, listenerId, listener);

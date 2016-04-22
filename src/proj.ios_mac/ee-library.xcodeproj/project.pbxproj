@@ -53,6 +53,14 @@
 		6F79B6361CCA8FA00008EFAC /* EEUiButtonLoader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C4A4A561CA153E500E72D89 /* EEUiButtonLoader.hpp */; };
 		6F79B6371CCA8FA20008EFAC /* EEUiTextLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C47AAF51CA4EAE100B3E65E /* EEUiTextLoader.cpp */; };
 		6F79B6381CCA8FA40008EFAC /* EEUiTextLoader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C47AAF61CA4EAE100B3E65E /* EEUiTextLoader.hpp */; };
+		6F79B6401CCAA2D70008EFAC /* EEBackButtonListener.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C2E7D871BDE1A1B008F5EF3 /* EEBackButtonListener.hpp */; };
+		6F79B6411CCAA2D70008EFAC /* EEBackButtonListener.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C2E7D871BDE1A1B008F5EF3 /* EEBackButtonListener.hpp */; };
+		6F79B6421CCAA2D90008EFAC /* EEBackButtonListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C2E7D861BDE1A1B008F5EF3 /* EEBackButtonListener.cpp */; };
+		6F79B6431CCAA2D90008EFAC /* EEBackButtonListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C2E7D861BDE1A1B008F5EF3 /* EEBackButtonListener.cpp */; };
+		6F79B6441CCAC0E50008EFAC /* EEEventInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A7B81BDDDAC300D0597F /* EEEventInfo.cpp */; };
+		6F79B6451CCAC0E70008EFAC /* EEEventInfo.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C43A7B91BDDDAC300D0597F /* EEEventInfo.hpp */; };
+		6F79B6461CCAC0E90008EFAC /* EEEvent.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C3849211CA230750020B858 /* EEEvent.hpp */; };
+		6F79B6471CCAC0EA0008EFAC /* EEEventListener.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C38491B1CA22FCA0020B858 /* EEEventListener.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -285,6 +293,7 @@
 				6C43A7B61BDDDAC300D0597F /* EEDynamicValue.cpp */,
 				6C43A7B71BDDDAC300D0597F /* EEDynamicValue.hpp */,
 				6C43A7D31BDDDAC300D0597F /* EEUtils.hpp */,
+				6F79B63F1CCAA2C20008EFAC /* listener */,
 				6C404B481CBFAEC3009A4251 /* async */,
 				6C3C3C2C1CA3859800A04333 /* ui */,
 				6C3C3C2B1CA3858C00A04333 /* event */,
@@ -332,8 +341,6 @@
 				6C43A7D01BDDDAC300D0597F /* EETouchManager-Impl.hpp */,
 				6C43A7D11BDDDAC300D0597F /* EETouchManager.cpp */,
 				6C43A7D21BDDDAC300D0597F /* EETouchManager.hpp */,
-				6C2E7D861BDE1A1B008F5EF3 /* EEBackButtonListener.cpp */,
-				6C2E7D871BDE1A1B008F5EF3 /* EEBackButtonListener.hpp */,
 				6C5473731BE0C08E008F06A7 /* EETouchListener.cpp */,
 				6C3A213E1BE08B4A0074C7F5 /* EETouchListener.hpp */,
 				6C54737B1BE0C7B0008F06A7 /* EETouchListener-Impl.hpp */,
@@ -488,6 +495,15 @@
 			name = Layer;
 			sourceTree = "<group>";
 		};
+		6F79B63F1CCAA2C20008EFAC /* listener */ = {
+			isa = PBXGroup;
+			children = (
+				6C2E7D861BDE1A1B008F5EF3 /* EEBackButtonListener.cpp */,
+				6C2E7D871BDE1A1B008F5EF3 /* EEBackButtonListener.hpp */,
+			);
+			name = listener;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -510,6 +526,7 @@
 				6C468C2D1CA2F0CA00D16594 /* EEUiWidgetCallback.hpp in Headers */,
 				6C42EF461C8547660062C2C6 /* EEEventInfo.hpp in Headers */,
 				6C47AAF81CA4EAE100B3E65E /* EEUiTextLoader.hpp in Headers */,
+				6F79B6401CCAA2D70008EFAC /* EEBackButtonListener.hpp in Headers */,
 				6C42EF451C85449F0062C2C6 /* EEDynamicValue.hpp in Headers */,
 				6C8D55F41C86F8330047DD82 /* EEDataInfo.hpp in Headers */,
 				6C3849231CA230750020B858 /* EEEvent.hpp in Headers */,
@@ -526,11 +543,15 @@
 				6F79B62A1CCA7FDB0008EFAC /* EEExtension.hpp in Headers */,
 				6F79B62E1CCA7FE20008EFAC /* EEUtils.hpp in Headers */,
 				6F79B6221CCA7FC70008EFAC /* EEHeader.hpp in Headers */,
+				6F79B6461CCAC0E90008EFAC /* EEEvent.hpp in Headers */,
 				6F79B6261CCA7FD00008EFAC /* EEBitManipulation.hpp in Headers */,
+				6F79B6451CCAC0E70008EFAC /* EEEventInfo.hpp in Headers */,
 				6F79B6341CCA8F9A0008EFAC /* EEUiWidgetCallback.hpp in Headers */,
 				6F79B62D1CCA7FE00008EFAC /* EEDynamicValue.hpp in Headers */,
 				6F79B6291CCA7FD50008EFAC /* EEForward.hpp in Headers */,
 				6F79B6381CCA8FA40008EFAC /* EEUiTextLoader.hpp in Headers */,
+				6F79B6471CCAC0EA0008EFAC /* EEEventListener.hpp in Headers */,
+				6F79B6411CCAA2D70008EFAC /* EEBackButtonListener.hpp in Headers */,
 				6F79B6361CCA8FA00008EFAC /* EEUiButtonLoader.hpp in Headers */,
 				6F79B6231CCA7FC90008EFAC /* EEMacro.hpp in Headers */,
 				6F79B6281CCA7FD20008EFAC /* EECocos2dxFwd.hpp in Headers */,
@@ -657,6 +678,7 @@
 			files = (
 				6C468C2C1CA2F0CA00D16594 /* EEUiWidgetCallback.cpp in Sources */,
 				6C4A4A571CA153E500E72D89 /* EEUiButtonLoader.cpp in Sources */,
+				6F79B6421CCAA2D90008EFAC /* EEBackButtonListener.cpp in Sources */,
 				6C47FE4A1CA1B7EF00FEF3BC /* EEEventInfo.cpp in Sources */,
 				6C3C3C301CA3947D00A04333 /* EEDataInfo.cpp in Sources */,
 				6C47FE491CA1B36A00FEF3BC /* EEDynamicValue.cpp in Sources */,
@@ -674,6 +696,8 @@
 				6F79B6351CCA8F9E0008EFAC /* EEUiButtonLoader.cpp in Sources */,
 				6F79B62C1CCA7FDE0008EFAC /* EEDynamicValue.cpp in Sources */,
 				6F79B6371CCA8FA20008EFAC /* EEUiTextLoader.cpp in Sources */,
+				6F79B6441CCAC0E50008EFAC /* EEEventInfo.cpp in Sources */,
+				6F79B6431CCAA2D90008EFAC /* EEBackButtonListener.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

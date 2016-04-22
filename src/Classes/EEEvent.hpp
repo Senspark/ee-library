@@ -14,28 +14,34 @@
 #include "EEMacro.hpp"
 #include "EEExtension.hpp"
 
-#include "base/CCEventCustom.h"
+#include <base/CCEventCustom.h>
 
 NS_EE_BEGIN
 NS_DETAIL_BEGIN
+/// Variadic arguments (custom) event.
 template<class... Args>
-class Event : public cocos2d::EventCustom {
+class Event final : public cocos2d::EventCustom {
 public:
     using ArgTypes = std::tuple<Args...>;
     using CallbackType = std::function<void(Args...)>;
     
     using EventCustom::EventCustom;
     
+    /// Assigns the event data to invoke later.
     void setData(Args... args) {
-        _callback = std::bind(&Event::impl, this, std::placeholders::_1, std::ref(std::forward<Args>(args))...);
+        _callback = std::bind(&Event::invokeImpl,
+                              this,
+                              std::placeholders::_1,
+                              std::ref(std::forward<Args>(args))...);
     }
     
+    /// Invokes the given callback with stored arguments.
     void invoke(const CallbackType& callback) const {
         _callback(callback);
     }
     
 private:
-    void impl(const CallbackType& callback, Args... args) const {
+    void invokeImpl(const CallbackType& callback, Args... args) const {
         callback(std::forward<Args>(args)...);
     }
     

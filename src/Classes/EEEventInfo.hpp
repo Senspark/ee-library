@@ -12,7 +12,6 @@
 #include <functional>
 
 #include "EEMacro.hpp"
-#include "EEForward.hpp"
 #include "EEEvent.hpp"
 #include "EEEventListener.hpp"
 
@@ -40,7 +39,7 @@ NS_DETAIL_END
 
 /// Variadic arguments event info.
 ///
-/// Enhance the way of dispatching custom events.
+/// Improve the way of dispatching custom events.
 ///
 /// Old way:
 /// @code
@@ -60,6 +59,10 @@ NS_DETAIL_END
 /// int myData = getMyData();
 /// auto dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
 /// dispacher->dispatchCustomEvent("event_name", &myData);
+///
+/// // Unregister all event listeners.
+/// auto dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
+/// dispatcher->removeCustomEventListeners("event_name");
 /// @endcode
 ///
 /// New way using ee::EventInfo.
@@ -78,6 +81,9 @@ NS_DETAIL_END
 /// // Dispatch event.
 /// int myData = getMyData();
 /// myEvent.dispatch(myData);
+///
+/// // Unregister all event listeners.
+/// myEvent.removeListeners();
 /// @endcode
 /// @see CREATE_EVENT_INFO
 /// @see CREATE_EVENT_INFO_EX

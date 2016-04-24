@@ -6,41 +6,52 @@
 //
 //
 
-#include "EEImage.hpp"
-#include "cocos2d.h"
-
+#include <cassert>
 #include <cstring>
 
+#include "EEImage.hpp"
+
+#include <platform/CCImage.h>
+
 NS_EE_BEGIN
+namespace image {
 NS_ANONYMOUS_BEGIN
-void internalBoxBlur2D(std::uint8_t* pixels, std::uint_fast32_t width, std::uint_fast32_t height, std::uint_fast32_t range) {
-    std::uint_fast32_t kernelSize = range * 2 + 1;
-    CC_ASSERT(kernelSize < width && kernelSize < height);
+void internalBoxBlur2D(ChannelType * pixels,
+                       SizeType width, SizeType height,
+                       SizeType range) {
+    auto kernelSize = range * 2 + 1;
+    assert(kernelSize < width && kernelSize < height);
     
-    constexpr std::uint_fast32_t Bits = 24;
-    const std::uint_fast32_t Numerator = (1 << Bits) / (kernelSize * kernelSize);
+    constexpr SizeType Bits = 24;
+    const auto Numerator = (1 << Bits) / (kernelSize * kernelSize);
     
     auto inPixel = pixels;
     auto outPixel = pixels;
     
-    auto vertPrefixSumR = new std::uint_fast32_t[width]();
-    auto vertPrefixSumG = new std::uint_fast32_t[width]();
-    auto vertPrefixSumB = new std::uint_fast32_t[width]();
-    auto horiPrefixSumR = new std::uint_fast32_t[width + 1]; horiPrefixSumR[0] = 0;
-    auto horiPrefixSumG = new std::uint_fast32_t[width + 1]; horiPrefixSumG[0] = 0;
-    auto horiPrefixSumB = new std::uint_fast32_t[width + 1]; horiPrefixSumB[0] = 0;
-    auto buffer = new std::uint8_t[height * width * 4];
+    auto vertPrefixSumR = new SizeType[width]();
+    auto vertPrefixSumG = new SizeType[width]();
+    auto vertPrefixSumB = new SizeType[width]();
+    
+    auto horiPrefixSumR = new SizeType[width + 1]; horiPrefixSumR[0] = 0;
+    auto horiPrefixSumG = new SizeType[width + 1]; horiPrefixSumG[0] = 0;
+    auto horiPrefixSumB = new SizeType[width + 1]; horiPrefixSumB[0] = 0;
+    
+    auto buffer = new ChannelType[height * width * 4];
     
     auto newPixel = buffer;
+    
     auto vertSumR = vertPrefixSumR;
     auto vertSumG = vertPrefixSumG;
     auto vertSumB = vertPrefixSumB;
+    
     auto horiSumInR = horiPrefixSumR;
     auto horiSumInG = horiPrefixSumG;
     auto horiSumInB = horiPrefixSumB;
+    
     auto horiSumOutR = horiPrefixSumR;
     auto horiSumOutG = horiPrefixSumG;
     auto horiSumOutB = horiPrefixSumB;
+    
     auto resetVertSum = [&] {
         vertSumR = vertPrefixSumR;
         vertSumG = vertPrefixSumG;
@@ -83,42 +94,42 @@ void internalBoxBlur2D(std::uint8_t* pixels, std::uint_fast32_t width, std::uint
         ++horiSumOutG;
         ++horiSumOutB;
     };
-    auto updatePixel = [&](std::uint_fast32_t hits) {
-        *newPixel++ = static_cast<std::uint8_t>((*horiSumInR - *horiSumOutR) / hits);
-        *newPixel++ = static_cast<std::uint8_t>((*horiSumInG - *horiSumOutG) / hits);
-        *newPixel++ = static_cast<std::uint8_t>((*horiSumInB - *horiSumOutB) / hits);
-        *newPixel++ = 0xFF;
+    auto updatePixel = [&](SizeType hits) {
+        *newPixel++ = static_cast<ChannelType>((*horiSumInR - *horiSumOutR) / hits);
+        *newPixel++ = static_cast<ChannelType>((*horiSumInG - *horiSumOutG) / hits);
+        *newPixel++ = static_cast<ChannelType>((*horiSumInB - *horiSumOutB) / hits);
+        *newPixel++ = std::numeric_limits<ChannelType>::max();
     };
     auto updatePixelFullKernel = [&] {
-        *newPixel++ = static_cast<std::uint8_t>(((*horiSumInR - *horiSumOutR) * Numerator) >> Bits);
-        *newPixel++ = static_cast<std::uint8_t>(((*horiSumInG - *horiSumOutG) * Numerator) >> Bits);
-        *newPixel++ = static_cast<std::uint8_t>(((*horiSumInB - *horiSumOutB) * Numerator) >> Bits);
-        *newPixel++ = 0xFF;
+        *newPixel++ = static_cast<ChannelType>(((*horiSumInR - *horiSumOutR) * Numerator) >> Bits);
+        *newPixel++ = static_cast<ChannelType>(((*horiSumInG - *horiSumOutG) * Numerator) >> Bits);
+        *newPixel++ = static_cast<ChannelType>(((*horiSumInB - *horiSumOutB) * Numerator) >> Bits);
+        *newPixel++ = std::numeric_limits<ChannelType>::max();
     };
-    for (std::uint_fast32_t row = 0; row < range; ++row) {
+    for (SizeType row = 0; row < range; ++row) {
         resetVertSum();
-        for (std::uint_fast32_t col = 0; col < width; ++col) {
+        for (SizeType col = 0; col < width; ++col) {
             addPixel();
             shiftVertSum();
         }
     }
-    for (std::uint_fast32_t row = range; row <= range + range; ++row) {
+    for (SizeType row = range; row <= range + range; ++row) {
         resetVertSum();
         resetHoriSum();
-        for (std::uint_fast32_t col = 0; col < range; ++col) {
+        for (SizeType col = 0; col < range; ++col) {
             addPixel();
             updateHoriSum();
             shiftVertSum();
             shiftHoriSumIn();
         }
-        for (std::uint_fast32_t col = range; col <= range + range; ++col) {
+        for (SizeType col = range; col <= range + range; ++col) {
             addPixel();
             updateHoriSum();
             shiftVertSum();
             shiftHoriSumIn();
             updatePixel((row + 1) * (col + 1));
         }
-        for (std::uint_fast32_t col = range + range + 1; col < width; ++col) {
+        for (SizeType col = range + range + 1; col < width; ++col) {
             addPixel();
             updateHoriSum();
             shiftVertSum();
@@ -126,22 +137,22 @@ void internalBoxBlur2D(std::uint8_t* pixels, std::uint_fast32_t width, std::uint
             shiftHoriSumOut();
             updatePixel((row + 1) * kernelSize);
         }
-        for (std::uint_fast32_t col = 0; col < range; ++col) {
+        for (SizeType col = 0; col < range; ++col) {
             shiftHoriSumOut();
             updatePixel((row + 1) * (kernelSize - col - 1));
         }
     }
-    for (std::uint_fast32_t row = range + range + 1; row < height; ++row) {
+    for (SizeType row = range + range + 1; row < height; ++row) {
         resetVertSum();
         resetHoriSum();
-        for (std::uint_fast32_t col = 0; col < range; ++col) {
+        for (SizeType col = 0; col < range; ++col) {
             addPixel();
             removePixel();
             updateHoriSum();
             shiftVertSum();
             shiftHoriSumIn();
         }
-        for (std::uint_fast32_t col = range; col <= range + range; ++col) {
+        for (SizeType col = range; col <= range + range; ++col) {
             addPixel();
             removePixel();
             updateHoriSum();
@@ -149,7 +160,7 @@ void internalBoxBlur2D(std::uint8_t* pixels, std::uint_fast32_t width, std::uint
             shiftHoriSumIn();
             updatePixel(kernelSize * (col + 1));
         }
-        for (std::uint_fast32_t col = range + range + 1; col < width; ++col) {
+        for (SizeType col = range + range + 1; col < width; ++col) {
             addPixel();
             removePixel();
             updateHoriSum();
@@ -158,28 +169,28 @@ void internalBoxBlur2D(std::uint8_t* pixels, std::uint_fast32_t width, std::uint
             shiftHoriSumOut();
             updatePixelFullKernel();
         }
-        for (std::uint_fast32_t col = 0; col < range; ++col) {
+        for (SizeType col = 0; col < range; ++col) {
             shiftHoriSumOut();
             updatePixel(kernelSize * (kernelSize - col - 1));
         }
     }
-    for (std::uint_fast32_t row = 0; row < range; ++row) {
+    for (SizeType row = 0; row < range; ++row) {
         resetVertSum();
         resetHoriSum();
-        for (std::uint_fast32_t col = 0; col < range; ++col) {
+        for (SizeType col = 0; col < range; ++col) {
             removePixel();
             updateHoriSum();
             shiftVertSum();
             shiftHoriSumIn();
         }
-        for (std::uint_fast32_t col = range; col <= range + range; ++col) {
+        for (SizeType col = range; col <= range + range; ++col) {
             removePixel();
             updateHoriSum();
             shiftVertSum();
             shiftHoriSumIn();
             updatePixel((kernelSize - row - 1) * (col + 1));
         }
-        for (std::uint_fast32_t col = range + range + 1; col < width; ++col) {
+        for (SizeType col = range + range + 1; col < width; ++col) {
             removePixel();
             updateHoriSum();
             shiftVertSum();
@@ -187,7 +198,7 @@ void internalBoxBlur2D(std::uint8_t* pixels, std::uint_fast32_t width, std::uint
             shiftHoriSumOut();
             updatePixel((kernelSize - row - 1) * kernelSize);
         }
-        for (std::uint_fast32_t col = 0; col < range; ++col) {
+        for (SizeType col = 0; col < range; ++col) {
             shiftHoriSumOut();
             updatePixel((kernelSize - row - 1) * (kernelSize - col - 1));
         }
@@ -204,7 +215,11 @@ void internalBoxBlur2D(std::uint8_t* pixels, std::uint_fast32_t width, std::uint
 }
 NS_ANONYMOUS_END
 
-void boxBlur2D(cocos2d::Image* image, std::uint_fast32_t range) {
-    internalBoxBlur2D(image->getData(), static_cast<std::uint_fast32_t>(image->getWidth()), static_cast<std::uint_fast32_t>(image->getHeight()), range);
+void boxBlur2D(cocos2d::Image* image, SizeType range) {
+    auto pixels = image->getData();
+    auto width = static_cast<SizeType>(image->getWidth());
+    auto height = static_cast<SizeType>(image->getHeight());
+    internalBoxBlur2D(pixels, width, height, range);
 }
+} // namespace image.
 NS_EE_END

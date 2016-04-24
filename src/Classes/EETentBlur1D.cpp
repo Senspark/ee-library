@@ -6,28 +6,33 @@
 //
 //
 
-#include "EEImage.hpp"
-#include "cocos2d.h"
-
+#include <cassert>
 #include <cstring>
 
+#include "EEImage.hpp"
+
+#include <platform/CCImage.h>
+
 NS_EE_BEGIN
+namespace image {
 NS_ANONYMOUS_BEGIN
-void internalTentBlur1D(std::uint8_t* pixels, std::uint_fast32_t width, std::uint_fast32_t height, std::uint_fast32_t range, std::uint_fast32_t iterations) {
-    std::uint_fast32_t kernelSize = range * 2 + 1;
-    CC_ASSERT(kernelSize < width && kernelSize < height);
+void internalTentBlur1D(ChannelType* pixels,
+                        SizeType width, SizeType height,
+                        SizeType range, SizeType iterations) {
+    auto kernelSize = range * 2 + 1;
+    assert(kernelSize < width && kernelSize < height);
     
-    constexpr std::uint_fast32_t Bits = 24;
-    std::uint_fast32_t numerators[kernelSize + 1];
-    for (std::uint_fast32_t size = 1, weight = 0; size <= kernelSize; ++size) {
+    constexpr SizeType Bits = 24;
+    SizeType numerators[kernelSize + 1];
+    for (SizeType size = 1, weight = 0; size <= kernelSize; ++size) {
         weight += (size <= range) ? size : (kernelSize - size + 1);
         numerators[size] = (1 << Bits) / weight;
     }
     
-    auto prefixSumR = new std::uint_fast32_t[width + 1]; prefixSumR[0] = 0;
-    auto prefixSumG = new std::uint_fast32_t[width + 1]; prefixSumG[0] = 0;
-    auto prefixSumB = new std::uint_fast32_t[width + 1]; prefixSumB[0] = 0;
-    auto buffer = new std::uint8_t[width * 4];
+    auto prefixSumR = new SizeType[width + 1]; prefixSumR[0] = 0;
+    auto prefixSumG = new SizeType[width + 1]; prefixSumG[0] = 0;
+    auto prefixSumB = new SizeType[width + 1]; prefixSumB[0] = 0;
+    auto buffer = new ChannelType[width * 4];
     
     auto newPixel = buffer;
     auto sumInR = prefixSumR;
@@ -39,9 +44,9 @@ void internalTentBlur1D(std::uint8_t* pixels, std::uint_fast32_t width, std::uin
     auto sumOutR = prefixSumR;
     auto sumOutG = prefixSumG;
     auto sumOutB = prefixSumB;
-    std::uint_fast32_t sumR = 0;
-    std::uint_fast32_t sumG = 0;
-    std::uint_fast32_t sumB = 0;
+    SizeType sumR = 0;
+    SizeType sumG = 0;
+    SizeType sumB = 0;
     
     auto inPixel = pixels;
     
@@ -76,27 +81,27 @@ void internalTentBlur1D(std::uint8_t* pixels, std::uint_fast32_t width, std::uin
         sumG -= *sumMidG - *sumOutG;
         sumB -= *sumMidB - *sumOutB;
     };
-    auto updatePixel = [&](std::uint_fast32_t size) {
-        *newPixel++ = static_cast<std::uint8_t>((sumR * numerators[size]) >> Bits);
-        *newPixel++ = static_cast<std::uint8_t>((sumG * numerators[size]) >> Bits);
-        *newPixel++ = static_cast<std::uint8_t>((sumB * numerators[size]) >> Bits);
-        *newPixel++ = 0xFF;
+    auto updatePixel = [&](SizeType size) {
+        *newPixel++ = static_cast<ChannelType>((sumR * numerators[size]) >> Bits);
+        *newPixel++ = static_cast<ChannelType>((sumG * numerators[size]) >> Bits);
+        *newPixel++ = static_cast<ChannelType>((sumB * numerators[size]) >> Bits);
+        *newPixel++ = std::numeric_limits<ChannelType>::max();
     };
     
-    for (std::uint_fast32_t row = 0; row < height; ++row) {
-        for (std::uint_fast32_t iteration = 0; iteration < iterations; ++iteration) {
+    for (SizeType row = 0; row < height; ++row) {
+        for (SizeType iteration = 0; iteration < iterations; ++iteration) {
             sumR = sumG = sumB = 0;
             sumInR = sumMidR = sumOutR = prefixSumR;
             sumInG = sumMidG = sumOutG = prefixSumG;
             sumInB = sumMidB = sumOutB = prefixSumB;
             inPixel = pixels;
             newPixel = buffer;
-            for (std::uint_fast32_t col = 0; col < range; ++col) {
+            for (SizeType col = 0; col < range; ++col) {
                 addPixel();
                 shiftSumIn();
                 addSum();
             }
-            for (std::uint_fast32_t col = range; col <= range + range; ++col) {
+            for (SizeType col = range; col <= range + range; ++col) {
                 addPixel();
                 shiftSumIn();
                 addSum();
@@ -104,7 +109,7 @@ void internalTentBlur1D(std::uint8_t* pixels, std::uint_fast32_t width, std::uin
                 shiftSumMid();
                 updatePixel(col + 1);
             }
-            for (std::uint_fast32_t col = range + range + 1; col < width; ++col) {
+            for (SizeType col = range + range + 1; col < width; ++col) {
                 addPixel();
                 shiftSumIn();
                 addSum();
@@ -113,7 +118,7 @@ void internalTentBlur1D(std::uint8_t* pixels, std::uint_fast32_t width, std::uin
                 shiftSumOut();
                 updatePixel(kernelSize);
             }
-            for (std::uint_fast32_t col = 0; col < range; ++col) {
+            for (SizeType col = 0; col < range; ++col) {
                 addSum();
                 removeSum();
                 shiftSumMid();
@@ -132,17 +137,23 @@ void internalTentBlur1D(std::uint8_t* pixels, std::uint_fast32_t width, std::uin
 }
 NS_ANONYMOUS_END
 
-void tentBlur1D(cocos2d::Image* image, std::uint_fast32_t range, std::uint_fast32_t iterations) {
+void tentBlur1D(cocos2d::Image* image, SizeType range, SizeType iterations) {
     auto pixels = image->getData();
-    auto width = static_cast<std::uint_fast32_t>(image->getWidth());
-    auto height = static_cast<std::uint_fast32_t>(image->getHeight());
-    auto buffer = new std::uint8_t[width * height * 4];
-    auto pixelsPtr = reinterpret_cast<std::uint32_t*>(pixels);
-    auto bufferPtr = reinterpret_cast<std::uint32_t*>(buffer);
+    auto width = static_cast<SizeType>(image->getWidth());
+    auto height = static_cast<SizeType>(image->getHeight());
+    auto buffer = new ChannelType[width * height * 4];
+    auto pixelsPtr = reinterpret_cast<PixelType*>(pixels);
+    auto bufferPtr = reinterpret_cast<PixelType*>(buffer);
+    
+    // Horizonal pass.
     internalTentBlur1D(pixels, width, height, range, iterations);
     transpose(pixelsPtr, bufferPtr, width, height);
+    
+    // Vertical pass.
     internalTentBlur1D(buffer, height, width, range, iterations);
     transpose(bufferPtr, pixelsPtr, height, width);
+    
     delete[] buffer;
 }
+} // namespace image.
 NS_EE_END

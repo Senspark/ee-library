@@ -9,10 +9,13 @@
 #include "EEImage.hpp"
 
 NS_EE_BEGIN
+namespace image {
 NS_ANONYMOUS_BEGIN
-void internalTranspose(std::uint_fast32_t rowBegin, std::uint_fast32_t rowEnd,
-                       std::uint_fast32_t colBegin, std::uint_fast32_t colEnd,
-                       std::uint32_t* src, std::uint32_t* dst, std::uint_fast32_t srcWidth, std::uint_fast32_t srcHeight) {
+void internalTranspose(SizeType rowBegin, SizeType rowEnd,
+                       SizeType colBegin, SizeType colEnd,
+                       PixelType* src, PixelType* dst,
+                       SizeType srcWidth,
+                       SizeType srcHeight) {
     auto deltaRow = rowEnd - rowBegin;
     auto deltaCol = colEnd - colBegin;
     if (deltaRow <= 16 && deltaCol <= 16) {
@@ -22,16 +25,24 @@ void internalTranspose(std::uint_fast32_t rowBegin, std::uint_fast32_t rowEnd,
             }
         }
     } else if (deltaRow >= deltaCol) {
-        internalTranspose(rowBegin, rowBegin + (deltaRow / 2), colBegin, colEnd, src, dst, srcWidth, srcHeight);
-        internalTranspose(rowBegin + (deltaRow / 2), rowEnd, colBegin, colEnd, src, dst, srcWidth, srcHeight);
+        internalTranspose(rowBegin, rowBegin + (deltaRow / 2),
+                          colBegin, colEnd, src, dst, srcWidth, srcHeight);
+        
+        internalTranspose(rowBegin + (deltaRow / 2), rowEnd,
+                          colBegin, colEnd, src, dst, srcWidth, srcHeight);
     } else {
-        internalTranspose(rowBegin, rowEnd, colBegin, colBegin + (deltaCol / 2), src, dst, srcWidth, srcHeight);
-        internalTranspose(rowBegin, rowEnd, colBegin + (deltaCol / 2), colEnd, src, dst, srcWidth, srcHeight);
+        internalTranspose(rowBegin, rowEnd, colBegin, colBegin + (deltaCol / 2),
+                          src, dst, srcWidth, srcHeight);
+        
+        internalTranspose(rowBegin, rowEnd, colBegin + (deltaCol / 2), colEnd,
+                          src, dst, srcWidth, srcHeight);
     }
 }
 NS_ANONYMOUS_END
 
-void transpose(std::uint32_t* src, std::uint32_t* dst, std::uint_fast32_t srcWidth, std::uint_fast32_t srcHeight) {
+void transpose(PixelType* src, PixelType* dst,
+               SizeType srcWidth, SizeType srcHeight) {
     internalTranspose(0, srcHeight, 0, srcWidth, src, dst, srcWidth, srcHeight);
 }
+} // namespace image
 NS_EE_END

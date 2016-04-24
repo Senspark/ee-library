@@ -34,6 +34,10 @@ class ParticleSystemQuad;
 class Animation;
 class Sprite;
 class SpriteFrame;
+class Image;
+class Texture2D;
+    
+class Sequence;
 
 class Event;
 class EventCustom;
@@ -43,6 +47,9 @@ class EventListenerKeyboard;
 class EventListenerTouchOneByOne;
 class EventListenerTouchAllAtOnce;
 class EventTouch;
+    
+class Touch;
+    
 class Ref;
 
 template<class T>

@@ -10,8 +10,6 @@
 #define EEEventListener_hpp
 
 #include "EEMacro.hpp"
-#include "EECocos2dxFwd.hpp"
-#include "EEForward.hpp"
 
 #include <base/CCEventListener.h>
 

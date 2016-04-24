@@ -21,6 +21,7 @@ void BackButtonListenerBase::registerListener(cocos2d::Node* node) {
                                          node,
                                          std::placeholders::_1,
                                          std::placeholders::_2);
+    
     auto dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
     dispatcher->addEventListenerWithSceneGraphPriority(_listener, node);
 }
@@ -39,6 +40,8 @@ void BackButtonListenerBase::onKeyReleased(cocos2d::Node* node,
     if (keyCode == cocos2d::EventKeyboard::KeyCode::KEY_BACK) {
         if (node->isRunning()) {
             onBackButtonPressed();
+            
+            // Allow only one event listener receives event.
             event->stopPropagation();
         }
     }

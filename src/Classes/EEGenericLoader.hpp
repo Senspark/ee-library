@@ -49,7 +49,7 @@ public:
             result->autorelease();
             result->_callback = [result, data = std::tuple<Us...>(std::forward<Us>(args)...)] {
                 return result->internalCreateNode(bool_constant<sizeof...(Ts) == 0>(),
-                                                  std::move(data),
+                                                  data,
                                                   std::make_index_sequence<sizeof...(Us)>());
             };
         } else {

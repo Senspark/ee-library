@@ -78,6 +78,9 @@ private:
     /// Retrieves the subclass instance.
     ///
     /// Subclass should be inherits from @c cocos2d::Node.
+    ///
+    /// Since dynamic_cast won't work in constructor,
+    /// static_cast is used.
     T* getInstance() {
         return static_cast<T*>(this);
     }

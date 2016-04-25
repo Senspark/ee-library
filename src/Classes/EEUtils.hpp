@@ -93,6 +93,47 @@ void resumeAll(cocos2d::Node* node);
 /// A button is actually visible means that it and its ancestor nodes
 /// are visible.
 bool isActuallyVisible(const cocos2d::Node* node);
+
+/// Attempts to capture a screenshot in pixels, i.e. the device screen size.
+///
+/// @note       This method is slow because it uses @c glReadPixels,
+///             which is synchronous.
+/// @note       Prefer this function to @c captureScreenInPoints if you want to
+///             capture a screenshot and share it via social networks.
+/// @param      afterCaptured will be invoked after the capturing process
+///             has done.
+/// @see        @c captureScreenInPoints.
+void captureScreenInPixels(const std::function<void(cocos2d::Image*)>& afterCaptured);
+
+/// Attempts to capture a screenshot in points, i.e. the scene size
+/// multiplied by content scale factor.
+///
+/// @note       This method is faster than @c captureScreenInPixels be cause it
+///             uses FBO.
+/// @note       If you are capturing the screenshot for blurring, set the scale
+///             to be less than 1 for better performance.
+/// @param      afterCaptured will be invoked after the capturing process
+///             has done.
+/// @param      scale Resulting image size will be multiplied by this parameter.
+/// @see        @c captureScreenInPoints.
+/// @warning    If you use a transition scene then you should not call this
+///             function in @c onEnter or @c onEnterTransitionDidFinish because
+///             @c director->getRunningScene() will return the transition scene.
+/// @warning    You can fix this by wrapping this function with
+///             @c runAction(cocos2d::CallFunc::create([] { ... }));
+void captureScreenInPoints(const std::function<void(cocos2d::Image*)>& afterCaptured,
+                           float scale);
+
+/// Attempts to download an image from an url.
+///
+/// @note       Downloaded image is automatically store in the texture cache
+///             for faster later retrieving.
+/// @param      imageUrl is the url of the image.
+/// @param      afterDownloaded will be invoked after the downloading process
+///             has finished.
+/// @warning    GIF images are not supported.
+void downloadImage(const std::string& imageUrl,
+                   const std::function<void(cocos2d::Texture2D*)>& afterDownloaded);
 NS_EE_END
 
 #endif /* EE_LIBRARY_UTILS_HPP_ */

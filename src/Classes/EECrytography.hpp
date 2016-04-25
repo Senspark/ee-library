@@ -38,22 +38,20 @@
 #ifndef EE_LIBRARY_CRYTOGRAPHY_HPP
 #define EE_LIBRARY_CRYTOGRAPHY_HPP
 
-#include "EEMacro.hpp"
-
 #include <string>
 
-namespace_ee_begin
-/**
- * @param input is the string to be hashed.
- * @return SHA-1 hashed hexadecimal string.
- */
+#include "EEMacro.hpp"
+
+NS_EE_BEGIN
+/// Generates SHA-1 hashed string.
+/// @param input is the string to be hashed.
+/// @return SHA-1 hashed hexadecimal string.
 std::string generateSha1(const std::string& input);
 
-/**
- * @param input is the string to be hashed.
- * @return 32bit CRC hashed hexadecimal string.
- */
+/// Generates CRC hashed string.
+/// @param input is the string to be hashed.
+/// @return 32bit CRC hashed hexadecimal string.
 std::string generateCrc(const std::string& input);
-namespace_ee_end
+NS_EE_END
 
 #endif /* EECrytography_h */

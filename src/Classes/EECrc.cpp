@@ -6,16 +6,16 @@
 //
 //
 
-#include "EECrytography.hpp"
-
 #include <algorithm>
 #include <array>
 #include <cstdint>
 #include <numeric>
 
-namespace_ee_begin
-NAMESPACE_BEGIN(crc)
-namespace_anonymous_begin
+#include "EECrytography.hpp"
+
+NS_EE_BEGIN
+NS_DETAIL_BEGIN
+NS_ANONYMOUS_BEGIN
 std::array<std::uint_fast32_t, 256> generate_crc_lookup_table() noexcept {
     auto const reversed_polynomial = std::uint_fast32_t{0xEDB88320uL};
     
@@ -40,7 +40,7 @@ std::array<std::uint_fast32_t, 256> generate_crc_lookup_table() noexcept {
     
     return table;
 }
-namespace_anonymous_end
+NS_ANONYMOUS_END
 
 // Calculates the CRC for any sequence of values. (You could use type traits and a
 // static assert to ensure the values can be converted to 8 bits.)
@@ -57,18 +57,18 @@ std::uint_fast32_t crc(InputIterator first, InputIterator last) {
                      [](std::uint_fast32_t checksum, std::uint_fast8_t value)
                      { return table[(checksum ^ value) & 0xFFu] ^ (checksum >> 8); });
 }
-NAMESPACE_END(crc)
+NS_DETAIL_END
     
 std::string generateCrc(const std::string& input) {
-    auto output = crc::crc(input.begin(), input.end());
+    auto output = detail::crc(input.begin(), input.end());
     std::string result;
     result.reserve(8);
-    constexpr const char* Digits = "0123456789abcdef";
+    constexpr const char* HexDigits = "0123456789abcdef";
     for (auto index = 0; index < 8; ++index) {
-        result += Digits[output & 0xf];
+        result += HexDigits[output & 0xf];
         output >>= 4;
     }
     std::reverse(result.begin(), result.end());
     return result;
 }
-namespace_ee_end
+NS_EE_END

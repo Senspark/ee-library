@@ -36,16 +36,16 @@
 
 #include "EECrytography.hpp"
 
-namespace_ee_begin
-NAMESPACE_BEGIN(sha1)
-namespace_anonymous_begin
-// Rotate an integer value to left.
+NS_EE_BEGIN
+NS_DETAIL_BEGIN
+NS_ANONYMOUS_BEGIN
+/// Rotate an integer value to left.
 std::uint32_t rol(const std::uint32_t value, const std::uint32_t steps) {
     return (value << steps) | (value >> (32 - steps));
 }
 
-// Sets the first 16 integers in the buffer to zero.
-// Used for clearing the W buffer.
+/// Sets the first 16 integers in the buffer to zero.
+/// Used for clearing the W buffer.
 void clearWBuffert(std::uint32_t* buffer) {
     for (std::uint_fast32_t pos = 16; ~(--pos);) {
         buffer[pos] = 0;
@@ -103,24 +103,31 @@ void innerHash(std::uint32_t* result, std::uint32_t* w) {
     result[3] += d;
     result[4] += e;
 }
-namespace_anonymous_end
+NS_ANONYMOUS_END
 
-/**
- * @param src points to any kind of data to be hashed.
- * @param byteLength is the number of bytes to hash from the src pointer.
- * @param hash should points to a buffer of at least 20 bytes of size for storing the SHA-1 result in.
- */
+/// @param src points to any kind of data to be hashed.
+/// @param byteLength is the number of bytes to hash from the src pointer.
+/// @param hash should points to a buffer of at least 20 bytes of size
+/// for storing the SHA-1 result in.
 void calc(const void* src, const std::size_t byteLength, unsigned char* hash);
 
-/**
- * @param hash is 20 bytes of SHA-1 hash. This is the same data that is the result from the calc function.
- * @param hexString should point to a buffer of at least 41 bytes of size for storing the hexadecimal representation of the hash. A zero will be written at position 40, so the buffer will be a valid zero ended string.
- */
+/// @param hash is 20 bytes of SHA-1 hash.
+/// This is the same data that is the result from the calc function.
+/// @param hexString should point to a buffer of at least 41 bytes of size
+/// for storing the hexadecimal representation of the hash.
+/// A zero will be written at position 40, so the buffer will
+/// be a valid zero ended string.
 void convertByteToHexString(const unsigned char* hash, char* hexString);
 
 void calc(const void* src, const std::size_t byteLength, unsigned char* hash) {
     // Init the result array.
-    std::uint32_t result[5] = { 0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476, 0xc3d2e1f0 };
+    std::uint32_t result[5] = {
+        0x67452301,
+        0xefcdab89,
+        0x98badcfe,
+        0x10325476,
+        0xc3d2e1f0
+    };
 
     // Cast the void src pointer to be the byte array we can work with.
     auto sarray = static_cast<const unsigned char*>(src);
@@ -169,21 +176,21 @@ void calc(const void* src, const std::size_t byteLength, unsigned char* hash) {
 }
 
 void convertByteToHexString(const unsigned char* hash, char* hexString) {
-    const char hexDigits[] = { "0123456789abcdef" };
+    constexpr const char* HexDigits = "0123456789abcdef";
 
     for (int hashByte = 20; --hashByte >= 0;) {
-        hexString[hashByte << 1] = hexDigits[(hash[hashByte] >> 4) & 0xf];
-        hexString[(hashByte << 1) + 1] = hexDigits[hash[hashByte] & 0xf];
+        hexString[hashByte << 1] = HexDigits[(hash[hashByte] >> 4) & 0xf];
+        hexString[(hashByte << 1) + 1] = HexDigits[hash[hashByte] & 0xf];
     }
     hexString[40] = 0;
 }
-NAMESPACE_END(sha1)
+NS_DETAIL_END
 
 std::string generateSha1(const std::string& input) {
     unsigned char hash[20];
-    sha1::calc(input.c_str(), input.size(), hash);
+    detail::calc(input.c_str(), input.size(), hash);
     char hexString[41];
-    sha1::convertByteToHexString(hash, hexString);
+    detail::convertByteToHexString(hash, hexString);
     return hexString;
 }
-namespace_ee_end
+NS_EE_END

@@ -17,6 +17,25 @@
 #include "EEExtension.hpp"
 
 NS_EE_BEGIN
+/// Reference guard.
+///
+/// Automatically retains instance on constructor
+/// and releases instance on destructor.
+///
+/// Example:
+/// @code
+/// ee::RefGuard some_guard(this);
+/// ee::RefGuard another_guard(some_instance);
+/// auto my_guard = ee::makeRefGuard(another_instance);
+/// @endcode
+using RefGuard = cocos2d::RefPtr<cocos2d::Ref>;
+
+/// @see @c RefGuard.
+template<class T>
+auto makeRefGuard(T&& instance) {
+    return ReferenceGuard(instance);
+}
+
 /// Faster and safer implementation alternative
 /// to cocos2d::StringUtils::format
 /// by using @c static @c std::stringstream.

@@ -11,6 +11,7 @@
 
 /// C++17 functions.
 
+#include <cstring>
 #include <functional>
 #include <type_traits>
 

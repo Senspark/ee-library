@@ -15,7 +15,6 @@
 #include <unordered_map>
 
 namespace cocos2d {
-class Action;
 class Node;
 class DrawNode;
 class Font;
@@ -37,6 +36,37 @@ class SpriteFrame;
 class Image;
 class Texture2D;
     
+class Action;
+class ActionInstant;
+class Show;
+class Hide;
+class RemoveSelf;
+class FlipX;
+class FlipY;
+class Place;
+class CallFunc;
+    
+class ActionInterval;
+class FiniteTimeAction;
+class Speed;
+class Follow;
+class Repeat;
+class RepeatForever;
+class Spawn;
+class RotateTo;
+class RotateBy;
+class MoveTo;
+class MoveBy;
+class SkewTo;
+class SkewBy;
+class ScaleBy;
+class ScaleTo;
+class Blink;
+class FadeTo;
+class FadeIn;
+class FadeOut;
+class DelayTime;
+class ActionFloat;
 class Sequence;
 
 class Event;

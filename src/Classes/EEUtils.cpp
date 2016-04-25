@@ -104,10 +104,11 @@ void captureScreenInPixels(const std::function<void(cocos2d::Image*)>& afterCapt
                             buffer.get() + row * width * 4, (unsigned) width * 4);
             }
 #endif
-            auto image = std::make_unique<cocos2d::Image>();
+            auto image = new cocos2d::Image();
             image->initWithRawData(flippedBuffer.get(), width * height * 4,
                                    width, height, 8);
-            afterCaptured(image.get());
+            afterCaptured(image);
+            image->release();
         } while (false);
         
         command.reset();
@@ -169,8 +170,9 @@ void captureScreenInPoints(const std::function<void(cocos2d::Image*)>& afterCapt
     // We makes the lambda mutable here so that we can
     // use the reset method on std::shared_ptr.
     command->func = [command, visitedNodes, renderer, scene, afterCaptured]() mutable {
-        auto image = std::unique_ptr<cocos2d::Image>(renderer->newImage());
-        afterCaptured(image.get());
+        auto image = renderer->newImage();
+        afterCaptured(image);
+        image->release();
         
         // Reset scale and anchor point.
         scene->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE);

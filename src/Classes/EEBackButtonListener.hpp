@@ -64,7 +64,7 @@ template<class T>
 class BackButtonListener
 : public detail::BackButtonListenerBase {
 protected:
-    BackButtonListener() {
+    BackButtonListener() : BackButtonListenerBase() {
         registerListener(getInstance());
     }
     

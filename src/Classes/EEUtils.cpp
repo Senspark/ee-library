@@ -189,20 +189,27 @@ void captureScreenInPoints(const std::function<void(cocos2d::Image*)>& afterCapt
 
 void downloadImage(const std::string& imageUrl,
                    const std::function<void(cocos2d::Texture2D*)>& afterDownloaded) {
-    auto cache = cocos2d::Director::getInstance()->getTextureCache();
-    auto cachedTexture = cache->getTextureForKey(imageUrl);
+    // Retrieve the texture in the texture cache.
+    auto cachedTexture = cocos2d::Director::getInstance()
+    ->getTextureCache()
+    ->getTextureForKey(imageUrl);
+    
     if (cachedTexture != nullptr) {
         // Image is already in the cache.
         return afterDownloaded(cachedTexture);
     }
     
+    // Image is not in the cache.
+    // Attempt to download the image from the given url.
+    
     // Can not use std::unique_ptr here because cocos2d::network::HttpClient
-    // will use it later.
+    // will retain it later.
     auto request = new (std::nothrow) cocos2d::network::HttpRequest();
     request->setUrl(imageUrl.c_str());
     request->setRequestType(cocos2d::network::HttpRequest::Type::GET);
-    request->setResponseCallback([imageUrl, afterDownloaded](cocos2d::network::HttpClient* client,
-                                                             cocos2d::network::HttpResponse* response) {
+    
+    auto callback = [imageUrl, afterDownloaded](cocos2d::network::HttpClient* client,
+                                                cocos2d::network::HttpResponse* response) {
         cocos2d::Image* image = nullptr;
         do {
             CC_BREAK_IF(response == nullptr || response->isSucceed() == false);
@@ -216,21 +223,28 @@ void downloadImage(const std::string& imageUrl,
             CC_BREAK_IF(buffer->size() < 3);
             CC_BREAK_IF((*buffer)[0] == 'G' && (*buffer)[1] == 'I' && (*buffer)[2] == 'F');
             
+            auto data = reinterpret_cast<unsigned char*>(&buffer->front());
+            auto dataLen = static_cast<ssize_t>(buffer->size());
+            
             image = new (std::nothrow) cocos2d::Image();
-            image->initWithImageData(reinterpret_cast<unsigned char*>(&(buffer->front())),
-                                     static_cast<ssize_t>(buffer->size()));
+            image->initWithImageData(data, dataLen);
         } while (false);
         
         if (afterDownloaded) {
             // Current thread is not cocos thread,
             // we should invoke the callback on cocos thread.
-            auto director = cocos2d::Director::getInstance();
-            auto scheduler = director->getScheduler();
-            scheduler->performFunctionInCocosThread([afterDownloaded, imageUrl, image] {
+            cocos2d::Director::getInstance()
+            ->getScheduler()
+            ->performFunctionInCocosThread([afterDownloaded, imageUrl, image] {
                 if (image != nullptr) {
-                    auto cc = cocos2d::Director::getInstance()->getTextureCache();
-                    auto newTexture = cc->addImage(image, imageUrl);
+                    // Create new texture with the given image and url.
+                    auto newTexture = cocos2d::Director::getInstance()
+                    ->getTextureCache()
+                    ->addImage(image, imageUrl);
+                    
+                    // Invoke the callback.
                     afterDownloaded(newTexture);
+                    
                     // Release resources.
                     image->release();
                 } else {
@@ -238,8 +252,11 @@ void downloadImage(const std::string& imageUrl,
                 }
             });
         }
-    });
+    };
+    request->setResponseCallback(callback);
     cocos2d::network::HttpClient::getInstance()->sendImmediate(request);
+    
+    // Release resources.
     request->release();
 }
 NS_EE_END

@@ -22,15 +22,18 @@ void BackButtonListenerBase::registerListener(cocos2d::Node* node) {
                                          std::placeholders::_1,
                                          std::placeholders::_2);
     
-    auto dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
-    dispatcher->addEventListenerWithSceneGraphPriority(_listener, node);
+    cocos2d::Director::getInstance()
+    ->getEventDispatcher()
+    ->addEventListenerWithSceneGraphPriority(_listener, node);
 }
 
 void BackButtonListenerBase::unregisterListener() {
     CC_ASSERT(_listener != nullptr);
     
-    auto dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
-    dispatcher->removeEventListener(_listener);
+    cocos2d::Director::getInstance()
+    ->getEventDispatcher()
+    ->removeEventListener(_listener);
+    
     _listener = nullptr;
 }
 

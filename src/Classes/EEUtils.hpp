@@ -9,6 +9,7 @@
 #ifndef EE_LIBRARY_UTILS_HPP_
 #define EE_LIBRARY_UTILS_HPP_
 
+#include <cstring>
 #include <functional>
 #include <sstream>
 
@@ -61,6 +62,68 @@ std::string toString(Args&&... args) {
     (ss << ... << std::forward<Args>(args));
     return ss.str();
 }
+
+/// bit_cast.
+///
+/// https://gist.github.com/socantre/3472964
+template<class Dest, class Source>
+inline Dest bit_cast(const Source& source) {
+    static_assert(sizeof(Dest) == sizeof(Source),
+                  "size of destination and source objects must be equal.");
+    
+    static_assert(std::is_trivially_copyable<Dest>::value,
+                  "destination type must be trivially copyable.");
+    
+    static_assert(std::is_trivially_copyable<Source>::value,
+                  "source type must be trivially copyable.");
+    Dest dest;
+    std::memcpy(&dest, &source, sizeof(dest));
+    return dest;
+}
+
+/// Comparator to compare @c first in @c std::pair<>.
+///
+/// Example:
+/// @code
+/// std::vector<std::pair<int, std::string>> v;
+/// v.emplace_back(5, "A");
+/// v.emplace_back(1, "C");
+/// v.emplace_back(3, "B");
+///
+/// std::sort(v.begin(), v.end(), ee::Compare1st<>());
+/// for (auto&& x : v) {
+///     std::cout << x.first << ' ';
+/// }
+/// std::cout << std::endl;
+///
+/// std::sort(v.begin(), v.end(), ee::Compare1st<std::greater<>>());
+/// for (auto&& x : v) {
+///     std::cout << x.first << ' ';
+/// }
+/// @endcode
+///
+/// Output:
+/// @code
+/// 1 3 5
+/// 5 3 1
+/// @endcode
+template<class Comparator = std::less<>>
+struct Compare1st {
+    template<class T>
+    bool operator()(T&& lhs, T&& rhs) const {
+        return Comparator()(lhs.first, rhs.first);
+    }
+};
+
+/// Comparator to compare @c second in @c std::pair<>.
+/// @see @c Compare1st.
+template<class Comparator = std::less<>>
+struct Compare2nd {
+    template<class T>
+    bool operator()(T&& lhs, T&& rhs) const {
+        return Comparator()(lhs.second, rhs.second);
+    }
+};
 
 /// Performs an action recursively on a node.
 void doRecursively(cocos2d::Node* node,

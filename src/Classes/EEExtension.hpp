@@ -11,7 +11,6 @@
 
 /// C++17 functions.
 
-#include <cstring>
 #include <functional>
 #include <type_traits>
 
@@ -161,7 +160,7 @@ auto invoke_impl(T Base::*pmf, Pointer&& ptr, Args&&... args)
     return ((*std::forward<Pointer>(ptr)).*pmf)(std::forward<Args>(args)...);
 }
 
-template <class Base, class T, class Derived>
+template<class Base, class T, class Derived>
 auto invoke_impl(T Base::*pmd, Derived&& ref)
     noexcept(noexcept(std::forward<Derived>(ref).*pmd))
     -> std::enable_if_t<!is_function_v<T> &&
@@ -170,7 +169,7 @@ auto invoke_impl(T Base::*pmd, Derived&& ref)
     return std::forward<Derived>(ref).*pmd;
 }
 
-template <class Base, class T, class RefWrap>
+template<class Base, class T, class RefWrap>
 auto invoke_impl(T Base::*pmd, RefWrap&& ref)
     noexcept(noexcept(ref.get().*pmd))
     -> std::enable_if_t<!is_function_v<T> &&
@@ -179,7 +178,7 @@ auto invoke_impl(T Base::*pmd, RefWrap&& ref)
     return ref.get().*pmd;
 }
 
-template <class Base, class T, class Pointer>
+template<class Base, class T, class Pointer>
 auto invoke_impl(T Base::*pmd, Pointer&& ptr)
     noexcept(noexcept((*std::forward<Pointer>(ptr)).*pmd))
     -> std::enable_if_t<!is_function_v<T> &&
@@ -217,24 +216,6 @@ template<class F, class Tuple>
 constexpr decltype(auto) apply(F&& f, Tuple&& t) {
     return detail::apply_impl(std::forward<F>(f), std::forward<Tuple>(t),
                               std::make_index_sequence<tuple_size_v<std::decay_t<Tuple>>>());
-}
-
-/// bit_cast.
-///
-/// https://gist.github.com/socantre/3472964
-template<class Dest, class Source>
-inline Dest bit_cast(const Source& source) {
-    static_assert(sizeof(Dest) == sizeof(Source),
-                  "size of destination and source objects must be equal.");
-    
-    static_assert(std::is_trivially_copyable<Dest>::value,
-                  "destination type must be trivially copyable.");
-    
-    static_assert(std::is_trivially_copyable<Source>::value,
-                  "source type must be trivially copyable.");
-    Dest dest;
-    std::memcpy(&dest, &source, sizeof(dest));
-    return dest;
 }
 NS_EE_END
 

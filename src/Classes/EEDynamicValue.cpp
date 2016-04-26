@@ -7,6 +7,7 @@
 //
 
 #include "EEDynamicValue.hpp"
+#include "EEUtils.hpp"
 
 #include <base/ccRandom.h>
 

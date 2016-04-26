@@ -13,7 +13,6 @@
 #include <memory>
 
 #include "EEMacro.hpp"
-#include "EEExtension.hpp"
 
 NS_EE_BEGIN
 /// Utility class to store a value that dynamically changes.

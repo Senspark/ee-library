@@ -12,6 +12,15 @@
 #include <network/HttpClient.h>
 
 NS_EE_BEGIN
+UniqueListener make_unique_listener(cocos2d::EventListener* listener) {
+    auto deleter = [](cocos2d::EventListener* lst) {
+        cocos2d::Director::getInstance()
+        ->getEventDispatcher()
+        ->removeEventListener(lst);
+    };
+    return UniqueListener(listener, deleter);
+}
+
 void doRecursively(cocos2d::Node* node,
                    const std::function<void(cocos2d::Node*)>& action) {
     action(node);

@@ -12,7 +12,6 @@
 #include <functional>
 
 #include "EEMacro.hpp"
-#include "EEExtension.hpp"
 
 #include <base/CCEventCustom.h>
 
@@ -32,7 +31,7 @@ public:
         _callback = std::bind(&Event::invokeImpl,
                               this,
                               std::placeholders::_1,
-                              std::ref(std::forward<Args>(args))...);
+                              std::forward<Args>(args)...);
     }
     
     /// Invokes the given callback with stored arguments.

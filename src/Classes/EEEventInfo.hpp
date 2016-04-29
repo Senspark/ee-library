@@ -65,7 +65,7 @@ NS_DETAIL_END
 /// dispatcher->removeCustomEventListeners("event_name");
 /// @endcode
 ///
-/// New way using ee::EventInfo.
+/// New way using @c ee::EventInfo.
 /// @code
 /// // Register event info.
 /// ee::EventInfo<int> myEvent("event_name");

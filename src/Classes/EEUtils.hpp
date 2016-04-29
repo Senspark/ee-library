@@ -33,8 +33,8 @@ using RefGuard = cocos2d::RefPtr<cocos2d::Ref>;
 
 /// @see @c RefGuard.
 template<class T>
-auto makeRefGuard(T&& instance) {
-    return ReferenceGuard(instance);
+auto make_ref_guard(T&& instance) {
+    return RefGuard(instance);
 }
 
 /// Faster and safer implementation alternative
@@ -62,6 +62,20 @@ std::string toString(Args&&... args) {
     (ss << ... << std::forward<Args>(args));
     return ss.str();
 }
+
+/// http://stackoverflow.com/questions/19053351/how-do-i-use-a-custom-deleter-with-a-stdunique-ptr-member
+template<class T>
+using deleted_unique_ptr =
+    std::unique_ptr<
+        T,
+        std::function<void(T*)>
+    >;
+
+/// unique listener for @c cocos2d::EventListener.
+using UniqueListener = deleted_unique_ptr<cocos2d::EventListener>;
+
+/// Creates an unique pointer for @c cocos2d::EventListener.
+UniqueListener make_unique_listener(cocos2d::EventListener* listener);
 
 /// bit_cast.
 ///
@@ -130,6 +144,18 @@ void doRecursively(cocos2d::Node* node,
                    const std::function<void(cocos2d::Node*)>& action);
 
 /// @c doRecursively with member function pointer version.
+///
+/// Example
+/// @code
+/// // Set color for all children.
+/// ee::doRecursively(your_node_pointer,
+///                   &cocos2d::Node::setColor,
+///                   cocos2d::Color3B(100, 100, 100));
+///
+/// // Pause all children.
+/// ee::doRecursively(your_node_pointer,
+///                   &cocos2d::Node::pause);
+/// @endcode
 template<
     class FunctionPointer,
     class... Args

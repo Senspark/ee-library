@@ -56,6 +56,18 @@ private:
         ee::detail::UiWidgetCallback::getInstance()->setActiveClickCallback(callback); \
         return CC_MENU_SELECTOR(ee::detail::DummyRef::dummyFunction); \
     }
+
+#define CCB_SELECTORRESOLVER_CCBUTTON_CLICK_EX_0(function) { \
+    std::string str = # function; \
+    str = str.substr(str.rfind("::") + 2); \
+    CCB_SELECTORRESOLVER_CCBUTTON_CLICK(this, str.c_str(), CC_CALLBACK_0(function, this)); \
+}
+
+#define CCB_SELECTORRESOLVER_CCBUTTON_CLICK_EX_1(function) { \
+    std::string str = # function; \
+    str = str.substr(str.rfind("::") + 2); \
+    CCB_SELECTORRESOLVER_CCBUTTON_CLICK(this, str.c_str(), CC_CALLBACK_1(function, this)); \
+}
 NS_DETAIL_END
 NS_EE_END
 

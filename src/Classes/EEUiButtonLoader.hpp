@@ -56,12 +56,12 @@ protected:
                                                            cocos2d::Node* parent,
                                                            cocosbuilder::CCBReader* reader,
                                                            const char* propertyName) override;
-
-    virtual void onHandlePropTypeBlockControl(cocos2d::Node* node,
-                                              cocos2d::Node* parent,
-                                              const char* propertyName,
-                                              cocosbuilder::BlockControlData* blockControlData,
-                                              cocosbuilder::CCBReader* reader) override;
+    
+    virtual void onHandlePropTypeBlock(cocos2d::Node* node,
+                                       cocos2d::Node* parent,
+                                       const char* propertyName,
+                                       cocosbuilder::BlockData* blockData,
+                                       cocosbuilder::CCBReader* ccbReader) override;
     
     virtual void onHandlePropTypeCheck(cocos2d::Node* node,
                                        cocos2d::Node* parent,
@@ -80,24 +80,17 @@ protected:
                                          const char* propertyName,
                                          const char* fontTTF,
                                          cocosbuilder::CCBReader* reader) override;
+    virtual void onHandlePropTypeFloat(cocos2d::Node* node,
+                                       cocos2d::Node* parent,
+                                       const char* propertyName,
+                                       float floatValue,
+                                       cocosbuilder::CCBReader* reader) override;
     
     virtual void onHandlePropTypeFloatScale(cocos2d::Node* node,
                                             cocos2d::Node* parent,
                                             const char* propertyName,
                                             float floatScale,
-                                            cocosbuilder::CCBReader* reader) override;
-    
-    virtual void onHandlePropTypePoint(cocos2d::Node* node,
-                                       cocos2d::Node* parent,
-                                       const char* propertyName,
-                                       cocos2d::Vec2 point,
-                                       cocosbuilder::CCBReader* reader) override;
-    
-    virtual void onHandlePropTypeSize(cocos2d::Node* node,
-                                      cocos2d::Node* parent,
-                                      const char* propertyName,
-                                      cocos2d::Size size,
-                                      cocosbuilder::CCBReader* reader) override;
+                                            cocosbuilder::CCBReader* reader) override;    
     
     virtual void onHandlePropTypeSpriteFrame(cocos2d::Node* node,
                                              cocos2d::Node* parent,
@@ -111,8 +104,9 @@ protected:
                                         cocos2d::Color3B color3B,
                                         cocosbuilder::CCBReader* reader) override;
     
-    std::string _spriteFrameName;
-    cocos2d::ui::Widget::TextureResType _textureResType;
+    bool spriteFrameEnabled_;
+    std::string spriteFrameName_;
+    cocos2d::ui::Widget::TextureResType textureResType_;
 };
 NS_EE_END
 

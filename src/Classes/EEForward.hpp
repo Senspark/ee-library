@@ -14,9 +14,22 @@
 namespace ee {
 template<class Np, class Lp, class... Ts>
 class GenericLoader;
+    
+template<class T>
+class DynamicValue;
+    
+namespace detail {
+class ButtonEx;
+} // namespace detail
+    
+using Button = detail::ButtonEx;
+    
+template<class T>
+class BackButtonListener;
 
 class UiButtonLoader;
-    
+class UiTextLoader;
+
 template<class... Args>
 class EventInfo;
     

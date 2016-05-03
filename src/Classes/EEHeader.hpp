@@ -14,6 +14,7 @@
 #include "EECocos2dxFwd.hpp"
 #include "EEExtension.hpp"
 #include "EEGenericLoader.hpp"
+#include "EEButton.hpp"
 #include "EEUiButtonLoader.hpp"
 #include "EEUiTextLoader.hpp"
 #include "EEUiWidgetCallback.hpp"

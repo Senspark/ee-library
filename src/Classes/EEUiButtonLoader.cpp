@@ -13,30 +13,28 @@
 #include "ui/UIButton.h"
 
 NS_EE_BEGIN
-NS_ANONYMOUS_BEGIN
-constexpr const char* PROPERTY_ENABLED                              = "enabled";
-constexpr const char* PROPERTY_SELECTED                             = "selected";
-constexpr const char* PROPERTY_CCCONTROL                            = "ccControl";
-constexpr const char* PROPERTY_ZOOMONTOUCHDOWN                      = "zoomOnTouchDown";
-constexpr const char* PROPERTY_TITLE_NORMAL                         = "title|1";
-constexpr const char* PROPERTY_TITLE_HIGHLIGHTED                    = "title|2";
-constexpr const char* PROPERTY_TITLE_DISABLED                       = "title|3";
-constexpr const char* PROPERTY_TITLECOLOR_NORMAL                    = "titleColor|1";
-constexpr const char* PROPERTY_TITLECOLOR_HIGHLIGHTED               = "titleColor|2";
-constexpr const char* PROPERTY_TITLECOLOR_DISABLED                  = "titleColor|3";
-constexpr const char* PROPERTY_TITLETTF_NORMAL                      = "titleTTF|1";
-constexpr const char* PROPERTY_TITLETTF_HIGHLIGHTED                 = "titleTTF|2";
-constexpr const char* PROPERTY_TITLETTF_DISABLED                    = "titleTTF|3";
-constexpr const char* PROPERTY_TITLETTFSIZE_NORMAL                  = "titleTTFSize|1";
-constexpr const char* PROPERTY_TITLETTFSIZE_HIGHLIGHTED             = "titleTTFSize|2";
-constexpr const char* PROPERTY_TITLETTFSIZE_DISABLED                = "titleTTFSize|3";
-constexpr const char* PROPERTY_LABELANCHORPOINT                     = "labelAnchorPoint";
-// TODO: Should be "preferredSize". This is a typo in cocos2d-iphone, cocos2d-x and CocosBuilder!
-constexpr const char* PROPERTY_PREFEREDSIZE                         = "preferedSize";
-constexpr const char* PROPERTY_BACKGROUNDSPRITEFRAME_NORMAL         = "backgroundSpriteFrame|1";
-constexpr const char* PROPERTY_BACKGROUNDSPRITEFRAME_HIGHLIGHTED    = "backgroundSpriteFrame|2";
-constexpr const char* PROPERTY_BACKGROUNDSPRITEFRAME_DISABLED       = "backgroundSpriteFrame|3";
-NS_ANONYMOUS_END
+namespace property {
+constexpr const char* block                         = "block";
+constexpr const char* touch_enabled                 = "touchEnabled";
+constexpr const char* swallow_touches               = "swallowTouches";
+constexpr const char* propagate_touch_events        = "propagateTouchEvents";
+
+constexpr const char* pressed_action_enabled        = "pressedActionEnabled";
+constexpr const char* zoom_scale                    = "zoomScale";
+
+constexpr const char* title_text                    = "titleText";
+constexpr const char* title_font_name               = "titleFontName";
+constexpr const char* title_font_size               = "titleFontSize";
+constexpr const char* title_color                   = "titleColor";
+
+constexpr const char* normal_sprite_frame_enabled   = "normalSpriteFrameEnabled";
+constexpr const char* pressed_sprite_frame_enabled  = "pressedSpriteFrameEnabled";
+constexpr const char* disabled_sprite_frame_enabled = "disabledSpriteFrameEnabled";
+
+constexpr const char* normal_sprite_frame           = "normalSpriteFrame";
+constexpr const char* pressed_sprite_frame          = "pressedSpriteFrame";
+constexpr const char* disabled_sprite_frame         = "disabledSpriteFrame";
+} // namespace property.
 
 cocos2d::Node* UiButtonLoader::createNode(cocos2d::Node* parent,
                                           cocosbuilder::CCBReader* reader) {
@@ -52,11 +50,11 @@ cocos2d::SpriteFrame* UiButtonLoader::parsePropTypeSpriteFrame(cocos2d::Node* no
     auto spriteSheet = reader->readCachedString();
     auto spriteFile = reader->readCachedString();
     cocos2d::SpriteFrame* spriteFrame = nullptr;
-    if (spriteFile.empty() == false) {
+    if (spriteFrameEnabled_ && spriteFile.empty() == false) {
         if (spriteSheet.empty()) {
             spriteFile = reader->getCCBRootPath() + spriteFile;
-            _spriteFrameName = spriteFile;
-            _textureResType = cocos2d::ui::Widget::TextureResType::LOCAL;
+            spriteFrameName_ = spriteFile;
+            textureResType_ = cocos2d::ui::Widget::TextureResType::LOCAL;
             auto texture = cocos2d::Director::getInstance()->getTextureCache()->addImage(spriteFile.c_str());
             if (texture != nullptr) {
                 auto bounds = cocos2d::Rect(0, 0,
@@ -73,8 +71,8 @@ cocos2d::SpriteFrame* UiButtonLoader::parsePropTypeSpriteFrame(cocos2d::Node* no
                 reader->getLoadedSpriteSheet().insert(spriteSheet);
             }
             spriteFrame = frameCache->getSpriteFrameByName(spriteFile.c_str());
-            _spriteFrameName = spriteFile;
-            _textureResType = cocos2d::ui::Widget::TextureResType::PLIST;
+            spriteFrameName_ = spriteFile;
+            textureResType_ = cocos2d::ui::Widget::TextureResType::PLIST;
         }
         if (reader->getAnimatedProperties()->find(propertyName) != reader->getAnimatedProperties()->end()) {
             reader->getAnimationManager()->setObject(spriteFrame, node, propertyName);
@@ -83,24 +81,13 @@ cocos2d::SpriteFrame* UiButtonLoader::parsePropTypeSpriteFrame(cocos2d::Node* no
     return spriteFrame;
 }
 
-void UiButtonLoader::onHandlePropTypeBlockControl(cocos2d::Node* node,
-                                                  cocos2d::Node* parent,
-                                                  const char* propertyName,
-                                                  cocosbuilder::BlockControlData* blockControlData,
-                                                  cocosbuilder::CCBReader* reader) {
+void UiButtonLoader::onHandlePropTypeBlock(cocos2d::Node* node,
+                                           cocos2d::Node* parent,
+                                           const char* propertyName,
+                                           cocosbuilder::BlockData* blockData,
+                                           cocosbuilder::CCBReader* reader) {
     auto button = dynamic_cast<cocos2d::ui::Button*>(node);
-    if (std::strcmp(propertyName, PROPERTY_CCCONTROL) == 0) {
-        // Backward-compability way.
-        // auto handler = blockControlData->mSELControlHandler;
-        // auto target = blockControlData->_target;
-        // auto events = blockControlData->mControlEvents;
-        // CCASSERT(events == cocos2d::extension::Control::EventType::TOUCH_UP_INSIDE, "Unexpected value.");
-        // button->addTouchEventListener([handler, target, events](cocos2d::Ref* sender,
-        //                                                         cocos2d::ui::Widget::TouchEventType eventType) {
-        //     if (eventType == cocos2d::ui::Widget::TouchEventType::ENDED) {
-        //         (target->*handler)(sender, cocos2d::extension::Control::EventType::TOUCH_UP_INSIDE);
-        //     }
-        // });
+    if (std::strcmp(propertyName, property::block) == 0) {
         auto&& touchCallback = detail::UiWidgetCallback::getInstance()->getActiveTouchCallback();
         auto&& clickCallback = detail::UiWidgetCallback::getInstance()->getActiveClickCallback();
         if (touchCallback) {
@@ -112,10 +99,9 @@ void UiButtonLoader::onHandlePropTypeBlockControl(cocos2d::Node* node,
         } else {
             CCASSERT(false, "Unexpected value.");
         }
-    } else {
-        NodeLoader::onHandlePropTypeBlockControl(node, parent, propertyName,
-                                                 blockControlData, reader);
+        return;
     }
+    NodeLoader::onHandlePropTypeBlock(node, parent, propertyName, blockData, reader);
 }
 
 void UiButtonLoader::onHandlePropTypeCheck(cocos2d::Node* node,
@@ -124,16 +110,25 @@ void UiButtonLoader::onHandlePropTypeCheck(cocos2d::Node* node,
                                            bool check,
                                            cocosbuilder::CCBReader* reader) {
     auto button = dynamic_cast<cocos2d::ui::Button*>(node);
-    if (std::strcmp(propertyName, PROPERTY_ZOOMONTOUCHDOWN) == 0) {
-        button->setPressedActionEnabled(check);
-    } else if (std::strcmp(propertyName, PROPERTY_ENABLED) == 0) {
-        button->setEnabled(check);
-    } else if (std::strcmp(propertyName, PROPERTY_SELECTED) == 0) {
-        CCASSERT(false, "Unexpected arg.");
-    } else {
-        NodeLoader::onHandlePropTypeCheck(node, parent, propertyName,
-                                          check, reader);
+    if (std::strcmp(propertyName, property::touch_enabled) == 0) {
+        return button->setTouchEnabled(check);
     }
+    if (std::strcmp(propertyName, property::swallow_touches) == 0) {
+        return button->setSwallowTouches(check);
+    }
+    if (std::strcmp(propertyName, property::propagate_touch_events) == 0) {
+        return button->setPropagateTouchEvents(check);
+    }
+    if (std::strcmp(propertyName, property::pressed_action_enabled) == 0) {
+        return button->setPressedActionEnabled(check);
+    }
+    if (std::strcmp(propertyName, property::normal_sprite_frame_enabled) == 0 ||
+        std::strcmp(propertyName, property::pressed_sprite_frame_enabled) == 0 ||
+        std::strcmp(propertyName, property::disabled_sprite_frame_enabled) == 0) {
+        spriteFrameEnabled_ = check;
+        return;
+    }
+    NodeLoader::onHandlePropTypeCheck(node, parent, propertyName, check, reader);
 }
 
 void UiButtonLoader::onHandlePropTypeString(cocos2d::Node* node,
@@ -142,16 +137,10 @@ void UiButtonLoader::onHandlePropTypeString(cocos2d::Node* node,
                                             const char* string,
                                             cocosbuilder::CCBReader* reader) {
     auto button = dynamic_cast<cocos2d::ui::Button*>(node);
-    if (std::strcmp(propertyName, PROPERTY_TITLE_NORMAL) == 0) {
-        button->setTitleText(string);
-    } else if (std::strcmp(propertyName, PROPERTY_TITLE_HIGHLIGHTED) == 0) {
-        CCASSERT(false, "Unexpected arg.");
-    } else if (std::strcmp(propertyName, PROPERTY_TITLE_DISABLED) == 0) {
-        CCASSERT(false, "Unexpected arg.");
-    } else {
-        NodeLoader::onHandlePropTypeString(node, parent, propertyName,
-                                           string, reader);
+    if (std::strcmp(propertyName, property::title_text) == 0) {
+        return button->setTitleText(string);
     }
+    NodeLoader::onHandlePropTypeString(node, parent, propertyName, string, reader);
 }
 
 void UiButtonLoader::onHandlePropTypeFontTTF(cocos2d::Node* node,
@@ -160,16 +149,22 @@ void UiButtonLoader::onHandlePropTypeFontTTF(cocos2d::Node* node,
                                              const char* fontTTF,
                                              cocosbuilder::CCBReader* reader) {
     auto button = dynamic_cast<cocos2d::ui::Button*>(node);
-    if (std::strcmp(propertyName, PROPERTY_TITLETTF_NORMAL) == 0) {
-        button->setTitleFontName(fontTTF);
-    } else if (std::strcmp(propertyName, PROPERTY_TITLETTF_HIGHLIGHTED) == 0) {
-        CCASSERT(false, "Unexpected arg.");
-    } else if (std::strcmp(propertyName, PROPERTY_TITLETTF_DISABLED) == 0) {
-        CCASSERT(false, "Unexpected arg.");
-    } else {
-        NodeLoader::onHandlePropTypeFontTTF(node, parent, propertyName,
-                                            fontTTF, reader);
+    if (std::strcmp(propertyName, property::title_font_name) == 0) {
+        return button->setTitleFontName(fontTTF);
     }
+    NodeLoader::onHandlePropTypeFontTTF(node, parent, propertyName, fontTTF, reader);
+}
+
+void UiButtonLoader::onHandlePropTypeFloat(cocos2d::Node* node,
+                                           cocos2d::Node* parent,
+                                           const char* propertyName,
+                                           float floatValue,
+                                           cocosbuilder::CCBReader* reader) {
+    auto button = dynamic_cast<cocos2d::ui::Button*>(node);
+    if (std::strcmp(propertyName, property::zoom_scale) == 0) {
+        return button->setZoomScale(floatValue);
+    }
+    NodeLoader::onHandlePropTypeFloat(node, parent, propertyName, floatValue, reader);
 }
 
 void UiButtonLoader::onHandlePropTypeFloatScale(cocos2d::Node* node,
@@ -178,44 +173,10 @@ void UiButtonLoader::onHandlePropTypeFloatScale(cocos2d::Node* node,
                                                 float floatScale,
                                                 cocosbuilder::CCBReader* reader) {
     auto button = dynamic_cast<cocos2d::ui::Button*>(node);
-    if (std::strcmp(propertyName, PROPERTY_TITLETTFSIZE_NORMAL) == 0) {
-        button->setTitleFontSize(floatScale);
-    } else if (std::strcmp(propertyName, PROPERTY_TITLETTFSIZE_HIGHLIGHTED) == 0) {
-        CCASSERT(false, "Unexpected arg.");
-    } else if (std::strcmp(propertyName, PROPERTY_TITLETTFSIZE_DISABLED) == 0) {
-        CCASSERT(false, "Unexpected arg.");
-    } else {
-        NodeLoader::onHandlePropTypeFloatScale(node, parent, propertyName,
-                                               floatScale, reader);
+    if (std::strcmp(propertyName, property::title_font_size) == 0) {
+        return button->setTitleFontSize(floatScale);
     }
-}
-
-void UiButtonLoader::onHandlePropTypePoint(cocos2d::Node* node,
-                                           cocos2d::Node* parent,
-                                           const char* propertyName,
-                                           cocos2d::Vec2 point,
-                                           cocosbuilder::CCBReader* reader) {
-    auto button = dynamic_cast<cocos2d::ui::Button*>(node);
-    if (std::strcmp(propertyName, PROPERTY_LABELANCHORPOINT) == 0) {
-        button->getTitleRenderer()->setAnchorPoint(point);
-    } else {
-        NodeLoader::onHandlePropTypePoint(node, parent, propertyName,
-                                          point, reader);
-    }
-}
-
-void UiButtonLoader::onHandlePropTypeSize(cocos2d::Node* node,
-                                          cocos2d::Node* parent,
-                                          const char* propertyName,
-                                          cocos2d::Size size,
-                                          cocosbuilder::CCBReader* reader) {
-    auto button = dynamic_cast<cocos2d::ui::Button*>(node);
-    if (std::strcmp(propertyName, PROPERTY_PREFEREDSIZE) == 0) {
-        button->setContentSize(size);
-    } else {
-        NodeLoader::onHandlePropTypeSize(node, parent, propertyName,
-                                         size, reader);
-    }
+    NodeLoader::onHandlePropTypeFloatScale(node, parent, propertyName, floatScale, reader);
 }
 
 void UiButtonLoader::onHandlePropTypeSpriteFrame(cocos2d::Node* node,
@@ -223,25 +184,33 @@ void UiButtonLoader::onHandlePropTypeSpriteFrame(cocos2d::Node* node,
                                                  const char* propertyName,
                                                  cocos2d::SpriteFrame* spriteFrame,
                                                  cocosbuilder::CCBReader* reader) {
-    if (spriteFrame == nullptr) {
-        LOG_FUNC_FORMAT("Failed to load spriteFrame: name = %s",
-                        _spriteFrameName.c_str());
+    auto button = dynamic_cast<cocos2d::ui::Button*>(node);
+    if (spriteFrameEnabled_) {
+        CCASSERT(spriteFrameName_.empty() == false,
+                 "Sprite frame name is empty!");
+    }
+    if (std::strcmp(propertyName, property::normal_sprite_frame) == 0) {
+        if (spriteFrameEnabled_) {
+            button->loadTextureNormal(spriteFrameName_, textureResType_);
+        }
         return;
     }
-    auto button = dynamic_cast<cocos2d::ui::Button*>(node);
-    if (std::strcmp(propertyName, PROPERTY_BACKGROUNDSPRITEFRAME_NORMAL) == 0) {
-        CCASSERT(_spriteFrameName.empty() == false, "Unexpected value.");
-        button->loadTextureNormal(_spriteFrameName, _textureResType);
-    } else if (std::strcmp(propertyName, PROPERTY_BACKGROUNDSPRITEFRAME_HIGHLIGHTED) == 0) {
-        CCASSERT(_spriteFrameName.empty() == false, "Unexpected value.");
-        button->loadTexturePressed(_spriteFrameName, _textureResType);
-    } else if (std::strcmp(propertyName, PROPERTY_BACKGROUNDSPRITEFRAME_DISABLED) == 0) {
-        CCASSERT(_spriteFrameName.empty() == false, "Unexpected value.");
-        button->loadTextureDisabled(_spriteFrameName, _textureResType);
-    } else {
-        NodeLoader::onHandlePropTypeSpriteFrame(node, parent, propertyName,
-                                                spriteFrame, reader);
+    if (std::strcmp(propertyName, property::pressed_sprite_frame) == 0) {
+        if (spriteFrameEnabled_) {
+            button->loadTexturePressed(spriteFrameName_, textureResType_);
+        }
+        return;
     }
+    if (std::strcmp(propertyName, property::disabled_sprite_frame) == 0) {
+        if (spriteFrameEnabled_) {
+            button->loadTextureDisabled(spriteFrameName_, textureResType_);
+        }
+        return;
+    }
+    if (spriteFrameEnabled_) {
+        CCASSERT(false, "Sprite frame is not loaded!");
+    }
+    NodeLoader::onHandlePropTypeSpriteFrame(node, parent, propertyName, spriteFrame, reader);
 }
 
 void UiButtonLoader::onHandlePropTypeColor3(cocos2d::Node* node,
@@ -250,15 +219,9 @@ void UiButtonLoader::onHandlePropTypeColor3(cocos2d::Node* node,
                                             cocos2d::Color3B color3B,
                                             cocosbuilder::CCBReader* reader) {
     auto button = dynamic_cast<cocos2d::ui::Button*>(node);
-    if (std::strcmp(propertyName, PROPERTY_TITLECOLOR_NORMAL) == 0) {
-        button->setTitleColor(color3B);
-    } else if(strcmp(propertyName, PROPERTY_TITLECOLOR_HIGHLIGHTED) == 0) {
-        // Ignored.
-    } else if(strcmp(propertyName, PROPERTY_TITLECOLOR_DISABLED) == 0) {
-        // Ignored.
-    } else {
-        NodeLoader::onHandlePropTypeColor3(node, parent, propertyName,
-                                           color3B, reader);
+    if (std::strcmp(propertyName, property::title_color) == 0) {
+        return button->setTitleColor(color3B);
     }
+    NodeLoader::onHandlePropTypeColor3(node, parent, propertyName, color3B, reader);
 }
 NS_EE_END

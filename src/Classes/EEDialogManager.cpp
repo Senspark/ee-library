@@ -6,55 +6,103 @@
 //
 //
 
-#include "EEDialogManager-Impl.hpp"
+#include "EEDialogManager.hpp"
 
 #include "EEDialog.hpp"
-#include "EECocosUtils.hpp"
-#include "cocos2d.h"
+#include "EEUtils.hpp"
 
-namespace_ee_begin
+#include <cocos2d.h>
+
+NS_EE_BEGIN
 DialogManager* DialogManager::getInstance() {
-    static Impl sharedInstance;
+    static DialogManager sharedInstance;
     return &sharedInstance;
 }
 
+bool DialogManager::show(const Command& command) {
+    addCommand(CommandType::Show, command);
+    processCommand();
+    return _commandQueue.empty();
+}
+
+bool DialogManager::push(const Command& command) {
+    addCommand(CommandType::Push, command);
+    processCommand();
+    return _commandQueue.empty();
+}
+
+bool DialogManager::hide(const Command& command) {
+    addCommand(CommandType::Hide, command);
+    processCommand();
+    return _commandQueue.empty();
+}
+
+void DialogManager::addCommand(CommandType type, const Command& command) {
+    _commandQueue.emplace(type, command);
+    return processCommand();
+}
+
+void DialogManager::processCommand() {
+    if (getLockingDialog() != nullptr) {
+        return;
+    }
+    while (_commandQueue.empty() == false) {
+        auto cmd = _commandQueue.front();
+        _commandQueue.pop();
+        auto dialog = cmd.second();
+        switch (cmd.first) {
+            case CommandType::Show: {
+                
+                break;
+            }
+            case CommandType::Push: {
+                
+                break;
+            }
+            case CommandType::Hide: {
+                
+                break;
+            }
+        }
+    }
+}
+
+Dialog* DialogManager::getLockingDialog() const {
+    return _lockingDialog;
+}
+
 Dialog* DialogManager::getCurrentDialog() const {
-    auto impl = static_cast<const Impl*>(this);
-    CC_ASSERT(impl->_dialogStack.empty() == false);
-    return impl->_dialogStack.back().dialog;
+    CC_ASSERT(_dialogStack.empty() == false);
+    return _dialogStack.back().dialog;
 }
 
 cocos2d::Scene* DialogManager::getCurrentScene() {
-    auto impl = static_cast<Impl*>(this);
-    impl->updateCurrentScene();
-    return impl->_lastScene;
+    updateCurrentScene();
+    return _lastScene;
 }
     
 void DialogManager::hideDialog() {
     LOG_FUNC();
-    // Retrieve impl pointer.
-    auto impl = static_cast<Impl*>(this);
 //     CC_ASSERT(impl->_dialogQueue.empty());
 //     CC_ASSERT(impl->_dialogStack.empty() == false);
-    impl->_actionQueue.emplace_back([impl] {
-        decltype(impl->_actionQueue) actions;
-        actions.swap(impl->_actionQueue);
-        impl->_dialogStack.back().dialog->hide();
-        impl->_actionQueue.insert(impl->_actionQueue.cend(), actions.cbegin(), actions.cend());
-        impl->processActionQueue();
+    _actionQueue.emplace_back([this] {
+        decltype(_actionQueue) actions;
+        actions.swap(_actionQueue);
+        _dialogStack.back().dialog->hide();
+        _actionQueue.insert(_actionQueue.cend(), actions.cbegin(), actions.cend());
+        processActionQueue();
     });
-    impl->processActionQueue();
+    processActionQueue();
 }
     
 void DialogManager::pushDialog(cocos2d::Node* container, Dialog* dialog, int localZOrder) {
     LOG_FUNC();
     // Retrieve impl pointer.
-    auto impl = static_cast<Impl*>(this);
     auto parent = getRunningNode();
     // Pause parent.
     pauseAll(parent);
     // Push dialog to stack.
-    impl->_dialogStack.emplace_back(container, dialog);
+    _dialogStack.emplace_back(container, dialog);
     // Add dialog to scene.
     parent->addChild(container, localZOrder);
 }
@@ -62,70 +110,62 @@ void DialogManager::pushDialog(cocos2d::Node* container, Dialog* dialog, int loc
 void DialogManager::popDialog(Dialog* dialog) {
     LOG_FUNC();
     // Retrieve impl pointer.
-    auto impl = static_cast<Impl*>(this);
     auto parent = getParentNode();
-    auto&& dialogInfo = impl->_dialogStack.back();
+    auto&& dialogInfo = _dialogStack.back();
     CC_ASSERT(dialog == dialogInfo.dialog);
     // Remove dialog from stack.
     dialogInfo.container->removeFromParent();
     // Pop dialog from stack.
-    impl->_dialogStack.pop_back();
+    _dialogStack.pop_back();
     // Resume scene.
     resumeAll(parent);
 }
 
 void DialogManager::addToQueue(const std::function<void()>& callback) {
-    auto impl = static_cast<Impl*>(this);
-    impl->_actionQueue.emplace_back(callback);
-    impl->processActionQueue();
+    _actionQueue.emplace_back(callback);
+    processActionQueue();
 }
 
 void DialogManager::lock(Dialog* dialog) {
     LOG_FUNC();
-    // Retrieve impl pointer.
-    auto impl = static_cast<Impl*>(this);
     // Update current scene.
-    impl->updateCurrentScene();
+    updateCurrentScene();
     // Add to locking set.
-    impl->_lockingDialog = dialog;
+    _lockingDialog = dialog;
 }
 
 void DialogManager::unlock(Dialog* dialog) {
     LOG_FUNC();
-    // Retrieve impl pointer.
-    auto impl = static_cast<Impl*>(this);
     // Remove from locking set.
-    impl->_lockingDialog = nullptr;
+    _lockingDialog = nullptr;
     // Process queue.
-    impl->processActionQueue();
+    processActionQueue();
 }
 
 cocos2d::Node* DialogManager::getRunningNode() {
-    auto ptr = static_cast<Impl*>(this);
-    ptr->updateCurrentScene();
+    updateCurrentScene();
     cocos2d::Node* ret = nullptr;
-    if (ptr->_dialogStack.empty() == false) {
-        ret = ptr->_dialogStack.back().container;
+    if (_dialogStack.empty() == false) {
+        ret = _dialogStack.back().container;
     } else {
-        ret = ptr->_lastScene;
+        ret = _lastScene;
     }
     return ret;
 }
     
 cocos2d::Node* DialogManager::getParentNode() {
-    auto ptr = static_cast<Impl*>(this);
-    ptr->updateCurrentScene();
+    updateCurrentScene();
     cocos2d::Node* ret = nullptr;
-    CC_ASSERT(ptr->_dialogStack.size() > 0);
-    if (ptr->_dialogStack.size() >= 2) {
-        ret = ptr->_dialogStack.at(ptr->_dialogStack.size() - 2).container;
+    CC_ASSERT(_dialogStack.size() > 0);
+    if (_dialogStack.size() >= 2) {
+        ret = _dialogStack.at(_dialogStack.size() - 2).container;
     } else {
-        ret = ptr->_lastScene;
+        ret = _lastScene;
     }
     return ret;
 }
     
-void DialogManager::Impl::updateCurrentScene() {
+void DialogManager::updateCurrentScene() {
     auto currentScene = cocos2d::Director::getInstance()->getRunningScene();
     auto transition = dynamic_cast<cocos2d::TransitionScene*>(currentScene);
     if (transition != nullptr) {
@@ -142,7 +182,7 @@ void DialogManager::Impl::updateCurrentScene() {
     }
 }
 
-void DialogManager::Impl::processActionQueue() {
+void DialogManager::processActionQueue() {
     if (_lockingDialog != nullptr) {
         return;
     }
@@ -152,4 +192,4 @@ void DialogManager::Impl::processActionQueue() {
         callback();
     }
 }
-namespace_ee_end
+NS_EE_END

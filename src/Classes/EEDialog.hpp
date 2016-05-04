@@ -9,21 +9,37 @@
 #ifndef EE_LIBRARY_DIALOG_H
 #define EE_LIBRARY_DIALOG_H
 
-#include "EEForward.hpp"
-#include "EEActiveControl.hpp"
-
 #include <functional>
 #include <memory>
-#include <utility>
+#include <vector>
 
-namespace_ee_begin
-class Dialog : public ActiveNodeButton {
+#include "EEMacro.hpp"
+
+#include <2d/CCNode.h>
+
+NS_EE_BEGIN
+class Dialog : public cocos2d::Node {
 public:
-    using Callback1 = std::function<void()>;
-    using Callback2 = std::function<void(cocos2d::Node*, Dialog*)>;
+    using Container = cocos2d::Node;
     
-    void show(int localZOrder = 0);
-    void hide();
+    using Callback1 = std::function<void()>;
+    using Callback2 = std::function<void(Container* container,
+                                         Dialog* dialog)>;
+    
+    using Command = std::function<Dialog*>;
+    
+    /// Attempts to push a dialog.
+    void pushDialog(const Command& command);
+    
+    virtual void show(int level);
+    
+    virtual void hide();
+    
+    int getDialogLevel() const;
+    
+    Container* getContainer();
+    
+    const Container* getContainer() const;
     
     Dialog* addOnShowBeganCallback(const Callback1& callback, int priority = 0);
     Dialog* addOnShowEndedCallback(const Callback2& callback, int priority = 0);
@@ -31,13 +47,8 @@ public:
     Dialog* addOnHideEndedCallback(const Callback1& callback, int priority = 0);
     
 protected:
-    virtual void internalShow(int localZOrder) = 0;
-    virtual void internalHide() = 0;
-    
-    Dialog();
-    virtual ~Dialog();
-    
     virtual bool init() override;
+    
     virtual void onEnter() override;
     virtual void onExit() override;
     
@@ -50,10 +61,20 @@ protected:
     static void popDialog(Dialog* dialog);
     
 private:
-    class Impl;
-    friend class Impl;
-    std::unique_ptr<Impl> _impl;
+    bool _isShowing;
+    bool _isHiding;
+    
+    using Callback1Info = std::pair<int, Callback1>;
+    using Callback2Info = std::pair<int, Callback2>;
+    
+    void invokeCallback1(std::vector<Callback1Info>& infos);
+    void invokeCallback2(std::vector<Callback2Info>& infos);
+    
+    std::vector<Callback1Info> _onShowBeganCallbacks;
+    std::vector<Callback2Info> _onShowEndedCallbacks;
+    std::vector<Callback2Info> _onHideBeganCallbacks;
+    std::vector<Callback1Info> _onHideEndedCallbacks;
 };
-namespace_ee_end
+NS_EE_END
 
 #endif /* EE_LIBRARY_DIALOG_H */

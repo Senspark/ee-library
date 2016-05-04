@@ -241,8 +241,8 @@
 		6CC43B101BF31BC600FAC807 /* EEJniConverter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EEJniConverter.cpp; sourceTree = "<group>"; };
 		6F39F1541CCBBBD10038796D /* EEButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEButton.cpp; sourceTree = "<group>"; };
 		6F39F1551CCBBBD10038796D /* EEButton.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEButton.hpp; sourceTree = "<group>"; };
-		6FA6588B1CCB5353009BC9EB /* lib_ee_desktop.a */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = lib_ee_desktop.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FA658961CCB700B009BC9EB /* EEUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEUtils.cpp; sourceTree = "<group>"; };
+		6FCDDC361CD994F600DF8095 /* lib_ee_desktop.a */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = lib_ee_desktop.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,7 +282,7 @@
 				46880B8319C43A87006E1F66 /* Classes */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				6C2E7D731BDE0B7D008F5EF3 /* Products */,
-				6FA6588B1CCB5353009BC9EB /* lib_ee_desktop.a */,
+				6FCDDC361CD994F600DF8095 /* lib_ee_desktop.a */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -311,8 +311,6 @@
 				6C5AEB3B1BDF1B9F004C98A2 /* crytography */,
 				6F7D5B591CD665010069E541 /* control */,
 				6F79B63F1CCAA2C20008EFAC /* listener */,
-				6CC359791C0C3C31007DC4CF /* layer */,
-				6C404B481CBFAEC3009A4251 /* async */,
 				6C3C3C2C1CA3859800A04333 /* ui */,
 				6C3C3C2B1CA3858C00A04333 /* event */,
 				6C43A7F61BDDDAEC00D0597F /* image */,
@@ -420,6 +418,8 @@
 		6C4557741C8FC8C4001AE09A /* experimental */ = {
 			isa = PBXGroup;
 			children = (
+				6C404B481CBFAEC3009A4251 /* async */,
+				6CC359791C0C3C31007DC4CF /* layer */,
 				6C3D1EEB1BEC9FAB00B56B55 /* data */,
 				6C43A78C1BDDCAF800D0597F /* CocosUtils.cpp */,
 				6C43A78D1BDDCAF800D0597F /* CocosUtils.hpp */,
@@ -616,7 +616,7 @@
 			);
 			name = "ee-library-desktop";
 			productName = "ee-library-desktop";
-			productReference = 6FA6588B1CCB5353009BC9EB /* lib_ee_desktop.a */;
+			productReference = 6FCDDC361CD994F600DF8095 /* lib_ee_desktop.a */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 /* End PBXNativeTarget section */

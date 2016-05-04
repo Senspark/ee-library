@@ -9,39 +9,63 @@
 #ifndef EE_LIBRARY_DIALOG_MANAGER_H
 #define EE_LIBRARY_DIALOG_MANAGER_H
 
-#include "EEForward.hpp"
-#include "EEMacro.hpp"
-
+#include <deque>
 #include <functional>
+#include <memory>
+#include <queue>
+#include <utility>
+#include <vector>
 
-namespace ee {
+#include "EEMacro.hpp"
+#include "EECocos2dxFwd.hpp"
+
+NS_EE_BEGIN
 class Dialog;
 
+/// Dialog manager manages the dialogs in the scene.
 class DialogManager {
 public:
-    static DialogManager* getInstance();
-    
-    Dialog* getCurrentDialog() const;
-    void hideDialog();
-    
-    cocos2d::Node* getRunningNode();
-    cocos2d::Node* getParentNode();
-    
-    cocos2d::Scene* getCurrentScene();
+    using Command = std::function<Dialog*()>;
     
 private:
     friend class Dialog;
     
-    void addToQueue(const std::function<void()>& callback);
+    /// Adds a command the to the command queue.
+//    void addCommand(CommandType type, const Command& command);
     
-    void pushDialog(cocos2d::Node* container, Dialog* dialog, int localZOrder);
-    void popDialog(Dialog* dialog);
+    /// Processes commands in command queue.
+    void processCommand();
     
-    void lock(Dialog* dialog);
-    void unlock(Dialog* dialog);
+//    std::queue<std::pair<CommandType, Command>> _commandQueue;
     
-    class Impl;   
+//    void addToQueue(const std::function<void()>& callback);
+//    
+//    void pushDialog(cocos2d::Node* container, Dialog* dialog, int localZOrder);
+//    void popDialog(Dialog* dialog);
+//    
+//    void lock(Dialog* dialog);
+//    void unlock(Dialog* dialog);
+//    
+//    void updateCurrentScene();
+//    void processActionQueue();
+//    
+//    cocos2d::Scene* _lastScene;
+    
+    Dialog* _lockingDialog;
+    
+//    struct DialogInfo {
+//        DialogInfo(cocos2d::Node* _container, Dialog* _dialog)
+//        : container(_container)
+//        , dialog(_dialog)
+//        {}
+//        
+//        cocos2d::RefPtr<cocos2d::Node> container;
+//        Dialog* dialog;
+//    };
+//    
+//    std::deque<std::function<void()>> _actionQueue;
+//    std::vector<DialogInfo> _dialogStack;
 };
-} // namespace ee
+NS_EE_END
 
 #endif /* EE_LIBRARY_DIALOG_MANAGER_H */

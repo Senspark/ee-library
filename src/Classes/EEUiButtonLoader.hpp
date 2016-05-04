@@ -20,28 +20,26 @@ NS_EE_BEGIN
 ///
 /// Simple example.
 /// @code
-/// // In onResolveCCBCCControlSelector method.
+/// // Register loader.
+/// your_node_loader_library->registerNodeLoader("CCButton",
+///                                              ee::UiButtonLoader::loader());
 ///
-/// // Old way used for cocos2d::extension::ControlButton.
-/// // CCB_SELECTORRESOLVER_CCCONTROL_GLUE(this, "onMyButtonPressed",
-/// //                                     MyClass::onMyButtonPressed);
-///
-/// // New way used for cocos2d::ui::Button.
+/// // Register touch callback in onResolveCCBCCMenuItemSelector.
 /// // This macro assumes that your_method_name_in_cocosbuilder
 /// // and the function name have the same name.
 /// // Do note that MyClass::onMyButtonPressed should have zero argument.
-/// CCB_SELECTORRESOLVER_CCCONTROL_CLICK_EX_0(MyClass::onMyButtonPressed);
+/// CCB_SELECTORRESOLVER_CCBUTTON_CLICK_EX_0(MyClass::onMyButtonPressed);
 ///
 /// // If your_method_name_in_cocosbuilder
 /// // have different name than the function name,
 /// // use the following macro:
-/// CCB_SELECTORRESOLVER_CCCONTROL_CLICK(this, "your_method_name_in_cocosbuilder",
-///                                      CC_CALLBACK_0(MyClass::onMyButtonPressed,
-///                                                    this));
+/// CCB_SELECTORRESOLVER_CCBUTTON_CLICK(this, "your_method_name_in_cocosbuilder",
+///                                     CC_CALLBACK_0(MyClass::onMyButtonPressed,
+///                                                   this));
 /// @endcode
-/// @see @c CCB_SELECTORRESOLVER_CCCONTROL_TOUCH
-/// @see @c CCB_SELECTORRESOLVER_CCCONTROL_TOUCH_EX
-/// @see @c CCB_SELECTORRESOLVER_CCCONTROL_CLICK_EX_1
+/// @see @c CCB_SELECTORRESOLVER_CCBUTTON_TOUCH
+/// @see @c CCB_SELECTORRESOLVER_CCBUTTON_TOUCH_EX
+/// @see @c CCB_SELECTORRESOLVER_CCBUTTON_CLICK_EX_1
 /// @see @c cocos2d::ui::Widget::ccWidgetTouchCallback
 /// @see @c cocos2d::ui::Widget::ccWidgetClickCallback
 class UiButtonLoader : public cocosbuilder::NodeLoader {

@@ -26,6 +26,18 @@ NS_DETAIL_END
 using Button = detail::ButtonEx;
 
 NS_DETAIL_BEGIN
+/// Improved button class for @c cocos2d::ui::Button:
+///
+/// - Correct hit test.
+///
+/// - Children will be scaled when the button is pressed.
+///
+/// Use the following code to register the loader.
+/// @code
+/// your_node_loader_library->registerNodeLoader("class_name_in_cocosbuilder",
+///                                              ee::GenericLoader<ee::Button,
+///                                              ee::UiButtonLoader>::loader());
+/// @endcode
 class ButtonEx : public cocos2d::ui::Button {
 public:
     using HitTester = std::function<bool(cocos2d::Touch* touch,

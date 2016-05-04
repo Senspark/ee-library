@@ -89,16 +89,18 @@ void UiButtonLoader::onHandlePropTypeBlock(cocos2d::Node* node,
     auto button = dynamic_cast<cocos2d::ui::Button*>(node);
     std::string propName(propertyName);
     if (propName == property::block) {
-        auto&& touchCallback = detail::UiWidgetCallback::getInstance()->getActiveTouchCallback();
-        auto&& clickCallback = detail::UiWidgetCallback::getInstance()->getActiveClickCallback();
-        if (touchCallback) {
-            button->addTouchEventListener(touchCallback);
-            detail::UiWidgetCallback::getInstance()->setActiveTouchCallback(nullptr);
-        } else if (clickCallback) {
-            button->addClickEventListener(clickCallback);
-            detail::UiWidgetCallback::getInstance()->setActiveClickCallback(nullptr);
-        } else {
-            CCASSERT(false, "Unexpected value.");
+        if (blockData != nullptr) {
+            auto&& touchCallback = detail::UiWidgetCallback::getInstance()->getActiveTouchCallback();
+            auto&& clickCallback = detail::UiWidgetCallback::getInstance()->getActiveClickCallback();
+            if (touchCallback) {
+                button->addTouchEventListener(touchCallback);
+                detail::UiWidgetCallback::getInstance()->setActiveTouchCallback(nullptr);
+            } else if (clickCallback) {
+                button->addClickEventListener(clickCallback);
+                detail::UiWidgetCallback::getInstance()->setActiveClickCallback(nullptr);
+            } else {
+                CCASSERT(false, "Unexpected value.");
+            }
         }
         return;
     }

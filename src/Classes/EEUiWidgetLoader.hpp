@@ -1,0 +1,42 @@
+//
+//  EEUiWidgetLoader.hpp
+//  ee-library
+//
+//  Created by Zinge on 5/5/16.
+//
+//
+
+#ifndef EEUiWidgetLoader_hpp
+#define EEUiWidgetLoader_hpp
+
+#include "EEMacro.hpp"
+#include "EECocos2dxFwd.hpp"
+
+#include <cocosbuilder/CCNodeLoader.h>
+#include <ui/UIWidget.h>
+
+NS_EE_BEGIN
+/// Cocosbuilder loader for @c cocos2d::ui::Widget.
+class UiWidgetLoader : public cocosbuilder::NodeLoader {
+public:
+    CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(UiWidgetLoader, loader);
+    
+protected:
+    virtual cocos2d::Node* createNode(cocos2d::Node* parent,
+                                      cocosbuilder::CCBReader* reader) override;
+    
+    virtual void onHandlePropTypeBlock(cocos2d::Node* node,
+                                       cocos2d::Node* parent,
+                                       const char* propertyName,
+                                       cocosbuilder::BlockData* blockData,
+                                       cocosbuilder::CCBReader* ccbReader) override;
+    
+    virtual void onHandlePropTypeCheck(cocos2d::Node* node,
+                                       cocos2d::Node* parent,
+                                       const char* propertyName,
+                                       bool check,
+                                       cocosbuilder::CCBReader* reader) override;
+};
+NS_EE_END
+
+#endif /* EEUiWidgetLoader_hpp */

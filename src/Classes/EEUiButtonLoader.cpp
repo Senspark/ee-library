@@ -9,16 +9,11 @@
 #include "EEUiButtonLoader.hpp"
 #include "EEUiWidgetCallback.hpp"
 
-#include "cocos2d.h"
-#include "ui/UIButton.h"
+#include <cocos2d.h>
+#include <ui/UIButton.h>
 
 NS_EE_BEGIN
 namespace property {
-constexpr const char* block                         = "block";
-constexpr const char* touch_enabled                 = "touchEnabled";
-constexpr const char* swallow_touches               = "swallowTouches";
-constexpr const char* propagate_touch_events        = "propagateTouchEvents";
-
 constexpr const char* pressed_action_enabled        = "pressedActionEnabled";
 constexpr const char* zoom_scale                    = "zoomScale";
 
@@ -81,32 +76,6 @@ cocos2d::SpriteFrame* UiButtonLoader::parsePropTypeSpriteFrame(cocos2d::Node* no
     return spriteFrame;
 }
 
-void UiButtonLoader::onHandlePropTypeBlock(cocos2d::Node* node,
-                                           cocos2d::Node* parent,
-                                           const char* propertyName,
-                                           cocosbuilder::BlockData* blockData,
-                                           cocosbuilder::CCBReader* reader) {
-    auto button = dynamic_cast<cocos2d::ui::Button*>(node);
-    std::string propName(propertyName);
-    if (propName == property::block) {
-        if (blockData != nullptr) {
-            auto&& touchCallback = detail::UiWidgetCallback::getInstance()->getActiveTouchCallback();
-            auto&& clickCallback = detail::UiWidgetCallback::getInstance()->getActiveClickCallback();
-            if (touchCallback) {
-                button->addTouchEventListener(touchCallback);
-                detail::UiWidgetCallback::getInstance()->setActiveTouchCallback(nullptr);
-            } else if (clickCallback) {
-                button->addClickEventListener(clickCallback);
-                detail::UiWidgetCallback::getInstance()->setActiveClickCallback(nullptr);
-            } else {
-                CCASSERT(false, "Unexpected value.");
-            }
-        }
-        return;
-    }
-    NodeLoader::onHandlePropTypeBlock(node, parent, propertyName, blockData, reader);
-}
-
 void UiButtonLoader::onHandlePropTypeCheck(cocos2d::Node* node,
                                            cocos2d::Node* parent,
                                            const char* propertyName,
@@ -114,15 +83,6 @@ void UiButtonLoader::onHandlePropTypeCheck(cocos2d::Node* node,
                                            cocosbuilder::CCBReader* reader) {
     auto button = dynamic_cast<cocos2d::ui::Button*>(node);
     std::string propName(propertyName);
-    if (propName == property::touch_enabled) {
-        return button->setTouchEnabled(check);
-    }
-    if (propName == property::swallow_touches) {
-        return button->setSwallowTouches(check);
-    }
-    if (propName == property::propagate_touch_events) {
-        return button->setPropagateTouchEvents(check);
-    }
     if (propName == property::pressed_action_enabled) {
         return button->setPressedActionEnabled(check);
     }
@@ -132,7 +92,8 @@ void UiButtonLoader::onHandlePropTypeCheck(cocos2d::Node* node,
         spriteFrameEnabled_ = check;
         return;
     }
-    NodeLoader::onHandlePropTypeCheck(node, parent, propertyName, check, reader);
+    UiWidgetLoader::onHandlePropTypeCheck(node, parent, propertyName,
+                                          check, reader);
 }
 
 void UiButtonLoader::onHandlePropTypeString(cocos2d::Node* node,
@@ -145,7 +106,8 @@ void UiButtonLoader::onHandlePropTypeString(cocos2d::Node* node,
     if (propName == property::title_text) {
         return button->setTitleText(string);
     }
-    NodeLoader::onHandlePropTypeString(node, parent, propertyName, string, reader);
+    UiWidgetLoader::onHandlePropTypeString(node, parent, propertyName,
+                                           string, reader);
 }
 
 void UiButtonLoader::onHandlePropTypeFontTTF(cocos2d::Node* node,
@@ -158,7 +120,8 @@ void UiButtonLoader::onHandlePropTypeFontTTF(cocos2d::Node* node,
     if (propName == property::title_font_name) {
         return button->setTitleFontName(fontTTF);
     }
-    NodeLoader::onHandlePropTypeFontTTF(node, parent, propertyName, fontTTF, reader);
+    UiWidgetLoader::onHandlePropTypeFontTTF(node, parent, propertyName,
+                                            fontTTF, reader);
 }
 
 void UiButtonLoader::onHandlePropTypeFloat(cocos2d::Node* node,
@@ -171,7 +134,8 @@ void UiButtonLoader::onHandlePropTypeFloat(cocos2d::Node* node,
     if (propName == property::zoom_scale) {
         return button->setZoomScale(floatValue);
     }
-    NodeLoader::onHandlePropTypeFloat(node, parent, propertyName, floatValue, reader);
+    UiWidgetLoader::onHandlePropTypeFloat(node, parent, propertyName,
+                                          floatValue, reader);
 }
 
 void UiButtonLoader::onHandlePropTypeFloatScale(cocos2d::Node* node,
@@ -184,7 +148,8 @@ void UiButtonLoader::onHandlePropTypeFloatScale(cocos2d::Node* node,
     if (propName == property::title_font_size) {
         return button->setTitleFontSize(floatScale);
     }
-    NodeLoader::onHandlePropTypeFloatScale(node, parent, propertyName, floatScale, reader);
+    UiWidgetLoader::onHandlePropTypeFloatScale(node, parent, propertyName,
+                                               floatScale, reader);
 }
 
 void UiButtonLoader::onHandlePropTypeSpriteFrame(cocos2d::Node* node,
@@ -219,7 +184,8 @@ void UiButtonLoader::onHandlePropTypeSpriteFrame(cocos2d::Node* node,
     if (spriteFrameEnabled_) {
         CCASSERT(false, "Sprite frame is not loaded!");
     }
-    NodeLoader::onHandlePropTypeSpriteFrame(node, parent, propertyName, spriteFrame, reader);
+    UiWidgetLoader::onHandlePropTypeSpriteFrame(node, parent, propertyName,
+                                                spriteFrame, reader);
 }
 
 void UiButtonLoader::onHandlePropTypeColor3(cocos2d::Node* node,
@@ -232,6 +198,7 @@ void UiButtonLoader::onHandlePropTypeColor3(cocos2d::Node* node,
     if (propName == property::title_color) {
         return button->setTitleColor(color3B);
     }
-    NodeLoader::onHandlePropTypeColor3(node, parent, propertyName, color3B, reader);
+    UiWidgetLoader::onHandlePropTypeColor3(node, parent, propertyName,
+                                           color3B, reader);
 }
 NS_EE_END

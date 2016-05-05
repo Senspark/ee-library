@@ -11,9 +11,7 @@
 
 #include "EEMacro.hpp"
 #include "EECocos2dxFwd.hpp"
-
-#include <cocosbuilder/CCNodeLoader.h>
-#include <ui/UIWidget.h>
+#include "EEUiWidgetLoader.hpp"
 
 NS_EE_BEGIN
 /// Cocosbuilder loader for @c cocos2d::ui::Button.
@@ -42,7 +40,7 @@ NS_EE_BEGIN
 /// @see @c CCB_SELECTORRESOLVER_CCBUTTON_CLICK_EX_1
 /// @see @c cocos2d::ui::Widget::ccWidgetTouchCallback
 /// @see @c cocos2d::ui::Widget::ccWidgetClickCallback
-class UiButtonLoader : public cocosbuilder::NodeLoader {
+class UiButtonLoader : public UiWidgetLoader {
 public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(UiButtonLoader, loader);
     
@@ -78,6 +76,7 @@ protected:
                                          const char* propertyName,
                                          const char* fontTTF,
                                          cocosbuilder::CCBReader* reader) override;
+    
     virtual void onHandlePropTypeFloat(cocos2d::Node* node,
                                        cocos2d::Node* parent,
                                        const char* propertyName,

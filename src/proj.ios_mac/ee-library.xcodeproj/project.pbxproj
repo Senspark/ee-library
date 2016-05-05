@@ -62,6 +62,10 @@
 		6F79DC851CCE5CBC00BDA20F /* EESha1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A7CA1BDDDAC300D0597F /* EESha1.cpp */; };
 		6F79DC861CCE5CBE00BDA20F /* EECrc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C2E7D831BDE14D4008F5EF3 /* EECrc.cpp */; };
 		6F79DC871CCE5CBF00BDA20F /* EECrc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C2E7D831BDE14D4008F5EF3 /* EECrc.cpp */; };
+		6F843E431CDB8EF6008B2EC4 /* EEUiWidgetLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F843E411CDB8EF6008B2EC4 /* EEUiWidgetLoader.cpp */; };
+		6F843E441CDB8EF6008B2EC4 /* EEUiWidgetLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F843E411CDB8EF6008B2EC4 /* EEUiWidgetLoader.cpp */; };
+		6F843E451CDB8EF6008B2EC4 /* EEUiWidgetLoader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6F843E421CDB8EF6008B2EC4 /* EEUiWidgetLoader.hpp */; };
+		6F843E461CDB8EF6008B2EC4 /* EEUiWidgetLoader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6F843E421CDB8EF6008B2EC4 /* EEUiWidgetLoader.hpp */; };
 		6FA6588C1CCB5C0B009BC9EB /* EEImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C7A9AC71BDB841A00199AC0 /* EEImage.cpp */; };
 		6FA6588D1CCB5C0B009BC9EB /* EEImage.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C32DC3D1BD67074007613F9 /* EEImage.hpp */; };
 		6FA6588E1CCB5C0B009BC9EB /* EEBoxBlur1D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C32DC431BD67791007613F9 /* EEBoxBlur1D.cpp */; };
@@ -229,6 +233,8 @@
 		6CC43B101BF31BC600FAC807 /* __EEJniConverter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = __EEJniConverter.cpp; sourceTree = "<group>"; };
 		6F39F1541CCBBBD10038796D /* EEButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEButton.cpp; sourceTree = "<group>"; };
 		6F39F1551CCBBBD10038796D /* EEButton.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEButton.hpp; sourceTree = "<group>"; };
+		6F843E411CDB8EF6008B2EC4 /* EEUiWidgetLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEUiWidgetLoader.cpp; sourceTree = "<group>"; };
+		6F843E421CDB8EF6008B2EC4 /* EEUiWidgetLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEUiWidgetLoader.hpp; sourceTree = "<group>"; };
 		6FA658961CCB700B009BC9EB /* EEUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEUtils.cpp; sourceTree = "<group>"; };
 		6FCDDC361CD994F600DF8095 /* lib_ee_desktop.a */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = lib_ee_desktop.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -363,6 +369,8 @@
 			children = (
 				6C468C2A1CA2F0CA00D16594 /* EEUiWidgetCallback.cpp */,
 				6C468C2B1CA2F0CA00D16594 /* EEUiWidgetCallback.hpp */,
+				6F843E411CDB8EF6008B2EC4 /* EEUiWidgetLoader.cpp */,
+				6F843E421CDB8EF6008B2EC4 /* EEUiWidgetLoader.hpp */,
 				6C4A4A551CA153E500E72D89 /* EEUiButtonLoader.cpp */,
 				6C4A4A561CA153E500E72D89 /* EEUiButtonLoader.hpp */,
 				6C47AAF51CA4EAE100B3E65E /* EEUiTextLoader.cpp */,
@@ -515,6 +523,7 @@
 				6F79B6251CCA7FCF0008EFAC /* EEBitManipulation.hpp in Headers */,
 				6FA658921CCB5C0C009BC9EB /* EEImage.hpp in Headers */,
 				6C3CAB401C5B5AC30059A380 /* EEForward.hpp in Headers */,
+				6F843E451CDB8EF6008B2EC4 /* EEUiWidgetLoader.hpp in Headers */,
 				6C49FBB11CA13D1D00E0FE86 /* EEGenericLoader.hpp in Headers */,
 				6C3CAB3E1C5B5ABB0059A380 /* EEHeader.hpp in Headers */,
 				6C3CAB3F1C5B5AC00059A380 /* EEMacro.hpp in Headers */,
@@ -541,6 +550,7 @@
 				6F79B62A1CCA7FDB0008EFAC /* EEExtension.hpp in Headers */,
 				6F79B62E1CCA7FE20008EFAC /* EEUtils.hpp in Headers */,
 				6F79B6221CCA7FC70008EFAC /* EEHeader.hpp in Headers */,
+				6F843E461CDB8EF6008B2EC4 /* EEUiWidgetLoader.hpp in Headers */,
 				6FA6588D1CCB5C0B009BC9EB /* EEImage.hpp in Headers */,
 				6F79B6461CCAC0E90008EFAC /* EEEvent.hpp in Headers */,
 				6F39F1591CCBBBD10038796D /* EEButton.hpp in Headers */,
@@ -686,6 +696,7 @@
 				6C47FE491CA1B36A00FEF3BC /* EEDynamicValue.cpp in Sources */,
 				6FA658931CCB5C0C009BC9EB /* EEBoxBlur1D.cpp in Sources */,
 				6FA658971CCB700B009BC9EB /* EEUtils.cpp in Sources */,
+				6F843E431CDB8EF6008B2EC4 /* EEUiWidgetLoader.cpp in Sources */,
 				6C47AAF71CA4EAE100B3E65E /* EEUiTextLoader.cpp in Sources */,
 				6FA658941CCB5C0C009BC9EB /* EEBoxBlur2D.cpp in Sources */,
 				6F39F1561CCBBBD10038796D /* EEButton.cpp in Sources */,
@@ -707,6 +718,7 @@
 				6F39F1571CCBBBD10038796D /* EEButton.cpp in Sources */,
 				6FA6588E1CCB5C0B009BC9EB /* EEBoxBlur1D.cpp in Sources */,
 				6F79DC871CCE5CBF00BDA20F /* EECrc.cpp in Sources */,
+				6F843E441CDB8EF6008B2EC4 /* EEUiWidgetLoader.cpp in Sources */,
 				6FA6588C1CCB5C0B009BC9EB /* EEImage.cpp in Sources */,
 				6FA6588F1CCB5C0B009BC9EB /* EEBoxBlur2D.cpp in Sources */,
 				6FCDDC421CD9981800DF8095 /* EEUiWidgetCallback.cpp in Sources */,

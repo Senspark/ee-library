@@ -167,7 +167,7 @@ void UiTextLoader::onHandlePropTypeInteger(cocos2d::Node* node,
         shadowBlurRadius_ = integer;
         if (shadowEnabled_) {
             cocos2d::Color4B color(shadowColor_);
-            color.a = static_cast<GLubyte>(shadowOpacity_);
+            color.a = shadowOpacity_;
             text->enableShadow(color, shadowOffset_, shadowBlurRadius_);
         }
         return;
@@ -176,7 +176,7 @@ void UiTextLoader::onHandlePropTypeInteger(cocos2d::Node* node,
         outlineSize_ = integer;
         if (outlineEnabled_) {
             cocos2d::Color4B color(outlineColor_);
-            color.a = static_cast<GLubyte>(outlineOpacity_);
+            color.a = outlineOpacity_;
             text->enableOutline(color, outlineSize_);
         }
         return;

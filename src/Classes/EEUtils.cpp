@@ -7,6 +7,7 @@
 //
 
 #include "EEUtils.hpp"
+#include "EEImage.hpp"
 
 #include <cocos2d.h>
 #include <network/HttpClient.h>
@@ -125,10 +126,8 @@ void captureScreenInPixels(const std::function<void(cocos2d::Image*)>& afterCapt
     cocos2d::Director::getInstance()->getRenderer()->addCommand(command.get());
 }
 
-void captureScreenInPoints(const std::function<void(cocos2d::Image*)>& afterCaptured,
-                           float scale) {
+cocos2d::Image* captureScreenInPoints(float scale) {
     // Retrieve the current scene.
-    // ??? scene should be guarded ???
     auto scene = cocos2d::Director::getInstance()->getRunningScene();
     
     auto transition = dynamic_cast<cocos2d::TransitionScene*>(scene);
@@ -148,12 +147,6 @@ void captureScreenInPoints(const std::function<void(cocos2d::Image*)>& afterCapt
     int width = static_cast<int>(size.width);
     int height = static_cast<int>(size.height);
     
-    // Guard all children.
-    std::vector<RefGuard> visitedNodes;
-    doRecursively(scene, [&visitedNodes](cocos2d::Node* n) {
-        visitedNodes.emplace_back(n);
-    });
-    
     // Create a renderer.
     auto renderer = cocos2d::RenderTexture::create(width, height);
     
@@ -167,33 +160,38 @@ void captureScreenInPoints(const std::function<void(cocos2d::Image*)>& afterCapt
     scene->visit();
     renderer->end();
     
-    // Create a custom command.
-    // This command will be used once.
-    auto command = std::make_shared<cocos2d::CustomCommand>();
+    // Force to render immediately.
+    cocos2d::Director::getInstance()->getRenderer()->render();
     
-    // Assign max global z-order so that this command will be
-    // executed last.
-    command->init(std::numeric_limits<float>::max());
+    // Retrieve the image.
+    auto image = renderer->newImage();
+    image->autorelease();
+        
+    // Reset scale and anchor point.
+    scene->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE);
+    scene->setScale(1.0f);
     
-    // Assign callback function.
-    // We makes the lambda mutable here so that we can
-    // use the reset method on std::shared_ptr.
-    command->func = [command, visitedNodes, renderer, scene, afterCaptured]() mutable {
-        auto image = renderer->newImage();
-        afterCaptured(image);
-        image->release();
-        
-        // Reset scale and anchor point.
-        scene->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE);
-        scene->setScale(1.0f);
-        
-        // Reset the command, which will destroy it.
-        command.reset();
-        
-        // Destroy the command will also destroy visitedNodes, which will
-        // releases all retained nodes.
-    };
-    cocos2d::Director::getInstance()->getRenderer()->addCommand(command.get());
+    return image;
+}
+
+cocos2d::Sprite* captureBlurredScreenInPoints(float scale, int blurRadius) {
+    auto image = captureScreenInPoints(scale);
+    
+    float realRadius = blurRadius * CC_CONTENT_SCALE_FACTOR();
+    
+    // Blur the image.
+    ee::tentBlur1D(image, static_cast<image::SizeType>(realRadius));
+    
+    auto texture = new cocos2d::Texture2D();
+    texture->initWithImage(image);
+    
+    // Create the resulting sprite.
+    auto sprite = cocos2d::Sprite::createWithTexture(texture);
+    
+    // Release resource.
+    texture->release();
+    
+    return sprite;
 }
 
 void downloadImage(const std::string& imageUrl,

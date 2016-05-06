@@ -84,13 +84,13 @@ protected:
     
 private:
     bool shadowEnabled_;
-    int shadowOpacity_;
+    GLubyte shadowOpacity_;
     cocos2d::Color3B shadowColor_;
     cocos2d::Size shadowOffset_;
     int shadowBlurRadius_;
     
     bool outlineEnabled_;
-    int outlineOpacity_;
+    GLubyte outlineOpacity_;
     cocos2d::Color3B outlineColor_;
     int outlineSize_;
 };

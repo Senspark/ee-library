@@ -16,6 +16,7 @@ namespace property {
 constexpr const char* enabled                       = "enabled";
 constexpr const char* bright                        = "bright";
 constexpr const char* highlighted                   = "highlighted";
+constexpr const char* ignoreContentAdaptWithSize    = "ignoreContentAdaptWithSize";
 constexpr const char* block                         = "block";
 constexpr const char* touch_enabled                 = "touchEnabled";
 constexpr const char* swallow_touches               = "swallowTouches";
@@ -70,6 +71,9 @@ void UiWidgetLoader::onHandlePropTypeCheck(cocos2d::Node* node,
     }
     if (propName == property::highlighted) {
         return widget->setHighlighted(check);
+    }
+    if (propName == property::ignoreContentAdaptWithSize) {
+        return widget->ignoreContentAdaptWithSize(check);
     }
     if (propName == property::touch_enabled) {
         return widget->setTouchEnabled(check);

@@ -21,6 +21,8 @@ constexpr const char* title_text                    = "titleText";
 constexpr const char* title_font_name               = "titleFontName";
 constexpr const char* title_font_size               = "titleFontSize";
 constexpr const char* title_color                   = "titleColor";
+    
+constexpr const char* scale_9_enabled               = "scale9Enabled";
 
 constexpr const char* normal_sprite_frame_enabled   = "normalSpriteFrameEnabled";
 constexpr const char* pressed_sprite_frame_enabled  = "pressedSpriteFrameEnabled";
@@ -34,7 +36,6 @@ constexpr const char* disabled_sprite_frame         = "disabledSpriteFrame";
 cocos2d::Node* UiButtonLoader::createNode(cocos2d::Node* parent,
                                           cocosbuilder::CCBReader* reader) {
     auto result = cocos2d::ui::Button::create();
-    result->setScale9Enabled(true);
     return result;
 }
 
@@ -85,6 +86,9 @@ void UiButtonLoader::onHandlePropTypeCheck(cocos2d::Node* node,
     std::string propName(propertyName);
     if (propName == property::pressed_action_enabled) {
         return button->setPressedActionEnabled(check);
+    }
+    if (propName == property::scale_9_enabled) {
+        return button->setScale9Enabled(check);
     }
     if (propName == property::normal_sprite_frame_enabled ||
         propName == property::pressed_sprite_frame_enabled ||

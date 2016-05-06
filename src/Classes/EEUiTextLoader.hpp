@@ -10,18 +10,29 @@
 #define EEUiTextLoader_hpp
 
 #include "EEMacro.hpp"
-
-#include <cocosbuilder/CCNodeLoader.h>
+#include "EEUiWidgetLoader.hpp"
 
 NS_EE_BEGIN
 /// Cocosbuilder loader for @c cocos2d::ui::Text.
-class UiTextLoader : public cocosbuilder::NodeLoader {
+class UiTextLoader : public UiWidgetLoader {
 public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(UiTextLoader, loader);
     
 protected:
     virtual cocos2d::Node* createNode(cocos2d::Node* parent,
                                       cocosbuilder::CCBReader* reader) override;
+    
+    virtual void onHandlePropTypePoint(cocos2d::Node* node,
+                                       cocos2d::Node* parent,
+                                       const char* propertyName,
+                                       cocos2d::Vec2 point,
+                                       cocosbuilder::CCBReader* reader) override;
+    
+    virtual void onHandlePropTypeCheck(cocos2d::Node* node,
+                                       cocos2d::Node* parent,
+                                       const char* propertyName,
+                                       bool check,
+                                       cocosbuilder::CCBReader* reader) override;
     
     virtual void onHandlePropTypeColor3(cocos2d::Node* node,
                                         cocos2d::Node* parent,
@@ -34,12 +45,6 @@ protected:
                                       const char* propertyName,
                                       unsigned char byte,
                                       cocosbuilder::CCBReader* reader) override;
-    
-    virtual void onHandlePropTypeBlendFunc(cocos2d::Node* node,
-                                           cocos2d::Node* parent,
-                                           const char* propertyName,
-                                           cocos2d::BlendFunc blendFunc,
-                                           cocosbuilder::CCBReader* ccbReader) override;
     
     virtual void onHandlePropTypeFontTTF(cocos2d::Node* node,
                                          cocos2d::Node* parent,
@@ -59,6 +64,12 @@ protected:
                                             float floatScale,
                                             cocosbuilder::CCBReader* reader) override;
     
+    virtual void onHandlePropTypeInteger(cocos2d::Node* node,
+                                         cocos2d::Node* parent,
+                                         const char* propertyName,
+                                         int integer,
+                                         cocosbuilder::CCBReader* reader) override;
+    
     virtual void onHandlePropTypeIntegerLabeled(cocos2d::Node* node,
                                                 cocos2d::Node* parent,
                                                 const char* propertyName,
@@ -70,6 +81,18 @@ protected:
                                       const char* propertyName,
                                       cocos2d::Size size,
                                       cocosbuilder::CCBReader* reader) override;
+    
+private:
+    bool shadowEnabled_;
+    int shadowOpacity_;
+    cocos2d::Color3B shadowColor_;
+    cocos2d::Size shadowOffset_;
+    int shadowBlurRadius_;
+    
+    bool outlineEnabled_;
+    int outlineOpacity_;
+    cocos2d::Color3B outlineColor_;
+    int outlineSize_;
 };
 
 NS_EE_END

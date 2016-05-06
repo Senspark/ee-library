@@ -53,12 +53,6 @@ protected:
                                                            cocosbuilder::CCBReader* reader,
                                                            const char* propertyName) override;
     
-    virtual void onHandlePropTypeBlock(cocos2d::Node* node,
-                                       cocos2d::Node* parent,
-                                       const char* propertyName,
-                                       cocosbuilder::BlockData* blockData,
-                                       cocosbuilder::CCBReader* ccbReader) override;
-    
     virtual void onHandlePropTypeCheck(cocos2d::Node* node,
                                        cocos2d::Node* parent,
                                        const char* propertyName,
@@ -101,6 +95,7 @@ protected:
                                         cocos2d::Color3B color3B,
                                         cocosbuilder::CCBReader* reader) override;
     
+private:
     bool spriteFrameEnabled_;
     std::string spriteFrameName_;
     cocos2d::ui::Widget::TextureResType textureResType_;

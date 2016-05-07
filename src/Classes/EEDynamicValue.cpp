@@ -19,9 +19,6 @@ DynamicValue<T>::DynamicValue()
 {}
 
 template<class T>
-DynamicValue<T>::~DynamicValue() = default;
-    
-template<class T>
 DynamicValue<T>::DynamicValue(T value)
 : DynamicValue() {
     set(value);
@@ -32,11 +29,6 @@ DynamicValue<T>::DynamicValue(const DynamicValue<T>& other)
 : DynamicValue() {
     set(other);
 }
-    
-template<class T>
-DynamicValue<T>::DynamicValue(DynamicValue<T>&& other)
-: _value(std::move(other._value))
-, _random(std::move(other._random)) {}
     
 template<class T>
 DynamicValue<T>& DynamicValue<T>::operator=(const DynamicValue& other) {

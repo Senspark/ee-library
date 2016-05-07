@@ -202,19 +202,17 @@ void captureScreenInPixels(const std::function<void(cocos2d::Image*)>& afterCapt
 /// @note       If you are capturing the screenshot for blurring, set the scale
 ///             to be less than 1 for better performance.
 /// @param      scale The resulting image size will be multiplied by this parameter.
-/// @return     A @c cocos2d::Image ref pointer.
+/// @return     A pointer to @c cocos2d::Image.
 /// @see        @c captureScreenInPoints.
-/// @warning    If you use a transition scene then you should not call this
-///             function in @c onEnter or @c onEnterTransitionDidFinish because
-///             @c director->getRunningScene() will return the transition scene.
-/// @warning    You can fix this by wrapping this function with
-///             @c runAction(cocos2d::CallFunc::create([] { ... }));
 cocos2d::Image* captureScreenInPoints(float scale);
 
 /// Attempts to capture a blurred screenshot in points.
-///
-/// This is a wrapper for the above method.
 cocos2d::Sprite* captureBlurredScreenInPoints(float scale, int blurRadius);
+
+/// Creates a sprite from the given image and use the specified process callback
+/// (if not @c nullptr).
+cocos2d::Sprite* createSpriteFromImage(cocos2d::Image* image,
+                                       const std::function<void(cocos2d::Image*)>& processor = nullptr);
 
 /// Attempts to download an image from an url.
 ///

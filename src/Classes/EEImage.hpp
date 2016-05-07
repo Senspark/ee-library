@@ -30,7 +30,8 @@ void boxBlur2D(cocos2d::Image* image, SizeType range);
 void boxBlur1D(cocos2d::Image* image, SizeType range, SizeType iterations = 1);
 
 /// Tent blur.
-/// Equal to two iterations of box blur.
+///
+/// Equivalent to two iterations of box blur.
 void tentBlur1D(cocos2d::Image* image, SizeType range, SizeType iterations = 1);
 
 /// Cache oblivious matrix transposition.

@@ -135,7 +135,7 @@ cocos2d::Image* captureScreenInPoints(float scale) {
         // Current scene is a transition scene,
         // which means this function is called when the transition
         // scene has not finished.
-        CCASSERT(false, "Transition scene has not yet finished.");
+        CCLOG("You are capturing the transition scene!");
     }
     
     // Retrieve the win size.
@@ -176,11 +176,19 @@ cocos2d::Image* captureScreenInPoints(float scale) {
 
 cocos2d::Sprite* captureBlurredScreenInPoints(float scale, int blurRadius) {
     auto image = captureScreenInPoints(scale);
+    auto realRadius = static_cast<image::SizeType>(blurRadius * CC_CONTENT_SCALE_FACTOR());
+    return createSpriteFromImage(image, std::bind(tentBlur1D,
+                                                  std::placeholders::_1,
+                                                  realRadius,
+                                                  2));
+}
+
+cocos2d::Sprite* createSpriteFromImage(cocos2d::Image* image,
+                                       const std::function<void(cocos2d::Image*)>& processor) {
     
-    float realRadius = blurRadius * CC_CONTENT_SCALE_FACTOR();
-    
-    // Blur the image.
-    ee::tentBlur1D(image, static_cast<image::SizeType>(realRadius));
+    if (processor) {
+        processor(image);
+    }
     
     auto texture = new cocos2d::Texture2D();
     texture->initWithImage(image);

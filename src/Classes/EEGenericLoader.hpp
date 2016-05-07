@@ -16,8 +16,6 @@
 #include "EECocos2dxFwd.hpp"
 #include "EEExtension.hpp"
 
-#include <cocosbuilder/CCNodeLoader.h>
-
 NS_EE_BEGIN
 /// Generic template loader for cocosbuilder.
 ///

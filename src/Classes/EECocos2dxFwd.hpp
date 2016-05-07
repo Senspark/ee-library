@@ -133,4 +133,9 @@ class RadioButton;
 class ImageView;
 } // namespace cocos2d::ui
 
+namespace cocosbuilder {
+class CCBReader;
+class NodeLoader;
+} // namespace cocosbuilder.
+
 #endif /* EE_LIBRARY_COCOS2DX_FWD_HPP_ */

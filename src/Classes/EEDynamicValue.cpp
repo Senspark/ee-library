@@ -37,13 +37,6 @@ DynamicValue<T>& DynamicValue<T>::operator=(const DynamicValue& other) {
 }
     
 template<class T>
-DynamicValue<T>& DynamicValue<T>::operator=(DynamicValue&& other) {
-    _value = std::move(other._value);
-    _random = std::move(other._random);
-    return *this;
-}
-    
-template<class T>
 T DynamicValue<T>::get() const {
     auto intValue = (*_value) ^ (*_random);
     auto ret = bit_cast<T>(intValue);

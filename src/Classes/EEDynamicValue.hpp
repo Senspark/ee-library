@@ -24,14 +24,15 @@ template<class T>
 class DynamicValue final {
 public:
     DynamicValue();
+    ~DynamicValue() = default;
+    
     DynamicValue(T value);
+    
     DynamicValue(const DynamicValue& other);
     DynamicValue(DynamicValue&& other) = default;
     
-    ~DynamicValue() = default;
-    
     DynamicValue& operator=(const DynamicValue& other);
-    DynamicValue& operator=(DynamicValue&& other);
+    DynamicValue& operator=(DynamicValue&& other) = default;
 
     /// Retrieves the value.
     T get() const;

@@ -174,13 +174,15 @@ cocos2d::Image* captureScreenInPoints(float scale) {
     return image;
 }
 
-cocos2d::Sprite* captureBlurredScreenInPoints(float scale, int blurRadius) {
+cocos2d::Sprite* captureBlurredScreenInPoints(float scale,
+                                              int blurRadius,
+                                              int iterations) {
     auto image = captureScreenInPoints(scale);
     auto realRadius = static_cast<image::SizeType>(blurRadius * CC_CONTENT_SCALE_FACTOR());
     return createSpriteFromImage(image, std::bind(tentBlur1D,
                                                   std::placeholders::_1,
                                                   realRadius,
-                                                  2));
+                                                  iterations));
 }
 
 cocos2d::Sprite* createSpriteFromImage(cocos2d::Image* image,
@@ -236,7 +238,9 @@ void downloadImage(const std::string& imageUrl,
             
             // GIF images are not supported by cocos2d-x.
             CC_BREAK_IF(buffer->size() < 3);
-            CC_BREAK_IF((*buffer)[0] == 'G' && (*buffer)[1] == 'I' && (*buffer)[2] == 'F');
+            CC_BREAK_IF((*buffer)[0] == 'G' &&
+                        (*buffer)[1] == 'I' &&
+                        (*buffer)[2] == 'F');
             
             auto data = reinterpret_cast<unsigned char*>(&buffer->front());
             auto dataLen = static_cast<ssize_t>(buffer->size());

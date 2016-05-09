@@ -204,10 +204,12 @@ void captureScreenInPixels(const std::function<void(cocos2d::Image*)>& afterCapt
 /// @param      scale The resulting image size will be multiplied by this parameter.
 /// @return     A pointer to @c cocos2d::Image.
 /// @see        @c captureScreenInPoints.
-cocos2d::Image* captureScreenInPoints(float scale);
+cocos2d::Image* captureScreenInPoints(float scale = 1.0f);
 
-/// Attempts to capture a blurred screenshot in points.
-cocos2d::Sprite* captureBlurredScreenInPoints(float scale, int blurRadius);
+/// Attempts to capture a blurred screenshot in points by using tent blur.
+cocos2d::Sprite* captureBlurredScreenInPoints(float scale = 1.0f,
+                                              int blurRadius = 2,
+                                              int iterations = 1);
 
 /// Creates a sprite from the given image and use the specified process callback
 /// (if not @c nullptr).

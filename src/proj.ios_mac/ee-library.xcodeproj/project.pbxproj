@@ -31,6 +31,10 @@
 		6F39F1571CCBBBD10038796D /* EEButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F39F1541CCBBBD10038796D /* EEButton.cpp */; };
 		6F39F1581CCBBBD10038796D /* EEButton.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6F39F1551CCBBBD10038796D /* EEButton.hpp */; };
 		6F39F1591CCBBBD10038796D /* EEButton.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6F39F1551CCBBBD10038796D /* EEButton.hpp */; };
+		6F798A5B1CE03866004D247B /* libboost-desktop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F798A5A1CE03522004D247B /* libboost-desktop.a */; settings = {ATTRIBUTES = (Weak, ); }; };
+		6F798A5C1CE03866004D247B /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAF9180E9839004C840B /* libcocos2d Mac.a */; settings = {ATTRIBUTES = (Weak, ); }; };
+		6F798A801CE03A5D004D247B /* __EEDataInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C3C3C2F1CA3947D00A04333 /* __EEDataInfo.cpp */; };
+		6F798A811CE03A5F004D247B /* __EEDataHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C75EC0E1C8591150006790E /* __EEDataHandler.cpp */; };
 		6F79B6221CCA7FC70008EFAC /* EEHeader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C43A7871BDDCA4600D0597F /* EEHeader.hpp */; };
 		6F79B6231CCA7FC90008EFAC /* EEMacro.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6CAC26C31BD4111000F11F3A /* EEMacro.hpp */; };
 		6F79B6251CCA7FCF0008EFAC /* EEBitManipulation.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C53F49E1CA3FE510088580E /* EEBitManipulation.hpp */; };
@@ -66,6 +70,8 @@
 		6F843E441CDB8EF6008B2EC4 /* EEUiWidgetLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F843E411CDB8EF6008B2EC4 /* EEUiWidgetLoader.cpp */; };
 		6F843E451CDB8EF6008B2EC4 /* EEUiWidgetLoader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6F843E421CDB8EF6008B2EC4 /* EEUiWidgetLoader.hpp */; };
 		6F843E461CDB8EF6008B2EC4 /* EEUiWidgetLoader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6F843E421CDB8EF6008B2EC4 /* EEUiWidgetLoader.hpp */; };
+		6F843E6E1CDBA4B1008B2EC4 /* __EEDataHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C75EC0E1C8591150006790E /* __EEDataHandler.cpp */; };
+		6F843E6F1CDBA4B6008B2EC4 /* __EEDataInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C3C3C2F1CA3947D00A04333 /* __EEDataInfo.cpp */; };
 		6FA6588C1CCB5C0B009BC9EB /* EEImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C7A9AC71BDB841A00199AC0 /* EEImage.cpp */; };
 		6FA6588D1CCB5C0B009BC9EB /* EEImage.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C32DC3D1BD67074007613F9 /* EEImage.hpp */; };
 		6FA6588E1CCB5C0B009BC9EB /* EEBoxBlur1D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C32DC431BD67791007613F9 /* EEBoxBlur1D.cpp */; };
@@ -78,6 +84,13 @@
 		6FA658951CCB5C0C009BC9EB /* EETentBlur1D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C7A9ABB1BD9335600199AC0 /* EETentBlur1D.cpp */; };
 		6FA658971CCB700B009BC9EB /* EEUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FA658961CCB700B009BC9EB /* EEUtils.cpp */; };
 		6FA658981CCB700B009BC9EB /* EEUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FA658961CCB700B009BC9EB /* EEUtils.cpp */; };
+		6FC695841CDF7A4400BAE327 /* EEDataInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC695821CDF7A4400BAE327 /* EEDataInfo.cpp */; };
+		6FC695851CDF7A4400BAE327 /* EEDataInfo.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC695831CDF7A4400BAE327 /* EEDataInfo.hpp */; };
+		6FC695861CDF7A4800BAE327 /* EEDataInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC695821CDF7A4400BAE327 /* EEDataInfo.cpp */; };
+		6FC695891CDF8A0A00BAE327 /* EEListenerList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC695871CDF8A0A00BAE327 /* EEListenerList.cpp */; };
+		6FC6958A1CDF8A0A00BAE327 /* EEListenerList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC695871CDF8A0A00BAE327 /* EEListenerList.cpp */; };
+		6FC6958B1CDF8A0A00BAE327 /* EEListenerList.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC695881CDF8A0A00BAE327 /* EEListenerList.hpp */; };
+		6FC6958C1CDF8A0A00BAE327 /* EEListenerList.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC695881CDF8A0A00BAE327 /* EEListenerList.hpp */; };
 		6FCDDC421CD9981800DF8095 /* EEUiWidgetCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C468C2A1CA2F0CA00D16594 /* EEUiWidgetCallback.cpp */; };
 /* End PBXBuildFile section */
 
@@ -117,12 +130,19 @@
 			remoteGlobalIDString = A07A4C241783777C0073F6A7;
 			remoteInfo = "libcocos2d iOS";
 		};
-		6F79B61E1CCA7FC30008EFAC /* PBXContainerItemProxy */ = {
+		6F798A591CE03522004D247B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6CB0A2F21C84297E003D7E50 /* boost.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6F798A571CE032A0004D247B;
+			remoteInfo = "boost-desktop";
+		};
+		6F798A5D1CE0386D004D247B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6CB0A2F21C84297E003D7E50 /* boost.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 6CB0A2DD1C842954003D7E50;
-			remoteInfo = boost;
+			remoteGlobalIDString = 6F798A4D1CE032A0004D247B;
+			remoteInfo = "boost-desktop";
 		};
 		6F79B6201CCA7FC30008EFAC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -134,13 +154,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		6C43A8041BDDDF1800D0597F /* CopyFiles */ = {
+		6C43A8041BDDDF1800D0597F /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -179,16 +200,14 @@
 		6C404B491CBFAEE4009A4251 /* __EEAsyncLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = __EEAsyncLoader.cpp; sourceTree = "<group>"; };
 		6C404B4A1CBFAEE4009A4251 /* __EEAsyncLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = __EEAsyncLoader.hpp; sourceTree = "<group>"; };
 		6C43A7871BDDCA4600D0597F /* EEHeader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EEHeader.hpp; sourceTree = "<group>"; };
-		6C43A78C1BDDCAF800D0597F /* __CocosUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = __CocosUtils.cpp; sourceTree = "<group>"; };
-		6C43A78D1BDDCAF800D0597F /* __CocosUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = __CocosUtils.hpp; sourceTree = "<group>"; };
 		6C43A7A81BDDDAC300D0597F /* __EECheckBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = __EECheckBox.cpp; sourceTree = "<group>"; };
 		6C43A7A91BDDDAC300D0597F /* __EECheckBox.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = __EECheckBox.hpp; sourceTree = "<group>"; };
 		6C43A7AF1BDDDAC300D0597F /* __EEData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = __EEData.cpp; sourceTree = "<group>"; };
 		6C43A7B01BDDDAC300D0597F /* __EEData.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = __EEData.hpp; sourceTree = "<group>"; };
-		6C43A7B11BDDDAC300D0597F /* __EEDialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = __EEDialog.cpp; sourceTree = "<group>"; };
-		6C43A7B21BDDDAC300D0597F /* __EEDialog.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = __EEDialog.hpp; sourceTree = "<group>"; };
-		6C43A7B41BDDDAC300D0597F /* __EEDialogManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = __EEDialogManager.cpp; sourceTree = "<group>"; };
-		6C43A7B51BDDDAC300D0597F /* __EEDialogManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = __EEDialogManager.hpp; sourceTree = "<group>"; };
+		6C43A7B11BDDDAC300D0597F /* EEDialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDialog.cpp; sourceTree = "<group>"; };
+		6C43A7B21BDDDAC300D0597F /* EEDialog.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDialog.hpp; sourceTree = "<group>"; };
+		6C43A7B41BDDDAC300D0597F /* EEDialogManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDialogManager.cpp; sourceTree = "<group>"; };
+		6C43A7B51BDDDAC300D0597F /* EEDialogManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDialogManager.hpp; sourceTree = "<group>"; };
 		6C43A7B61BDDDAC300D0597F /* EEDynamicValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDynamicValue.cpp; sourceTree = "<group>"; };
 		6C43A7B71BDDDAC300D0597F /* EEDynamicValue.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDynamicValue.hpp; sourceTree = "<group>"; };
 		6C43A7B81BDDDAC300D0597F /* EEEventInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEEventInfo.cpp; sourceTree = "<group>"; };
@@ -236,7 +255,11 @@
 		6F843E411CDB8EF6008B2EC4 /* EEUiWidgetLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEUiWidgetLoader.cpp; sourceTree = "<group>"; };
 		6F843E421CDB8EF6008B2EC4 /* EEUiWidgetLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEUiWidgetLoader.hpp; sourceTree = "<group>"; };
 		6FA658961CCB700B009BC9EB /* EEUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEUtils.cpp; sourceTree = "<group>"; };
-		6FCDDC361CD994F600DF8095 /* lib_ee_desktop.a */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = lib_ee_desktop.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6FC6956E1CDCEBA000BAE327 /* lib_ee_desktop.a */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = lib_ee_desktop.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6FC695821CDF7A4400BAE327 /* EEDataInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDataInfo.cpp; sourceTree = "<group>"; };
+		6FC695831CDF7A4400BAE327 /* EEDataInfo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDataInfo.hpp; sourceTree = "<group>"; };
+		6FC695871CDF8A0A00BAE327 /* EEListenerList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEListenerList.cpp; sourceTree = "<group>"; };
+		6FC695881CDF8A0A00BAE327 /* EEListenerList.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEListenerList.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,8 +267,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6C42EF411C8540A50062C2C6 /* libcocos2d iOS.a in Frameworks */,
 				6CB0BC4D1C842ABA003D7E50 /* libboost.a in Frameworks */,
+				6C42EF411C8540A50062C2C6 /* libcocos2d iOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +276,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F798A5B1CE03866004D247B /* libboost-desktop.a in Frameworks */,
+				6F798A5C1CE03866004D247B /* libcocos2d Mac.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,7 +301,7 @@
 				46880B8319C43A87006E1F66 /* Classes */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				6C2E7D731BDE0B7D008F5EF3 /* Products */,
-				6FCDDC361CD994F600DF8095 /* lib_ee_desktop.a */,
+				6FC6956E1CDCEBA000BAE327 /* lib_ee_desktop.a */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -294,9 +319,9 @@
 				6C43A7871BDDCA4600D0597F /* EEHeader.hpp */,
 				6CAC26C31BD4111000F11F3A /* EEMacro.hpp */,
 				6CAC26B81BD4111000F11F3A /* EEForward.hpp */,
-				6C53F49E1CA3FE510088580E /* EEBitManipulation.hpp */,
 				6C49FB961CA1354A00E0FE86 /* EECocos2dxFwd.hpp */,
 				6C49FB991CA136ED00E0FE86 /* EEExtension.hpp */,
+				6C53F49E1CA3FE510088580E /* EEBitManipulation.hpp */,
 				6C49FBB01CA13D1D00E0FE86 /* EEGenericLoader.hpp */,
 				6C43A7B61BDDDAC300D0597F /* EEDynamicValue.cpp */,
 				6C43A7B71BDDDAC300D0597F /* EEDynamicValue.hpp */,
@@ -304,6 +329,8 @@
 				6C43A7D31BDDDAC300D0597F /* EEUtils.hpp */,
 				6C5AEB3B1BDF1B9F004C98A2 /* crytography */,
 				6F7D5B591CD665010069E541 /* control */,
+				6FC6957F1CDCF10F00BAE327 /* layer */,
+				6C3D1EEB1BEC9FAB00B56B55 /* data */,
 				6F79B63F1CCAA2C20008EFAC /* listener */,
 				6C3C3C2C1CA3859800A04333 /* ui */,
 				6C3C3C2B1CA3858C00A04333 /* event */,
@@ -360,6 +387,8 @@
 				6C43A7B91BDDDAC300D0597F /* EEEventInfo.hpp */,
 				6C3849211CA230750020B858 /* EEEvent.hpp */,
 				6C38491B1CA22FCA0020B858 /* EEEventListener.hpp */,
+				6FC695871CDF8A0A00BAE327 /* EEListenerList.cpp */,
+				6FC695881CDF8A0A00BAE327 /* EEListenerList.hpp */,
 			);
 			name = event;
 			sourceTree = "<group>";
@@ -386,6 +415,8 @@
 				6C519B411BEDEC68002644FC /* __EEDataInfo.hpp */,
 				6C75EC0E1C8591150006790E /* __EEDataHandler.cpp */,
 				6C75EC0F1C8591150006790E /* __EEDataHandler.hpp */,
+				6FC695821CDF7A4400BAE327 /* EEDataInfo.cpp */,
+				6FC695831CDF7A4400BAE327 /* EEDataInfo.hpp */,
 			);
 			name = data;
 			sourceTree = "<group>";
@@ -416,9 +447,6 @@
 			children = (
 				6C404B481CBFAEC3009A4251 /* async */,
 				6CC359791C0C3C31007DC4CF /* layer */,
-				6C3D1EEB1BEC9FAB00B56B55 /* data */,
-				6C43A78C1BDDCAF800D0597F /* __CocosUtils.cpp */,
-				6C43A78D1BDDCAF800D0597F /* __CocosUtils.hpp */,
 				6C3AD4E71BE4A29A0052E786 /* __EEConstexprString.hpp */,
 				6CC359701C0C0F2E007DC4CF /* __EEState.cpp */,
 				6CC3596C1C0C0792007DC4CF /* __EEState.hpp */,
@@ -469,6 +497,7 @@
 			isa = PBXGroup;
 			children = (
 				6CB0A2F71C84297F003D7E50 /* libboost.a */,
+				6F798A5A1CE03522004D247B /* libboost-desktop.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -476,10 +505,6 @@
 		6CC359791C0C3C31007DC4CF /* layer */ = {
 			isa = PBXGroup;
 			children = (
-				6C43A7B11BDDDAC300D0597F /* __EEDialog.cpp */,
-				6C43A7B21BDDDAC300D0597F /* __EEDialog.hpp */,
-				6C43A7B41BDDDAC300D0597F /* __EEDialogManager.cpp */,
-				6C43A7B51BDDDAC300D0597F /* __EEDialogManager.hpp */,
 				6C3D4AF71C0D37F0001A09DF /* __EETransitionScene.cpp */,
 				6C3D4AF81C0D37F0001A09DF /* __EETransitionScene.hpp */,
 			);
@@ -511,6 +536,17 @@
 			name = control;
 			sourceTree = "<group>";
 		};
+		6FC6957F1CDCF10F00BAE327 /* layer */ = {
+			isa = PBXGroup;
+			children = (
+				6C43A7B11BDDDAC300D0597F /* EEDialog.cpp */,
+				6C43A7B21BDDDAC300D0597F /* EEDialog.hpp */,
+				6C43A7B41BDDDAC300D0597F /* EEDialogManager.cpp */,
+				6C43A7B51BDDDAC300D0597F /* EEDialogManager.hpp */,
+			);
+			name = layer;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -528,6 +564,7 @@
 				6C3CAB3E1C5B5ABB0059A380 /* EEHeader.hpp in Headers */,
 				6C3CAB3F1C5B5AC00059A380 /* EEMacro.hpp in Headers */,
 				6F79B6271CCA7FD10008EFAC /* EECocos2dxFwd.hpp in Headers */,
+				6FC695851CDF7A4400BAE327 /* EEDataInfo.hpp in Headers */,
 				6C468C2D1CA2F0CA00D16594 /* EEUiWidgetCallback.hpp in Headers */,
 				6C42EF461C8547660062C2C6 /* EEEventInfo.hpp in Headers */,
 				6F39F1581CCBBBD10038796D /* EEButton.hpp in Headers */,
@@ -535,6 +572,7 @@
 				6F79B6401CCAA2D70008EFAC /* EEBackButtonListener.hpp in Headers */,
 				6C42EF451C85449F0062C2C6 /* EEDynamicValue.hpp in Headers */,
 				6C3849231CA230750020B858 /* EEEvent.hpp in Headers */,
+				6FC6958B1CDF8A0A00BAE327 /* EEListenerList.hpp in Headers */,
 				6F79DC821CCE5CB900BDA20F /* EECrytography.hpp in Headers */,
 				6C49FB9A1CA136ED00E0FE86 /* EEExtension.hpp in Headers */,
 				6C3CAB421C5B5ACF0059A380 /* EEUtils.hpp in Headers */,
@@ -545,6 +583,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FC6958C1CDF8A0A00BAE327 /* EEListenerList.hpp in Headers */,
 				6F79DC831CCE5CBA00BDA20F /* EECrytography.hpp in Headers */,
 				6F79B62B1CCA7FDC0008EFAC /* EEGenericLoader.hpp in Headers */,
 				6F79B62A1CCA7FDB0008EFAC /* EEExtension.hpp in Headers */,
@@ -577,7 +616,7 @@
 			buildPhases = (
 				6C43A8021BDDDF1800D0597F /* Sources */,
 				6C43A8031BDDDF1800D0597F /* Frameworks */,
-				6C43A8041BDDDF1800D0597F /* CopyFiles */,
+				6C43A8041BDDDF1800D0597F /* Copy Files */,
 				6C1952961C44E97F00185F01 /* Headers */,
 			);
 			buildRules = (
@@ -602,12 +641,12 @@
 			buildRules = (
 			);
 			dependencies = (
-				6F79B61F1CCA7FC30008EFAC /* PBXTargetDependency */,
+				6F798A5E1CE0386D004D247B /* PBXTargetDependency */,
 				6F79B6211CCA7FC30008EFAC /* PBXTargetDependency */,
 			);
 			name = "ee-library-desktop";
 			productName = "ee-library-desktop";
-			productReference = 6FCDDC361CD994F600DF8095 /* lib_ee_desktop.a */;
+			productReference = 6FC6956E1CDCEBA000BAE327 /* lib_ee_desktop.a */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 /* End PBXNativeTarget section */
@@ -679,6 +718,13 @@
 			remoteRef = 6CB0A2F61C84297F003D7E50 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		6F798A5A1CE03522004D247B /* libboost-desktop.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libboost-desktop.a";
+			remoteRef = 6F798A591CE03522004D247B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -690,6 +736,7 @@
 				6FA658951CCB5C0C009BC9EB /* EETentBlur1D.cpp in Sources */,
 				6F79DC841CCE5CBC00BDA20F /* EESha1.cpp in Sources */,
 				6F79DC861CCE5CBE00BDA20F /* EECrc.cpp in Sources */,
+				6F843E6E1CDBA4B1008B2EC4 /* __EEDataHandler.cpp in Sources */,
 				6C4A4A571CA153E500E72D89 /* EEUiButtonLoader.cpp in Sources */,
 				6F79B6421CCAA2D90008EFAC /* EEBackButtonListener.cpp in Sources */,
 				6C47FE4A1CA1B7EF00FEF3BC /* EEEventInfo.cpp in Sources */,
@@ -699,7 +746,10 @@
 				6F843E431CDB8EF6008B2EC4 /* EEUiWidgetLoader.cpp in Sources */,
 				6C47AAF71CA4EAE100B3E65E /* EEUiTextLoader.cpp in Sources */,
 				6FA658941CCB5C0C009BC9EB /* EEBoxBlur2D.cpp in Sources */,
+				6F843E6F1CDBA4B6008B2EC4 /* __EEDataInfo.cpp in Sources */,
 				6F39F1561CCBBBD10038796D /* EEButton.cpp in Sources */,
+				6FC695891CDF8A0A00BAE327 /* EEListenerList.cpp in Sources */,
+				6FC695841CDF7A4400BAE327 /* EEDataInfo.cpp in Sources */,
 				6FA658911CCB5C0C009BC9EB /* EEImage.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -709,10 +759,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FA658981CCB700B009BC9EB /* EEUtils.cpp in Sources */,
+				6F798A811CE03A5F004D247B /* __EEDataHandler.cpp in Sources */,
 				6F79DC851CCE5CBC00BDA20F /* EESha1.cpp in Sources */,
 				6F79B6351CCA8F9E0008EFAC /* EEUiButtonLoader.cpp in Sources */,
+				6FC6958A1CDF8A0A00BAE327 /* EEListenerList.cpp in Sources */,
 				6F79B62C1CCA7FDE0008EFAC /* EEDynamicValue.cpp in Sources */,
+				6F798A801CE03A5D004D247B /* __EEDataInfo.cpp in Sources */,
 				6F79B6371CCA8FA20008EFAC /* EEUiTextLoader.cpp in Sources */,
+				6FC695861CDF7A4800BAE327 /* EEDataInfo.cpp in Sources */,
 				6FA658901CCB5C0B009BC9EB /* EETentBlur1D.cpp in Sources */,
 				6F79B6441CCAC0E50008EFAC /* EEEventInfo.cpp in Sources */,
 				6F39F1571CCBBBD10038796D /* EEButton.cpp in Sources */,
@@ -739,10 +793,10 @@
 			name = "libcocos2d iOS";
 			targetProxy = 6CB0BC4B1C842AAF003D7E50 /* PBXContainerItemProxy */;
 		};
-		6F79B61F1CCA7FC30008EFAC /* PBXTargetDependency */ = {
+		6F798A5E1CE0386D004D247B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = boost;
-			targetProxy = 6F79B61E1CCA7FC30008EFAC /* PBXContainerItemProxy */;
+			name = "boost-desktop";
+			targetProxy = 6F798A5D1CE0386D004D247B /* PBXContainerItemProxy */;
 		};
 		6F79B6211CCA7FC30008EFAC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -755,7 +809,6 @@
 		6C43A80E1BDDDF1900D0597F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					CC_TARGET_OS_IPHONE,
@@ -764,7 +817,6 @@
 				PRODUCT_NAME = lib_ee_mobile;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Debug;
 		};
@@ -779,7 +831,6 @@
 				PRODUCT_NAME = lib_ee_mobile;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Release;
 		};
@@ -792,8 +843,11 @@
 					CC_KEYBOARD_SUPPORT,
 					_USRDLL,
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../cocos2d/external/glfw3/include/mac",
+				);
 				LD_DYLIB_INSTALL_NAME = "";
-				MACH_O_TYPE = staticlib;
 				PRODUCT_NAME = lib_ee_desktop;
 				SDKROOT = macosx;
 			};
@@ -808,8 +862,11 @@
 					CC_TARGET_OS_MAC,
 					_USRDLL,
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../cocos2d/external/glfw3/include/mac",
+				);
 				LD_DYLIB_INSTALL_NAME = "";
-				MACH_O_TYPE = staticlib;
 				PRODUCT_NAME = lib_ee_desktop;
 				SDKROOT = macosx;
 			};
@@ -840,7 +897,9 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES_AGGRESSIVE;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				EXECUTABLE_EXTENSION = a;
 				EXECUTABLE_PREFIX = "";
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -883,6 +942,7 @@
 					"$(SRCROOT)/../cocos2d/external",
 					"$(SRCROOT)/../../boost_1_60_0",
 				);
+				MACH_O_TYPE = staticlib;
 				ONLY_ACTIVE_ARCH = YES;
 				SKIP_INSTALL = YES;
 			};
@@ -911,6 +971,7 @@
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES_AGGRESSIVE;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXECUTABLE_EXTENSION = a;
 				EXECUTABLE_PREFIX = "";
@@ -954,6 +1015,7 @@
 					"$(SRCROOT)/../../boost_1_60_0",
 				);
 				LLVM_LTO = YES;
+				MACH_O_TYPE = staticlib;
 				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
 			};

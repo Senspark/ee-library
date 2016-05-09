@@ -26,7 +26,7 @@
 		6C49FBB11CA13D1D00E0FE86 /* EEGenericLoader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C49FBB01CA13D1D00E0FE86 /* EEGenericLoader.hpp */; };
 		6C4A4A571CA153E500E72D89 /* EEUiButtonLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C4A4A551CA153E500E72D89 /* EEUiButtonLoader.cpp */; };
 		6C4A4A581CA153E500E72D89 /* EEUiButtonLoader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C4A4A561CA153E500E72D89 /* EEUiButtonLoader.hpp */; };
-		6CB0BC4D1C842ABA003D7E50 /* libboost.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CB0A2F71C84297F003D7E50 /* libboost.a */; settings = {ATTRIBUTES = (Weak, ); }; };
+		6CB0BC4D1C842ABA003D7E50 /* libboost-mobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CB0A2F71C84297F003D7E50 /* libboost-mobile.a */; settings = {ATTRIBUTES = (Weak, ); }; };
 		6F39F1561CCBBBD10038796D /* EEButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F39F1541CCBBBD10038796D /* EEButton.cpp */; };
 		6F39F1571CCBBBD10038796D /* EEButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F39F1541CCBBBD10038796D /* EEButton.cpp */; };
 		6F39F1581CCBBBD10038796D /* EEButton.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6F39F1551CCBBBD10038796D /* EEButton.hpp */; };
@@ -168,7 +168,7 @@
 
 /* Begin PBXFileReference section */
 		1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
-		6C2E7D711BDE0B69008F5EF3 /* lib_ee_mobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = lib_ee_mobile.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C2E7D711BDE0B69008F5EF3 /* .a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = .a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C2E7D831BDE14D4008F5EF3 /* EECrc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EECrc.cpp; sourceTree = "<group>"; };
 		6C2E7D861BDE1A1B008F5EF3 /* EEBackButtonListener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEBackButtonListener.cpp; sourceTree = "<group>"; };
 		6C2E7D871BDE1A1B008F5EF3 /* EEBackButtonListener.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEBackButtonListener.hpp; sourceTree = "<group>"; };
@@ -255,7 +255,7 @@
 		6F843E411CDB8EF6008B2EC4 /* EEUiWidgetLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEUiWidgetLoader.cpp; sourceTree = "<group>"; };
 		6F843E421CDB8EF6008B2EC4 /* EEUiWidgetLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEUiWidgetLoader.hpp; sourceTree = "<group>"; };
 		6FA658961CCB700B009BC9EB /* EEUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEUtils.cpp; sourceTree = "<group>"; };
-		6FC6956E1CDCEBA000BAE327 /* lib_ee_desktop.a */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = lib_ee_desktop.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6FC6956E1CDCEBA000BAE327 /* ee-library-desktop.a */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; name = "ee-library-desktop.a"; path = "/Volumes/Setup/Android/projects/ee-library/src/proj.ios_mac/build/Debug/ee-library-desktop.a"; sourceTree = "<absolute>"; };
 		6FC695821CDF7A4400BAE327 /* EEDataInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDataInfo.cpp; sourceTree = "<group>"; };
 		6FC695831CDF7A4400BAE327 /* EEDataInfo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDataInfo.hpp; sourceTree = "<group>"; };
 		6FC695871CDF8A0A00BAE327 /* EEListenerList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEListenerList.cpp; sourceTree = "<group>"; };
@@ -267,7 +267,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6CB0BC4D1C842ABA003D7E50 /* libboost.a in Frameworks */,
+				6CB0BC4D1C842ABA003D7E50 /* libboost-mobile.a in Frameworks */,
 				6C42EF411C8540A50062C2C6 /* libcocos2d iOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -301,7 +301,6 @@
 				46880B8319C43A87006E1F66 /* Classes */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				6C2E7D731BDE0B7D008F5EF3 /* Products */,
-				6FC6956E1CDCEBA000BAE327 /* lib_ee_desktop.a */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -368,7 +367,7 @@
 		6C2E7D731BDE0B7D008F5EF3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6C2E7D711BDE0B69008F5EF3 /* lib_ee_mobile.a */,
+				6C2E7D711BDE0B69008F5EF3 /* .a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -496,7 +495,7 @@
 		6CB0A2F31C84297E003D7E50 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6CB0A2F71C84297F003D7E50 /* libboost.a */,
+				6CB0A2F71C84297F003D7E50 /* libboost-mobile.a */,
 				6F798A5A1CE03522004D247B /* libboost-desktop.a */,
 			);
 			name = Products;
@@ -627,7 +626,7 @@
 			);
 			name = "ee-library-mobile";
 			productName = "ee-library";
-			productReference = 6C2E7D711BDE0B69008F5EF3 /* lib_ee_mobile.a */;
+			productReference = 6C2E7D711BDE0B69008F5EF3 /* .a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		6F79B6111CCA7AA00008EFAC /* ee-library-desktop */ = {
@@ -646,7 +645,7 @@
 			);
 			name = "ee-library-desktop";
 			productName = "ee-library-desktop";
-			productReference = 6FC6956E1CDCEBA000BAE327 /* lib_ee_desktop.a */;
+			productReference = 6FC6956E1CDCEBA000BAE327 /* ee-library-desktop.a */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 /* End PBXNativeTarget section */
@@ -711,10 +710,10 @@
 			remoteRef = 1AC6FB06180E9839004C840B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		6CB0A2F71C84297F003D7E50 /* libboost.a */ = {
+		6CB0A2F71C84297F003D7E50 /* libboost-mobile.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libboost.a;
+			path = "libboost-mobile.a";
 			remoteRef = 6CB0A2F61C84297F003D7E50 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -814,7 +813,6 @@
 					CC_TARGET_OS_IPHONE,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PRODUCT_NAME = lib_ee_mobile;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -828,7 +826,6 @@
 					CC_TARGET_OS_IPHONE,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PRODUCT_NAME = lib_ee_mobile;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -848,7 +845,6 @@
 					"$(SRCROOT)/../cocos2d/external/glfw3/include/mac",
 				);
 				LD_DYLIB_INSTALL_NAME = "";
-				PRODUCT_NAME = lib_ee_desktop;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -867,7 +863,6 @@
 					"$(SRCROOT)/../cocos2d/external/glfw3/include/mac",
 				);
 				LD_DYLIB_INSTALL_NAME = "";
-				PRODUCT_NAME = lib_ee_desktop;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -898,7 +893,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_TESTABILITY = YES;
 				EXECUTABLE_EXTENSION = a;
 				EXECUTABLE_PREFIX = "";
@@ -944,6 +939,7 @@
 				);
 				MACH_O_TYPE = staticlib;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -972,7 +968,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES_AGGRESSIVE;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_NS_ASSERTIONS = NO;
 				EXECUTABLE_EXTENSION = a;
 				EXECUTABLE_PREFIX = "";
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -1016,6 +1012,7 @@
 				);
 				LLVM_LTO = YES;
 				MACH_O_TYPE = staticlib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
 			};

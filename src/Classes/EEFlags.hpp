@@ -11,6 +11,18 @@
 
 #include "EEMacro.hpp"
 
+#define EE_ENABLE_BITWISE_OPERATORS_FOR_ENUM(EnumType) \
+    namespace ee::detail { \
+    template<> \
+    struct has_bitwise_operators<EnumType> : public std::true_type {}; \
+    } // namespace ee::detail
+
+#define EE_ENABLE_ARITHMETIC_OPERATORS_FOR_ENUM(EnumType) \
+    namespace ee::detail { \
+    template<> \
+    struct has_arithmetic_operators<EnumType> : public std::true_type {}; \
+    } // namespace ee::detail
+
 NS_EE_BEGIN
 NS_DETAIL_BEGIN
 template<class EnumType>
@@ -26,16 +38,26 @@ convert_enum_to_underlying_type(EnumType value) noexcept {
 template<class T>
 struct has_bitwise_operators : public std::false_type {};
 
-template<class EnumType, class Type>
+template<class T>
+struct has_arithmetic_operators : public std::false_type {};
+
+template<class EnumType, class T>
 using enable_if_enum_has_bitwise_operators = std::enable_if_t<
     std::is_enum<EnumType>::value &&
     has_bitwise_operators<EnumType>::value,
-    Type
+    T
 >;
 
-template<class EnumType, class BinOp>
+template<class EnumType, class T>
+using enable_if_enum_has_arithmetic_operators = std::enable_if_t<
+    std::is_enum<EnumType>::value &&
+    has_arithmetic_operators<EnumType>::value,
+    T
+>;
+
+template<class EnumType, class BinaryOp>
 constexpr EnumType apply_binary_operator(EnumType lhs, EnumType rhs,
-                                         BinOp op) noexcept {
+                                         BinaryOp op) noexcept {
     return static_cast<EnumType>(op(convert_enum_to_underlying_type(lhs),
                                     convert_enum_to_underlying_type(rhs)));
 }
@@ -47,12 +69,6 @@ constexpr EnumType apply_unary_operator(EnumType value, UnaryOp op) noexcept {
 
 NS_DETAIL_END
 NS_EE_END
-
-#define EE_ENABLE_BITWISE_OPERATORS_FOR_ENUM(EnumType) \
-    namespace ee::detail { \
-    template<> \
-    struct has_bitwise_operators<EnumType> : public std::true_type {}; \
-    } // namespace ee::detail
 
 /// Bitwise or operator.
 template<class EnumType>
@@ -105,6 +121,72 @@ constexpr
 ee::detail::enable_if_enum_has_bitwise_operators<EnumType, EnumType>
 operator~(EnumType value) noexcept {
     return ee::detail::apply_unary_operator(value, std::bit_not<>());
+}
+
+/// Arithmetic addition operator.
+template<class EnumType>
+constexpr
+ee::detail::enable_if_enum_has_arithmetic_operators<EnumType, EnumType>
+operator+(EnumType lhs, std::underlying_type_t<EnumType> rhs) noexcept {
+    return static_cast<EnumType>(ee::detail::convert_enum_to_underlying_type(lhs) + rhs);
+}
+
+template<class EnumType>
+constexpr
+ee::detail::enable_if_enum_has_arithmetic_operators<EnumType, EnumType&>
+operator+=(EnumType& lhs, std::underlying_type_t<EnumType> rhs) noexcept {
+    return lhs = lhs + rhs;
+}
+
+/// Arithmetic subtraction operator.
+template<class EnumType>
+constexpr
+ee::detail::enable_if_enum_has_arithmetic_operators<EnumType, EnumType>
+operator-(EnumType lhs, std::underlying_type_t<EnumType> rhs) noexcept {
+    return static_cast<EnumType>(ee::detail::convert_enum_to_underlying_type(lhs) - rhs);
+}
+
+template<class EnumType>
+constexpr
+ee::detail::enable_if_enum_has_arithmetic_operators<EnumType, EnumType&>
+operator-=(EnumType& lhs, std::underlying_type_t<EnumType> rhs) noexcept {
+    return lhs = lhs - rhs;
+}
+
+/// Arithmetic pre-increment operator.
+template<class EnumType>
+constexpr
+ee::detail::enable_if_enum_has_arithmetic_operators<EnumType, EnumType&>
+operator++(EnumType& value) noexcept {
+    return value += 1;
+}
+
+// Arithmetic post-increment operator.
+template<class EnumType>
+constexpr
+ee::detail::enable_if_enum_has_arithmetic_operators<EnumType, EnumType>
+operator++(EnumType& value, int) noexcept {
+    auto result{value};
+    ++value;
+    return result;
+}
+
+// Arithmetic pre-decrement operator.
+template<class EnumType>
+constexpr
+ee::detail::enable_if_enum_has_arithmetic_operators<EnumType, EnumType&>
+operator--(EnumType& value) noexcept {
+    return value -= 1;
+}
+
+// Arithmetic post-decrement operator.
+template<class EnumType>
+constexpr
+ee::detail::enable_if_enum_has_arithmetic_operators<EnumType, EnumType>
+operator--(EnumType& value, int) noexcept {
+    auto result{value};
+    --value;
+    return result;
 }
 
 #endif /* EE_LIBRARY_FLAGS_HPP_ */

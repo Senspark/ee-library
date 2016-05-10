@@ -46,6 +46,15 @@ protected:
                                       const char* propertyName,
                                       unsigned char byte,
                                       cocosbuilder::CCBReader* reader) override;
+    
+    virtual void onHandlePropTypeInteger(cocos2d::Node* node,
+                                         cocos2d::Node* parent,
+                                         const char* propertyName,
+                                         int integer,
+                                         cocosbuilder::CCBReader* reader) override;
+    
+private:
+    bool _localZOrderOverrode;
 };
 NS_EE_END
 

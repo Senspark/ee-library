@@ -10,6 +10,8 @@
 
 NS_EE_BEGIN
 namespace property {
+constexpr const char* local_z_order_overrode    = "localZOrderOverrode";
+constexpr const char* local_z_order             = "localZOrder";
 constexpr const char* color                     = "color";
 constexpr const char* opacity                   = "opacity";
 constexpr const char* cascade_color_enabled     = "cascadeColorEnabled";
@@ -27,6 +29,10 @@ void NodeV3Loader::onHandlePropTypeCheck(cocos2d::Node* node,
                                          bool check,
                                          cocosbuilder::CCBReader* reader) {
     std::string propName(propertyName);
+    if (propName == property::local_z_order_overrode) {
+        _localZOrderOverrode = check;
+        return;
+    }
     if (propName == property::cascade_color_enabled) {
         return node->setCascadeColorEnabled(check);
     }
@@ -61,5 +67,21 @@ void NodeV3Loader::onHandlePropTypeByte(cocos2d::Node* node,
     }
     NodeLoader::onHandlePropTypeByte(node, parent, propertyName,
                                      byte, reader);
+}
+
+void NodeV3Loader::onHandlePropTypeInteger(cocos2d::Node* node,
+                                           cocos2d::Node* parent,
+                                           const char* propertyName,
+                                           int integer,
+                                           cocosbuilder::CCBReader* reader) {
+    std::string propName(propertyName);
+    if (propName == property::local_z_order) {
+        if (_localZOrderOverrode) {
+            node->setLocalZOrder(integer);
+        }
+        return;
+    }
+    NodeLoader::onHandlePropTypeInteger(node, parent, propertyName,
+                                        integer, reader);
 }
 NS_EE_END

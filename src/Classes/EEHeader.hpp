@@ -30,6 +30,9 @@
 
 #include "EEImage.hpp"
 
+#include "EENodeV3Loader.hpp"
+#include "EEUiWidgetLoader.hpp"
+#include "EEUiLayoutLoader.hpp"
 #include "EEUiButtonLoader.hpp"
 #include "EEUiTextLoader.hpp"
 #include "EEUiWidgetCallback.hpp"

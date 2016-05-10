@@ -13,6 +13,8 @@
 #include "EECocos2dxFwd.hpp"
 #include "EEUiWidgetLoader.hpp"
 
+#include <ui/UIWidget.h>
+
 NS_EE_BEGIN
 /// Cocosbuilder loader for @c cocos2d::ui::Button.
 ///

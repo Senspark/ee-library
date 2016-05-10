@@ -11,13 +11,11 @@
 
 #include "EEMacro.hpp"
 #include "EECocos2dxFwd.hpp"
-
-#include <cocosbuilder/CCNodeLoader.h>
-#include <ui/UIWidget.h>
+#include "EENodeV3Loader.hpp"
 
 NS_EE_BEGIN
 /// Cocosbuilder loader for @c cocos2d::ui::Widget.
-class UiWidgetLoader : public cocosbuilder::NodeLoader {
+class UiWidgetLoader : public NodeV3Loader {
 public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(UiWidgetLoader, loader);
     

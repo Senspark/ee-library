@@ -94,7 +94,6 @@ private:
     cocos2d::Color3B outlineColor_;
     int outlineSize_;
 };
-
 NS_EE_END
 
 #endif /* EEUiTextLoader_hpp */

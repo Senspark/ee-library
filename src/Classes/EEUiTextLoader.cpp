@@ -59,7 +59,7 @@ void UiTextLoader::onHandlePropTypeCheck(cocos2d::Node* node,
                                          cocosbuilder::CCBReader* reader) {
     auto text = dynamic_cast<cocos2d::ui::Text*>(node);
     std::string propName(propertyName);
-    if (propName == property::touch_scale_change_enabled ) {
+    if (propName == property::touch_scale_change_enabled) {
         return text->setTouchScaleChangeEnabled(check);
     }
     if (propName == property::shadow_enabled) {

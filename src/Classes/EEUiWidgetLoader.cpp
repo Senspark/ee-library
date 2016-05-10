@@ -10,6 +10,7 @@
 #include "EEUiWidgetCallback.hpp"
 
 #include <cocos2d.h>
+#include <ui/UiWidget.h>
 
 NS_EE_BEGIN
 namespace property {
@@ -52,8 +53,8 @@ void UiWidgetLoader::onHandlePropTypeBlock(cocos2d::Node* node,
         }
         return;
     }
-    NodeLoader::onHandlePropTypeBlock(node, parent, propertyName,
-                                      blockData, reader);
+    NodeV3Loader::onHandlePropTypeBlock(node, parent, propertyName,
+                                        blockData, reader);
 }
 
 void UiWidgetLoader::onHandlePropTypeCheck(cocos2d::Node* node,
@@ -84,7 +85,7 @@ void UiWidgetLoader::onHandlePropTypeCheck(cocos2d::Node* node,
     if (propName == property::propagate_touch_events) {
         return widget->setPropagateTouchEvents(check);
     }
-    NodeLoader::onHandlePropTypeCheck(node, parent, propertyName,
-                                      check, reader);
+    NodeV3Loader::onHandlePropTypeCheck(node, parent, propertyName,
+                                        check, reader);
 }
 NS_EE_END

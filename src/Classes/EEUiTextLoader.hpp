@@ -14,6 +14,12 @@
 
 NS_EE_BEGIN
 /// Cocosbuilder loader for @c cocos2d::ui::Text.
+///
+/// Usage:
+/// @code
+/// your_node_loader_library->registerNodeLoader("CCText",
+///                                               ee::UiTextLoader::loader());
+/// @endcode
 class UiTextLoader : public UiWidgetLoader {
 public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(UiTextLoader, loader);

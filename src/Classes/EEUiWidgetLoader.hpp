@@ -15,6 +15,12 @@
 
 NS_EE_BEGIN
 /// Cocosbuilder loader for @c cocos2d::ui::Widget.
+///
+/// Usage:
+/// @code
+/// your_node_loader_library->registerNodeLoader("CCWidget",
+///                                               ee::UiWidgetLoader::loader());
+/// @endcode
 class UiWidgetLoader : public NodeV3Loader {
 public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(UiWidgetLoader, loader);

@@ -14,6 +14,12 @@
 
 NS_EE_BEGIN
 /// Cocosbuilder loader for @c cocos2d::ui::Layout.
+///
+/// Usage:
+/// @code
+/// your_node_loader_library->registerNodeLoader("CCLayout",
+///                                               ee::UiLayoutLoader::loader());
+/// @endcode
 class UiLayoutLoader : public UiWidgetLoader {
 public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(UiLayoutLoader, loader);

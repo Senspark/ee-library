@@ -14,6 +14,13 @@
 #include <cocosbuilder/CCNodeLoader.h>
 
 NS_EE_BEGIN
+/// Cocosbuilder loader for @c cocos2d::Node with color and opacity.
+///
+/// Usage:
+/// @code
+/// your_node_loader_library->registerNodeLoader("CCNodeV3",
+///                                               ee::NodeV3::loader());
+/// @endcode
 class NodeV3Loader : public cocosbuilder::NodeLoader {
 public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(NodeV3Loader, loader);

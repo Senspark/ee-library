@@ -10,7 +10,7 @@
 
 NS_EE_BEGIN
 namespace property {
-constexpr const char* local_z_order_overrode    = "localZOrderOverrode";
+constexpr const char* local_z_order_overridden  = "localZOrderOverridden";
 constexpr const char* local_z_order             = "localZOrder";
 constexpr const char* color                     = "color";
 constexpr const char* opacity                   = "opacity";
@@ -29,7 +29,7 @@ void NodeV3Loader::onHandlePropTypeCheck(cocos2d::Node* node,
                                          bool check,
                                          cocosbuilder::CCBReader* reader) {
     std::string propName(propertyName);
-    if (propName == property::local_z_order_overrode) {
+    if (propName == property::local_z_order_overridden) {
         _localZOrderOverrode = check;
         return;
     }

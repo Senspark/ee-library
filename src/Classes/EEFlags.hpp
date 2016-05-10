@@ -19,7 +19,7 @@ std::enable_if_t<
     std::is_enum<EnumType>::value,
     std::underlying_type_t<EnumType>
 >
-convert_enum_to_underlying_type(EnumType value) {
+convert_enum_to_underlying_type(EnumType value) noexcept {
     return static_cast<std::underlying_type_t<EnumType>>(value);
 }
 

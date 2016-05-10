@@ -15,10 +15,14 @@
 
 #include "EEMacro.hpp"
 
-#include <2d/CCNode.h>
+#include <ui/UIWidget.h>
 
 NS_EE_BEGIN
-class Dialog : public cocos2d::Node {
+enum class DialogLevel {
+    Highest,
+};
+
+class Dialog : public cocos2d::ui::Widget {
 public:
     using Container = cocos2d::Node;
     
@@ -31,7 +35,7 @@ public:
     /// Attempts to push a dialog.
     void pushDialog(const Command& command);
     
-    virtual void show(int level);
+    virtual void show(DialogLevel level);
     
     virtual void hide();
     

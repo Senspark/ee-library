@@ -12,18 +12,29 @@
 #include "EEMacro.hpp"
 #include "EEForward.hpp"
 #include "EECocos2dxFwd.hpp"
+
 #include "EEExtension.hpp"
+#include "EEBitManipulation.hpp"
 #include "EEGenericLoader.hpp"
+#include "EEDynamicValue.hpp"
+#include "EEFlags.hpp"
+#include "EEUtils.hpp"
+
+#include "EECrytography.hpp"
+
 #include "EEButton.hpp"
+
+#include "EEBackButtonListener.hpp"
+
+#include "EEEventInfo.hpp"
+
+#include "EEImage.hpp"
+
 #include "EEUiButtonLoader.hpp"
 #include "EEUiTextLoader.hpp"
 #include "EEUiWidgetCallback.hpp"
-#include "EEDynamicValue.hpp"
-#include "EEEventInfo.hpp"
-#include "EEDataInfo.hpp"
-#include "EEDataHandler.hpp"
-#include "EEUtils.hpp"
-#include "EEBitManipulation.hpp"
-#include "EEBackButtonListener.hpp"
+
+#include "__EEDataInfo.hpp"
+#include "__EEDataHandler.hpp"
 
 #endif /* EE_LIBRARY_HEADER_HPP_ */

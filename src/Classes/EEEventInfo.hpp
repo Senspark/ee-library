@@ -115,11 +115,15 @@ public:
     }
 };
 
-#define CREATE_EVENT_INFO(variableName) \
+#define EE_CREATE_EVENT_INFO(variableName) \
     variableName(# variableName)
 
-#define CREATE_EVENT_INFO_EX(...) \
+#define EE_CREATE_EVENT_INFO_EX(...) \
     decltype(GET_FIRST_ARG(__VA_ARGS__)) CREATE_EVENT_INFO(__VA_ARGS__)
+
+/// Deprecated.
+#define CREATE_EVENT_INFO(...)      EE_CREATE_EVENT_INFO(__VA_ARGS__)
+#define CREATE_EVENT_INFO_EX(...)   EE_CREATE_EVENT_INFO_EX(__VA_ARGS__)
 NS_EE_END
 
 #endif // EE_LIBRARY_EVENT_INFO_HPP_

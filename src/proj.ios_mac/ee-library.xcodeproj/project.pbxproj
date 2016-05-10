@@ -31,6 +31,8 @@
 		6F39F1571CCBBBD10038796D /* EEButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F39F1541CCBBBD10038796D /* EEButton.cpp */; };
 		6F39F1581CCBBBD10038796D /* EEButton.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6F39F1551CCBBBD10038796D /* EEButton.hpp */; };
 		6F39F1591CCBBBD10038796D /* EEButton.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6F39F1551CCBBBD10038796D /* EEButton.hpp */; };
+		6F77D7971CE0D733000BA9BE /* EEFlags.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6CC3596C1C0C0792007DC4CF /* EEFlags.hpp */; };
+		6F77D7981CE0D734000BA9BE /* EEFlags.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6CC3596C1C0C0792007DC4CF /* EEFlags.hpp */; };
 		6F798A5B1CE03866004D247B /* libboost-desktop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F798A5A1CE03522004D247B /* libboost-desktop.a */; settings = {ATTRIBUTES = (Weak, ); }; };
 		6F798A5C1CE03866004D247B /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAF9180E9839004C840B /* libcocos2d Mac.a */; settings = {ATTRIBUTES = (Weak, ); }; };
 		6F798A801CE03A5D004D247B /* __EEDataInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C3C3C2F1CA3947D00A04333 /* __EEDataInfo.cpp */; };
@@ -84,13 +86,10 @@
 		6FA658951CCB5C0C009BC9EB /* EETentBlur1D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C7A9ABB1BD9335600199AC0 /* EETentBlur1D.cpp */; };
 		6FA658971CCB700B009BC9EB /* EEUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FA658961CCB700B009BC9EB /* EEUtils.cpp */; };
 		6FA658981CCB700B009BC9EB /* EEUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FA658961CCB700B009BC9EB /* EEUtils.cpp */; };
-		6FC695841CDF7A4400BAE327 /* EEDataInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC695821CDF7A4400BAE327 /* EEDataInfo.cpp */; };
-		6FC695851CDF7A4400BAE327 /* EEDataInfo.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC695831CDF7A4400BAE327 /* EEDataInfo.hpp */; };
-		6FC695861CDF7A4800BAE327 /* EEDataInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC695821CDF7A4400BAE327 /* EEDataInfo.cpp */; };
-		6FC695891CDF8A0A00BAE327 /* EEListenerList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC695871CDF8A0A00BAE327 /* EEListenerList.cpp */; };
-		6FC6958A1CDF8A0A00BAE327 /* EEListenerList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC695871CDF8A0A00BAE327 /* EEListenerList.cpp */; };
-		6FC6958B1CDF8A0A00BAE327 /* EEListenerList.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC695881CDF8A0A00BAE327 /* EEListenerList.hpp */; };
-		6FC6958C1CDF8A0A00BAE327 /* EEListenerList.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC695881CDF8A0A00BAE327 /* EEListenerList.hpp */; };
+		6FC695891CDF8A0A00BAE327 /* __EEListenerList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC695871CDF8A0A00BAE327 /* __EEListenerList.cpp */; };
+		6FC6958A1CDF8A0A00BAE327 /* __EEListenerList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC695871CDF8A0A00BAE327 /* __EEListenerList.cpp */; };
+		6FC6958B1CDF8A0A00BAE327 /* __EEListenerList.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC695881CDF8A0A00BAE327 /* __EEListenerList.hpp */; };
+		6FC6958C1CDF8A0A00BAE327 /* __EEListenerList.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC695881CDF8A0A00BAE327 /* __EEListenerList.hpp */; };
 		6FCDDC421CD9981800DF8095 /* EEUiWidgetCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C468C2A1CA2F0CA00D16594 /* EEUiWidgetCallback.cpp */; };
 /* End PBXBuildFile section */
 
@@ -168,7 +167,7 @@
 
 /* Begin PBXFileReference section */
 		1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
-		6C2E7D711BDE0B69008F5EF3 /* .a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = .a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C2E7D711BDE0B69008F5EF3 /* ee-library-mobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "ee-library-mobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C2E7D831BDE14D4008F5EF3 /* EECrc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EECrc.cpp; sourceTree = "<group>"; };
 		6C2E7D861BDE1A1B008F5EF3 /* EEBackButtonListener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEBackButtonListener.cpp; sourceTree = "<group>"; };
 		6C2E7D871BDE1A1B008F5EF3 /* EEBackButtonListener.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEBackButtonListener.hpp; sourceTree = "<group>"; };
@@ -204,10 +203,10 @@
 		6C43A7A91BDDDAC300D0597F /* __EECheckBox.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = __EECheckBox.hpp; sourceTree = "<group>"; };
 		6C43A7AF1BDDDAC300D0597F /* __EEData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = __EEData.cpp; sourceTree = "<group>"; };
 		6C43A7B01BDDDAC300D0597F /* __EEData.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = __EEData.hpp; sourceTree = "<group>"; };
-		6C43A7B11BDDDAC300D0597F /* EEDialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDialog.cpp; sourceTree = "<group>"; };
-		6C43A7B21BDDDAC300D0597F /* EEDialog.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDialog.hpp; sourceTree = "<group>"; };
-		6C43A7B41BDDDAC300D0597F /* EEDialogManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDialogManager.cpp; sourceTree = "<group>"; };
-		6C43A7B51BDDDAC300D0597F /* EEDialogManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDialogManager.hpp; sourceTree = "<group>"; };
+		6C43A7B11BDDDAC300D0597F /* __EEDialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = __EEDialog.cpp; sourceTree = "<group>"; };
+		6C43A7B21BDDDAC300D0597F /* __EEDialog.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = __EEDialog.hpp; sourceTree = "<group>"; };
+		6C43A7B41BDDDAC300D0597F /* __EEDialogManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = __EEDialogManager.cpp; sourceTree = "<group>"; };
+		6C43A7B51BDDDAC300D0597F /* __EEDialogManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = __EEDialogManager.hpp; sourceTree = "<group>"; };
 		6C43A7B61BDDDAC300D0597F /* EEDynamicValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDynamicValue.cpp; sourceTree = "<group>"; };
 		6C43A7B71BDDDAC300D0597F /* EEDynamicValue.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDynamicValue.hpp; sourceTree = "<group>"; };
 		6C43A7B81BDDDAC300D0597F /* EEEventInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEEventInfo.cpp; sourceTree = "<group>"; };
@@ -247,19 +246,16 @@
 		6CAC26B81BD4111000F11F3A /* EEForward.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEForward.hpp; sourceTree = "<group>"; };
 		6CAC26C31BD4111000F11F3A /* EEMacro.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEMacro.hpp; sourceTree = "<group>"; };
 		6CB0A2F21C84297E003D7E50 /* boost.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = boost.xcodeproj; path = ../../boost_1_60_0/proj.ios_mac/boost.xcodeproj; sourceTree = "<group>"; };
-		6CC3596C1C0C0792007DC4CF /* __EEState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = __EEState.hpp; sourceTree = "<group>"; };
-		6CC359701C0C0F2E007DC4CF /* __EEState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = __EEState.cpp; sourceTree = "<group>"; };
+		6CC3596C1C0C0792007DC4CF /* EEFlags.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEFlags.hpp; sourceTree = "<group>"; };
 		6CC43B101BF31BC600FAC807 /* __EEJniConverter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = __EEJniConverter.cpp; sourceTree = "<group>"; };
 		6F39F1541CCBBBD10038796D /* EEButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEButton.cpp; sourceTree = "<group>"; };
 		6F39F1551CCBBBD10038796D /* EEButton.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEButton.hpp; sourceTree = "<group>"; };
+		6F77D7961CE0D618000BA9BE /* ee-library-desktop.a */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "ee-library-desktop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F843E411CDB8EF6008B2EC4 /* EEUiWidgetLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEUiWidgetLoader.cpp; sourceTree = "<group>"; };
 		6F843E421CDB8EF6008B2EC4 /* EEUiWidgetLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEUiWidgetLoader.hpp; sourceTree = "<group>"; };
 		6FA658961CCB700B009BC9EB /* EEUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEUtils.cpp; sourceTree = "<group>"; };
-		6FC6956E1CDCEBA000BAE327 /* ee-library-desktop.a */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; name = "ee-library-desktop.a"; path = "/Volumes/Setup/Android/projects/ee-library/src/proj.ios_mac/build/Debug/ee-library-desktop.a"; sourceTree = "<absolute>"; };
-		6FC695821CDF7A4400BAE327 /* EEDataInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDataInfo.cpp; sourceTree = "<group>"; };
-		6FC695831CDF7A4400BAE327 /* EEDataInfo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDataInfo.hpp; sourceTree = "<group>"; };
-		6FC695871CDF8A0A00BAE327 /* EEListenerList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEListenerList.cpp; sourceTree = "<group>"; };
-		6FC695881CDF8A0A00BAE327 /* EEListenerList.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEListenerList.hpp; sourceTree = "<group>"; };
+		6FC695871CDF8A0A00BAE327 /* __EEListenerList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = __EEListenerList.cpp; sourceTree = "<group>"; };
+		6FC695881CDF8A0A00BAE327 /* __EEListenerList.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = __EEListenerList.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -301,6 +297,7 @@
 				46880B8319C43A87006E1F66 /* Classes */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				6C2E7D731BDE0B7D008F5EF3 /* Products */,
+				6F77D7961CE0D618000BA9BE /* ee-library-desktop.a */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -324,12 +321,11 @@
 				6C49FBB01CA13D1D00E0FE86 /* EEGenericLoader.hpp */,
 				6C43A7B61BDDDAC300D0597F /* EEDynamicValue.cpp */,
 				6C43A7B71BDDDAC300D0597F /* EEDynamicValue.hpp */,
+				6CC3596C1C0C0792007DC4CF /* EEFlags.hpp */,
 				6FA658961CCB700B009BC9EB /* EEUtils.cpp */,
 				6C43A7D31BDDDAC300D0597F /* EEUtils.hpp */,
 				6C5AEB3B1BDF1B9F004C98A2 /* crytography */,
 				6F7D5B591CD665010069E541 /* control */,
-				6FC6957F1CDCF10F00BAE327 /* layer */,
-				6C3D1EEB1BEC9FAB00B56B55 /* data */,
 				6F79B63F1CCAA2C20008EFAC /* listener */,
 				6C3C3C2C1CA3859800A04333 /* ui */,
 				6C3C3C2B1CA3858C00A04333 /* event */,
@@ -367,7 +363,7 @@
 		6C2E7D731BDE0B7D008F5EF3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6C2E7D711BDE0B69008F5EF3 /* .a */,
+				6C2E7D711BDE0B69008F5EF3 /* ee-library-mobile.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -386,8 +382,6 @@
 				6C43A7B91BDDDAC300D0597F /* EEEventInfo.hpp */,
 				6C3849211CA230750020B858 /* EEEvent.hpp */,
 				6C38491B1CA22FCA0020B858 /* EEEventListener.hpp */,
-				6FC695871CDF8A0A00BAE327 /* EEListenerList.cpp */,
-				6FC695881CDF8A0A00BAE327 /* EEListenerList.hpp */,
 			);
 			name = event;
 			sourceTree = "<group>";
@@ -405,19 +399,6 @@
 				6C47AAF61CA4EAE100B3E65E /* EEUiTextLoader.hpp */,
 			);
 			name = ui;
-			sourceTree = "<group>";
-		};
-		6C3D1EEB1BEC9FAB00B56B55 /* data */ = {
-			isa = PBXGroup;
-			children = (
-				6C3C3C2F1CA3947D00A04333 /* __EEDataInfo.cpp */,
-				6C519B411BEDEC68002644FC /* __EEDataInfo.hpp */,
-				6C75EC0E1C8591150006790E /* __EEDataHandler.cpp */,
-				6C75EC0F1C8591150006790E /* __EEDataHandler.hpp */,
-				6FC695821CDF7A4400BAE327 /* EEDataInfo.cpp */,
-				6FC695831CDF7A4400BAE327 /* EEDataInfo.hpp */,
-			);
-			name = data;
 			sourceTree = "<group>";
 		};
 		6C404B481CBFAEC3009A4251 /* async */ = {
@@ -444,11 +425,19 @@
 		6C4557741C8FC8C4001AE09A /* experimental */ = {
 			isa = PBXGroup;
 			children = (
+				6C43A7B11BDDDAC300D0597F /* __EEDialog.cpp */,
+				6C43A7B21BDDDAC300D0597F /* __EEDialog.hpp */,
+				6C43A7B41BDDDAC300D0597F /* __EEDialogManager.cpp */,
+				6C43A7B51BDDDAC300D0597F /* __EEDialogManager.hpp */,
+				6C3C3C2F1CA3947D00A04333 /* __EEDataInfo.cpp */,
+				6C519B411BEDEC68002644FC /* __EEDataInfo.hpp */,
+				6C75EC0E1C8591150006790E /* __EEDataHandler.cpp */,
+				6C75EC0F1C8591150006790E /* __EEDataHandler.hpp */,
+				6FC695871CDF8A0A00BAE327 /* __EEListenerList.cpp */,
+				6FC695881CDF8A0A00BAE327 /* __EEListenerList.hpp */,
 				6C404B481CBFAEC3009A4251 /* async */,
 				6CC359791C0C3C31007DC4CF /* layer */,
 				6C3AD4E71BE4A29A0052E786 /* __EEConstexprString.hpp */,
-				6CC359701C0C0F2E007DC4CF /* __EEState.cpp */,
-				6CC3596C1C0C0792007DC4CF /* __EEState.hpp */,
 				6C1952B51C44FD5500185F01 /* GroupNode */,
 				6C3AD4DF1BE49CDB0052E786 /* Jni */,
 				6C3C89951BE536530049CFAE /* __EEJni.cpp */,
@@ -535,17 +524,6 @@
 			name = control;
 			sourceTree = "<group>";
 		};
-		6FC6957F1CDCF10F00BAE327 /* layer */ = {
-			isa = PBXGroup;
-			children = (
-				6C43A7B11BDDDAC300D0597F /* EEDialog.cpp */,
-				6C43A7B21BDDDAC300D0597F /* EEDialog.hpp */,
-				6C43A7B41BDDDAC300D0597F /* EEDialogManager.cpp */,
-				6C43A7B51BDDDAC300D0597F /* EEDialogManager.hpp */,
-			);
-			name = layer;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -563,15 +541,15 @@
 				6C3CAB3E1C5B5ABB0059A380 /* EEHeader.hpp in Headers */,
 				6C3CAB3F1C5B5AC00059A380 /* EEMacro.hpp in Headers */,
 				6F79B6271CCA7FD10008EFAC /* EECocos2dxFwd.hpp in Headers */,
-				6FC695851CDF7A4400BAE327 /* EEDataInfo.hpp in Headers */,
 				6C468C2D1CA2F0CA00D16594 /* EEUiWidgetCallback.hpp in Headers */,
 				6C42EF461C8547660062C2C6 /* EEEventInfo.hpp in Headers */,
+				6F77D7971CE0D733000BA9BE /* EEFlags.hpp in Headers */,
 				6F39F1581CCBBBD10038796D /* EEButton.hpp in Headers */,
 				6C47AAF81CA4EAE100B3E65E /* EEUiTextLoader.hpp in Headers */,
 				6F79B6401CCAA2D70008EFAC /* EEBackButtonListener.hpp in Headers */,
 				6C42EF451C85449F0062C2C6 /* EEDynamicValue.hpp in Headers */,
 				6C3849231CA230750020B858 /* EEEvent.hpp in Headers */,
-				6FC6958B1CDF8A0A00BAE327 /* EEListenerList.hpp in Headers */,
+				6FC6958B1CDF8A0A00BAE327 /* __EEListenerList.hpp in Headers */,
 				6F79DC821CCE5CB900BDA20F /* EECrytography.hpp in Headers */,
 				6C49FB9A1CA136ED00E0FE86 /* EEExtension.hpp in Headers */,
 				6C3CAB421C5B5ACF0059A380 /* EEUtils.hpp in Headers */,
@@ -582,7 +560,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FC6958C1CDF8A0A00BAE327 /* EEListenerList.hpp in Headers */,
+				6FC6958C1CDF8A0A00BAE327 /* __EEListenerList.hpp in Headers */,
 				6F79DC831CCE5CBA00BDA20F /* EECrytography.hpp in Headers */,
 				6F79B62B1CCA7FDC0008EFAC /* EEGenericLoader.hpp in Headers */,
 				6F79B62A1CCA7FDB0008EFAC /* EEExtension.hpp in Headers */,
@@ -598,6 +576,7 @@
 				6F79B62D1CCA7FE00008EFAC /* EEDynamicValue.hpp in Headers */,
 				6F79B6291CCA7FD50008EFAC /* EEForward.hpp in Headers */,
 				6F79B6381CCA8FA40008EFAC /* EEUiTextLoader.hpp in Headers */,
+				6F77D7981CE0D734000BA9BE /* EEFlags.hpp in Headers */,
 				6F79B6471CCAC0EA0008EFAC /* EEEventListener.hpp in Headers */,
 				6F79B6411CCAA2D70008EFAC /* EEBackButtonListener.hpp in Headers */,
 				6F79B6361CCA8FA00008EFAC /* EEUiButtonLoader.hpp in Headers */,
@@ -626,7 +605,7 @@
 			);
 			name = "ee-library-mobile";
 			productName = "ee-library";
-			productReference = 6C2E7D711BDE0B69008F5EF3 /* .a */;
+			productReference = 6C2E7D711BDE0B69008F5EF3 /* ee-library-mobile.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		6F79B6111CCA7AA00008EFAC /* ee-library-desktop */ = {
@@ -645,7 +624,7 @@
 			);
 			name = "ee-library-desktop";
 			productName = "ee-library-desktop";
-			productReference = 6FC6956E1CDCEBA000BAE327 /* ee-library-desktop.a */;
+			productReference = 6F77D7961CE0D618000BA9BE /* ee-library-desktop.a */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 /* End PBXNativeTarget section */
@@ -747,8 +726,7 @@
 				6FA658941CCB5C0C009BC9EB /* EEBoxBlur2D.cpp in Sources */,
 				6F843E6F1CDBA4B6008B2EC4 /* __EEDataInfo.cpp in Sources */,
 				6F39F1561CCBBBD10038796D /* EEButton.cpp in Sources */,
-				6FC695891CDF8A0A00BAE327 /* EEListenerList.cpp in Sources */,
-				6FC695841CDF7A4400BAE327 /* EEDataInfo.cpp in Sources */,
+				6FC695891CDF8A0A00BAE327 /* __EEListenerList.cpp in Sources */,
 				6FA658911CCB5C0C009BC9EB /* EEImage.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -761,11 +739,10 @@
 				6F798A811CE03A5F004D247B /* __EEDataHandler.cpp in Sources */,
 				6F79DC851CCE5CBC00BDA20F /* EESha1.cpp in Sources */,
 				6F79B6351CCA8F9E0008EFAC /* EEUiButtonLoader.cpp in Sources */,
-				6FC6958A1CDF8A0A00BAE327 /* EEListenerList.cpp in Sources */,
+				6FC6958A1CDF8A0A00BAE327 /* __EEListenerList.cpp in Sources */,
 				6F79B62C1CCA7FDE0008EFAC /* EEDynamicValue.cpp in Sources */,
 				6F798A801CE03A5D004D247B /* __EEDataInfo.cpp in Sources */,
 				6F79B6371CCA8FA20008EFAC /* EEUiTextLoader.cpp in Sources */,
-				6FC695861CDF7A4800BAE327 /* EEDataInfo.cpp in Sources */,
 				6FA658901CCB5C0B009BC9EB /* EETentBlur1D.cpp in Sources */,
 				6F79B6441CCAC0E50008EFAC /* EEEventInfo.cpp in Sources */,
 				6F39F1571CCBBBD10038796D /* EEButton.cpp in Sources */,

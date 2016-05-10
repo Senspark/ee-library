@@ -161,7 +161,7 @@ operator++(EnumType& value) noexcept {
     return value += 1;
 }
 
-// Arithmetic post-increment operator.
+/// Arithmetic post-increment operator.
 template<class EnumType>
 constexpr
 ee::detail::enable_if_enum_has_arithmetic_operators<EnumType, EnumType>
@@ -171,7 +171,7 @@ operator++(EnumType& value, int) noexcept {
     return result;
 }
 
-// Arithmetic pre-decrement operator.
+/// Arithmetic pre-decrement operator.
 template<class EnumType>
 constexpr
 ee::detail::enable_if_enum_has_arithmetic_operators<EnumType, EnumType&>
@@ -179,7 +179,7 @@ operator--(EnumType& value) noexcept {
     return value -= 1;
 }
 
-// Arithmetic post-decrement operator.
+/// Arithmetic post-decrement operator.
 template<class EnumType>
 constexpr
 ee::detail::enable_if_enum_has_arithmetic_operators<EnumType, EnumType>

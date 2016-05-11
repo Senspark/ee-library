@@ -30,7 +30,7 @@ void NodeV3Loader::onHandlePropTypeCheck(cocos2d::Node* node,
                                          cocosbuilder::CCBReader* reader) {
     std::string propName(propertyName);
     if (propName == property::local_z_order_overridden) {
-        _localZOrderOverrode = check;
+        _localZOrderOverridden = check;
         return;
     }
     if (propName == property::cascade_color_enabled) {
@@ -76,7 +76,7 @@ void NodeV3Loader::onHandlePropTypeInteger(cocos2d::Node* node,
                                            cocosbuilder::CCBReader* reader) {
     std::string propName(propertyName);
     if (propName == property::local_z_order) {
-        if (_localZOrderOverrode) {
+        if (_localZOrderOverridden) {
             node->setLocalZOrder(integer);
         }
         return;

@@ -91,13 +91,13 @@ public:
     template<class... Transitions>
     enable_if_args_are_transition_types<Transitions...>
     setShowingTransitions(Transitions&&... transitions) {
-        setShowingTransitions({ std::forward<Transitions>(transitions)... });
+        return setShowingTransitions({ std::forward<Transitions>(transitions)... });
     }
     
     template<class... Transitions>
     enable_if_args_are_transition_types<Transitions...>
     setHidingTransitions(Transitions&&... transitions) {
-        setHidingTransitions({ std::forward<Transitions>(transitions)... });
+        return setHidingTransitions({ std::forward<Transitions>(transitions)... });
     }
     
     template<class... Transitions>

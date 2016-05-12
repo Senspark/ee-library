@@ -66,7 +66,6 @@ template<class EnumType, class UnaryOp>
 constexpr EnumType apply_unary_operator(EnumType value, UnaryOp op) noexcept {
     return static_cast<EnumType>(op(convert_enum_to_underlying_type(value)));
 }
-
 NS_DETAIL_END
 NS_EE_END
 

@@ -24,6 +24,12 @@
 
 #include "EEButton.hpp"
 
+#include "EEDialog.hpp"
+#include "EEDialogManager.hpp"
+#include "EEDialogTransitionProtocol.hpp"
+#include "EEBlurBackground.hpp"
+#include "EEMoveHorizontally.hpp"
+
 #include "EEBackButtonListener.hpp"
 
 #include "EEEventInfo.hpp"

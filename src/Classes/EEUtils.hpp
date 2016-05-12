@@ -124,7 +124,7 @@ inline Dest bit_cast(const Source& source) {
 template<class Comparator = std::less<>>
 struct Compare1st {
     template<class T>
-    bool operator()(T&& lhs, T&& rhs) const {
+    bool operator()(const T& lhs, const T& rhs) const {
         return Comparator()(lhs.first, rhs.first);
     }
 };
@@ -134,7 +134,7 @@ struct Compare1st {
 template<class Comparator = std::less<>>
 struct Compare2nd {
     template<class T>
-    bool operator()(T&& lhs, T&& rhs) const {
+    bool operator()(const T& lhs, const T& rhs) const {
         return Comparator()(lhs.second, rhs.second);
     }
 };

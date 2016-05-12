@@ -26,9 +26,7 @@
 
 #include "EEDialog.hpp"
 #include "EEDialogManager.hpp"
-#include "EEDialogTransitionProtocol.hpp"
-#include "EEBlurBackground.hpp"
-#include "EEMoveHorizontally.hpp"
+#include "EEDialogUtils.hpp"
 
 #include "EEBackButtonListener.hpp"
 

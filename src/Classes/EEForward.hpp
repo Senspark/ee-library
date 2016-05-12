@@ -27,14 +27,12 @@ using Button = detail::ButtonEx;
 namespace dialog {
 class Dialog;
 class DialogManager;
-class DialogTransitionProtocol;
 } // namespace dialog
 
 class BlurBackground;
     
 using dialog::Dialog;
 using dialog::DialogManager;
-using dialog::DialogTransitionProtocol;
     
 template<class T>
 class BackButtonListener;

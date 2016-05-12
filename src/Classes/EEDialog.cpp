@@ -56,6 +56,30 @@ void Dialog::hide() {
     DialogManager::getInstance()->popDialog(this);
 }
     
+Dialog* Dialog::addDialogWillShowCallback(const CallbackType& callback,
+                                          int priority) {
+    onDialogWillShowCallbacks_.emplace_back(callback, priority);
+    return this;
+}
+
+Dialog* Dialog::addDialogDidShowCallback(const CallbackType& callback,
+                                         int priority) {
+    onDialogDidShowCallbacks_.emplace_back(callback, priority);
+    return this;
+}
+
+Dialog* Dialog::addDialogWillHideCallback(const CallbackType& callback,
+                                          int priority) {
+    onDialogWillHideCallbacks_.emplace_back(callback, priority);
+    return this;
+}
+
+Dialog* Dialog::addDialogDidHideCallback(const CallbackType& callback,
+                                         int priority) {
+    onDialogDidHideCallbacks_.emplace_back(callback, priority);
+    return this;
+}
+    
 std::size_t Dialog::getDialogLevel() const noexcept {
     return dialogLevel_;
 }
@@ -74,11 +98,63 @@ bool Dialog::hitTest(const cocos2d::Point& pt,
     // Test outside.
     return (Widget::hitTest(pt, camera, p) == false);
 }
+    
+void Dialog::onDialogWillShow() {
+    invokeCallbacks(onDialogWillShowCallbacks_);
+}
+
+void Dialog::onDialogDidShow() {
+    invokeCallbacks(onDialogDidShowCallbacks_);
+}
+
+void Dialog::onDialogWillHide() {
+    invokeCallbacks(onDialogWillHideCallbacks_);
+}
+
+void Dialog::onDialogDidHide() {
+    invokeCallbacks(onDialogDidHideCallbacks_);
+}
+    
+void Dialog::invokeCallbacks(std::vector<CallbackInfo>& callbacks) {
+    std::stable_sort(callbacks.begin(), callbacks.end(), Compare2nd<>());
+    
+    RefGuard guard(this);
+    
+    for (auto&& info : callbacks) {
+        info.first(this);
+    }
+}
 
 void Dialog::onClickedOutside() {
     if (isActive()) {
         hide();
     }
+}
+    
+void Dialog::setShowingTransitions(const std::vector<TransitionRef>& transitions) {
+    showingTransitions_ = transitions;
+}
+
+void Dialog::setHidingTransitions(const std::vector<TransitionRef>& transitions) {
+    hidingTransitions_ = transitions;
+}
+
+void Dialog::addShowingTransitions(const std::vector<TransitionRef>& transitions) {
+    showingTransitions_.insert(showingTransitions_.cend(),
+                               transitions.cbegin(), transitions.cend());
+}
+
+void Dialog::addHidingTransitions(const std::vector<TransitionRef>& transitions) {
+    hidingTransitions_.insert(hidingTransitions_.cend(),
+                              transitions.cbegin(), transitions.cend());
+}
+
+auto Dialog::getShowingTransitions() const -> const std::vector<TransitionRef>& {
+    return showingTransitions_;
+}
+
+auto Dialog::getHidingTransitions() const -> const std::vector<TransitionRef>&  {
+    return hidingTransitions_;
 }
 } // namespace dialog
 NS_EE_END

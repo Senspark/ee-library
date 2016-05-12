@@ -98,18 +98,10 @@
 		6FAC217D1CE3454E000C16CC /* EEDialogGuard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FAC217A1CE3454E000C16CC /* EEDialogGuard.cpp */; };
 		6FAC217E1CE3454E000C16CC /* EEDialogGuard.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FAC217B1CE3454E000C16CC /* EEDialogGuard.hpp */; };
 		6FAC217F1CE3454E000C16CC /* EEDialogGuard.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FAC217B1CE3454E000C16CC /* EEDialogGuard.hpp */; };
-		6FB73D1D1CE4301B00C718D5 /* EEDialogTransitionProtocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FB73D1B1CE4301B00C718D5 /* EEDialogTransitionProtocol.cpp */; };
-		6FB73D1E1CE4301B00C718D5 /* EEDialogTransitionProtocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FB73D1B1CE4301B00C718D5 /* EEDialogTransitionProtocol.cpp */; };
-		6FB73D1F1CE4301B00C718D5 /* EEDialogTransitionProtocol.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FB73D1C1CE4301B00C718D5 /* EEDialogTransitionProtocol.hpp */; };
-		6FB73D201CE4301B00C718D5 /* EEDialogTransitionProtocol.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FB73D1C1CE4301B00C718D5 /* EEDialogTransitionProtocol.hpp */; };
-		6FB73D231CE437B800C718D5 /* EEBlurBackground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FB73D211CE437B800C718D5 /* EEBlurBackground.cpp */; };
-		6FB73D241CE437B800C718D5 /* EEBlurBackground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FB73D211CE437B800C718D5 /* EEBlurBackground.cpp */; };
-		6FB73D251CE437B800C718D5 /* EEBlurBackground.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FB73D221CE437B800C718D5 /* EEBlurBackground.hpp */; };
-		6FB73D261CE437B800C718D5 /* EEBlurBackground.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FB73D221CE437B800C718D5 /* EEBlurBackground.hpp */; };
-		6FB73D291CE441CE00C718D5 /* EEMoveHorizontally.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FB73D271CE441CE00C718D5 /* EEMoveHorizontally.cpp */; };
-		6FB73D2A1CE441CE00C718D5 /* EEMoveHorizontally.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FB73D271CE441CE00C718D5 /* EEMoveHorizontally.cpp */; };
-		6FB73D2B1CE441CE00C718D5 /* EEMoveHorizontally.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FB73D281CE441CE00C718D5 /* EEMoveHorizontally.hpp */; };
-		6FB73D2C1CE441CE00C718D5 /* EEMoveHorizontally.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FB73D281CE441CE00C718D5 /* EEMoveHorizontally.hpp */; };
+		6FB73D331CE45E5800C718D5 /* EEDialogUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FB73D311CE45E5800C718D5 /* EEDialogUtils.cpp */; };
+		6FB73D341CE45E5800C718D5 /* EEDialogUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FB73D311CE45E5800C718D5 /* EEDialogUtils.cpp */; };
+		6FB73D351CE45E5800C718D5 /* EEDialogUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FB73D321CE45E5800C718D5 /* EEDialogUtils.hpp */; };
+		6FB73D361CE45E5800C718D5 /* EEDialogUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FB73D321CE45E5800C718D5 /* EEDialogUtils.hpp */; };
 		6FC6958B1CDF8A0A00BAE327 /* __EEListenerList.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC695881CDF8A0A00BAE327 /* __EEListenerList.hpp */; };
 		6FC6958C1CDF8A0A00BAE327 /* __EEListenerList.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC695881CDF8A0A00BAE327 /* __EEListenerList.hpp */; };
 		6FCDDC421CD9981800DF8095 /* EEUiWidgetCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C468C2A1CA2F0CA00D16594 /* EEUiWidgetCallback.cpp */; };
@@ -288,12 +280,8 @@
 		6FAC21751CE33425000C16CC /* EEDialogCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDialogCommand.hpp; sourceTree = "<group>"; };
 		6FAC217A1CE3454E000C16CC /* EEDialogGuard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDialogGuard.cpp; sourceTree = "<group>"; };
 		6FAC217B1CE3454E000C16CC /* EEDialogGuard.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDialogGuard.hpp; sourceTree = "<group>"; };
-		6FB73D1B1CE4301B00C718D5 /* EEDialogTransitionProtocol.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDialogTransitionProtocol.cpp; sourceTree = "<group>"; };
-		6FB73D1C1CE4301B00C718D5 /* EEDialogTransitionProtocol.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDialogTransitionProtocol.hpp; sourceTree = "<group>"; };
-		6FB73D211CE437B800C718D5 /* EEBlurBackground.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEBlurBackground.cpp; sourceTree = "<group>"; };
-		6FB73D221CE437B800C718D5 /* EEBlurBackground.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEBlurBackground.hpp; sourceTree = "<group>"; };
-		6FB73D271CE441CE00C718D5 /* EEMoveHorizontally.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEMoveHorizontally.cpp; sourceTree = "<group>"; };
-		6FB73D281CE441CE00C718D5 /* EEMoveHorizontally.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEMoveHorizontally.hpp; sourceTree = "<group>"; };
+		6FB73D311CE45E5800C718D5 /* EEDialogUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDialogUtils.cpp; sourceTree = "<group>"; };
+		6FB73D321CE45E5800C718D5 /* EEDialogUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDialogUtils.hpp; sourceTree = "<group>"; };
 		6FC695871CDF8A0A00BAE327 /* __EEListenerList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = __EEListenerList.cpp; sourceTree = "<group>"; };
 		6FC695881CDF8A0A00BAE327 /* __EEListenerList.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = __EEListenerList.hpp; sourceTree = "<group>"; };
 		6FD294751CE1CBF9009ECBFA /* EENodeV3Loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EENodeV3Loader.cpp; sourceTree = "<group>"; };
@@ -580,12 +568,8 @@
 				6FAC21751CE33425000C16CC /* EEDialogCommand.hpp */,
 				6FAC217A1CE3454E000C16CC /* EEDialogGuard.cpp */,
 				6FAC217B1CE3454E000C16CC /* EEDialogGuard.hpp */,
-				6FB73D1B1CE4301B00C718D5 /* EEDialogTransitionProtocol.cpp */,
-				6FB73D1C1CE4301B00C718D5 /* EEDialogTransitionProtocol.hpp */,
-				6FB73D211CE437B800C718D5 /* EEBlurBackground.cpp */,
-				6FB73D221CE437B800C718D5 /* EEBlurBackground.hpp */,
-				6FB73D271CE441CE00C718D5 /* EEMoveHorizontally.cpp */,
-				6FB73D281CE441CE00C718D5 /* EEMoveHorizontally.hpp */,
+				6FB73D311CE45E5800C718D5 /* EEDialogUtils.cpp */,
+				6FB73D321CE45E5800C718D5 /* EEDialogUtils.hpp */,
 			);
 			name = dialog;
 			sourceTree = "<group>";
@@ -598,18 +582,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C4A4A581CA153E500E72D89 /* EEUiButtonLoader.hpp in Headers */,
-				6FB73D251CE437B800C718D5 /* EEBlurBackground.hpp in Headers */,
 				6C38491D1CA22FCA0020B858 /* EEEventListener.hpp in Headers */,
 				6F79B6251CCA7FCF0008EFAC /* EEBitManipulation.hpp in Headers */,
 				6FA658921CCB5C0C009BC9EB /* EEImage.hpp in Headers */,
 				6C3CAB401C5B5AC30059A380 /* EEForward.hpp in Headers */,
-				6FB73D1F1CE4301B00C718D5 /* EEDialogTransitionProtocol.hpp in Headers */,
 				6F843E451CDB8EF6008B2EC4 /* EEUiWidgetLoader.hpp in Headers */,
 				6C49FBB11CA13D1D00E0FE86 /* EEGenericLoader.hpp in Headers */,
 				6FD294921CE1D95B009ECBFA /* EEUiLayoutLoader.hpp in Headers */,
 				6C3CAB3E1C5B5ABB0059A380 /* EEHeader.hpp in Headers */,
 				6C3CAB3F1C5B5AC00059A380 /* EEMacro.hpp in Headers */,
-				6FB73D2B1CE441CE00C718D5 /* EEMoveHorizontally.hpp in Headers */,
 				6FD294791CE1CBF9009ECBFA /* EENodeV3Loader.hpp in Headers */,
 				6F79B6271CCA7FD10008EFAC /* EECocos2dxFwd.hpp in Headers */,
 				6C468C2D1CA2F0CA00D16594 /* EEUiWidgetCallback.hpp in Headers */,
@@ -625,6 +606,7 @@
 				6F79DC821CCE5CB900BDA20F /* EECrytography.hpp in Headers */,
 				6C49FB9A1CA136ED00E0FE86 /* EEExtension.hpp in Headers */,
 				6FAC21781CE33425000C16CC /* EEDialogCommand.hpp in Headers */,
+				6FB73D351CE45E5800C718D5 /* EEDialogUtils.hpp in Headers */,
 				6C3CAB421C5B5ACF0059A380 /* EEUtils.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -634,18 +616,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FC6958C1CDF8A0A00BAE327 /* __EEListenerList.hpp in Headers */,
-				6FB73D261CE437B800C718D5 /* EEBlurBackground.hpp in Headers */,
 				6F79DC831CCE5CBA00BDA20F /* EECrytography.hpp in Headers */,
 				6F79B62B1CCA7FDC0008EFAC /* EEGenericLoader.hpp in Headers */,
 				6F79B62A1CCA7FDB0008EFAC /* EEExtension.hpp in Headers */,
 				6F79B62E1CCA7FE20008EFAC /* EEUtils.hpp in Headers */,
-				6FB73D201CE4301B00C718D5 /* EEDialogTransitionProtocol.hpp in Headers */,
 				6F79B6221CCA7FC70008EFAC /* EEHeader.hpp in Headers */,
 				6F843E461CDB8EF6008B2EC4 /* EEUiWidgetLoader.hpp in Headers */,
 				6FD294931CE1D95B009ECBFA /* EEUiLayoutLoader.hpp in Headers */,
 				6FA6588D1CCB5C0B009BC9EB /* EEImage.hpp in Headers */,
 				6F79B6461CCAC0E90008EFAC /* EEEvent.hpp in Headers */,
-				6FB73D2C1CE441CE00C718D5 /* EEMoveHorizontally.hpp in Headers */,
 				6FD2947A1CE1CBF9009ECBFA /* EENodeV3Loader.hpp in Headers */,
 				6F39F1591CCBBBD10038796D /* EEButton.hpp in Headers */,
 				6F79B6261CCA7FD00008EFAC /* EEBitManipulation.hpp in Headers */,
@@ -661,6 +640,7 @@
 				6F79B6361CCA8FA00008EFAC /* EEUiButtonLoader.hpp in Headers */,
 				6F79B6231CCA7FC90008EFAC /* EEMacro.hpp in Headers */,
 				6FAC21791CE33425000C16CC /* EEDialogCommand.hpp in Headers */,
+				6FB73D361CE45E5800C718D5 /* EEDialogUtils.hpp in Headers */,
 				6F79B6281CCA7FD20008EFAC /* EECocos2dxFwd.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -791,11 +771,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C468C2C1CA2F0CA00D16594 /* EEUiWidgetCallback.cpp in Sources */,
+				6FB73D331CE45E5800C718D5 /* EEDialogUtils.cpp in Sources */,
 				6FA658951CCB5C0C009BC9EB /* EETentBlur1D.cpp in Sources */,
 				6F79DC841CCE5CBC00BDA20F /* EESha1.cpp in Sources */,
 				6FAC216D1CE310AD000C16CC /* EEDialogManager.cpp in Sources */,
 				6FAC217C1CE3454E000C16CC /* EEDialogGuard.cpp in Sources */,
-				6FB73D231CE437B800C718D5 /* EEBlurBackground.cpp in Sources */,
 				6F79DC861CCE5CBE00BDA20F /* EECrc.cpp in Sources */,
 				6F843E6E1CDBA4B1008B2EC4 /* __EEDataHandler.cpp in Sources */,
 				6FD294901CE1D95B009ECBFA /* EEUiLayoutLoader.cpp in Sources */,
@@ -809,12 +789,10 @@
 				6FA658931CCB5C0C009BC9EB /* EEBoxBlur1D.cpp in Sources */,
 				6FA658971CCB700B009BC9EB /* EEUtils.cpp in Sources */,
 				6F843E431CDB8EF6008B2EC4 /* EEUiWidgetLoader.cpp in Sources */,
-				6FB73D291CE441CE00C718D5 /* EEMoveHorizontally.cpp in Sources */,
 				6C47AAF71CA4EAE100B3E65E /* EEUiTextLoader.cpp in Sources */,
 				6FA658941CCB5C0C009BC9EB /* EEBoxBlur2D.cpp in Sources */,
 				6F843E6F1CDBA4B6008B2EC4 /* __EEDataInfo.cpp in Sources */,
 				6F39F1561CCBBBD10038796D /* EEButton.cpp in Sources */,
-				6FB73D1D1CE4301B00C718D5 /* EEDialogTransitionProtocol.cpp in Sources */,
 				6FA658911CCB5C0C009BC9EB /* EEImage.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -824,11 +802,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FA658981CCB700B009BC9EB /* EEUtils.cpp in Sources */,
+				6FB73D341CE45E5800C718D5 /* EEDialogUtils.cpp in Sources */,
 				6F798A811CE03A5F004D247B /* __EEDataHandler.cpp in Sources */,
 				6F79DC851CCE5CBC00BDA20F /* EESha1.cpp in Sources */,
 				6FAC216E1CE310AD000C16CC /* EEDialogManager.cpp in Sources */,
 				6FAC217D1CE3454E000C16CC /* EEDialogGuard.cpp in Sources */,
-				6FB73D241CE437B800C718D5 /* EEBlurBackground.cpp in Sources */,
 				6F79B6351CCA8F9E0008EFAC /* EEUiButtonLoader.cpp in Sources */,
 				6F79B62C1CCA7FDE0008EFAC /* EEDynamicValue.cpp in Sources */,
 				6FD294911CE1D95B009ECBFA /* EEUiLayoutLoader.cpp in Sources */,
@@ -842,12 +820,10 @@
 				6F39F1571CCBBBD10038796D /* EEButton.cpp in Sources */,
 				6FA6588E1CCB5C0B009BC9EB /* EEBoxBlur1D.cpp in Sources */,
 				6F79DC871CCE5CBF00BDA20F /* EECrc.cpp in Sources */,
-				6FB73D2A1CE441CE00C718D5 /* EEMoveHorizontally.cpp in Sources */,
 				6F843E441CDB8EF6008B2EC4 /* EEUiWidgetLoader.cpp in Sources */,
 				6FA6588C1CCB5C0B009BC9EB /* EEImage.cpp in Sources */,
 				6FA6588F1CCB5C0B009BC9EB /* EEBoxBlur2D.cpp in Sources */,
 				6FCDDC421CD9981800DF8095 /* EEUiWidgetCallback.cpp in Sources */,
-				6FB73D1E1CE4301B00C718D5 /* EEDialogTransitionProtocol.cpp in Sources */,
 				6F79B6431CCAA2D90008EFAC /* EEBackButtonListener.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

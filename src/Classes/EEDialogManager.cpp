@@ -10,7 +10,6 @@
 
 #include "EEDialog.hpp"
 #include "EEDialogCommand.hpp"
-#include "EEDialogTransitionProtocol.hpp"
 #include "EEUtils.hpp"
 
 #include <cocos2d.h>
@@ -27,6 +26,7 @@ void DialogManager::pushDialog(Dialog* dialog) {
 }
     
 void DialogManager::pushDialog(Dialog* dialog, std::size_t level) {
+    LOG_FUNC();
     updateCurrentScene();
     
     CC_ASSERT(dialog != nullptr);
@@ -36,6 +36,7 @@ void DialogManager::pushDialog(Dialog* dialog, std::size_t level) {
 }
     
 void DialogManager::popDialog(Dialog* dialog) {
+    LOG_FUNC();
     updateCurrentScene();
     
     CC_ASSERT(dialog != nullptr);
@@ -113,11 +114,7 @@ void DialogManager::processCommandQueue() {
 void DialogManager::pushDialogImmediately(Dialog* dialog, std::size_t level) {
     LOG_FUNC();
     
-    auto protocol = dynamic_cast<DialogTransitionProtocol*>(dialog);
-    if (protocol != nullptr) {
-        protocol->onShowBegan();
-    }
-    
+    dialog->onDialogWillShow();
     lock(dialog);
     
     auto parent = getRunningNode();
@@ -129,19 +126,14 @@ void DialogManager::pushDialogImmediately(Dialog* dialog, std::size_t level) {
     parent->addChild(dialog->getContainer(), Dialog::ContainerLocalZOrder);
     
     cocos2d::Vector<cocos2d::FiniteTimeAction*> actions;
-    
-    if (protocol != nullptr) {
-        for (auto&& act : protocol->getShowingActions()) {
-            actions.pushBack(act);
-        }
+    for (auto&& act : dialog->getShowingTransitions()) {
+        actions.pushBack(act);
     }
-    actions.pushBack(cocos2d::CallFunc::create([this, dialog, protocol] {
+    
+    actions.pushBack(cocos2d::CallFunc::create([this, dialog] {
         unlock(dialog);
         dialog->setActive(true);
-        
-        if (protocol != nullptr) {
-            protocol->onShowEnded();
-        }
+        dialog->onDialogDidShow();
     }));
     
     dialog->runAction(cocos2d::Sequence::create(actions));
@@ -151,31 +143,23 @@ void DialogManager::popDialogImmediately(Dialog* dialog) {
     LOG_FUNC();
     CC_ASSERT(dialog == getTopDialog());
     
-    auto protocol = dynamic_cast<DialogTransitionProtocol*>(dialog);
-    if (protocol != nullptr) {
-        protocol->onHideBegan();
-    }
-    
+    dialog->onDialogWillHide();
     dialog->setActive(false);
     lock(dialog);
     
     cocos2d::Vector<cocos2d::FiniteTimeAction*> actions;
-    
-    if (protocol != nullptr) {
-        for (auto&& act : protocol->getHidingActions()) {
-            actions.pushBack(act);
-        }
+    for (auto&& act : dialog->getHidingTransitions()) {
+        actions.pushBack(act);
     }
-    actions.pushBack(cocos2d::CallFunc::create([this, dialog, protocol] {
+    
+    actions.pushBack(cocos2d::CallFunc::create([this, dialog] {
         dialog->getContainer()->removeFromParent();
         dialogStack_.pop_back();
         --currentLevel_;
         auto parent = getRunningNode();
         resumeAll(parent);
         unlock(dialog);
-        if (protocol != nullptr) {
-            protocol->onHideEnded();
-        }
+        dialog->onDialogDidHide();
     }));
     
     dialog->runAction(cocos2d::Sequence::create(actions));

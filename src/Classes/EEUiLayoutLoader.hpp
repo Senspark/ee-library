@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef EEUiLayoutLoader_hpp
-#define EEUiLayoutLoader_hpp
+#ifndef EE_LIBRARY_UI_LAYOUT_LOADER_HPP_
+#define EE_LIBRARY_UI_LAYOUT_LOADER_HPP_
 
 #include "EEMacro.hpp"
 #include "EEUiWidgetLoader.hpp"
@@ -42,4 +42,4 @@ protected:
 };
 NS_EE_END
 
-#endif /* EEUiLayoutLoader_hpp */
+#endif /* EE_LIBRARY_UI_LAYOUT_LOADER_HPP_ */

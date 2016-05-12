@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef EEBit_hpp
-#define EEBit_hpp
+#ifndef EE_LIBRARY_BIT_MANIPULATION_HPP_
+#define EE_LIBRARY_BIT_MANIPULATION_HPP_
 
 /// Fast bit manipulation library.
 
@@ -172,4 +172,4 @@ constexpr std::uint32_t bitPopCountKernighan(T n) noexcept {
 }
 NS_EE_END
 
-#endif /* EEBit_hpp */
+#endif /* EE_LIBRARY_BIT_MANIPULATION_HPP_ */

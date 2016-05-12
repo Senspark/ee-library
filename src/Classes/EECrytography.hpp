@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef EE_LIBRARY_CRYTOGRAPHY_HPP
-#define EE_LIBRARY_CRYTOGRAPHY_HPP
+#ifndef EE_LIBRARY_CRYTOGRAPHY_HPP_
+#define EE_LIBRARY_CRYTOGRAPHY_HPP_
 
 #include <string>
 
@@ -25,4 +25,4 @@ std::string generateSha1(const std::string& input);
 std::string generateCrc(const std::string& input);
 NS_EE_END
 
-#endif /* EECrytography_h */
+#endif /* EE_LIBRARY_CRYTOGRAPHY_HPP_ */

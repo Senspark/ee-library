@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef EEEvent_hpp
-#define EEEvent_hpp
+#ifndef EE_LIBRARY_EVENT_HPP_
+#define EE_LIBRARY_EVENT_HPP_
 
 #include <functional>
 
@@ -49,4 +49,4 @@ private:
 NS_DETAIL_END
 NS_EE_END
 
-#endif /* EEEvent_hpp */
+#endif /* EE_LIBRARY_EVENT_HPP_ */

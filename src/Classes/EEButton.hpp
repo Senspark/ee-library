@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef EEButton_hpp
-#define EEButton_hpp
+#ifndef EE_LIBRARY_BUTTON_HPP_
+#define EE_LIBRARY_BUTTON_HPP_
 
 #include <array>
 #include <functional>
@@ -187,4 +187,4 @@ private:
 NS_DETAIL_END
 NS_EE_END
 
-#endif /* EEButton_hpp */
+#endif /* EE_LIBRARY_BUTTON_HPP_ */

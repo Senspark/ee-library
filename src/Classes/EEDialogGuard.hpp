@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef DialogGuard_hpp
-#define DialogGuard_hpp
+#ifndef EE_LIBRARY_DIALOG_GUARD_HPP_
+#define EE_LIBRARY_DIALOG_GUARD_HPP_
 
 #include "EEMacro.hpp"
 
@@ -28,4 +28,4 @@ private:
 } // namespace dialog
 NS_EE_END
 
-#endif /* DialogGuard_hpp */
+#endif /* EE_LIBRARY_DIALOG_GUARD_HPP_ */

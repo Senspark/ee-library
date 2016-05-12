@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef EEUiWidgetCallback_hpp
-#define EEUiWidgetCallback_hpp
+#ifndef EE_LIBRARY_UI_WIDGET_CALLBACK_HPP_
+#define EE_LIBRARY_UI_WIDGET_CALLBACK_HPP_
 
 #include "EEMacro.hpp"
 
@@ -71,4 +71,4 @@ private:
 NS_DETAIL_END
 NS_EE_END
 
-#endif /* EEUiWidgetCallback_hpp */
+#endif /* EE_LIBRARY_UI_WIDGET_CALLBACK_HPP_ */

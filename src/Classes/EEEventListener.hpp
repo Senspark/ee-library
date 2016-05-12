@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef EEEventListener_hpp
-#define EEEventListener_hpp
+#ifndef EE_LIBRARY_EVENT_LISTENER_HPP_
+#define EE_LIBRARY_EVENT_LISTENER_HPP_
 
 #include "EEMacro.hpp"
 
@@ -59,4 +59,4 @@ private:
 NS_DETAIL_END
 NS_EE_END
 
-#endif /* EEEventListener_hpp */
+#endif /* EE_LIBRARY_EVENT_LISTENER_HPP_ */

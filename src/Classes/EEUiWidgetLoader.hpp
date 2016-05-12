@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef EEUiWidgetLoader_hpp
-#define EEUiWidgetLoader_hpp
+#ifndef EE_LIBRARY_UI_WIDGET_LOADER_HPP_
+#define EE_LIBRARY_UI_WIDGET_LOADER_HPP_
 
 #include "EEMacro.hpp"
 #include "EECocos2dxFwd.hpp"
@@ -43,4 +43,4 @@ protected:
 };
 NS_EE_END
 
-#endif /* EEUiWidgetLoader_hpp */
+#endif /* EE_LIBRARY_UI_WIDGET_LOADER_HPP_ */

@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef EE_LIBRARY_DIALOG_H
-#define EE_LIBRARY_DIALOG_H
+#ifndef EE_LIBRARY_DIALOG_HPP_
+#define EE_LIBRARY_DIALOG_HPP_
 
 #include <functional>
 #include <memory>
@@ -150,4 +150,4 @@ private:
 } // namespace dialog.
 NS_EE_END
 
-#endif /* EE_LIBRARY_DIALOG_H */
+#endif /* EE_LIBRARY_DIALOG_HPP_ */

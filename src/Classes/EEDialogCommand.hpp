@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef EEDialogMessage_hpp
-#define EEDialogMessage_hpp
+#ifndef EE_LIBRARY_DIALOG_COMMAND_HPP_
+#define EE_LIBRARY_DIALOG_COMMAND_HPP_
 
 #include <cstddef>
 
@@ -41,4 +41,4 @@ private:
 } // namespace dialog.
 NS_EE_END
 
-#endif /* EEDialogMessage_hpp */
+#endif /* EE_LIBRARY_DIALOG_COMMAND_HPP_ */

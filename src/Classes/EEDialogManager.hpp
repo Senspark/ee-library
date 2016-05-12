@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef EE_LIBRARY_DIALOG_MANAGER_H
-#define EE_LIBRARY_DIALOG_MANAGER_H
+#ifndef EE_LIBRARY_DIALOG_MANAGER_HPP_
+#define EE_LIBRARY_DIALOG_MANAGER_HPP_
 
 #include <vector>
 
@@ -86,4 +86,4 @@ private:
 } // namespace dialog.
 NS_EE_END
 
-#endif /* EE_LIBRARY_DIALOG_MANAGER_H */
+#endif /* EE_LIBRARY_DIALOG_MANAGER_HPP_ */

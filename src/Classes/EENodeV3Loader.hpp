@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef CCNodeV3Loader_hpp
-#define CCNodeV3Loader_hpp
+#ifndef EE_LIBRARY_NODE_V3_LOADER_HPP_
+#define EE_LIBRARY_NODE_V3_LOADER_HPP_
 
 #include "EEMacro.hpp"
 
@@ -58,4 +58,4 @@ private:
 };
 NS_EE_END
 
-#endif /* CCNodeV3Loader_hpp */
+#endif /* EE_LIBRARY_NODE_V3_LOADER_HPP_ */

@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef EEUiButtonLoader_hpp
-#define EEUiButtonLoader_hpp
+#ifndef EE_LIBRARY_UI_BUTTON_LOADER_HPP_
+#define EE_LIBRARY_UI_BUTTON_LOADER_HPP_
 
 #include "EEMacro.hpp"
 #include "EECocos2dxFwd.hpp"
@@ -104,4 +104,4 @@ private:
 };
 NS_EE_END
 
-#endif /* EEUiButtonLoader_hpp */
+#endif /* EE_LIBRARY_UI_BUTTON_LOADER_HPP_ */

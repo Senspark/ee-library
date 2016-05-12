@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef EEDialogUtils_hpp
-#define EEDialogUtils_hpp
+#ifndef EE_LIBRARY_DIALOG_UTILS_HPP_
+#define EE_LIBRARY_DIALOG_UTILS_HPP_
 
 #include "EEMacro.hpp"
 
@@ -37,7 +37,7 @@ Dialog* addBlurBackground(Dialog* dialog, float duration = 0.8f,
 /// Adds a transition action for the specified dialog that:
 ///
 /// - Moves the dialog from left to right when the dialog is about to show/hide
-/// in @c duration.
+/// in @c duration seconds.
 ///
 /// @param duration     The transition duration.
 /// @param rate         Used in @c cocos2d::EaseElasticOut and @c
@@ -46,4 +46,4 @@ Dialog* addHorizontalTransition(Dialog* dialog, float duration = 0.8f,
                                 float rate = 0.8f);
 NS_EE_END
 
-#endif /* EEDialogUtils_hpp */
+#endif /* EE_LIBRARY_DIALOG_UTILS_HPP_ */

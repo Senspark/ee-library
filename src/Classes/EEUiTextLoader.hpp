@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef EEUiTextLoader_hpp
-#define EEUiTextLoader_hpp
+#ifndef EE_LIBRARY_UI_TEXT_LOADER_HPP_
+#define EE_LIBRARY_UI_TEXT_LOADER_HPP_
 
 #include "EEMacro.hpp"
 #include "EEUiWidgetLoader.hpp"
@@ -102,4 +102,4 @@ private:
 };
 NS_EE_END
 
-#endif /* EEUiTextLoader_hpp */
+#endif /* EE_LIBRARY_UI_TEXT_LOADER_HPP_ */

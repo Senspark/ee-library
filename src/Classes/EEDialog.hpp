@@ -45,17 +45,25 @@ public:
     static const int ContainerLocalZOrder;
     static const std::size_t TopLevel;
     
+    /// Attempts to show this dialog to the current scene.
+    /// @param level The dialog level to show, should be in range [1, +inf).
     virtual void show(std::size_t level = TopLevel);
     
+    /// Attempts to hide this dialog from the current scene.
     virtual void hide();
     
+    /// Retrieves the dialog level in the current scene.
     std::size_t getDialogLevel() const noexcept;
     
-    virtual const cocos2d::Node* getContainer() const;
+    /// Retrieves this dialog's container
     virtual cocos2d::Node* getContainer();
+    
+    /// Retrieves this dialog's container (const version).
+    virtual const cocos2d::Node* getContainer() const;
     
     virtual void setActive(bool active);
     
+    /// Whether the user can interact with this dialog.
     bool isActive() const noexcept;
 
     virtual Dialog* addDialogWillShowCallback(const CallbackType& callback,

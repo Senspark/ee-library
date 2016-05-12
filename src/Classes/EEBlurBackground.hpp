@@ -9,6 +9,7 @@
 #ifndef EEBlurBackground_hpp
 #define EEBlurBackground_hpp
 
+#include "EECocos2dxFwd.hpp"
 #include "EEDialogTransitionProtocol.hpp"
 
 NS_EE_BEGIN
@@ -17,6 +18,9 @@ public:
     
 protected:
     virtual void onShowBegan() override;
+    virtual void onHideBegan() override;
+    
+    cocos2d::Sprite* blurredBackgroundSprite_;
 };
 NS_EE_END
 

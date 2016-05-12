@@ -17,11 +17,26 @@ void BlurBackground::onShowBegan() {
     auto thiz = dynamic_cast<Dialog*>(this);
     CC_ASSERT(thiz != nullptr);
     
-    auto blurredBackgroundSprite = captureBlurredScreenInPoints(0.25f);
-    blurredBackgroundSprite->setScale(4.0f);
-    blurredBackgroundSprite->setNormalizedPosition(cocos2d::Vec2::ANCHOR_MIDDLE);
+    CC_ASSERT(blurredBackgroundSprite_ == nullptr);
     
-    thiz->getContainer()->addChild(blurredBackgroundSprite,
+    blurredBackgroundSprite_ = captureBlurredScreenInPoints(0.25f);
+    blurredBackgroundSprite_->setScale(4.0f);
+    blurredBackgroundSprite_->setNormalizedPosition(cocos2d::Vec2::ANCHOR_MIDDLE);
+    
+    blurredBackgroundSprite_->setOpacity(0);
+    blurredBackgroundSprite_->runAction(cocos2d::FadeIn::create(0.8f));
+    
+    thiz->getContainer()->addChild(blurredBackgroundSprite_,
                                    std::numeric_limits<int>::lowest());
+}
+
+void BlurBackground::onHideBegan() {
+    CC_ASSERT(blurredBackgroundSprite_ != nullptr);
+    
+    auto sequence = cocos2d::Sequence::create(cocos2d::FadeOut::create(0.8f),
+                                              cocos2d::RemoveSelf::create(),
+                                              nullptr);
+    
+    blurredBackgroundSprite_->runAction(sequence);
 }
 NS_EE_END

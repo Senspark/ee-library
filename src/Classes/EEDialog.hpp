@@ -39,7 +39,8 @@ public:
             (std::is_base_of<
                 TransitionType,
                 std::remove_pointer_t<std::decay_t<Args>>
-             >::value && ...)
+             >::value && ...),
+            Dialog*
         >;
     
     static const int ContainerLocalZOrder;
@@ -78,11 +79,11 @@ public:
     virtual Dialog* addDialogDidHideCallback(const CallbackType& callback,
                                              int priority = 0);
     
-    void setShowingTransitions(const std::vector<TransitionRef>& transitions);
-    void setHidingTransitions(const std::vector<TransitionRef>& transitions);
+    Dialog* setShowingTransitions(const std::vector<TransitionRef>& transitions);
+    Dialog* setHidingTransitions(const std::vector<TransitionRef>& transitions);
     
-    void addShowingTransitions(const std::vector<TransitionRef>& transitions);
-    void addHidingTransitions(const std::vector<TransitionRef>& transitions);
+    Dialog* addShowingTransitions(const std::vector<TransitionRef>& transitions);
+    Dialog* addHidingTransitions(const std::vector<TransitionRef>& transitions);
     
     const std::vector<TransitionRef>& getShowingTransitions() const;
     const std::vector<TransitionRef>& getHidingTransitions() const;
@@ -102,13 +103,13 @@ public:
     template<class... Transitions>
     enable_if_args_are_transition_types<Transitions...>
     addShowingTransitions(Transitions&&... transitions) {
-        addShowingTransitions({ std::forward<Transitions>(transitions)... });
+        return addShowingTransitions({ std::forward<Transitions>(transitions)... });
     }
     
     template<class... Transitions>
     enable_if_args_are_transition_types<Transitions...>
     addHidingTransitions(Transitions&&... transitions) {
-        addHidingTransitions({ std::forward<Transitions>(transitions)... });
+        return addHidingTransitions({ std::forward<Transitions>(transitions)... });
     }
     
 protected:

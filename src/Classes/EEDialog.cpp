@@ -131,22 +131,26 @@ void Dialog::onClickedOutside() {
     }
 }
     
-void Dialog::setShowingTransitions(const std::vector<TransitionRef>& transitions) {
+Dialog* Dialog::setShowingTransitions(const std::vector<TransitionRef>& transitions) {
     showingTransitions_ = transitions;
+    return this;
 }
 
-void Dialog::setHidingTransitions(const std::vector<TransitionRef>& transitions) {
+Dialog* Dialog::setHidingTransitions(const std::vector<TransitionRef>& transitions) {
     hidingTransitions_ = transitions;
+    return this;
 }
 
-void Dialog::addShowingTransitions(const std::vector<TransitionRef>& transitions) {
+Dialog* Dialog::addShowingTransitions(const std::vector<TransitionRef>& transitions) {
     showingTransitions_.insert(showingTransitions_.cend(),
                                transitions.cbegin(), transitions.cend());
+    return this;
 }
 
-void Dialog::addHidingTransitions(const std::vector<TransitionRef>& transitions) {
+Dialog* Dialog::addHidingTransitions(const std::vector<TransitionRef>& transitions) {
     hidingTransitions_.insert(hidingTransitions_.cend(),
                               transitions.cbegin(), transitions.cend());
+    return this;
 }
 
 auto Dialog::getShowingTransitions() const -> const std::vector<TransitionRef>& {

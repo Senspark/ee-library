@@ -7,7 +7,6 @@
 //
 
 #include "EEDialogManager.hpp"
-
 #include "EEDialog.hpp"
 #include "EEDialogCommand.hpp"
 #include "EEUtils.hpp"

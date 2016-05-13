@@ -28,8 +28,6 @@ namespace dialog {
 class Dialog;
 class DialogManager;
 } // namespace dialog
-
-class BlurBackground;
     
 using dialog::Dialog;
 using dialog::DialogManager;

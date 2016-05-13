@@ -11,6 +11,7 @@
 
 #include "EEMacro.hpp"
 
+#include <GUI/CCControlExtension/CCControl.h>
 #include <ui/UIWidget.h>
 
 NS_EE_BEGIN

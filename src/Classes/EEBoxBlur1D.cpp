@@ -44,23 +44,23 @@ void internalBoxBlur1D(ChannelType* pixels,
     auto inPixel = pixels;
     auto newPixel = buffer;
     
-    auto shiftSumIn = [&] {
+    auto shiftSumIn = [&]() noexcept {
         ++sumInR;
         ++sumInG;
         ++sumInB;
     };
-    auto shiftSumOut = [&] {
+    auto shiftSumOut = [&]() noexcept {
         ++sumOutR;
         ++sumOutG;
         ++sumOutB;
     };
-    auto addPixel = [&] {
+    auto addPixel = [&]() noexcept {
         *(sumInR + 1) = *sumInR + *inPixel++;
         *(sumInG + 1) = *sumInG + *inPixel++;
         *(sumInB + 1) = *sumInB + *inPixel++;
         inPixel++;
     };
-    auto updatePixel = [&](SizeType size) {
+    auto updatePixel = [&](SizeType size) noexcept {
         auto num = numerators[size];
         *newPixel++ = static_cast<ChannelType>(((*sumInR - *sumOutR) * num) >> Bits);
         *newPixel++ = static_cast<ChannelType>(((*sumInG - *sumOutG) * num) >> Bits);

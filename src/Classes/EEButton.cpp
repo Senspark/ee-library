@@ -33,10 +33,10 @@ auto ButtonEx::getDefaultHitTester() -> const HitTester& {
 }
 
 ButtonEx::ButtonEx()
-: _zoomingDuration(0.05f)
-, _currentTouch(nullptr)
-, _currentEvent(nullptr)
-, _container(nullptr) {}
+: zoomingDuration_(0.05f)
+, currentTouch_(nullptr)
+, currentEvent_(nullptr)
+, container_(nullptr) {}
 
 ButtonEx::~ButtonEx() = default;
 
@@ -70,61 +70,61 @@ ButtonEx* ButtonEx::create(const std::string& normalImage,
 
 void ButtonEx::addChild(Node* child, int localZOrder, int tag) {
     // Forward to the container.
-    _container->addChild(child, localZOrder, tag);
+    container_->addChild(child, localZOrder, tag);
 }
 
 void ButtonEx::addChild(Node* child, int localZOrder, const std::string& name) {
     // Forward to the container.
-    _container->addChild(child, localZOrder, name);
+    container_->addChild(child, localZOrder, name);
 }
 
 auto ButtonEx::getChildByTag(int tag) const -> Node* {
     // Forward to the container.
-    return _container->getChildByTag(tag);
+    return container_->getChildByTag(tag);
 }
 
 auto ButtonEx::getChildByName(const std::string& name) const -> Node* {
     // Forward to the container.
-    return _container->getChildByName(name);
+    return container_->getChildByName(name);
 }
 
 auto ButtonEx::getChildren() -> cocos2d::Vector<Node*>& {
     // Forward to the container.
-    return _container->getChildren();
+    return container_->getChildren();
 }
 
 auto ButtonEx::getChildren() const -> const cocos2d::Vector<Node*>& {
     // Forward to the container.
-    return _container->getChildren();
+    return container_->getChildren();
 }
 
 ssize_t ButtonEx::getChildrenCount() const {
     // Forward to the container.
-    return _container->getChildrenCount();
+    return container_->getChildrenCount();
 }
 
 void ButtonEx::removeChild(Node* child, bool cleanup) {
     // Forward to the container.
-    _container->removeChild(child, cleanup);
+    container_->removeChild(child, cleanup);
 }
 
 void ButtonEx::removeAllChildrenWithCleanup(bool cleanup) {
     // Forward to the container.
-    _container->removeAllChildrenWithCleanup(cleanup);
+    container_->removeAllChildrenWithCleanup(cleanup);
 }
 
 void ButtonEx::reorderChild(Node* child, int localZOrder) {
-    if (child == _container) {
+    if (child == container_) {
         Button::reorderChild(child, localZOrder);
     } else {
         // Forward to the container.
-        _container->reorderChild(child, localZOrder);
+        container_->reorderChild(child, localZOrder);
     }
 }
 
 void ButtonEx::sortAllChildren() {
     // Forward to the container.
-    _container->sortAllChildren();
+    container_->sortAllChildren();
 }
 
 void ButtonEx::setContentSize(const cocos2d::Size& contentSize) {
@@ -135,18 +135,18 @@ bool ButtonEx::hitTest(const cocos2d::Point& point,
                        const cocos2d::Camera* camera,
                        cocos2d::Vec3* p) const {
     // Forward to the container.
-    return _container->hitTest(point, camera, p);
+    return container_->hitTest(point, camera, p);
 }
 
 bool ButtonEx::onTouchBegan(cocos2d::Touch* touch,
                             cocos2d::Event* event) {
-    CC_ASSERT(_currentTouch == nullptr);
-    CC_ASSERT(_currentEvent == nullptr);
-    _currentTouch = touch;
-    _currentEvent = event;
+    CC_ASSERT(currentTouch_ == nullptr);
+    CC_ASSERT(currentEvent_ == nullptr);
+    currentTouch_ = touch;
+    currentEvent_ = event;
     bool result = Button::onTouchBegan(touch, event);
-    _currentTouch = nullptr;
-    _currentEvent = nullptr;
+    currentTouch_ = nullptr;
+    currentEvent_ = nullptr;
     return result;
 }
 
@@ -155,24 +155,24 @@ void ButtonEx::onTouchMoved(cocos2d::Touch* touch,
     if (touch->getDelta() == cocos2d::Vec2::ZERO) {
         return;
     }
-    CC_ASSERT(_currentTouch == nullptr);
-    CC_ASSERT(_currentEvent == nullptr);
-    _currentTouch = touch;
-    _currentEvent = event;
+    CC_ASSERT(currentTouch_ == nullptr);
+    CC_ASSERT(currentEvent_ == nullptr);
+    currentTouch_ = touch;
+    currentEvent_ = event;
     Button::onTouchMoved(touch, event);
-    _currentTouch = nullptr;
-    _currentEvent = nullptr;
+    currentTouch_ = nullptr;
+    currentEvent_ = nullptr;
 }
 
 void ButtonEx::onTouchEnded(cocos2d::Touch* touch,
                             cocos2d::Event* event) {
-    CC_ASSERT(_currentTouch == nullptr);
-    CC_ASSERT(_currentEvent == nullptr);
-    _currentTouch = touch;
-    _currentEvent = event;
+    CC_ASSERT(currentTouch_ == nullptr);
+    CC_ASSERT(currentEvent_ == nullptr);
+    currentTouch_ = touch;
+    currentEvent_ = event;
     Button::onTouchEnded(touch, event);
-    _currentTouch = nullptr;
-    _currentEvent = nullptr;
+    currentTouch_ = nullptr;
+    currentEvent_ = nullptr;
 }
 
 void ButtonEx::setScale9Enabled(bool enable) {
@@ -183,18 +183,18 @@ std::string ButtonEx::getDescription() const {
     return "ee::ButtonEx";
 }
 
-void ButtonEx::setZoomingDuration(float duration) {
-    _zoomingDuration = duration;
+void ButtonEx::setZoomingDuration(float duration) noexcept {
+    zoomingDuration_ = duration;
 }
 
-float ButtonEx::getZoomingDuration() const {
-    return _zoomingDuration;
+float ButtonEx::getZoomingDuration() const noexcept {
+    return zoomingDuration_;
 }
 
 void ButtonEx::setTouchBeganCallback(const TouchCallback& callback) {
     addTouchEventListener([callback, this](cocos2d::Ref*, TouchEventType type) {
         if (type == TouchEventType::BEGAN) {
-            callback(_currentTouch, _currentEvent);
+            callback(currentTouch_, currentEvent_);
         }
     });
 }
@@ -202,7 +202,7 @@ void ButtonEx::setTouchBeganCallback(const TouchCallback& callback) {
 void ButtonEx::setTouchMovedCallback(const TouchCallback& callback) {
     addTouchEventListener([callback, this](cocos2d::Ref*, TouchEventType type) {
         if (type == TouchEventType::MOVED) {
-            callback(_currentTouch, _currentEvent);
+            callback(currentTouch_, currentEvent_);
         }
     });
 }
@@ -210,17 +210,17 @@ void ButtonEx::setTouchMovedCallback(const TouchCallback& callback) {
 void ButtonEx::setTouchEndedCallback(const TouchCallback& callback) {
     addTouchEventListener([callback, this](cocos2d::Ref*, TouchEventType type) {
         if (type == TouchEventType::ENDED) {
-            callback(_currentTouch, _currentEvent);
+            callback(currentTouch_, currentEvent_);
         }
     });
 }
 
-auto ButtonEx::getContainer() const -> const Widget* {
-    return _container;
+auto ButtonEx::getContainer() const noexcept -> const Widget* {
+    return container_;
 }
 
-auto ButtonEx::getContainer() -> Widget* {
-    return _container;
+auto ButtonEx::getContainer() noexcept -> Widget* {
+    return container_;
 }
 
 bool ButtonEx::init() {
@@ -258,19 +258,19 @@ void ButtonEx::initRenderer() {
     removeProtectedChild(_buttonDisabledRenderer);
     removeProtectedChild(_titleRenderer);
     
-    _container = Widget::create();
-    _container->ignoreContentAdaptWithSize(false);
-    _container->setPositionType(PositionType::PERCENT);
-    _container->setPositionPercent(cocos2d::Vec2(0.5f, 0.5f));
-    _container->setSizeType(SizeType::PERCENT);
-    _container->setSizePercent(cocos2d::Vec2(1.0f, 1.0f));
+    container_ = Widget::create();
+    container_->ignoreContentAdaptWithSize(false);
+    container_->setPositionType(PositionType::PERCENT);
+    container_->setPositionPercent(cocos2d::Vec2(0.5f, 0.5f));
+    container_->setSizeType(SizeType::PERCENT);
+    container_->setSizePercent(cocos2d::Vec2(1.0f, 1.0f));
     
-    addProtectedChild(_container, std::numeric_limits<int>::min());
+    addProtectedChild(container_, std::numeric_limits<int>::min());
     
-    _container->addProtectedChild(_buttonNormalRenderer);
-    _container->addProtectedChild(_buttonClickedRenderer);
-    _container->addProtectedChild(_buttonDisabledRenderer);
-    _container->addProtectedChild(_titleRenderer);
+    container_->addProtectedChild(_buttonNormalRenderer);
+    container_->addProtectedChild(_buttonClickedRenderer);
+    container_->addProtectedChild(_buttonDisabledRenderer);
+    container_->addProtectedChild(_titleRenderer);
 }
 
 void ButtonEx::onPressStateChangedToNormal() {
@@ -286,14 +286,14 @@ void ButtonEx::onPressStateChangedToNormal() {
         // None background.
     }
     
-    _container->stopAllActions();
+    container_->stopAllActions();
     
     if (_pressedActionEnabled) {
         // Zooming is enabled.
-        auto zoomAction = cocos2d::ScaleTo::create(_zoomingDuration, 1.0f);
-        _container->runAction(zoomAction);
+        auto zoomAction = cocos2d::ScaleTo::create(zoomingDuration_, 1.0f);
+        container_->runAction(zoomAction);
     } else {
-        _container->setScale(1.0f);
+        container_->setScale(1.0f);
     }
 }
 
@@ -318,16 +318,16 @@ void ButtonEx::onPressStateChangedToPressed() {
         }
     }
     
-    _container->stopAllActions();
+    container_->stopAllActions();
     
     if (_pressedActionEnabled) {
         // Zooming is enabled.
-        auto zoomAction = cocos2d::ScaleTo::create(_zoomingDuration,
+        auto zoomAction = cocos2d::ScaleTo::create(zoomingDuration_,
                                                    1.0f + _zoomScale);
-        _container->runAction(zoomAction);
+        container_->runAction(zoomAction);
     } else {
         // Instantly scaled.
-        _container->setScale(1.0f + _zoomScale);
+        container_->setScale(1.0f + _zoomScale);
     }
 }
 
@@ -355,8 +355,8 @@ void ButtonEx::onPressStateChangedToDisabled() {
     }
     
     // Stop animation and reset scale.
-    _container->stopAllActions();
-    _container->setScale(1.0f);
+    container_->stopAllActions();
+    container_->setScale(1.0f);
 }
 
 void ButtonEx::adaptRenderers() {

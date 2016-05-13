@@ -14,8 +14,8 @@
 NS_EE_BEGIN
 template<class T>
 DynamicValue<T>::DynamicValue()
-: _value(new StoreType())
-, _random(new StoreType())
+: value_(new StoreType())
+, random_(new StoreType())
 {}
 
 template<class T>
@@ -38,7 +38,7 @@ DynamicValue<T>& DynamicValue<T>::operator=(const DynamicValue& other) {
     
 template<class T>
 T DynamicValue<T>::get() const {
-    auto intValue = (*_value) ^ (*_random);
+    auto intValue = (*value_) ^ (*random_);
     auto ret = bit_cast<T>(intValue);
     return ret;
 }
@@ -46,9 +46,9 @@ T DynamicValue<T>::get() const {
 template<class T>
 DynamicValue<T>& DynamicValue<T>::set(T value) {
     auto intValue = bit_cast<StoreType>(value);
-    _random = std::make_unique<StoreType>(cocos2d::random(std::numeric_limits<StoreType>::min(),
+    random_ = std::make_unique<StoreType>(cocos2d::random(std::numeric_limits<StoreType>::min(),
                                                           std::numeric_limits<StoreType>::max()));
-    _value = std::make_unique<std::uint32_t>((*_random) ^ intValue);
+    value_ = std::make_unique<std::uint32_t>((*random_) ^ intValue);
     return *this;
 }
 

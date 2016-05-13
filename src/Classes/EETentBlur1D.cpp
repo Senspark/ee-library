@@ -50,38 +50,38 @@ void internalTentBlur1D(ChannelType* pixels,
     
     auto inPixel = pixels;
     
-    auto shiftSumIn = [&] {
+    auto shiftSumIn = [&]() noexcept {
         ++sumInR;
         ++sumInG;
         ++sumInB;
     };
-    auto shiftSumMid = [&] {
+    auto shiftSumMid = [&]() noexcept {
         ++sumMidR;
         ++sumMidG;
         ++sumMidB;
     };
-    auto shiftSumOut = [&] {
+    auto shiftSumOut = [&]() noexcept {
         ++sumOutR;
         ++sumOutG;
         ++sumOutB;
     };
-    auto addPixel = [&] {
+    auto addPixel = [&]() noexcept {
         *(sumInR + 1) = *sumInR + *inPixel++;
         *(sumInG + 1) = *sumInG + *inPixel++;
         *(sumInB + 1) = *sumInB + *inPixel++;
         inPixel++;
     };
-    auto addSum = [&] {
+    auto addSum = [&]() noexcept {
         sumR += *sumInR - *sumMidR;
         sumG += *sumInG - *sumMidG;
         sumB += *sumInB - *sumMidB;
     };
-    auto removeSum = [&] {
+    auto removeSum = [&]() noexcept {
         sumR -= *sumMidR - *sumOutR;
         sumG -= *sumMidG - *sumOutG;
         sumB -= *sumMidB - *sumOutB;
     };
-    auto updatePixel = [&](SizeType size) {
+    auto updatePixel = [&](SizeType size) noexcept {
         *newPixel++ = static_cast<ChannelType>((sumR * numerators[size]) >> Bits);
         *newPixel++ = static_cast<ChannelType>((sumG * numerators[size]) >> Bits);
         *newPixel++ = static_cast<ChannelType>((sumB * numerators[size]) >> Bits);

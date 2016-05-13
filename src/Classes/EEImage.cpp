@@ -15,7 +15,7 @@ void internalTranspose(SizeType rowBegin, SizeType rowEnd,
                        SizeType colBegin, SizeType colEnd,
                        PixelType* src, PixelType* dst,
                        SizeType srcWidth,
-                       SizeType srcHeight) {
+                       SizeType srcHeight) noexcept {
     auto deltaRow = rowEnd - rowBegin;
     auto deltaCol = colEnd - colBegin;
     if (deltaRow <= 16 && deltaCol <= 16) {
@@ -41,7 +41,7 @@ void internalTranspose(SizeType rowBegin, SizeType rowEnd,
 NS_ANONYMOUS_END
 
 void transpose(PixelType* src, PixelType* dst,
-               SizeType srcWidth, SizeType srcHeight) {
+               SizeType srcWidth, SizeType srcHeight) noexcept {
     internalTranspose(0, srcHeight, 0, srcWidth, src, dst, srcWidth, srcHeight);
 }
 } // namespace image

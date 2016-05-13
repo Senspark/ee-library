@@ -40,7 +40,8 @@ NS_EE_BEGIN
 NS_DETAIL_BEGIN
 NS_ANONYMOUS_BEGIN
 /// Rotate an integer value to left.
-std::uint32_t rol(const std::uint32_t value, const std::uint32_t steps) {
+std::uint32_t rol(const std::uint32_t value,
+                  const std::uint32_t steps) noexcept {
     return (value << steps) | (value >> (32 - steps));
 }
 

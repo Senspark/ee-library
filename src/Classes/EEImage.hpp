@@ -36,7 +36,7 @@ void tentBlur1D(cocos2d::Image* image, SizeType range, SizeType iterations = 1);
 
 /// Cache oblivious matrix transposition.
 void transpose(PixelType* src, PixelType* dst,
-               SizeType srcWidth, SizeType srcHeight);
+               SizeType srcWidth, SizeType srcHeight) noexcept;
 } // namespace image.
 
 using image::boxBlur1D;

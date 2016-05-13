@@ -65,8 +65,8 @@ public:
 private:
     using StoreType = std::uint32_t;
     
-    std::unique_ptr<StoreType> _value;
-    std::unique_ptr<StoreType> _random;
+    std::unique_ptr<StoreType> value_;
+    std::unique_ptr<StoreType> random_;
 };
 NS_EE_END
 

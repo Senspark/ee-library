@@ -133,12 +133,12 @@ public:
     virtual std::string getDescription() const override;
     
     /// Assigns the zooming duration for the default animation.
-    void setZoomingDuration(float duration);
+    void setZoomingDuration(float duration) noexcept;
     
     /// Retrieves the zooming duration for the default animation.
     ///
     /// Default is 0.05f (seconds).
-    float getZoomingDuration() const;
+    float getZoomingDuration() const noexcept;
     
     void setTouchBeganCallback(const TouchCallback& callback);
     
@@ -147,10 +147,10 @@ public:
     void setTouchEndedCallback(const TouchCallback& callback);
     
     /// Retrieves the internal container.
-    Widget* getContainer();
+    Widget* getContainer() noexcept;
     
     /// Retrieves the internal container (@c const version).
-    const Widget* getContainer() const;
+    const Widget* getContainer() const noexcept;
     
 protected:
     virtual bool init() override;
@@ -177,12 +177,12 @@ protected:
     virtual void updateTexture();
     
 private:
-    float _zoomingDuration;
+    float zoomingDuration_;
     
-    cocos2d::Touch* _currentTouch;
-    cocos2d::Event* _currentEvent;
+    cocos2d::Touch* currentTouch_;
+    cocos2d::Event* currentEvent_;
     
-    cocos2d::ui::Widget* _container;
+    cocos2d::ui::Widget* container_;
 };
 NS_DETAIL_END
 NS_EE_END

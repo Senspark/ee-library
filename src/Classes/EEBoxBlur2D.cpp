@@ -52,55 +52,55 @@ void internalBoxBlur2D(ChannelType * pixels,
     auto horiSumOutG = horiPrefixSumG;
     auto horiSumOutB = horiPrefixSumB;
     
-    auto resetVertSum = [&] {
+    auto resetVertSum = [&]() noexcept {
         vertSumR = vertPrefixSumR;
         vertSumG = vertPrefixSumG;
         vertSumB = vertPrefixSumB;
     };
-    auto resetHoriSum = [&] {
+    auto resetHoriSum = [&]() noexcept {
         horiSumInR = horiSumOutR = horiPrefixSumR;
         horiSumInG = horiSumOutG = horiPrefixSumG;
         horiSumInB = horiSumOutB = horiPrefixSumB;
     };
-    auto updateHoriSum = [&] {
+    auto updateHoriSum = [&]() noexcept {
         *(horiSumInR + 1) = *horiSumInR + *vertSumR;
         *(horiSumInG + 1) = *horiSumInG + *vertSumG;
         *(horiSumInB + 1) = *horiSumInB + *vertSumB;
     };
-    auto addPixel = [&] {
+    auto addPixel = [&]() noexcept {
         *vertSumR += *inPixel++;
         *vertSumG += *inPixel++;
         *vertSumB += *inPixel++;
         inPixel++;
     };
-    auto removePixel = [&] {
+    auto removePixel = [&]() noexcept {
         *vertSumR -= *outPixel++;
         *vertSumG -= *outPixel++;
         *vertSumB -= *outPixel++;
         outPixel++;
     };
-    auto shiftVertSum = [&] {
+    auto shiftVertSum = [&]() noexcept {
         ++vertSumR;
         ++vertSumG;
         ++vertSumB;
     };
-    auto shiftHoriSumIn = [&] {
+    auto shiftHoriSumIn = [&]() noexcept {
         ++horiSumInR;
         ++horiSumInG;
         ++horiSumInB;
     };
-    auto shiftHoriSumOut = [&] {
+    auto shiftHoriSumOut = [&]() noexcept {
         ++horiSumOutR;
         ++horiSumOutG;
         ++horiSumOutB;
     };
-    auto updatePixel = [&](SizeType hits) {
+    auto updatePixel = [&](SizeType hits) noexcept {
         *newPixel++ = static_cast<ChannelType>((*horiSumInR - *horiSumOutR) / hits);
         *newPixel++ = static_cast<ChannelType>((*horiSumInG - *horiSumOutG) / hits);
         *newPixel++ = static_cast<ChannelType>((*horiSumInB - *horiSumOutB) / hits);
         *newPixel++ = std::numeric_limits<ChannelType>::max();
     };
-    auto updatePixelFullKernel = [&] {
+    auto updatePixelFullKernel = [&]() noexcept {
         *newPixel++ = static_cast<ChannelType>(((*horiSumInR - *horiSumOutR) * Numerator) >> Bits);
         *newPixel++ = static_cast<ChannelType>(((*horiSumInG - *horiSumOutG) * Numerator) >> Bits);
         *newPixel++ = static_cast<ChannelType>(((*horiSumInB - *horiSumOutB) * Numerator) >> Bits);

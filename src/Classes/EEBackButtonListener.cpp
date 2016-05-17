@@ -13,10 +13,10 @@
 NS_EE_BEGIN
 NS_DETAIL_BEGIN
 void BackButtonListenerBase::registerListener(cocos2d::Node* node) {
-    CC_ASSERT(_listener == nullptr);
+    CC_ASSERT(listener_ == nullptr);
     
-    _listener = cocos2d::EventListenerKeyboard::create();
-    _listener->onKeyReleased = std::bind(&BackButtonListenerBase::onKeyReleased,
+    listener_ = cocos2d::EventListenerKeyboard::create();
+    listener_->onKeyReleased = std::bind(&BackButtonListenerBase::onKeyReleased,
                                          this,
                                          node,
                                          std::placeholders::_1,
@@ -24,17 +24,17 @@ void BackButtonListenerBase::registerListener(cocos2d::Node* node) {
     
     cocos2d::Director::getInstance()
     ->getEventDispatcher()
-    ->addEventListenerWithSceneGraphPriority(_listener, node);
+    ->addEventListenerWithSceneGraphPriority(listener_, node);
 }
 
 void BackButtonListenerBase::unregisterListener() {
-    CC_ASSERT(_listener != nullptr);
+    CC_ASSERT(listener_ != nullptr);
     
     cocos2d::Director::getInstance()
     ->getEventDispatcher()
-    ->removeEventListener(_listener);
+    ->removeEventListener(listener_);
     
-    _listener = nullptr;
+    listener_ = nullptr;
 }
 
 void BackButtonListenerBase::onKeyReleased(cocos2d::Node* node,

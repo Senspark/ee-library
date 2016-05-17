@@ -69,7 +69,7 @@ constexpr EnumType apply_unary_operator(EnumType value, UnaryOp op) noexcept {
 NS_DETAIL_END
 NS_EE_END
 
-/// Bitwise or operator.
+/// Bitwise OR operator.
 template<class EnumType>
 constexpr
 ee::detail::enable_if_enum_has_bitwise_operators<EnumType, EnumType>
@@ -84,7 +84,7 @@ operator|=(EnumType& lhs, EnumType rhs) noexcept {
     return lhs = lhs | rhs;
 }
 
-/// Bitwise and operator.
+/// Bitwise AND operator.
 template<class EnumType>
 constexpr
 ee::detail::enable_if_enum_has_bitwise_operators<EnumType, EnumType>
@@ -99,7 +99,7 @@ operator&=(EnumType& lhs, EnumType rhs) noexcept {
     return lhs = lhs & rhs;
 }
 
-/// Bitwise xor operator.
+/// Bitwise XOR operator.
 template<class EnumType>
 constexpr
 ee::detail::enable_if_enum_has_bitwise_operators<EnumType, EnumType>
@@ -114,7 +114,7 @@ operator^=(EnumType& lhs, EnumType rhs) noexcept {
     return lhs = lhs ^ rhs;
 }
 
-/// Bitwise not operator.
+/// Bitwise NOT operator.
 template<class EnumType>
 constexpr
 ee::detail::enable_if_enum_has_bitwise_operators<EnumType, EnumType>

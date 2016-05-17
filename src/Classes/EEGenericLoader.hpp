@@ -45,7 +45,7 @@ public:
         auto result = new (std::nothrow) GenericLoader();
         if (result != nullptr) {
             result->autorelease();
-            result->_callback = [result, data = std::tuple<Us...>(std::forward<Us>(args)...)] {
+            result->callback_ = [result, data = std::tuple<Us...>(std::forward<Us>(args)...)] {
                 return result->internalCreateNode(bool_constant<sizeof...(Ts) == 0>(),
                                                   data,
                                                   std::make_index_sequence<sizeof...(Us)>());
@@ -60,7 +60,7 @@ public:
 private:
     virtual NodeType* createNode(cocos2d::Node* parent,
                                  cocosbuilder::CCBReader* reader) override {
-        return _callback();
+        return callback_();
     }
     
     /// Non-templated @c create overload.
@@ -77,7 +77,7 @@ private:
         return NodeType::template create<Ts...>(std::get<Indices>(std::forward<DataType>(data))...);
     }
     
-    std::function<NodeType*()> _callback;
+    std::function<NodeType*()> callback_;
 };
 NS_EE_END
 

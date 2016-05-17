@@ -52,7 +52,7 @@ protected:
     virtual void onBackButtonPressed() = 0;
     
 private:
-    cocos2d::EventListenerKeyboard* _listener;
+    cocos2d::EventListenerKeyboard* listener_;
 };
 NS_DETAIL_END
 

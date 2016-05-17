@@ -16,13 +16,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		6CB0A2DC1C842954003D7E50 /* CopyFiles */ = {
+		6CB0A2DC1C842954003D7E50 /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		6F798A531CE032A0004D247B /* CopyFiles */ = {
@@ -8230,7 +8231,7 @@
 			buildPhases = (
 				6CB0A2DA1C842954003D7E50 /* Sources */,
 				6CB0A2DB1C842954003D7E50 /* Frameworks */,
-				6CB0A2DC1C842954003D7E50 /* CopyFiles */,
+				6CB0A2DC1C842954003D7E50 /* Copy Files */,
 			);
 			buildRules = (
 			);
@@ -8320,7 +8321,6 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -8342,8 +8342,6 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				CLANG_CXX_LIBRARY = "libc++";
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/..";

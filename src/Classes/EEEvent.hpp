@@ -28,7 +28,7 @@ public:
     
     /// Assigns the event data to invoke later.
     void setData(Args... args) {
-        _callback = std::bind(&Event::invokeImpl,
+        callback_ = std::bind(&Event::invokeImpl,
                               this,
                               std::placeholders::_1,
                               std::forward<Args>(args)...);
@@ -36,7 +36,7 @@ public:
     
     /// Invokes the given callback with stored arguments.
     void invoke(const CallbackType& callback) const {
-        _callback(callback);
+        callback_(callback);
     }
     
 private:
@@ -44,7 +44,7 @@ private:
         callback(std::forward<Args>(args)...);
     }
     
-    std::function<void(const CallbackType&)> _callback;
+    std::function<void(const CallbackType&)> callback_;
 };
 NS_DETAIL_END
 NS_EE_END

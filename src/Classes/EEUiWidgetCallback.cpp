@@ -16,21 +16,21 @@ UiWidgetCallback* UiWidgetCallback::getInstance() {
 }
 
 void UiWidgetCallback::setActiveClickCallback(const ClickCallback& callback) {
-    _clickCallback = callback;
-    _touchCallback = nullptr;
+    clickCallback_ = callback;
+    touchCallback_ = nullptr;
 }
 
 void UiWidgetCallback::setActiveTouchCallback(const TouchCallback& callback) {
-    _touchCallback = callback;
-    _clickCallback = nullptr;
+    touchCallback_ = callback;
+    clickCallback_ = nullptr;
 }
 
 auto UiWidgetCallback::getActiveTouchCallback() const -> const TouchCallback& {
-    return _touchCallback;
+    return touchCallback_;
 }
 
 auto UiWidgetCallback::getActiveClickCallback() const -> const ClickCallback& {
-    return _clickCallback;
+    return clickCallback_;
 }
 NS_DETAIL_END
 NS_EE_END

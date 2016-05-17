@@ -54,7 +54,7 @@ protected:
                                          cocosbuilder::CCBReader* reader) override;
     
 private:
-    bool _localZOrderOverridden;
+    bool localZOrderOverridden_;
 };
 NS_EE_END
 

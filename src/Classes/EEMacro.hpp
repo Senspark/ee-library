@@ -30,6 +30,17 @@
         std::remove_reference_t<decltype(_ ## variableName)>, \
         _ ## variableName)
 
+#define CCB_MEMBERVARIABLEASSIGNER_GLUE_WEAK_EX_2(variableName) \
+    CCB_MEMBERVARIABLEASSIGNER_GLUE_WEAK( \
+        this, \
+        [](const std::string& input) { \
+            auto from = input.find_first_not_of('_'); \
+            auto to = input.find_last_not_of('_'); \
+            return input.substr(from, to - from + 1); \
+        }(# variableName).c_str(), \
+        std::remove_reference_t<decltype(variableName)>, \
+        variableName)
+
 /// Concatenates two string literals.
 #define STRCAT_HELPER(x, y)     x ## y
 #define STRCAT(x, y)            STRCAT_HELPER(x, y)

@@ -38,8 +38,8 @@ public:
     const ClickCallback& getActiveClickCallback() const;
     
 private:
-    TouchCallback _touchCallback;
-    ClickCallback _clickCallback;
+    TouchCallback touchCallback_;
+    ClickCallback clickCallback_;
 };
 
 #define CCB_SELECTORRESOLVER_CCBUTTON_TOUCH(target, selectorName, callback) \

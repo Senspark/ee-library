@@ -189,7 +189,6 @@
 
 /* Begin PBXFileReference section */
 		1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
-		6C2E7D711BDE0B69008F5EF3 /* ee-library-mobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "ee-library-mobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C2E7D831BDE14D4008F5EF3 /* EECrc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EECrc.cpp; sourceTree = "<group>"; };
 		6C2E7D861BDE1A1B008F5EF3 /* EEBackButtonListener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEBackButtonListener.cpp; sourceTree = "<group>"; };
 		6C2E7D871BDE1A1B008F5EF3 /* EEBackButtonListener.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEBackButtonListener.hpp; sourceTree = "<group>"; };
@@ -272,7 +271,6 @@
 		6CC43B101BF31BC600FAC807 /* __EEJniConverter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = __EEJniConverter.cpp; sourceTree = "<group>"; };
 		6F39F1541CCBBBD10038796D /* EEButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEButton.cpp; sourceTree = "<group>"; };
 		6F39F1551CCBBBD10038796D /* EEButton.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEButton.hpp; sourceTree = "<group>"; };
-		6F77D7961CE0D618000BA9BE /* ee-library-desktop.a */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "ee-library-desktop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F843E411CDB8EF6008B2EC4 /* EEUiWidgetLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEUiWidgetLoader.cpp; sourceTree = "<group>"; };
 		6F843E421CDB8EF6008B2EC4 /* EEUiWidgetLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEUiWidgetLoader.hpp; sourceTree = "<group>"; };
 		6FA658961CCB700B009BC9EB /* EEUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEUtils.cpp; sourceTree = "<group>"; };
@@ -282,6 +280,8 @@
 		6FAC217B1CE3454E000C16CC /* EEDialogGuard.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDialogGuard.hpp; sourceTree = "<group>"; };
 		6FB73D311CE45E5800C718D5 /* EEDialogUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDialogUtils.cpp; sourceTree = "<group>"; };
 		6FB73D321CE45E5800C718D5 /* EEDialogUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDialogUtils.hpp; sourceTree = "<group>"; };
+		6FC1CA8E1CEAB7D300DCDC8E /* ee-library-mobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "ee-library-mobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6FC1CA8F1CEAB7D300DCDC8E /* ee-library-desktop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "ee-library-desktop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FC695871CDF8A0A00BAE327 /* __EEListenerList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = __EEListenerList.cpp; sourceTree = "<group>"; };
 		6FC695881CDF8A0A00BAE327 /* __EEListenerList.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = __EEListenerList.hpp; sourceTree = "<group>"; };
 		6FD294751CE1CBF9009ECBFA /* EENodeV3Loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EENodeV3Loader.cpp; sourceTree = "<group>"; };
@@ -328,8 +328,7 @@
 				1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */,
 				46880B8319C43A87006E1F66 /* Classes */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
-				6C2E7D731BDE0B7D008F5EF3 /* Products */,
-				6F77D7961CE0D618000BA9BE /* ee-library-desktop.a */,
+				6FC1CA921CEAB89C00DCDC8E /* Products */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -391,14 +390,6 @@
 				6C43A7C21BDDDAC300D0597F /* __EEGroupNodeDelegate.hpp */,
 			);
 			name = GroupNode;
-			sourceTree = "<group>";
-		};
-		6C2E7D731BDE0B7D008F5EF3 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				6C2E7D711BDE0B69008F5EF3 /* ee-library-mobile.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		6C3AD4DF1BE49CDB0052E786 /* Jni */ = {
@@ -574,6 +565,15 @@
 			name = dialog;
 			sourceTree = "<group>";
 		};
+		6FC1CA921CEAB89C00DCDC8E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6FC1CA8F1CEAB7D300DCDC8E /* ee-library-desktop.a */,
+				6FC1CA8E1CEAB7D300DCDC8E /* ee-library-mobile.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -665,7 +665,7 @@
 			);
 			name = "ee-library-mobile";
 			productName = "ee-library";
-			productReference = 6C2E7D711BDE0B69008F5EF3 /* ee-library-mobile.a */;
+			productReference = 6FC1CA8E1CEAB7D300DCDC8E /* ee-library-mobile.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		6F79B6111CCA7AA00008EFAC /* ee-library-desktop */ = {
@@ -684,8 +684,8 @@
 			);
 			name = "ee-library-desktop";
 			productName = "ee-library-desktop";
-			productReference = 6F77D7961CE0D618000BA9BE /* ee-library-desktop.a */;
-			productType = "com.apple.product-type.library.dynamic";
+			productReference = 6FC1CA8F1CEAB7D300DCDC8E /* ee-library-desktop.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
@@ -861,6 +861,7 @@
 					"$(inherited)",
 					CC_TARGET_OS_IPHONE,
 				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -874,6 +875,7 @@
 					"$(inherited)",
 					CC_TARGET_OS_IPHONE,
 				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -893,7 +895,6 @@
 					"$(inherited)",
 					"$(SRCROOT)/../cocos2d/external/glfw3/include/mac",
 				);
-				LD_DYLIB_INSTALL_NAME = "";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -911,7 +912,6 @@
 					"$(inherited)",
 					"$(SRCROOT)/../cocos2d/external/glfw3/include/mac",
 				);
-				LD_DYLIB_INSTALL_NAME = "";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -919,6 +919,7 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ADDRESS_SANITIZER_CONTAINER_OVERFLOW = YES;
 				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
@@ -941,10 +942,8 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES_AGGRESSIVE;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_TESTABILITY = YES;
-				EXECUTABLE_EXTENSION = a;
 				EXECUTABLE_PREFIX = "";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -986,7 +985,6 @@
 					"$(SRCROOT)/../cocos2d/external",
 					"$(SRCROOT)/../../boost_1_60_0",
 				);
-				MACH_O_TYPE = staticlib;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -996,6 +994,7 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
@@ -1016,9 +1015,7 @@
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES_AGGRESSIVE;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
-				EXECUTABLE_EXTENSION = a;
 				EXECUTABLE_PREFIX = "";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -1060,7 +1057,6 @@
 					"$(SRCROOT)/../../boost_1_60_0",
 				);
 				LLVM_LTO = YES;
-				MACH_O_TYPE = staticlib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;

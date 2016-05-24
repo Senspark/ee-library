@@ -44,7 +44,6 @@ ButtonEx* ButtonEx::create() {
     auto result = new (std::nothrow) ButtonEx();
     if (result != nullptr && result->init()) {
         result->autorelease();
-        result->setScale9Enabled(true);
     } else {
         CC_SAFE_DELETE(result);
     }
@@ -260,6 +259,9 @@ void ButtonEx::initRenderer() {
     
     container_ = Widget::create();
     container_->ignoreContentAdaptWithSize(false);
+    container_->setSwallowTouches(false);
+    container_->setPropagateTouchEvents(true);
+    container_->setFocusEnabled(false);
     container_->setPositionType(PositionType::PERCENT);
     container_->setPositionPercent(cocos2d::Vec2(0.5f, 0.5f));
     container_->setSizeType(SizeType::PERCENT);

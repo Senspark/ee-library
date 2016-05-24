@@ -41,6 +41,8 @@
 #include "EEUiTextLoader.hpp"
 #include "EEUiWidgetCallback.hpp"
 
+#include "EESkeletonAnimationLoader.hpp"
+
 #include "__EEDataInfo.hpp"
 #include "__EEDataHandler.hpp"
 

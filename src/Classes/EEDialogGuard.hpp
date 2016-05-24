@@ -18,7 +18,7 @@ namespace dialog {
 class Dialog;
     
 struct Guard final {
-    explicit Guard(Dialog* dialog_);
+    explicit Guard(Dialog* dialog);
     
     Dialog* dialog;
     

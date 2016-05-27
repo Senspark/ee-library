@@ -39,6 +39,7 @@
 #include "EEUiLayoutLoader.hpp"
 #include "EEUiButtonLoader.hpp"
 #include "EEUiTextLoader.hpp"
+#include "EEUiCheckBoxLoader.hpp"
 #include "EEUiWidgetCallback.hpp"
 
 #include "EESkeletonAnimationLoader.hpp"

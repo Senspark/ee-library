@@ -106,6 +106,10 @@
 		6FB73D341CE45E5800C718D5 /* EEDialogUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FB73D311CE45E5800C718D5 /* EEDialogUtils.cpp */; };
 		6FB73D351CE45E5800C718D5 /* EEDialogUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FB73D321CE45E5800C718D5 /* EEDialogUtils.hpp */; };
 		6FB73D361CE45E5800C718D5 /* EEDialogUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FB73D321CE45E5800C718D5 /* EEDialogUtils.hpp */; };
+		6FC19AD31CF83F9A0002D68B /* EEUiCheckBoxLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC19AD11CF83F9A0002D68B /* EEUiCheckBoxLoader.cpp */; };
+		6FC19AD41CF83F9A0002D68B /* EEUiCheckBoxLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC19AD11CF83F9A0002D68B /* EEUiCheckBoxLoader.cpp */; };
+		6FC19AD51CF83F9A0002D68B /* EEUiCheckBoxLoader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC19AD21CF83F9A0002D68B /* EEUiCheckBoxLoader.hpp */; };
+		6FC19AD61CF83F9A0002D68B /* EEUiCheckBoxLoader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC19AD21CF83F9A0002D68B /* EEUiCheckBoxLoader.hpp */; };
 		6FC6958B1CDF8A0A00BAE327 /* __EEListenerList.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC695881CDF8A0A00BAE327 /* __EEListenerList.hpp */; };
 		6FC6958C1CDF8A0A00BAE327 /* __EEListenerList.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC695881CDF8A0A00BAE327 /* __EEListenerList.hpp */; };
 		6FCDDC421CD9981800DF8095 /* EEUiWidgetCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C468C2A1CA2F0CA00D16594 /* EEUiWidgetCallback.cpp */; };
@@ -286,6 +290,8 @@
 		6FAC217B1CE3454E000C16CC /* EEDialogGuard.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDialogGuard.hpp; sourceTree = "<group>"; };
 		6FB73D311CE45E5800C718D5 /* EEDialogUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDialogUtils.cpp; sourceTree = "<group>"; };
 		6FB73D321CE45E5800C718D5 /* EEDialogUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDialogUtils.hpp; sourceTree = "<group>"; };
+		6FC19AD11CF83F9A0002D68B /* EEUiCheckBoxLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEUiCheckBoxLoader.cpp; sourceTree = "<group>"; };
+		6FC19AD21CF83F9A0002D68B /* EEUiCheckBoxLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEUiCheckBoxLoader.hpp; sourceTree = "<group>"; };
 		6FC1CA8E1CEAB7D300DCDC8E /* ee-library-mobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "ee-library-mobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FC1CA8F1CEAB7D300DCDC8E /* ee-library-desktop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "ee-library-desktop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FC695871CDF8A0A00BAE327 /* __EEListenerList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = __EEListenerList.cpp; sourceTree = "<group>"; };
@@ -430,6 +436,8 @@
 				6C4A4A561CA153E500E72D89 /* EEUiButtonLoader.hpp */,
 				6C47AAF51CA4EAE100B3E65E /* EEUiTextLoader.cpp */,
 				6C47AAF61CA4EAE100B3E65E /* EEUiTextLoader.hpp */,
+				6FC19AD11CF83F9A0002D68B /* EEUiCheckBoxLoader.cpp */,
+				6FC19AD21CF83F9A0002D68B /* EEUiCheckBoxLoader.hpp */,
 				6FD294751CE1CBF9009ECBFA /* EENodeV3Loader.cpp */,
 				6FD294761CE1CBF9009ECBFA /* EENodeV3Loader.hpp */,
 			);
@@ -611,6 +619,7 @@
 				6FD294791CE1CBF9009ECBFA /* EENodeV3Loader.hpp in Headers */,
 				6F79B6271CCA7FD10008EFAC /* EECocos2dxFwd.hpp in Headers */,
 				6C468C2D1CA2F0CA00D16594 /* EEUiWidgetCallback.hpp in Headers */,
+				6FC19AD51CF83F9A0002D68B /* EEUiCheckBoxLoader.hpp in Headers */,
 				6C42EF461C8547660062C2C6 /* EEEventInfo.hpp in Headers */,
 				6F77D7971CE0D733000BA9BE /* EEFlags.hpp in Headers */,
 				6F39F1581CCBBBD10038796D /* EEButton.hpp in Headers */,
@@ -646,6 +655,7 @@
 				6FD2947A1CE1CBF9009ECBFA /* EENodeV3Loader.hpp in Headers */,
 				6F39F1591CCBBBD10038796D /* EEButton.hpp in Headers */,
 				6F79B6261CCA7FD00008EFAC /* EEBitManipulation.hpp in Headers */,
+				6FC19AD61CF83F9A0002D68B /* EEUiCheckBoxLoader.hpp in Headers */,
 				6F79B6451CCAC0E70008EFAC /* EEEventInfo.hpp in Headers */,
 				6F79B6341CCA8F9A0008EFAC /* EEUiWidgetCallback.hpp in Headers */,
 				6F79B62D1CCA7FE00008EFAC /* EEDynamicValue.hpp in Headers */,
@@ -800,6 +810,7 @@
 				6FAC21761CE33425000C16CC /* EEDialogCommand.cpp in Sources */,
 				6C4A4A571CA153E500E72D89 /* EEUiButtonLoader.cpp in Sources */,
 				6FAC216C1CE30FE0000C16CC /* EEDialog.cpp in Sources */,
+				6FC19AD31CF83F9A0002D68B /* EEUiCheckBoxLoader.cpp in Sources */,
 				6F79B6421CCAA2D90008EFAC /* EEBackButtonListener.cpp in Sources */,
 				6C47FE4A1CA1B7EF00FEF3BC /* EEEventInfo.cpp in Sources */,
 				6F17FAAC1CF29D5500CFCD14 /* EESkeletonAnimationLoader.cpp in Sources */,
@@ -832,6 +843,7 @@
 				6FAC21771CE33425000C16CC /* EEDialogCommand.cpp in Sources */,
 				6F798A801CE03A5D004D247B /* __EEDataInfo.cpp in Sources */,
 				6FAC216B1CE30FE0000C16CC /* EEDialog.cpp in Sources */,
+				6FC19AD41CF83F9A0002D68B /* EEUiCheckBoxLoader.cpp in Sources */,
 				6F79B6371CCA8FA20008EFAC /* EEUiTextLoader.cpp in Sources */,
 				6FA658901CCB5C0B009BC9EB /* EETentBlur1D.cpp in Sources */,
 				6F17FAAD1CF29D5500CFCD14 /* EESkeletonAnimationLoader.cpp in Sources */,

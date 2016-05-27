@@ -7,7 +7,6 @@
 //
 
 #include "EEUiButtonLoader.hpp"
-#include "EEUiWidgetCallback.hpp"
 
 #include <cocos2d.h>
 #include <ui/UIButton.h>

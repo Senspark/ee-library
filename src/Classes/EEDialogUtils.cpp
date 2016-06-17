@@ -17,11 +17,12 @@ Dialog* addHorizontalTransition(Dialog* dialog, float duration, float rate) {
     auto&& winSize = cocos2d::Director::getInstance()->getWinSize();
     
     dialog->addDialogWillShowCallback([&winSize](Dialog* dlg) {
-        dlg->setPosition(cocos2d::Point(cocos2d::Point(-winSize.width / 2,
-                                                       winSize.height / 2)));
+        dlg->setPosition(cocos2d::Point(-winSize.width / 2,
+                                        winSize.height / 2));
     });
     
-    auto move = cocos2d::MoveBy::create(duration, cocos2d::Vec2(winSize.width, 0));
+    auto move = cocos2d::MoveBy::create(duration,
+                                        cocos2d::Vec2(winSize.width, 0));
     auto moveIn = cocos2d::EaseElasticOut::create(move->clone(), rate);
     auto moveOut = cocos2d::EaseElasticIn::create(move->clone(), rate);
     

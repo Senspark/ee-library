@@ -23,6 +23,7 @@
 #include "EECrytography.hpp"
 
 #include "EEButton.hpp"
+#include "EECheckBox.hpp"
 
 #include "EEDialog.hpp"
 #include "EEDialogManager.hpp"

@@ -165,7 +165,7 @@ template<class EnumType>
 constexpr
 ee::detail::enable_if_enum_has_arithmetic_operators<EnumType, EnumType>
 operator++(EnumType& value, int) noexcept {
-    auto result{value};
+    auto result = value;
     ++value;
     return result;
 }
@@ -183,7 +183,7 @@ template<class EnumType>
 constexpr
 ee::detail::enable_if_enum_has_arithmetic_operators<EnumType, EnumType>
 operator--(EnumType& value, int) noexcept {
-    auto result{value};
+    auto result = value;
     --value;
     return result;
 }

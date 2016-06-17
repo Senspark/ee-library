@@ -130,6 +130,16 @@ void ButtonEx::setContentSize(const cocos2d::Size& contentSize) {
     Button::setContentSize(contentSize);
 }
 
+void ButtonEx::setCascadeColorEnabled(bool enabled) {
+    Button::setCascadeColorEnabled(enabled);
+    container_->setCascadeColorEnabled(enabled);
+}
+
+void ButtonEx::setCascadeOpacityEnabled(bool enabled) {
+    Button::setCascadeOpacityEnabled(enabled);
+    container_->setCascadeOpacityEnabled(enabled);
+}
+
 bool ButtonEx::hitTest(const cocos2d::Point& point,
                        const cocos2d::Camera* camera,
                        cocos2d::Vec3* p) const {

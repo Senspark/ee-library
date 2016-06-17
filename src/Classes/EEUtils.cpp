@@ -148,16 +148,20 @@ cocos2d::Image* captureScreenInPoints(float scale) {
     int height = static_cast<int>(size.height);
     
     // Create a renderer.
-    auto renderer = cocos2d::RenderTexture::create(width, height);
-    
-    // Temporarily assign new anchor point and scale
-    // for the current scene.
-    scene->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
-    scene->setScale(scale);
+    auto renderer = cocos2d::RenderTexture::create(width, height,
+                                                   cocos2d::Texture2D::PixelFormat::RGBA8888,
+                                                   GL_DEPTH24_STENCIL8);
     
     // Process rendering.
     renderer->begin();
+    
+    auto additionalTransform = cocos2d::Mat4::IDENTITY;
+    additionalTransform.scale(scale, scale, 1.0f);
+    
+    scene->setAdditionalTransform(&additionalTransform);
     scene->visit();
+    scene->setAdditionalTransform(nullptr);
+    
     renderer->end();
     
     // Force to render immediately.
@@ -166,10 +170,6 @@ cocos2d::Image* captureScreenInPoints(float scale) {
     // Retrieve the image.
     auto image = renderer->newImage();
     image->autorelease();
-        
-    // Reset scale and anchor point.
-    scene->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE);
-    scene->setScale(1.0f);
     
     return image;
 }

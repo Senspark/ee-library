@@ -64,6 +64,14 @@ Dialog* DialogManager::getDialog(std::size_t level) {
 Dialog* DialogManager::getTopDialog() {
     return getDialog(Dialog::TopLevel);
 }
+    
+std::size_t DialogManager::getTopDialogLevel() {
+    auto topDialog = getTopDialog();
+    if (topDialog != nullptr) {
+        return topDialog->getDialogLevel();
+    }
+    return 0;
+}
 
 void DialogManager::updateCurrentScene() {
     auto currentScene = cocos2d::Director::getInstance()->getRunningScene();

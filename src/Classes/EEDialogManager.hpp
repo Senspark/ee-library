@@ -51,6 +51,8 @@ public:
     /// @return @c nullptr if there is not any dialog in the current scene.
     Dialog* getTopDialog();
     
+    std::size_t getTopDialogLevel();
+    
     /// Updates the whole dialog graph in the current scene.
     void updateCurrentScene();
     

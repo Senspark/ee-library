@@ -110,6 +110,10 @@
 		6FC19AD41CF83F9A0002D68B /* EEUiCheckBoxLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC19AD11CF83F9A0002D68B /* EEUiCheckBoxLoader.cpp */; };
 		6FC19AD51CF83F9A0002D68B /* EEUiCheckBoxLoader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC19AD21CF83F9A0002D68B /* EEUiCheckBoxLoader.hpp */; };
 		6FC19AD61CF83F9A0002D68B /* EEUiCheckBoxLoader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC19AD21CF83F9A0002D68B /* EEUiCheckBoxLoader.hpp */; };
+		6FC19ADB1CF84A470002D68B /* EECheckBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A7A81BDDDAC300D0597F /* EECheckBox.cpp */; };
+		6FC19ADC1CF84A470002D68B /* EECheckBox.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C43A7A91BDDDAC300D0597F /* EECheckBox.hpp */; };
+		6FC19ADD1CF84A470002D68B /* EECheckBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A7A81BDDDAC300D0597F /* EECheckBox.cpp */; };
+		6FC19ADE1CF84A470002D68B /* EECheckBox.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C43A7A91BDDDAC300D0597F /* EECheckBox.hpp */; };
 		6FC6958B1CDF8A0A00BAE327 /* __EEListenerList.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC695881CDF8A0A00BAE327 /* __EEListenerList.hpp */; };
 		6FC6958C1CDF8A0A00BAE327 /* __EEListenerList.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC695881CDF8A0A00BAE327 /* __EEListenerList.hpp */; };
 		6FCDDC421CD9981800DF8095 /* EEUiWidgetCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C468C2A1CA2F0CA00D16594 /* EEUiWidgetCallback.cpp */; };
@@ -228,8 +232,8 @@
 		6C404B491CBFAEE4009A4251 /* __EEAsyncLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = __EEAsyncLoader.cpp; sourceTree = "<group>"; };
 		6C404B4A1CBFAEE4009A4251 /* __EEAsyncLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = __EEAsyncLoader.hpp; sourceTree = "<group>"; };
 		6C43A7871BDDCA4600D0597F /* EEHeader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EEHeader.hpp; sourceTree = "<group>"; };
-		6C43A7A81BDDDAC300D0597F /* __EECheckBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = __EECheckBox.cpp; sourceTree = "<group>"; };
-		6C43A7A91BDDDAC300D0597F /* __EECheckBox.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = __EECheckBox.hpp; sourceTree = "<group>"; };
+		6C43A7A81BDDDAC300D0597F /* EECheckBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EECheckBox.cpp; sourceTree = "<group>"; };
+		6C43A7A91BDDDAC300D0597F /* EECheckBox.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EECheckBox.hpp; sourceTree = "<group>"; };
 		6C43A7AF1BDDDAC300D0597F /* __EEData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = __EEData.cpp; sourceTree = "<group>"; };
 		6C43A7B01BDDDAC300D0597F /* __EEData.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = __EEData.hpp; sourceTree = "<group>"; };
 		6C43A7B11BDDDAC300D0597F /* EEDialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDialog.cpp; sourceTree = "<group>"; };
@@ -498,8 +502,6 @@
 				6C43A7C71BDDDAC300D0597F /* __EEJniString.hpp */,
 				6C3AD4E81BE4A4A10052E786 /* __EEJniUtils.cpp */,
 				6C3AD4E91BE4A4A10052E786 /* __EEJniUtils.hpp */,
-				6C43A7A81BDDDAC300D0597F /* __EECheckBox.cpp */,
-				6C43A7A91BDDDAC300D0597F /* __EECheckBox.hpp */,
 				6C43A7AF1BDDDAC300D0597F /* __EEData.cpp */,
 				6C43A7B01BDDDAC300D0597F /* __EEData.hpp */,
 				6C43A7BC1BDDDAC300D0597F /* __EEGesture-Impl.hpp */,
@@ -566,6 +568,8 @@
 		6F7D5B591CD665010069E541 /* control */ = {
 			isa = PBXGroup;
 			children = (
+				6C43A7A81BDDDAC300D0597F /* EECheckBox.cpp */,
+				6C43A7A91BDDDAC300D0597F /* EECheckBox.hpp */,
 				6F39F1541CCBBBD10038796D /* EEButton.cpp */,
 				6F39F1551CCBBBD10038796D /* EEButton.hpp */,
 			);
@@ -623,6 +627,7 @@
 				6C42EF461C8547660062C2C6 /* EEEventInfo.hpp in Headers */,
 				6F77D7971CE0D733000BA9BE /* EEFlags.hpp in Headers */,
 				6F39F1581CCBBBD10038796D /* EEButton.hpp in Headers */,
+				6FC19ADC1CF84A470002D68B /* EECheckBox.hpp in Headers */,
 				6C47AAF81CA4EAE100B3E65E /* EEUiTextLoader.hpp in Headers */,
 				6F79B6401CCAA2D70008EFAC /* EEBackButtonListener.hpp in Headers */,
 				6C42EF451C85449F0062C2C6 /* EEDynamicValue.hpp in Headers */,
@@ -659,6 +664,7 @@
 				6F79B6451CCAC0E70008EFAC /* EEEventInfo.hpp in Headers */,
 				6F79B6341CCA8F9A0008EFAC /* EEUiWidgetCallback.hpp in Headers */,
 				6F79B62D1CCA7FE00008EFAC /* EEDynamicValue.hpp in Headers */,
+				6FC19ADE1CF84A470002D68B /* EECheckBox.hpp in Headers */,
 				6F79B6291CCA7FD50008EFAC /* EEForward.hpp in Headers */,
 				6F79B6381CCA8FA40008EFAC /* EEUiTextLoader.hpp in Headers */,
 				6F77D7981CE0D734000BA9BE /* EEFlags.hpp in Headers */,
@@ -798,6 +804,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FC19ADB1CF84A470002D68B /* EECheckBox.cpp in Sources */,
 				6C468C2C1CA2F0CA00D16594 /* EEUiWidgetCallback.cpp in Sources */,
 				6FB73D331CE45E5800C718D5 /* EEDialogUtils.cpp in Sources */,
 				6FA658951CCB5C0C009BC9EB /* EETentBlur1D.cpp in Sources */,
@@ -831,6 +838,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FC19ADD1CF84A470002D68B /* EECheckBox.cpp in Sources */,
 				6FA658981CCB700B009BC9EB /* EEUtils.cpp in Sources */,
 				6FB73D341CE45E5800C718D5 /* EEDialogUtils.cpp in Sources */,
 				6F798A811CE03A5F004D247B /* __EEDataHandler.cpp in Sources */,

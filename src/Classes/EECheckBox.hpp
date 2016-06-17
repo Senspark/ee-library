@@ -6,63 +6,68 @@
 //
 //
 
-#ifndef EE_LIBRARY_CHECK_BOX_H
-#define EE_LIBRARY_CHECK_BOX_H
-
-#include "EEMacro.hpp"
+#ifndef EE_LIBRARY_CHECK_BOX_HPP_
+#define EE_LIBRARY_CHECK_BOX_HPP_
 
 #include <functional>
 #include <vector>
 
-namespace_ee_begin
+#include "EEMacro.hpp"
+
+NS_EE_BEGIN
 class CheckBox;
 
-namespace_detail_begin
+NS_DETAIL_BEGIN
 class CheckBoxBase {
 public:
-    virtual ~CheckBoxBase();
+    using StateChangedCallback = std::function<void(bool checked)>;
     
-    bool isChecked() const;
+    virtual ~CheckBoxBase() = default;
+    
+    bool isChecked() const noexcept;
+    
     virtual void setChecked(bool checked);
     
     void uncheck();
     void check();
 
-    void setOnStateChangedCallback(const std::function<void(bool)>& callback);
+    void setOnStateChangedCallback(const StateChangedCallback& callback);
     
 protected:
     virtual void onStateChanged(bool checked) = 0;
     
 private:
-    bool _isChecked;
-    std::function<void(bool)> _onStateChangedCallback;
+    bool isChecked_;
+    
+    StateChangedCallback onStateChangedCallback_;
 };
-namespace_detail_end
+NS_DETAIL_END
 
 class CheckAllBox : public detail::CheckBoxBase {
 public:
     void addCheckBox(CheckBox* checkBox);
     
-    const std::vector<CheckBox*>& getCheckBoxList() const;
-    void clearCheckBoxList();
+    void setCheckBox(const std::vector<CheckBox>& checkBoxes);
     
-    // Test whether all sub checkboxes are checked.
+    const std::vector<CheckBox*>& getCheckBoxes() const;
+    
+    void clearAllCheckBoxes();
+    
     bool all() const;
     
-    // Test whether any sub checkbox is checked.
     bool any() const;
     
-    // Test whether no sub checkbox is checked.
     bool none() const;
     
     virtual void setChecked(bool checked) override;
     
-private:
+protected:
     friend class CheckBox;
     
-    void updateState();
+    virtual void updateState();
     
-    std::vector<CheckBox*> _checkBoxList;
+private:
+    std::vector<CheckBox*> checkBoxes_;
 };
 
 class CheckBox : public detail::CheckBoxBase {
@@ -72,8 +77,8 @@ public:
 private:
     friend class CheckAllBox;
     
-    CheckAllBox* _checkAllBox;
+    CheckAllBox* checkAllBox_;
 };
-namespace_ee_end
+NS_EE_END
 
-#endif /* EE_LIBRARY_CHECK_BOX_H */
+#endif /* EE_LIBRARY_CHECK_BOX_HPP_ */

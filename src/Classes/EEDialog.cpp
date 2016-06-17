@@ -49,6 +49,8 @@ void Dialog::show(std::size_t level) {
     container->setContentSize(_director->getWinSize());
     container->addChild(this);
     
+    dialogLevel_ = level;
+    
     DialogManager::getInstance()->pushDialog(this, level);
 }
 

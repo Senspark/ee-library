@@ -138,4 +138,8 @@ class CCBReader;
 class NodeLoader;
 } // namespace cocosbuilder.
 
+namespace spine {
+class SkeletonAnimation;
+} // namespace spine
+
 #endif /* EE_LIBRARY_COCOS2DX_FWD_HPP_ */

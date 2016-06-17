@@ -113,6 +113,10 @@ public:
     /// @see @c cocos2d::ui::Button::setContentSize.
     virtual void setContentSize(const cocos2d::Size& contentSize) override;
     
+    virtual void setCascadeColorEnabled(bool enabled) override;
+    
+    virtual void setCascadeOpacityEnabled(bool enabled) override;
+    
     /// @see @c cocos2d::ui::Widget::hitTest.
     virtual bool hitTest(const cocos2d::Point& point,
                          const cocos2d::Camera* camera,

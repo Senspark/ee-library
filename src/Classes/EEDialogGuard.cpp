@@ -12,8 +12,6 @@
 NS_EE_BEGIN
 namespace dialog {
 Guard::Guard(Dialog* dialog_)
-: dialog(dialog_)
-, guard_(dialog->getContainer()) {
-}
+    : dialog(dialog_), guard_(dialog->getContainer()) {}
 } // namespace dialog
 NS_EE_END

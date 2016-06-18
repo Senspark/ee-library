@@ -21,10 +21,10 @@ bool Dialog::init() {
     if (Widget::init() == false) {
         return false;
     }
-    
+
     setActive(false);
     addClickEventListener(CC_CALLBACK_0(Dialog::onClickedOutside, this));
-    
+
     return true;
 }
 
@@ -35,7 +35,7 @@ void Dialog::onEnter() {
 void Dialog::onExit() {
     Widget::onExit();
 }
-    
+
 const cocos2d::Node* Dialog::getContainer() const {
     return getParent();
 }
@@ -48,16 +48,16 @@ void Dialog::show(std::size_t level) {
     auto container = cocos2d::Node::create();
     container->setContentSize(_director->getWinSize());
     container->addChild(this);
-    
+
     dialogLevel_ = level;
-    
+
     DialogManager::getInstance()->pushDialog(this, level);
 }
 
 void Dialog::hide() {
     DialogManager::getInstance()->popDialog(this);
 }
-    
+
 Dialog* Dialog::addDialogWillShowCallback(const CallbackType& callback,
                                           int priority) {
     onDialogWillShowCallbacks_.emplace_back(callback, priority);
@@ -81,26 +81,25 @@ Dialog* Dialog::addDialogDidHideCallback(const CallbackType& callback,
     onDialogDidHideCallbacks_.emplace_back(callback, priority);
     return this;
 }
-    
+
 std::size_t Dialog::getDialogLevel() const noexcept {
     return dialogLevel_;
 }
-    
+
 void Dialog::setActive(bool active) {
     isActive_ = active;
 }
-    
+
 bool Dialog::isActive() const noexcept {
     return isActive_;
 }
 
-bool Dialog::hitTest(const cocos2d::Point& pt,
-                     const cocos2d::Camera* camera,
+bool Dialog::hitTest(const cocos2d::Point& pt, const cocos2d::Camera* camera,
                      cocos2d::Vec3* p) const {
     // Test outside.
     return (Widget::hitTest(pt, camera, p) == false);
 }
-    
+
 void Dialog::onDialogWillShow() {
     invokeCallbacks(onDialogWillShowCallbacks_);
 }
@@ -116,12 +115,12 @@ void Dialog::onDialogWillHide() {
 void Dialog::onDialogDidHide() {
     invokeCallbacks(onDialogDidHideCallbacks_);
 }
-    
+
 void Dialog::invokeCallbacks(std::vector<CallbackInfo>& callbacks) {
     std::stable_sort(callbacks.begin(), callbacks.end(), Compare2nd<>());
-    
+
     RefGuard guard(this);
-    
+
     for (auto&& info : callbacks) {
         info.first(this);
     }
@@ -132,34 +131,40 @@ void Dialog::onClickedOutside() {
         hide();
     }
 }
-    
-Dialog* Dialog::setShowingTransitions(const std::vector<TransitionRef>& transitions) {
+
+Dialog*
+Dialog::setShowingTransitions(const std::vector<TransitionRef>& transitions) {
     showingTransitions_ = transitions;
     return this;
 }
 
-Dialog* Dialog::setHidingTransitions(const std::vector<TransitionRef>& transitions) {
+Dialog*
+Dialog::setHidingTransitions(const std::vector<TransitionRef>& transitions) {
     hidingTransitions_ = transitions;
     return this;
 }
 
-Dialog* Dialog::addShowingTransitions(const std::vector<TransitionRef>& transitions) {
-    showingTransitions_.insert(showingTransitions_.cend(),
-                               transitions.cbegin(), transitions.cend());
+Dialog*
+Dialog::addShowingTransitions(const std::vector<TransitionRef>& transitions) {
+    showingTransitions_.insert(showingTransitions_.cend(), transitions.cbegin(),
+                               transitions.cend());
     return this;
 }
 
-Dialog* Dialog::addHidingTransitions(const std::vector<TransitionRef>& transitions) {
-    hidingTransitions_.insert(hidingTransitions_.cend(),
-                              transitions.cbegin(), transitions.cend());
+Dialog*
+Dialog::addHidingTransitions(const std::vector<TransitionRef>& transitions) {
+    hidingTransitions_.insert(hidingTransitions_.cend(), transitions.cbegin(),
+                              transitions.cend());
     return this;
 }
 
-auto Dialog::getShowingTransitions() const -> const std::vector<TransitionRef>& {
+auto Dialog::getShowingTransitions() const
+    -> const std::vector<TransitionRef> & {
     return showingTransitions_;
 }
 
-auto Dialog::getHidingTransitions() const -> const std::vector<TransitionRef>&  {
+auto Dialog::getHidingTransitions() const
+    -> const std::vector<TransitionRef> & {
     return hidingTransitions_;
 }
 } // namespace dialog

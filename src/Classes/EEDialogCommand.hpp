@@ -27,14 +27,12 @@ enum class CommandType {
 ///
 /// The dialog and its container will be retained.
 struct Command final {
-    explicit Command(CommandType type,
-                     Dialog* dialog,
-                     std::size_t level);
-    
+    explicit Command(CommandType type, Dialog* dialog, std::size_t level);
+
     CommandType type;
     Dialog* dialog;
     std::size_t level;
-    
+
 private:
     Guard guard_;
 };

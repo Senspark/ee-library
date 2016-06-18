@@ -16,12 +16,12 @@
 NS_EE_BEGIN
 namespace dialog {
 class Dialog;
-    
+
 struct Guard final {
     explicit Guard(Dialog* dialog);
-    
+
     Dialog* dialog;
-    
+
 private:
     cocos2d::RefPtr<cocos2d::Node> guard_;
 };

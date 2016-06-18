@@ -24,22 +24,21 @@ NS_EE_BEGIN
 class UiWidgetLoader : public NodeV3Loader {
 public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(UiWidgetLoader, loader);
-    
+
 protected:
     virtual cocos2d::Node* createNode(cocos2d::Node* parent,
                                       cocosbuilder::CCBReader* reader) override;
-    
-    virtual void onHandlePropTypeBlock(cocos2d::Node* node,
-                                       cocos2d::Node* parent,
-                                       const char* propertyName,
-                                       cocosbuilder::BlockData* blockData,
-                                       cocosbuilder::CCBReader* ccbReader) override;
-    
-    virtual void onHandlePropTypeCheck(cocos2d::Node* node,
-                                       cocos2d::Node* parent,
-                                       const char* propertyName,
-                                       bool check,
-                                       cocosbuilder::CCBReader* reader) override;
+
+    virtual void
+    onHandlePropTypeBlock(cocos2d::Node* node, cocos2d::Node* parent,
+                          const char* propertyName,
+                          cocosbuilder::BlockData* blockData,
+                          cocosbuilder::CCBReader* ccbReader) override;
+
+    virtual void
+    onHandlePropTypeCheck(cocos2d::Node* node, cocos2d::Node* parent,
+                          const char* propertyName, bool check,
+                          cocosbuilder::CCBReader* reader) override;
 };
 NS_EE_END
 

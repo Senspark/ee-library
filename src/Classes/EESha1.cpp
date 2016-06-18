@@ -62,41 +62,41 @@ void innerHash(std::uint32_t* result, std::uint32_t* w) {
 
     std::uint_fast32_t round = 0;
 
-    #define sha1macro(func, val) { \
-        const std::uint_fast32_t t = rol(a, 5) + (func) + e + val + w[round]; \
-		e = d; \
-		d = c; \
-		c = rol(b, 30); \
-		b = a; \
-		a = t; \
-	}
+#define sha1macro(func, val)                                                   \
+    {                                                                          \
+        const std::uint_fast32_t t = rol(a, 5) + (func) + e + val + w[round];  \
+        e = d;                                                                 \
+        d = c;                                                                 \
+        c = rol(b, 30);                                                        \
+        b = a;                                                                 \
+        a = t;                                                                 \
+    }
 
     while (round < 16) {
-        sha1macro((b & c) | (~b & d), 0x5a827999)
-        ++round;
+        sha1macro((b & c) | (~b & d), 0x5a827999)++ round;
     }
     while (round < 20) {
-        w[round] = rol((w[round - 3] ^ w[round - 8] ^ w[round - 14] ^ w[round - 16]), 1);
-        sha1macro((b & c) | (~b & d), 0x5a827999)
-        ++round;
+        w[round] = rol(
+            (w[round - 3] ^ w[round - 8] ^ w[round - 14] ^ w[round - 16]), 1);
+        sha1macro((b & c) | (~b & d), 0x5a827999)++ round;
     }
     while (round < 40) {
-        w[round] = rol((w[round - 3] ^ w[round - 8] ^ w[round - 14] ^ w[round - 16]), 1);
-        sha1macro(b ^ c ^ d, 0x6ed9eba1)
-        ++round;
+        w[round] = rol(
+            (w[round - 3] ^ w[round - 8] ^ w[round - 14] ^ w[round - 16]), 1);
+        sha1macro(b ^ c ^ d, 0x6ed9eba1)++ round;
     }
     while (round < 60) {
-        w[round] = rol((w[round - 3] ^ w[round - 8] ^ w[round - 14] ^ w[round - 16]), 1);
-        sha1macro((b & c) | (b & d) | (c & d), 0x8f1bbcdc)
-        ++round;
+        w[round] = rol(
+            (w[round - 3] ^ w[round - 8] ^ w[round - 14] ^ w[round - 16]), 1);
+        sha1macro((b & c) | (b & d) | (c & d), 0x8f1bbcdc)++ round;
     }
     while (round < 80) {
-        w[round] = rol((w[round - 3] ^ w[round - 8] ^ w[round - 14] ^ w[round - 16]), 1);
-        sha1macro(b ^ c ^ d, 0xca62c1d6)
-        ++round;
+        w[round] = rol(
+            (w[round - 3] ^ w[round - 8] ^ w[round - 14] ^ w[round - 16]), 1);
+        sha1macro(b ^ c ^ d, 0xca62c1d6)++ round;
     }
 
-    #undef sha1macro
+#undef sha1macro
 
     result[0] += a;
     result[1] += b;
@@ -122,13 +122,8 @@ void convertByteToHexString(const unsigned char* hash, char* hexString);
 
 void calc(const void* src, const std::size_t byteLength, unsigned char* hash) {
     // Init the result array.
-    std::uint32_t result[5] = {
-        0x67452301,
-        0xefcdab89,
-        0x98badcfe,
-        0x10325476,
-        0xc3d2e1f0
-    };
+    std::uint32_t result[5] = {0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476,
+                               0xc3d2e1f0};
 
     // Cast the void src pointer to be the byte array we can work with.
     auto sarray = static_cast<const unsigned char*>(src);
@@ -145,12 +140,15 @@ void calc(const void* src, const std::size_t byteLength, unsigned char* hash) {
         endCurrentBlock = currentBlock + 64;
 
         // Init the round buffer with the 64 byte block data.
-        for (int roundPos = 0; currentBlock < endCurrentBlock; currentBlock += 4) {
-            // This line will swap endian on big endian and keep endian on little endian.
-            w[roundPos++] = static_cast<std::uint32_t>(sarray[currentBlock + 3])
-                         | (static_cast<std::uint32_t>(sarray[currentBlock + 2]) << 8)
-                         | (static_cast<std::uint32_t>(sarray[currentBlock + 1]) << 16)
-                         | (static_cast<std::uint32_t>(sarray[currentBlock]) << 24);
+        for (int roundPos = 0; currentBlock < endCurrentBlock;
+             currentBlock += 4) {
+            // This line will swap endian on big endian and keep endian on
+            // little endian.
+            w[roundPos++] =
+                static_cast<std::uint32_t>(sarray[currentBlock + 3]) |
+                (static_cast<std::uint32_t>(sarray[currentBlock + 2]) << 8) |
+                (static_cast<std::uint32_t>(sarray[currentBlock + 1]) << 16) |
+                (static_cast<std::uint32_t>(sarray[currentBlock]) << 24);
         }
         innerHash(result, w);
     }
@@ -160,9 +158,12 @@ void calc(const void* src, const std::size_t byteLength, unsigned char* hash) {
     clearWBuffert(w);
     std::size_t lastBlockBytes = 0;
     for (; lastBlockBytes < endCurrentBlock; ++lastBlockBytes) {
-        w[lastBlockBytes >> 2] |= static_cast<std::uint32_t>(sarray[lastBlockBytes + currentBlock]) << ((3 - (lastBlockBytes & 3)) << 3);
+        w[lastBlockBytes >> 2] |=
+            static_cast<std::uint32_t>(sarray[lastBlockBytes + currentBlock])
+            << ((3 - (lastBlockBytes & 3)) << 3);
     }
-    w[lastBlockBytes >> 2] |= static_cast<std::uint32_t>(0x80 << ((3 - (lastBlockBytes & 3)) << 3));
+    w[lastBlockBytes >> 2] |=
+        static_cast<std::uint32_t>(0x80 << ((3 - (lastBlockBytes & 3)) << 3));
     if (endCurrentBlock >= 56) {
         innerHash(result, w);
         clearWBuffert(w);
@@ -170,9 +171,11 @@ void calc(const void* src, const std::size_t byteLength, unsigned char* hash) {
     w[15] = static_cast<std::uint32_t>(byteLength << 3);
     innerHash(result, w);
 
-    // Store hash in result pointer, and make sure we get in in the correct order on both endian models.
+    // Store hash in result pointer, and make sure we get in in the correct
+    // order on both endian models.
     for (std::uint_fast32_t hashByte = 20; ~(--hashByte);) {
-        hash[hashByte] = (result[hashByte >> 2] >> (((3 - hashByte) & 0x3) << 3)) & 0xff;
+        hash[hashByte] =
+            (result[hashByte >> 2] >> (((3 - hashByte) & 0x3) << 3)) & 0xff;
     }
 }
 

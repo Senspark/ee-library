@@ -10,12 +10,12 @@
 
 NS_EE_BEGIN
 namespace property {
-constexpr const char* local_z_order_overridden  = "localZOrderOverridden";
-constexpr const char* local_z_order             = "localZOrder";
-constexpr const char* color                     = "color";
-constexpr const char* opacity                   = "opacity";
-constexpr const char* cascade_color_enabled     = "cascadeColorEnabled";
-constexpr const char* cascade_opacity_enabled   = "cascadeOpacityEnabled";
+constexpr const char* local_z_order_overridden = "localZOrderOverridden";
+constexpr const char* local_z_order = "localZOrder";
+constexpr const char* color = "color";
+constexpr const char* opacity = "opacity";
+constexpr const char* cascade_color_enabled = "cascadeColorEnabled";
+constexpr const char* cascade_opacity_enabled = "cascadeOpacityEnabled";
 } // namespace property.
 
 cocos2d::Node* NodeV3Loader::createNode(cocos2d::Node* parent,
@@ -25,8 +25,7 @@ cocos2d::Node* NodeV3Loader::createNode(cocos2d::Node* parent,
 
 void NodeV3Loader::onHandlePropTypeCheck(cocos2d::Node* node,
                                          cocos2d::Node* parent,
-                                         const char* propertyName,
-                                         bool check,
+                                         const char* propertyName, bool check,
                                          cocosbuilder::CCBReader* reader) {
     std::string propName(propertyName);
     if (propName == property::local_z_order_overridden) {
@@ -39,8 +38,8 @@ void NodeV3Loader::onHandlePropTypeCheck(cocos2d::Node* node,
     if (propName == property::cascade_opacity_enabled) {
         return node->setCascadeOpacityEnabled(check);
     }
-    NodeLoader::onHandlePropTypeCheck(node, parent, propertyName,
-                                      check, reader);
+    NodeLoader::onHandlePropTypeCheck(node, parent, propertyName, check,
+                                      reader);
 }
 
 void NodeV3Loader::onHandlePropTypeColor3(cocos2d::Node* node,
@@ -52,8 +51,8 @@ void NodeV3Loader::onHandlePropTypeColor3(cocos2d::Node* node,
     if (propName == property::color) {
         return node->setColor(color3B);
     }
-    NodeLoader::onHandlePropTypeColor3(node, parent, propertyName,
-                                       color3B, reader);
+    NodeLoader::onHandlePropTypeColor3(node, parent, propertyName, color3B,
+                                       reader);
 }
 
 void NodeV3Loader::onHandlePropTypeByte(cocos2d::Node* node,
@@ -65,8 +64,7 @@ void NodeV3Loader::onHandlePropTypeByte(cocos2d::Node* node,
     if (propName == property::opacity) {
         return node->setOpacity(byte);
     }
-    NodeLoader::onHandlePropTypeByte(node, parent, propertyName,
-                                     byte, reader);
+    NodeLoader::onHandlePropTypeByte(node, parent, propertyName, byte, reader);
 }
 
 void NodeV3Loader::onHandlePropTypeInteger(cocos2d::Node* node,
@@ -81,7 +79,7 @@ void NodeV3Loader::onHandlePropTypeInteger(cocos2d::Node* node,
         }
         return;
     }
-    NodeLoader::onHandlePropTypeInteger(node, parent, propertyName,
-                                        integer, reader);
+    NodeLoader::onHandlePropTypeInteger(node, parent, propertyName, integer,
+                                        reader);
 }
 NS_EE_END

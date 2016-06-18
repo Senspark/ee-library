@@ -12,25 +12,25 @@
 
 NS_EE_BEGIN
 namespace property {
-constexpr const char* font_name                     = "fontName";
-constexpr const char* font_size                     = "fontSize";
-constexpr const char* text_color                    = "textColor";
-constexpr const char* text_area_size                = "textAreaSize";
-constexpr const char* text_horizontal_alignment     = "textHorizontalAlignment";
-constexpr const char* text_vertical_alignment       = "textVerticalAlignment";
-constexpr const char* touch_scale_change_enabled    = "touchScaleChangeEnabled";
-constexpr const char* string                        = "string";
+constexpr const char* font_name = "fontName";
+constexpr const char* font_size = "fontSize";
+constexpr const char* text_color = "textColor";
+constexpr const char* text_area_size = "textAreaSize";
+constexpr const char* text_horizontal_alignment = "textHorizontalAlignment";
+constexpr const char* text_vertical_alignment = "textVerticalAlignment";
+constexpr const char* touch_scale_change_enabled = "touchScaleChangeEnabled";
+constexpr const char* string = "string";
 
-constexpr const char* shadow_enabled                = "shadowEnabled";
-constexpr const char* shadow_opacity                = "shadowOpacity";
-constexpr const char* shadow_color                  = "shadowColor";
-constexpr const char* shadow_offset                 = "shadowOffset";
-constexpr const char* shadow_blur_radius            = "shadowBlurRadius";
+constexpr const char* shadow_enabled = "shadowEnabled";
+constexpr const char* shadow_opacity = "shadowOpacity";
+constexpr const char* shadow_color = "shadowColor";
+constexpr const char* shadow_offset = "shadowOffset";
+constexpr const char* shadow_blur_radius = "shadowBlurRadius";
 
-constexpr const char* outline_enabled               = "outlineEnabled";
-constexpr const char* outline_opacity               = "outlineOpacity";
-constexpr const char* outline_color                 = "outlineColor";
-constexpr const char* outline_size                  = "outlineSize";
+constexpr const char* outline_enabled = "outlineEnabled";
+constexpr const char* outline_opacity = "outlineOpacity";
+constexpr const char* outline_color = "outlineColor";
+constexpr const char* outline_size = "outlineSize";
 } // namespace property.
 
 cocos2d::Node* UiTextLoader::createNode(cocos2d::Node* parent,
@@ -48,14 +48,13 @@ void UiTextLoader::onHandlePropTypePoint(cocos2d::Node* node,
         shadowOffset_ = point;
         return;
     }
-    UiWidgetLoader::onHandlePropTypePoint(node, parent, propertyName,
-                                          point, reader);
+    UiWidgetLoader::onHandlePropTypePoint(node, parent, propertyName, point,
+                                          reader);
 }
 
 void UiTextLoader::onHandlePropTypeCheck(cocos2d::Node* node,
                                          cocos2d::Node* parent,
-                                         const char* propertyName,
-                                         bool check,
+                                         const char* propertyName, bool check,
                                          cocosbuilder::CCBReader* reader) {
     auto text = dynamic_cast<cocos2d::ui::Text*>(node);
     std::string propName(propertyName);
@@ -70,8 +69,8 @@ void UiTextLoader::onHandlePropTypeCheck(cocos2d::Node* node,
         outlineEnabled_ = check;
         return;
     }
-    UiWidgetLoader::onHandlePropTypeCheck(node, parent, propertyName,
-                                          check, reader);
+    UiWidgetLoader::onHandlePropTypeCheck(node, parent, propertyName, check,
+                                          reader);
 }
 
 void UiTextLoader::onHandlePropTypeColor3(cocos2d::Node* node,
@@ -92,8 +91,8 @@ void UiTextLoader::onHandlePropTypeColor3(cocos2d::Node* node,
         outlineColor_ = color3B;
         return;
     }
-    UiWidgetLoader::onHandlePropTypeColor3(node, parent, propertyName,
-                                           color3B, reader);
+    UiWidgetLoader::onHandlePropTypeColor3(node, parent, propertyName, color3B,
+                                           reader);
 }
 
 void UiTextLoader::onHandlePropTypeByte(cocos2d::Node* node,
@@ -110,22 +109,22 @@ void UiTextLoader::onHandlePropTypeByte(cocos2d::Node* node,
         outlineOpacity_ = byte;
         return;
     }
-    UiWidgetLoader::onHandlePropTypeByte(node, parent, propertyName,
-                                         byte, reader);
+    UiWidgetLoader::onHandlePropTypeByte(node, parent, propertyName, byte,
+                                         reader);
 }
 
 void UiTextLoader::onHandlePropTypeFontTTF(cocos2d::Node* node,
                                            cocos2d::Node* parent,
                                            const char* propertyName,
-                                           const char * fontTTF,
+                                           const char* fontTTF,
                                            cocosbuilder::CCBReader* reader) {
     auto text = dynamic_cast<cocos2d::ui::Text*>(node);
     std::string propName(propertyName);
     if (propName == property::font_name) {
         return text->setFontName(fontTTF);
     }
-    UiWidgetLoader::onHandlePropTypeFontTTF(node, parent, propertyName,
-                                            fontTTF, reader);
+    UiWidgetLoader::onHandlePropTypeFontTTF(node, parent, propertyName, fontTTF,
+                                            reader);
 }
 
 void UiTextLoader::onHandlePropTypeText(cocos2d::Node* node,
@@ -138,8 +137,8 @@ void UiTextLoader::onHandlePropTypeText(cocos2d::Node* node,
     if (propName == property::string) {
         return uiText->setString(text);
     }
-    UiWidgetLoader::onHandlePropTypeText(node, parent, propertyName,
-                                         text, reader);
+    UiWidgetLoader::onHandlePropTypeText(node, parent, propertyName, text,
+                                         reader);
 }
 
 void UiTextLoader::onHandlePropTypeFloatScale(cocos2d::Node* node,
@@ -181,15 +180,13 @@ void UiTextLoader::onHandlePropTypeInteger(cocos2d::Node* node,
         }
         return;
     }
-    UiWidgetLoader::onHandlePropTypeInteger(node, parent, propertyName,
-                                            integer, reader);
+    UiWidgetLoader::onHandlePropTypeInteger(node, parent, propertyName, integer,
+                                            reader);
 }
 
-void UiTextLoader::onHandlePropTypeIntegerLabeled(cocos2d::Node* node,
-                                                  cocos2d::Node* parent,
-                                                  const char* propertyName,
-                                                  int integerLabeled,
-                                                  cocosbuilder::CCBReader* reader) {
+void UiTextLoader::onHandlePropTypeIntegerLabeled(
+    cocos2d::Node* node, cocos2d::Node* parent, const char* propertyName,
+    int integerLabeled, cocosbuilder::CCBReader* reader) {
     auto text = dynamic_cast<cocos2d::ui::Text*>(node);
     std::string propName(propertyName);
     if (propName == property::text_horizontal_alignment) {
@@ -214,7 +211,7 @@ void UiTextLoader::onHandlePropTypeSize(cocos2d::Node* node,
     if (propName == property::text_area_size) {
         return text->setTextAreaSize(size);
     }
-    UiWidgetLoader::onHandlePropTypeSize(node, parent, propertyName,
-                                         size, reader);
+    UiWidgetLoader::onHandlePropTypeSize(node, parent, propertyName, size,
+                                         reader);
 }
 NS_EE_END

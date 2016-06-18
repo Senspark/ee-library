@@ -16,12 +16,12 @@
 NS_EE_BEGIN
 NS_DETAIL_BEGIN
 /// Variadic arguments (custom) event listener.
-template<class... Args>
+template <class... Args>
 class EventListener final : public cocos2d::EventListener {
 public:
     using EventType = Event<Args...>;
     using CallbackType = std::function<void(EventType*)>;
-    
+
     /// Creates an event listener with name and callback.
     static EventListener* create(const std::string& eventName,
                                  const CallbackType& callback) {
@@ -34,16 +34,16 @@ public:
         }
         return result;
     }
-     
+
     virtual bool checkAvailable() override {
         return cocos2d::EventListener::checkAvailable() && onCustomEvent_;
     }
-    
+
     virtual EventListener* clone() override {
         return create(_listenerID, onCustomEvent_);
     }
-    
-private:    
+
+private:
     bool init(const ListenerID& listenerId, const CallbackType& callback) {
         onCustomEvent_ = callback;
         auto listener = [this](cocos2d::Event* event) {
@@ -53,7 +53,7 @@ private:
         };
         return cocos2d::EventListener::init(Type::CUSTOM, listenerId, listener);
     }
-    
+
     CallbackType onCustomEvent_;
 };
 NS_DETAIL_END

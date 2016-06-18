@@ -16,24 +16,26 @@
 NS_EE_BEGIN
 namespace image {
 NS_ANONYMOUS_BEGIN
-void internalTentBlur1D(ChannelType* pixels,
-                        SizeType width, SizeType height,
+void internalTentBlur1D(ChannelType* pixels, SizeType width, SizeType height,
                         SizeType range, SizeType iterations) {
     auto kernelSize = range * 2 + 1;
     assert(kernelSize < width && kernelSize < height);
-    
+
     constexpr SizeType Bits = 24;
     SizeType numerators[kernelSize + 1];
     for (SizeType size = 1, weight = 0; size <= kernelSize; ++size) {
         weight += (size <= range) ? size : (kernelSize - size + 1);
         numerators[size] = (1 << Bits) / weight;
     }
-    
-    auto prefixSumR = new SizeType[width + 1]; prefixSumR[0] = 0;
-    auto prefixSumG = new SizeType[width + 1]; prefixSumG[0] = 0;
-    auto prefixSumB = new SizeType[width + 1]; prefixSumB[0] = 0;
+
+    auto prefixSumR = new SizeType[width + 1];
+    prefixSumR[0] = 0;
+    auto prefixSumG = new SizeType[width + 1];
+    prefixSumG[0] = 0;
+    auto prefixSumB = new SizeType[width + 1];
+    prefixSumB[0] = 0;
     auto buffer = new ChannelType[width * 4];
-    
+
     auto newPixel = buffer;
     auto sumInR = prefixSumR;
     auto sumInG = prefixSumG;
@@ -47,9 +49,9 @@ void internalTentBlur1D(ChannelType* pixels,
     SizeType sumR = 0;
     SizeType sumG = 0;
     SizeType sumB = 0;
-    
+
     auto inPixel = pixels;
-    
+
     auto shiftSumIn = [&]() noexcept {
         ++sumInR;
         ++sumInG;
@@ -82,12 +84,15 @@ void internalTentBlur1D(ChannelType* pixels,
         sumB -= *sumMidB - *sumOutB;
     };
     auto updatePixel = [&](SizeType size) noexcept {
-        *newPixel++ = static_cast<ChannelType>((sumR * numerators[size]) >> Bits);
-        *newPixel++ = static_cast<ChannelType>((sumG * numerators[size]) >> Bits);
-        *newPixel++ = static_cast<ChannelType>((sumB * numerators[size]) >> Bits);
+        *newPixel++ =
+            static_cast<ChannelType>((sumR * numerators[size]) >> Bits);
+        *newPixel++ =
+            static_cast<ChannelType>((sumG * numerators[size]) >> Bits);
+        *newPixel++ =
+            static_cast<ChannelType>((sumB * numerators[size]) >> Bits);
         *newPixel++ = std::numeric_limits<ChannelType>::max();
     };
-    
+
     for (SizeType row = 0; row < height; ++row) {
         for (SizeType iteration = 0; iteration < iterations; ++iteration) {
             sumR = sumG = sumB = 0;
@@ -129,7 +134,7 @@ void internalTentBlur1D(ChannelType* pixels,
         }
         pixels = inPixel;
     }
-    
+
     delete[] buffer;
     delete[] prefixSumR;
     delete[] prefixSumG;
@@ -144,15 +149,15 @@ void tentBlur1D(cocos2d::Image* image, SizeType range, SizeType iterations) {
     auto buffer = new ChannelType[width * height * 4];
     auto pixelsPtr = reinterpret_cast<PixelType*>(pixels);
     auto bufferPtr = reinterpret_cast<PixelType*>(buffer);
-    
+
     // Horizonal pass.
     internalTentBlur1D(pixels, width, height, range, iterations);
     transpose(pixelsPtr, bufferPtr, width, height);
-    
+
     // Vertical pass.
     internalTentBlur1D(buffer, height, width, range, iterations);
     transpose(bufferPtr, pixelsPtr, height, width);
-    
+
     delete[] buffer;
 }
 } // namespace image.

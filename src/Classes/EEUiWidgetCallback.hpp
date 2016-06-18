@@ -28,46 +28,52 @@ class UiWidgetCallback {
 public:
     using TouchCallback = cocos2d::ui::Widget::ccWidgetTouchCallback;
     using ClickCallback = cocos2d::ui::Widget::ccWidgetClickCallback;
-    
+
     static UiWidgetCallback* getInstance();
-    
+
     void setActiveTouchCallback(const TouchCallback& callback);
     void setActiveClickCallback(const ClickCallback& callback);
-    
+
     const TouchCallback& getActiveTouchCallback() const;
     const ClickCallback& getActiveClickCallback() const;
-    
+
 private:
     TouchCallback touchCallback_;
     ClickCallback clickCallback_;
 };
 
-#define CCB_SELECTORRESOLVER_CCBUTTON_TOUCH(target, selectorName, callback) \
-    if (pTarget == target && std::strcmp(pSelectorName, selectorName) == 0) { \
-        ee::detail::UiWidgetCallback::getInstance()->setActiveTouchCallback(callback); \
-        return CC_MENU_SELECTOR(ee::detail::DummyRef::dummyFunction); \
+#define CCB_SELECTORRESOLVER_CCBUTTON_TOUCH(target, selectorName, callback)    \
+    if (pTarget == target && std::strcmp(pSelectorName, selectorName) == 0) {  \
+        ee::detail::UiWidgetCallback::getInstance()->setActiveTouchCallback(   \
+            callback);                                                         \
+        return CC_MENU_SELECTOR(ee::detail::DummyRef::dummyFunction);          \
     }
 
-#define CCB_SELECTORRESOLVER_CCBUTTON_TOUCH_EX(selectorName, callback) \
+#define CCB_SELECTORRESOLVER_CCBUTTON_TOUCH_EX(selectorName, callback)         \
     CCB_SEELCTORRESOLVER_CCBUTTON_TOUCH(this, selectorName, callback)
 
-#define CCB_SELECTORRESOLVER_CCBUTTON_CLICK(target, selectorName, callback) \
-    if (pTarget == target && std::strcmp(pSelectorName, selectorName) == 0) { \
-        ee::detail::UiWidgetCallback::getInstance()->setActiveClickCallback(callback); \
-        return CC_MENU_SELECTOR(ee::detail::DummyRef::dummyFunction); \
+#define CCB_SELECTORRESOLVER_CCBUTTON_CLICK(target, selectorName, callback)    \
+    if (pTarget == target && std::strcmp(pSelectorName, selectorName) == 0) {  \
+        ee::detail::UiWidgetCallback::getInstance()->setActiveClickCallback(   \
+            callback);                                                         \
+        return CC_MENU_SELECTOR(ee::detail::DummyRef::dummyFunction);          \
     }
 
-#define CCB_SELECTORRESOLVER_CCBUTTON_CLICK_EX_0(function) { \
-    std::string str = # function; \
-    str = str.substr(str.rfind("::") + 2); \
-    CCB_SELECTORRESOLVER_CCBUTTON_CLICK(this, str.c_str(), CC_CALLBACK_0(function, this)); \
-}
+#define CCB_SELECTORRESOLVER_CCBUTTON_CLICK_EX_0(function)                     \
+    {                                                                          \
+        std::string str = #function;                                           \
+        str = str.substr(str.rfind("::") + 2);                                 \
+        CCB_SELECTORRESOLVER_CCBUTTON_CLICK(this, str.c_str(),                 \
+                                            CC_CALLBACK_0(function, this));    \
+    }
 
-#define CCB_SELECTORRESOLVER_CCBUTTON_CLICK_EX_1(function) { \
-    std::string str = # function; \
-    str = str.substr(str.rfind("::") + 2); \
-    CCB_SELECTORRESOLVER_CCBUTTON_CLICK(this, str.c_str(), CC_CALLBACK_1(function, this)); \
-}
+#define CCB_SELECTORRESOLVER_CCBUTTON_CLICK_EX_1(function)                     \
+    {                                                                          \
+        std::string str = #function;                                           \
+        str = str.substr(str.rfind("::") + 2);                                 \
+        CCB_SELECTORRESOLVER_CCBUTTON_CLICK(this, str.c_str(),                 \
+                                            CC_CALLBACK_1(function, this));    \
+    }
 NS_DETAIL_END
 NS_EE_END
 

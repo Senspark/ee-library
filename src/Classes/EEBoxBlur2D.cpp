@@ -16,42 +16,44 @@
 NS_EE_BEGIN
 namespace image {
 NS_ANONYMOUS_BEGIN
-void internalBoxBlur2D(ChannelType * pixels,
-                       SizeType width, SizeType height,
+void internalBoxBlur2D(ChannelType* pixels, SizeType width, SizeType height,
                        SizeType range) {
     auto kernelSize = range * 2 + 1;
     assert(kernelSize < width && kernelSize < height);
-    
+
     constexpr SizeType Bits = 24;
     const auto Numerator = (1 << Bits) / (kernelSize * kernelSize);
-    
+
     auto inPixel = pixels;
     auto outPixel = pixels;
-    
+
     auto vertPrefixSumR = new SizeType[width]();
     auto vertPrefixSumG = new SizeType[width]();
     auto vertPrefixSumB = new SizeType[width]();
-    
-    auto horiPrefixSumR = new SizeType[width + 1]; horiPrefixSumR[0] = 0;
-    auto horiPrefixSumG = new SizeType[width + 1]; horiPrefixSumG[0] = 0;
-    auto horiPrefixSumB = new SizeType[width + 1]; horiPrefixSumB[0] = 0;
-    
+
+    auto horiPrefixSumR = new SizeType[width + 1];
+    horiPrefixSumR[0] = 0;
+    auto horiPrefixSumG = new SizeType[width + 1];
+    horiPrefixSumG[0] = 0;
+    auto horiPrefixSumB = new SizeType[width + 1];
+    horiPrefixSumB[0] = 0;
+
     auto buffer = new ChannelType[height * width * 4];
-    
+
     auto newPixel = buffer;
-    
+
     auto vertSumR = vertPrefixSumR;
     auto vertSumG = vertPrefixSumG;
     auto vertSumB = vertPrefixSumB;
-    
+
     auto horiSumInR = horiPrefixSumR;
     auto horiSumInG = horiPrefixSumG;
     auto horiSumInB = horiPrefixSumB;
-    
+
     auto horiSumOutR = horiPrefixSumR;
     auto horiSumOutG = horiPrefixSumG;
     auto horiSumOutB = horiPrefixSumB;
-    
+
     auto resetVertSum = [&]() noexcept {
         vertSumR = vertPrefixSumR;
         vertSumG = vertPrefixSumG;
@@ -95,15 +97,21 @@ void internalBoxBlur2D(ChannelType * pixels,
         ++horiSumOutB;
     };
     auto updatePixel = [&](SizeType hits) noexcept {
-        *newPixel++ = static_cast<ChannelType>((*horiSumInR - *horiSumOutR) / hits);
-        *newPixel++ = static_cast<ChannelType>((*horiSumInG - *horiSumOutG) / hits);
-        *newPixel++ = static_cast<ChannelType>((*horiSumInB - *horiSumOutB) / hits);
+        *newPixel++ =
+            static_cast<ChannelType>((*horiSumInR - *horiSumOutR) / hits);
+        *newPixel++ =
+            static_cast<ChannelType>((*horiSumInG - *horiSumOutG) / hits);
+        *newPixel++ =
+            static_cast<ChannelType>((*horiSumInB - *horiSumOutB) / hits);
         *newPixel++ = std::numeric_limits<ChannelType>::max();
     };
     auto updatePixelFullKernel = [&]() noexcept {
-        *newPixel++ = static_cast<ChannelType>(((*horiSumInR - *horiSumOutR) * Numerator) >> Bits);
-        *newPixel++ = static_cast<ChannelType>(((*horiSumInG - *horiSumOutG) * Numerator) >> Bits);
-        *newPixel++ = static_cast<ChannelType>(((*horiSumInB - *horiSumOutB) * Numerator) >> Bits);
+        *newPixel++ = static_cast<ChannelType>(
+            ((*horiSumInR - *horiSumOutR) * Numerator) >> Bits);
+        *newPixel++ = static_cast<ChannelType>(
+            ((*horiSumInG - *horiSumOutG) * Numerator) >> Bits);
+        *newPixel++ = static_cast<ChannelType>(
+            ((*horiSumInB - *horiSumOutB) * Numerator) >> Bits);
         *newPixel++ = std::numeric_limits<ChannelType>::max();
     };
     for (SizeType row = 0; row < range; ++row) {
@@ -204,7 +212,7 @@ void internalBoxBlur2D(ChannelType * pixels,
         }
     }
     std::memcpy(pixels, buffer, width * height * 4);
-    
+
     delete[] vertPrefixSumR;
     delete[] vertPrefixSumG;
     delete[] vertPrefixSumB;

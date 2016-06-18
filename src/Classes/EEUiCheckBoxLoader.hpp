@@ -20,34 +20,32 @@ NS_EE_BEGIN
 class UiCheckBoxLoader : public UiWidgetLoader {
 public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(UiCheckBoxLoader, loader);
-    
+
 protected:
     virtual cocos2d::Node* createNode(cocos2d::Node* parent,
                                       cocosbuilder::CCBReader* reader) override;
-    
-    virtual cocos2d::SpriteFrame* parsePropTypeSpriteFrame(cocos2d::Node* node,
-                                                           cocos2d::Node* parent,
-                                                           cocosbuilder::CCBReader* reader,
-                                                           const char* propertyName) override;
-    
-    virtual void onHandlePropTypeCheck(cocos2d::Node* node,
-                                       cocos2d::Node* parent,
-                                       const char* propertyName,
-                                       bool check,
-                                       cocosbuilder::CCBReader* reader) override;
-    
-    virtual void onHandlePropTypeFloat(cocos2d::Node* node,
-                                       cocos2d::Node* parent,
-                                       const char* propertyName,
-                                       float floatValue,
-                                       cocosbuilder::CCBReader* reader) override;
-    
-    virtual void onHandlePropTypeSpriteFrame(cocos2d::Node* node,
-                                             cocos2d::Node* parent,
-                                             const char* propertyName,
-                                             cocos2d::SpriteFrame* spriteFrame,
-                                             cocosbuilder::CCBReader* reader) override;
-    
+
+    virtual cocos2d::SpriteFrame*
+    parsePropTypeSpriteFrame(cocos2d::Node* node, cocos2d::Node* parent,
+                             cocosbuilder::CCBReader* reader,
+                             const char* propertyName) override;
+
+    virtual void
+    onHandlePropTypeCheck(cocos2d::Node* node, cocos2d::Node* parent,
+                          const char* propertyName, bool check,
+                          cocosbuilder::CCBReader* reader) override;
+
+    virtual void
+    onHandlePropTypeFloat(cocos2d::Node* node, cocos2d::Node* parent,
+                          const char* propertyName, float floatValue,
+                          cocosbuilder::CCBReader* reader) override;
+
+    virtual void
+    onHandlePropTypeSpriteFrame(cocos2d::Node* node, cocos2d::Node* parent,
+                                const char* propertyName,
+                                cocos2d::SpriteFrame* spriteFrame,
+                                cocosbuilder::CCBReader* reader) override;
+
 private:
     bool spriteFrameEnabled_;
     std::string spriteFrameName_;

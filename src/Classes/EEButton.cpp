@@ -14,18 +14,17 @@
 
 NS_EE_BEGIN
 NS_DETAIL_BEGIN
-auto ButtonEx::getDefaultHitTester() -> const HitTester& {
-    static const HitTester checker = [](cocos2d::Touch* touch,
-                                            Button* button) {
+auto ButtonEx::getDefaultHitTester() -> const HitTester & {
+    static const HitTester checker = [](cocos2d::Touch* touch, Button* button) {
         // Retrieve world position.
         auto&& position = touch->getLocation();
-        
+
         // Convert to local position.
         auto&& localPosition = button->convertToNodeSpace(position);
-        
+
         // Retrieve local bounding box.
         auto&& contentSize = button->getContentSize();
-        
+
         return (0 <= localPosition.x && localPosition.x <= contentSize.width &&
                 0 <= localPosition.y && localPosition.y <= contentSize.height);
     };
@@ -33,10 +32,8 @@ auto ButtonEx::getDefaultHitTester() -> const HitTester& {
 }
 
 ButtonEx::ButtonEx()
-: zoomingDuration_(0.05f)
-, currentTouch_(nullptr)
-, currentEvent_(nullptr)
-, container_(nullptr) {}
+    : zoomingDuration_(0.05f), currentTouch_(nullptr), currentEvent_(nullptr),
+      container_(nullptr) {}
 
 ButtonEx::~ButtonEx() = default;
 
@@ -55,10 +52,8 @@ ButtonEx* ButtonEx::create(const std::string& normalImage,
                            const std::string& disableImage,
                            TextureResType texType) {
     auto result = new (std::nothrow) ButtonEx();
-    if (result != nullptr && result->init(normalImage,
-                                          selectedImage,
-                                          disableImage,
-                                          texType)) {
+    if (result != nullptr &&
+        result->init(normalImage, selectedImage, disableImage, texType)) {
         result->autorelease();
         result->setScale9Enabled(true);
     } else {
@@ -77,22 +72,22 @@ void ButtonEx::addChild(Node* child, int localZOrder, const std::string& name) {
     container_->addChild(child, localZOrder, name);
 }
 
-auto ButtonEx::getChildByTag(int tag) const -> Node* {
+auto ButtonEx::getChildByTag(int tag) const -> Node * {
     // Forward to the container.
     return container_->getChildByTag(tag);
 }
 
-auto ButtonEx::getChildByName(const std::string& name) const -> Node* {
+auto ButtonEx::getChildByName(const std::string& name) const -> Node * {
     // Forward to the container.
     return container_->getChildByName(name);
 }
 
-auto ButtonEx::getChildren() -> cocos2d::Vector<Node*>& {
+auto ButtonEx::getChildren() -> cocos2d::Vector<Node*> & {
     // Forward to the container.
     return container_->getChildren();
 }
 
-auto ButtonEx::getChildren() const -> const cocos2d::Vector<Node*>& {
+auto ButtonEx::getChildren() const -> const cocos2d::Vector<Node*> & {
     // Forward to the container.
     return container_->getChildren();
 }
@@ -141,14 +136,12 @@ void ButtonEx::setCascadeOpacityEnabled(bool enabled) {
 }
 
 bool ButtonEx::hitTest(const cocos2d::Point& point,
-                       const cocos2d::Camera* camera,
-                       cocos2d::Vec3* p) const {
+                       const cocos2d::Camera* camera, cocos2d::Vec3* p) const {
     // Forward to the container.
     return container_->hitTest(point, camera, p);
 }
 
-bool ButtonEx::onTouchBegan(cocos2d::Touch* touch,
-                            cocos2d::Event* event) {
+bool ButtonEx::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event) {
     CC_ASSERT(currentTouch_ == nullptr);
     CC_ASSERT(currentEvent_ == nullptr);
     currentTouch_ = touch;
@@ -159,8 +152,7 @@ bool ButtonEx::onTouchBegan(cocos2d::Touch* touch,
     return result;
 }
 
-void ButtonEx::onTouchMoved(cocos2d::Touch* touch,
-                            cocos2d::Event* event) {
+void ButtonEx::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event) {
     if (touch->getDelta() == cocos2d::Vec2::ZERO) {
         return;
     }
@@ -173,8 +165,7 @@ void ButtonEx::onTouchMoved(cocos2d::Touch* touch,
     currentEvent_ = nullptr;
 }
 
-void ButtonEx::onTouchEnded(cocos2d::Touch* touch,
-                            cocos2d::Event* event) {
+void ButtonEx::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) {
     CC_ASSERT(currentTouch_ == nullptr);
     CC_ASSERT(currentEvent_ == nullptr);
     currentTouch_ = touch;
@@ -224,11 +215,11 @@ void ButtonEx::setTouchEndedCallback(const TouchCallback& callback) {
     });
 }
 
-auto ButtonEx::getContainer() const noexcept -> const Widget* {
+auto ButtonEx::getContainer() const noexcept -> const Widget * {
     return container_;
 }
 
-auto ButtonEx::getContainer() noexcept -> Widget* {
+auto ButtonEx::getContainer() noexcept -> Widget * {
     return container_;
 }
 
@@ -241,10 +232,9 @@ bool ButtonEx::init() {
 
 bool ButtonEx::init(const std::string& normalImage,
                     const std::string& selectedImage,
-                    const std::string& disableImage,
-                    TextureResType texType) {
-    if (Button::init(normalImage, selectedImage,
-                     disableImage, texType) == false) {
+                    const std::string& disableImage, TextureResType texType) {
+    if (Button::init(normalImage, selectedImage, disableImage, texType) ==
+        false) {
         return false;
     }
     return true;
@@ -253,20 +243,17 @@ bool ButtonEx::init(const std::string& normalImage,
 void ButtonEx::initRenderer() {
     Button::initRenderer();
     createTitleRenderer();
-    
-    std::vector<RefGuard> guards = {
-        _buttonNormalRenderer,
-        _buttonClickedRenderer,
-        _buttonDisabledRenderer,
-        _titleRenderer
-    };
-    
+
+    std::vector<RefGuard> guards = {_buttonNormalRenderer,
+                                    _buttonClickedRenderer,
+                                    _buttonDisabledRenderer, _titleRenderer};
+
     // Remove all sprites and title and add to the internal container.
     removeProtectedChild(_buttonNormalRenderer);
     removeProtectedChild(_buttonClickedRenderer);
     removeProtectedChild(_buttonDisabledRenderer);
     removeProtectedChild(_titleRenderer);
-    
+
     container_ = Widget::create();
     container_->ignoreContentAdaptWithSize(false);
     container_->setSwallowTouches(false);
@@ -276,9 +263,9 @@ void ButtonEx::initRenderer() {
     container_->setPositionPercent(cocos2d::Vec2(0.5f, 0.5f));
     container_->setSizeType(SizeType::PERCENT);
     container_->setSizePercent(cocos2d::Vec2(1.0f, 1.0f));
-    
+
     addProtectedChild(container_, std::numeric_limits<int>::min());
-    
+
     container_->addProtectedChild(_buttonNormalRenderer);
     container_->addProtectedChild(_buttonClickedRenderer);
     container_->addProtectedChild(_buttonDisabledRenderer);
@@ -290,16 +277,17 @@ void ButtonEx::onPressStateChangedToNormal() {
     _buttonNormalRenderer->setVisible(false);
     _buttonClickedRenderer->setVisible(false);
     _buttonDisabledRenderer->setVisible(false);
-    
+
     if (_normalTextureLoaded) {
         _buttonNormalRenderer->setVisible(true);
-        _buttonNormalRenderer->setState(cocos2d::ui::Scale9Sprite::State::NORMAL);
+        _buttonNormalRenderer->setState(
+            cocos2d::ui::Scale9Sprite::State::NORMAL);
     } else {
         // None background.
     }
-    
+
     container_->stopAllActions();
-    
+
     if (_pressedActionEnabled) {
         // Zooming is enabled.
         auto zoomAction = cocos2d::ScaleTo::create(zoomingDuration_, 1.0f);
@@ -314,7 +302,7 @@ void ButtonEx::onPressStateChangedToPressed() {
     _buttonNormalRenderer->setVisible(false);
     _buttonClickedRenderer->setVisible(false);
     _buttonDisabledRenderer->setVisible(false);
-    
+
     if (_pressedTextureLoaded) {
         // Pressed texture is loaded.
         // Show pressed sprite.
@@ -324,18 +312,19 @@ void ButtonEx::onPressStateChangedToPressed() {
         if (_normalTextureLoaded) {
             // Use normal texture instead.
             _buttonNormalRenderer->setVisible(true);
-            _buttonNormalRenderer->setState(cocos2d::ui::Scale9Sprite::State::NORMAL);
+            _buttonNormalRenderer->setState(
+                cocos2d::ui::Scale9Sprite::State::NORMAL);
         } else {
             // None background.
         }
     }
-    
+
     container_->stopAllActions();
-    
+
     if (_pressedActionEnabled) {
         // Zooming is enabled.
-        auto zoomAction = cocos2d::ScaleTo::create(zoomingDuration_,
-                                                   1.0f + _zoomScale);
+        auto zoomAction =
+            cocos2d::ScaleTo::create(zoomingDuration_, 1.0f + _zoomScale);
         container_->runAction(zoomAction);
     } else {
         // Instantly scaled.
@@ -348,7 +337,7 @@ void ButtonEx::onPressStateChangedToDisabled() {
     _buttonNormalRenderer->setVisible(false);
     _buttonClickedRenderer->setVisible(false);
     _buttonDisabledRenderer->setVisible(false);
-    
+
     if (_disabledTextureLoaded) {
         // Disabled texture is loaded.
         // Show the disabled texture.
@@ -360,12 +349,13 @@ void ButtonEx::onPressStateChangedToDisabled() {
             // Use the normal texture instead.
             // Gray out the normal sprite.
             _buttonNormalRenderer->setVisible(true);
-            _buttonNormalRenderer->setState(cocos2d::ui::Scale9Sprite::State::GRAY);
+            _buttonNormalRenderer->setState(
+                cocos2d::ui::Scale9Sprite::State::GRAY);
         } else {
             // None background.
         }
     }
-    
+
     // Stop animation and reset scale.
     container_->stopAllActions();
     container_->setScale(1.0f);
@@ -376,7 +366,7 @@ void ButtonEx::adaptRenderers() {
     Button::adaptRenderers();
 }
 
-auto ButtonEx::createCloneInstance() -> Widget* {
+auto ButtonEx::createCloneInstance() -> Widget * {
     return create();
 }
 
@@ -384,31 +374,28 @@ void ButtonEx::copySpecialProperties(Widget* model) {
     auto button = dynamic_cast<ButtonEx*>(model);
     if (button != nullptr) {
         Button::copySpecialProperties(model);
-        setZoomingDuration(button->getZoomingDuration());        
+        setZoomingDuration(button->getZoomingDuration());
     }
 }
 
 void ButtonEx::updateTexture() {
     int counter = 0;
-    
-    if (_normalTextureAdaptDirty &&
-        isBright() &&
+
+    if (_normalTextureAdaptDirty && isBright() &&
         _brightStyle == BrightStyle::NORMAL) {
         onPressStateChangedToNormal();
         ++counter;
     }
-    if (_pressedTextureAdaptDirty &&
-        isBright() &&
+    if (_pressedTextureAdaptDirty && isBright() &&
         _brightStyle == BrightStyle::HIGHLIGHT) {
         onPressStateChangedToPressed();
         ++counter;
     }
-    if (_disabledTextureAdaptDirty &&
-        isBright() == false) {
+    if (_disabledTextureAdaptDirty && isBright() == false) {
         onPressStateChangedToDisabled();
         ++counter;
     }
-    
+
     CC_ASSERT(counter <= 1);
 }
 NS_DETAIL_END

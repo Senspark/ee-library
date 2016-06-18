@@ -23,17 +23,16 @@ NS_EE_BEGIN
 class UiLayoutLoader : public UiWidgetLoader {
 public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(UiLayoutLoader, loader);
-    
+
 protected:
     virtual cocos2d::Node* createNode(cocos2d::Node* parent,
                                       cocosbuilder::CCBReader* reader) override;
-    
-    virtual void onHandlePropTypeColor3(cocos2d::Node* node,
-                                        cocos2d::Node* parent,
-                                        const char* propertyName,
-                                        cocos2d::Color3B color3B,
-                                        cocosbuilder::CCBReader* reader) override;
-    
+
+    virtual void
+    onHandlePropTypeColor3(cocos2d::Node* node, cocos2d::Node* parent,
+                           const char* propertyName, cocos2d::Color3B color3B,
+                           cocosbuilder::CCBReader* reader) override;
+
     virtual void onHandlePropTypeByte(cocos2d::Node* node,
                                       cocos2d::Node* parent,
                                       const char* propertyName,

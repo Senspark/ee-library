@@ -20,51 +20,50 @@ NS_EE_BEGIN
 /// Useful for anticheating.
 ///
 /// Currently supports @c std::int32_t and @c float.
-template<class T>
-class DynamicValue final {
+template <class T> class DynamicValue final {
 public:
     DynamicValue();
     ~DynamicValue() = default;
-    
+
     DynamicValue(T value);
-    
+
     DynamicValue(const DynamicValue& other);
     DynamicValue(DynamicValue&& other) = default;
-    
+
     DynamicValue& operator=(const DynamicValue& other);
     DynamicValue& operator=(DynamicValue&& other) = default;
 
     /// Retrieves the value.
     T get() const;
-    
+
     /// Assigns value.
     DynamicValue& set(T value);
-    
+
     /// Add a value.
     DynamicValue& add(T amount);
 
     /// Implicit conversion.
     operator T() const;
-    
+
     DynamicValue& operator=(T value);
     DynamicValue& operator+=(T value);
     DynamicValue& operator-=(T value);
 
     /// Post-increment operator.
     DynamicValue operator++(int);
-    
+
     /// Post-decrement operator.
     DynamicValue operator--(int);
 
     /// Pre-increment operator.
     DynamicValue& operator++();
-    
+
     /// Pre-decrement operator.
     DynamicValue& operator--();
 
 private:
     using StoreType = std::uint32_t;
-    
+
     std::unique_ptr<StoreType> value_;
     std::unique_ptr<StoreType> random_;
 };

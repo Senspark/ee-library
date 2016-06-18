@@ -30,25 +30,28 @@ NS_EE_BEGIN
 ///                               /// cocosbuilder::NodeLoader
 ///     >::loader());
 /// @endcode
-template<class Np, class Lp, class... Ts>
+template <class Np, class Lp, class... Ts>
 class GenericLoader final : public Lp {
 public:
     using NodeType = Np;
     using ParentLoaderType = Lp;
     using ArgsType = std::tuple<Ts...>;
-    
-    static_assert(is_base_of_v<cocosbuilder::NodeLoader, ParentLoaderType>,
-                  "ParentLoader should be derived from cocosbuilder::NodeLoader");
-    
-    template<class... Us>
-    static GenericLoader* loader(Us&&... args) {
+
+    static_assert(
+        is_base_of_v<cocosbuilder::NodeLoader, ParentLoaderType>,
+        "ParentLoader should be derived from cocosbuilder::NodeLoader");
+
+    template <class... Us> static GenericLoader* loader(Us&&... args) {
         auto result = new (std::nothrow) GenericLoader();
         if (result != nullptr) {
             result->autorelease();
-            result->callback_ = [result, data = std::tuple<Us...>(std::forward<Us>(args)...)] {
-                return result->internalCreateNode(bool_constant<sizeof...(Ts) == 0>(),
-                                                  data,
-                                                  std::make_index_sequence<sizeof...(Us)>());
+            result->callback_ = [
+                result,
+                data = std::tuple<Us...>(std::forward<Us>(args)...)
+            ] {
+                return result->internalCreateNode(
+                    bool_constant<sizeof...(Ts) == 0>(), data,
+                    std::make_index_sequence<sizeof...(Us)>());
             };
         } else {
             delete result;
@@ -56,27 +59,29 @@ public:
         }
         return result;
     }
-    
+
 private:
     virtual NodeType* createNode(cocos2d::Node* parent,
                                  cocosbuilder::CCBReader* reader) override {
         return callback_();
     }
-    
+
     /// Non-templated @c create overload.
-    template<class DataType, std::size_t... Indices>
+    template <class DataType, std::size_t... Indices>
     NodeType* internalCreateNode(std::true_type, DataType&& data,
                                  std::index_sequence<Indices...>) {
-        return NodeType::create(std::get<Indices>(std::forward<DataType>(data))...);
+        return NodeType::create(
+            std::get<Indices>(std::forward<DataType>(data))...);
     }
-    
+
     /// Templated @c create overload.
-    template<class DataType, std::size_t... Indices>
+    template <class DataType, std::size_t... Indices>
     NodeType* internalCreateNode(std::false_type, DataType&& data,
                                  std::index_sequence<Indices...>) {
-        return NodeType::template create<Ts...>(std::get<Indices>(std::forward<DataType>(data))...);
+        return NodeType::template create<Ts...>(
+            std::get<Indices>(std::forward<DataType>(data))...);
     }
-    
+
     std::function<NodeType*()> callback_;
 };
 NS_EE_END

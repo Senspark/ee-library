@@ -35,7 +35,7 @@ class Sprite;
 class SpriteFrame;
 class Image;
 class Texture2D;
-    
+
 class Action;
 class ActionInstant;
 class Show;
@@ -45,7 +45,7 @@ class FlipX;
 class FlipY;
 class Place;
 class CallFunc;
-    
+
 class ActionInterval;
 class FiniteTimeAction;
 class Speed;
@@ -77,14 +77,13 @@ class EventListenerKeyboard;
 class EventListenerTouchOneByOne;
 class EventListenerTouchAllAtOnce;
 class EventTouch;
-    
+
 class Touch;
-    
+
 class Ref;
 
-template<class T>
-class RefPtr;
-    
+template <class T> class RefPtr;
+
 class Value;
 using ValueMap = std::unordered_map<std::string, Value>;
 
@@ -118,7 +117,8 @@ using Point = Vec2;
 class Size;
 } // namespace cocos2d
 
-namespace cocos2d::ui {
+namespace cocos2d {
+namespace ui {
 class ListView;
 class LoadingBar;
 class PageView;
@@ -131,12 +131,13 @@ class Button;
 class CheckBox;
 class RadioButton;
 class ImageView;
-} // namespace cocos2d::ui
+} // namespace ui
+} // namespace cocos2d
 
 namespace cocosbuilder {
 class CCBReader;
 class NodeLoader;
-} // namespace cocosbuilder.
+} // namespace cocosbuilder
 
 namespace spine {
 class SkeletonAnimation;

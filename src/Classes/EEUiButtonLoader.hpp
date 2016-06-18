@@ -33,7 +33,8 @@ NS_EE_BEGIN
 /// // If your_method_name_in_cocosbuilder
 /// // have different name than the function name,
 /// // use the following macro:
-/// CCB_SELECTORRESOLVER_CCBUTTON_CLICK(this, "your_method_name_in_cocosbuilder",
+/// CCB_SELECTORRESOLVER_CCBUTTON_CLICK(this,
+/// "your_method_name_in_cocosbuilder",
 ///                                     CC_CALLBACK_0(MyClass::onMyButtonPressed,
 ///                                                   this));
 /// @endcode
@@ -45,58 +46,52 @@ NS_EE_BEGIN
 class UiButtonLoader : public UiWidgetLoader {
 public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(UiButtonLoader, loader);
-    
+
 protected:
     virtual cocos2d::Node* createNode(cocos2d::Node* parent,
                                       cocosbuilder::CCBReader* reader) override;
-    
-    virtual cocos2d::SpriteFrame* parsePropTypeSpriteFrame(cocos2d::Node* node,
-                                                           cocos2d::Node* parent,
-                                                           cocosbuilder::CCBReader* reader,
-                                                           const char* propertyName) override;
-    
-    virtual void onHandlePropTypeCheck(cocos2d::Node* node,
-                                       cocos2d::Node* parent,
-                                       const char* propertyName,
-                                       bool check,
-                                       cocosbuilder::CCBReader* reader) override;
-    
-    virtual void onHandlePropTypeString(cocos2d::Node* node,
-                                        cocos2d::Node* parent,
-                                        const char* propertyName,
-                                        const char* string,
-                                        cocosbuilder::CCBReader* reader) override;
-    
-    virtual void onHandlePropTypeFontTTF(cocos2d::Node* node,
-                                         cocos2d::Node* parent,
-                                         const char* propertyName,
-                                         const char* fontTTF,
-                                         cocosbuilder::CCBReader* reader) override;
-    
-    virtual void onHandlePropTypeFloat(cocos2d::Node* node,
-                                       cocos2d::Node* parent,
-                                       const char* propertyName,
-                                       float floatValue,
-                                       cocosbuilder::CCBReader* reader) override;
-    
-    virtual void onHandlePropTypeFloatScale(cocos2d::Node* node,
-                                            cocos2d::Node* parent,
-                                            const char* propertyName,
-                                            float floatScale,
-                                            cocosbuilder::CCBReader* reader) override;    
-    
-    virtual void onHandlePropTypeSpriteFrame(cocos2d::Node* node,
-                                             cocos2d::Node* parent,
-                                             const char* propertyName,
-                                             cocos2d::SpriteFrame* spriteFrame,
-                                             cocosbuilder::CCBReader* reader) override;
-    
-    virtual void onHandlePropTypeColor3(cocos2d::Node* node,
-                                        cocos2d::Node* parent,
-                                        const char* propertyName,
-                                        cocos2d::Color3B color3B,
-                                        cocosbuilder::CCBReader* reader) override;
-    
+
+    virtual cocos2d::SpriteFrame*
+    parsePropTypeSpriteFrame(cocos2d::Node* node, cocos2d::Node* parent,
+                             cocosbuilder::CCBReader* reader,
+                             const char* propertyName) override;
+
+    virtual void
+    onHandlePropTypeCheck(cocos2d::Node* node, cocos2d::Node* parent,
+                          const char* propertyName, bool check,
+                          cocosbuilder::CCBReader* reader) override;
+
+    virtual void
+    onHandlePropTypeString(cocos2d::Node* node, cocos2d::Node* parent,
+                           const char* propertyName, const char* string,
+                           cocosbuilder::CCBReader* reader) override;
+
+    virtual void
+    onHandlePropTypeFontTTF(cocos2d::Node* node, cocos2d::Node* parent,
+                            const char* propertyName, const char* fontTTF,
+                            cocosbuilder::CCBReader* reader) override;
+
+    virtual void
+    onHandlePropTypeFloat(cocos2d::Node* node, cocos2d::Node* parent,
+                          const char* propertyName, float floatValue,
+                          cocosbuilder::CCBReader* reader) override;
+
+    virtual void
+    onHandlePropTypeFloatScale(cocos2d::Node* node, cocos2d::Node* parent,
+                               const char* propertyName, float floatScale,
+                               cocosbuilder::CCBReader* reader) override;
+
+    virtual void
+    onHandlePropTypeSpriteFrame(cocos2d::Node* node, cocos2d::Node* parent,
+                                const char* propertyName,
+                                cocos2d::SpriteFrame* spriteFrame,
+                                cocosbuilder::CCBReader* reader) override;
+
+    virtual void
+    onHandlePropTypeColor3(cocos2d::Node* node, cocos2d::Node* parent,
+                           const char* propertyName, cocos2d::Color3B color3B,
+                           cocosbuilder::CCBReader* reader) override;
+
 private:
     bool spriteFrameEnabled_;
     std::string spriteFrameName_;

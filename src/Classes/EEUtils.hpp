@@ -32,8 +32,7 @@ NS_EE_BEGIN
 using RefGuard = cocos2d::RefPtr<cocos2d::Ref>;
 
 /// @see @c RefGuard.
-template<class T>
-auto make_ref_guard(T&& instance) {
+template <class T> auto make_ref_guard(T&& instance) {
     return RefGuard(instance);
 }
 
@@ -54,8 +53,7 @@ auto make_ref_guard(T&& instance) {
 ///              std::setw(2), minutes, ":",
 ///              std::setw(2), seconds);
 /// @endcode
-template<class... Args>
-std::string toString(Args&&... args) {
+template <class... Args> std::string toString(Args&&... args) {
     static std::stringstream ss;
     ss.str(std::string());
     ss.clear();
@@ -64,12 +62,8 @@ std::string toString(Args&&... args) {
 }
 
 /// http://stackoverflow.com/questions/19053351/how-do-i-use-a-custom-deleter-with-a-stdunique-ptr-member
-template<class T>
-using deleted_unique_ptr =
-    std::unique_ptr<
-        T,
-        std::function<void(T*)>
-    >;
+template <class T>
+using deleted_unique_ptr = std::unique_ptr<T, std::function<void(T*)>>;
 
 /// unique listener for @c cocos2d::EventListener.
 using UniqueListener = deleted_unique_ptr<cocos2d::EventListener>;
@@ -80,14 +74,13 @@ UniqueListener make_unique_listener(cocos2d::EventListener* listener);
 /// bit_cast.
 ///
 /// https://gist.github.com/socantre/3472964
-template<class Dest, class Source>
-inline Dest bit_cast(const Source& source) {
+template <class Dest, class Source> inline Dest bit_cast(const Source& source) {
     static_assert(sizeof(Dest) == sizeof(Source),
                   "size of destination and source objects must be equal.");
-    
+
     static_assert(std::is_trivially_copyable<Dest>::value,
                   "destination type must be trivially copyable.");
-    
+
     static_assert(std::is_trivially_copyable<Source>::value,
                   "source type must be trivially copyable.");
     Dest dest;
@@ -121,9 +114,8 @@ inline Dest bit_cast(const Source& source) {
 /// 1 3 5
 /// 5 3 1
 /// @endcode
-template<class Comparator = std::less<>>
-struct Compare1st {
-    template<class T>
+template <class Comparator = std::less<>> struct Compare1st {
+    template <class T>
     bool operator()(const T& lhs, const T& rhs) const
         noexcept(noexcept(Comparator()(lhs.first, rhs.first))) {
         return Comparator()(lhs.first, rhs.first);
@@ -132,9 +124,8 @@ struct Compare1st {
 
 /// Comparator to compare @c second in @c std::pair<>.
 /// @see @c Compare1st.
-template<class Comparator = std::less<>>
-struct Compare2nd {
-    template<class T>
+template <class Comparator = std::less<>> struct Compare2nd {
+    template <class T>
     bool operator()(const T& lhs, const T& rhs) const
         noexcept(noexcept(Comparator()(lhs.second, rhs.second))) {
         return Comparator()(lhs.second, rhs.second);
@@ -158,19 +149,10 @@ void doRecursively(cocos2d::Node* node,
 /// ee::doRecursively(your_node_pointer,
 ///                   &cocos2d::Node::pause);
 /// @endcode
-template<
-    class FunctionPointer,
-    class... Args
->
-std::enable_if_t<
-    is_member_function_pointer_v<FunctionPointer>
->
-doRecursively(cocos2d::Node* node,
-              FunctionPointer&& ptr,
-              Args&&... args) {
-    doRecursively(node, [&](cocos2d::Node* n) {
-        (n->*ptr)(args...);
-    });
+template <class FunctionPointer, class... Args>
+std::enable_if_t<is_member_function_pointer_v<FunctionPointer>>
+doRecursively(cocos2d::Node* node, FunctionPointer&& ptr, Args&&... args) {
+    doRecursively(node, [&](cocos2d::Node* n) { (n->*ptr)(args...); });
 }
 
 /// Pauses the given node and all of its sub-children.
@@ -194,7 +176,8 @@ bool isActuallyVisible(const cocos2d::Node* node);
 /// @param      afterCaptured will be invoked after the capturing process
 ///             has done.
 /// @see        @c captureScreenInPoints.
-void captureScreenInPixels(const std::function<void(cocos2d::Image*)>& afterCaptured);
+void captureScreenInPixels(
+    const std::function<void(cocos2d::Image*)>& afterCaptured);
 
 /// Attempts to capture a screenshot in points, i.e. the scene size
 /// multiplied by content scale factor.
@@ -203,7 +186,8 @@ void captureScreenInPixels(const std::function<void(cocos2d::Image*)>& afterCapt
 ///             uses FBO.
 /// @note       If you are capturing the screenshot for blurring, set the scale
 ///             to be less than 1 for better performance.
-/// @param      scale The resulting image size will be multiplied by this parameter.
+/// @param      scale The resulting image size will be multiplied by this
+/// parameter.
 /// @return     A pointer to @c cocos2d::Image.
 /// @see        @c captureScreenInPoints.
 cocos2d::Image* captureScreenInPoints(float scale = 1.0f);
@@ -215,8 +199,9 @@ cocos2d::Sprite* captureBlurredScreenInPoints(float scale = 1.0f,
 
 /// Creates a sprite from the given image and use the specified process callback
 /// (if not @c nullptr).
-cocos2d::Sprite* createSpriteFromImage(cocos2d::Image* image,
-                                       const std::function<void(cocos2d::Image*)>& processor = nullptr);
+cocos2d::Sprite* createSpriteFromImage(
+    cocos2d::Image* image,
+    const std::function<void(cocos2d::Image*)>& processor = nullptr);
 
 /// Attempts to download an image from an url.
 ///
@@ -226,8 +211,9 @@ cocos2d::Sprite* createSpriteFromImage(cocos2d::Image* image,
 /// @param      afterDownloaded will be invoked after the downloading process
 ///             has finished.
 /// @warning    GIF images are not supported.
-void downloadImage(const std::string& imageUrl,
-                   const std::function<void(cocos2d::Texture2D*)>& afterDownloaded);
+void downloadImage(
+    const std::string& imageUrl,
+    const std::function<void(cocos2d::Texture2D*)>& afterDownloaded);
 NS_EE_END
 
 #endif /* EE_LIBRARY_UTILS_HPP_ */

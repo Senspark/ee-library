@@ -12,27 +12,26 @@
 
 NS_EE_BEGIN
 namespace property {
-constexpr const char* data_file         = "dataFile";
-constexpr const char* atlas_file        = "atlasFile";
-constexpr const char* animation_scale   = "animationScale";
-constexpr const char* animation_name    = "animation|animationList";
-constexpr const char* skin_name         = "skin|skinList";
-constexpr const char* loop              = "loop";
-constexpr const char* time_scale        = "timeScale";
+constexpr const char* data_file = "dataFile";
+constexpr const char* atlas_file = "atlasFile";
+constexpr const char* animation_scale = "animationScale";
+constexpr const char* animation_name = "animation|animationList";
+constexpr const char* skin_name = "skin|skinList";
+constexpr const char* loop = "loop";
+constexpr const char* time_scale = "timeScale";
 } // namespace property
 
-cocos2d::Node* SkeletonAnimationLoader::createNode(cocos2d::Node* parent,
-                                                   cocosbuilder::CCBReader* reader) {
+cocos2d::Node*
+SkeletonAnimationLoader::createNode(cocos2d::Node* parent,
+                                    cocosbuilder::CCBReader* reader) {
     auto result = new spine::SkeletonAnimation();
     result->autorelease();
     return result;
 }
 
-void SkeletonAnimationLoader::onHandlePropTypeCheck(cocos2d::Node* node,
-                                                    cocos2d::Node* parent,
-                                                    const char* propertyName,
-                                                    bool check,
-                                                    cocosbuilder::CCBReader* reader) {
+void SkeletonAnimationLoader::onHandlePropTypeCheck(
+    cocos2d::Node* node, cocos2d::Node* parent, const char* propertyName,
+    bool check, cocosbuilder::CCBReader* reader) {
     auto skeleton = dynamic_cast<spine::SkeletonAnimation*>(node);
     std::string propName{propertyName};
     if (propName == property::loop) {
@@ -41,15 +40,13 @@ void SkeletonAnimationLoader::onHandlePropTypeCheck(cocos2d::Node* node,
         }
         return;
     }
-    NodeV3Loader::onHandlePropTypeCheck(node, parent, propertyName,
-                                        check, reader);
+    NodeV3Loader::onHandlePropTypeCheck(node, parent, propertyName, check,
+                                        reader);
 }
 
-void SkeletonAnimationLoader::onHandlePropTypeString(cocos2d::Node* node,
-                                                     cocos2d::Node* parent,
-                                                     const char* propertyName,
-                                                     const char* string,
-                                                     cocosbuilder::CCBReader* reader) {
+void SkeletonAnimationLoader::onHandlePropTypeString(
+    cocos2d::Node* node, cocos2d::Node* parent, const char* propertyName,
+    const char* string, cocosbuilder::CCBReader* reader) {
     auto skeleton = dynamic_cast<spine::SkeletonAnimation*>(node);
     std::string propName{propertyName};
     if (propName == property::data_file) {
@@ -68,29 +65,25 @@ void SkeletonAnimationLoader::onHandlePropTypeString(cocos2d::Node* node,
         skeleton->setSkin(string);
         return;
     }
-    NodeV3Loader::onHandlePropTypeString(node, parent, propertyName,
-                                         string, reader);
+    NodeV3Loader::onHandlePropTypeString(node, parent, propertyName, string,
+                                         reader);
 }
 
-void SkeletonAnimationLoader::onHandlePropTypeFloat(cocos2d::Node* node,
-                                                    cocos2d::Node* parent,
-                                                    const char* propertyName,
-                                                    float floatValue,
-                                                    cocosbuilder::CCBReader* reader) {
+void SkeletonAnimationLoader::onHandlePropTypeFloat(
+    cocos2d::Node* node, cocos2d::Node* parent, const char* propertyName,
+    float floatValue, cocosbuilder::CCBReader* reader) {
     auto skeleton = dynamic_cast<spine::SkeletonAnimation*>(node);
     std::string propName{propertyName};
     if (propName == property::time_scale) {
         return skeleton->setTimeScale(floatValue);
     }
-    NodeV3Loader::onHandlePropTypeFloat(node, parent, propertyName,
-                                        floatValue, reader);
+    NodeV3Loader::onHandlePropTypeFloat(node, parent, propertyName, floatValue,
+                                        reader);
 }
 
-void SkeletonAnimationLoader::onHandlePropTypeFloatScale(cocos2d::Node* node,
-                                                         cocos2d::Node* parent,
-                                                         const char* propertyName,
-                                                         float floatScale,
-                                                         cocosbuilder::CCBReader* reader) {
+void SkeletonAnimationLoader::onHandlePropTypeFloatScale(
+    cocos2d::Node* node, cocos2d::Node* parent, const char* propertyName,
+    float floatScale, cocosbuilder::CCBReader* reader) {
     auto skeleton = dynamic_cast<spine::SkeletonAnimation*>(node);
     std::string propName{propertyName};
     if (propName == property::animation_scale) {

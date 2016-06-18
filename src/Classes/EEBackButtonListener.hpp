@@ -20,18 +20,18 @@ class BackButtonListenerBase {
 protected:
     BackButtonListenerBase() = default;
     virtual ~BackButtonListenerBase() = default;
-    
+
     /// Register the keyboard listener for back button.
     void registerListener(cocos2d::Node* node);
-    
+
     /// Unregister the listener.
     void unregisterListener();
-    
+
     /// Keyboard event callback.
     void onKeyReleased(cocos2d::Node* node,
                        cocos2d::EventKeyboard::KeyCode keyCode,
                        cocos2d::Event* event);
-    
+
     /// Callback method when the user presses back button on Android.
     ///
     /// Invoked when subclass instance is running
@@ -50,7 +50,7 @@ protected:
     /// };
     /// @endcode
     virtual void onBackButtonPressed() = 0;
-    
+
 private:
     cocos2d::EventListenerKeyboard* listener_;
 };
@@ -60,20 +60,19 @@ NS_DETAIL_END
 ///
 /// Only one back button listener instance
 /// can receive the touch at a time (swallow touch).
-template<class T>
-class BackButtonListener
-: public detail::BackButtonListenerBase {
+template <class T>
+class BackButtonListener : public detail::BackButtonListenerBase {
 protected:
     BackButtonListener() : BackButtonListenerBase() {
         registerListener(getInstance());
     }
-    
+
     virtual ~BackButtonListener() {
         unregisterListener();
     }
-    
+
     using BackButtonListenerBase::onBackButtonPressed;
-    
+
 private:
     /// Retrieves the subclass instance.
     ///
@@ -84,7 +83,7 @@ private:
     T* getInstance() {
         return static_cast<T*>(this);
     }
-    
+
     /// Retrieves the subclass instance (const).
     ///
     /// Subclass should be inherits from @c cocos2d::Node.

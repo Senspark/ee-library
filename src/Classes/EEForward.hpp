@@ -12,28 +12,29 @@
 /// Forward ee library classes.
 
 namespace ee {
-template<class Np, class Lp, class... Ts>
-class GenericLoader;
-    
-template<class T>
-class DynamicValue;
-    
+template <class Np, class Lp, class... Ts> class GenericLoader;
+
+template <class T> class DynamicValue;
+
 namespace detail {
 class ButtonEx;
+class SpriteEx;
 } // namespace detail
-    
+
 using Button = detail::ButtonEx;
-    
+using Sprite = detail::SpriteEx;
+
+class CheckBox;
+
 namespace dialog {
 class Dialog;
 class DialogManager;
 } // namespace dialog
-    
+
 using dialog::Dialog;
 using dialog::DialogManager;
-    
-template<class T>
-class BackButtonListener;
+
+template <class T> class BackButtonListener;
 
 class NodeV3Loader;
 class UiWidgetLoader;
@@ -41,13 +42,11 @@ class UiButtonLoader;
 class UiTextLoader;
 class UiLayoutLoader;
 
-template<class... Args>
-class EventInfo;
-    
-template<class... Args>
-class DataInfo;
-    
-class DataHandler;    
+template <class... Args> class EventInfo;
+
+template <class... Args> class DataInfo;
+
+class DataHandler;
 } // namespace ee
 
 #endif // EE_LIBRARY_FORWARD_HPP_

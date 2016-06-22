@@ -39,6 +39,18 @@ void resumeAll(cocos2d::Node* node) {
     doRecursively(node, &cocos2d::Node::resume);
 }
 
+cocos2d::Rect getCascadeContentSize(cocos2d::Node* node) {
+    auto&& size = node->getContentSize();
+    cocos2d::Rect result{0, 0, size.width, size.height};
+    for (auto&& child : node->getChildren()) {
+        auto rect = getCascadeContentSize(child);
+        rect = cocos2d::RectApplyAffineTransform(
+            rect, child->getNodeToParentAffineTransform());
+        result.merge(rect);
+    }
+    return result;
+}
+
 bool isActuallyVisible(const cocos2d::Node* node) {
     if (node == nullptr) {
         // node is nullptr.

@@ -114,7 +114,12 @@ using String = __String;
 class Vec2;
 using Point = Vec2;
 
+class Vec3;
+
 class Size;
+class Rect;
+
+class GLProgram;
 } // namespace cocos2d
 
 namespace cocos2d {

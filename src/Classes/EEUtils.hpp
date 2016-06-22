@@ -161,6 +161,8 @@ void pauseAll(cocos2d::Node* node);
 /// Resumes the given node and all of its sub-children.
 void resumeAll(cocos2d::Node* node);
 
+cocos2d::Rect getCascadeContentSize(cocos2d::Node* node);
+
 /// Checks whether the node is actually visible.
 ///
 /// A button is actually visible means that it and its ancestor nodes

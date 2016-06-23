@@ -67,6 +67,7 @@ class FadeIn;
 class FadeOut;
 class DelayTime;
 class ActionFloat;
+class ActionEase;
 class Sequence;
 
 class Event;
@@ -115,6 +116,7 @@ class Vec2;
 using Point = Vec2;
 
 class Vec3;
+class Mat3;
 class Mat4;
 
 class Size;
@@ -137,6 +139,7 @@ class Button;
 class CheckBox;
 class RadioButton;
 class ImageView;
+class Scale9Sprite;
 } // namespace ui
 } // namespace cocos2d
 

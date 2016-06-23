@@ -18,11 +18,9 @@ template <class T> class DynamicValue;
 
 namespace detail {
 class ButtonEx;
-class SpriteEx;
 } // namespace detail
 
 using Button = detail::ButtonEx;
-using Sprite = detail::SpriteEx;
 
 class CheckBox;
 

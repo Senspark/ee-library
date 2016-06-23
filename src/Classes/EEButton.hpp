@@ -15,6 +15,7 @@
 #include "EEMacro.hpp"
 #include "EECocos2dxFwd.hpp"
 #include "EEExtension.hpp"
+#include "EEForward.hpp"
 
 #include <ui/UiButton.h>
 
@@ -40,6 +41,8 @@ NS_DETAIL_BEGIN
 /// @endcode
 class ButtonEx : public cocos2d::ui::Button {
 public:
+    using Loader = GenericLoader<ButtonEx, UiButtonLoader>;
+    
     using HitTester =
         std::function<bool(cocos2d::Touch* touch, Button* button)>;
 

@@ -41,6 +41,9 @@ class UiWidgetLoader;
 class UiButtonLoader;
 class UiTextLoader;
 class UiLayoutLoader;
+    
+class SpriteWithHSV;
+class SpriteWithHSVLoader;
 
 template <class... Args> class EventInfo;
 

@@ -115,6 +115,7 @@ class Vec2;
 using Point = Vec2;
 
 class Vec3;
+class Mat4;
 
 class Size;
 class Rect;

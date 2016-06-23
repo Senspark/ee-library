@@ -102,10 +102,18 @@
 		6FAC217D1CE3454E000C16CC /* EEDialogGuard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FAC217A1CE3454E000C16CC /* EEDialogGuard.cpp */; };
 		6FAC217E1CE3454E000C16CC /* EEDialogGuard.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FAC217B1CE3454E000C16CC /* EEDialogGuard.hpp */; };
 		6FAC217F1CE3454E000C16CC /* EEDialogGuard.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FAC217B1CE3454E000C16CC /* EEDialogGuard.hpp */; };
+		6FB731211D1B926F000B7397 /* EESpriteWithHSVLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FB7311F1D1B926F000B7397 /* EESpriteWithHSVLoader.cpp */; };
+		6FB731221D1B926F000B7397 /* EESpriteWithHSVLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FB7311F1D1B926F000B7397 /* EESpriteWithHSVLoader.cpp */; };
+		6FB731231D1B926F000B7397 /* EESpriteWithHSVLoader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FB731201D1B926F000B7397 /* EESpriteWithHSVLoader.hpp */; };
+		6FB731241D1B926F000B7397 /* EESpriteWithHSVLoader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FB731201D1B926F000B7397 /* EESpriteWithHSVLoader.hpp */; };
 		6FB73D331CE45E5800C718D5 /* EEDialogUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FB73D311CE45E5800C718D5 /* EEDialogUtils.cpp */; };
 		6FB73D341CE45E5800C718D5 /* EEDialogUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FB73D311CE45E5800C718D5 /* EEDialogUtils.cpp */; };
 		6FB73D351CE45E5800C718D5 /* EEDialogUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FB73D321CE45E5800C718D5 /* EEDialogUtils.hpp */; };
 		6FB73D361CE45E5800C718D5 /* EEDialogUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FB73D321CE45E5800C718D5 /* EEDialogUtils.hpp */; };
+		6FBEDB9B1D1A93430038E335 /* EESpriteWithHSV.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FBEDB991D1A93430038E335 /* EESpriteWithHSV.cpp */; };
+		6FBEDB9C1D1A93430038E335 /* EESpriteWithHSV.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FBEDB991D1A93430038E335 /* EESpriteWithHSV.cpp */; };
+		6FBEDB9D1D1A93430038E335 /* EESpriteWithHSV.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FBEDB9A1D1A93430038E335 /* EESpriteWithHSV.hpp */; };
+		6FBEDB9E1D1A93430038E335 /* EESpriteWithHSV.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FBEDB9A1D1A93430038E335 /* EESpriteWithHSV.hpp */; };
 		6FC19AD31CF83F9A0002D68B /* EEUiCheckBoxLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC19AD11CF83F9A0002D68B /* EEUiCheckBoxLoader.cpp */; };
 		6FC19AD41CF83F9A0002D68B /* EEUiCheckBoxLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC19AD11CF83F9A0002D68B /* EEUiCheckBoxLoader.cpp */; };
 		6FC19AD51CF83F9A0002D68B /* EEUiCheckBoxLoader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC19AD21CF83F9A0002D68B /* EEUiCheckBoxLoader.hpp */; };
@@ -116,6 +124,10 @@
 		6FC19ADE1CF84A470002D68B /* EECheckBox.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C43A7A91BDDDAC300D0597F /* EECheckBox.hpp */; };
 		6FC6958B1CDF8A0A00BAE327 /* __EEListenerList.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC695881CDF8A0A00BAE327 /* __EEListenerList.hpp */; };
 		6FC6958C1CDF8A0A00BAE327 /* __EEListenerList.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC695881CDF8A0A00BAE327 /* __EEListenerList.hpp */; };
+		6FC7FAD21D154387005AF2E5 /* EEShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC7FAD01D154387005AF2E5 /* EEShader.cpp */; };
+		6FC7FAD31D154387005AF2E5 /* EEShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC7FAD01D154387005AF2E5 /* EEShader.cpp */; };
+		6FC7FAD41D154387005AF2E5 /* EEShader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC7FAD11D154387005AF2E5 /* EEShader.hpp */; };
+		6FC7FAD51D154387005AF2E5 /* EEShader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC7FAD11D154387005AF2E5 /* EEShader.hpp */; };
 		6FCDDC421CD9981800DF8095 /* EEUiWidgetCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C468C2A1CA2F0CA00D16594 /* EEUiWidgetCallback.cpp */; };
 		6FD294771CE1CBF9009ECBFA /* EENodeV3Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FD294751CE1CBF9009ECBFA /* EENodeV3Loader.cpp */; };
 		6FD294781CE1CBF9009ECBFA /* EENodeV3Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FD294751CE1CBF9009ECBFA /* EENodeV3Loader.cpp */; };
@@ -285,6 +297,7 @@
 		6F17FAAB1CF29D5500CFCD14 /* EESkeletonAnimationLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EESkeletonAnimationLoader.hpp; sourceTree = "<group>"; };
 		6F39F1541CCBBBD10038796D /* EEButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEButton.cpp; sourceTree = "<group>"; };
 		6F39F1551CCBBBD10038796D /* EEButton.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEButton.hpp; sourceTree = "<group>"; };
+		6F552B5D1D1AAA950077991C /* EEHSVShader.frag.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EEHSVShader.frag.hpp; sourceTree = "<group>"; };
 		6F843E411CDB8EF6008B2EC4 /* EEUiWidgetLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEUiWidgetLoader.cpp; sourceTree = "<group>"; };
 		6F843E421CDB8EF6008B2EC4 /* EEUiWidgetLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEUiWidgetLoader.hpp; sourceTree = "<group>"; };
 		6FA658961CCB700B009BC9EB /* EEUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEUtils.cpp; sourceTree = "<group>"; };
@@ -292,14 +305,21 @@
 		6FAC21751CE33425000C16CC /* EEDialogCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDialogCommand.hpp; sourceTree = "<group>"; };
 		6FAC217A1CE3454E000C16CC /* EEDialogGuard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDialogGuard.cpp; sourceTree = "<group>"; };
 		6FAC217B1CE3454E000C16CC /* EEDialogGuard.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDialogGuard.hpp; sourceTree = "<group>"; };
+		6FB7310B1D1B7A48000B7397 /* EEHSVShader.vert.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EEHSVShader.vert.hpp; sourceTree = "<group>"; };
+		6FB7311F1D1B926F000B7397 /* EESpriteWithHSVLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EESpriteWithHSVLoader.cpp; sourceTree = "<group>"; };
+		6FB731201D1B926F000B7397 /* EESpriteWithHSVLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EESpriteWithHSVLoader.hpp; sourceTree = "<group>"; };
 		6FB73D311CE45E5800C718D5 /* EEDialogUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDialogUtils.cpp; sourceTree = "<group>"; };
 		6FB73D321CE45E5800C718D5 /* EEDialogUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDialogUtils.hpp; sourceTree = "<group>"; };
+		6FBEDB991D1A93430038E335 /* EESpriteWithHSV.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EESpriteWithHSV.cpp; sourceTree = "<group>"; };
+		6FBEDB9A1D1A93430038E335 /* EESpriteWithHSV.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EESpriteWithHSV.hpp; sourceTree = "<group>"; };
 		6FC19AD11CF83F9A0002D68B /* EEUiCheckBoxLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEUiCheckBoxLoader.cpp; sourceTree = "<group>"; };
 		6FC19AD21CF83F9A0002D68B /* EEUiCheckBoxLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEUiCheckBoxLoader.hpp; sourceTree = "<group>"; };
 		6FC1CA8E1CEAB7D300DCDC8E /* ee-library-mobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "ee-library-mobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FC1CA8F1CEAB7D300DCDC8E /* ee-library-desktop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "ee-library-desktop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FC695871CDF8A0A00BAE327 /* __EEListenerList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = __EEListenerList.cpp; sourceTree = "<group>"; };
 		6FC695881CDF8A0A00BAE327 /* __EEListenerList.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = __EEListenerList.hpp; sourceTree = "<group>"; };
+		6FC7FAD01D154387005AF2E5 /* EEShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEShader.cpp; sourceTree = "<group>"; };
+		6FC7FAD11D154387005AF2E5 /* EEShader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEShader.hpp; sourceTree = "<group>"; };
 		6FD294751CE1CBF9009ECBFA /* EENodeV3Loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EENodeV3Loader.cpp; sourceTree = "<group>"; };
 		6FD294761CE1CBF9009ECBFA /* EENodeV3Loader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EENodeV3Loader.hpp; sourceTree = "<group>"; };
 		6FD2948E1CE1D95B009ECBFA /* EEUiLayoutLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEUiLayoutLoader.cpp; sourceTree = "<group>"; };
@@ -371,8 +391,10 @@
 				6CC3596C1C0C0792007DC4CF /* EEFlags.hpp */,
 				6FA658961CCB700B009BC9EB /* EEUtils.cpp */,
 				6C43A7D31BDDDAC300D0597F /* EEUtils.hpp */,
+				6C4557741C8FC8C4001AE09A /* experimental */,
 				6C5AEB3B1BDF1B9F004C98A2 /* crytography */,
 				6F7D5B591CD665010069E541 /* control */,
+				6FB731521D1BD418000B7397 /* shader */,
 				6FAC216F1CE31ED0000C16CC /* dialog */,
 				6F79B63F1CCAA2C20008EFAC /* listener */,
 				6C3C3C2C1CA3859800A04333 /* ui */,
@@ -380,7 +402,6 @@
 				6C3C3C2B1CA3858C00A04333 /* event */,
 				6C43A7F61BDDDAEC00D0597F /* image */,
 				6F79B6481CCAC15A0008EFAC /* deprecated */,
-				6C4557741C8FC8C4001AE09A /* experimental */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -593,6 +614,21 @@
 			name = dialog;
 			sourceTree = "<group>";
 		};
+		6FB731521D1BD418000B7397 /* shader */ = {
+			isa = PBXGroup;
+			children = (
+				6FC7FAD01D154387005AF2E5 /* EEShader.cpp */,
+				6FC7FAD11D154387005AF2E5 /* EEShader.hpp */,
+				6FB7310B1D1B7A48000B7397 /* EEHSVShader.vert.hpp */,
+				6F552B5D1D1AAA950077991C /* EEHSVShader.frag.hpp */,
+				6FBEDB991D1A93430038E335 /* EESpriteWithHSV.cpp */,
+				6FBEDB9A1D1A93430038E335 /* EESpriteWithHSV.hpp */,
+				6FB7311F1D1B926F000B7397 /* EESpriteWithHSVLoader.cpp */,
+				6FB731201D1B926F000B7397 /* EESpriteWithHSVLoader.hpp */,
+			);
+			name = shader;
+			sourceTree = "<group>";
+		};
 		6FC1CA921CEAB89C00DCDC8E /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -632,9 +668,12 @@
 				6F79B6401CCAA2D70008EFAC /* EEBackButtonListener.hpp in Headers */,
 				6C42EF451C85449F0062C2C6 /* EEDynamicValue.hpp in Headers */,
 				6C3849231CA230750020B858 /* EEEvent.hpp in Headers */,
+				6FBEDB9D1D1A93430038E335 /* EESpriteWithHSV.hpp in Headers */,
 				6FAC217E1CE3454E000C16CC /* EEDialogGuard.hpp in Headers */,
+				6FC7FAD41D154387005AF2E5 /* EEShader.hpp in Headers */,
 				6FC6958B1CDF8A0A00BAE327 /* __EEListenerList.hpp in Headers */,
 				6F79DC821CCE5CB900BDA20F /* EECrytography.hpp in Headers */,
+				6FB731231D1B926F000B7397 /* EESpriteWithHSVLoader.hpp in Headers */,
 				6C49FB9A1CA136ED00E0FE86 /* EEExtension.hpp in Headers */,
 				6FAC21781CE33425000C16CC /* EEDialogCommand.hpp in Headers */,
 				6FB73D351CE45E5800C718D5 /* EEDialogUtils.hpp in Headers */,
@@ -669,9 +708,12 @@
 				6F79B6381CCA8FA40008EFAC /* EEUiTextLoader.hpp in Headers */,
 				6F77D7981CE0D734000BA9BE /* EEFlags.hpp in Headers */,
 				6F79B6471CCAC0EA0008EFAC /* EEEventListener.hpp in Headers */,
+				6FBEDB9E1D1A93430038E335 /* EESpriteWithHSV.hpp in Headers */,
 				6FAC217F1CE3454E000C16CC /* EEDialogGuard.hpp in Headers */,
+				6FC7FAD51D154387005AF2E5 /* EEShader.hpp in Headers */,
 				6F79B6411CCAA2D70008EFAC /* EEBackButtonListener.hpp in Headers */,
 				6F79B6361CCA8FA00008EFAC /* EEUiButtonLoader.hpp in Headers */,
+				6FB731241D1B926F000B7397 /* EESpriteWithHSVLoader.hpp in Headers */,
 				6F79B6231CCA7FC90008EFAC /* EEMacro.hpp in Headers */,
 				6FAC21791CE33425000C16CC /* EEDialogCommand.hpp in Headers */,
 				6FB73D361CE45E5800C718D5 /* EEDialogUtils.hpp in Headers */,
@@ -806,10 +848,12 @@
 			files = (
 				6FC19ADB1CF84A470002D68B /* EECheckBox.cpp in Sources */,
 				6C468C2C1CA2F0CA00D16594 /* EEUiWidgetCallback.cpp in Sources */,
+				6FC7FAD21D154387005AF2E5 /* EEShader.cpp in Sources */,
 				6FB73D331CE45E5800C718D5 /* EEDialogUtils.cpp in Sources */,
 				6FA658951CCB5C0C009BC9EB /* EETentBlur1D.cpp in Sources */,
 				6F79DC841CCE5CBC00BDA20F /* EESha1.cpp in Sources */,
 				6FAC216D1CE310AD000C16CC /* EEDialogManager.cpp in Sources */,
+				6FB731211D1B926F000B7397 /* EESpriteWithHSVLoader.cpp in Sources */,
 				6FAC217C1CE3454E000C16CC /* EEDialogGuard.cpp in Sources */,
 				6F79DC861CCE5CBE00BDA20F /* EECrc.cpp in Sources */,
 				6F843E6E1CDBA4B1008B2EC4 /* __EEDataHandler.cpp in Sources */,
@@ -823,6 +867,7 @@
 				6F17FAAC1CF29D5500CFCD14 /* EESkeletonAnimationLoader.cpp in Sources */,
 				6C47FE491CA1B36A00FEF3BC /* EEDynamicValue.cpp in Sources */,
 				6FD294771CE1CBF9009ECBFA /* EENodeV3Loader.cpp in Sources */,
+				6FBEDB9B1D1A93430038E335 /* EESpriteWithHSV.cpp in Sources */,
 				6FA658931CCB5C0C009BC9EB /* EEBoxBlur1D.cpp in Sources */,
 				6FA658971CCB700B009BC9EB /* EEUtils.cpp in Sources */,
 				6F843E431CDB8EF6008B2EC4 /* EEUiWidgetLoader.cpp in Sources */,
@@ -840,10 +885,12 @@
 			files = (
 				6FC19ADD1CF84A470002D68B /* EECheckBox.cpp in Sources */,
 				6FA658981CCB700B009BC9EB /* EEUtils.cpp in Sources */,
+				6FC7FAD31D154387005AF2E5 /* EEShader.cpp in Sources */,
 				6FB73D341CE45E5800C718D5 /* EEDialogUtils.cpp in Sources */,
 				6F798A811CE03A5F004D247B /* __EEDataHandler.cpp in Sources */,
 				6F79DC851CCE5CBC00BDA20F /* EESha1.cpp in Sources */,
 				6FAC216E1CE310AD000C16CC /* EEDialogManager.cpp in Sources */,
+				6FB731221D1B926F000B7397 /* EESpriteWithHSVLoader.cpp in Sources */,
 				6FAC217D1CE3454E000C16CC /* EEDialogGuard.cpp in Sources */,
 				6F79B6351CCA8F9E0008EFAC /* EEUiButtonLoader.cpp in Sources */,
 				6F79B62C1CCA7FDE0008EFAC /* EEDynamicValue.cpp in Sources */,
@@ -857,6 +904,7 @@
 				6F17FAAD1CF29D5500CFCD14 /* EESkeletonAnimationLoader.cpp in Sources */,
 				6F79B6441CCAC0E50008EFAC /* EEEventInfo.cpp in Sources */,
 				6FD294781CE1CBF9009ECBFA /* EENodeV3Loader.cpp in Sources */,
+				6FBEDB9C1D1A93430038E335 /* EESpriteWithHSV.cpp in Sources */,
 				6F39F1571CCBBBD10038796D /* EEButton.cpp in Sources */,
 				6FA6588E1CCB5C0B009BC9EB /* EEBoxBlur1D.cpp in Sources */,
 				6F79DC871CCE5CBF00BDA20F /* EECrc.cpp in Sources */,

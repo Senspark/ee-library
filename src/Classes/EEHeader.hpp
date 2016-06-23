@@ -43,6 +43,9 @@
 #include "EEUiCheckBoxLoader.hpp"
 #include "EEUiWidgetCallback.hpp"
 
+#include "EESpriteWithHSV.hpp"
+#include "EESpriteWithHSVLoader.hpp"
+
 #include "EESkeletonAnimationLoader.hpp"
 
 #include "__EEDataInfo.hpp"

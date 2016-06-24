@@ -124,7 +124,36 @@ cocos2d::Mat4 Shader::createHueMatrix(float degree) {
     // Cos = 1/sqrt(2).
     cocos2d::Mat4::createRotationX(static_cast<float>(-M_PI_4), &temp);
     cocos2d::Mat4::multiply(temp, mat, &mat);
-    
+
     return mat;
+}
+
+NS_ANONYMOUS_BEGIN
+#include "EEVerticalBlurShader.vert.hpp"
+#include "EEHorizontalBlurShader.vert.hpp"
+#include "EEBlurShader.frag.hpp"
+NS_ANONYMOUS_END
+
+cocos2d::GLProgram* Shader::createHorizontalBlurVertexShader() {
+    return createBlurVertexShader("ee_horizontal_vertex_shader",
+                                  ee_horizontal_blur_shader_vert);
+}
+
+cocos2d::GLProgram* Shader::createVerticalBlurVertexShader() {
+    return createBlurVertexShader("ee_vertical_vertex_shader",
+                                  ee_vertical_blur_shader_vert);
+}
+
+cocos2d::GLProgram*
+Shader::createBlurVertexShader(const std::string& name,
+                               const std::string& vertexShader) {
+    auto cache = cocos2d::GLProgramCache::getInstance();
+    auto p = cache->getGLProgram(name);
+    if (p == nullptr) {
+        p = cocos2d::GLProgram::createWithByteArrays(vertexShader.c_str(),
+                                                     ee_blur_shader_frag);
+        cache->addGLProgram(p, name);
+    }
+    return p;
 }
 NS_EE_END

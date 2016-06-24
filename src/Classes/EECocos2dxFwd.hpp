@@ -35,6 +35,7 @@ class Sprite;
 class SpriteFrame;
 class Image;
 class Texture2D;
+class RenderTexture;
 
 class Action;
 class ActionInstant;

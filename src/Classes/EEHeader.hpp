@@ -46,6 +46,9 @@
 #include "EESpriteWithHSV.hpp"
 #include "EESpriteWithHSVLoader.hpp"
 
+#include "EEBlurBackground.hpp"
+#include "EEBlurBackgroundLoader.hpp"
+
 #include "EESkeletonAnimationLoader.hpp"
 
 #include "__EEDataInfo.hpp"

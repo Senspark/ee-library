@@ -15,8 +15,12 @@
 NS_EE_BEGIN
 class Shader {
 public:
-    static cocos2d::Mat4 createShearZMatrix(float dx, float dy);
+    static cocos2d::GLProgram* createHorizontalBlurVertexShader();
     
+    static cocos2d::GLProgram* createVerticalBlurVertexShader();
+
+    static cocos2d::Mat4 createShearZMatrix(float dx, float dy);
+
     static void transformRGB(const cocos2d::Mat4& mat, float red, float green,
                              float blue, float& transformedRed,
                              float& transformedGreen, float& transformedBlue);
@@ -61,6 +65,11 @@ public:
                                                 float blue);
 
     static cocos2d::Mat4 createHueMatrix(float degree);
+
+private:
+    static cocos2d::GLProgram*
+    createBlurVertexShader(const std::string& name,
+                           const std::string& vertexShader);
 };
 NS_EE_END
 

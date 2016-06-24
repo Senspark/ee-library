@@ -97,7 +97,6 @@ void SpriteWithHSV::initShader() {
     if (p == nullptr) {
         p = cocos2d::GLProgram::createWithByteArrays(ee_hsv_shader_vert,
                                                      ee_hsv_shader_frag);
-        //        p->bindAttribLocation(cocos2d::GLProgram::NAME, GLuint index)
         cache->addGLProgram(p, ProgramKey);
     }
 

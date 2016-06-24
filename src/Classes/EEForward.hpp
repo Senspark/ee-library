@@ -39,9 +39,12 @@ class UiWidgetLoader;
 class UiButtonLoader;
 class UiTextLoader;
 class UiLayoutLoader;
-    
+
 class SpriteWithHSV;
 class SpriteWithHSVLoader;
+
+class BlurBackground;
+class BlurBackgroundLoader;
 
 template <class... Args> class EventInfo;
 

@@ -308,9 +308,6 @@
 		6F552B5D1D1AAA950077991C /* EEHSVShader.frag.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EEHSVShader.frag.hpp; sourceTree = "<group>"; };
 		6F6EA92E1D1D3F5300816BAF /* EEBlurBackground.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEBlurBackground.cpp; sourceTree = "<group>"; };
 		6F6EA92F1D1D3F5300816BAF /* EEBlurBackground.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEBlurBackground.hpp; sourceTree = "<group>"; };
-		6F6EA9341D1D491D00816BAF /* EEBlurShader.frag.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EEBlurShader.frag.hpp; sourceTree = "<group>"; };
-		6F6EA9351D1D496900816BAF /* EEVerticalBlurShader.vert.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EEVerticalBlurShader.vert.hpp; sourceTree = "<group>"; };
-		6F6EA9361D1D499A00816BAF /* EEHorizontalBlurShader.vert.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EEHorizontalBlurShader.vert.hpp; sourceTree = "<group>"; };
 		6F7F38841D1D5BD000F5893F /* EEBlurBackgroundLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEBlurBackgroundLoader.cpp; sourceTree = "<group>"; };
 		6F7F38851D1D5BD000F5893F /* EEBlurBackgroundLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEBlurBackgroundLoader.hpp; sourceTree = "<group>"; };
 		6F843E411CDB8EF6008B2EC4 /* EEUiWidgetLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEUiWidgetLoader.cpp; sourceTree = "<group>"; };
@@ -644,9 +641,6 @@
 				6F6EA92F1D1D3F5300816BAF /* EEBlurBackground.hpp */,
 				6F7F38841D1D5BD000F5893F /* EEBlurBackgroundLoader.cpp */,
 				6F7F38851D1D5BD000F5893F /* EEBlurBackgroundLoader.hpp */,
-				6F6EA9341D1D491D00816BAF /* EEBlurShader.frag.hpp */,
-				6F6EA9351D1D496900816BAF /* EEVerticalBlurShader.vert.hpp */,
-				6F6EA9361D1D499A00816BAF /* EEHorizontalBlurShader.vert.hpp */,
 			);
 			name = shader;
 			sourceTree = "<group>";

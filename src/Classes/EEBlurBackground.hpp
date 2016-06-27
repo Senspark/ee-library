@@ -21,17 +21,38 @@ public:
     
     void setRenderScale(float scale);
     
+    void setSigma(float sigma);
+    
+    void setBlurRadius(int radius);
+    
+    void setUseLinearSampling(bool use);
+    
 protected:
     virtual bool init() override;
+    
+    virtual void update(float delta) override;
     
     virtual void visit(cocos2d::Renderer* renderer,
                        const cocos2d::Mat4& parentTransforms,
                        std::uint32_t parentFlags) override;
     
-    void initRenderers();    
+    void updateRenderers();
+    
+    void createRenderers();
+    
     void resetRenderers();
     
+    void configHorizontalRenderer();
+    
+    void configVerticalRenderer();
+    
     float renderScale_;
+    float sigma_;
+    int blurRadius_;
+    bool useLinearSampling_;
+    
+    bool rendererInitialized_;
+    bool rendererDirty_;
     
     cocos2d::RenderTexture* verticalRenderer_;
     cocos2d::RenderTexture* horizontalRenderer_;

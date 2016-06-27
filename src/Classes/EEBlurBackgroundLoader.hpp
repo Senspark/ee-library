@@ -24,6 +24,11 @@ protected:
     onHandlePropTypeFloat(cocos2d::Node* node, cocos2d::Node* parent,
                           const char* propertyName, float floatValue,
                           cocosbuilder::CCBReader* reader) override;
+
+    virtual void
+    onHandlePropTypeInteger(cocos2d::Node* node, cocos2d::Node* parent,
+                            const char* propertyName, int integer,
+                            cocosbuilder::CCBReader* reader) override;
 };
 NS_EE_END
 

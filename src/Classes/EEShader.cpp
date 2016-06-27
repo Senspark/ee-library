@@ -6,7 +6,10 @@
 //
 //
 
+#include <iomanip>
+
 #include "EEShader.hpp"
+#include "EEUtils.hpp"
 
 #include <cocos2d.h>
 
@@ -128,32 +131,232 @@ cocos2d::Mat4 Shader::createHueMatrix(float degree) {
     return mat;
 }
 
-NS_ANONYMOUS_BEGIN
-#include "EEVerticalBlurShader.vert.hpp"
-#include "EEHorizontalBlurShader.vert.hpp"
-#include "EEBlurShader.frag.hpp"
-NS_ANONYMOUS_END
-
-cocos2d::GLProgram* Shader::createHorizontalBlurVertexShader() {
-    return createBlurVertexShader("ee_horizontal_vertex_shader",
-                                  ee_horizontal_blur_shader_vert);
-}
-
-cocos2d::GLProgram* Shader::createVerticalBlurVertexShader() {
-    return createBlurVertexShader("ee_vertical_vertex_shader",
-                                  ee_vertical_blur_shader_vert);
-}
-
-cocos2d::GLProgram*
-Shader::createBlurVertexShader(const std::string& name,
-                               const std::string& vertexShader) {
+cocos2d::GLProgram* Shader::createHorizontalBlurProgram(float width,
+                                                        int blurRadius,
+                                                        bool useLinearSampling,
+                                                        float sigma) {
     auto cache = cocos2d::GLProgramCache::getInstance();
-    auto p = cache->getGLProgram(name);
-    if (p == nullptr) {
-        p = cocos2d::GLProgram::createWithByteArrays(vertexShader.c_str(),
-                                                     ee_blur_shader_frag);
-        cache->addGLProgram(p, name);
+    auto key = toString("ee_horizontal_blur_", width, "_", blurRadius, "_",
+                        useLinearSampling, "_", sigma);
+    auto program = cache->getGLProgram(key);
+    if (program == nullptr) {
+        program = createBlurProgram(false, width, blurRadius, useLinearSampling,
+                                    sigma);
+        cache->addGLProgram(program, key);
     }
-    return p;
+    return program;
+}
+
+cocos2d::GLProgram* Shader::createVerticalBlurProgram(float height,
+                                                      int blurRadius,
+                                                      bool useLinearSampling,
+                                                      float sigma) {
+    auto cache = cocos2d::GLProgramCache::getInstance();
+    auto key = toString("ee_vertical_blur", height, "_", blurRadius, "_",
+                        useLinearSampling, "_", sigma);
+    auto program = cache->getGLProgram(key);
+    if (program == nullptr) {
+        program = createBlurProgram(true, height, blurRadius, useLinearSampling,
+                                    sigma);
+        cache->addGLProgram(program, key);
+    }
+    return program;
+}
+
+cocos2d::GLProgram* Shader::createBlurProgram(bool isVertical, float dimension,
+                                              int blurRadius,
+                                              bool useLinearSampling,
+                                              float sigma) {
+    auto vertexShader = createBlurVertexShader(
+        isVertical, dimension, blurRadius, useLinearSampling, sigma);
+
+    auto fragmentShader =
+        createBlurFragmentShader(blurRadius, useLinearSampling, sigma);
+
+    return cocos2d::GLProgram::createWithByteArrays(vertexShader.c_str(),
+                                                    fragmentShader.c_str());
+}
+
+std::string Shader::createBlurVertexShader(bool isVertical, float dimension,
+                                           int blurRadius,
+                                           bool useLinearSampling,
+                                           float sigma) {
+    auto size = static_cast<std::size_t>(blurRadius + 1);
+
+    std::vector<float> offsets;
+
+    if (useLinearSampling && (blurRadius % 2 == 0)) {
+        std::vector<float> weights(size);
+        float sum = 0;
+        for (std::size_t i = 0; i < size; ++i) {
+            weights.at(i) = gaussianFunction(i, sigma);
+            sum += weights.at(i);
+            if (i > 0) {
+                sum += weights.at(i);
+            }
+        }
+        for (auto& w : weights) {
+            w /= sum;
+        }
+
+        offsets.reserve(size / 2);
+        for (std::size_t i = 1; i < size; i += 2) {
+            offsets.push_back(
+                (i * weights.at(i) + (i + 1) * weights.at(i + 1)) /
+                (weights.at(i) + weights.at(i + 1)));
+        }
+        CC_ASSERT(offsets.size() == size / 2);
+    } else {
+        offsets.reserve(size - 1);
+        for (std::size_t i = 1; i < size; ++i) {
+            offsets.push_back(i);
+        }
+    }
+
+    auto blurTexCoords = offsets.size() * 2;
+
+    std::string result;
+    result += "#ifdef GL_ES\n"
+              "precision mediump float;\n"
+              "#endif\n"
+
+              "attribute vec4 a_position;\n"
+              "attribute vec2 a_texCoord;\n"
+              "attribute vec4 a_color;\n"
+
+              "#ifdef GL_ES\n"
+              "varying lowp vec4 v_fragmentColor;\n"
+              "varying mediump vec2 v_texCoord;\n";
+
+    result += toString("varying mediump vec2 v_blurTexCoords[", blurTexCoords,
+                       "];\n");
+
+    result += "#else\n"
+              "varying vec4 v_fragmentColor;\n"
+              "varying vec2 v_texCoord;\n";
+
+    result += toString("varying vec2 v_blurTexCoords[", blurTexCoords, "];\n");
+
+    result += "#endif\n"
+
+              "void main() {\n"
+              "    gl_Position = CC_PMatrix * a_position;\n"
+              "    v_fragmentColor = a_color;\n"
+              "    v_texCoord = a_texCoord;\n";
+
+    std::size_t vertexIndex = 0;
+    for (auto i = offsets.size() - 1; ~i; --i) {
+        auto offset = toString(std::fixed, std::setprecision(10),
+                               -offsets.at(i), " / ", dimension);
+        result +=
+            toString("    v_blurTexCoords[", vertexIndex++,
+                     "] = v_texCoord + vec2(", (isVertical ? "0.0" : offset),
+                     ", ", (isVertical ? offset : "0.0"), ");\n");
+    }
+
+    for (std::size_t i = 0; i < offsets.size(); ++i) {
+        auto offset = toString(std::fixed, std::setprecision(10), offsets.at(i),
+                               " / ", dimension);
+        result +=
+            toString("    v_blurTexCoords[", vertexIndex++,
+                     "] = v_texCoord + vec2(", (isVertical ? "0.0" : offset),
+                     ", ", (isVertical ? offset : "0.0"), ");\n");
+    }
+
+    result += "}";
+
+    LOG_FUNC_FORMAT(
+        "vertical = %s radius = %d sampling = %s sigma = %f frag = %s",
+        isVertical ? "true" : "false", blurRadius,
+        useLinearSampling ? "true" : "false", sigma, result.c_str());
+
+    return result;
+}
+
+std::string Shader::createBlurFragmentShader(int blurRadius,
+                                             bool useLinearSampling,
+                                             float sigma) {
+    auto size = static_cast<std::size_t>(blurRadius + 1);
+
+    std::vector<float> weights(size);
+    float sum = 0;
+    for (std::size_t i = 0; i < size; ++i) {
+        weights.at(i) = gaussianFunction(i, sigma);
+        sum += weights.at(i);
+        if (i > 0) {
+            sum += weights.at(i);
+        }
+    }
+    for (auto& w : weights) {
+        w /= sum;
+    }
+
+    if (useLinearSampling && (blurRadius % 2 == 0)) {
+        for (std::size_t i = 1, j = 1; i < size; i += 2) {
+            weights.at(j++) = weights.at(i) + weights.at(i + 1);
+        }
+        weights.resize((size + 1) / 2);
+    }
+
+    auto blurTexCoords = (weights.size() - 1) * 2;
+
+    std::string result;
+    result += "#ifdef GL_ES\n"
+              "precision mediump float;\n"
+              "#endif\n"
+
+              "#ifdef GL_ES\n"
+              "varying lowp vec4 v_fragmentColor;\n"
+              "varying mediump vec2 v_texCoord;\n";
+
+    result += toString("varying mediump vec2 v_blurTexCoords[", blurTexCoords,
+                       "];\n");
+
+    result += "#else\n"
+              "varying vec4 v_fragmentColor;\n"
+              "varying vec2 v_texCoord;\n";
+
+    result += toString("varying vec2 v_blurTexCoords[", blurTexCoords, "];\n");
+
+    result += "#endif\n"
+
+              "void main() {\n"
+              "    gl_FragColor = vec4(0.0);\n";
+
+    std::size_t vertexIndex = 0;
+    for (auto i = weights.size() - 1; i > 0; --i) {
+        result += toString(
+            "    gl_FragColor += texture2D(CC_Texture0, v_blurTexCoords[",
+            vertexIndex++, "]) * ", std::fixed, std::setprecision(10),
+            weights.at(i), ";\n");
+    }
+
+    result +=
+        toString("    gl_FragColor += texture2D(CC_Texture0, v_texCoord) * ",
+                 std::fixed, std::setprecision(10), weights.at(0), ";\n");
+
+    for (std::size_t i = 1; i < weights.size(); ++i) {
+        result += toString(
+            "    gl_FragColor += texture2D(CC_Texture0, v_blurTexCoords[",
+            vertexIndex++, "]) * ", std::fixed, std::setprecision(10),
+            weights.at(i), ";\n");
+    }
+
+    result += "    gl_FragColor = gl_FragColor * v_fragmentColor;\n"
+              "}";
+
+    LOG_FUNC_FORMAT("radius = %d sampling = %s sigma = %f frag = %s",
+                    blurRadius, useLinearSampling ? "true" : "false", sigma,
+                    result.c_str());
+
+    return result;
+}
+
+float Shader::gaussianFunction(float x, float sigma) {
+    // 1/(sigma * sqrt(2 * pi) * exp(-(x/sigma)^2 / 2).
+    constexpr float inv_sqrt_2pi = 0.39894228f;
+
+    float k = x / sigma;
+    return inv_sqrt_2pi / sigma * std::exp(-k * k * 0.5f);
 }
 NS_EE_END

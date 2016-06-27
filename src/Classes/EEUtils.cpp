@@ -147,8 +147,10 @@ void captureScreenInPixels(
 }
 
 cocos2d::Image* captureScreenInPoints(float scale) {
+    auto director = cocos2d::Director::getInstance();
+
     // Retrieve the current scene.
-    auto scene = cocos2d::Director::getInstance()->getRunningScene();
+    auto scene = director->getRunningScene();
 
     auto transition = dynamic_cast<cocos2d::TransitionScene*>(scene);
     if (transition != nullptr) {
@@ -159,7 +161,7 @@ cocos2d::Image* captureScreenInPoints(float scale) {
     }
 
     // Retrieve the win size.
-    auto&& winSize = cocos2d::Director::getInstance()->getWinSize();
+    auto&& winSize = director->getWinSize();
 
     // Calculate resulting image size.
     auto&& size = winSize * scale;
@@ -172,20 +174,17 @@ cocos2d::Image* captureScreenInPoints(float scale) {
         width, height, cocos2d::Texture2D::PixelFormat::RGBA8888,
         GL_DEPTH24_STENCIL8);
 
+    renderer->setKeepMatrix(true);
+
     // Process rendering.
     renderer->begin();
 
-    auto additionalTransform = cocos2d::Mat4::IDENTITY;
-    additionalTransform.scale(scale, scale, 1.0f);
-
-    scene->setAdditionalTransform(&additionalTransform);
     scene->visit();
-    scene->setAdditionalTransform(nullptr);
 
     renderer->end();
 
     // Force to render immediately.
-    cocos2d::Director::getInstance()->getRenderer()->render();
+    director->getRenderer()->render();
 
     // Retrieve the image.
     auto image = renderer->newImage();

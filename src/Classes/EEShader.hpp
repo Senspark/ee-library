@@ -15,9 +15,14 @@
 NS_EE_BEGIN
 class Shader {
 public:
-    static cocos2d::GLProgram* createHorizontalBlurVertexShader();
-    
-    static cocos2d::GLProgram* createVerticalBlurVertexShader();
+    static cocos2d::GLProgram*
+    createHorizontalBlurProgram(float width, int blurRadius,
+                                bool useLinearSampling, float sigma);
+
+    static cocos2d::GLProgram* createVerticalBlurProgram(float height,
+                                                         int blurRadius,
+                                                         bool useLinearSampling,
+                                                         float sigma);
 
     static cocos2d::Mat4 createShearZMatrix(float dx, float dy);
 
@@ -68,8 +73,19 @@ public:
 
 private:
     static cocos2d::GLProgram*
-    createBlurVertexShader(const std::string& name,
-                           const std::string& vertexShader);
+    createBlurProgram(bool isVertical, float dimension, int blurRadius,
+                      bool useLinearSampling, float sigma);
+
+    static std::string createBlurVertexShader(bool isVertical, float dimension,
+                                              int blurRadius,
+                                              bool useLinearSampling,
+                                              float sigma);
+
+    static std::string createBlurFragmentShader(int blurRadius,
+                                                bool useLinearSampling,
+                                                float sigma);
+
+    static float gaussianFunction(float x, float sigma);
 };
 NS_EE_END
 

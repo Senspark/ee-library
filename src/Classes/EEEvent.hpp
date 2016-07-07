@@ -32,9 +32,7 @@ public:
     }
 
     /// Invokes the given callback with stored arguments.
-    void invoke(const CallbackType& callback) const {
-        callback_(callback);
-    }
+    void invoke(const CallbackType& callback) const { callback_(callback); }
 
 private:
     void invokeImpl(const CallbackType& callback, Args... args) const {

@@ -10,8 +10,6 @@
 #define EE_LIBRARY_TRANSITION_SCENE_HPP_
 
 #include "EEMacro.hpp"
-#include "EEForward.hpp"
-#include "cocos2d.h"
 
 #include <functional>
 #include <memory>

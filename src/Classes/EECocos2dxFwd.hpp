@@ -14,6 +14,8 @@
 #include <string>
 #include <unordered_map>
 
+enum class ResolutionPolicy;
+
 namespace cocos2d {
 class Node;
 class DrawNode;

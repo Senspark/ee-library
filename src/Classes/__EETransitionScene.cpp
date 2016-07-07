@@ -6,7 +6,7 @@
 //
 //
 
-#include "EETransitionScene.hpp"
+#include "__EETransitionScene.hpp"
 #include "cocos2d.h"
 
 namespace_ee_begin

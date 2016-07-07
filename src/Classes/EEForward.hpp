@@ -46,7 +46,7 @@ class SpriteWithHSVLoader;
 class BlurBackground;
 class BlurBackgroundLoader;
 
-template <class... Args> class EventInfo;
+template <int Id, class... Args> class EventInfo;
 
 template <class... Args> class DataInfo;
 

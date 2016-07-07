@@ -87,7 +87,8 @@ NS_DETAIL_END
 /// @endcode
 /// @see CREATE_EVENT_INFO
 /// @see CREATE_EVENT_INFO_EX
-template <class... Args> class EventInfo final : public detail::EventInfoBase {
+template <class... Args>
+class [[deprecated]] EventInfo final : public detail::EventInfoBase {
 public:
     using DataType = std::tuple<Args...>;
     using CallbackType = std::function<void(Args...)>;

@@ -6,7 +6,7 @@
 //
 //
 
-#include "EEEventInfo.hpp"
+#include "EEEventInfoV1.hpp"
 
 #include <cocos2d.h>
 

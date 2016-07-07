@@ -51,7 +51,7 @@
 
 #include "EESkeletonAnimationLoader.hpp"
 
-#include "__EEDataInfo.hpp"
-#include "__EEDataHandler.hpp"
+#include "_EEDataInfo.hpp"
+#include "_EEDataHandler.hpp"
 
 #endif /* EE_LIBRARY_HEADER_HPP_ */

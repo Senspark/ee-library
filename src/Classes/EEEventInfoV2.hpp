@@ -13,7 +13,12 @@
 #include <tuple>
 
 namespace ee {
-template <int EventId, class... Args> class EventInfo final {
+namespace detail {
+class EventInfoBase {};
+} // namespace detail
+
+template <int EventId, class... Args>
+class EventInfo final : public detail::EventInfoBase {
 public:
     using ArgTypes = std::tuple<Args...>;
     using CallbackType = std::function<void(Args...)>;

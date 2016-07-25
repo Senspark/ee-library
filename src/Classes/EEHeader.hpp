@@ -13,7 +13,6 @@
 #include "EEForward.hpp"
 #include "EECocos2dxFwd.hpp"
 
-#include "EEExtension.hpp"
 #include "EEGenericLoader.hpp"
 #include "EEDynamicValue.hpp"
 #include "EEFlags.hpp"

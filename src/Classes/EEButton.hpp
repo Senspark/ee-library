@@ -14,7 +14,6 @@
 
 #include "EEMacro.hpp"
 #include "EECocos2dxFwd.hpp"
-#include "EEExtension.hpp"
 #include "EEForward.hpp"
 
 #include <ui/UiButton.h>

@@ -14,7 +14,6 @@
 
 #include "EEMacro.hpp"
 #include "EECocos2dxFwd.hpp"
-#include "EEExtension.hpp"
 
 NS_EE_BEGIN
 /// Generic template loader for cocosbuilder.
@@ -38,7 +37,7 @@ public:
     using ArgsType = std::tuple<Ts...>;
 
     static_assert(
-        is_base_of_v<cocosbuilder::NodeLoader, ParentLoaderType>,
+        std::is_base_of<cocosbuilder::NodeLoader, ParentLoaderType>::value,
         "ParentLoader should be derived from cocosbuilder::NodeLoader");
 
     template <class... Us> static GenericLoader* loader(Us&&... args) {
@@ -50,7 +49,7 @@ public:
                 data = std::tuple<Us...>(std::forward<Us>(args)...)
             ] {
                 return result->internalCreateNode(
-                    bool_constant<sizeof...(Ts) == 0>(), data,
+                    std::integral_constant<bool, sizeof...(Ts) == 0>(), data,
                     std::make_index_sequence<sizeof...(Us)>());
             };
         } else {

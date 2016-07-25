@@ -15,7 +15,6 @@
 
 #include "EEMacro.hpp"
 #include "EECocos2dxFwd.hpp"
-#include "EEExtension.hpp"
 
 NS_EE_BEGIN
 /// Reference guard.
@@ -150,7 +149,7 @@ void doRecursively(cocos2d::Node* node,
 ///                   &cocos2d::Node::pause);
 /// @endcode
 template <class FunctionPointer, class... Args>
-std::enable_if_t<is_member_function_pointer_v<FunctionPointer>>
+std::enable_if_t<std::is_member_function_pointer<FunctionPointer>::value>
 doRecursively(cocos2d::Node* node, FunctionPointer&& ptr, Args&&... args) {
     doRecursively(node, [&](cocos2d::Node* n) { (n->*ptr)(args...); });
 }

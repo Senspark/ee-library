@@ -149,6 +149,7 @@ class Scale9Sprite;
 namespace cocosbuilder {
 class CCBReader;
 class NodeLoader;
+class SpriteLoader;
 } // namespace cocosbuilder
 
 namespace spine {

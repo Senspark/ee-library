@@ -99,7 +99,7 @@ void UiCheckBoxLoader::onHandlePropTypeCheck(cocos2d::Node* node,
         return button->setSelected(check);
     }
     if (propName == property::normal_cross_sprite_frame_enabled ||
-        propName == property::disabled_cross_sprite_frame ||
+        propName == property::disabled_cross_sprite_frame_enabled ||
         propName == property::normal_background_sprite_frame_enabled ||
         propName == property::pressed_background_sprite_frame_enabled ||
         propName == property::disabled_background_sprite_frame_enabled) {

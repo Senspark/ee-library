@@ -6,67 +6,31 @@
 //
 //
 
-#ifndef EEDataInfo_hpp
-#define EEDataInfo_hpp
+#ifndef EE_LIBRARY_DATA_INFO_HPP_
+#define EE_LIBRARY_DATA_INFO_HPP_
 
-#include <string>
+#include <functional>
+#include <tuple>
 
-#include "EEMacro.hpp"
 #include "EEUtils.hpp"
 
-NS_EE_BEGIN
-enum class DataType {
-    Persist,
-    Session
-};
+namespace ee {
+namespace detail {
+class DataInfoBase {};
+} // namespace detail
 
-template<class... Args>
-std::string createKey(Args&&... args) {
-    return (toString("___", std::forward<Args>(args)) + ...);
-}
-
-NS_DETAIL_BEGIN
-class BaseData {
+template <int DataId, class Value, class... Keys>
+class DataInfo final : public detail::DataInfoBase {
 public:
-    explicit BaseData(DataType type, const std::string& key);
-    
-    const std::string& getKey() const noexcept;
-    
-private:
-    DataType type_;
-    
-    std::string key_;
-};
+    using ValueType = Value;
+    using KeyTypes = std::tuple<Keys...>;
 
-template<class T, class... Args>
-class BaseDataInfo : public BaseData {
-public:
-    using ValueType = T;
-    using FormatType = std::tuple<Args...>;
-    
-    using BaseData::BaseData;
-};
-NS_EE_END
+    enum { Id = DataId };
 
-template<class T, class... Args>
-class SessionData : public detail::BaseDataInfo<T, Args...> {
-public:
-//    using detail::BaseDataInfo<T, Args...>::ValueType;
-//    using detail::BaseDataInfo<T, Args...>::FormatType;
-    
-    explicit SessionData(const std::string& key)
-    : detail::BaseDataInfo<T, Args...>(key) {}
+    static std::string createKey(const Keys&... keys) {
+        return toString(toString("___", keys)...);
+    }
 };
+} // namespace ee
 
-template<class T, class... Args>
-class PersistData : public detail::BaseDataInfo<T, Args...> {
-public:
-//    using detail::BaseDataInfo<T, Args...>::ValueType;
-//    using detail::BaseDataInfo<T, Args...>::FormatType;
-    
-    explicit PersistData(const std::string& key)
-    : detail::BaseDataInfo<T, Args...>(key) {}
-};
-NS_EE_END
-
-#endif /* EEDataInfo_hpp */
+#endif /* EE_LIBRARY_DATA_INFO_HPP_ */

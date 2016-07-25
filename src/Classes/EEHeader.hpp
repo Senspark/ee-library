@@ -14,7 +14,6 @@
 #include "EECocos2dxFwd.hpp"
 
 #include "EEExtension.hpp"
-#include "EEBitManipulation.hpp"
 #include "EEGenericLoader.hpp"
 #include "EEDynamicValue.hpp"
 #include "EEFlags.hpp"
@@ -51,7 +50,7 @@
 
 #include "EESkeletonAnimationLoader.hpp"
 
-#include "_EEDataInfo.hpp"
-#include "_EEDataHandler.hpp"
+#include "EEDataInfo.hpp"
+#include "EEDataHandler.hpp"
 
 #endif /* EE_LIBRARY_HEADER_HPP_ */

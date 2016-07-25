@@ -47,9 +47,9 @@ class BlurBackground;
 class BlurBackgroundLoader;
 
 template <int Id, class... Args> class EventInfo;
+class EventDispatcher;
 
-template <class... Args> class DataInfo;
-
+template <int Id, class Value, class... Keys> class DataInfo;
 class DataHandler;
 } // namespace ee
 

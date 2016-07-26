@@ -15,20 +15,20 @@ DataHandler::DataHandler() { handlers_.insert(this); }
 
 DataHandler::~DataHandler() { handlers_.erase(this); }
 
-void DataHandler::notify(int dataId, const std::string& key,
-                         const cocos2d::Value& value) const {
+void DataHandler::save(int dataId, const std::string& key,
+                       const cocos2d::Value& value) const {
     for (auto&& handler : handlers_) {
-        if (handler->notifyCallback_) {
-            handler->notifyCallback_(dataId, key, value);
+        if (handler->savingCallback_) {
+            handler->savingCallback_(dataId, key, value);
         }
     }
 }
 
-bool DataHandler::request(int dataId, const std::string& key,
-                          cocos2d::Value& result) const {
+bool DataHandler::load(int dataId, const std::string& key,
+                       cocos2d::Value& result) const {
     for (auto&& handler : handlers_) {
-        if (handler->requestCallback_) {
-            if (handler->requestCallback_(dataId, key, result)) {
+        if (handler->loadingCallback_) {
+            if (handler->loadingCallback_(dataId, key, result)) {
                 return true;
             }
         }
@@ -36,24 +36,11 @@ bool DataHandler::request(int dataId, const std::string& key,
     return false;
 }
 
-template <>
-bool DataHandler::request(int dataId, const std::string& key) const {
-    cocos2d::Value result{false};
-    request(dataId, key, result);
-    return result.asBool();
+void DataHandler::setSavingCallback(const SavingCallback& callback) {
+    savingCallback_ = callback;
 }
 
-template <> int DataHandler::request(int dataId, const std::string& key) const {
-    cocos2d::Value result{0};
-    request(dataId, key, result);
-    return result.asInt();
-}
-
-void DataHandler::setNotifyCallback(const NotifyCallback& callback) {
-    notifyCallback_ = callback;
-}
-
-void DataHandler::setRequestCallback(const RequestCallback& callback) {
-    requestCallback_ = callback;
+void DataHandler::setLoadingCallback(const LoadingCallback& callback) {
+    loadingCallback_ = callback;
 }
 } // namespace ee

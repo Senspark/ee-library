@@ -51,6 +51,8 @@ class EventDispatcher;
 
 template <int Id, class Value, class... Keys> class DataInfo;
 class DataHandler;
+
+template <class T> struct DataTraits;
 } // namespace ee
 
 #endif // EE_LIBRARY_FORWARD_HPP_

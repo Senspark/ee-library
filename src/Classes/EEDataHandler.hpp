@@ -12,16 +12,17 @@
 #include <unordered_set>
 
 #include "EEForward.hpp"
+#include "EEDataTraits.hpp"
 
 #include <base/CCValue.h>
 
 namespace ee {
 class DataHandler {
 public:
-    using NotifyCallback = std::function<void(
+    using SavingCallback = std::function<void(
         int dataId, const std::string& key, const cocos2d::Value& value)>;
 
-    using RequestCallback = std::function<bool(
+    using LoadingCallback = std::function<bool(
         int dataId, const std::string& key, cocos2d::Value& result)>;
 
     DataHandler();
@@ -29,15 +30,18 @@ public:
 
     template <class DataType, class Value, class... Keys>
     void set(Value&& value, Keys&&... keys) {
-        notify(DataType::Id, DataType::createKey(std::forward<Keys>(keys)...),
-               cocos2d::Value{std::forward<Value>(value)});
+        using ValueType = typename DataType::ValueType;
+        save(DataType::Id, DataType::createKey(std::forward<Keys>(keys)...),
+             DataTraits<ValueType>::save(std::forward<Value>(value)));
     }
 
-    template <class DataType, class Value = typename DataType::ValueType,
-              class... Keys>
-    Value get(Keys&&... keys) {
-        return request<Value>(DataType::Id,
-                              DataType::createKey(std::forward<Keys>(keys)...));
+    template <class DataType, class... Keys>
+    decltype(auto) get(Keys&&... keys) {
+        using ValueType = typename DataType::ValueType;
+        cocos2d::Value result{};
+        load(DataType::Id, DataType::createKey(std::forward<Keys>(keys)...),
+             result);
+        return DataTraits<ValueType>::load(result);
     }
 
     template <class DataType, class Function, class... Keys>
@@ -47,20 +51,17 @@ public:
         set<DataType>(current, std::forward<Keys>(keys)...);
     }
 
-    void setNotifyCallback(const NotifyCallback& callback);
-    void setRequestCallback(const RequestCallback& callback);
+    void setSavingCallback(const SavingCallback& callback);
+    void setLoadingCallback(const LoadingCallback& callback);
 
 private:
-    void notify(int dataId, const std::string& key,
-                const cocos2d::Value& value) const;
+    void save(int dataId, const std::string& key,
+              const cocos2d::Value& value) const;
 
-    template <class T> T request(int dataId, const std::string& key) const;
+    bool load(int dataId, const std::string& key, cocos2d::Value& result) const;
 
-    bool request(int dataId, const std::string& key,
-                 cocos2d::Value& result) const;
-
-    NotifyCallback notifyCallback_;
-    RequestCallback requestCallback_;
+    SavingCallback savingCallback_;
+    LoadingCallback loadingCallback_;
 
     static std::unordered_set<DataHandler*> handlers_;
 };

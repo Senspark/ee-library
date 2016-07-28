@@ -15,20 +15,27 @@ DataHandler::DataHandler() { handlers_.insert(this); }
 
 DataHandler::~DataHandler() { handlers_.erase(this); }
 
-void DataHandler::save(int dataId, const std::string& key,
+DataHandler::DataHandler(const DataHandler& other)
+    : setCallback_{other.setCallback_}
+    , getCallback_{other.getCallback_}
+    , removeCallback_(other.removeCallback_) {
+    handlers_.insert(this);
+}
+
+void DataHandler::set0(int dataId, const std::string& key,
                        const cocos2d::Value& value) const {
     for (auto&& handler : handlers_) {
-        if (handler->savingCallback_) {
-            handler->savingCallback_(dataId, key, value);
+        if (handler->setCallback_) {
+            handler->setCallback_(dataId, key, value);
         }
     }
 }
 
-bool DataHandler::load(int dataId, const std::string& key,
+bool DataHandler::get0(int dataId, const std::string& key,
                        cocos2d::Value& result) const {
     for (auto&& handler : handlers_) {
-        if (handler->loadingCallback_) {
-            if (handler->loadingCallback_(dataId, key, result)) {
+        if (handler->getCallback_) {
+            if (handler->getCallback_(dataId, key, result)) {
                 return true;
             }
         }
@@ -36,11 +43,23 @@ bool DataHandler::load(int dataId, const std::string& key,
     return false;
 }
 
-void DataHandler::setSavingCallback(const SavingCallback& callback) {
-    savingCallback_ = callback;
+void DataHandler::remove0(int dataId, const std::string& key) const {
+    for (auto&& handler : handlers_) {
+        if (handler->removeCallback_) {
+            handler->removeCallback_(dataId, key);
+        }
+    }
 }
 
-void DataHandler::setLoadingCallback(const LoadingCallback& callback) {
-    loadingCallback_ = callback;
+void DataHandler::setCallback(const SetCallback& callback) {
+    setCallback_ = callback;
+}
+
+void DataHandler::setCallback(const GetCallback& callback) {
+    getCallback_ = callback;
+}
+
+void DataHandler::setCallback(const RemoveCallback& callback) {
+    removeCallback_ = callback;
 }
 } // namespace ee

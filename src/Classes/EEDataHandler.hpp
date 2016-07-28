@@ -19,49 +19,66 @@
 namespace ee {
 class DataHandler {
 public:
-    using SavingCallback = std::function<void(
-        int dataId, const std::string& key, const cocos2d::Value& value)>;
+    using SetCallback = std::function<void(int dataId, const std::string& key,
+                                           const cocos2d::Value& value)>;
 
-    using LoadingCallback = std::function<bool(
-        int dataId, const std::string& key, cocos2d::Value& result)>;
+    using GetCallback = std::function<bool(int dataId, const std::string& key,
+                                           cocos2d::Value& result)>;
+
+    using RemoveCallback =
+        std::function<void(int dataId, const std::string& key)>;
 
     DataHandler();
     ~DataHandler();
 
+    DataHandler(const DataHandler& other);
+    DataHandler& operator=(const DataHandler& other) = default;
+
+    DataHandler(DataHandler&& other) = delete;
+    DataHandler& operator=(DataHandler&& other) = delete;
+
     template <class DataType, class Value, class... Keys>
     void set(Value&& value, Keys&&... keys) {
         using ValueType = typename DataType::ValueType;
-        save(DataType::Id, DataType::createKey(std::forward<Keys>(keys)...),
-             DataTraits<ValueType>::save(std::forward<Value>(value)));
+        set0(DataType::Id, DataType::createKey(std::forward<Keys>(keys)...),
+             DataTraits<ValueType>::set(std::forward<Value>(value)));
     }
 
     template <class DataType, class... Keys>
     decltype(auto) get(Keys&&... keys) {
         using ValueType = typename DataType::ValueType;
         cocos2d::Value result{};
-        load(DataType::Id, DataType::createKey(std::forward<Keys>(keys)...),
+        get0(DataType::Id, DataType::createKey(std::forward<Keys>(keys)...),
              result);
-        return DataTraits<ValueType>::load(result);
+        return DataTraits<ValueType>::get(result);
     }
 
-    template <class DataType, class Function, class... Keys>
-    void getAndSet(Function&& f, Keys&&... keys) {
+    template <class DataType, class... Keys>
+    void getAndSet(const typename DataType::SetterType& f, Keys&&... keys) {
         auto current = get<DataType>(keys...);
         f(current);
         set<DataType>(current, std::forward<Keys>(keys)...);
     }
 
-    void setSavingCallback(const SavingCallback& callback);
-    void setLoadingCallback(const LoadingCallback& callback);
+    template <class DataType, class... Keys> void remove(Keys&&... keys) {
+        remove0(DataType::Id, DataType::createKey(std::forward<Keys>(keys)...));
+    }
+
+    void setCallback(const SetCallback& callback);
+    void setCallback(const GetCallback& callback);
+    void setCallback(const RemoveCallback& callback);
 
 private:
-    void save(int dataId, const std::string& key,
+    void set0(int dataId, const std::string& key,
               const cocos2d::Value& value) const;
 
-    bool load(int dataId, const std::string& key, cocos2d::Value& result) const;
+    bool get0(int dataId, const std::string& key, cocos2d::Value& result) const;
 
-    SavingCallback savingCallback_;
-    LoadingCallback loadingCallback_;
+    void remove0(int dataId, const std::string& key) const;
+
+    SetCallback setCallback_;
+    GetCallback getCallback_;
+    RemoveCallback removeCallback_;
 
     static std::unordered_set<DataHandler*> handlers_;
 };

@@ -56,7 +56,7 @@ template <class... Args> std::string toString(Args&&... args) {
     static std::stringstream ss;
     ss.str(std::string());
     ss.clear();
-    (ss << ... << std::forward<Args>(args));
+    (void)((ss << ... << std::forward<Args>(args)));
     return ss.str();
 }
 

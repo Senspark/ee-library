@@ -38,4 +38,16 @@ cocos2d::Value DataTraits<std::string>::set(const std::string& value) {
 std::string DataTraits<std::string>::get(const cocos2d::Value& value) {
     return value.asString();
 }
+
+template <class T>
+cocos2d::Value
+DataTraits<T, detail::enable_if_is_enum_and_inherit_from_int<T>>::set(T value) {
+    return DataTraits<int>::set(static_cast<int>(value));
+}
+
+template <class T>
+T DataTraits<T, detail::enable_if_is_enum_and_inherit_from_int<T>>::get(
+    const cocos2d::Value& value) {
+    return static_cast<T>(DataTraits<int>::get(value));
+}
 } // namespace ee

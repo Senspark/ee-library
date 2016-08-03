@@ -6,37 +6,52 @@
 //
 //
 
+#include <limits>
+#include <unordered_set>
+
 #include "EEDataHandler.hpp"
 
 namespace ee {
-std::unordered_set<DataHandler*> DataHandler::handlers_;
+namespace {
+std::map<int, std::unordered_set<DataHandler*>> handlers_;
+} // namespace
 
-DataHandler::DataHandler() { handlers_.insert(this); }
+const int DataHandler::LowestPriority = std::numeric_limits<int>::max();
 
-DataHandler::~DataHandler() { handlers_.erase(this); }
+DataHandler::DataHandler(int priority)
+    : priority_{priority} {
+    handlers_[priority_].insert(this);
+}
+
+DataHandler::~DataHandler() { handlers_[priority_].erase(this); }
 
 DataHandler::DataHandler(const DataHandler& other)
-    : setCallback_{other.setCallback_}
+    : priority_{other.priority_}
+    , setCallback_{other.setCallback_}
     , getCallback_{other.getCallback_}
     , removeCallback_(other.removeCallback_) {
-    handlers_.insert(this);
+    handlers_[priority_].insert(this);
 }
 
 void DataHandler::set0(int dataId, const std::string& key,
                        const cocos2d::Value& value) const {
-    for (auto&& handler : handlers_) {
-        if (handler->setCallback_) {
-            handler->setCallback_(dataId, key, value);
+    for (auto&& handlers : handlers_) {
+        for (auto&& handler : handlers.second) {
+            if (handler->setCallback_) {
+                handler->setCallback_(dataId, key, value);
+            }
         }
     }
 }
 
 bool DataHandler::get0(int dataId, const std::string& key,
                        cocos2d::Value& result) const {
-    for (auto&& handler : handlers_) {
-        if (handler->getCallback_) {
-            if (handler->getCallback_(dataId, key, result)) {
-                return true;
+    for (auto&& handlers : handlers_) {
+        for (auto&& handler : handlers.second) {
+            if (handler->getCallback_) {
+                if (handler->getCallback_(dataId, key, result)) {
+                    return true;
+                }
             }
         }
     }
@@ -44,9 +59,11 @@ bool DataHandler::get0(int dataId, const std::string& key,
 }
 
 void DataHandler::remove0(int dataId, const std::string& key) const {
-    for (auto&& handler : handlers_) {
-        if (handler->removeCallback_) {
-            handler->removeCallback_(dataId, key);
+    for (auto&& handlers : handlers_) {
+        for (auto&& handler : handlers.second) {
+            if (handler->removeCallback_) {
+                handler->removeCallback_(dataId, key);
+            }
         }
     }
 }

@@ -9,8 +9,6 @@
 #ifndef EE_LIBRARY_DATA_HANDLER_HPP_
 #define EE_LIBRARY_DATA_HANDLER_HPP_
 
-#include <unordered_set>
-
 #include "EEForward.hpp"
 #include "EEDataTraits.hpp"
 
@@ -28,7 +26,10 @@ public:
     using RemoveCallback =
         std::function<void(int dataId, const std::string& key)>;
 
-    DataHandler();
+    static const int LowestPriority;
+
+    DataHandler(int priority = LowestPriority);
+
     ~DataHandler();
 
     DataHandler(const DataHandler& other);
@@ -76,11 +77,11 @@ private:
 
     void remove0(int dataId, const std::string& key) const;
 
+    int priority_;
+
     SetCallback setCallback_;
     GetCallback getCallback_;
     RemoveCallback removeCallback_;
-
-    static std::unordered_set<DataHandler*> handlers_;
 };
 } // namespace ee
 

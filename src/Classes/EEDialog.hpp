@@ -16,6 +16,7 @@
 #include "EEMacro.hpp"
 #include "EECocos2dxFwd.hpp"
 
+#include <base/CCRefPtr.h>
 #include <ui/UIWidget.h>
 
 NS_EE_BEGIN

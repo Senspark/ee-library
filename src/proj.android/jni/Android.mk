@@ -14,7 +14,6 @@ LOCAL_MODULE := ee_static
 LOCAL_MODULE_FILENAME := libee
 
 LOCAL_SRC_FILES := ${shell find $(LOCAL_PATH)/../../Classes -name "*.cpp" ! -name "__*.cpp" -print}
-LOCAL_SRC_FILES += ${shell find $(LOCAL_PATH)/../../../boost_1_60_0/boost -name "*.cpp" -print}
                    
 LOCAL_C_INCLUDES := \
 $(LOCAL_PATH)/../../Classes \
@@ -26,6 +25,5 @@ $(LOCAL_PATH)/../../cocos2d/cocos/ui \
 $(LOCAL_PATH)/../../cocos2d/extensions
 
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/../../Classes
-LOCAL_EXPORT_C_INCLUDES += $(LOCAL_PATH)/../../../boost_1_60_0
 
 include $(BUILD_STATIC_LIBRARY)

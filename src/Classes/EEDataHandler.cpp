@@ -7,6 +7,7 @@
 //
 
 #include <limits>
+#include <map>
 #include <unordered_set>
 
 #include "EEDataHandler.hpp"
@@ -33,8 +34,8 @@ DataHandler::DataHandler(const DataHandler& other)
     handlers_[priority_].insert(this);
 }
 
-void DataHandler::set0(int dataId, const std::string& key,
-                       const cocos2d::Value& value) const {
+void DataHandler::set0(std::size_t dataId, const std::string& key,
+                       const std::string& value) const {
     for (auto&& handlers : handlers_) {
         for (auto&& handler : handlers.second) {
             if (handler->setCallback_) {
@@ -44,8 +45,8 @@ void DataHandler::set0(int dataId, const std::string& key,
     }
 }
 
-bool DataHandler::get0(int dataId, const std::string& key,
-                       cocos2d::Value& result) const {
+bool DataHandler::get0(std::size_t dataId, const std::string& key,
+                       std::string& result) const {
     for (auto&& handlers : handlers_) {
         for (auto&& handler : handlers.second) {
             if (handler->getCallback_) {
@@ -58,7 +59,7 @@ bool DataHandler::get0(int dataId, const std::string& key,
     return false;
 }
 
-void DataHandler::remove0(int dataId, const std::string& key) const {
+void DataHandler::remove0(std::size_t dataId, const std::string& key) const {
     for (auto&& handlers : handlers_) {
         for (auto&& handler : handlers.second) {
             if (handler->removeCallback_) {

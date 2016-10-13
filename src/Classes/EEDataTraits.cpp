@@ -6,36 +6,53 @@
 //
 //
 
+#include <stdexcept>
+
 #include "EEDataTraits.hpp"
 
-#include <base/CCValue.h>
-
 namespace ee {
-cocos2d::Value DataTraits<bool>::set(bool value) {
-    return cocos2d::Value{value};
+template <> bool DataTraits<bool>::get(const std::string& value) {
+    if (value == "1") {
+        return true;
+    }
+    if (value == "0") {
+        return false;
+    }
+    throw std::invalid_argument("DataTraits<bool>");
 }
 
-bool DataTraits<bool>::get(const cocos2d::Value& value) {
-    return value.asBool();
+template <> int DataTraits<int>::get(const std::string& value) {
+    return std::stoi(value);
 }
 
-cocos2d::Value DataTraits<int>::set(int value) { return cocos2d::Value{value}; }
-
-int DataTraits<int>::get(const cocos2d::Value& value) { return value.asInt(); }
-
-cocos2d::Value DataTraits<float>::set(float value) {
-    return cocos2d::Value{value};
+template <>
+unsigned long DataTraits<unsigned long>::get(const std::string& value) {
+    return std::stoul(value);
 }
 
-float DataTraits<float>::get(const cocos2d::Value& value) {
-    return value.asFloat();
+template <> long long DataTraits<long long>::get(const std::string& value) {
+    return std::stoll(value);
 }
 
-cocos2d::Value DataTraits<std::string>::set(const std::string& value) {
-    return cocos2d::Value{value};
+template <>
+unsigned long long
+DataTraits<unsigned long long>::get(const std::string& value) {
+    return std::stoull(value);
 }
 
-std::string DataTraits<std::string>::get(const cocos2d::Value& value) {
-    return value.asString();
+template <> float DataTraits<float>::get(const std::string& value) {
+    return std::stof(value);
+}
+
+template <> double DataTraits<double>::get(const std::string& value) {
+    return std::stod(value);
+}
+
+const std::string& DataTraits<std::string>::set(const std::string& value) {
+    return value;
+}
+
+const std::string& DataTraits<std::string>::get(const std::string& value) {
+    return value;
 }
 } // namespace ee

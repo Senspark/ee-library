@@ -12,19 +12,17 @@
 #include "EEForward.hpp"
 #include "EEDataTraits.hpp"
 
-#include <base/CCValue.h>
-
 namespace ee {
 class DataHandler {
 public:
-    using SetCallback = std::function<void(int dataId, const std::string& key,
-                                           const cocos2d::Value& value)>;
+    using SetCallback = std::function<void(
+        std::size_t dataId, const std::string& key, const std::string& value)>;
 
-    using GetCallback = std::function<bool(int dataId, const std::string& key,
-                                           cocos2d::Value& result)>;
+    using GetCallback = std::function<bool(
+        std::size_t dataId, const std::string& key, std::string& result)>;
 
     using RemoveCallback =
-        std::function<void(int dataId, const std::string& key)>;
+        std::function<void(std::size_t dataId, const std::string& key)>;
 
     static const int LowestPriority;
 
@@ -45,10 +43,9 @@ public:
              DataTraits<ValueType>::set(std::forward<Value>(value)));
     }
 
-    template <class DataType, class... Keys>
-    decltype(auto) get(Keys&&... keys) {
+    template <class DataType, class... Keys> auto get(Keys&&... keys) {
         using ValueType = typename DataType::ValueType;
-        cocos2d::Value result{};
+        std::string result;
         get0(DataType::Id, DataType::createKey(std::forward<Keys>(keys)...),
              result);
         return DataTraits<ValueType>::get(result);
@@ -70,12 +67,13 @@ public:
     void setCallback(const RemoveCallback& callback);
 
 private:
-    void set0(int dataId, const std::string& key,
-              const cocos2d::Value& value) const;
+    void set0(std::size_t dataId, const std::string& key,
+              const std::string& value) const;
 
-    bool get0(int dataId, const std::string& key, cocos2d::Value& result) const;
+    bool get0(std::size_t dataId, const std::string& key,
+              std::string& result) const;
 
-    void remove0(int dataId, const std::string& key) const;
+    void remove0(std::size_t dataId, const std::string& key) const;
 
     int priority_;
 

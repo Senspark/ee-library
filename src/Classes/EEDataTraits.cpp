@@ -6,6 +6,7 @@
 //
 //
 
+#include <sstream>
 #include <stdexcept>
 
 #include "EEDataTraits.hpp"
@@ -25,13 +26,26 @@ template <> int DataTraits<int>::get(const std::string& value) {
     return std::stoi(value);
 }
 
-template <>
-unsigned long DataTraits<unsigned long>::get(const std::string& value) {
-    return std::stoul(value);
+template <> long DataTraits<long>::get(const std::string& value) {
+    return std::stol(value);
 }
 
 template <> long long DataTraits<long long>::get(const std::string& value) {
     return std::stoll(value);
+}
+
+template <>
+unsigned int DataTraits<unsigned int>::get(const std::string& value) {
+    auto result = std::stoul(value);
+    if (std::numeric_limits<unsigned int>::max() < result) {
+        throw std::out_of_range("data_traits_unsigned_int");
+    }
+    return static_cast<unsigned int>(result);
+}
+
+template <>
+unsigned long DataTraits<unsigned long>::get(const std::string& value) {
+    return std::stoul(value);
 }
 
 template <>

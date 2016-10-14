@@ -17,6 +17,42 @@ namespace {
 std::map<int, std::unordered_set<DataHandler*>> handlers_;
 } // namespace
 
+namespace detail {
+void set0(std::size_t dataId, const std::string& key,
+          const std::string& value) {
+    for (auto&& handlers : handlers_) {
+        for (auto&& handler : handlers.second) {
+            if (handler->setCallback_) {
+                handler->setCallback_(dataId, key, value);
+            }
+        }
+    }
+}
+
+bool get0(std::size_t dataId, const std::string& key, std::string& result) {
+    for (auto&& handlers : handlers_) {
+        for (auto&& handler : handlers.second) {
+            if (handler->getCallback_) {
+                if (handler->getCallback_(dataId, key, result)) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+void remove0(std::size_t dataId, const std::string& key) {
+    for (auto&& handlers : handlers_) {
+        for (auto&& handler : handlers.second) {
+            if (handler->removeCallback_) {
+                handler->removeCallback_(dataId, key);
+            }
+        }
+    }
+}
+} // namespace detail
+
 const int DataHandler::LowestPriority = std::numeric_limits<int>::max();
 
 DataHandler::DataHandler(int priority)
@@ -32,41 +68,6 @@ DataHandler::DataHandler(const DataHandler& other)
     , getCallback_{other.getCallback_}
     , removeCallback_(other.removeCallback_) {
     handlers_[priority_].insert(this);
-}
-
-void DataHandler::set0(std::size_t dataId, const std::string& key,
-                       const std::string& value) const {
-    for (auto&& handlers : handlers_) {
-        for (auto&& handler : handlers.second) {
-            if (handler->setCallback_) {
-                handler->setCallback_(dataId, key, value);
-            }
-        }
-    }
-}
-
-bool DataHandler::get0(std::size_t dataId, const std::string& key,
-                       std::string& result) const {
-    for (auto&& handlers : handlers_) {
-        for (auto&& handler : handlers.second) {
-            if (handler->getCallback_) {
-                if (handler->getCallback_(dataId, key, result)) {
-                    return true;
-                }
-            }
-        }
-    }
-    return false;
-}
-
-void DataHandler::remove0(std::size_t dataId, const std::string& key) const {
-    for (auto&& handlers : handlers_) {
-        for (auto&& handler : handlers.second) {
-            if (handler->removeCallback_) {
-                handler->removeCallback_(dataId, key);
-            }
-        }
-    }
 }
 
 void DataHandler::setCallback(const SetCallback& callback) {

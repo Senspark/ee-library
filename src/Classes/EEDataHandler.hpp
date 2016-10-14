@@ -13,6 +13,39 @@
 #include "EEDataTraits.hpp"
 
 namespace ee {
+namespace detail {
+void set0(std::size_t dataId, const std::string& key, const std::string& value);
+bool get0(std::size_t dataId, const std::string& key, std::string& result);
+void remove0(std::size_t dataId, const std::string& key);
+} // namespace detail
+
+template <class DataType, class Value, class... Keys>
+void set(Value&& value, Keys&&... keys) {
+    using ValueType = typename DataType::ValueType;
+    detail::set0(DataType::Id, DataType::createKey(std::forward<Keys>(keys)...),
+                 DataTraits<ValueType>::set(std::forward<Value>(value)));
+}
+
+template <class DataType, class... Keys> auto get(Keys&&... keys) {
+    using ValueType = typename DataType::ValueType;
+    std::string result;
+    detail::get0(DataType::Id, DataType::createKey(std::forward<Keys>(keys)...),
+                 result);
+    return DataTraits<ValueType>::get(result);
+}
+
+template <class DataType, class... Keys>
+void getAndSet(const typename DataType::SetterType& f, Keys&&... keys) {
+    auto current = get<DataType>(keys...);
+    f(current);
+    set<DataType>(current, std::forward<Keys>(keys)...);
+}
+
+template <class DataType, class... Keys> void remove(Keys&&... keys) {
+    detail::remove0(DataType::Id,
+                    DataType::createKey(std::forward<Keys>(keys)...));
+}
+
 class DataHandler {
 public:
     using SetCallback = std::function<void(
@@ -37,29 +70,28 @@ public:
     DataHandler& operator=(DataHandler&& other) = delete;
 
     template <class DataType, class Value, class... Keys>
-    void set(Value&& value, Keys&&... keys) {
-        using ValueType = typename DataType::ValueType;
-        set0(DataType::Id, DataType::createKey(std::forward<Keys>(keys)...),
-             DataTraits<ValueType>::set(std::forward<Value>(value)));
-    }
-
-    template <class DataType, class... Keys> auto get(Keys&&... keys) {
-        using ValueType = typename DataType::ValueType;
-        std::string result;
-        get0(DataType::Id, DataType::createKey(std::forward<Keys>(keys)...),
-             result);
-        return DataTraits<ValueType>::get(result);
+    [[deprecated]] void set(Value&& value, Keys&&... keys) {
+        using ee::set;
+        set<DataType>(std::forward<Value>(value), std::forward<Keys>(keys)...);
     }
 
     template <class DataType, class... Keys>
-    void getAndSet(const typename DataType::SetterType& f, Keys&&... keys) {
-        auto current = get<DataType>(keys...);
-        f(current);
-        set<DataType>(current, std::forward<Keys>(keys)...);
+    [[deprecated]] auto get(Keys&&... keys) {
+        using ee::get;
+        return get<DataType>(std::forward<Keys>(keys)...);
     }
 
-    template <class DataType, class... Keys> void remove(Keys&&... keys) {
-        remove0(DataType::Id, DataType::createKey(std::forward<Keys>(keys)...));
+    template <class DataType, class... Keys>
+    [[deprecated]] void getAndSet(const typename DataType::SetterType& f,
+                                  Keys&&... keys) {
+        using ee::getAndSet;
+        return getAndSet<DataType>(f, std::forward<Keys>(keys)...);
+    }
+
+    template <class DataType, class... Keys>
+    [[deprecated]] void remove(Keys&&... keys) {
+        using ee::remove;
+        return remove<DataType>(std::forward<Keys>(keys)...);
     }
 
     void setCallback(const SetCallback& callback);
@@ -67,13 +99,11 @@ public:
     void setCallback(const RemoveCallback& callback);
 
 private:
-    void set0(std::size_t dataId, const std::string& key,
-              const std::string& value) const;
-
-    bool get0(std::size_t dataId, const std::string& key,
-              std::string& result) const;
-
-    void remove0(std::size_t dataId, const std::string& key) const;
+    friend void detail::set0(std::size_t dataId, const std::string& key,
+                             const std::string& value);
+    friend bool detail::get0(std::size_t dataId, const std::string& key,
+                             std::string& result);
+    friend void detail::remove0(std::size_t dataId, const std::string& key);
 
     int priority_;
 

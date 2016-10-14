@@ -143,6 +143,7 @@ class CheckBox;
 class RadioButton;
 class ImageView;
 class Scale9Sprite;
+class Widget;
 } // namespace ui
 } // namespace cocos2d
 

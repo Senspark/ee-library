@@ -26,7 +26,7 @@ private:
     };
 
     template <class... Args> struct is_dispatchable {
-        template <int Id, class... Ts>
+        template <std::size_t Id, class... Ts>
         static constexpr bool value(EventInfo<Id, Ts...>) {
             return (sizeof...(Ts) == sizeof...(Args)) &&
                    (std::is_convertible<Args, Ts>::value && ...);
@@ -65,7 +65,7 @@ public:
     void clear() noexcept { listeners_.clear(); }
 
 private:
-    template <int Id, class... Args, class Callable>
+    template <std::size_t Id, class... Args, class Callable>
     void addListener0(EventInfo<Id, Args...>, Callable&& callable) {
         using EventType = detail::Event<Args...>;
         using EventInfoType = EventInfo<Id, Args...>;
@@ -79,7 +79,7 @@ private:
         listeners_.push_back(ee::make_unique_listener(listener));
     }
 
-    template <int Id, class... Ts, class... Args>
+    template <std::size_t Id, class... Ts, class... Args>
     void dispatch0(EventInfo<Id, Ts...>, Args&&... args) {
         using EventType = detail::Event<Ts...>;
         using EventInfoType = EventInfo<Id, Ts...>;

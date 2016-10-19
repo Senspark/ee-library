@@ -46,6 +46,8 @@ class SpriteWithHSVLoader;
 class BlurBackground;
 class BlurBackgroundLoader;
 
+class SkeletonAnimationLoader;
+
 template <int Id, class... Args> class EventInfo;
 class EventDispatcher;
 

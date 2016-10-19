@@ -151,6 +151,8 @@
 		6FD294911CE1D95B009ECBFA /* EEUiLayoutLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2948E1CE1D95B009ECBFA /* EEUiLayoutLoader.cpp */; };
 		6FD294921CE1D95B009ECBFA /* EEUiLayoutLoader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FD2948F1CE1D95B009ECBFA /* EEUiLayoutLoader.hpp */; };
 		6FD294931CE1D95B009ECBFA /* EEUiLayoutLoader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FD2948F1CE1D95B009ECBFA /* EEUiLayoutLoader.hpp */; };
+		6FEC41ED1D9B53C8000B40F2 /* EEPool.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FEC41EA1D9B53C8000B40F2 /* EEPool.hpp */; };
+		6FEC41EE1D9B53C8000B40F2 /* EEPool.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FEC41EA1D9B53C8000B40F2 /* EEPool.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -290,6 +292,7 @@
 		6FD294761CE1CBF9009ECBFA /* EENodeV3Loader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EENodeV3Loader.hpp; sourceTree = "<group>"; };
 		6FD2948E1CE1D95B009ECBFA /* EEUiLayoutLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEUiLayoutLoader.cpp; sourceTree = "<group>"; };
 		6FD2948F1CE1D95B009ECBFA /* EEUiLayoutLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEUiLayoutLoader.hpp; sourceTree = "<group>"; };
+		6FEC41EA1D9B53C8000B40F2 /* EEPool.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEPool.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -352,6 +355,7 @@
 				6CC3596C1C0C0792007DC4CF /* EEFlags.hpp */,
 				6FA658961CCB700B009BC9EB /* EEUtils.cpp */,
 				6C43A7D31BDDDAC300D0597F /* EEUtils.hpp */,
+				6FEC41EA1D9B53C8000B40F2 /* EEPool.hpp */,
 				6C4557741C8FC8C4001AE09A /* experimental */,
 				6C5AEB3B1BDF1B9F004C98A2 /* crytography */,
 				6F7D5B591CD665010069E541 /* control */,
@@ -568,6 +572,7 @@
 				6C38491D1CA22FCA0020B858 /* EEEventListener.hpp in Headers */,
 				6FA658921CCB5C0C009BC9EB /* EEImage.hpp in Headers */,
 				6C3CAB401C5B5AC30059A380 /* EEForward.hpp in Headers */,
+				6FEC41ED1D9B53C8000B40F2 /* EEPool.hpp in Headers */,
 				6F7F38881D1D5BD000F5893F /* EEBlurBackgroundLoader.hpp in Headers */,
 				6F843E451CDB8EF6008B2EC4 /* EEUiWidgetLoader.hpp in Headers */,
 				6F6A87331D2E4F4400DE745F /* EEEventInfoV2.hpp in Headers */,
@@ -612,6 +617,7 @@
 				6F79B62B1CCA7FDC0008EFAC /* EEGenericLoader.hpp in Headers */,
 				6F79B62E1CCA7FE20008EFAC /* EEUtils.hpp in Headers */,
 				6FAE798A1D3375B800A0CFB1 /* EEDataInfo.hpp in Headers */,
+				6FEC41EE1D9B53C8000B40F2 /* EEPool.hpp in Headers */,
 				6F7F38891D1D5BD000F5893F /* EEBlurBackgroundLoader.hpp in Headers */,
 				6F79B6221CCA7FC70008EFAC /* EEHeader.hpp in Headers */,
 				6F843E461CDB8EF6008B2EC4 /* EEUiWidgetLoader.hpp in Headers */,

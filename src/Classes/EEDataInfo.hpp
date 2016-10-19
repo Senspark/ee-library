@@ -19,7 +19,7 @@ namespace detail {
 class DataInfoBase {};
 } // namespace detail
 
-template <int DataId, class Value, class... Keys>
+template <std::size_t DataId, class Value, class... Keys>
 class DataInfo final : public detail::DataInfoBase {
 public:
     static_assert(not std::is_reference<Value>::value,

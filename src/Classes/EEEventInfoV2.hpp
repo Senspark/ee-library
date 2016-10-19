@@ -17,7 +17,7 @@ namespace detail {
 class EventInfoBase {};
 } // namespace detail
 
-template <int EventId, class... Args>
+template <std::size_t EventId, class... Args>
 class EventInfo final : public detail::EventInfoBase {
 public:
     using ArgTypes = std::tuple<Args...>;

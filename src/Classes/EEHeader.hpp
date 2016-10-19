@@ -17,6 +17,7 @@
 #include "EEDynamicValue.hpp"
 #include "EEFlags.hpp"
 #include "EEUtils.hpp"
+#include "EEPool.hpp"
 
 #include "EECrytography.hpp"
 

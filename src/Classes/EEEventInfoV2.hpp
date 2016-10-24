@@ -10,6 +10,7 @@
 #define EE_LIBRARY_EVENT_INFO_HPP_
 
 #include <functional>
+#include <string>
 #include <tuple>
 
 namespace ee {

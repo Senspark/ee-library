@@ -132,11 +132,10 @@ void calc(const void* src, const std::size_t byteLength, unsigned char* hash) {
     std::uint32_t w[80];
 
     // Loop through all complete 64byte blocks.
-    const auto endOfFullBlocks = byteLength - 64;
     std::size_t endCurrentBlock;
     std::size_t currentBlock = 0;
 
-    while (currentBlock <= endOfFullBlocks) {
+    while (currentBlock + 64 <= byteLength) {
         endCurrentBlock = currentBlock + 64;
 
         // Init the round buffer with the 64 byte block data.

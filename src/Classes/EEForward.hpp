@@ -9,6 +9,8 @@
 #ifndef EE_LIBRARY_FORWARD_HPP_
 #define EE_LIBRARY_FORWARD_HPP_
 
+#include <cstddef>
+
 /// Forward ee library classes.
 
 namespace ee {
@@ -46,10 +48,12 @@ class SpriteWithHSVLoader;
 class BlurBackground;
 class BlurBackgroundLoader;
 
-template <int Id, class... Args> class EventInfo;
+class SkeletonAnimationLoader;
+
+template <std::size_t Id, class... Args> class EventInfo;
 class EventDispatcher;
 
-template <int Id, class Value, class... Keys> class DataInfo;
+template <std::size_t Id, class Value, class... Keys> class DataInfo;
 class DataHandler;
 
 template <class T, class Enable = void> struct DataTraits;

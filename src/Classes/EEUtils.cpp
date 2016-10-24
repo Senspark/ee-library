@@ -39,14 +39,16 @@ void resumeAll(cocos2d::Node* node) {
     doRecursively(node, &cocos2d::Node::resume);
 }
 
-cocos2d::Rect getCascadeContentSize(cocos2d::Node* node) {
+cocos2d::Rect getCascadeContentSize(cocos2d::Node* node, std::size_t depth) {
     auto&& size = node->getContentSize();
     cocos2d::Rect result{0, 0, size.width, size.height};
-    for (auto&& child : node->getChildren()) {
-        auto rect = getCascadeContentSize(child);
-        rect = cocos2d::RectApplyAffineTransform(
-            rect, child->getNodeToParentAffineTransform());
-        result.merge(rect);
+    if (depth > 0) {
+        for (auto&& child : node->getChildren()) {
+            auto rect = getCascadeContentSize(child, depth - 1);
+            rect = cocos2d::RectApplyAffineTransform(
+                rect, child->getNodeToParentAffineTransform());
+            result.merge(rect);
+        }
     }
     return result;
 }

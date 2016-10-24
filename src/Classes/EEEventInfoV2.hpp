@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef EE_LIBRARY_EVENT_INFO_HPP_
-#define EE_LIBRARY_EVENT_INFO_HPP_
+#ifndef EE_LIBRARY_EVENT_INFO_V2_HPP_
+#define EE_LIBRARY_EVENT_INFO_V2_HPP_
 
 #include <functional>
 #include <string>
@@ -18,7 +18,7 @@ namespace detail {
 class EventInfoBase {};
 } // namespace detail
 
-template <int EventId, class... Args>
+template <std::size_t EventId, class... Args>
 class EventInfo final : public detail::EventInfoBase {
 public:
     using ArgTypes = std::tuple<Args...>;
@@ -33,4 +33,4 @@ public:
 };
 } // namespace ee
 
-#endif /* EE_LIBRARY_EVENT_INFO_HPP_ */
+#endif /* EE_LIBRARY_EVENT_INFO_V2_HPP_ */

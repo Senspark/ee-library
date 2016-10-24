@@ -15,17 +15,28 @@
 #include "EEMacro.hpp"
 
 NS_EE_BEGIN
+namespace detail {
+template <class T, std::size_t Size = sizeof(T)> struct dynamic_value_storage;
+
+template <class T> struct dynamic_value_storage<T, 4> {
+    using value_type = T;
+    using storage_type = std::uint32_t;
+};
+
+template <class T> struct dynamic_value_storage<T, 8> {
+    using value_type = T;
+    using storage_type = std::uint64_t;
+};
+} // namespace detail
+
 /// Utility class to store a value that dynamically changes.
 ///
 /// Useful for anticheating.
-///
-/// Currently supports @c std::int32_t and @c float.
 template <class T> class DynamicValue final {
 public:
-    DynamicValue();
     ~DynamicValue() = default;
 
-    DynamicValue(T value);
+    DynamicValue(T value = T());
 
     DynamicValue(const DynamicValue& other);
     DynamicValue(DynamicValue&& other) = default;
@@ -41,6 +52,8 @@ public:
 
     /// Add a value.
     DynamicValue& add(T amount);
+
+    DynamicValue& subtract(T amount);
 
     /// Implicit conversion.
     operator T() const;
@@ -62,10 +75,11 @@ public:
     DynamicValue& operator--();
 
 private:
-    using StoreType = std::uint32_t;
+    using storage_type =
+        typename detail::dynamic_value_storage<T>::storage_type;
 
-    std::unique_ptr<StoreType> value_;
-    std::unique_ptr<StoreType> random_;
+    std::unique_ptr<storage_type> value_;
+    std::unique_ptr<storage_type> random_;
 };
 NS_EE_END
 

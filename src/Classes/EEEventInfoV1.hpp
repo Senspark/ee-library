@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef EE_LIBRARY_EVENT_INFO_HPP_
-#define EE_LIBRARY_EVENT_INFO_HPP_
+#ifndef EE_LIBRARY_EVENT_INFO_V1_HPP_
+#define EE_LIBRARY_EVENT_INFO_V1_HPP_
 
 #include <functional>
 
@@ -124,4 +124,4 @@ public:
 #define CREATE_EVENT_INFO_EX(...) EE_CREATE_EVENT_INFO_EX(__VA_ARGS__)
 NS_EE_END
 
-#endif // EE_LIBRARY_EVENT_INFO_HPP_
+#endif // EE_LIBRARY_EVENT_INFO_V1_HPP_

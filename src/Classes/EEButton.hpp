@@ -41,7 +41,7 @@ NS_DETAIL_BEGIN
 class ButtonEx : public cocos2d::ui::Button {
 public:
     using Loader = GenericLoader<ButtonEx, UiButtonLoader>;
-    
+
     using HitTester =
         std::function<bool(cocos2d::Touch* touch, Button* button)>;
 
@@ -146,6 +146,8 @@ public:
     /// Default is 0.05f (seconds).
     float getZoomingDuration() const noexcept;
 
+    void pressedStateBrightness(float brightness);
+
     void setTouchBeganCallback(const TouchCallback& callback);
 
     void setTouchMovedCallback(const TouchCallback& callback);
@@ -181,6 +183,10 @@ protected:
     /// @c loadTextures, @c loadTextureNormal, @c loadTexturePressed
     /// or @c loadTextureDisabled.
     virtual void updateTexture();
+
+    Scale9SpriteWithHsv* getRendererNormal() const;
+    Scale9SpriteWithHsv* getRendererClicked() const;
+    Scale9SpriteWithHsv* getRendererDisabled() const;
 
 private:
     float zoomingDuration_;

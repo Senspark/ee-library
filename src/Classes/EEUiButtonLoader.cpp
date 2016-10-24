@@ -13,25 +13,24 @@
 
 NS_EE_BEGIN
 namespace property {
-constexpr const char* pressed_action_enabled = "pressedActionEnabled";
-constexpr const char* zoom_scale = "zoomScale";
+constexpr auto pressed_action_enabled = "pressedActionEnabled";
+constexpr auto zoom_scale = "zoomScale";
 
-constexpr const char* title_text = "titleText";
-constexpr const char* title_font_name = "titleFontName";
-constexpr const char* title_font_size = "titleFontSize";
-constexpr const char* title_color = "titleColor";
+constexpr auto title_text = "titleText";
+constexpr auto title_font_name = "titleFontName";
+constexpr auto title_font_size = "titleFontSize";
+constexpr auto title_color = "titleColor";
 
-constexpr const char* scale_9_enabled = "scale9Enabled";
+constexpr auto scale_9_enabled = "scale9Enabled";
 
-constexpr const char* normal_sprite_frame_enabled = "normalSpriteFrameEnabled";
-constexpr const char* pressed_sprite_frame_enabled =
-    "pressedSpriteFrameEnabled";
+constexpr auto normal_sprite_frame_enabled = "normalSpriteFrameEnabled";
+constexpr auto pressed_sprite_frame_enabled = "pressedSpriteFrameEnabled";
 constexpr const char* disabled_sprite_frame_enabled =
     "disabledSpriteFrameEnabled";
 
-constexpr const char* normal_sprite_frame = "normalSpriteFrame";
-constexpr const char* pressed_sprite_frame = "pressedSpriteFrame";
-constexpr const char* disabled_sprite_frame = "disabledSpriteFrame";
+constexpr auto normal_sprite_frame = "normalSpriteFrame";
+constexpr auto pressed_sprite_frame = "pressedSpriteFrame";
+constexpr auto disabled_sprite_frame = "disabledSpriteFrame";
 } // namespace property.
 
 cocos2d::Node* UiButtonLoader::createNode(cocos2d::Node* parent,

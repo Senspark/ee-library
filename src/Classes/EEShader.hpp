@@ -15,6 +15,8 @@
 NS_EE_BEGIN
 class Shader {
 public:
+    static cocos2d::GLProgram* createHsvProgram();
+
     static cocos2d::GLProgram*
     createHorizontalBlurProgram(float width, int blurRadius,
                                 bool useLinearSampling, float sigma);

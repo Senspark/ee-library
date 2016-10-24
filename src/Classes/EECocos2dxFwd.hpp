@@ -126,6 +126,7 @@ class Size;
 class Rect;
 
 class GLProgram;
+struct Uniform;
 } // namespace cocos2d
 
 namespace cocos2d {

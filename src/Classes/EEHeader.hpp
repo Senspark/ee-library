@@ -43,8 +43,12 @@
 #include "EEUiCheckBoxLoader.hpp"
 #include "EEUiWidgetCallback.hpp"
 
+#include "EEButtonLoader.hpp"
+
 #include "EESpriteWithHSV.hpp"
 #include "EESpriteWithHSVLoader.hpp"
+
+#include "EEScale9SpriteWithHSV.hpp"
 
 #include "EEBlurBackground.hpp"
 #include "EEBlurBackgroundLoader.hpp"

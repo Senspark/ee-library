@@ -11,7 +11,8 @@
 #include "EEShader.hpp"
 #include "EEUtils.hpp"
 
-#include <cocos2d.h>
+#include <renderer/CCGLProgram.h>
+#include <renderer/CCGLProgramCache.h>
 
 NS_EE_BEGIN
 NS_ANONYMOUS_BEGIN
@@ -129,6 +130,24 @@ cocos2d::Mat4 Shader::createHueMatrix(float degree) {
     cocos2d::Mat4::multiply(temp, mat, &mat);
 
     return mat;
+}
+
+cocos2d::GLProgram* Shader::createHsvProgram() {
+#include "EEHSVShader.vert.hpp"
+#include "EEHSVShader.frag.hpp"
+
+    constexpr auto ProgramKey = "ee_hsv_program";
+
+    auto cache = cocos2d::GLProgramCache::getInstance();
+    auto p = cache->getGLProgram(ProgramKey);
+    if (p == nullptr) {
+        p = cocos2d::GLProgram::createWithByteArrays(ee_hsv_shader_vert,
+                                                     ee_hsv_shader_frag);
+        cache->addGLProgram(p, ProgramKey);
+    }
+
+    CC_ASSERT(p != nullptr);
+    return p;
 }
 
 cocos2d::GLProgram* Shader::createHorizontalBlurProgram(float width,

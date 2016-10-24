@@ -6,8 +6,8 @@
 //
 //
 
-#include "EESpriteWithHSVLoader.hpp"
-#include "EESpriteWithHSV.hpp"
+#include "EESpriteWithHsvLoader.hpp"
+#include "EESpriteWithHsv.hpp"
 
 NS_EE_BEGIN
 namespace property {
@@ -18,15 +18,15 @@ constexpr const char* contrast = "contrast";
 } // namespace property
 
 cocos2d::Sprite*
-SpriteWithHSVLoader::createNode(cocos2d::Node* parent,
+SpriteWithHsvLoader::createNode(cocos2d::Node* parent,
                                 cocosbuilder::CCBReader* reader) {
-    return SpriteWithHSV::create();
+    return SpriteWithHsv::create();
 }
 
-void SpriteWithHSVLoader::onHandlePropTypeDegrees(
+void SpriteWithHsvLoader::onHandlePropTypeDegrees(
     cocos2d::Node* node, cocos2d::Node* parent, const char* propertyName,
     float degrees, cocosbuilder::CCBReader* reader) {
-    auto sprite = dynamic_cast<SpriteWithHSV*>(node);
+    auto sprite = dynamic_cast<SpriteWithHsv*>(node);
     std::string prop{propertyName};
     if (prop == property::hue) {
         return sprite->setHue(degrees);
@@ -35,10 +35,10 @@ void SpriteWithHSVLoader::onHandlePropTypeDegrees(
                                           reader);
 }
 
-void SpriteWithHSVLoader::onHandlePropTypeFloat(
+void SpriteWithHsvLoader::onHandlePropTypeFloat(
     cocos2d::Node* node, cocos2d::Node* parent, const char* propertyName,
     float floatValue, cocosbuilder::CCBReader* reader) {
-    auto sprite = dynamic_cast<SpriteWithHSV*>(node);
+    auto sprite = dynamic_cast<SpriteWithHsv*>(node);
     std::string prop{propertyName};
     if (prop == property::saturation) {
         return sprite->setSaturation(floatValue);

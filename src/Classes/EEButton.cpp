@@ -8,6 +8,7 @@
 
 #include "EEButton.hpp"
 #include "EEUtils.hpp"
+#include "EEScale9SpriteWithHsv.hpp"
 
 #include <cocos2d.h>
 #include <ui/CocosGUI.h>
@@ -32,8 +33,10 @@ auto ButtonEx::getDefaultHitTester() -> const HitTester & {
 }
 
 ButtonEx::ButtonEx()
-    : zoomingDuration_(0.05f), currentTouch_(nullptr), currentEvent_(nullptr),
-      container_(nullptr) {}
+    : zoomingDuration_(0.05f)
+    , currentTouch_(nullptr)
+    , currentEvent_(nullptr)
+    , container_(nullptr) {}
 
 ButtonEx::~ButtonEx() = default;
 
@@ -179,16 +182,16 @@ void ButtonEx::setScale9Enabled(bool enable) {
     Button::setScale9Enabled(enable);
 }
 
-std::string ButtonEx::getDescription() const {
-    return "ee::ButtonEx";
-}
+std::string ButtonEx::getDescription() const { return "ee::ButtonEx"; }
 
 void ButtonEx::setZoomingDuration(float duration) noexcept {
     zoomingDuration_ = duration;
 }
 
-float ButtonEx::getZoomingDuration() const noexcept {
-    return zoomingDuration_;
+float ButtonEx::getZoomingDuration() const noexcept { return zoomingDuration_; }
+
+void ButtonEx::pressedStateBrightness(float brightness) {
+    getRendererClicked()->setBrightness(brightness);
 }
 
 void ButtonEx::setTouchBeganCallback(const TouchCallback& callback) {
@@ -219,9 +222,7 @@ auto ButtonEx::getContainer() const noexcept -> const Widget * {
     return container_;
 }
 
-auto ButtonEx::getContainer() noexcept -> Widget * {
-    return container_;
-}
+auto ButtonEx::getContainer() noexcept -> Widget * { return container_; }
 
 bool ButtonEx::init() {
     if (Button::init() == false) {
@@ -233,26 +234,26 @@ bool ButtonEx::init() {
 bool ButtonEx::init(const std::string& normalImage,
                     const std::string& selectedImage,
                     const std::string& disableImage, TextureResType texType) {
-    if (Button::init(normalImage, selectedImage, disableImage, texType) ==
-        false) {
+    if (not Button::init(normalImage, selectedImage, disableImage, texType)) {
         return false;
     }
     return true;
 }
 
 void ButtonEx::initRenderer() {
-    Button::initRenderer();
     createTitleRenderer();
 
-    std::vector<RefGuard> guards = {_buttonNormalRenderer,
-                                    _buttonClickedRenderer,
-                                    _buttonDisabledRenderer, _titleRenderer};
-
-    // Remove all sprites and title and add to the internal container.
-    removeProtectedChild(_buttonNormalRenderer);
-    removeProtectedChild(_buttonClickedRenderer);
-    removeProtectedChild(_buttonDisabledRenderer);
     removeProtectedChild(_titleRenderer);
+
+    _buttonNormalRenderer = Scale9SpriteWithHsv::create();
+    _buttonClickedRenderer = Scale9SpriteWithHsv::create();
+    _buttonDisabledRenderer = Scale9SpriteWithHsv::create();
+    _buttonClickedRenderer->setRenderingType(
+        cocos2d::ui::Scale9Sprite::RenderingType::SIMPLE);
+    _buttonNormalRenderer->setRenderingType(
+        cocos2d::ui::Scale9Sprite::RenderingType::SIMPLE);
+    _buttonDisabledRenderer->setRenderingType(
+        cocos2d::ui::Scale9Sprite::RenderingType::SIMPLE);
 
     container_ = Widget::create();
     container_->ignoreContentAdaptWithSize(false);
@@ -266,9 +267,9 @@ void ButtonEx::initRenderer() {
 
     addProtectedChild(container_, std::numeric_limits<int>::min());
 
-    container_->addProtectedChild(_buttonNormalRenderer);
-    container_->addProtectedChild(_buttonClickedRenderer);
-    container_->addProtectedChild(_buttonDisabledRenderer);
+    container_->addProtectedChild(_buttonNormalRenderer, -2, -1);
+    container_->addProtectedChild(_buttonClickedRenderer, -2, -1);
+    container_->addProtectedChild(_buttonDisabledRenderer, -2, -1);
     container_->addProtectedChild(_titleRenderer);
 }
 
@@ -312,8 +313,7 @@ void ButtonEx::onPressStateChangedToPressed() {
         if (_normalTextureLoaded) {
             // Use normal texture instead.
             _buttonNormalRenderer->setVisible(true);
-            _buttonNormalRenderer->setState(
-                cocos2d::ui::Scale9Sprite::State::NORMAL);
+            getRendererNormal()->setSaturation(1.0f);
         } else {
             // None background.
         }
@@ -349,8 +349,7 @@ void ButtonEx::onPressStateChangedToDisabled() {
             // Use the normal texture instead.
             // Gray out the normal sprite.
             _buttonNormalRenderer->setVisible(true);
-            _buttonNormalRenderer->setState(
-                cocos2d::ui::Scale9Sprite::State::GRAY);
+            getRendererNormal()->setSaturation(0.0f);
         } else {
             // None background.
         }
@@ -366,9 +365,7 @@ void ButtonEx::adaptRenderers() {
     Button::adaptRenderers();
 }
 
-auto ButtonEx::createCloneInstance() -> Widget * {
-    return create();
-}
+cocos2d::ui::Widget* ButtonEx::createCloneInstance() { return create(); }
 
 void ButtonEx::copySpecialProperties(Widget* model) {
     auto button = dynamic_cast<ButtonEx*>(model);
@@ -397,6 +394,18 @@ void ButtonEx::updateTexture() {
     }
 
     CC_ASSERT(counter <= 1);
+}
+
+Scale9SpriteWithHsv* ButtonEx::getRendererNormal() const {
+    return dynamic_cast<Scale9SpriteWithHsv*>(_buttonNormalRenderer);
+}
+
+Scale9SpriteWithHsv* ButtonEx::getRendererClicked() const {
+    return dynamic_cast<Scale9SpriteWithHsv*>(_buttonClickedRenderer);
+}
+
+Scale9SpriteWithHsv* ButtonEx::getRendererDisabled() const {
+    return dynamic_cast<Scale9SpriteWithHsv*>(_buttonDisabledRenderer);
 }
 NS_DETAIL_END
 NS_EE_END

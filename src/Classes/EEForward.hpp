@@ -42,8 +42,12 @@ class UiButtonLoader;
 class UiTextLoader;
 class UiLayoutLoader;
 
-class SpriteWithHSV;
-class SpriteWithHSVLoader;
+class ButtonLoader;
+
+class SpriteWithHsv;
+class SpriteWithHsvLoader;
+
+class Scale9SpriteWithHsv;
 
 class BlurBackground;
 class BlurBackgroundLoader;

@@ -14,9 +14,9 @@
 #include <cocosbuilder/CCSpriteLoader.h>
 
 NS_EE_BEGIN
-class SpriteWithHSVLoader : public cocosbuilder::SpriteLoader {
+class SpriteWithHsvLoader : public cocosbuilder::SpriteLoader {
 public:
-    CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(SpriteWithHSVLoader, loader);
+    CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(SpriteWithHsvLoader, loader);
 
 protected:
     virtual cocos2d::Sprite*

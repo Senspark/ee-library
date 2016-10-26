@@ -197,8 +197,8 @@ void UiTextLoader::onHandlePropTypeIntegerLabeled(
         auto alignment = static_cast<cocos2d::TextVAlignment>(integerLabeled);
         return text->setTextVerticalAlignment(alignment);
     }
-    UiWidgetLoader::onHandlePropTypeFloatScale(node, parent, propertyName,
-                                               integerLabeled, reader);
+    UiWidgetLoader::onHandlePropTypeIntegerLabeled(node, parent, propertyName,
+                                                   integerLabeled, reader);
 }
 
 void UiTextLoader::onHandlePropTypeSize(cocos2d::Node* node,

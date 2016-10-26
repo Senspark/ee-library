@@ -14,14 +14,16 @@
 
 NS_EE_BEGIN
 namespace property {
-constexpr const char* enabled = "enabled";
-constexpr const char* bright = "bright";
-constexpr const char* highlighted = "highlighted";
-constexpr const char* ignoreContentAdaptWithSize = "ignoreContentAdaptWithSize";
-constexpr const char* block = "block";
-constexpr const char* touch_enabled = "touchEnabled";
-constexpr const char* swallow_touches = "swallowTouches";
-constexpr const char* propagate_touch_events = "propagateTouchEvents";
+constexpr auto enabled = "enabled";
+constexpr auto bright = "bright";
+constexpr auto highlighted = "highlighted";
+constexpr auto ignore_content_adapt_with_size = "ignoreContentAdaptWithSize";
+constexpr auto size_type = "sizeType";
+constexpr auto position_type = "positionType";
+constexpr auto block = "block";
+constexpr auto touch_enabled = "touchEnabled";
+constexpr auto swallow_touches = "swallowTouches";
+constexpr auto propagate_touch_events = "propagateTouchEvents";
 } // namespace property.
 
 cocos2d::Node* UiWidgetLoader::createNode(cocos2d::Node* parent,
@@ -76,7 +78,7 @@ void UiWidgetLoader::onHandlePropTypeCheck(cocos2d::Node* node,
     if (propName == property::highlighted) {
         return widget->setHighlighted(check);
     }
-    if (propName == property::ignoreContentAdaptWithSize) {
+    if (propName == property::ignore_content_adapt_with_size) {
         return widget->ignoreContentAdaptWithSize(check);
     }
     if (propName == property::touch_enabled) {
@@ -90,5 +92,39 @@ void UiWidgetLoader::onHandlePropTypeCheck(cocos2d::Node* node,
     }
     NodeV3Loader::onHandlePropTypeCheck(node, parent, propertyName, check,
                                         reader);
+}
+
+void UiWidgetLoader::onHandlePropTypeIntegerLabeled(
+    cocos2d::Node* node, cocos2d::Node* parent, const char* propertyName,
+    int integerLabeled, cocosbuilder::CCBReader* reader) {
+    auto widget = dynamic_cast<cocos2d::ui::Widget*>(node);
+    auto parentContentSize =
+        reader->getAnimationManager()->getContainerSize(parent);
+    std::string propName(propertyName);
+    if (propName == property::size_type) {
+        auto type = static_cast<cocos2d::ui::Widget::SizeType>(integerLabeled);
+        widget->setSizeType(type);
+        if (type == cocos2d::ui::Widget::SizeType::PERCENT) {
+            auto&& contentSize = widget->getContentSize();
+            widget->setSizePercent(
+                cocos2d::Vec2(contentSize.width / parentContentSize.width,
+                              contentSize.height / parentContentSize.height));
+        }
+        return;
+    }
+    if (propName == property::position_type) {
+        auto type =
+            static_cast<cocos2d::ui::Widget::PositionType>(integerLabeled);
+        widget->setPositionType(type);
+        if (type == cocos2d::ui::Widget::PositionType::PERCENT) {
+            auto&& position = widget->getPosition();
+            widget->setPositionPercent(
+                cocos2d::Vec2(position.x / parentContentSize.width,
+                              position.y / parentContentSize.height));
+        }
+        return;
+    }
+    return NodeV3Loader::onHandlePropTypeIntegerLabeled(
+        node, parent, propertyName, integerLabeled, reader);
 }
 NS_EE_END

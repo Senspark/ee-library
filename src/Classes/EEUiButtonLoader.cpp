@@ -19,14 +19,14 @@ constexpr auto zoom_scale = "zoomScale";
 constexpr auto title_text = "titleText";
 constexpr auto title_font_name = "titleFontName";
 constexpr auto title_font_size = "titleFontSize";
+constexpr auto title_anchor_point = "titleAnchorPoint";
 constexpr auto title_color = "titleColor";
 
 constexpr auto scale_9_enabled = "scale9Enabled";
 
 constexpr auto normal_sprite_frame_enabled = "normalSpriteFrameEnabled";
 constexpr auto pressed_sprite_frame_enabled = "pressedSpriteFrameEnabled";
-constexpr const char* disabled_sprite_frame_enabled =
-    "disabledSpriteFrameEnabled";
+constexpr auto disabled_sprite_frame_enabled = "disabledSpriteFrameEnabled";
 
 constexpr auto normal_sprite_frame = "normalSpriteFrame";
 constexpr auto pressed_sprite_frame = "pressedSpriteFrame";
@@ -80,6 +80,20 @@ cocos2d::SpriteFrame* UiButtonLoader::parsePropTypeSpriteFrame(
         }
     }
     return spriteFrame;
+}
+
+void UiButtonLoader::onHandlePropTypePoint(cocos2d::Node* node,
+                                           cocos2d::Node* parent,
+                                           const char* propertyName,
+                                           cocos2d::Point point,
+                                           cocosbuilder::CCBReader* reader) {
+    auto button = dynamic_cast<cocos2d::ui::Button*>(node);
+    std::string propName(propertyName);
+    if (propName == property::title_anchor_point) {
+        return button->getTitleRenderer()->setAnchorPoint(point);
+    }
+    return UiWidgetLoader::onHandlePropTypePoint(node, parent, propertyName,
+                                                 point, reader);
 }
 
 void UiButtonLoader::onHandlePropTypeCheck(cocos2d::Node* node,

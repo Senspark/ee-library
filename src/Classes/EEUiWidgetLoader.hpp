@@ -39,6 +39,11 @@ protected:
     onHandlePropTypeCheck(cocos2d::Node* node, cocos2d::Node* parent,
                           const char* propertyName, bool check,
                           cocosbuilder::CCBReader* reader) override;
+
+    virtual void
+    onHandlePropTypeIntegerLabeled(cocos2d::Node* node, cocos2d::Node* parent,
+                                   const char* propertyName, int integerLabeled,
+                                   cocosbuilder::CCBReader* reader) override;
 };
 NS_EE_END
 

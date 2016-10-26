@@ -55,6 +55,10 @@ protected:
     parsePropTypeSpriteFrame(cocos2d::Node* node, cocos2d::Node* parent,
                              cocosbuilder::CCBReader* reader,
                              const char* propertyName) override;
+    virtual void
+    onHandlePropTypePoint(cocos2d::Node* node, cocos2d::Node* parent,
+                          const char* propertyName, cocos2d::Point point,
+                          cocosbuilder::CCBReader* reader) override;
 
     virtual void
     onHandlePropTypeCheck(cocos2d::Node* node, cocos2d::Node* parent,

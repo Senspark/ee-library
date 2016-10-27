@@ -281,8 +281,7 @@ void ButtonEx::onPressStateChangedToNormal() {
 
     if (_normalTextureLoaded) {
         _buttonNormalRenderer->setVisible(true);
-        _buttonNormalRenderer->setState(
-            cocos2d::ui::Scale9Sprite::State::NORMAL);
+        getRendererNormal()->setSaturation(1.0f);
     } else {
         // None background.
     }

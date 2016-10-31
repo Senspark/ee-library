@@ -9,6 +9,7 @@
 #ifndef EE_LIBRARY_BLUR_BACKGROUND_HPP_
 #define EE_LIBRARY_BLUR_BACKGROUND_HPP_
 
+/*
 #include "EEMacro.hpp"
 #include "EECocos2dxFwd.hpp"
 
@@ -58,5 +59,6 @@ protected:
     cocos2d::RenderTexture* horizontalRenderer_;
 };
 NS_EE_END
+ */
 
 #endif /* EE_LIBRARY_BLUR_BACKGROUND_HPP_ */

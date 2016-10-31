@@ -6,6 +6,8 @@
 //
 //
 
+/*
+
 #include "EEBlurBackgroundLoader.hpp"
 #include "EEBlurBackground.hpp"
 
@@ -49,3 +51,5 @@ void BlurBackgroundLoader::onHandlePropTypeInteger(
                                                  integer, reader);
 }
 NS_EE_END
+
+*/

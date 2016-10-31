@@ -6,6 +6,8 @@
 //
 //
 
+/*
+
 #include "EEBlurBackground.hpp"
 #include "EEShader.hpp"
 
@@ -182,3 +184,5 @@ void BlurBackground::visit(cocos2d::Renderer* renderer,
     Node::visit(renderer, parentTransforms, parentFlags);
 }
 NS_EE_END
+
+*/

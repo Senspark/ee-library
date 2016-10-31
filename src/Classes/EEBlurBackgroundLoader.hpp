@@ -9,6 +9,8 @@
 #ifndef EE_LIBRARY_BLUR_BACKGROUND_LOADER_HPP_
 #define EE_LIBRARY_BLUR_BACKGROUND_LOADER_HPP_
 
+/*
+
 #include "EENodeV3Loader.hpp"
 
 NS_EE_BEGIN
@@ -31,5 +33,7 @@ protected:
                             cocosbuilder::CCBReader* reader) override;
 };
 NS_EE_END
+
+*/
 
 #endif /* EE_LIBRARY_BLUR_BACKGROUND_LOADER_HPP_ */

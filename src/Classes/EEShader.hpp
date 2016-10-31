@@ -6,25 +6,28 @@
 //
 //
 
-#ifndef EEShader_hpp
-#define EEShader_hpp
+#ifndef EE_LIBRARY_SHADER_HPP_
+#define EE_LIBRARY_SHADER_HPP_
 
 #include "EEMacro.hpp"
 #include "EECocos2dxFwd.hpp"
 
-NS_EE_BEGIN
+namespace ee {
 class Shader {
 public:
-    static cocos2d::GLProgram* createHsvProgram();
+    static Shader* getInstance();
 
-    static cocos2d::GLProgram*
-    createHorizontalBlurProgram(float width, int blurRadius,
-                                bool useLinearSampling, float sigma);
+    cocos2d::GLProgram* createHsvProgram();
 
-    static cocos2d::GLProgram* createVerticalBlurProgram(float height,
-                                                         int blurRadius,
-                                                         bool useLinearSampling,
-                                                         float sigma);
+    /*
+    cocos2d::GLProgram* createHorizontalBlurProgram(float width, int blurRadius,
+                                                    bool useLinearSampling,
+                                                    float sigma);
+
+    cocos2d::GLProgram* createVerticalBlurProgram(float height, int blurRadius,
+                                                  bool useLinearSampling,
+                                                  float sigma);
+     */
 
     static cocos2d::Mat4 createShearZMatrix(float dx, float dy);
 
@@ -74,6 +77,9 @@ public:
     static cocos2d::Mat4 createHueMatrix(float degree);
 
 private:
+    Shader();
+    ~Shader();
+
     static cocos2d::GLProgram*
     createBlurProgram(bool isVertical, float dimension, int blurRadius,
                       bool useLinearSampling, float sigma);
@@ -88,7 +94,9 @@ private:
                                                 float sigma);
 
     static float gaussianFunction(float x, float sigma);
-};
-NS_EE_END
 
-#endif /* EEShader_hpp */
+    cocos2d::EventListener* backgroundListener_;
+};
+} // namespace ee
+
+#endif /* EE_LIBRARY_SHADER_HPP_ */

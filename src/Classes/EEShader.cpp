@@ -11,6 +11,10 @@
 #include "EEShader.hpp"
 #include "EEUtils.hpp"
 
+#include <base/CCEventType.h>
+#include <base/CCEventListenerCustom.h>
+#include <base/CCDirector.h>
+#include <base/CCEventDispatcher.h>
 #include <renderer/CCGLProgram.h>
 #include <renderer/CCGLProgramCache.h>
 
@@ -132,24 +136,54 @@ cocos2d::Mat4 Shader::createHueMatrix(float degree) {
     return mat;
 }
 
-cocos2d::GLProgram* Shader::createHsvProgram() {
+namespace shader {
+constexpr auto hsv_program = "ee_hsv_program";
+} // namespace shader
+
 #include "EEHSVShader.vert.hpp"
 #include "EEHSVShader.frag.hpp"
 
-    constexpr auto ProgramKey = "ee_hsv_program";
+Shader* Shader::getInstance() {
+    static Shader sharedInstance;
+    return &sharedInstance;
+}
 
+Shader::Shader() {
+    backgroundListener_ = cocos2d::EventListenerCustom::create(
+        EVENT_RENDERER_RECREATED, std::bind([] {
+            auto cache = cocos2d::GLProgramCache::getInstance();
+            auto p = cache->getGLProgram(shader::hsv_program);
+            if (p != nullptr) {
+                p->reset();
+                p->initWithByteArrays(ee_hsv_shader_vert, ee_hsv_shader_frag);
+                p->link();
+                p->updateUniforms();
+            }
+        }));
+    cocos2d::Director::getInstance()
+        ->getEventDispatcher()
+        ->addEventListenerWithFixedPriority(backgroundListener_, -1);
+}
+
+Shader::~Shader() {
+    cocos2d::Director::getInstance()->getEventDispatcher()->removeEventListener(
+        backgroundListener_);
+}
+
+cocos2d::GLProgram* Shader::createHsvProgram() {
     auto cache = cocos2d::GLProgramCache::getInstance();
-    auto p = cache->getGLProgram(ProgramKey);
+    auto p = cache->getGLProgram(shader::hsv_program);
     if (p == nullptr) {
         p = cocos2d::GLProgram::createWithByteArrays(ee_hsv_shader_vert,
                                                      ee_hsv_shader_frag);
-        cache->addGLProgram(p, ProgramKey);
+        cache->addGLProgram(p, shader::hsv_program);
     }
 
     CC_ASSERT(p != nullptr);
     return p;
 }
 
+/*
 cocos2d::GLProgram* Shader::createHorizontalBlurProgram(float width,
                                                         int blurRadius,
                                                         bool useLinearSampling,
@@ -377,5 +411,5 @@ float Shader::gaussianFunction(float x, float sigma) {
 
     float k = x / sigma;
     return inv_sqrt_2pi / sigma * std::exp(-k * k * 0.5f);
-}
+}*/
 NS_EE_END

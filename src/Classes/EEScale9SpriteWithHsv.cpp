@@ -65,7 +65,7 @@ bool Scale9SpriteWithHsv::updateWithSprite(cocos2d::Sprite* sprite,
                                            originalSize, capInsets)) {
         return false;
     }
-    auto prog = Shader::createHsvProgram();
+    auto prog = Shader::getInstance()->createHsvProgram();
     auto state = cocos2d::GLProgramState::create(prog);
     state->setUniformCallback("u_hsv", [this](cocos2d::GLProgram* p,
                                               cocos2d::Uniform* u) {

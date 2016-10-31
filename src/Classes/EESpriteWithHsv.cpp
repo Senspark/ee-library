@@ -75,7 +75,7 @@ bool SpriteWithHsv::initWithTexture(cocos2d::Texture2D* texture,
 }
 
 void SpriteWithHsv::initShader() {
-    auto prog = Shader::createHsvProgram();
+    auto prog = Shader::getInstance()->createHsvProgram();
     setGLProgram(prog);
     getGLProgramState()->setUniformCallback(
         "u_hsv", [this](cocos2d::GLProgram* p, cocos2d::Uniform* u) {

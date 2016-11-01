@@ -49,7 +49,7 @@ public:
     pointer pop() {
         check_for_unused_instances();
         if (unused_instances_.empty()) {
-            unused_instances_.emplace_back(instantiate());
+            unused_instances_.emplace(instantiate());
         }
 
         auto instance = unused_instances_.front();
@@ -62,7 +62,7 @@ public:
         if (destroy && dtor_) {
             dtor_(instance);
         }
-        unused_instances_.emplace_back(instance);
+        unused_instances_.emplace(instance);
     }
 
 protected:

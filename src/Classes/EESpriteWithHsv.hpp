@@ -56,6 +56,8 @@ protected:
                       const cocos2d::Mat4& transform,
                       std::uint32_t flags) override;
 
+    virtual bool updateMatrix() override;
+
     void initShader();
 };
 } // namespace ee

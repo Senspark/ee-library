@@ -36,7 +36,7 @@ public:
     void setContrast(float contrast);
 
 protected:
-    void updateMatrix();
+    virtual bool updateMatrix();
 
     const cocos2d::Mat4& getHsvMatrix() const;
 

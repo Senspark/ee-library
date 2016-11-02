@@ -21,8 +21,6 @@ HsvProtocol::HsvProtocol() {
     saturationMatrixDirty_ = true;
     brightnessMatrixDirty_ = true;
     contrastMatrixDirty_ = true;
-
-    updateMatrix();
 }
 
 void HsvProtocol::setHue(float hue) {
@@ -59,7 +57,7 @@ void HsvProtocol::setContrast(float contrast) {
 
 const cocos2d::Mat4& HsvProtocol::getHsvMatrix() const { return hsvMatrix_; }
 
-void HsvProtocol::updateMatrix() {
+bool HsvProtocol::updateMatrix() {
     updateHueMatrix();
     updateSaturationMatrix();
     updateBrightnessMatrix();
@@ -72,7 +70,9 @@ void HsvProtocol::updateMatrix() {
         cocos2d::Mat4::multiply(saturationMatrix_, hsvMatrix_, &hsvMatrix_);
         cocos2d::Mat4::multiply(brightnessMatrix_, hsvMatrix_, &hsvMatrix_);
         cocos2d::Mat4::multiply(contrastMatrix_, hsvMatrix_, &hsvMatrix_);
+        return true;
     }
+    return false;
 }
 
 void HsvProtocol::updateHueMatrix() {

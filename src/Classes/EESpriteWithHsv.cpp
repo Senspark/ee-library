@@ -77,16 +77,19 @@ bool SpriteWithHsv::initWithTexture(cocos2d::Texture2D* texture,
 void SpriteWithHsv::initShader() {
     auto prog = Shader::getInstance()->createHsvProgram();
     setGLProgram(prog);
-    getGLProgramState()->setUniformCallback(
-        "u_hsv", [this](cocos2d::GLProgram* p, cocos2d::Uniform* u) {
-            p->setUniformLocationWithMatrix4fv(u->location, getHsvMatrix().m,
-                                               1);
-        });
 }
 
 void SpriteWithHsv::draw(cocos2d::Renderer* renderer,
                          const cocos2d::Mat4& transform, std::uint32_t flags) {
     updateMatrix();
     Sprite::draw(renderer, transform, flags);
+}
+
+bool SpriteWithHsv::updateMatrix() {
+    if (HsvProtocol::updateMatrix()) {
+        getGLProgramState()->setUniformMat4("u_hsv", getHsvMatrix());
+        return true;
+    }
+    return false;
 }
 } // namespace ee

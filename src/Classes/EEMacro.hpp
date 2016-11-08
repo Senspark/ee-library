@@ -38,6 +38,11 @@
         }(#variableName).c_str(),                                              \
         std::remove_reference_t<decltype(variableName)>, variableName)
 
+#define CCB_MEMBERVARIABLEASSIGNER_GLUE_WEAK_EX_3(variableName, variable)      \
+    CCB_MEMBERVARIABLEASSIGNER_GLUE_WEAK(                                      \
+        this, variableName, std::remove_reference_t<decltype(variable)>,       \
+        variable)
+
 /// Concatenates two string literals.
 #define STRCAT_HELPER(x, y) x##y
 #define STRCAT(x, y) STRCAT_HELPER(x, y)

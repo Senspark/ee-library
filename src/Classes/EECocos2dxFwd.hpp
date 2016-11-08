@@ -150,8 +150,18 @@ class Widget;
 
 namespace cocosbuilder {
 class CCBReader;
+class NodeLoaderLibrary;
 class NodeLoader;
 class SpriteLoader;
+class Scale9SpriteLoader;
+class ControlLoader;
+class LabelBMFontLoader;
+class LabelTTFLoader;
+class LayerLoader;
+class LayerColorLoader;
+class LayerGradientLoader;
+class ScrollViewLoader;
+class ParticleSystemQuadLoader;
 } // namespace cocosbuilder
 
 namespace spine {

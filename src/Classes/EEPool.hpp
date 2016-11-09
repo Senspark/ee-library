@@ -39,9 +39,9 @@ public:
     void reserve(size_type n) {
         auto cap = capacity();
         if (n > cap) {
-            auto difference = cap - n;
+            auto difference = n - cap;
             for (size_type i = 0; i < difference; ++i) {
-                unused_instances_.emplace_back(instantiate());
+                unused_instances_.emplace(instantiate());
             }
         }
     }

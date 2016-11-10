@@ -21,14 +21,22 @@ public:
     using value_type = T;
     using pointer = T*;
     using reference = cocos2d::RefPtr<value_type>;
-    using const_reference = const reference&;
+    using const_pointer = const pointer;
     using constructor = std::function<pointer()>;
     using destructor = std::function<void(pointer)>;
+    using predicate = std::function<bool(const_pointer instance)>;
     using size_type = std::size_t;
 
     explicit Pool(const constructor& ctor, const destructor& dtor = nullptr)
+        : Pool(ctor, dtor, [this](const_pointer instance) {
+            return instance->getReferenceCount() == 1;
+        }) {}
+
+    explicit Pool(const constructor& ctor, const destructor& dtor,
+                  const predicate& pred)
         : ctor_(ctor)
-        , dtor_(dtor) {}
+        , dtor_(dtor)
+        , pred_(pred) {}
 
     size_type size() const { return unused_instances_.size(); }
 
@@ -71,8 +79,8 @@ protected:
     void check_for_unused_instances() {
         auto iter =
             std::remove_if(using_instances_.begin(), using_instances_.end(),
-                           [this](const_reference instance) {
-                               if (instance->getReferenceCount() == 1) {
+                           [this](const_pointer instance) {
+                               if (pred_(instance)) {
                                    push(instance);
                                    return true;
                                }
@@ -86,6 +94,7 @@ protected:
 
     constructor ctor_;
     destructor dtor_;
+    predicate pred_;
 };
 } // namespace ee
 

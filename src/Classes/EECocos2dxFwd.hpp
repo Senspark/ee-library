@@ -145,6 +145,9 @@ class RadioButton;
 class ImageView;
 class Scale9Sprite;
 class Widget;
+class EditBox;
+class EditBoxDelegate;
+class TextField;
 } // namespace ui
 } // namespace cocos2d
 

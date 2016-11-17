@@ -19,26 +19,31 @@ bool get0(std::size_t dataId, const std::string& key, std::string& result);
 void remove0(std::size_t dataId, const std::string& key);
 } // namespace detail
 
-template <class DataType, class Value, class... Keys>
+template <class DataType,
+          class Traits = DataTraits<typename DataType::ValueType>, class Value,
+          class... Keys>
 void set(Value&& value, Keys&&... keys) {
-    using ValueType = typename DataType::ValueType;
     detail::set0(DataType::Id, DataType::createKey(std::forward<Keys>(keys)...),
-                 DataTraits<ValueType>::set(std::forward<Value>(value)));
+                 Traits::set(std::forward<Value>(value)));
 }
 
-template <class DataType, class... Keys> auto get(Keys&&... keys) {
-    using ValueType = typename DataType::ValueType;
+template <class DataType,
+          class Traits = DataTraits<typename DataType::ValueType>,
+          class... Keys>
+auto get(Keys&&... keys) {
     std::string result;
     detail::get0(DataType::Id, DataType::createKey(std::forward<Keys>(keys)...),
                  result);
-    return DataTraits<ValueType>::get(result);
+    return Traits::get(result);
 }
 
-template <class DataType, class... Keys>
+template <class DataType,
+          class Traits = DataTraits<typename DataType::ValueType>,
+          class... Keys>
 void getAndSet(const typename DataType::SetterType& f, Keys&&... keys) {
-    auto current = get<DataType>(keys...);
+    auto current = get<DataType, Traits>(keys...);
     f(current);
-    set<DataType>(current, std::forward<Keys>(keys)...);
+    set<DataType, Traits>(current, std::forward<Keys>(keys)...);
 }
 
 template <class DataType, class... Keys> void remove(Keys&&... keys) {

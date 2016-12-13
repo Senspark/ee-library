@@ -36,6 +36,13 @@ template <class T> auto make_ref_guard(T&& instance) {
     return RefGuard(instance);
 }
 
+template <class T>
+using Holder = cocos2d::RefPtr<std::remove_pointer_t<std::decay_t<T>>>;
+
+template <class T> auto make_holder(T&& instance) {
+    return Holder<T>(std::forward<T>(instance));
+}
+
 /// Faster and safer implementation alternative
 /// to cocos2d::StringUtils::format
 /// by using @c static @c std::stringstream.

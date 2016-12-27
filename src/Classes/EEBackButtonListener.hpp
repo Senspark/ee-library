@@ -61,7 +61,7 @@ NS_DETAIL_END
 /// Only one back button listener instance
 /// can receive the touch at a time (swallow touch).
 template <class T>
-class BackButtonListener : public detail::BackButtonListenerBase {
+class[[deprecated]] BackButtonListener : public detail::BackButtonListenerBase {
 protected:
     BackButtonListener() : BackButtonListenerBase() {
         registerListener(getInstance());

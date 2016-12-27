@@ -28,6 +28,8 @@
 #include "EEDialogManager.hpp"
 #include "EEDialogUtils.hpp"
 
+#include "EEBackButtonComponent.hpp"
+
 #include "EEBackButtonListener.hpp"
 
 #include "EEEventDispatcher.hpp"

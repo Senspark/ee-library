@@ -24,11 +24,11 @@ UniqueListener make_unique_listener(cocos2d::EventListener* listener) {
 
 void doRecursively(cocos2d::Node* node,
                    const std::function<void(cocos2d::Node*)>& action) {
-    action(node);
     auto&& children = node->getChildren();
     for (auto&& child : children) {
         doRecursively(child, action);
     }
+    action(node);
 }
 
 void pauseAll(cocos2d::Node* node) {

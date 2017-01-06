@@ -12,6 +12,7 @@
 #include "EEMacro.hpp"
 
 #include <base/CCRefPtr.h>
+#include <2d/CCNode.h>
 
 NS_EE_BEGIN
 namespace dialog {

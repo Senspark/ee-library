@@ -7,6 +7,7 @@
 //
 
 #include "EESkeletonAnimationLoader.hpp"
+#include "EESpineFactory.hpp"
 
 #include <spine/spine-cocos2dx.h>
 
@@ -87,11 +88,9 @@ void SkeletonAnimationLoader::onHandlePropTypeFloatScale(
     auto skeleton = dynamic_cast<spine::SkeletonAnimation*>(node);
     std::string propName{propertyName};
     if (propName == property::animation_scale) {
-#if COCOS2D_VERSION >= 0x00031400
-        skeleton->initWithJsonFile(dataFile_, atlasFile_, floatScale);
-#else // COCOS2D_VERSION >= 0x00031400
-        skeleton->initWithFile(dataFile_, atlasFile_, floatScale);
-#endif // COCOS2D_VERSION >= 0x00031400
+        auto&& data = SpineFactory::getInstance()->getSkeletonData(
+            dataFile_, atlasFile_, floatScale);
+        skeleton->initWithData(data.get());
         skeleton->initialize();
         return;
     }

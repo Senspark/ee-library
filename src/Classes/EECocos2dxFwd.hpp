@@ -24,6 +24,7 @@ class FontAtlas;
 class Label;
 class LabelAtlas;
 class Layer;
+class LayerColor;
 class Scene;
 class Transition;
 class Menu;

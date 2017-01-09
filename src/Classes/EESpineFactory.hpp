@@ -32,7 +32,7 @@ using SpineDataName = std::string;
 using SpineDataDeleter = std::function<void(spSkeletonData* data)>;
 using SpineDataPtr = std::unique_ptr<spSkeletonData, SpineDataDeleter>;
 
-class SpineFactory {
+class SpineFactory final {
 public:
     static SpineFactory* getInstance();
 
@@ -54,6 +54,9 @@ public:
                                         float scale);
 
 private:
+    SpineFactory() = default;
+    ~SpineFactory() = default;
+
     /// Stores (atlas filename, skeleton json).
     std::unordered_map<SpineAtlasName, SpineJsonPtr> cachedSkeletonJson_;
 

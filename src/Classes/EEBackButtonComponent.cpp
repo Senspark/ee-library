@@ -22,6 +22,14 @@ BackButtonComponent::create(const BackButtonCallback& callback) {
     return result;
 }
 
+bool BackButtonComponent::initWithCallback(const BackButtonCallback& callback) {
+    if (not Super::init()) {
+        return false;
+    }
+    callback_ = callback;
+    return true;
+}
+
 void BackButtonComponent::onAdd() {
     Super::onAdd();
 

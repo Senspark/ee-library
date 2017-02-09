@@ -16,7 +16,7 @@
 
 #include "EEMacro.hpp"
 
-struct spSkeletonJson;
+struct spAtlas;
 struct spSkeletonData;
 
 namespace spine {
@@ -25,8 +25,8 @@ class SkeletonAnimation;
 
 NS_EE_BEGIN
 using SpineAtlasName = std::string;
-using SpineJsonDeleter = std::function<void(spSkeletonJson* json)>;
-using SpineJsonPtr = std::unique_ptr<spSkeletonJson, SpineJsonDeleter>;
+using SpineAtlasDeleter = std::function<void(spAtlas* atlas)>;
+using SpineAtlasPtr = std::unique_ptr<spAtlas, SpineAtlasDeleter>;
 
 using SpineDataName = std::string;
 using SpineDataDeleter = std::function<void(spSkeletonData* data)>;
@@ -47,18 +47,16 @@ public:
                                         const SpineAtlasName& atlasName,
                                         float scale);
 
-    /// Gets (or creates if not cached) skeleton json for the specified atlas
-    /// filename and scale.
-    /// @return Reference to the cached skeleton json.
-    const SpineJsonPtr& getSkeletonJson(const SpineAtlasName& atlasName,
-                                        float scale);
+    /// Gets (or creates if not cached) atlas for the specified atlas filename.
+    /// @return Reference to the cached atlas;
+    const SpineAtlasPtr& getAtlas(const SpineAtlasName& atlasName);
 
 private:
     SpineFactory() = default;
     ~SpineFactory() = default;
 
     /// Stores (atlas filename, skeleton json).
-    std::unordered_map<SpineAtlasName, SpineJsonPtr> cachedSkeletonJson_;
+    std::unordered_map<SpineAtlasName, SpineAtlasPtr> cachedAtlas_;
 
     /// Stores (data filename, skeleton data).
     std::map<std::pair<SpineDataName, float>, SpineDataPtr> cachedSkeletonData_;

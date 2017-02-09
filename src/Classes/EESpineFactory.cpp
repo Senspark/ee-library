@@ -12,9 +12,9 @@
 
 NS_EE_BEGIN
 namespace {
-const SpineJsonDeleter& getSkeletonJsonDeleter() {
-    static SpineJsonDeleter deleter =
-        [](spSkeletonJson* json) { spSkeletonJson_dispose(json); };
+const SpineAtlasDeleter& getAtlasDeleter() {
+    static SpineAtlasDeleter deleter =
+        [](spAtlas* atlas) { spAtlas_dispose(atlas); };
     return deleter;
 }
 
@@ -30,20 +30,16 @@ SpineFactory* SpineFactory::getInstance() {
     return &sharedInstance;
 }
 
-const SpineJsonPtr&
-SpineFactory::getSkeletonJson(const SpineAtlasName& atlasName, float scale) {
-    auto iter = cachedSkeletonJson_.find(atlasName);
-    if (iter == cachedSkeletonJson_.cend()) {
+const SpineAtlasPtr& SpineFactory::getAtlas(const SpineAtlasName& atlasName) {
+    auto iter = cachedAtlas_.find(atlasName);
+    if (iter == cachedAtlas_.cend()) {
         auto atlas = spAtlas_createFromFile(atlasName.c_str(), nullptr);
         CCASSERT(atlas != nullptr, "Error reading atlas file.");
 
-        auto ptr = SpineJsonPtr(spSkeletonJson_create(atlas),
-                                getSkeletonJsonDeleter());
-        iter = cachedSkeletonJson_.emplace(atlasName, std::move(ptr)).first;
+        auto ptr = SpineAtlasPtr(atlas, getAtlasDeleter());
+        iter = cachedAtlas_.emplace(atlasName, std::move(ptr)).first;
     }
-    auto&& result = iter->second;
-    result->scale = scale;
-    return result;
+    return iter->second;
 }
 
 const SpineDataPtr&
@@ -51,11 +47,21 @@ SpineFactory::getSkeletonData(const SpineDataName& dataName,
                               const SpineAtlasName& atlasName, float scale) {
     auto iter = cachedSkeletonData_.find(std::make_pair(dataName, scale));
     if (iter == cachedSkeletonData_.cend()) {
-        auto&& json = getSkeletonJson(atlasName, scale);
-        auto ptr = SpineDataPtr(
-            spSkeletonJson_readSkeletonDataFile(json.get(), dataName.c_str()),
-            getSkeletonDataDeleter());
+        auto&& atlas = getAtlas(atlasName);
+
+        auto attachmentLoader =
+            &Cocos2dAttachmentLoader_create(atlas.get())->super;
+        auto json = spSkeletonJson_createWithLoader(attachmentLoader);
+        json->scale = scale;
+
+        auto skeletonData =
+            spSkeletonJson_readSkeletonDataFile(json, dataName.c_str());
+        auto ptr = SpineDataPtr(skeletonData, getSkeletonDataDeleter());
         CCASSERT(ptr, "Error reading skeleton data file.");
+
+        spSkeletonJson_dispose(json);
+        spAttachmentLoader_dispose(attachmentLoader);
+
         iter =
             cachedSkeletonData_.emplace(std::piecewise_construct,
                                         std::forward_as_tuple(dataName, scale),

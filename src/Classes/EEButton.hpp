@@ -160,6 +160,12 @@ public:
     /// Retrieves the internal container (@c const version).
     const Widget* getContainer() const noexcept;
 
+    Scale9SpriteWithHsv* getRendererNormal() const;
+
+    Scale9SpriteWithHsv* getRendererClicked() const;
+
+    Scale9SpriteWithHsv* getRendererDisabled() const;
+
 protected:
     virtual bool init() override;
 
@@ -183,10 +189,6 @@ protected:
     /// @c loadTextures, @c loadTextureNormal, @c loadTexturePressed
     /// or @c loadTextureDisabled.
     virtual void updateTexture();
-
-    Scale9SpriteWithHsv* getRendererNormal() const;
-    Scale9SpriteWithHsv* getRendererClicked() const;
-    Scale9SpriteWithHsv* getRendererDisabled() const;
 
 private:
     float zoomingDuration_;

@@ -39,6 +39,9 @@ NS_DETAIL_BEGIN
 ///                                              ee::UiButtonLoader>::loader());
 /// @endcode
 class ButtonEx : public cocos2d::ui::Button {
+private:
+    using Super = cocos2d::ui::Button;
+
 public:
     using Loader = GenericLoader<ButtonEx, UiButtonLoader>;
 
@@ -184,6 +187,10 @@ protected:
 
     virtual Widget* createCloneInstance() override;
     virtual void copySpecialProperties(Widget* model) override;
+
+    virtual void visit(cocos2d::Renderer* renderer,
+                       const cocos2d::Mat4& parentTransform,
+                       std::uint32_t parentFlags) override;
 
     /// Update texture for current state after loading new texture via
     /// @c loadTextures, @c loadTextureNormal, @c loadTexturePressed

@@ -112,7 +112,7 @@ void ButtonEx::removeAllChildrenWithCleanup(bool cleanup) {
 
 void ButtonEx::reorderChild(Node* child, int localZOrder) {
     if (child == container_) {
-        Button::reorderChild(child, localZOrder);
+        Super::reorderChild(child, localZOrder);
     } else {
         // Forward to the container.
         container_->reorderChild(child, localZOrder);
@@ -125,16 +125,16 @@ void ButtonEx::sortAllChildren() {
 }
 
 void ButtonEx::setContentSize(const cocos2d::Size& contentSize) {
-    Button::setContentSize(contentSize);
+    Super::setContentSize(contentSize);
 }
 
 void ButtonEx::setCascadeColorEnabled(bool enabled) {
-    Button::setCascadeColorEnabled(enabled);
+    Super::setCascadeColorEnabled(enabled);
     container_->setCascadeColorEnabled(enabled);
 }
 
 void ButtonEx::setCascadeOpacityEnabled(bool enabled) {
-    Button::setCascadeOpacityEnabled(enabled);
+    Super::setCascadeOpacityEnabled(enabled);
     container_->setCascadeOpacityEnabled(enabled);
 }
 
@@ -149,7 +149,7 @@ bool ButtonEx::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event) {
     CC_ASSERT(currentEvent_ == nullptr);
     currentTouch_ = touch;
     currentEvent_ = event;
-    bool result = Button::onTouchBegan(touch, event);
+    bool result = Super::onTouchBegan(touch, event);
     currentTouch_ = nullptr;
     currentEvent_ = nullptr;
     return result;
@@ -163,7 +163,7 @@ void ButtonEx::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event) {
     CC_ASSERT(currentEvent_ == nullptr);
     currentTouch_ = touch;
     currentEvent_ = event;
-    Button::onTouchMoved(touch, event);
+    Super::onTouchMoved(touch, event);
     currentTouch_ = nullptr;
     currentEvent_ = nullptr;
 }
@@ -173,13 +173,13 @@ void ButtonEx::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) {
     CC_ASSERT(currentEvent_ == nullptr);
     currentTouch_ = touch;
     currentEvent_ = event;
-    Button::onTouchEnded(touch, event);
+    Super::onTouchEnded(touch, event);
     currentTouch_ = nullptr;
     currentEvent_ = nullptr;
 }
 
 void ButtonEx::setScale9Enabled(bool enable) {
-    Button::setScale9Enabled(enable);
+    Super::setScale9Enabled(enable);
 }
 
 std::string ButtonEx::getDescription() const { return "ee::ButtonEx"; }
@@ -225,7 +225,7 @@ auto ButtonEx::getContainer() const noexcept -> const Widget * {
 auto ButtonEx::getContainer() noexcept -> Widget * { return container_; }
 
 bool ButtonEx::init() {
-    if (Button::init() == false) {
+    if (not Super::init()) {
         return false;
     }
     return true;
@@ -234,7 +234,7 @@ bool ButtonEx::init() {
 bool ButtonEx::init(const std::string& normalImage,
                     const std::string& selectedImage,
                     const std::string& disableImage, TextureResType texType) {
-    if (not Button::init(normalImage, selectedImage, disableImage, texType)) {
+    if (not Super::init(normalImage, selectedImage, disableImage, texType)) {
         return false;
     }
     return true;
@@ -361,7 +361,7 @@ void ButtonEx::onPressStateChangedToDisabled() {
 
 void ButtonEx::adaptRenderers() {
     updateTexture();
-    Button::adaptRenderers();
+    Super::adaptRenderers();
 }
 
 cocos2d::ui::Widget* ButtonEx::createCloneInstance() { return create(); }
@@ -369,9 +369,16 @@ cocos2d::ui::Widget* ButtonEx::createCloneInstance() { return create(); }
 void ButtonEx::copySpecialProperties(Widget* model) {
     auto button = dynamic_cast<ButtonEx*>(model);
     if (button != nullptr) {
-        Button::copySpecialProperties(model);
+        Super::copySpecialProperties(model);
         setZoomingDuration(button->getZoomingDuration());
     }
+}
+
+void ButtonEx::visit(cocos2d::Renderer* renderer,
+                     const cocos2d::Mat4& parentTransform,
+                     std::uint32_t parentFlags) {
+    adaptRenderers();
+    Super::visit(renderer, parentTransform, parentFlags);
 }
 
 void ButtonEx::updateTexture() {
@@ -387,7 +394,7 @@ void ButtonEx::updateTexture() {
         onPressStateChangedToPressed();
         ++counter;
     }
-    if (_disabledTextureAdaptDirty && isBright() == false) {
+    if (_disabledTextureAdaptDirty && not isBright()) {
         onPressStateChangedToDisabled();
         ++counter;
     }

@@ -50,7 +50,7 @@ private:
     }
 
 #define CCB_SELECTORRESOLVER_CCBUTTON_TOUCH_EX(selectorName, callback)         \
-    CCB_SEELCTORRESOLVER_CCBUTTON_TOUCH(this, selectorName, callback)
+    CCB_SELECTORRESOLVER_CCBUTTON_TOUCH(this, selectorName, callback)
 
 #define CCB_SELECTORRESOLVER_CCBUTTON_CLICK(target, selectorName, callback)    \
     if (pTarget == target && std::strcmp(pSelectorName, selectorName) == 0) {  \

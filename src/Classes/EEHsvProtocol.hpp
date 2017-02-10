@@ -35,6 +35,11 @@ public:
     /// Default is 1.0.
     void setContrast(float contrast);
 
+    float getHue() const { return hue_; }
+    float getSaturation() const { return saturation_; }
+    float getBrightness() const { return brightness_; }
+    float getContrast() const { return contrast_; }
+
 protected:
     virtual bool updateMatrix();
 

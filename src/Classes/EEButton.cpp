@@ -33,7 +33,8 @@ auto ButtonEx::getDefaultHitTester() -> const HitTester & {
 }
 
 ButtonEx::ButtonEx()
-    : zoomingDuration_(0.05f)
+    : saturation_(1.0f)
+    , zoomingDuration_(0.05f)
     , currentTouch_(nullptr)
     , currentEvent_(nullptr)
     , container_(nullptr) {}
@@ -281,7 +282,7 @@ void ButtonEx::onPressStateChangedToNormal() {
 
     if (_normalTextureLoaded) {
         _buttonNormalRenderer->setVisible(true);
-        getRendererNormal()->setSaturation(1.0f);
+        getRendererNormal()->setSaturation(saturation_);
     } else {
         // None background.
     }
@@ -312,7 +313,7 @@ void ButtonEx::onPressStateChangedToPressed() {
         if (_normalTextureLoaded) {
             // Use normal texture instead.
             _buttonNormalRenderer->setVisible(true);
-            getRendererNormal()->setSaturation(1.0f);
+            getRendererNormal()->setSaturation(saturation_);
         } else {
             // None background.
         }
@@ -412,6 +413,17 @@ Scale9SpriteWithHsv* ButtonEx::getRendererClicked() const {
 
 Scale9SpriteWithHsv* ButtonEx::getRendererDisabled() const {
     return dynamic_cast<Scale9SpriteWithHsv*>(_buttonDisabledRenderer);
+}
+
+void ButtonEx::setSaturation(float saturation) {
+    if (saturation_ == saturation) {
+        return;
+    }
+    saturation_ = saturation;
+    if (isBright()) {
+        getRendererNormal()->setSaturation(saturation_);
+        getRendererClicked()->setSaturation(saturation_);
+    }
 }
 NS_DETAIL_END
 NS_EE_END

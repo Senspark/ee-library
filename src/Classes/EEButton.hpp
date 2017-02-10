@@ -169,6 +169,8 @@ public:
 
     Scale9SpriteWithHsv* getRendererDisabled() const;
 
+    void setSaturation(float saturation);
+
 protected:
     virtual bool init() override;
 
@@ -198,6 +200,7 @@ protected:
     virtual void updateTexture();
 
 private:
+    float saturation_;
     float zoomingDuration_;
 
     cocos2d::Touch* currentTouch_;

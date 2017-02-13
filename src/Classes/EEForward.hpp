@@ -43,6 +43,7 @@ class UiWidgetLoader;
 class UiButtonLoader;
 class UiTextLoader;
 class UiLayoutLoader;
+class ClippingRectangleNodeLoader;
 
 class ButtonLoader;
 

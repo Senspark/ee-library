@@ -44,6 +44,7 @@
 #include "EEUiTextLoader.hpp"
 #include "EEUiCheckBoxLoader.hpp"
 #include "EEUiWidgetCallback.hpp"
+#include "EEClippingRectangleNodeLoader.hpp"
 
 #include "EEButtonLoader.hpp"
 

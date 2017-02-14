@@ -46,6 +46,20 @@ void getAndSet(const typename DataType::SetterType& f, Keys&&... keys) {
     set<DataType, Traits>(current, std::forward<Keys>(keys)...);
 }
 
+template <class DataType,
+          class Traits = DataTraits<typename DataType::ValueType>,
+          class Function, class... Keys,
+          class = std::enable_if_t<
+              std::is_same<bool, typename DataType::ValueType>::value>>
+void getAndSetIf(bool conditionalValue, Function&& f, Keys&&... keys) {
+    auto current = get<DataType, Traits>(keys...);
+    if (current == conditionalValue) {
+        current = not conditionalValue;
+        f();
+        set<DataType, Traits>(current, std::forward<Keys>(keys)...);
+    }
+}
+
 template <class DataType, class... Keys> void remove(Keys&&... keys) {
     detail::remove0(DataType::Id,
                     DataType::createKey(std::forward<Keys>(keys)...));

@@ -28,6 +28,9 @@ using dialog::Dialog;
 
 namespace dialog {
 class Dialog : public cocos2d::ui::Widget {
+private:
+    using Super = cocos2d::ui::Widget;
+
 public:
     using CallbackType = std::function<void(Dialog*)>;
 

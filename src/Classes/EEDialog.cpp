@@ -18,45 +18,35 @@ const int Dialog::ContainerLocalZOrder = 123456;
 const std::size_t Dialog::TopLevel = 123456;
 
 bool Dialog::init() {
-    if (Widget::init() == false) {
+    if (not Super::init()) {
         return false;
     }
 
     setActive(false);
     addClickEventListener(CC_CALLBACK_0(Dialog::onClickedOutside, this));
-
     return true;
 }
 
-void Dialog::onEnter() {
-    Widget::onEnter();
-}
+void Dialog::onEnter() { Super::onEnter(); }
 
-void Dialog::onExit() {
-    Widget::onExit();
-}
+void Dialog::onExit() { Super::onExit(); }
 
-const cocos2d::Node* Dialog::getContainer() const {
-    return getParent();
-}
+const cocos2d::Node* Dialog::getContainer() const { return getParent(); }
 
-cocos2d::Node* Dialog::getContainer() {
-    return getParent();
-}
+cocos2d::Node* Dialog::getContainer() { return getParent(); }
 
 void Dialog::show(std::size_t level) {
-    auto container = cocos2d::Node::create();
-    container->setContentSize(_director->getWinSize());
-    container->addChild(this);
+    if (getContainer() == nullptr) {
+        auto container = cocos2d::Node::create();
+        container->setContentSize(_director->getWinSize());
+        container->addChild(this);
+    }
 
     dialogLevel_ = level;
-
     DialogManager::getInstance()->pushDialog(this, level);
 }
 
-void Dialog::hide() {
-    DialogManager::getInstance()->popDialog(this);
-}
+void Dialog::hide() { DialogManager::getInstance()->popDialog(this); }
 
 Dialog* Dialog::addDialogWillShowCallback(const CallbackType& callback,
                                           int priority) {
@@ -82,39 +72,25 @@ Dialog* Dialog::addDialogDidHideCallback(const CallbackType& callback,
     return this;
 }
 
-std::size_t Dialog::getDialogLevel() const noexcept {
-    return dialogLevel_;
-}
+std::size_t Dialog::getDialogLevel() const noexcept { return dialogLevel_; }
 
-void Dialog::setActive(bool active) {
-    isActive_ = active;
-}
+void Dialog::setActive(bool active) { isActive_ = active; }
 
-bool Dialog::isActive() const noexcept {
-    return isActive_;
-}
+bool Dialog::isActive() const noexcept { return isActive_; }
 
 bool Dialog::hitTest(const cocos2d::Point& pt, const cocos2d::Camera* camera,
                      cocos2d::Vec3* p) const {
     // Test outside.
-    return (Widget::hitTest(pt, camera, p) == false);
+    return not Super::hitTest(pt, camera, p);
 }
 
-void Dialog::onDialogWillShow() {
-    invokeCallbacks(onDialogWillShowCallbacks_);
-}
+void Dialog::onDialogWillShow() { invokeCallbacks(onDialogWillShowCallbacks_); }
 
-void Dialog::onDialogDidShow() {
-    invokeCallbacks(onDialogDidShowCallbacks_);
-}
+void Dialog::onDialogDidShow() { invokeCallbacks(onDialogDidShowCallbacks_); }
 
-void Dialog::onDialogWillHide() {
-    invokeCallbacks(onDialogWillHideCallbacks_);
-}
+void Dialog::onDialogWillHide() { invokeCallbacks(onDialogWillHideCallbacks_); }
 
-void Dialog::onDialogDidHide() {
-    invokeCallbacks(onDialogDidHideCallbacks_);
-}
+void Dialog::onDialogDidHide() { invokeCallbacks(onDialogDidHideCallbacks_); }
 
 void Dialog::invokeCallbacks(std::vector<CallbackInfo>& callbacks) {
     std::stable_sort(callbacks.begin(), callbacks.end(), Compare2nd<>());

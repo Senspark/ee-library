@@ -61,5 +61,6 @@
 
 #include "EEDataInfo.hpp"
 #include "EEDataHandler.hpp"
+#include "EEPreferences.hpp"
 
 #endif /* EE_LIBRARY_HEADER_HPP_ */

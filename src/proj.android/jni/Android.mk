@@ -22,7 +22,8 @@ $(LOCAL_PATH)/../../cocos2d/cocos \
 $(LOCAL_PATH)/../../cocos2d/cocos/editor-support \
 $(LOCAL_PATH)/../../cocos2d/cocos/platform/android/jni \
 $(LOCAL_PATH)/../../cocos2d/cocos/ui \
-$(LOCAL_PATH)/../../cocos2d/extensions
+$(LOCAL_PATH)/../../cocos2d/extensions \
+$(LOCAL_PATH)/../../cocos2d/external
 
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/../../Classes
 

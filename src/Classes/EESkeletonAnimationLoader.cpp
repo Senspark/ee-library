@@ -90,7 +90,7 @@ void SkeletonAnimationLoader::onHandlePropTypeFloatScale(
     if (propName == property::animation_scale) {
         auto&& data = SpineFactory::getInstance()->getSkeletonData(
             dataFile_, atlasFile_, floatScale);
-        skeleton->initWithData(data.get());
+        skeleton->initWithData(data);
         return;
     }
     NodeV3Loader::onHandlePropTypeFloatScale(node, parent, propertyName,

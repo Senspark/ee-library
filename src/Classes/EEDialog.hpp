@@ -27,6 +27,23 @@ class Dialog;
 using dialog::Dialog;
 
 namespace dialog {
+/// Dialog lifetime:
+/// Initial state:
+/// - Inactive (isActive() returns false).
+///
+/// When show() is called.
+/// - onDialogWillShow is called.
+///   - invoke all callbacks in addDialogWillShowCallback() (can be overroden).
+/// - onDialogDidShow is called.
+///   - invoke all callbacks in addDialogDidShowCallback() (can be overroden).
+/// - Active (isActive() returns true).
+///
+/// When hide() is called.
+/// - Inactive (isActive() returns false).
+/// - onDialogWillHide is called.
+///   - invoke all callbacks in addDialogWillHideCallback() (can be overroden).
+/// - onDialogDidHidee is called.
+///   - invoke all callbacks in addDialogDidHideCallback() (can be overroden).
 class Dialog : public cocos2d::ui::Widget {
 private:
     using Super = cocos2d::ui::Widget;

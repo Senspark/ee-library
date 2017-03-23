@@ -28,10 +28,12 @@ class CheckBox;
 
 namespace dialog {
 class Dialog;
+class DialogComponent;
 class DialogManager;
 } // namespace dialog
 
 using dialog::Dialog;
+using dialog::DialogComponent;
 using dialog::DialogManager;
 
 class BackButtonComponent;

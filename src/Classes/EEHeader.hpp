@@ -25,6 +25,7 @@
 #include "EECheckBox.hpp"
 
 #include "EEDialog.hpp"
+#include "EEDialogComponent.hpp"
 #include "EEDialogManager.hpp"
 #include "EEDialogUtils.hpp"
 

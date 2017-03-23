@@ -7,7 +7,6 @@
 //
 
 #include "EEDialogComponent.hpp"
-#include "EEUtils.hpp"
 
 #include <2d/CCNode.h>
 
@@ -28,8 +27,6 @@ bool DialogComponent::init() {
         return false;
     }
     setName(DefaultName);
-    setPauseCallback([this] { ee::pauseAll(getOwner()); });
-    setResumeCallback([this] { ee::resumeAll(getOwner()); });
     return true;
 }
 
@@ -45,15 +42,15 @@ DialogComponent::setResumeCallback(const ResumeCallback& callback) {
     return this;
 }
 
-void DialogComponent::resume() {
+void DialogComponent::resume(Dialog* dialog) {
     if (resumeCallback_) {
-        resumeCallback_();
+        resumeCallback_(dialog);
     }
 }
 
-void DialogComponent::pause() {
+void DialogComponent::pause(Dialog* dialog) {
     if (pauseCallback_) {
-        pauseCallback_();
+        pauseCallback_(dialog);
     }
 }
 } // namespace dialog

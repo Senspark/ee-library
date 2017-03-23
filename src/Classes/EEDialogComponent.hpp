@@ -13,20 +13,22 @@
 
 namespace ee {
 namespace dialog {
+class Dialog;
+
 class DialogComponent : public cocos2d::Component {
 private:
     using Super = cocos2d::Component;
 
 public:
-    using ResumeCallback = std::function<void()>;
-    using PauseCallback = std::function<void()>;
+    using ResumeCallback = std::function<void(Dialog* dialog)>;
+    using PauseCallback = std::function<void(Dialog* dialog)>;
 
     static const std::string DefaultName;
 
     static DialogComponent* create();
 
-    void resume();
-    void pause();
+    void resume(Dialog* dialog);
+    void pause(Dialog* dialog);
 
     DialogComponent* setResumeCallback(const ResumeCallback& callback);
     DialogComponent* setPauseCallback(const PauseCallback& callback);

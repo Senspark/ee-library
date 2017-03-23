@@ -10,57 +10,36 @@
 #include "EEDialog.hpp"
 #include "EEDialogCommand.hpp"
 #include "EEDialogComponent.hpp"
+#include "EEUtils.hpp"
 
 #include <cocos2d.h>
 
 NS_EE_BEGIN
 namespace dialog {
 namespace {
-void doRecursivelyTopDown(cocos2d::Node* node,
-                          const std::function<bool(cocos2d::Node*)>& action) {
-    if (action(node)) {
-        auto&& children = node->getChildren();
-        for (auto&& child : children) {
-            doRecursivelyTopDown(child, action);
-        }
-    }
-}
-
-void pauseAllDialog(cocos2d::Node* node) {
-    doRecursivelyTopDown(node, [](cocos2d::Node* currentNode) {
+void pauseAllDialog(cocos2d::Node* node, Dialog* dialog) {
+    doRecursively(node, [dialog](cocos2d::Node* currentNode) {
         auto component =
             currentNode->getComponent(DialogComponent::DefaultName);
         if (component == nullptr) {
-            // Backward compability or the root scene.
             currentNode->pause();
-
-            // Continue recursing children.
-            return true;
+        } else {
+            auto dialogComponent = dynamic_cast<DialogComponent*>(component);
+            dialogComponent->pause(dialog);
         }
-        auto dialogComponent = dynamic_cast<DialogComponent*>(component);
-        dialogComponent->pause();
-
-        // Stop recursing children.
-        return false;
     });
 }
 
-void resumeAllDialog(cocos2d::Node* node) {
-    doRecursivelyTopDown(node, [](cocos2d::Node* currentNode) {
+void resumeAllDialog(cocos2d::Node* node, Dialog* dialog) {
+    doRecursively(node, [dialog](cocos2d::Node* currentNode) {
         auto component =
             currentNode->getComponent(DialogComponent::DefaultName);
         if (component == nullptr) {
-            // Backward compability or the root scene.
             currentNode->resume();
-
-            // Continue recursing children.
-            return true;
+        } else {
+            auto dialogComponent = dynamic_cast<DialogComponent*>(component);
+            dialogComponent->resume(dialog);
         }
-        auto dialogComponent = dynamic_cast<DialogComponent*>(component);
-        dialogComponent->resume();
-
-        // Stop recursing children.
-        return false;
     });
 }
 } // namespace
@@ -176,7 +155,7 @@ void DialogManager::pushDialogImmediately(Dialog* dialog, std::size_t level) {
     lock(dialog);
 
     auto parent = getRunningNode();
-    pauseAllDialog(parent);
+    pauseAllDialog(parent, dialog);
 
     ++currentLevel_;
     dialog->dialogLevel_ = currentLevel_;
@@ -215,7 +194,7 @@ void DialogManager::popDialogImmediately(Dialog* dialog) {
         dialogStack_.pop_back();
         --currentLevel_;
         auto parent = getRunningNode();
-        resumeAllDialog(parent);
+        resumeAllDialog(parent, dialog);
         unlock(dialog);
         dialog->onDialogDidHide();
     }));

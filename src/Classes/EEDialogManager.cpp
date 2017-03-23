@@ -178,7 +178,7 @@ cocos2d::Node* DialogManager::getRunningNode() {
     if (dialog != nullptr) {
         return dialog->getParent();
     }
-    return cocos2d::Director::getInstance()->getRunningScene();
+    return currentScene_;
 }
 
 bool DialogManager::isLocked() {

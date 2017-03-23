@@ -19,32 +19,32 @@ DialogManager* DialogManager::getInstance() {
     static DialogManager sharedInstance;
     return &sharedInstance;
 }
-    
+
 void DialogManager::pushDialog(Dialog* dialog) {
     pushDialog(dialog, Dialog::TopLevel);
 }
-    
+
 void DialogManager::pushDialog(Dialog* dialog, std::size_t level) {
     LOG_FUNC();
     updateCurrentScene();
-    
+
     CC_ASSERT(dialog != nullptr);
     CC_ASSERT(dialog->getContainer() != nullptr);
     commandQueue_.emplace_back(CommandType::Push, dialog, level);
     processCommandQueue();
 }
-    
+
 void DialogManager::popDialog(Dialog* dialog) {
     LOG_FUNC();
     updateCurrentScene();
-    
+
     CC_ASSERT(dialog != nullptr);
     CC_ASSERT(dialog->getParent() != nullptr);
     auto level = dialog->getDialogLevel();
     commandQueue_.emplace_back(CommandType::Pop, dialog, level);
     processCommandQueue();
 }
-    
+
 void DialogManager::popDialog() {
     popDialog(getTopDialog());
 }
@@ -64,7 +64,7 @@ Dialog* DialogManager::getDialog(std::size_t level) {
 Dialog* DialogManager::getTopDialog() {
     return getDialog(Dialog::TopLevel);
 }
-    
+
 std::size_t DialogManager::getTopDialogLevel() {
     auto topDialog = getTopDialog();
     if (topDialog != nullptr) {
@@ -75,7 +75,8 @@ std::size_t DialogManager::getTopDialogLevel() {
 
 void DialogManager::updateCurrentScene() {
     auto currentScene = cocos2d::Director::getInstance()->getRunningScene();
-    auto transitionScene = dynamic_cast<cocos2d::TransitionScene*>(currentScene);
+    auto transitionScene =
+        dynamic_cast<cocos2d::TransitionScene*>(currentScene);
     if (transitionScene != nullptr) {
         CCASSERT(false, "The current transition scene is not finished!");
     }
@@ -98,8 +99,8 @@ void DialogManager::processCommandQueue() {
         if (command.type == CommandType::Push) {
             if (currentLevel_ + 1 == command.level ||
                 command.level == Dialog::TopLevel) {
-                commandQueue_.erase(std::next(commandQueue_.begin(),
-                                              static_cast<DiffType>(i)));
+                commandQueue_.erase(
+                    std::next(commandQueue_.begin(), static_cast<DiffType>(i)));
                 pushDialogImmediately(command.dialog, command.level);
                 break;
             }
@@ -107,8 +108,8 @@ void DialogManager::processCommandQueue() {
             if ((currentLevel_ == command.level ||
                  command.level == Dialog::TopLevel) &&
                 getTopDialog() == command.dialog) {
-                commandQueue_.erase(std::next(commandQueue_.begin(),
-                                              static_cast<DiffType>(i)));
+                commandQueue_.erase(
+                    std::next(commandQueue_.begin(), static_cast<DiffType>(i)));
                 popDialogImmediately(command.dialog);
                 break;
             }
@@ -117,48 +118,48 @@ void DialogManager::processCommandQueue() {
         }
     }
 }
-    
+
 void DialogManager::pushDialogImmediately(Dialog* dialog, std::size_t level) {
     LOG_FUNC();
-    
+
     dialog->onDialogWillShow();
     lock(dialog);
-    
+
     auto parent = getRunningNode();
     pauseAll(parent);
-    
+
     ++currentLevel_;
     dialog->dialogLevel_ = currentLevel_;
     dialogStack_.emplace_back(dialog);
     parent->addChild(dialog->getContainer(), Dialog::ContainerLocalZOrder);
-    
+
     cocos2d::Vector<cocos2d::FiniteTimeAction*> actions;
     for (auto&& act : dialog->getShowingTransitions()) {
         actions.pushBack(act);
     }
-    
+
     actions.pushBack(cocos2d::CallFunc::create([this, dialog] {
         unlock(dialog);
         dialog->setActive(true);
         dialog->onDialogDidShow();
     }));
-    
+
     dialog->runAction(cocos2d::Sequence::create(actions));
 }
-    
+
 void DialogManager::popDialogImmediately(Dialog* dialog) {
     LOG_FUNC();
     CC_ASSERT(dialog == getTopDialog());
-    
+
     dialog->onDialogWillHide();
     dialog->setActive(false);
     lock(dialog);
-    
+
     cocos2d::Vector<cocos2d::FiniteTimeAction*> actions;
     for (auto&& act : dialog->getHidingTransitions()) {
         actions.pushBack(act);
     }
-    
+
     actions.pushBack(cocos2d::CallFunc::create([this, dialog] {
         dialog->getContainer()->removeFromParent();
         dialogStack_.pop_back();
@@ -168,10 +169,10 @@ void DialogManager::popDialogImmediately(Dialog* dialog) {
         unlock(dialog);
         dialog->onDialogDidHide();
     }));
-    
+
     dialog->runAction(cocos2d::Sequence::create(actions));
 }
-    
+
 cocos2d::Node* DialogManager::getRunningNode() {
     updateCurrentScene();
     auto dialog = getTopDialog();

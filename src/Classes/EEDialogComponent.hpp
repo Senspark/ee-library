@@ -15,6 +15,25 @@ namespace ee {
 namespace dialog {
 class Dialog;
 
+/// DialogManager will pause and resume children nodes when any dialog is pushed
+/// or popped.
+///
+/// Use this class to override that behaviour.
+/// Usage:
+/// @code
+/// your_node->addComponent(
+///     ee::DialogComponent::create()
+///         ->setResumeCallback([your_node](ee::Dialog* poppedDialog) {
+///             // poppedDialog is the dialog that is hiding.
+///             // Default behaviour: your_node->resume();
+///             // Override your behaviour here.
+///         })
+///         ->setPauseCallback([your_node](ee::Dialog* pushedDialog) {
+///             // pushedDialog is the dialog that is showing.
+///             // Default behaviour: your_node->pause();
+///             // Override your behaviour here.
+///         }));
+/// @endcode
 class DialogComponent : public cocos2d::Component {
 private:
     using Super = cocos2d::Component;

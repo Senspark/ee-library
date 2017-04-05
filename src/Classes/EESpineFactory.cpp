@@ -39,8 +39,6 @@ const detail::SpineDataDeleter& getSkeletonDataDeleter() {
     };
     return deleter;
 }
-
-SpineFactory* instance_;
 } // namespace
 
 SpineFactory* SpineFactory::getInstance() {

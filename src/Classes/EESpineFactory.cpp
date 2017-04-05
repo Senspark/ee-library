@@ -10,7 +10,13 @@
 
 #include "EESpineFactory.hpp"
 
+// clang-format off
+#if __has_include(<spine/Cocos2dAttachmentLoader.h>)
+#define EE_SPINE_USE_NEW_VERSION
 #include <spine/Cocos2dAttachmentLoader.h>
+#endif // __has_include(<spine/Cocos2dAttachmentLoader.h>)
+// clang-format on
+
 #include <spine/SkeletonAnimation.h>
 
 namespace ee {
@@ -64,8 +70,13 @@ spSkeletonData* SpineFactory::getSkeletonData(const std::string& dataName,
     auto iter = cachedSkeletonData_.find(std::make_pair(dataName, scale));
     if (iter == cachedSkeletonData_.cend()) {
         auto&& atlas = getAtlas(atlasName);
-
+#ifdef EE_SPINE_USE_NEW_VERSION
         auto attachmentLoader = &Cocos2dAttachmentLoader_create(atlas)->super;
+#undef EE_SPINE_USE_NEW_VERSION
+#else  // EE_SPINE_USE_NEW_VERSION
+        auto attachmentLoader = &spAtlasAttachmentLoader_create(atlas)->super;
+#endif // EE_SPINE_USE_NEW_VERSION
+
         auto json = spSkeletonJson_createWithLoader(attachmentLoader);
         json->scale = scale;
 

@@ -203,6 +203,8 @@ private:
     float saturation_;
     float zoomingDuration_;
 
+    cocos2d::Node* zoomingAction_;
+
     cocos2d::Touch* currentTouch_;
     cocos2d::Event* currentEvent_;
 

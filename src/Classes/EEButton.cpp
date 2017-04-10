@@ -8,6 +8,7 @@
 
 #include "EEButton.hpp"
 #include "EEUtils.hpp"
+#include "EEDialogComponent.hpp"
 #include "EEScale9SpriteWithHsv.hpp"
 
 #include <cocos2d.h>
@@ -37,7 +38,8 @@ ButtonEx::ButtonEx()
     , zoomingDuration_(0.05f)
     , currentTouch_(nullptr)
     , currentEvent_(nullptr)
-    , container_(nullptr) {}
+    , container_(nullptr) {
+}
 
 ButtonEx::~ButtonEx() = default;
 
@@ -183,13 +185,17 @@ void ButtonEx::setScale9Enabled(bool enable) {
     Super::setScale9Enabled(enable);
 }
 
-std::string ButtonEx::getDescription() const { return "ee::ButtonEx"; }
+std::string ButtonEx::getDescription() const {
+    return "ee::ButtonEx";
+}
 
 void ButtonEx::setZoomingDuration(float duration) noexcept {
     zoomingDuration_ = duration;
 }
 
-float ButtonEx::getZoomingDuration() const noexcept { return zoomingDuration_; }
+float ButtonEx::getZoomingDuration() const noexcept {
+    return zoomingDuration_;
+}
 
 void ButtonEx::pressedStateBrightness(float brightness) {
     getRendererClicked()->setBrightness(brightness);
@@ -219,11 +225,13 @@ void ButtonEx::setTouchEndedCallback(const TouchCallback& callback) {
     });
 }
 
-auto ButtonEx::getContainer() const noexcept -> const Widget * {
+const cocos2d::ui::Widget* ButtonEx::getContainer() const noexcept {
     return container_;
 }
 
-auto ButtonEx::getContainer() noexcept -> Widget * { return container_; }
+cocos2d::ui::Widget* ButtonEx::getContainer() noexcept {
+    return container_;
+}
 
 bool ButtonEx::init() {
     if (not Super::init()) {
@@ -256,7 +264,7 @@ void ButtonEx::initRenderer() {
     _buttonDisabledRenderer->setRenderingType(
         cocos2d::ui::Scale9Sprite::RenderingType::SIMPLE);
 
-    container_ = Widget::create();
+    container_ = cocos2d::ui::Widget::create();
     container_->ignoreContentAdaptWithSize(false);
     container_->setSwallowTouches(false);
     container_->setPropagateTouchEvents(true);
@@ -272,6 +280,11 @@ void ButtonEx::initRenderer() {
     container_->addProtectedChild(_buttonClickedRenderer, -2, -1);
     container_->addProtectedChild(_buttonDisabledRenderer, -2, -1);
     container_->addProtectedChild(_titleRenderer);
+
+    zoomingAction_ = cocos2d::Node::create();
+    zoomingAction_->setVisible(false);
+    zoomingAction_->addComponent(ee::DialogComponent::create());
+    container_->addProtectedChild(zoomingAction_);
 }
 
 void ButtonEx::onPressStateChangedToNormal() {
@@ -287,12 +300,13 @@ void ButtonEx::onPressStateChangedToNormal() {
         // None background.
     }
 
-    container_->stopAllActions();
+    zoomingAction_->stopAllActions();
 
     if (_pressedActionEnabled) {
         // Zooming is enabled.
         auto zoomAction = cocos2d::ScaleTo::create(zoomingDuration_, 1.0f);
-        container_->runAction(zoomAction);
+        zoomingAction_->runAction(
+            cocos2d::TargetedAction::create(container_, zoomAction));
     } else {
         container_->setScale(1.0f);
     }
@@ -319,13 +333,14 @@ void ButtonEx::onPressStateChangedToPressed() {
         }
     }
 
-    container_->stopAllActions();
+    zoomingAction_->stopAllActions();
 
     if (_pressedActionEnabled) {
         // Zooming is enabled.
         auto zoomAction =
             cocos2d::ScaleTo::create(zoomingDuration_, 1.0f + _zoomScale);
-        container_->runAction(zoomAction);
+        zoomingAction_->runAction(
+            cocos2d::TargetedAction::create(container_, zoomAction));
     } else {
         // Instantly scaled.
         container_->setScale(1.0f + _zoomScale);
@@ -365,7 +380,9 @@ void ButtonEx::adaptRenderers() {
     Super::adaptRenderers();
 }
 
-cocos2d::ui::Widget* ButtonEx::createCloneInstance() { return create(); }
+cocos2d::ui::Widget* ButtonEx::createCloneInstance() {
+    return create();
+}
 
 void ButtonEx::copySpecialProperties(Widget* model) {
     auto button = dynamic_cast<ButtonEx*>(model);

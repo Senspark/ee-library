@@ -31,6 +31,9 @@
 
 #include "EEBackButtonComponent.hpp"
 
+#include "EEConsole.hpp"
+#include "EECommandPool.hpp"
+
 #include "EEBackButtonListener.hpp"
 
 #include "EEEventDispatcher.hpp"

@@ -59,6 +59,8 @@ private:
     PauseCallback pauseCallback_;
 };
 } // namespace dialog
+
+using dialog::DialogComponent;
 } // namespace ee
 
 #endif /* EE_LIBRARY_DIALOG_COMPONENT_HPP_ */

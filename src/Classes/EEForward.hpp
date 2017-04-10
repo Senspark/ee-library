@@ -39,6 +39,8 @@ using dialog::DialogManager;
 
 class BackButtonComponent;
 
+class Console;
+
 template <class T> class BackButtonListener;
 
 class NodeV3Loader;

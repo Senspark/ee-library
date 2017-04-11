@@ -61,6 +61,8 @@ class BlurBackground;
 class BlurBackgroundLoader;
 
 class SkeletonAnimationLoader;
+class SkeletonBone;
+class SkeletonBoneLoader;
 
 template <std::size_t Id, class... Args> class EventInfo;
 class EventDispatcher;

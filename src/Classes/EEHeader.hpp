@@ -62,6 +62,8 @@
 #include "EEBlurBackgroundLoader.hpp"
 
 #include "EESkeletonAnimationLoader.hpp"
+#include "EESkeletonBone.hpp"
+#include "EESkeletonBoneLoader.hpp"
 #include "EESpineFactory.hpp"
 
 #include "EEDataInfo.hpp"

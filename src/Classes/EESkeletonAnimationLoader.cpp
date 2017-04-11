@@ -9,7 +9,7 @@
 #include "EESkeletonAnimationLoader.hpp"
 #include "EESpineFactory.hpp"
 
-#include <spine/spine-cocos2dx.h>
+#include <spine/SkeletonAnimation.h>
 
 NS_EE_BEGIN
 namespace property {

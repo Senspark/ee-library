@@ -152,8 +152,8 @@ void DialogManager::processCommandQueue() {
 void DialogManager::pushDialogImmediately(Dialog* dialog, std::size_t level) {
     LOG_FUNC_FORMAT("dialog = %p level = %zu", dialog, level);
 
-    dialog->onDialogWillShow();
     lock(dialog);
+    dialog->onDialogWillShow();
 
     auto parent = getRunningNode();
     pauseAllDialog(parent, dialog);
@@ -183,9 +183,9 @@ void DialogManager::popDialogImmediately(Dialog* dialog) {
     LOG_FUNC_FORMAT("dialog = %p level = %zu", dialog,
                     dialog->getDialogLevel());
 
-    dialog->onDialogWillHide();
     dialog->setActive(false);
     lock(dialog);
+    dialog->onDialogWillHide();
 
     cocos2d::Vector<cocos2d::FiniteTimeAction*> actions;
     for (auto&& action : dialog->getHidingTransitions()) {

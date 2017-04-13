@@ -11,10 +11,9 @@
 
 #include <cstddef>
 
-#include "EEMacro.hpp"
 #include "EEDialogGuard.hpp"
 
-NS_EE_BEGIN
+namespace ee {
 namespace dialog {
 class Dialog;
 
@@ -37,6 +36,6 @@ private:
     Guard guard_;
 };
 } // namespace dialog.
-NS_EE_END
+} // namespac eee
 
 #endif /* EE_LIBRARY_DIALOG_COMMAND_HPP_ */

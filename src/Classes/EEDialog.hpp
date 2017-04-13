@@ -13,15 +13,15 @@
 #include <memory>
 #include <vector>
 
-#include "EEMacro.hpp"
 #include "EECocos2dxFwd.hpp"
 
 #include <base/CCRefPtr.h>
 #include <ui/UIWidget.h>
 
-NS_EE_BEGIN
+namespace ee {
 namespace dialog {
 class Dialog;
+class DialogManager;
 } // namespace dialog
 
 using dialog::Dialog;
@@ -137,7 +137,7 @@ public:
     }
 
 protected:
-    friend class DialogManager;
+    friend DialogManager;
 
     virtual bool init() override;
 
@@ -173,6 +173,6 @@ private:
     std::vector<CallbackInfo> onDialogDidHideCallbacks_;
 };
 } // namespace dialog.
-NS_EE_END
+} // namespace ee
 
 #endif /* EE_LIBRARY_DIALOG_HPP_ */

@@ -14,7 +14,7 @@
 
 #include <cocos2d.h>
 
-NS_EE_BEGIN
+namespace ee {
 namespace dialog {
 namespace {
 void pauseAllDialog(cocos2d::Node* node, Dialog* dialog) {
@@ -231,4 +231,4 @@ void DialogManager::lock(Dialog* dialog) {
     lockingDialog_ = dialog;
 }
 } // namespace dialog
-NS_EE_END
+} // namespac ee

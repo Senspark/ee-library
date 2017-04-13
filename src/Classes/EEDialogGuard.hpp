@@ -9,16 +9,16 @@
 #ifndef EE_LIBRARY_DIALOG_GUARD_HPP_
 #define EE_LIBRARY_DIALOG_GUARD_HPP_
 
-#include "EEMacro.hpp"
-
-#include <base/CCRefPtr.h>
 #include <2d/CCNode.h>
+#include <base/CCRefPtr.h>
 
-NS_EE_BEGIN
+namespace ee {
 namespace dialog {
 class Dialog;
 
+/// Guards the dialog by keep a reference to its container.
 struct Guard final {
+    /// Constructs a guard for the specified dialog.
     explicit Guard(Dialog* dialog);
 
     Dialog* dialog;
@@ -27,6 +27,6 @@ private:
     cocos2d::RefPtr<cocos2d::Node> guard_;
 };
 } // namespace dialog
-NS_EE_END
+} // namespace ee
 
 #endif /* EE_LIBRARY_DIALOG_GUARD_HPP_ */

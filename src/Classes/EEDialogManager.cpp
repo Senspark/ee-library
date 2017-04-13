@@ -11,6 +11,7 @@
 #include "EEDialogCommand.hpp"
 #include "EEDialogComponent.hpp"
 #include "EEUtils.hpp"
+#include "EEScopeGuard.hpp"
 
 #include <cocos2d.h>
 
@@ -175,10 +176,21 @@ void DialogManager::pushDialogImmediately(Dialog* dialog, std::size_t level) {
         actions.pushBack(cocos2d::TargetedAction::create(dialog, action));
     }
 
-    actions.pushBack(cocos2d::CallFunc::create([this, dialog] {
+    auto unlocker = std::make_shared<ScopeGuard>([this, dialog] {
+        LOG_FUNC_FORMAT("unlocker: dialog = %p level = %zu", dialog,
+                        dialog->getDialogLevel());
         unlock(dialog);
-        dialog->setActive(true);
-        dialog->onDialogDidShow();
+        processCommandQueue();
+    });
+
+    actions.pushBack(cocos2d::CallFunc::create([this, dialog, unlocker] {
+        if (updateCurrentScene()) {
+            unlocker->dismiss();
+        } else {
+            dialog->onDialogDidShow();
+            unlocker->invoke();
+            dialog->setActive(true);
+        }
     }));
 
     dialog->transitionAction_->stopAllActions();
@@ -199,14 +211,31 @@ void DialogManager::popDialogImmediately(Dialog* dialog) {
         actions.pushBack(cocos2d::TargetedAction::create(dialog, action));
     }
 
-    actions.pushBack(cocos2d::CallFunc::create([this, dialog] {
-        dialog->getContainer()->removeFromParent();
-        dialogStack_.pop_back();
-        --currentLevel_;
-        auto parent = getRunningNode();
-        resumeAllDialog(parent, dialog);
+    auto unlocker = std::make_shared<ScopeGuard>([this, dialog] {
+        LOG_FUNC_FORMAT("unlocker: dialog = %p level = %zu", dialog,
+                        dialog->getDialogLevel());
         unlock(dialog);
-        dialog->onDialogDidHide();
+        processCommandQueue();
+    });
+
+    actions.pushBack(cocos2d::CallFunc::create([this, dialog, unlocker] {
+        auto container = dialog->getContainer();
+        auto realParent = container->getParent();
+        container->removeFromParent();
+
+        if (updateCurrentScene()) {
+            unlocker->dismiss();
+        } else {
+            dialogStack_.pop_back();
+            --currentLevel_;
+
+            auto parent = getRunningNode();
+            CC_ASSERT(parent == realParent);
+            resumeAllDialog(parent, dialog);
+
+            dialog->onDialogDidHide();
+            unlocker->invoke();
+        }
     }));
 
     dialog->transitionAction_->stopAllActions();

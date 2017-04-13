@@ -53,7 +53,7 @@ public:
     std::size_t getTopDialogLevel();
 
     /// Updates the whole dialog graph in the current scene.
-    void updateCurrentScene();
+    bool updateCurrentScene();
 
     /// Processes available dialog command queue.
     void processCommandQueue();

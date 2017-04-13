@@ -42,6 +42,14 @@ void resumeAllDialog(cocos2d::Node* node, Dialog* dialog) {
         }
     });
 }
+
+bool isTransitionScene(cocos2d::Node* scene) {
+    auto transitionScene = dynamic_cast<cocos2d::TransitionScene*>(scene);
+    if (transitionScene != nullptr) {
+        return true;
+    }
+    return false;
+}
 } // namespace
 
 DialogManager* DialogManager::getInstance() {
@@ -103,20 +111,19 @@ std::size_t DialogManager::getTopDialogLevel() {
     return 0;
 }
 
-void DialogManager::updateCurrentScene() {
+bool DialogManager::updateCurrentScene() {
     auto currentScene = cocos2d::Director::getInstance()->getRunningScene();
-    auto transitionScene =
-        dynamic_cast<cocos2d::TransitionScene*>(currentScene);
-    if (transitionScene != nullptr) {
-        CCASSERT(false, "The current transition scene is not finished!");
+    if (currentScene == currentScene_) {
+        return false;
     }
-    if (currentScene != currentScene_) {
-        currentScene_ = currentScene;
-        dialogStack_.clear();
-        lockingDialog_ = nullptr;
-        currentLevel_ = 0;
-        commandQueue_.clear();
-    }
+
+    LOG_FUNC();
+    currentScene_ = currentScene;
+    dialogStack_.clear();
+    lockingDialog_ = nullptr;
+    currentLevel_ = 0;
+    commandQueue_.clear();
+    return true;
 }
 
 void DialogManager::processCommandQueue() {

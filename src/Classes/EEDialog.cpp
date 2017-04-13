@@ -22,6 +22,10 @@ bool Dialog::init() {
         return false;
     }
 
+    transitionAction_ = cocos2d::Node::create();
+    transitionAction_->setVisible(false);
+    addProtectedChild(transitionAction_);
+
     setActive(false);
     addClickEventListener(CC_CALLBACK_0(Dialog::onClickedOutside, this));
     return true;

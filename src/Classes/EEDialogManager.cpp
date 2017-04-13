@@ -163,8 +163,8 @@ void DialogManager::pushDialogImmediately(Dialog* dialog, std::size_t level) {
     parent->addChild(dialog->getContainer(), Dialog::ContainerLocalZOrder);
 
     cocos2d::Vector<cocos2d::FiniteTimeAction*> actions;
-    for (auto&& act : dialog->getShowingTransitions()) {
-        actions.pushBack(act);
+    for (auto&& action : dialog->getShowingTransitions()) {
+        actions.pushBack(cocos2d::TargetedAction::create(dialog, action));
     }
 
     actions.pushBack(cocos2d::CallFunc::create([this, dialog] {
@@ -173,7 +173,8 @@ void DialogManager::pushDialogImmediately(Dialog* dialog, std::size_t level) {
         dialog->onDialogDidShow();
     }));
 
-    dialog->runAction(cocos2d::Sequence::create(actions));
+    dialog->transitionAction_->stopAllActions();
+    dialog->transitionAction_->runAction(cocos2d::Sequence::create(actions));
 }
 
 void DialogManager::popDialogImmediately(Dialog* dialog) {
@@ -185,8 +186,8 @@ void DialogManager::popDialogImmediately(Dialog* dialog) {
     lock(dialog);
 
     cocos2d::Vector<cocos2d::FiniteTimeAction*> actions;
-    for (auto&& act : dialog->getHidingTransitions()) {
-        actions.pushBack(act);
+    for (auto&& action : dialog->getHidingTransitions()) {
+        actions.pushBack(cocos2d::TargetedAction::create(dialog, action));
     }
 
     actions.pushBack(cocos2d::CallFunc::create([this, dialog] {
@@ -199,7 +200,8 @@ void DialogManager::popDialogImmediately(Dialog* dialog) {
         dialog->onDialogDidHide();
     }));
 
-    dialog->runAction(cocos2d::Sequence::create(actions));
+    dialog->transitionAction_->stopAllActions();
+    dialog->transitionAction_->runAction(cocos2d::Sequence::create(actions));
 }
 
 cocos2d::Node* DialogManager::getRunningNode() {

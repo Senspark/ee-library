@@ -164,6 +164,8 @@ private:
     std::size_t dialogLevel_;
     bool isActive_;
 
+    cocos2d::Node* transitionAction_;
+
     std::vector<TransitionRef> showingTransitions_;
     std::vector<TransitionRef> hidingTransitions_;
 

@@ -54,22 +54,23 @@ void DialogManager::pushDialog(Dialog* dialog) {
 }
 
 void DialogManager::pushDialog(Dialog* dialog, std::size_t level) {
-    LOG_FUNC();
-    updateCurrentScene();
-
     CC_ASSERT(dialog != nullptr);
     CC_ASSERT(dialog->getContainer() != nullptr);
+    LOG_FUNC_FORMAT("dialog = %p level = %zu", dialog, level);
+
+    updateCurrentScene();
     commandQueue_.emplace_back(CommandType::Push, dialog, level);
     processCommandQueue();
 }
 
 void DialogManager::popDialog(Dialog* dialog) {
-    LOG_FUNC();
-    updateCurrentScene();
-
     CC_ASSERT(dialog != nullptr);
     CC_ASSERT(dialog->getParent() != nullptr);
+
     auto level = dialog->getDialogLevel();
+    LOG_FUNC_FORMAT("dialog = %p level = %zu", dialog, level);
+
+    updateCurrentScene();
     commandQueue_.emplace_back(CommandType::Pop, dialog, level);
     processCommandQueue();
 }
@@ -149,7 +150,7 @@ void DialogManager::processCommandQueue() {
 }
 
 void DialogManager::pushDialogImmediately(Dialog* dialog, std::size_t level) {
-    LOG_FUNC();
+    LOG_FUNC_FORMAT("dialog = %p level = %zu", dialog, level);
 
     dialog->onDialogWillShow();
     lock(dialog);
@@ -178,8 +179,9 @@ void DialogManager::pushDialogImmediately(Dialog* dialog, std::size_t level) {
 }
 
 void DialogManager::popDialogImmediately(Dialog* dialog) {
-    LOG_FUNC();
     CC_ASSERT(dialog == getTopDialog());
+    LOG_FUNC_FORMAT("dialog = %p level = %zu", dialog,
+                    dialog->getDialogLevel());
 
     dialog->onDialogWillHide();
     dialog->setActive(false);
@@ -219,15 +221,16 @@ bool DialogManager::isLocked() {
 }
 
 void DialogManager::unlock(Dialog* dialog) {
-    LOG_FUNC();
+    LOG_FUNC_FORMAT("dialog = %p level = %zu", dialog,
+                    dialog->getDialogLevel());
     CCASSERT(lockingDialog_ == dialog,
              "Attempted to unlock not the top dialog!");
     lockingDialog_ = nullptr;
-    processCommandQueue();
 }
 
 void DialogManager::lock(Dialog* dialog) {
-    LOG_FUNC();
+    LOG_FUNC_FORMAT("dialog = %p level = %zu", dialog,
+                    dialog->getDialogLevel());
     CC_ASSERT(lockingDialog_ == nullptr);
     updateCurrentScene();
     lockingDialog_ = dialog;

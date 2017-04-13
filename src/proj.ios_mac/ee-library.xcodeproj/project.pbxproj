@@ -145,6 +145,8 @@
 		6FAC217D1CE3454E000C16CC /* EEDialogGuard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FAC217A1CE3454E000C16CC /* EEDialogGuard.cpp */; };
 		6FAC217E1CE3454E000C16CC /* EEDialogGuard.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FAC217B1CE3454E000C16CC /* EEDialogGuard.hpp */; };
 		6FAC217F1CE3454E000C16CC /* EEDialogGuard.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FAC217B1CE3454E000C16CC /* EEDialogGuard.hpp */; };
+		6FAE05331E9F212000A17C21 /* EEScopeGuard.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FAE05301E9F212000A17C21 /* EEScopeGuard.hpp */; };
+		6FAE05341E9F212000A17C21 /* EEScopeGuard.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FAE05301E9F212000A17C21 /* EEScopeGuard.hpp */; };
 		6FAE79871D33759D00A0CFB1 /* EEDataHandler.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FAE79831D33759D00A0CFB1 /* EEDataHandler.hpp */; };
 		6FAE79891D33759D00A0CFB1 /* EEDataInfo.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FAE79851D33759D00A0CFB1 /* EEDataInfo.hpp */; };
 		6FAE798A1D3375B800A0CFB1 /* EEDataInfo.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FAE79851D33759D00A0CFB1 /* EEDataInfo.hpp */; };
@@ -343,6 +345,7 @@
 		6FAC21751CE33425000C16CC /* EEDialogCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDialogCommand.hpp; sourceTree = "<group>"; };
 		6FAC217A1CE3454E000C16CC /* EEDialogGuard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDialogGuard.cpp; sourceTree = "<group>"; };
 		6FAC217B1CE3454E000C16CC /* EEDialogGuard.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDialogGuard.hpp; sourceTree = "<group>"; };
+		6FAE05301E9F212000A17C21 /* EEScopeGuard.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEScopeGuard.hpp; sourceTree = "<group>"; };
 		6FAE79821D33759D00A0CFB1 /* EEDataHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDataHandler.cpp; sourceTree = "<group>"; };
 		6FAE79831D33759D00A0CFB1 /* EEDataHandler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDataHandler.hpp; sourceTree = "<group>"; };
 		6FAE79841D33759D00A0CFB1 /* EEDataInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDataInfo.cpp; sourceTree = "<group>"; };
@@ -442,6 +445,7 @@
 				6FEC41EA1D9B53C8000B40F2 /* EEPool.hpp */,
 				6F588AE01E84FA5D00B1F1ED /* EEAction.cpp */,
 				6F588AE11E84FA5D00B1F1ED /* EEAction.hpp */,
+				6FAE05301E9F212000A17C21 /* EEScopeGuard.hpp */,
 				6FD64E9F1E9B47010030CDEC /* Console */,
 				6C4557741C8FC8C4001AE09A /* experimental */,
 				6F588AD31E84C99D00B1F1ED /* coroutine */,
@@ -749,6 +753,7 @@
 				6FC7FAD41D154387005AF2E5 /* EEShader.hpp in Headers */,
 				6F79DC821CCE5CB900BDA20F /* EECrytography.hpp in Headers */,
 				6F8C9EF71E233D65005D4121 /* EESpineFactory.hpp in Headers */,
+				6FAE05331E9F212000A17C21 /* EEScopeGuard.hpp in Headers */,
 				6FB731231D1B926F000B7397 /* EESpriteWithHsvLoader.hpp in Headers */,
 				6FAC21781CE33425000C16CC /* EEDialogCommand.hpp in Headers */,
 				6F48D01E1E9CBBE900342077 /* EESkeletonBone.hpp in Headers */,
@@ -808,6 +813,7 @@
 				6F79B6361CCA8FA00008EFAC /* EEUiButtonLoader.hpp in Headers */,
 				6FB731241D1B926F000B7397 /* EESpriteWithHsvLoader.hpp in Headers */,
 				6F8C9EF81E233D65005D4121 /* EESpineFactory.hpp in Headers */,
+				6FAE05341E9F212000A17C21 /* EEScopeGuard.hpp in Headers */,
 				6F79B6231CCA7FC90008EFAC /* EEMacro.hpp in Headers */,
 				6FAC21791CE33425000C16CC /* EEDialogCommand.hpp in Headers */,
 				6F48D01F1E9CBBE900342077 /* EESkeletonBone.hpp in Headers */,

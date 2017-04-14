@@ -10,7 +10,7 @@
 #include "EEDialogManager.hpp"
 #include "EEUtils.hpp"
 
-#include <cocos2d.h>
+#include <base/CCDirector.h>
 
 namespace ee {
 namespace dialog {
@@ -105,18 +105,22 @@ bool Dialog::hitTest(const cocos2d::Point& pt, const cocos2d::Camera* camera,
 }
 
 void Dialog::onDialogWillShow() {
+    LOG_FUNC_FORMAT("dialog = %p", this);
     invokeCallbacks(onDialogWillShowCallbacks_);
 }
 
 void Dialog::onDialogDidShow() {
+    LOG_FUNC_FORMAT("dialog = %p", this);
     invokeCallbacks(onDialogDidShowCallbacks_);
 }
 
 void Dialog::onDialogWillHide() {
+    LOG_FUNC_FORMAT("dialog = %p", this);
     invokeCallbacks(onDialogWillHideCallbacks_);
 }
 
 void Dialog::onDialogDidHide() {
+    LOG_FUNC_FORMAT("dialog = %p", this);
     invokeCallbacks(onDialogDidHideCallbacks_);
 }
 

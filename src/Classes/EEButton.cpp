@@ -439,8 +439,8 @@ void ButtonEx::setSaturation(float saturation) {
     saturation_ = saturation;
     if (isBright()) {
         getRendererNormal()->setSaturation(saturation_);
-        getRendererClicked()->setSaturation(saturation_);
     }
+    getRendererClicked()->setSaturation(saturation_);
 }
 NS_DETAIL_END
 NS_EE_END

@@ -35,6 +35,7 @@ auto ButtonEx::getDefaultHitTester() -> const HitTester & {
 
 ButtonEx::ButtonEx()
     : saturation_(1.0f)
+    , brightness_(0.0f)
     , zoomingDuration_(0.05f)
     , currentTouch_(nullptr)
     , currentEvent_(nullptr)
@@ -441,6 +442,15 @@ void ButtonEx::setSaturation(float saturation) {
         getRendererNormal()->setSaturation(saturation_);
     }
     getRendererClicked()->setSaturation(saturation_);
+}
+
+void ButtonEx::setBrightness(float brightness) {
+    if (brightness_ == brightness) {
+        return;
+    }
+    brightness_ = brightness;
+    getRendererNormal()->setBrightness(brightness_);
+    getRendererClicked()->setBrightness(brightness_);
 }
 NS_DETAIL_END
 NS_EE_END

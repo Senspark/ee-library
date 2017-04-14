@@ -170,6 +170,7 @@ public:
     Scale9SpriteWithHsv* getRendererDisabled() const;
 
     void setSaturation(float saturation);
+    void setBrightness(float brightness);
 
 protected:
     virtual bool init() override;
@@ -201,6 +202,7 @@ protected:
 
 private:
     float saturation_;
+    float brightness_;
     float zoomingDuration_;
 
     cocos2d::Node* zoomingAction_;

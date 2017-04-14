@@ -10,6 +10,12 @@
 
 #include <spine/SkeletonAnimation.h>
 
+// clang-format off
+#if __has_include(<spine/Cocos2dAttachmentLoader.h>)
+#define EE_SPINE_USE_NEW_VERSION
+#endif // __has_include(<spine/Cocos2dAttachmentLoader.h>)
+// clang-format on
+
 namespace ee {
 bool SkeletonBone::init() {
     if (not Super::init()) {
@@ -37,9 +43,16 @@ void SkeletonBone::update(float delta) {
     auto bone = parentSkeleton_->findBone(boneName_);
     setPositionX(bone->worldX);
     setPositionY(bone->worldY);
+
+#ifdef EE_SPINE_USE_NEW_VERSION
     setRotation(spBone_getWorldRotationX(bone));
     setScaleX(spBone_getWorldScaleX(bone));
     setScaleY(spBone_getWorldScaleY(bone));
+#else // EE_SPINE_USE_NEW_VERSION
+    setRotation(bone->worldRotation);
+    setScaleX(bone->worldScaleX);
+    setScaleY(bone->worldScaleY);
+#endif // EE_SPINE_USE_NEW_VERSION
 }
 
 void SkeletonBone::setParent(cocos2d::Node* parent) {

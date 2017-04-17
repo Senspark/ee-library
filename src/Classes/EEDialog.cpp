@@ -10,6 +10,7 @@
 #include "EEDialogManager.hpp"
 #include "EEUtils.hpp"
 
+#include <2d/CCAction.h>
 #include <base/CCDirector.h>
 
 namespace ee {

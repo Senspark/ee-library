@@ -226,8 +226,13 @@ void DialogManager::popDialogImmediately(Dialog* dialog) {
         if (updateCurrentScene()) {
             unlocker->dismiss();
         } else {
+            // When the dialog doesn't have any hiding transition, i.e.
+            // transitionAction_ won't run any TargetedAction, so the dialog
+            // will not be guarded by the TargetedAction (TargetedAction will
+            // keep a reference to the targeted node).
+            // We have to manually guard the dialog here.
             auto guard = ee::make_ref_guard(dialog);
-            
+
             dialogStack_.pop_back();
             --currentLevel_;
 

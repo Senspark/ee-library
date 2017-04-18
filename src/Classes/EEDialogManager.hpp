@@ -17,6 +17,8 @@
 
 namespace ee {
 namespace dialog {
+enum class CommandType;
+
 class Dialog;
 class Command;
 class Guard;
@@ -44,31 +46,68 @@ public:
     void popDialog();
 
     /// Retrieves the dialog whose the specified level in the current scece.
+    /// @note This is also update the current scene.
     Dialog* getDialog(std::size_t level);
 
     /// Retrieves the top dialog.
+    /// @note This is also update the current scene.
     /// @return @c nullptr if there is not any dialog in the current scene.
     Dialog* getTopDialog();
 
     std::size_t getTopDialogLevel();
 
+private:
     /// Updates the whole dialog graph in the current scene.
+    /// @return Whether the current scene has changed.
     bool updateCurrentScene();
 
-    /// Processes available dialog command queue.
-    void processCommandQueue();
+    Dialog* getDialogWithoutUpdate(std::size_t level) const;
+
+    Dialog* getTopDialogWithoutUpdate() const;
+
+    /// Gets the (top) running node in the current scene.
+    /// @note updateCurrentScene() must be called first to ensure that the
+    /// result is correct.
+    cocos2d::Node* getRunningNode() const;
 
     /// Checks whether there is a locking dialog.
-    bool isLocked();
+    /// @note updateCurrentScene() must be called first to ensure that the
+    /// result is correct.
+    bool isLocked() const;
 
-    /// Unlock the command queue with current dialog.
+    /// Unlocks the command queue with the specified dialog.
+    /// @param dialog The dialog to be unlocked.
     void unlock(Dialog* dialog);
 
-    /// Lock the command queue with given dialog.
+    /// Locks the command queue with the specified dialog.
+    /// @param dialog The dialog to be locked.
     void lock(Dialog* dialog);
 
-private:
-    cocos2d::Node* getRunningNode();
+    /// Processes available dialog command queue.
+    /// @return Whether any command was executed.
+    bool processCommandQueue();
+
+    /// Processes the specified command.
+    /// @param command The command to be processed.
+    /// @return Whether the command was executed.
+    bool processCommand(const Command& command);
+
+    /// Processes a push command.
+    /// @param dialog The dialog to be pushed.
+    /// @param level The level to be considered.
+    /// @return Whether the command was executed.
+    bool processPushCommand(Dialog* dialog, std::size_t level);
+
+    /// Processes a pop command.
+    /// @param dialog The dialog to be popped.
+    /// @param level The level to be considered.
+    /// @return Whether the command was executed.
+    bool processPopCommand(Dialog* dialog, std::size_t level);
+
+    /// Pushes a command to the command queue.
+    /// @param command The command to be pushed.
+    /// @return Whether the command was pushed.
+    bool pushCommand(const Command& command);
 
     void pushDialogImmediately(Dialog* dialog, std::size_t level);
 

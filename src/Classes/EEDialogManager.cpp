@@ -68,7 +68,7 @@ void DialogManager::pushDialog(Dialog* dialog, std::size_t level) {
     LOG_FUNC_FORMAT("dialog = %p level = %zu", dialog, level);
 
     updateCurrentScene();
-    commandQueue_.emplace_back(CommandType::Push, dialog, level);
+    pushCommand(Command(CommandType::Push, dialog, level));
     processCommandQueue();
 }
 
@@ -80,7 +80,7 @@ void DialogManager::popDialog(Dialog* dialog) {
     LOG_FUNC_FORMAT("dialog = %p level = %zu", dialog, level);
 
     updateCurrentScene();
-    commandQueue_.emplace_back(CommandType::Pop, dialog, level);
+    pushCommand(Command(CommandType::Pop, dialog, level));
     processCommandQueue();
 }
 
@@ -90,6 +90,14 @@ void DialogManager::popDialog() {
 
 Dialog* DialogManager::getDialog(std::size_t level) {
     updateCurrentScene();
+    return getDialogWithoutUpdate(level);
+}
+
+Dialog* DialogManager::getTopDialog() {
+    return getDialog(Dialog::TopLevel);
+}
+
+Dialog* DialogManager::getDialogWithoutUpdate(std::size_t level) const {
     if (dialogStack_.empty()) {
         return nullptr;
     }
@@ -100,8 +108,8 @@ Dialog* DialogManager::getDialog(std::size_t level) {
     return dialogStack_.at(level - 1).dialog;
 }
 
-Dialog* DialogManager::getTopDialog() {
-    return getDialog(Dialog::TopLevel);
+Dialog* DialogManager::getTopDialogWithoutUpdate() const {
+    return getDialogWithoutUpdate(Dialog::TopLevel);
 }
 
 std::size_t DialogManager::getTopDialogLevel() {
@@ -127,38 +135,66 @@ bool DialogManager::updateCurrentScene() {
     return true;
 }
 
-void DialogManager::processCommandQueue() {
+bool DialogManager::processCommandQueue() {
     if (isLocked()) {
-        return;
+        return false;
     }
     using DiffType = decltype(commandQueue_)::difference_type;
     for (std::size_t i = 0; i < commandQueue_.size(); ++i) {
-        auto command = commandQueue_.at(i);
-        if (command.type == CommandType::Push) {
-            if (currentLevel_ + 1 == command.level ||
-                command.level == Dialog::TopLevel) {
-                commandQueue_.erase(
-                    std::next(commandQueue_.begin(), static_cast<DiffType>(i)));
-                pushDialogImmediately(command.dialog, command.level);
-                break;
-            }
-        } else if (command.type == CommandType::Pop) {
-            if ((currentLevel_ == command.level ||
-                 command.level == Dialog::TopLevel) &&
-                getTopDialog() == command.dialog) {
-                commandQueue_.erase(
-                    std::next(commandQueue_.begin(), static_cast<DiffType>(i)));
-                popDialogImmediately(command.dialog);
-                break;
-            }
-        } else {
-            CC_ASSERT(false);
+        if (processCommand(commandQueue_.at(i))) {
+            commandQueue_.erase(
+                std::next(commandQueue_.begin(), static_cast<DiffType>(i)));
+            return true;
         }
     }
+    return false;
+}
+
+bool DialogManager::processCommand(const Command& command) {
+    if (command.type == CommandType::Push) {
+        return processPushCommand(command.dialog, command.level);
+    }
+    if (command.type == CommandType::Pop) {
+        return processPopCommand(command.dialog, command.level);
+    }
+    CC_ASSERT(false);
+    return false;
+}
+
+bool DialogManager::processPushCommand(Dialog* dialog, std::size_t level) {
+    if (level == Dialog::TopLevel || level == currentLevel_ + 1) {
+        pushDialogImmediately(dialog, level);
+        return true;
+    }
+    return false;
+}
+
+bool DialogManager::processPopCommand(Dialog* dialog, std::size_t level) {
+    if (level == Dialog::TopLevel || level == currentLevel_) {
+        if (dialog != getTopDialogWithoutUpdate()) {
+            // Attempted to pop not the top dialog!!!
+            return false;
+        }
+        popDialogImmediately(dialog);
+        return true;
+    }
+    return false;
+}
+
+bool DialogManager::pushCommand(const Command& command) {
+    for (auto&& cmd : commandQueue_) {
+        if (cmd.type == command.type && cmd.dialog == command.dialog) {
+            // Exist.
+            return false;
+        }
+    }
+    commandQueue_.push_back(command);
+    return true;
 }
 
 void DialogManager::pushDialogImmediately(Dialog* dialog, std::size_t level) {
     LOG_FUNC_FORMAT("dialog = %p level = %zu", dialog, level);
+    CC_ASSERT(not updateCurrentScene());
 
     lock(dialog);
     dialog->onDialogWillShow();
@@ -199,6 +235,7 @@ void DialogManager::pushDialogImmediately(Dialog* dialog, std::size_t level) {
 
 void DialogManager::popDialogImmediately(Dialog* dialog) {
     CC_ASSERT(dialog == getTopDialog());
+    CC_ASSERT(not updateCurrentScene());
     LOG_FUNC_FORMAT("dialog = %p level = %zu", dialog,
                     dialog->getDialogLevel());
 
@@ -249,17 +286,15 @@ void DialogManager::popDialogImmediately(Dialog* dialog) {
     dialog->transitionAction_->runAction(cocos2d::Sequence::create(actions));
 }
 
-cocos2d::Node* DialogManager::getRunningNode() {
-    updateCurrentScene();
-    auto dialog = getTopDialog();
+cocos2d::Node* DialogManager::getRunningNode() const {
+    auto dialog = getTopDialogWithoutUpdate();
     if (dialog != nullptr) {
         return dialog->getParent();
     }
     return currentScene_;
 }
 
-bool DialogManager::isLocked() {
-    updateCurrentScene();
+bool DialogManager::isLocked() const {
     return lockingDialog_ != nullptr;
 }
 
@@ -275,7 +310,6 @@ void DialogManager::lock(Dialog* dialog) {
     LOG_FUNC_FORMAT("dialog = %p level = %zu", dialog,
                     dialog->getDialogLevel());
     CC_ASSERT(lockingDialog_ == nullptr);
-    updateCurrentScene();
     lockingDialog_ = dialog;
 }
 } // namespace dialog

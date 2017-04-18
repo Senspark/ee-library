@@ -22,10 +22,11 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#include "AppDelegate.h"
-#include "cocos2d.h"
+#include "AppDelegate.hpp"
+
+#include <cocos2d.h>
 
 int main(int argc, char* argv[]) {
     AppDelegate app;
-    return Application::getInstance()->run();
+    return cocos2d::Application::getInstance()->run();
 }

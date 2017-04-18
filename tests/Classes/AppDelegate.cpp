@@ -2,6 +2,8 @@
 #include "cocos2d.h"
 //#include "TestScene.hpp"
 //#include "CCBUtils.hpp"
+#include "DialogBase.hpp"
+#include "DialogTestScene.hpp"
 
 #include "EEHeader.hpp"
 
@@ -37,9 +39,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
     }
 
     auto file = cocos2d::FileUtils::getInstance();
-    file->addSearchPath("Resources-gen");
-    // file->addSearchResolutionsOrder("Resources-gen/resources-iphone");
-    file->addSearchResolutionsOrder("Resources-gen/resources-ipadhd");
+    file->addSearchPath("auto");
+    file->addSearchPath("fonts");
+    file->addSearchPath("scenes");
+    // file->addSearchResolutionsOrder("resources-iphone");
+    file->addSearchResolutionsOrder("resources-ipadhd");
 
     director->setContentScaleFactor(4.0f);
 
@@ -54,6 +58,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto&& frameSize = glView->getFrameSize();
 
     register_all_packages();
+
+    DialogTestScene::openScene();
 
     // CCBUtils::initLoaders();
 

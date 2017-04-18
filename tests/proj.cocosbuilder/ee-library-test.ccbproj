@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>contentProtectionKey</key>
+	<string></string>
 	<key>deviceOrientationLandscapeLeft</key>
 	<true/>
 	<key>deviceOrientationLandscapeRight</key>
@@ -73,23 +75,32 @@
 		<dict>
 			<key>path</key>
 			<string>auto</string>
+			<key>publish</key>
+			<true/>
 		</dict>
 		<dict>
 			<key>path</key>
 			<string>resources</string>
+			<key>publish</key>
+			<false/>
 		</dict>
 		<dict>
 			<key>path</key>
 			<string>scenes</string>
+			<key>publish</key>
+			<true/>
 		</dict>
 		<dict>
 			<key>path</key>
 			<string>fonts</string>
+			<key>publish</key>
+			<true/>
 		</dict>
 	</array>
 	<key>versionStr</key>
-	<string>Version: 3.0-alpha5
-GitHub: 76499877e8
+	<string>Version: 
+-n GitHub: 
+12addc36c8
 </string>
 </dict>
 </plist>

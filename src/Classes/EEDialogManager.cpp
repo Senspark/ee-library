@@ -226,6 +226,8 @@ void DialogManager::popDialogImmediately(Dialog* dialog) {
         if (updateCurrentScene()) {
             unlocker->dismiss();
         } else {
+            auto guard = ee::make_ref_guard(dialog);
+            
             dialogStack_.pop_back();
             --currentLevel_;
 

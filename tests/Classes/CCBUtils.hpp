@@ -14,7 +14,7 @@
 class CCBUtils {
 public:
     static void initLoaders();
-    
+
     static cocos2d::Scene* openScene(const std::string& filename);
     static cocos2d::Node* openNode(const std::string& filename);
 };

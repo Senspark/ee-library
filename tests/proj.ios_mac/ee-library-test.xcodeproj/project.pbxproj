@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6C2E7D6B1BDE0596008F5EF3 /* Resources-gen in Resources */ = {isa = PBXBuildFile; fileRef = 6C43A8421BDDE13600D0597F /* Resources-gen */; };
 		6C42EF3F1C8540320062C2C6 /* ee-library-mobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C42EF3C1C853F6A0062C2C6 /* ee-library-mobile.a */; };
 		6C43A87D1BDDE26300D0597F /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A81A1BDDE0FE00D0597F /* AppDelegate.cpp */; };
 		6C43A88B1BDDE2A500D0597F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C43A8251BDDE12700D0597F /* Default-568h@2x.png */; };
@@ -35,6 +34,24 @@
 		6FD560E31EA5BDA2003E1DCD /* CCBUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A81C1BDDE0FE00D0597F /* CCBUtils.cpp */; };
 		6FD560E41EA5BDA2003E1DCD /* TestScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C43A8201BDDE0FE00D0597F /* TestScene.cpp */; };
 		6FD560E81EA5BE22003E1DCD /* ee-library-desktop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD560D71EA5BAA9003E1DCD /* ee-library-desktop.a */; };
+		6FD560F01EA5BF33003E1DCD /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD560EF1EA5BF33003E1DCD /* OpenAL.framework */; };
+		6FD560F61EA5BF5E003E1DCD /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD560F51EA5BF5E003E1DCD /* libz.tbd */; };
+		6FD560F81EA5BF7D003E1DCD /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD560F71EA5BF7D003E1DCD /* libiconv.tbd */; };
+		6FD560FA1EA5BFA6003E1DCD /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD560F91EA5BFA6003E1DCD /* Quartz.framework */; };
+		6FD561001EA5BFCF003E1DCD /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD560FF1EA5BFCF003E1DCD /* AudioToolbox.framework */; };
+		6FD561041EA5BFF4003E1DCD /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD561031EA5BFF4003E1DCD /* AppKit.framework */; };
+		6FD561061EA5C1A2003E1DCD /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD561051EA5C1A2003E1DCD /* libcocos2d iOS.a */; };
+		6FD561081EA5C1AD003E1DCD /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD561071EA5C1AD003E1DCD /* OpenAL.framework */; };
+		6FD5610A1EA5C1B4003E1DCD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD561091EA5C1B4003E1DCD /* AVFoundation.framework */; };
+		6FD5610C1EA5C1BE003E1DCD /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD5610B1EA5C1BE003E1DCD /* libz.tbd */; };
+		6FD561171EA5C266003E1DCD /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD561161EA5C266003E1DCD /* libiconv.tbd */; };
+		6FD561191EA5C26E003E1DCD /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD561181EA5C26E003E1DCD /* AudioToolbox.framework */; };
+		6FD5611D1EA5C281003E1DCD /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD5611C1EA5C281003E1DCD /* GameController.framework */; };
+		6FD561201EA5C293003E1DCD /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD5611A1EA5C279003E1DCD /* CoreMotion.framework */; };
+		6FD561211EA5C2B1003E1DCD /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD560F11EA5BF3F003E1DCD /* OpenGL.framework */; };
+		6FD561221EA5C2C0003E1DCD /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD561011EA5BFE5003E1DCD /* IOKit.framework */; };
+		6FD561241EA5C2D2003E1DCD /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD561231EA5C2D2003E1DCD /* libcocos2d Mac.a */; };
+		6FD561251EA5C2E2003E1DCD /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD5611E1EA5C28A003E1DCD /* MediaPlayer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,10 +86,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6C2E7D6D1BDE0887008F5EF3 /* dylib1.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = dylib1.o; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.1.sdk/usr/lib/dylib1.o; sourceTree = DEVELOPER_DIR; };
-		6C2E7D6F1BDE0A21008F5EF3 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = ../../../../../../../usr/lib/libz.1.dylib; sourceTree = "<group>"; };
 		6C42EF351C853F690062C2C6 /* ee-library.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ee-library.xcodeproj"; path = "../../src/proj.ios_mac/ee-library.xcodeproj"; sourceTree = "<group>"; };
-		6C42EF3D1C853FF80062C2C6 /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/usr/lib/libiconv.2.4.0.tbd; sourceTree = DEVELOPER_DIR; };
 		6C43A81A1BDDE0FE00D0597F /* AppDelegate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
 		6C43A81B1BDDE0FE00D0597F /* AppDelegate.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AppDelegate.hpp; sourceTree = "<group>"; };
 		6C43A81C1BDDE0FE00D0597F /* CCBUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CCBUtils.cpp; sourceTree = "<group>"; };
@@ -109,21 +123,29 @@
 		6C43A83E1BDDE12700D0597F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C43A83F1BDDE12700D0597F /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		6C43A8401BDDE12700D0597F /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
-		6C43A8421BDDE13600D0597F /* Resources-gen */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Resources-gen"; path = "../Resources-gen"; sourceTree = "<group>"; };
 		6C43A8471BDDE17E00D0597F /* ee-library-test-mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ee-library-test-mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6C43A8A61BDDE76D00D0597F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.1.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
-		6C43A8A81BDDE77600D0597F /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.1.sdk/System/Library/Frameworks/OpenAL.framework; sourceTree = DEVELOPER_DIR; };
-		6C43A8AB1BDDE78300D0597F /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.1.sdk/System/Library/Frameworks/OpenGLES.framework; sourceTree = DEVELOPER_DIR; };
-		6C43A8AD1BDDE79F00D0597F /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.1.sdk/System/Library/Frameworks/CoreAudio.framework; sourceTree = DEVELOPER_DIR; };
-		6C43A8AF1BDDE7A500D0597F /* CoreAudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.1.sdk/System/Library/Frameworks/CoreAudioKit.framework; sourceTree = DEVELOPER_DIR; };
-		6C43A8B11BDDE7AC00D0597F /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.1.sdk/System/Library/Frameworks/AudioUnit.framework; sourceTree = DEVELOPER_DIR; };
-		6C43A8B31BDDE7BB00D0597F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.1.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
-		6C43A8B51BDDE7C400D0597F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.1.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
-		6C43A8B71BDDE7CF00D0597F /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.1.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
-		6C43A8B91BDDE7DF00D0597F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.1.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
-		6C43A8C21BDDEA0C00D0597F /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.1.sdk/System/Library/Frameworks/GameController.framework; sourceTree = DEVELOPER_DIR; };
-		6C43A8C41BDDEA2400D0597F /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.1.sdk/System/Library/Frameworks/MediaPlayer.framework; sourceTree = DEVELOPER_DIR; };
 		6FD560C11EA5BAA9003E1DCD /* ee-library-test-desktop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ee-library-test-desktop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6FD560EF1EA5BF33003E1DCD /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		6FD560F11EA5BF3F003E1DCD /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		6FD560F31EA5BF55003E1DCD /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		6FD560F51EA5BF5E003E1DCD /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		6FD560F71EA5BF7D003E1DCD /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		6FD560F91EA5BFA6003E1DCD /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		6FD560FB1EA5BFB8003E1DCD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6FD560FD1EA5BFC8003E1DCD /* CoreAudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioKit.framework; path = System/Library/Frameworks/CoreAudioKit.framework; sourceTree = SDKROOT; };
+		6FD560FF1EA5BFCF003E1DCD /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		6FD561011EA5BFE5003E1DCD /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		6FD561031EA5BFF4003E1DCD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		6FD561051EA5C1A2003E1DCD /* libcocos2d iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libcocos2d iOS.a"; path = "../../../../../../../../../Users/Zinge/Library/Developer/Xcode/DerivedData/ee-library-test-ggsknijbxvufqbepsnzotlcrsdxd/Build/Products/Debug-iphonesimulator/libcocos2d iOS.a"; sourceTree = "<group>"; };
+		6FD561071EA5C1AD003E1DCD /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.2.sdk/System/Library/Frameworks/OpenAL.framework; sourceTree = DEVELOPER_DIR; };
+		6FD561091EA5C1B4003E1DCD /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.2.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
+		6FD5610B1EA5C1BE003E1DCD /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.2.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
+		6FD561161EA5C266003E1DCD /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.2.sdk/usr/lib/libiconv.tbd; sourceTree = DEVELOPER_DIR; };
+		6FD561181EA5C26E003E1DCD /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.2.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
+		6FD5611A1EA5C279003E1DCD /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.2.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
+		6FD5611C1EA5C281003E1DCD /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.2.sdk/System/Library/Frameworks/GameController.framework; sourceTree = DEVELOPER_DIR; };
+		6FD5611E1EA5C28A003E1DCD /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.2.sdk/System/Library/Frameworks/MediaPlayer.framework; sourceTree = DEVELOPER_DIR; };
+		6FD561231EA5C2D2003E1DCD /* libcocos2d Mac.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libcocos2d Mac.a"; path = "../../../../../../../../../Users/Zinge/Library/Developer/Xcode/DerivedData/ee-library-test-ggsknijbxvufqbepsnzotlcrsdxd/Build/Products/Debug/libcocos2d Mac.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +153,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FD561251EA5C2E2003E1DCD /* MediaPlayer.framework in Frameworks */,
+				6FD561201EA5C293003E1DCD /* CoreMotion.framework in Frameworks */,
+				6FD5611D1EA5C281003E1DCD /* GameController.framework in Frameworks */,
+				6FD561191EA5C26E003E1DCD /* AudioToolbox.framework in Frameworks */,
+				6FD561171EA5C266003E1DCD /* libiconv.tbd in Frameworks */,
+				6FD5610C1EA5C1BE003E1DCD /* libz.tbd in Frameworks */,
+				6FD5610A1EA5C1B4003E1DCD /* AVFoundation.framework in Frameworks */,
+				6FD561081EA5C1AD003E1DCD /* OpenAL.framework in Frameworks */,
+				6FD561061EA5C1A2003E1DCD /* libcocos2d iOS.a in Frameworks */,
 				6C42EF3F1C8540320062C2C6 /* ee-library-mobile.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,6 +170,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FD561241EA5C2D2003E1DCD /* libcocos2d Mac.a in Frameworks */,
+				6FD561221EA5C2C0003E1DCD /* IOKit.framework in Frameworks */,
+				6FD561211EA5C2B1003E1DCD /* OpenGL.framework in Frameworks */,
+				6FD561041EA5BFF4003E1DCD /* AppKit.framework in Frameworks */,
+				6FD561001EA5BFCF003E1DCD /* AudioToolbox.framework in Frameworks */,
+				6FD560FA1EA5BFA6003E1DCD /* Quartz.framework in Frameworks */,
+				6FD560F81EA5BF7D003E1DCD /* libiconv.tbd in Frameworks */,
+				6FD560F61EA5BF5E003E1DCD /* libz.tbd in Frameworks */,
+				6FD560F01EA5BF33003E1DCD /* OpenAL.framework in Frameworks */,
 				6FD560E81EA5BE22003E1DCD /* ee-library-desktop.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -229,7 +269,6 @@
 		6C43A8411BDDE12F00D0597F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6C43A8421BDDE13600D0597F /* Resources-gen */,
 			);
 			name = Resources;
 			path = ../Resources;
@@ -247,21 +286,27 @@
 		6C43A8BF1BDDE9E400D0597F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6C42EF3D1C853FF80062C2C6 /* libiconv.2.4.0.tbd */,
-				6C2E7D6F1BDE0A21008F5EF3 /* libz.1.dylib */,
-				6C2E7D6D1BDE0887008F5EF3 /* dylib1.o */,
-				6C43A8C41BDDEA2400D0597F /* MediaPlayer.framework */,
-				6C43A8C21BDDEA0C00D0597F /* GameController.framework */,
-				6C43A8B91BDDE7DF00D0597F /* libz.tbd */,
-				6C43A8B71BDDE7CF00D0597F /* CoreMotion.framework */,
-				6C43A8B51BDDE7C400D0597F /* SystemConfiguration.framework */,
-				6C43A8B31BDDE7BB00D0597F /* AudioToolbox.framework */,
-				6C43A8B11BDDE7AC00D0597F /* AudioUnit.framework */,
-				6C43A8AF1BDDE7A500D0597F /* CoreAudioKit.framework */,
-				6C43A8AD1BDDE79F00D0597F /* CoreAudio.framework */,
-				6C43A8AB1BDDE78300D0597F /* OpenGLES.framework */,
-				6C43A8A81BDDE77600D0597F /* OpenAL.framework */,
-				6C43A8A61BDDE76D00D0597F /* AVFoundation.framework */,
+				6FD561231EA5C2D2003E1DCD /* libcocos2d Mac.a */,
+				6FD5611E1EA5C28A003E1DCD /* MediaPlayer.framework */,
+				6FD5611C1EA5C281003E1DCD /* GameController.framework */,
+				6FD5611A1EA5C279003E1DCD /* CoreMotion.framework */,
+				6FD561181EA5C26E003E1DCD /* AudioToolbox.framework */,
+				6FD561161EA5C266003E1DCD /* libiconv.tbd */,
+				6FD5610B1EA5C1BE003E1DCD /* libz.tbd */,
+				6FD561091EA5C1B4003E1DCD /* AVFoundation.framework */,
+				6FD561071EA5C1AD003E1DCD /* OpenAL.framework */,
+				6FD561051EA5C1A2003E1DCD /* libcocos2d iOS.a */,
+				6FD561031EA5BFF4003E1DCD /* AppKit.framework */,
+				6FD561011EA5BFE5003E1DCD /* IOKit.framework */,
+				6FD560FF1EA5BFCF003E1DCD /* AudioToolbox.framework */,
+				6FD560FD1EA5BFC8003E1DCD /* CoreAudioKit.framework */,
+				6FD560FB1EA5BFB8003E1DCD /* CoreGraphics.framework */,
+				6FD560F91EA5BFA6003E1DCD /* Quartz.framework */,
+				6FD560F71EA5BF7D003E1DCD /* libiconv.tbd */,
+				6FD560F51EA5BF5E003E1DCD /* libz.tbd */,
+				6FD560F31EA5BF55003E1DCD /* CoreFoundation.framework */,
+				6FD560F11EA5BF3F003E1DCD /* OpenGL.framework */,
+				6FD560EF1EA5BF33003E1DCD /* OpenAL.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -374,7 +419,6 @@
 				6C43A89C1BDDE2A500D0597F /* Icon-80.png in Resources */,
 				6C43A88B1BDDE2A500D0597F /* Default-568h@2x.png in Resources */,
 				6C43A88C1BDDE2A500D0597F /* Default-667h@2x.png in Resources */,
-				6C2E7D6B1BDE0596008F5EF3 /* Resources-gen in Resources */,
 				6C43A8981BDDE2A500D0597F /* Icon-57.png in Resources */,
 				6C43A8941BDDE2A500D0597F /* Icon-152.png in Resources */,
 				6C43A88F1BDDE2A500D0597F /* Default@2x.png in Resources */,
@@ -695,6 +739,7 @@
 				6FD560D31EA5BAA9003E1DCD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -44,10 +44,8 @@ public:
         auto result = new (std::nothrow) GenericLoader();
         if (result != nullptr) {
             result->autorelease();
-            result->callback_ = [
-                result,
-                data = std::tuple<Us...>(std::forward<Us>(args)...)
-            ] {
+            result->callback_ =
+                [result, data = std::make_tuple(std::forward<Us>(args)...)] {
                 return result->internalCreateNode(
                     std::integral_constant<bool, sizeof...(Ts) == 0>(), data,
                     std::make_index_sequence<sizeof...(Us)>());

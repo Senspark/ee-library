@@ -13,6 +13,7 @@
 #include <2d/CCNode.h>
 #include <base/CCDirector.h>
 #include <base/CCEventDispatcher.h>
+#include <renderer/CCTextureCache.h>
 
 namespace ee {
 bool SceneSwitcher::init() {
@@ -20,6 +21,8 @@ bool SceneSwitcher::init() {
         return false;
     }
     phase_ = Phase::None;
+    imagesLoaded_ = true;
+    inActionsDone_ = true;
     actor_ = cocos2d::Node::create();
     actor_->setVisible(false);
     addChild(actor_);
@@ -64,6 +67,11 @@ SceneSwitcher::setInSceneConstructor(const SceneConstructor& constructor) {
     return this;
 }
 
+SceneSwitcher* SceneSwitcher::addImage(const std::string& imageName) {
+    imageNames_.push(imageName);
+    return this;
+}
+
 SceneSwitcher*
 SceneSwitcher::addPrePhaseAction(cocos2d::FiniteTimeAction* action) {
     preActions_.pushBack(action);
@@ -90,23 +98,37 @@ void SceneSwitcher::run() {
 }
 
 void SceneSwitcher::onPhaseBegan(Phase phase) {
-    cocos2d::FiniteTimeAction* action = nullptr;
     if (phase == Phase::Pre) {
         _outScene->onExitTransitionDidStart();
         _eventDispatcher->setEnabled(false);
-        action = cocos2d::Sequence::create(preActions_);
+        actor_->runAction(cocos2d::Sequence::create(
+            cocos2d::Sequence::create(preActions_),
+            cocos2d::CallFunc::create(
+                std::bind(&SceneSwitcher::onPhaseEnded, this, phase)),
+            nullptr));
     }
     if (phase == Phase::In) {
-        action = cocos2d::Sequence::create(inActions_);
+        imagesLoaded_ = false;
+        inActionsDone_ = false;
+        loadNextImage();
+        actor_->runAction(
+            cocos2d::Sequence::create(cocos2d::Sequence::create(preActions_),
+                                      cocos2d::CallFunc::create([this, phase] {
+                                          inActionsDone_ = true;
+                                          if (imagesLoaded_) {
+                                              onPhaseEnded(phase);
+                                          }
+                                      }),
+                                      nullptr));
     }
     if (phase == Phase::Post) {
         _inScene = inSceneConstructor_();
         _inScene->onEnter();
-        action = cocos2d::Sequence::create(postActions_);
+        actor_->runAction(cocos2d::Sequence::createWithTwoActions(
+            cocos2d::Sequence::create(postActions_),
+            cocos2d::CallFunc::create(
+                std::bind(&SceneSwitcher::onPhaseEnded, this, phase))));
     }
-    actor_->runAction(cocos2d::Sequence::createWithTwoActions(
-        action, cocos2d::CallFunc::create(
-                    std::bind(&SceneSwitcher::onPhaseEnded, this, phase))));
 }
 
 void SceneSwitcher::onPhaseEnded(Phase phase) {
@@ -123,5 +145,27 @@ void SceneSwitcher::onPhaseEnded(Phase phase) {
         actor_->runAction(
             cocos2d::CallFunc::create(std::bind(&SceneSwitcher::finish, this)));
     }
+}
+
+bool SceneSwitcher::loadNextImage() {
+    if (imageNames_.empty()) {
+        imagesLoaded_ = true;
+        if (inActionsDone_) {
+            onPhaseEnded(Phase::In);
+        }
+        return false;
+    }
+    auto imageName = imageNames_.front();
+    imageNames_.pop();
+    auto textureCache = _director->getTextureCache();
+    textureCache->addImageAsync(imageName,
+                                std::bind(&SceneSwitcher::onImageLoaded, this,
+                                          std::placeholders::_1, imageName));
+    return true;
+}
+
+void SceneSwitcher::onImageLoaded(cocos2d::Texture2D* texture,
+                                  const std::string& imageName) {
+    loadNextImage();
 }
 } // namespace ee

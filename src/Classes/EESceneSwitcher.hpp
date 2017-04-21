@@ -9,6 +9,8 @@
 #ifndef EE_LIBRARY_SCENE_SWITCHER_HPP_
 #define EE_LIBRARY_SCENE_SWITCHER_HPP_
 
+#include <queue>
+
 #include "EECocos2dxFwd.hpp"
 
 #include <2d/CCTransition.h>
@@ -34,6 +36,10 @@ public:
     /// Used to constructor the in-scene.
     /// @param constructor The in-scene constructor.
     SceneSwitcher* setInSceneConstructor(const SceneConstructor& constructor);
+
+    /// Adds an image for loading in in-phase.
+    /// @param imageName The name of the image.
+    SceneSwitcher* addImage(const std::string& imageName);
 
     /// Adds a pre-phase action.
     SceneSwitcher* addPrePhaseAction(cocos2d::FiniteTimeAction* action);
@@ -65,8 +71,15 @@ private:
     void onPhaseBegan(Phase phase);
     void onPhaseEnded(Phase phase);
 
+    bool loadNextImage();
+    void onImageLoaded(cocos2d::Texture2D* texture,
+                       const std::string& imageName);
+
     Phase phase_;
+    bool imagesLoaded_;
+    bool inActionsDone_;
     SceneConstructor inSceneConstructor_;
+    std::queue<std::string> imageNames_;
     cocos2d::Vector<cocos2d::FiniteTimeAction*> preActions_;
     cocos2d::Vector<cocos2d::FiniteTimeAction*> inActions_;
     cocos2d::Vector<cocos2d::FiniteTimeAction*> postActions_;

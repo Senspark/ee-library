@@ -65,6 +65,10 @@ protected:
     virtual void onExitTransitionDidStart() override;
     virtual void onExit() override;
 
+    virtual void visit(cocos2d::Renderer* renderer,
+                       const cocos2d::Mat4& transform,
+                       std::uint32_t flags) override;
+
     virtual void draw(cocos2d::Renderer* renderer,
                       const cocos2d::Mat4& transform,
                       std::uint32_t flags) override;

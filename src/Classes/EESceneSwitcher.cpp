@@ -47,8 +47,8 @@ void SceneSwitcher::onExit() {
     onPhaseEnded(Phase::Post);
 }
 
-void SceneSwitcher::draw(cocos2d::Renderer* renderer,
-                         const cocos2d::Mat4& transform, std::uint32_t flags) {
+void SceneSwitcher::visit(cocos2d::Renderer* renderer,
+                          const cocos2d::Mat4& transform, std::uint32_t flags) {
     if (phase_ == Phase::None) {
         CC_ASSERT(false);
         return;
@@ -58,6 +58,11 @@ void SceneSwitcher::draw(cocos2d::Renderer* renderer,
     } else if (phase_ == Phase::Post) {
         _inScene->visit(renderer, transform, flags);
     }
+    Super::visit(renderer, transform, flags);
+}
+
+void SceneSwitcher::draw(cocos2d::Renderer* renderer,
+                         const cocos2d::Mat4& transform, std::uint32_t flags) {
     Super::draw(renderer, transform, flags);
 }
 
@@ -102,34 +107,30 @@ void SceneSwitcher::onPhaseBegan(Phase phase) {
     if (phase == Phase::Pre) {
         _outScene->onExitTransitionDidStart();
         _eventDispatcher->setEnabled(false);
-        actor_->runAction(cocos2d::Sequence::create(
-            cocos2d::Sequence::create(preActions_),
-            cocos2d::CallFunc::create(
-                std::bind(&SceneSwitcher::onPhaseEnded, this, phase)),
-            nullptr));
+        preActions_.pushBack(cocos2d::CallFunc::create(
+            std::bind(&SceneSwitcher::onPhaseEnded, this, phase)));
+        actor_->runAction(cocos2d::Sequence::create(preActions_));
     }
     if (phase == Phase::In) {
         imagesLoaded_ = false;
         inActionsDone_ = false;
         loadNextImage();
-        actor_->runAction(
-            cocos2d::Sequence::create(cocos2d::Sequence::create(preActions_),
-                                      cocos2d::CallFunc::create([this, phase] {
-                                          inActionsDone_ = true;
-                                          if (imagesLoaded_) {
-                                              onPhaseEnded(phase);
-                                          }
-                                      }),
-                                      nullptr));
+        inActions_.pushBack(cocos2d::CallFunc::create([this, phase] {
+            inActionsDone_ = true;
+            if (imagesLoaded_) {
+                onPhaseEnded(phase);
+            }
+        }));
+        actor_->runAction(cocos2d::Sequence::create(inActions_));
     }
     if (phase == Phase::Post) {
         _inScene = inSceneConstructor_();
         _inScene->retain();
+        _inScene->setVisible(true);
         _inScene->onEnter();
-        actor_->runAction(cocos2d::Sequence::createWithTwoActions(
-            cocos2d::Sequence::create(postActions_),
-            cocos2d::CallFunc::create(
-                std::bind(&SceneSwitcher::finish, this))));
+        postActions_.pushBack(
+            cocos2d::CallFunc::create(std::bind(&SceneSwitcher::finish, this)));
+        actor_->runAction(cocos2d::Sequence::create(postActions_));
     }
 }
 

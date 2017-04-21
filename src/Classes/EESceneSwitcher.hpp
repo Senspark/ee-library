@@ -32,6 +32,8 @@ private:
 public:
     using SceneConstructor = std::function<cocos2d::Scene*()>;
 
+    CREATE_FUNC(SceneSwitcher);
+
     /// Sets the in-scene constructor.
     /// Used to constructor the in-scene.
     /// @param constructor The in-scene constructor.

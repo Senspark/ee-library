@@ -54,9 +54,9 @@ void SceneSwitcher::draw(cocos2d::Renderer* renderer,
         return;
     }
     if (phase_ == Phase::Pre) {
-        _inScene->visit(renderer, transform, flags);
-    } else if (phase_ == Phase::Post) {
         _outScene->visit(renderer, transform, flags);
+    } else if (phase_ == Phase::Post) {
+        _inScene->visit(renderer, transform, flags);
     }
     Super::draw(renderer, transform, flags);
 }
@@ -98,6 +98,7 @@ void SceneSwitcher::run() {
 }
 
 void SceneSwitcher::onPhaseBegan(Phase phase) {
+    phase_ = phase;
     if (phase == Phase::Pre) {
         _outScene->onExitTransitionDidStart();
         _eventDispatcher->setEnabled(false);
@@ -123,11 +124,12 @@ void SceneSwitcher::onPhaseBegan(Phase phase) {
     }
     if (phase == Phase::Post) {
         _inScene = inSceneConstructor_();
+        _inScene->retain();
         _inScene->onEnter();
         actor_->runAction(cocos2d::Sequence::createWithTwoActions(
             cocos2d::Sequence::create(postActions_),
             cocos2d::CallFunc::create(
-                std::bind(&SceneSwitcher::onPhaseEnded, this, phase))));
+                std::bind(&SceneSwitcher::finish, this))));
     }
 }
 
@@ -142,8 +144,6 @@ void SceneSwitcher::onPhaseEnded(Phase phase) {
     if (phase == Phase::Post) {
         _eventDispatcher->setEnabled(true);
         _inScene->onEnterTransitionDidFinish();
-        actor_->runAction(
-            cocos2d::CallFunc::create(std::bind(&SceneSwitcher::finish, this)));
     }
 }
 

@@ -27,6 +27,7 @@
 #include "EECheckBox.hpp"
 
 #include "EETransitionFadeOut.hpp"
+#include "EESceneSwitcher.hpp"
 
 #include "EEDialog.hpp"
 #include "EEDialogComponent.hpp"

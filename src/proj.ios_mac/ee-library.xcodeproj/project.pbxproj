@@ -446,7 +446,7 @@
 				6F588AE01E84FA5D00B1F1ED /* EEAction.cpp */,
 				6F588AE11E84FA5D00B1F1ED /* EEAction.hpp */,
 				6FAE05301E9F212000A17C21 /* EEScopeGuard.hpp */,
-				6FD64E9F1E9B47010030CDEC /* Console */,
+				6FD64E9F1E9B47010030CDEC /* console */,
 				6C4557741C8FC8C4001AE09A /* experimental */,
 				6F588AD31E84C99D00B1F1ED /* coroutine */,
 				6C5AEB3B1BDF1B9F004C98A2 /* crytography */,
@@ -688,7 +688,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6FD64E9F1E9B47010030CDEC /* Console */ = {
+		6FD64E9F1E9B47010030CDEC /* console */ = {
 			isa = PBXGroup;
 			children = (
 				6FD64E991E9B45AB0030CDEC /* EEConsole.cpp */,
@@ -698,7 +698,7 @@
 				6FD64EA01E9B47220030CDEC /* EECommandPool.cpp */,
 				6FD64EA11E9B47220030CDEC /* EECommandPool.hpp */,
 			);
-			name = Console;
+			name = console;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

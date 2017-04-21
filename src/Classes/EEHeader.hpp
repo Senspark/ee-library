@@ -26,6 +26,8 @@
 #include "EEButton.hpp"
 #include "EECheckBox.hpp"
 
+#include "EETransitionFadeOut.hpp"
+
 #include "EEDialog.hpp"
 #include "EEDialogComponent.hpp"
 #include "EEDialogManager.hpp"

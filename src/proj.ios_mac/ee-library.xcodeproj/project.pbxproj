@@ -70,6 +70,8 @@
 		6F6EA9311D1D3F5300816BAF /* EEBlurBackground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F6EA92E1D1D3F5300816BAF /* EEBlurBackground.cpp */; };
 		6F6EA9321D1D3F5300816BAF /* EEBlurBackground.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6F6EA92F1D1D3F5300816BAF /* EEBlurBackground.hpp */; };
 		6F6EA9331D1D3F5300816BAF /* EEBlurBackground.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6F6EA92F1D1D3F5300816BAF /* EEBlurBackground.hpp */; };
+		6F72C5AE1EA9E82D00622353 /* EETransitionFadeOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C3D4AF71C0D37F0001A09DF /* EETransitionFadeOut.cpp */; };
+		6F72C5AF1EA9E82D00622353 /* EETransitionFadeOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C3D4AF71C0D37F0001A09DF /* EETransitionFadeOut.cpp */; };
 		6F77D7971CE0D733000BA9BE /* EEFlags.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6CC3596C1C0C0792007DC4CF /* EEFlags.hpp */; };
 		6F77D7981CE0D734000BA9BE /* EEFlags.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6CC3596C1C0C0792007DC4CF /* EEFlags.hpp */; };
 		6F798A5C1CE03866004D247B /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAF9180E9839004C840B /* libcocos2d Mac.a */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -267,8 +269,8 @@
 		6C32DC551BD692CF007613F9 /* EEBoxBlur2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEBoxBlur2D.cpp; sourceTree = "<group>"; };
 		6C38491B1CA22FCA0020B858 /* EEEventListener.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEEventListener.hpp; sourceTree = "<group>"; };
 		6C3849211CA230750020B858 /* EEEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEEvent.hpp; sourceTree = "<group>"; };
-		6C3D4AF71C0D37F0001A09DF /* __EETransitionScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = __EETransitionScene.cpp; sourceTree = "<group>"; };
-		6C3D4AF81C0D37F0001A09DF /* __EETransitionScene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = __EETransitionScene.hpp; sourceTree = "<group>"; };
+		6C3D4AF71C0D37F0001A09DF /* EETransitionFadeOut.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EETransitionFadeOut.cpp; sourceTree = "<group>"; };
+		6C3D4AF81C0D37F0001A09DF /* EETransitionFadeOut.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EETransitionFadeOut.hpp; sourceTree = "<group>"; };
 		6C3FD3A91C50E97900D2AFE2 /* __Gesture-Impl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = "__Gesture-Impl.hpp"; path = "experimental/__Gesture-Impl.hpp"; sourceTree = "<group>"; };
 		6C3FD3AA1C50E97900D2AFE2 /* __Gesture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = __Gesture.cpp; path = experimental/__Gesture.cpp; sourceTree = "<group>"; };
 		6C3FD3AB1C50E97900D2AFE2 /* __Gesture.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = __Gesture.hpp; path = experimental/__Gesture.hpp; sourceTree = "<group>"; };
@@ -454,6 +456,7 @@
 				6FAE79811D33758700A0CFB1 /* data */,
 				6FB731521D1BD418000B7397 /* shader */,
 				6FAC216F1CE31ED0000C16CC /* dialog */,
+				6F72C5AD1EA9E7CF00622353 /* transition */,
 				6F5D03D11E12643E00F432F3 /* component */,
 				6F79B63F1CCAA2C20008EFAC /* listener */,
 				6C3C3C2C1CA3859800A04333 /* ui */,
@@ -563,8 +566,6 @@
 		6CC359791C0C3C31007DC4CF /* layer */ = {
 			isa = PBXGroup;
 			children = (
-				6C3D4AF71C0D37F0001A09DF /* __EETransitionScene.cpp */,
-				6C3D4AF81C0D37F0001A09DF /* __EETransitionScene.hpp */,
 			);
 			name = layer;
 			sourceTree = "<group>";
@@ -598,6 +599,15 @@
 				6F5D03D31E12647600F432F3 /* EEBackButtonComponent.hpp */,
 			);
 			name = component;
+			sourceTree = "<group>";
+		};
+		6F72C5AD1EA9E7CF00622353 /* transition */ = {
+			isa = PBXGroup;
+			children = (
+				6C3D4AF71C0D37F0001A09DF /* EETransitionFadeOut.cpp */,
+				6C3D4AF81C0D37F0001A09DF /* EETransitionFadeOut.hpp */,
+			);
+			name = transition;
 			sourceTree = "<group>";
 		};
 		6F79B63F1CCAA2C20008EFAC /* listener */ = {
@@ -955,6 +965,7 @@
 				6F6A872B1D2E4E9400DE745F /* EEEventDispatcher.cpp in Sources */,
 				6F8460891E518C5100DB7FB3 /* EEClippingRectangleNodeLoader.cpp in Sources */,
 				6FAC216C1CE30FE0000C16CC /* EEDialog.cpp in Sources */,
+				6F72C5AE1EA9E82D00622353 /* EETransitionFadeOut.cpp in Sources */,
 				6FC19AD31CF83F9A0002D68B /* EEUiCheckBoxLoader.cpp in Sources */,
 				6FC276B71DBDA532008282B6 /* EEScale9SpriteWithHsv.cpp in Sources */,
 				6F79B6421CCAA2D90008EFAC /* EEBackButtonListener.cpp in Sources */,
@@ -1010,6 +1021,7 @@
 				6FAC216B1CE30FE0000C16CC /* EEDialog.cpp in Sources */,
 				6F84608A1E518C5100DB7FB3 /* EEClippingRectangleNodeLoader.cpp in Sources */,
 				6FC19AD41CF83F9A0002D68B /* EEUiCheckBoxLoader.cpp in Sources */,
+				6F72C5AF1EA9E82D00622353 /* EETransitionFadeOut.cpp in Sources */,
 				6F79B6371CCA8FA20008EFAC /* EEUiTextLoader.cpp in Sources */,
 				6FC276B81DBDA532008282B6 /* EEScale9SpriteWithHsv.cpp in Sources */,
 				6FA658901CCB5C0B009BC9EB /* EETentBlur1D.cpp in Sources */,

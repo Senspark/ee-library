@@ -49,8 +49,8 @@ public:
     /// Adds an in-phase action.
     SceneSwitcher* addInPhaseAction(cocos2d::FiniteTimeAction* action);
 
-    /// Adds a pose-phase action.
-    SceneSwitcher* addPosePhaseAction(cocos2d::FiniteTimeAction* action);
+    /// Adds a post-phase action.
+    SceneSwitcher* addPostPhaseAction(cocos2d::FiniteTimeAction* action);
 
     void run();
 

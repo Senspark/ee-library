@@ -85,7 +85,7 @@ SceneSwitcher::addInPhaseAction(cocos2d::FiniteTimeAction* action) {
 }
 
 SceneSwitcher*
-SceneSwitcher::addPosePhaseAction(cocos2d::FiniteTimeAction* action) {
+SceneSwitcher::addPostPhaseAction(cocos2d::FiniteTimeAction* action) {
     postActions_.pushBack(action);
     return this;
 }

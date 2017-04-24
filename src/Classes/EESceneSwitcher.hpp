@@ -31,6 +31,7 @@ private:
 
 public:
     using SceneConstructor = std::function<cocos2d::Scene*()>;
+    using LayerConstructor = std::function<cocos2d::Node*()>;
 
     CREATE_FUNC(SceneSwitcher);
 
@@ -38,6 +39,11 @@ public:
     /// Used to constructor the in-scene.
     /// @param constructor The in-scene constructor.
     SceneSwitcher* setInSceneConstructor(const SceneConstructor& constructor);
+
+    /// Sets the layer constructor.
+    /// Used to constructor a layer in the in-scene.
+    /// @param constructor The layer constructor.
+    SceneSwitcher* setInLayerConstructor(const LayerConstructor& constructor);
 
     /// Adds an image for loading in in-phase.
     /// @param imageName The name of the image.
@@ -80,6 +86,8 @@ protected:
                       std::uint32_t flags) override;
 
 private:
+    cocos2d::Scene* createInScene() const;
+
     void onPhaseBegan(Phase phase);
     void onPhaseEnded(Phase phase);
 

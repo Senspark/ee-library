@@ -7,6 +7,7 @@
 //
 
 #include "EESceneSwitcher.hpp"
+#include "EEManagedScene.hpp"
 
 #include <2d/CCActionInstant.h>
 #include <2d/CCActionInterval.h>
@@ -72,6 +73,14 @@ void SceneSwitcher::draw(cocos2d::Renderer* renderer,
 SceneSwitcher*
 SceneSwitcher::setInSceneConstructor(const SceneConstructor& constructor) {
     inSceneConstructor_ = constructor;
+    inLayerConstructor_ = nullptr;
+    return this;
+}
+
+SceneSwitcher*
+SceneSwitcher::setInLayerConstructor(const LayerConstructor& constructor) {
+    inLayerConstructor_ = constructor;
+    inSceneConstructor_ = nullptr;
     return this;
 }
 
@@ -107,8 +116,19 @@ SceneSwitcher::addPostPhaseAction(cocos2d::FiniteTimeAction* action) {
 void SceneSwitcher::run() {
     _outScene = _director->getRunningScene();
     CC_ASSERT(_outScene != nullptr);
+    CC_ASSERT(inSceneConstructor_ || inLayerConstructor_);
     _outScene->retain();
     _director->replaceScene(this);
+}
+
+cocos2d::Scene* SceneSwitcher::createInScene() const {
+    if (inSceneConstructor_) {
+        return inSceneConstructor_();
+    }
+    auto layer = inLayerConstructor_();
+    auto scene = ManagedScene::create();
+    scene->addChild(layer);
+    return scene;
 }
 
 void SceneSwitcher::onPhaseBegan(Phase phase) {
@@ -133,7 +153,7 @@ void SceneSwitcher::onPhaseBegan(Phase phase) {
         actor_->runAction(cocos2d::Sequence::create(inActions_));
     }
     if (phase == Phase::Post) {
-        _inScene = inSceneConstructor_();
+        _inScene = createInScene();
         _inScene->retain();
         _inScene->setVisible(true);
         _inScene->onEnter();

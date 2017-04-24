@@ -61,7 +61,6 @@ void ManagedScene::unloadAtlases() {
         spriteFrameCache->removeSpriteFramesFromFile(plistName);
         auto texture = textureCache->getTextureForKey(imageName);
         CC_ASSERT(texture != nullptr);
-        CC_ASSERT(texture->getReferenceCount() == 1);
         textureCache->removeTextureForKey(imageName);
     }
 }

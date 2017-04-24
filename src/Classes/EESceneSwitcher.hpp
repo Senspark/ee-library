@@ -35,6 +35,8 @@ public:
 
     CREATE_FUNC(SceneSwitcher);
 
+    virtual ~SceneSwitcher();
+
     /// Sets the in-scene constructor.
     /// Used to constructor the in-scene.
     /// @param constructor The in-scene constructor.
@@ -85,6 +87,8 @@ protected:
                       const cocos2d::Mat4& transform,
                       std::uint32_t flags) override;
 
+    virtual void cleanup() override;
+
 private:
     cocos2d::Scene* createInScene() const;
 
@@ -101,6 +105,12 @@ private:
     void onAtlasLoaded(cocos2d::Texture2D* texture,
                        const std::string& plistName,
                        const std::string& imageName);
+
+    /// Modified finish() in TransitionScene.
+    void finish2();
+
+    /// Modified setNewScene() in TransitionScene.
+    void setNewScene2();
 
     Phase phase_;
     bool imagesLoaded_;

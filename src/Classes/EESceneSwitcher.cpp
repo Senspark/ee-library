@@ -11,13 +11,16 @@
 
 #include <2d/CCActionInstant.h>
 #include <2d/CCActionInterval.h>
-#include <2d/CCNode.h>
 #include <2d/CCSpriteFrameCache.h>
 #include <base/CCDirector.h>
 #include <base/CCEventDispatcher.h>
 #include <renderer/CCTextureCache.h>
 
 namespace ee {
+SceneSwitcher::~SceneSwitcher() {
+    CCLOG("%s: %p", __PRETTY_FUNCTION__, this);
+}
+
 bool SceneSwitcher::init() {
     if (not Super::init()) {
         return false;
@@ -68,6 +71,17 @@ void SceneSwitcher::visit(cocos2d::Renderer* renderer,
 void SceneSwitcher::draw(cocos2d::Renderer* renderer,
                          const cocos2d::Mat4& transform, std::uint32_t flags) {
     Super::draw(renderer, transform, flags);
+}
+
+void SceneSwitcher::cleanup() {
+    Super::cleanup();
+
+    if (phase_ == Phase::Pre) {
+        CC_ASSERT(_outScene != nullptr);
+        if (_outScene != nullptr && _director->isSendCleanupToScene()) {
+            _outScene->cleanup();
+        }
+    }
 }
 
 SceneSwitcher*
@@ -128,6 +142,8 @@ cocos2d::Scene* SceneSwitcher::createInScene() const {
     auto layer = inLayerConstructor_();
     auto scene = ManagedScene::create();
     scene->addChild(layer);
+    scene->images_ = images_;
+    scene->atlases_ = atlases_;
     return scene;
 }
 
@@ -157,15 +173,26 @@ void SceneSwitcher::onPhaseBegan(Phase phase) {
         _inScene->retain();
         _inScene->setVisible(true);
         _inScene->onEnter();
-        postActions_.pushBack(
-            cocos2d::CallFunc::create(std::bind(&SceneSwitcher::finish, this)));
+        postActions_.pushBack(cocos2d::CallFunc::create(
+            std::bind(&SceneSwitcher::finish2, this)));
         actor_->runAction(cocos2d::Sequence::create(postActions_));
     }
 }
 
 void SceneSwitcher::onPhaseEnded(Phase phase) {
     if (phase == Phase::Pre) {
+        // Cleanup the outScene.
         _outScene->onExit();
+
+        if (_director->isSendCleanupToScene()) {
+            _outScene->cleanup();
+        }
+
+        // Actually outScene should be released here instead of in the
+        // destructor.
+        _outScene->release();
+        _outScene = nullptr;
+
         onPhaseBegan(Phase::In);
     }
     if (phase == Phase::In) {
@@ -192,6 +219,7 @@ bool SceneSwitcher::loadNextImage() {
     if (loadedImageCount_ == images_.size()) {
         return false;
     }
+    CCLOG("%s", __PRETTY_FUNCTION__);
     auto textureCache = _director->getTextureCache();
     auto imageName = images_.at(loadedImageCount_++);
     CC_ASSERT(textureCache->getTextureForKey(imageName) == nullptr);
@@ -205,6 +233,7 @@ bool SceneSwitcher::loadNextAtlas() {
     if (loadedAtlasCount_ == atlases_.size()) {
         return false;
     }
+    CCLOG("%s", __PRETTY_FUNCTION__);
     auto textureCache = _director->getTextureCache();
     std::string plistName;
     std::string imageName;
@@ -226,7 +255,25 @@ void SceneSwitcher::onAtlasLoaded(cocos2d::Texture2D* texture,
                                   const std::string& imageName) {
     auto spriteFrameCache = cocos2d::SpriteFrameCache::getInstance();
     CC_ASSERT(not spriteFrameCache->isSpriteFramesWithFileLoaded(plistName));
-    spriteFrameCache->addSpriteFramesWithFile(plistName, texture);
+    spriteFrameCache->addSpriteFramesWithFile(plistName, imageName);
     loadNextItem();
+}
+
+void SceneSwitcher::finish2() {
+    // clean up
+    _inScene->setVisible(true);
+    _inScene->setPosition(0, 0);
+    _inScene->setScale(1.0f);
+    _inScene->setRotation(0.0f);
+    _inScene->setAdditionalTransform(nullptr);
+
+    // outScene is already released.
+
+    scheduleOnce(std::bind(&SceneSwitcher::setNewScene2, this), 0.0f,
+                 "___new_scene");
+}
+
+void SceneSwitcher::setNewScene2() {
+    _director->replaceScene(_inScene);
 }
 } // namespace ee

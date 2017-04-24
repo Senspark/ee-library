@@ -10,13 +10,20 @@
 #define EE_LIBRARY_POOL_HPP_
 
 #include <functional>
-#include <vector>
 #include <queue>
+#include <vector>
 
 #include <base/CCRefPtr.h>
 
 namespace ee {
-template <class T> class Pool {
+/// Be careful with objects that are not added to scene.
+/// They will be leaked (issue #14050).
+///
+/// Also when using CocosBuilder, CCBAnimationManager will also be leaked
+/// because there is a circular reference.
+/// Workaround: loaded_node->setUserObject(nullptr) (must do for all children)
+/// to remove the CCBAnimationManager.
+template <class T> class Pool final {
 public:
     using value_type = T;
     using pointer = T*;

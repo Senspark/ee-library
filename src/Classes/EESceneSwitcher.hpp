@@ -43,6 +43,12 @@ public:
     /// @param imageName The name of the image.
     SceneSwitcher* addImage(const std::string& imageName);
 
+    /// Adds an atlas for loading in in-phase.
+    /// @param plistName The name of the plist file.
+    /// @param imageName The name of the corresponding image.
+    SceneSwitcher* addAtlas(const std::string& plistName,
+                            const std::string& imageName);
+
     /// Adds a pre-phase action.
     SceneSwitcher* addPrePhaseAction(cocos2d::FiniteTimeAction* action);
 
@@ -77,15 +83,30 @@ private:
     void onPhaseBegan(Phase phase);
     void onPhaseEnded(Phase phase);
 
+    bool loadNextItem();
     bool loadNextImage();
+    bool loadNextAtlas();
+
     void onImageLoaded(cocos2d::Texture2D* texture,
+                       const std::string& imageName);
+
+    void onAtlasLoaded(cocos2d::Texture2D* texture,
+                       const std::string& plistName,
                        const std::string& imageName);
 
     Phase phase_;
     bool imagesLoaded_;
     bool inActionsDone_;
+
     SceneConstructor inSceneConstructor_;
-    std::queue<std::string> imageNames_;
+    LayerConstructor inLayerConstructor_;
+
+    std::size_t loadedImageCount_;
+    std::vector<std::string> images_;
+
+    std::size_t loadedAtlasCount_;
+    std::vector<std::pair<std::string, std::string>> atlases_;
+
     cocos2d::Vector<cocos2d::FiniteTimeAction*> preActions_;
     cocos2d::Vector<cocos2d::FiniteTimeAction*> inActions_;
     cocos2d::Vector<cocos2d::FiniteTimeAction*> postActions_;

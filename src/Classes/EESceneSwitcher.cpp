@@ -11,6 +11,7 @@
 #include <2d/CCActionInstant.h>
 #include <2d/CCActionInterval.h>
 #include <2d/CCNode.h>
+#include <2d/CCSpriteFrameCache.h>
 #include <base/CCDirector.h>
 #include <base/CCEventDispatcher.h>
 #include <renderer/CCTextureCache.h>
@@ -23,6 +24,8 @@ bool SceneSwitcher::init() {
     phase_ = Phase::None;
     imagesLoaded_ = true;
     inActionsDone_ = true;
+    loadedImageCount_ = 0;
+    loadedAtlasCount_ = 0;
     actor_ = cocos2d::Node::create();
     actor_->setVisible(false);
     addChild(actor_);
@@ -73,7 +76,13 @@ SceneSwitcher::setInSceneConstructor(const SceneConstructor& constructor) {
 }
 
 SceneSwitcher* SceneSwitcher::addImage(const std::string& imageName) {
-    imageNames_.push(imageName);
+    images_.push_back(imageName);
+    return this;
+}
+
+SceneSwitcher* SceneSwitcher::addAtlas(const std::string& plistName,
+                                       const std::string& imageName) {
+    atlases_.emplace_back(plistName, imageName);
     return this;
 }
 
@@ -114,7 +123,7 @@ void SceneSwitcher::onPhaseBegan(Phase phase) {
     if (phase == Phase::In) {
         imagesLoaded_ = false;
         inActionsDone_ = false;
-        loadNextImage();
+        loadNextItem();
         inActions_.pushBack(cocos2d::CallFunc::create([this, phase] {
             inActionsDone_ = true;
             if (imagesLoaded_) {
@@ -148,25 +157,56 @@ void SceneSwitcher::onPhaseEnded(Phase phase) {
     }
 }
 
+bool SceneSwitcher::loadNextItem() {
+    if (loadNextImage() || loadNextAtlas()) {
+        return true;
+    }
+    imagesLoaded_ = true;
+    if (inActionsDone_) {
+        onPhaseEnded(Phase::In);
+    }
+    return false;
+}
+
 bool SceneSwitcher::loadNextImage() {
-    if (imageNames_.empty()) {
-        imagesLoaded_ = true;
-        if (inActionsDone_) {
-            onPhaseEnded(Phase::In);
-        }
+    if (loadedImageCount_ == images_.size()) {
         return false;
     }
-    auto imageName = imageNames_.front();
-    imageNames_.pop();
     auto textureCache = _director->getTextureCache();
+    auto imageName = images_.at(loadedImageCount_++);
+    CC_ASSERT(textureCache->getTextureForKey(imageName) == nullptr);
     textureCache->addImageAsync(imageName,
                                 std::bind(&SceneSwitcher::onImageLoaded, this,
                                           std::placeholders::_1, imageName));
     return true;
 }
 
+bool SceneSwitcher::loadNextAtlas() {
+    if (loadedAtlasCount_ == atlases_.size()) {
+        return false;
+    }
+    auto textureCache = _director->getTextureCache();
+    std::string plistName;
+    std::string imageName;
+    std::tie(plistName, imageName) = atlases_.at(loadedAtlasCount_++);
+    CC_ASSERT(textureCache->getTextureForKey(imageName) == nullptr);
+    textureCache->addImageAsync(
+        imageName, std::bind(&SceneSwitcher::onAtlasLoaded, this,
+                             std::placeholders::_1, plistName, imageName));
+    return true;
+}
+
 void SceneSwitcher::onImageLoaded(cocos2d::Texture2D* texture,
                                   const std::string& imageName) {
-    loadNextImage();
+    loadNextItem();
+}
+
+void SceneSwitcher::onAtlasLoaded(cocos2d::Texture2D* texture,
+                                  const std::string& plistName,
+                                  const std::string& imageName) {
+    auto spriteFrameCache = cocos2d::SpriteFrameCache::getInstance();
+    CC_ASSERT(not spriteFrameCache->isSpriteFramesWithFileLoaded(plistName));
+    spriteFrameCache->addSpriteFramesWithFile(plistName, texture);
+    loadNextItem();
 }
 } // namespace ee

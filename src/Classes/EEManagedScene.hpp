@@ -13,6 +13,7 @@
 
 namespace ee {
 class SceneSwitcher;
+class ImageBuilder;
 
 class ManagedScene : public cocos2d::Scene {
 private:
@@ -35,11 +36,8 @@ private:
     bool unloaded_;
 
     void unloadItems();
-    void unloadImages();
-    void unloadAtlases();
 
-    std::vector<std::string> images_;
-    std::vector<std::pair<std::string, std::string>> atlases_;
+    std::vector<ImageBuilder> images_;
 };
 } // namespace ee
 

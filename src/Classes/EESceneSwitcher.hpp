@@ -16,6 +16,8 @@
 #include <2d/CCTransition.h>
 
 namespace ee {
+class ImageBuilder;
+
 /// Layout:
 /// - out-scene on exit transition did start.
 /// - pre-phase actions.
@@ -46,6 +48,8 @@ public:
     /// Used to constructor a layer in the in-scene.
     /// @param constructor The layer constructor.
     SceneSwitcher* setInLayerConstructor(const LayerConstructor& constructor);
+
+    SceneSwitcher* addImage(const ImageBuilder& builder);
 
     /// Adds an image for loading in in-phase.
     /// @param imageName The name of the image.
@@ -95,16 +99,9 @@ private:
     void onPhaseBegan(Phase phase);
     void onPhaseEnded(Phase phase);
 
-    bool loadNextItem();
     bool loadNextImage();
-    bool loadNextAtlas();
 
-    void onImageLoaded(cocos2d::Texture2D* texture,
-                       const std::string& imageName);
-
-    void onAtlasLoaded(cocos2d::Texture2D* texture,
-                       const std::string& plistName,
-                       const std::string& imageName);
+    void onImageLoaded(cocos2d::Texture2D* texture, const ImageBuilder& image);
 
     /// Modified finish() in TransitionScene.
     void finish2();
@@ -120,10 +117,7 @@ private:
     LayerConstructor inLayerConstructor_;
 
     std::size_t loadedImageCount_;
-    std::vector<std::string> images_;
-
-    std::size_t loadedAtlasCount_;
-    std::vector<std::pair<std::string, std::string>> atlases_;
+    std::vector<ImageBuilder> images_;
 
     cocos2d::Vector<cocos2d::FiniteTimeAction*> preActions_;
     cocos2d::Vector<cocos2d::FiniteTimeAction*> inActions_;

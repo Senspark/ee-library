@@ -28,6 +28,7 @@
 
 #include "EETransitionFadeOut.hpp"
 #include "EESceneSwitcher.hpp"
+#include "EEImageBuilder.hpp"
 
 #include "EEDialog.hpp"
 #include "EEDialogComponent.hpp"

@@ -7,6 +7,7 @@
 //
 
 #include "EEManagedScene.hpp"
+#include "EEImageBuilder.hpp"
 
 #include <2d/CCSpriteFrameCache.h>
 #include <base/CCDirector.h>
@@ -37,31 +38,17 @@ void ManagedScene::unloadItems() {
     if (unloaded_) {
         return;
     }
-    unloadImages();
-    unloadAtlases();
-    unloaded_ = true;
-}
-
-void ManagedScene::unloadImages() {
-    auto textureCache = _director->getTextureCache();
-    for (auto&& imageName : images_) {
-        CC_ASSERT(textureCache->getTextureForKey(imageName) != nullptr);
-        textureCache->removeTextureForKey(imageName);
-    }
-}
-
-void ManagedScene::unloadAtlases() {
     auto textureCache = _director->getTextureCache();
     auto spriteFrameCache = cocos2d::SpriteFrameCache::getInstance();
-    for (auto&& elt : atlases_) {
-        std::string plistName;
-        std::string imageName;
-        std::tie(plistName, imageName) = elt;
-        CC_ASSERT(spriteFrameCache->isSpriteFramesWithFileLoaded(plistName));
-        spriteFrameCache->removeSpriteFramesFromFile(plistName);
-        auto texture = textureCache->getTextureForKey(imageName);
+    for (auto&& image : images_) {
+        if (image.useAtlas_) {
+            CC_ASSERT(spriteFrameCache->isSpriteFramesWithFileLoaded(
+                image.atlasName_));
+            spriteFrameCache->removeSpriteFramesFromFile(image.atlasName_);
+        }
+        auto texture = textureCache->getTextureForKey(image.imageName_);
         CC_ASSERT(texture != nullptr);
-        textureCache->removeTextureForKey(imageName);
+        textureCache->removeTextureForKey(image.imageName_);
     }
 }
 } // namespace ee

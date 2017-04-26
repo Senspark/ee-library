@@ -8,6 +8,7 @@
 
 #include "EESceneSwitcher.hpp"
 #include "EEManagedScene.hpp"
+#include "EEImageBuilder.hpp"
 
 #include <2d/CCActionInstant.h>
 #include <2d/CCActionInterval.h>
@@ -29,7 +30,6 @@ bool SceneSwitcher::init() {
     imagesLoaded_ = true;
     inActionsDone_ = true;
     loadedImageCount_ = 0;
-    loadedAtlasCount_ = 0;
     actor_ = cocos2d::Node::create();
     actor_->setVisible(false);
     addChild(actor_);
@@ -98,15 +98,19 @@ SceneSwitcher::setInLayerConstructor(const LayerConstructor& constructor) {
     return this;
 }
 
-SceneSwitcher* SceneSwitcher::addImage(const std::string& imageName) {
-    images_.push_back(imageName);
+SceneSwitcher* SceneSwitcher::addImage(const ImageBuilder& builder) {
+    images_.push_back(builder);
     return this;
+}
+
+SceneSwitcher* SceneSwitcher::addImage(const std::string& imageName) {
+    return addImage(ImageBuilder().setImageName(imageName));
 }
 
 SceneSwitcher* SceneSwitcher::addAtlas(const std::string& plistName,
                                        const std::string& imageName) {
-    atlases_.emplace_back(plistName, imageName);
-    return this;
+    return addImage(
+        ImageBuilder().setAtlasName(plistName).setImageName(imageName));
 }
 
 SceneSwitcher*
@@ -143,7 +147,6 @@ cocos2d::Scene* SceneSwitcher::createInScene() const {
     auto scene = ManagedScene::create();
     scene->addChild(layer);
     scene->images_ = images_;
-    scene->atlases_ = atlases_;
     return scene;
 }
 
@@ -159,7 +162,7 @@ void SceneSwitcher::onPhaseBegan(Phase phase) {
     if (phase == Phase::In) {
         imagesLoaded_ = false;
         inActionsDone_ = false;
-        loadNextItem();
+        loadNextImage();
         inActions_.pushBack(cocos2d::CallFunc::create([this, phase] {
             inActionsDone_ = true;
             if (imagesLoaded_) {
@@ -193,7 +196,10 @@ void SceneSwitcher::onPhaseEnded(Phase phase) {
         _outScene->release();
         _outScene = nullptr;
 
-        onPhaseBegan(Phase::In);
+        // cocos2d::Ref::printLeaks();
+
+        actor_->runAction(cocos2d::CallFunc::create(
+            std::bind(&SceneSwitcher::onPhaseBegan, this, Phase::In)));
     }
     if (phase == Phase::In) {
         onPhaseBegan(Phase::Post);
@@ -204,59 +210,47 @@ void SceneSwitcher::onPhaseEnded(Phase phase) {
     }
 }
 
-bool SceneSwitcher::loadNextItem() {
-    if (loadNextImage() || loadNextAtlas()) {
-        return true;
-    }
-    imagesLoaded_ = true;
-    if (inActionsDone_) {
-        onPhaseEnded(Phase::In);
-    }
-    return false;
-}
-
 bool SceneSwitcher::loadNextImage() {
     if (loadedImageCount_ == images_.size()) {
+        imagesLoaded_ = true;
+        if (inActionsDone_) {
+            onPhaseEnded(Phase::In);
+        }
         return false;
     }
     CCLOG("%s", __PRETTY_FUNCTION__);
     auto textureCache = _director->getTextureCache();
-    auto imageName = images_.at(loadedImageCount_++);
-    CC_ASSERT(textureCache->getTextureForKey(imageName) == nullptr);
-    textureCache->addImageAsync(imageName,
+    auto&& image = images_.at(loadedImageCount_++);
+    CC_ASSERT(textureCache->getTextureForKey(image.imageName_) == nullptr);
+    textureCache->addImageAsync(image.imageName_,
                                 std::bind(&SceneSwitcher::onImageLoaded, this,
-                                          std::placeholders::_1, imageName));
-    return true;
-}
-
-bool SceneSwitcher::loadNextAtlas() {
-    if (loadedAtlasCount_ == atlases_.size()) {
-        return false;
-    }
-    CCLOG("%s", __PRETTY_FUNCTION__);
-    auto textureCache = _director->getTextureCache();
-    std::string plistName;
-    std::string imageName;
-    std::tie(plistName, imageName) = atlases_.at(loadedAtlasCount_++);
-    CC_ASSERT(textureCache->getTextureForKey(imageName) == nullptr);
-    textureCache->addImageAsync(
-        imageName, std::bind(&SceneSwitcher::onAtlasLoaded, this,
-                             std::placeholders::_1, plistName, imageName));
+                                          std::placeholders::_1, image));
     return true;
 }
 
 void SceneSwitcher::onImageLoaded(cocos2d::Texture2D* texture,
-                                  const std::string& imageName) {
-    loadNextItem();
-}
+                                  const ImageBuilder& image) {
+    if (image.minFilter_ == GL_NEAREST_MIPMAP_NEAREST ||
+        image.minFilter_ == GL_NEAREST_MIPMAP_LINEAR ||
+        image.minFilter_ == GL_LINEAR_MIPMAP_NEAREST ||
+        image.minFilter_ == GL_LINEAR_MIPMAP_LINEAR) {
+        texture->generateMipmap();
+    }
 
-void SceneSwitcher::onAtlasLoaded(cocos2d::Texture2D* texture,
-                                  const std::string& plistName,
-                                  const std::string& imageName) {
-    auto spriteFrameCache = cocos2d::SpriteFrameCache::getInstance();
-    CC_ASSERT(not spriteFrameCache->isSpriteFramesWithFileLoaded(plistName));
-    spriteFrameCache->addSpriteFramesWithFile(plistName, imageName);
-    loadNextItem();
+    auto params = cocos2d::Texture2D::TexParams();
+    params.minFilter = image.minFilter_;
+    params.magFilter = image.magFilter_;
+    params.wrapS = image.wrapS_;
+    params.wrapT = image.wrapT_;
+    texture->setTexParameters(params);
+
+    if (image.useAtlas_) {
+        auto spriteFrameCache = cocos2d::SpriteFrameCache::getInstance();
+        CC_ASSERT(not spriteFrameCache->isSpriteFramesWithFileLoaded(
+            image.atlasName_));
+        spriteFrameCache->addSpriteFramesWithFile(image.atlasName_, texture);
+    }
+    loadNextImage();
 }
 
 void SceneSwitcher::finish2() {

@@ -190,6 +190,10 @@
 		6FC276BE1DBDA666008282B6 /* EEHsvProtocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC276BB1DBDA666008282B6 /* EEHsvProtocol.cpp */; };
 		6FC276BF1DBDA666008282B6 /* EEHsvProtocol.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC276BC1DBDA666008282B6 /* EEHsvProtocol.hpp */; };
 		6FC276C01DBDA666008282B6 /* EEHsvProtocol.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC276BC1DBDA666008282B6 /* EEHsvProtocol.hpp */; };
+		6FC7D08B1EB07E9000078819 /* EEImageBuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC7D0891EB07E9000078819 /* EEImageBuilder.cpp */; };
+		6FC7D08C1EB07E9000078819 /* EEImageBuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC7D0891EB07E9000078819 /* EEImageBuilder.cpp */; };
+		6FC7D08D1EB07E9000078819 /* EEImageBuilder.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC7D08A1EB07E9000078819 /* EEImageBuilder.hpp */; };
+		6FC7D08E1EB07E9000078819 /* EEImageBuilder.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC7D08A1EB07E9000078819 /* EEImageBuilder.hpp */; };
 		6FC7FAD21D154387005AF2E5 /* EEShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC7FAD01D154387005AF2E5 /* EEShader.cpp */; };
 		6FC7FAD31D154387005AF2E5 /* EEShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC7FAD01D154387005AF2E5 /* EEShader.cpp */; };
 		6FC7FAD41D154387005AF2E5 /* EEShader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC7FAD11D154387005AF2E5 /* EEShader.hpp */; };
@@ -379,6 +383,8 @@
 		6FC276B61DBDA532008282B6 /* EEScale9SpriteWithHsv.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEScale9SpriteWithHsv.hpp; sourceTree = "<group>"; };
 		6FC276BB1DBDA666008282B6 /* EEHsvProtocol.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEHsvProtocol.cpp; sourceTree = "<group>"; };
 		6FC276BC1DBDA666008282B6 /* EEHsvProtocol.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEHsvProtocol.hpp; sourceTree = "<group>"; };
+		6FC7D0891EB07E9000078819 /* EEImageBuilder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEImageBuilder.cpp; sourceTree = "<group>"; };
+		6FC7D08A1EB07E9000078819 /* EEImageBuilder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEImageBuilder.hpp; sourceTree = "<group>"; };
 		6FC7FAD01D154387005AF2E5 /* EEShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEShader.cpp; sourceTree = "<group>"; };
 		6FC7FAD11D154387005AF2E5 /* EEShader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEShader.hpp; sourceTree = "<group>"; };
 		6FD294751CE1CBF9009ECBFA /* EENodeV3Loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EENodeV3Loader.cpp; sourceTree = "<group>"; };
@@ -622,6 +628,8 @@
 				6F72C5BD1EAA0B0700622353 /* EESceneSwitcher.hpp */,
 				6F633F961EADA3CB004C37C1 /* EEManagedScene.cpp */,
 				6F633F971EADA3CB004C37C1 /* EEManagedScene.hpp */,
+				6FC7D0891EB07E9000078819 /* EEImageBuilder.cpp */,
+				6FC7D08A1EB07E9000078819 /* EEImageBuilder.hpp */,
 			);
 			name = transition;
 			sourceTree = "<group>";
@@ -770,6 +778,7 @@
 				6FC19ADC1CF84A470002D68B /* EECheckBox.hpp in Headers */,
 				6FAE79891D33759D00A0CFB1 /* EEDataInfo.hpp in Headers */,
 				6FD64E9D1E9B45AB0030CDEC /* EEConsole.hpp in Headers */,
+				6FC7D08D1EB07E9000078819 /* EEImageBuilder.hpp in Headers */,
 				6F9C2FD61D4742A200939859 /* EEDataTraits.hpp in Headers */,
 				6C47AAF81CA4EAE100B3E65E /* EEUiTextLoader.hpp in Headers */,
 				6F79B6401CCAA2D70008EFAC /* EEBackButtonListener.hpp in Headers */,
@@ -832,6 +841,7 @@
 				6F79B6381CCA8FA40008EFAC /* EEUiTextLoader.hpp in Headers */,
 				6F77D7981CE0D734000BA9BE /* EEFlags.hpp in Headers */,
 				6FD64E9E1E9B45AB0030CDEC /* EEConsole.hpp in Headers */,
+				6FC7D08E1EB07E9000078819 /* EEImageBuilder.hpp in Headers */,
 				6F9C2FD71D4742A200939859 /* EEDataTraits.hpp in Headers */,
 				6F79B6471CCAC0EA0008EFAC /* EEEventListener.hpp in Headers */,
 				6F6B54091D41B58700F13CA9 /* EEDataHandler.hpp in Headers */,
@@ -966,6 +976,7 @@
 				6FB73D331CE45E5800C718D5 /* EEDialogUtils.cpp in Sources */,
 				6FB85B871D40E7020061A441 /* EEDataInfo.cpp in Sources */,
 				6F6269571DBDBA7400A93689 /* EEButtonLoader.cpp in Sources */,
+				6FC7D08B1EB07E9000078819 /* EEImageBuilder.cpp in Sources */,
 				6FA658951CCB5C0C009BC9EB /* EETentBlur1D.cpp in Sources */,
 				6FD64EA81E9B48A60030CDEC /* EEConsoleDelegate.cpp in Sources */,
 				6F79DC841CCE5CBC00BDA20F /* EESha1.cpp in Sources */,
@@ -1024,6 +1035,7 @@
 				6FB73D341CE45E5800C718D5 /* EEDialogUtils.cpp in Sources */,
 				6FB85B861D40E7010061A441 /* EEDataInfo.cpp in Sources */,
 				6F6269581DBDBA7400A93689 /* EEButtonLoader.cpp in Sources */,
+				6FC7D08C1EB07E9000078819 /* EEImageBuilder.cpp in Sources */,
 				6F79DC851CCE5CBC00BDA20F /* EESha1.cpp in Sources */,
 				6FD64EA91E9B48A60030CDEC /* EEConsoleDelegate.cpp in Sources */,
 				6FAC216E1CE310AD000C16CC /* EEDialogManager.cpp in Sources */,

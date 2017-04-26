@@ -1,0 +1,50 @@
+//
+//  EEImageBuilder.cpp
+//  ee-library
+//
+//  Created by Zinge on 4/26/17.
+//
+//
+
+#include "EEImageBuilder.hpp"
+
+namespace ee {
+ImageBuilder::ImageBuilder() {
+    useAtlas_ = false;
+    setMinFilter(GL_LINEAR);
+    setMagFilter(GL_LINEAR);
+    setWrapS(GL_CLAMP_TO_EDGE);
+    setWrapT(GL_CLAMP_TO_EDGE);
+}
+
+ImageBuilder& ImageBuilder::setImageName(const std::string& imageName) {
+    imageName_ = imageName;
+    return *this;
+}
+
+ImageBuilder& ImageBuilder::setAtlasName(const std::string& atlasName) {
+    useAtlas_ = true;
+    atlasName_ = atlasName;
+    return *this;
+}
+
+ImageBuilder& ImageBuilder::setMinFilter(GLuint minFilter) {
+    minFilter_ = minFilter;
+    return *this;
+}
+
+ImageBuilder& ImageBuilder::setMagFilter(GLuint magFilter) {
+    magFilter_ = magFilter;
+    return *this;
+}
+
+ImageBuilder& ImageBuilder::setWrapS(GLuint wrapS) {
+    wrapS_ = wrapS;
+    return *this;
+}
+
+ImageBuilder& ImageBuilder::setWrapT(GLuint wrapT) {
+    wrapT_ = wrapT;
+    return *this;
+}
+} // namespace ee

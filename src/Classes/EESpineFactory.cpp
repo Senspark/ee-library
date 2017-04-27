@@ -98,6 +98,19 @@ spSkeletonData* SpineFactory::getSkeletonData(const std::string& dataName,
     return iter->second->data;
 }
 
+void SpineFactory::destroy(const std::string& dataName,
+                           const std::string& atlasName) {
+    cachedAtlas_.erase(atlasName);
+    for (auto iter = cachedSkeletonData_.begin();
+         iter != cachedSkeletonData_.end();) {
+        if (iter->first.first == dataName) {
+            iter = cachedSkeletonData_.erase(iter);
+        } else {
+            ++iter;
+        }
+    }
+}
+
 spine::SkeletonAnimation*
 SpineFactory::createAnimation(const std::string& dataFile,
                               const std::string& atlasFile, float scale) {

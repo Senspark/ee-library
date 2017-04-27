@@ -26,10 +26,15 @@ public:
     /// @return This instance for chaining.
     ImageBuilder& setImageName(const std::string& imageName);
 
-    /// Sets the atlas name to be loaded.
+    /// Sets the atlas name (.plist) to be loaded.
     /// @param imageName The name of the atlas.
     /// @return This instance for chaining.
     ImageBuilder& setAtlasName(const std::string& atlasName);
+
+    /// Sets the data filename (.json) and atlas filename (.atlas) for spine
+    /// animation.
+    ImageBuilder& setSpineData(const std::string& dataName,
+                               const std::string& atlasName);
 
     ImageBuilder& setMipmapEnabled(bool enabled);
 
@@ -76,6 +81,9 @@ private:
     bool useAtlas_;
     std::string imageName_;
     std::string atlasName_;
+    bool useSpine_;
+    std::string spineDataName_;
+    std::string spineAtlasName_;
     bool mipmapEnabled_;
     GLuint minFilter_;
     GLuint magFilter_;

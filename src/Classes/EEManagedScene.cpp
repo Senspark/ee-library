@@ -8,6 +8,7 @@
 
 #include "EEManagedScene.hpp"
 #include "EEImageBuilder.hpp"
+#include "EESpineFactory.hpp"
 
 #include <2d/CCSpriteFrameCache.h>
 #include <base/CCDirector.h>
@@ -40,11 +41,15 @@ void ManagedScene::unloadItems() {
     }
     auto textureCache = _director->getTextureCache();
     auto spriteFrameCache = cocos2d::SpriteFrameCache::getInstance();
+    auto spineFactory = SpineFactory::getInstance();
     for (auto&& image : images_) {
         if (image.useAtlas_) {
             CC_ASSERT(spriteFrameCache->isSpriteFramesWithFileLoaded(
                 image.atlasName_));
             spriteFrameCache->removeSpriteFramesFromFile(image.atlasName_);
+        }
+        if (image.useSpine_) {
+            spineFactory->destroy(image.spineDataName_, image.spineAtlasName_);
         }
         auto texture = textureCache->getTextureForKey(image.imageName_);
         CC_ASSERT(texture != nullptr);

@@ -59,6 +59,8 @@ public:
     /// @warning Caller must not delete the pointer.
     spAtlas* getAtlas(const std::string& atlasName);
 
+    void destroy(const std::string& dataName, const std::string& atlasName);
+
 private:
     SpineFactory() = default;
     ~SpineFactory() = default;

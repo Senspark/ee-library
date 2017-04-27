@@ -11,6 +11,7 @@
 namespace ee {
 ImageBuilder::ImageBuilder() {
     useAtlas_ = false;
+    useSpine_ = false;
     setMinFilter(GL_LINEAR);
     setMagFilter(GL_LINEAR);
     setWrapS(GL_CLAMP_TO_EDGE);
@@ -25,6 +26,14 @@ ImageBuilder& ImageBuilder::setImageName(const std::string& imageName) {
 ImageBuilder& ImageBuilder::setAtlasName(const std::string& atlasName) {
     useAtlas_ = true;
     atlasName_ = atlasName;
+    return *this;
+}
+
+ImageBuilder& ImageBuilder::setSpineData(const std::string& dataName,
+                                         const std::string& atlasName) {
+    useSpine_ = true;
+    spineDataName_ = dataName;
+    spineAtlasName_ = atlasName;
     return *this;
 }
 

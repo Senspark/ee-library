@@ -34,11 +34,10 @@ ImageBuilder& ImageBuilder::setMipmapEnabled(bool enabled) {
 }
 
 ImageBuilder& ImageBuilder::setMinFilter(GLuint minFilter) {
-
-    if (minFilter_ == GL_NEAREST_MIPMAP_NEAREST ||
-        minFilter_ == GL_NEAREST_MIPMAP_LINEAR ||
-        minFilter_ == GL_LINEAR_MIPMAP_NEAREST ||
-        minFilter_ == GL_LINEAR_MIPMAP_LINEAR) {
+    if (minFilter == GL_NEAREST_MIPMAP_NEAREST ||
+        minFilter == GL_NEAREST_MIPMAP_LINEAR ||
+        minFilter == GL_LINEAR_MIPMAP_NEAREST ||
+        minFilter == GL_LINEAR_MIPMAP_LINEAR) {
         setMipmapEnabled(true);
     } else {
         setMipmapEnabled(false);

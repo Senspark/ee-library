@@ -31,6 +31,8 @@ public:
     /// @return This instance for chaining.
     ImageBuilder& setAtlasName(const std::string& atlasName);
 
+    ImageBuilder& setMipmapEnabled(bool enabled);
+
     /// Sets the minification filter, available values:
     /// - GL_NEAREST
     /// - GL_LINEAR
@@ -74,6 +76,7 @@ private:
     bool useAtlas_;
     std::string imageName_;
     std::string atlasName_;
+    bool mipmapEnabled_;
     GLuint minFilter_;
     GLuint magFilter_;
     GLuint wrapS_;

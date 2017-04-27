@@ -230,10 +230,7 @@ bool SceneSwitcher::loadNextImage() {
 
 void SceneSwitcher::onImageLoaded(cocos2d::Texture2D* texture,
                                   const ImageBuilder& image) {
-    if (image.minFilter_ == GL_NEAREST_MIPMAP_NEAREST ||
-        image.minFilter_ == GL_NEAREST_MIPMAP_LINEAR ||
-        image.minFilter_ == GL_LINEAR_MIPMAP_NEAREST ||
-        image.minFilter_ == GL_LINEAR_MIPMAP_LINEAR) {
+    if (image.mipmapEnabled_) {
         texture->generateMipmap();
     }
 

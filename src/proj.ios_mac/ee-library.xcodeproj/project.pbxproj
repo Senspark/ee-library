@@ -219,6 +219,8 @@
 		6FD64EA91E9B48A60030CDEC /* EEConsoleDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FD64EA61E9B48A60030CDEC /* EEConsoleDelegate.cpp */; };
 		6FD64EAA1E9B48A60030CDEC /* EEConsoleDelegate.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FD64EA71E9B48A60030CDEC /* EEConsoleDelegate.hpp */; };
 		6FD64EAB1E9B48A60030CDEC /* EEConsoleDelegate.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FD64EA71E9B48A60030CDEC /* EEConsoleDelegate.hpp */; };
+		6FE287EB1EB34B8D0079BAAE /* EEMd5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FE287EA1EB34B8D0079BAAE /* EEMd5.cpp */; };
+		6FE287EC1EB34B8D0079BAAE /* EEMd5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FE287EA1EB34B8D0079BAAE /* EEMd5.cpp */; };
 		6FE569D91E63C9FC001E1F80 /* EEPreferences.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FE569D71E63C9FC001E1F80 /* EEPreferences.cpp */; };
 		6FE569DA1E63C9FC001E1F80 /* EEPreferences.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FE569D71E63C9FC001E1F80 /* EEPreferences.cpp */; };
 		6FE569DB1E63C9FC001E1F80 /* EEPreferences.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FE569D81E63C9FC001E1F80 /* EEPreferences.hpp */; };
@@ -397,6 +399,7 @@
 		6FD64EA11E9B47220030CDEC /* EECommandPool.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EECommandPool.hpp; sourceTree = "<group>"; };
 		6FD64EA61E9B48A60030CDEC /* EEConsoleDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEConsoleDelegate.cpp; sourceTree = "<group>"; };
 		6FD64EA71E9B48A60030CDEC /* EEConsoleDelegate.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEConsoleDelegate.hpp; sourceTree = "<group>"; };
+		6FE287EA1EB34B8D0079BAAE /* EEMd5.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEMd5.cpp; sourceTree = "<group>"; };
 		6FE569D71E63C9FC001E1F80 /* EEPreferences.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEPreferences.cpp; sourceTree = "<group>"; };
 		6FE569D81E63C9FC001E1F80 /* EEPreferences.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEPreferences.hpp; sourceTree = "<group>"; };
 		6FEC41EA1D9B53C8000B40F2 /* EEPool.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEPool.hpp; sourceTree = "<group>"; };
@@ -577,6 +580,7 @@
 				6C5AEB3E1BDF1BF1004C98A2 /* EECrytography.hpp */,
 				6C2E7D831BDE14D4008F5EF3 /* EECrc.cpp */,
 				6C43A7CA1BDDDAC300D0597F /* EESha1.cpp */,
+				6FE287EA1EB34B8D0079BAAE /* EEMd5.cpp */,
 			);
 			name = crytography;
 			sourceTree = "<group>";
@@ -1005,6 +1009,7 @@
 				6F6B540B1D41B58D00F13CA9 /* EEDataHandler.cpp in Sources */,
 				6F72C5BE1EAA0B0700622353 /* EESceneSwitcher.cpp in Sources */,
 				6FD64EA21E9B47220030CDEC /* EECommandPool.cpp in Sources */,
+				6FE287EB1EB34B8D0079BAAE /* EEMd5.cpp in Sources */,
 				6C47FE491CA1B36A00FEF3BC /* EEDynamicValue.cpp in Sources */,
 				6FD294771CE1CBF9009ECBFA /* EENodeV3Loader.cpp in Sources */,
 				6F48D0221E9CBE5500342077 /* EESkeletonBoneLoader.cpp in Sources */,
@@ -1064,6 +1069,7 @@
 				6F6B540A1D41B58D00F13CA9 /* EEDataHandler.cpp in Sources */,
 				6F72C5BF1EAA0B0700622353 /* EESceneSwitcher.cpp in Sources */,
 				6FD64EA31E9B47220030CDEC /* EECommandPool.cpp in Sources */,
+				6FE287EC1EB34B8D0079BAAE /* EEMd5.cpp in Sources */,
 				6FD294781CE1CBF9009ECBFA /* EENodeV3Loader.cpp in Sources */,
 				6FBEDB9C1D1A93430038E335 /* EESpriteWithHsv.cpp in Sources */,
 				6F48D0231E9CBE5500342077 /* EESkeletonBoneLoader.cpp in Sources */,

@@ -23,6 +23,8 @@ std::string generateSha1(const std::string& input);
 /// @param input is the string to be hashed.
 /// @return 32bit CRC hashed hexadecimal string.
 std::string generateCrc(const std::string& input);
+
+std::string generateMd5(const std::string& input);
 NS_EE_END
 
 #endif /* EE_LIBRARY_CRYTOGRAPHY_HPP_ */

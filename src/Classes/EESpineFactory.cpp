@@ -9,13 +9,11 @@
 #include <cassert>
 
 #include "EESpineFactory.hpp"
+#include "EESpineMacro.hpp"
 
-// clang-format off
-#if __has_include(<spine/Cocos2dAttachmentLoader.h>)
-#define EE_SPINE_USE_NEW_VERSION
+#ifdef EE_SPINE_RUNTIME_V3
 #include <spine/Cocos2dAttachmentLoader.h>
-#endif // __has_include(<spine/Cocos2dAttachmentLoader.h>)
-// clang-format on
+#endif // EE_SPINE_RUNTIME_V3
 
 #include <spine/SkeletonAnimation.h>
 
@@ -70,12 +68,11 @@ spSkeletonData* SpineFactory::getSkeletonData(const std::string& dataName,
     auto iter = cachedSkeletonData_.find(std::make_pair(dataName, scale));
     if (iter == cachedSkeletonData_.cend()) {
         auto&& atlas = getAtlas(atlasName);
-#ifdef EE_SPINE_USE_NEW_VERSION
+#ifdef EE_SPINE_RUNTIME_V3
         auto attachmentLoader = &Cocos2dAttachmentLoader_create(atlas)->super;
-#undef EE_SPINE_USE_NEW_VERSION
-#else  // EE_SPINE_USE_NEW_VERSION
+#else  // EE_SPINE_RUNTIME_V3
         auto attachmentLoader = &spAtlasAttachmentLoader_create(atlas)->super;
-#endif // EE_SPINE_USE_NEW_VERSION
+#endif // EE_SPINE_RUNTIME_V3
 
         auto json = spSkeletonJson_createWithLoader(attachmentLoader);
         json->scale = scale;

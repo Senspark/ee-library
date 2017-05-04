@@ -227,6 +227,8 @@
 		6FE569DC1E63C9FC001E1F80 /* EEPreferences.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FE569D81E63C9FC001E1F80 /* EEPreferences.hpp */; };
 		6FEC41ED1D9B53C8000B40F2 /* EEPool.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FEC41EA1D9B53C8000B40F2 /* EEPool.hpp */; };
 		6FEC41EE1D9B53C8000B40F2 /* EEPool.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FEC41EA1D9B53C8000B40F2 /* EEPool.hpp */; };
+		6FF4BB561EBAC354000214C1 /* EESpineMacro.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FF4BB531EBAC354000214C1 /* EESpineMacro.hpp */; };
+		6FF4BB571EBAC354000214C1 /* EESpineMacro.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FF4BB531EBAC354000214C1 /* EESpineMacro.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -403,6 +405,7 @@
 		6FE569D71E63C9FC001E1F80 /* EEPreferences.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEPreferences.cpp; sourceTree = "<group>"; };
 		6FE569D81E63C9FC001E1F80 /* EEPreferences.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEPreferences.hpp; sourceTree = "<group>"; };
 		6FEC41EA1D9B53C8000B40F2 /* EEPool.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEPool.hpp; sourceTree = "<group>"; };
+		6FF4BB531EBAC354000214C1 /* EESpineMacro.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EESpineMacro.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -595,6 +598,7 @@
 		6F17FAA91CF29D4500CFCD14 /* spine */ = {
 			isa = PBXGroup;
 			children = (
+				6FF4BB531EBAC354000214C1 /* EESpineMacro.hpp */,
 				6F17FAAA1CF29D5500CFCD14 /* EESkeletonAnimationLoader.cpp */,
 				6F17FAAB1CF29D5500CFCD14 /* EESkeletonAnimationLoader.hpp */,
 				6F8C9EF31E233D65005D4121 /* EESpineFactory.cpp */,
@@ -784,6 +788,7 @@
 				6FD64E9D1E9B45AB0030CDEC /* EEConsole.hpp in Headers */,
 				6FC7D08D1EB07E9000078819 /* EEImageBuilder.hpp in Headers */,
 				6F9C2FD61D4742A200939859 /* EEDataTraits.hpp in Headers */,
+				6FF4BB561EBAC354000214C1 /* EESpineMacro.hpp in Headers */,
 				6C47AAF81CA4EAE100B3E65E /* EEUiTextLoader.hpp in Headers */,
 				6F79B6401CCAA2D70008EFAC /* EEBackButtonListener.hpp in Headers */,
 				6C42EF451C85449F0062C2C6 /* EEDynamicValue.hpp in Headers */,
@@ -847,6 +852,7 @@
 				6FD64E9E1E9B45AB0030CDEC /* EEConsole.hpp in Headers */,
 				6FC7D08E1EB07E9000078819 /* EEImageBuilder.hpp in Headers */,
 				6F9C2FD71D4742A200939859 /* EEDataTraits.hpp in Headers */,
+				6FF4BB571EBAC354000214C1 /* EESpineMacro.hpp in Headers */,
 				6F79B6471CCAC0EA0008EFAC /* EEEventListener.hpp in Headers */,
 				6F6B54091D41B58700F13CA9 /* EEDataHandler.hpp in Headers */,
 				6FBEDB9E1D1A93430038E335 /* EESpriteWithHsv.hpp in Headers */,

@@ -8,6 +8,7 @@
 
 #include "EESkeletonAnimationLoader.hpp"
 #include "EESpineFactory.hpp"
+#include "EESpineMacro.hpp"
 
 #include <spine/SkeletonAnimation.h>
 
@@ -91,6 +92,11 @@ void SkeletonAnimationLoader::onHandlePropTypeFloatScale(
         auto&& data = SpineFactory::getInstance()->getSkeletonData(
             dataFile_, atlasFile_, floatScale);
         skeleton->initWithData(data);
+#ifdef EE_SPINE_RUNTIME_V2
+        // Initialize in v2 is not virtual.
+        // We should manually call it.
+        skeleton->initialize();
+#endif // EE_SPINE_RUNTIME_V2
         return;
     }
     NodeV3Loader::onHandlePropTypeFloatScale(node, parent, propertyName,

@@ -41,18 +41,15 @@ void UiWidgetLoader::onHandlePropTypeBlock(cocos2d::Node* node,
     std::string propName(propertyName);
     if (propName == property::block) {
         if (blockData != nullptr) {
-            auto&& touchCallback = detail::UiWidgetCallback::getInstance()
-                                       ->getActiveTouchCallback();
-            auto&& clickCallback = detail::UiWidgetCallback::getInstance()
-                                       ->getActiveClickCallback();
+            auto callbackManager = detail::UiWidgetCallback::getInstance();
+            auto&& touchCallback = callbackManager->getActiveTouchCallback();
+            auto&& clickCallback = callbackManager->getActiveClickCallback();
             if (touchCallback) {
                 widget->addTouchEventListener(touchCallback);
-                detail::UiWidgetCallback::getInstance()->setActiveTouchCallback(
-                    nullptr);
+                callbackManager->setActiveTouchCallback(nullptr);
             } else if (clickCallback) {
                 widget->addClickEventListener(clickCallback);
-                detail::UiWidgetCallback::getInstance()->setActiveClickCallback(
-                    nullptr);
+                callbackManager->setActiveClickCallback(nullptr);
             } else {
                 CCASSERT(false, "Unexpected value.");
             }

@@ -17,6 +17,16 @@
 namespace ee {
 namespace detail {
 class DataInfoBase {};
+
+template <class T, class = std::enable_if_t<not std::is_enum<T>::value>>
+const T& convert_enum_to_integer(const T& arg) {
+    return arg;
+}
+
+template <class T, class = std::enable_if_t<std::is_enum<T>::value>>
+std::underlying_type_t<T> convert_enum_to_integer(const T& arg) {
+    return static_cast<std::underlying_type_t<T>>(arg);
+}
 } // namespace detail
 
 template <std::size_t DataId, class Value, class... Keys>
@@ -36,7 +46,8 @@ public:
     enum { Id = DataId };
 
     static std::string createKey(const Keys&... keys) {
-        return toString(toString("___", keys)...);
+        return toString(
+            toString("___", detail::convert_enum_to_integer(keys))...);
     }
 };
 } // namespace ee

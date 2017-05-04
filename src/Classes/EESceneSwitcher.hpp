@@ -34,6 +34,7 @@ private:
 public:
     using SceneConstructor = std::function<cocos2d::Scene*()>;
     using LayerConstructor = std::function<cocos2d::Node*()>;
+    using InPhaseSignal = std::function<bool()>;
 
     CREATE_FUNC(SceneSwitcher);
 
@@ -60,6 +61,8 @@ public:
     /// @param imageName The name of the corresponding image.
     SceneSwitcher* addAtlas(const std::string& plistName,
                             const std::string& imageName);
+
+    SceneSwitcher* setInPhaseSignal(const InPhaseSignal& signal);
 
     /// Adds a pre-phase action.
     SceneSwitcher* addPrePhaseAction(cocos2d::FiniteTimeAction* action);
@@ -103,6 +106,12 @@ private:
 
     void onImageLoaded(cocos2d::Texture2D* texture, const ImageBuilder& image);
 
+    void scheduleSignal();
+    void unscheduleSignal();
+    void updateSignal();
+
+    void checkEndInPhase();
+
     /// Modified finish() in TransitionScene.
     void finish2();
 
@@ -118,6 +127,9 @@ private:
 
     std::size_t loadedImageCount_;
     std::vector<ImageBuilder> images_;
+
+    bool signaled_;
+    InPhaseSignal inPhaseSignal_;
 
     cocos2d::Vector<cocos2d::FiniteTimeAction*> preActions_;
     cocos2d::Vector<cocos2d::FiniteTimeAction*> inActions_;

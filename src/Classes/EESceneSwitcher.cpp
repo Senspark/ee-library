@@ -30,6 +30,7 @@ bool SceneSwitcher::init() {
     imagesLoaded_ = true;
     inActionsDone_ = true;
     loadedImageCount_ = 0;
+    signaled_ = true;
     actor_ = cocos2d::Node::create();
     actor_->setVisible(false);
     addChild(actor_);
@@ -113,6 +114,11 @@ SceneSwitcher* SceneSwitcher::addAtlas(const std::string& plistName,
         ImageBuilder().setAtlasName(plistName).setImageName(imageName));
 }
 
+SceneSwitcher* SceneSwitcher::setInPhaseSignal(const InPhaseSignal& signal) {
+    inPhaseSignal_ = signal;
+    return this;
+}
+
 SceneSwitcher*
 SceneSwitcher::addPrePhaseAction(cocos2d::FiniteTimeAction* action) {
     preActions_.pushBack(action);
@@ -162,12 +168,14 @@ void SceneSwitcher::onPhaseBegan(Phase phase) {
     if (phase == Phase::In) {
         imagesLoaded_ = false;
         inActionsDone_ = false;
+        if (inPhaseSignal_) {
+            signaled_ = false;
+            scheduleSignal();
+        }
         loadNextImage();
         inActions_.pushBack(cocos2d::CallFunc::create([this, phase] {
             inActionsDone_ = true;
-            if (imagesLoaded_) {
-                onPhaseEnded(phase);
-            }
+            checkEndInPhase();
         }));
         actor_->runAction(cocos2d::Sequence::create(inActions_));
     }
@@ -213,9 +221,7 @@ void SceneSwitcher::onPhaseEnded(Phase phase) {
 bool SceneSwitcher::loadNextImage() {
     if (loadedImageCount_ == images_.size()) {
         imagesLoaded_ = true;
-        if (inActionsDone_) {
-            onPhaseEnded(Phase::In);
-        }
+        checkEndInPhase();
         return false;
     }
     CCLOG("%s", __PRETTY_FUNCTION__);
@@ -248,6 +254,38 @@ void SceneSwitcher::onImageLoaded(cocos2d::Texture2D* texture,
         spriteFrameCache->addSpriteFramesWithFile(image.atlasName_, texture);
     }
     loadNextImage();
+}
+
+void SceneSwitcher::scheduleSignal() {
+    CC_ASSERT(not signaled_);
+    CC_ASSERT(inPhaseSignal_);
+    schedule(std::bind(&SceneSwitcher::updateSignal, this), "__update_signal");
+}
+
+void SceneSwitcher::unscheduleSignal() {
+    CC_ASSERT(signaled_);
+    unschedule("__update_signal");
+}
+
+void SceneSwitcher::updateSignal() {
+    signaled_ = inPhaseSignal_();
+    if (signaled_) {
+        unscheduleSignal();
+        checkEndInPhase();
+    }
+}
+
+void SceneSwitcher::checkEndInPhase() {
+    if (not inActionsDone_) {
+        return;
+    }
+    if (not imagesLoaded_) {
+        return;
+    }
+    if (not signaled_) {
+        return;
+    }
+    onPhaseEnded(Phase::In);
 }
 
 void SceneSwitcher::finish2() {

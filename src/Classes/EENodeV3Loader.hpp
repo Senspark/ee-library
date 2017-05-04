@@ -22,6 +22,9 @@ NS_EE_BEGIN
 ///                                               ee::NodeV3::loader());
 /// @endcode
 class NodeV3Loader : public cocosbuilder::NodeLoader {
+private:
+    using Super = cocosbuilder::NodeLoader;
+
 public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(NodeV3Loader, loader);
 

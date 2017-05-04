@@ -106,8 +106,7 @@ void UiCheckBoxLoader::onHandlePropTypeCheck(cocos2d::Node* node,
         spriteFrameEnabled_ = check;
         return;
     }
-    UiWidgetLoader::onHandlePropTypeCheck(node, parent, propertyName, check,
-                                          reader);
+    Super::onHandlePropTypeCheck(node, parent, propertyName, check, reader);
 }
 
 void UiCheckBoxLoader::onHandlePropTypeFloat(cocos2d::Node* node,
@@ -120,8 +119,8 @@ void UiCheckBoxLoader::onHandlePropTypeFloat(cocos2d::Node* node,
     if (propName == property::zoom_scale) {
         return button->setZoomScale(floatValue);
     }
-    UiWidgetLoader::onHandlePropTypeFloat(node, parent, propertyName,
-                                          floatValue, reader);
+    Super::onHandlePropTypeFloat(node, parent, propertyName, floatValue,
+                                 reader);
 }
 
 void UiCheckBoxLoader::onHandlePropTypeSpriteFrame(
@@ -169,7 +168,7 @@ void UiCheckBoxLoader::onHandlePropTypeSpriteFrame(
     if (spriteFrameEnabled_) {
         CCASSERT(false, "Sprite frame is not loaded!");
     }
-    UiWidgetLoader::onHandlePropTypeSpriteFrame(node, parent, propertyName,
-                                                spriteFrame, reader);
+    Super::onHandlePropTypeSpriteFrame(node, parent, propertyName, spriteFrame,
+                                       reader);
 }
 NS_EE_END

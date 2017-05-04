@@ -92,8 +92,8 @@ void UiButtonLoader::onHandlePropTypePoint(cocos2d::Node* node,
     if (propName == property::title_anchor_point) {
         return button->getTitleRenderer()->setAnchorPoint(point);
     }
-    return UiWidgetLoader::onHandlePropTypePoint(node, parent, propertyName,
-                                                 point, reader);
+    return Super::onHandlePropTypePoint(node, parent, propertyName, point,
+                                        reader);
 }
 
 void UiButtonLoader::onHandlePropTypeCheck(cocos2d::Node* node,
@@ -114,8 +114,7 @@ void UiButtonLoader::onHandlePropTypeCheck(cocos2d::Node* node,
         spriteFrameEnabled_ = check;
         return;
     }
-    UiWidgetLoader::onHandlePropTypeCheck(node, parent, propertyName, check,
-                                          reader);
+    Super::onHandlePropTypeCheck(node, parent, propertyName, check, reader);
 }
 
 void UiButtonLoader::onHandlePropTypeString(cocos2d::Node* node,
@@ -128,8 +127,7 @@ void UiButtonLoader::onHandlePropTypeString(cocos2d::Node* node,
     if (propName == property::title_text) {
         return button->setTitleText(string);
     }
-    UiWidgetLoader::onHandlePropTypeString(node, parent, propertyName, string,
-                                           reader);
+    Super::onHandlePropTypeString(node, parent, propertyName, string, reader);
 }
 
 void UiButtonLoader::onHandlePropTypeFontTTF(cocos2d::Node* node,
@@ -142,8 +140,7 @@ void UiButtonLoader::onHandlePropTypeFontTTF(cocos2d::Node* node,
     if (propName == property::title_font_name) {
         return button->setTitleFontName(fontTTF);
     }
-    UiWidgetLoader::onHandlePropTypeFontTTF(node, parent, propertyName, fontTTF,
-                                            reader);
+    Super::onHandlePropTypeFontTTF(node, parent, propertyName, fontTTF, reader);
 }
 
 void UiButtonLoader::onHandlePropTypeFloat(cocos2d::Node* node,
@@ -156,8 +153,8 @@ void UiButtonLoader::onHandlePropTypeFloat(cocos2d::Node* node,
     if (propName == property::zoom_scale) {
         return button->setZoomScale(floatValue);
     }
-    UiWidgetLoader::onHandlePropTypeFloat(node, parent, propertyName,
-                                          floatValue, reader);
+    Super::onHandlePropTypeFloat(node, parent, propertyName, floatValue,
+                                 reader);
 }
 
 void UiButtonLoader::onHandlePropTypeFloatScale(
@@ -168,8 +165,8 @@ void UiButtonLoader::onHandlePropTypeFloatScale(
     if (propName == property::title_font_size) {
         return button->setTitleFontSize(floatScale);
     }
-    UiWidgetLoader::onHandlePropTypeFloatScale(node, parent, propertyName,
-                                               floatScale, reader);
+    Super::onHandlePropTypeFloatScale(node, parent, propertyName, floatScale,
+                                      reader);
 }
 
 void UiButtonLoader::onHandlePropTypeSpriteFrame(
@@ -202,8 +199,8 @@ void UiButtonLoader::onHandlePropTypeSpriteFrame(
     if (spriteFrameEnabled_) {
         CCASSERT(false, "Sprite frame is not loaded!");
     }
-    UiWidgetLoader::onHandlePropTypeSpriteFrame(node, parent, propertyName,
-                                                spriteFrame, reader);
+    Super::onHandlePropTypeSpriteFrame(node, parent, propertyName, spriteFrame,
+                                       reader);
 }
 
 void UiButtonLoader::onHandlePropTypeColor3(cocos2d::Node* node,
@@ -216,7 +213,6 @@ void UiButtonLoader::onHandlePropTypeColor3(cocos2d::Node* node,
     if (propName == property::title_color) {
         return button->setTitleColor(color3B);
     }
-    UiWidgetLoader::onHandlePropTypeColor3(node, parent, propertyName, color3B,
-                                           reader);
+    Super::onHandlePropTypeColor3(node, parent, propertyName, color3B, reader);
 }
 NS_EE_END

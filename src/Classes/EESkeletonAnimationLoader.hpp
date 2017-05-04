@@ -13,6 +13,9 @@
 
 NS_EE_BEGIN
 class SkeletonAnimationLoader : public NodeV3Loader {
+private:
+    using Super = NodeV3Loader;
+
 public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(SkeletonAnimationLoader, loader);
 

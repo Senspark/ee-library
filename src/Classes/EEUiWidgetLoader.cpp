@@ -59,8 +59,7 @@ void UiWidgetLoader::onHandlePropTypeBlock(cocos2d::Node* node,
         }
         return;
     }
-    NodeV3Loader::onHandlePropTypeBlock(node, parent, propertyName, blockData,
-                                        reader);
+    Super::onHandlePropTypeBlock(node, parent, propertyName, blockData, reader);
 }
 
 void UiWidgetLoader::onHandlePropTypeCheck(cocos2d::Node* node,
@@ -90,8 +89,7 @@ void UiWidgetLoader::onHandlePropTypeCheck(cocos2d::Node* node,
     if (propName == property::propagate_touch_events) {
         return widget->setPropagateTouchEvents(check);
     }
-    NodeV3Loader::onHandlePropTypeCheck(node, parent, propertyName, check,
-                                        reader);
+    Super::onHandlePropTypeCheck(node, parent, propertyName, check, reader);
 }
 
 void UiWidgetLoader::onHandlePropTypeIntegerLabeled(
@@ -124,7 +122,7 @@ void UiWidgetLoader::onHandlePropTypeIntegerLabeled(
         }
         return;
     }
-    return NodeV3Loader::onHandlePropTypeIntegerLabeled(
-        node, parent, propertyName, integerLabeled, reader);
+    return Super::onHandlePropTypeIntegerLabeled(node, parent, propertyName,
+                                                 integerLabeled, reader);
 }
 NS_EE_END

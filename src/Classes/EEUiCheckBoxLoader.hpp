@@ -18,6 +18,9 @@
 NS_EE_BEGIN
 /// Cocosbuilder loader for @c cocos2d::ui::CheckBox.
 class UiCheckBoxLoader : public UiWidgetLoader {
+private:
+    using Super = UiWidgetLoader;
+
 public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(UiCheckBoxLoader, loader);
 

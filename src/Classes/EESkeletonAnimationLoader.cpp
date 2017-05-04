@@ -42,8 +42,7 @@ void SkeletonAnimationLoader::onHandlePropTypeCheck(
         }
         return;
     }
-    NodeV3Loader::onHandlePropTypeCheck(node, parent, propertyName, check,
-                                        reader);
+    Super::onHandlePropTypeCheck(node, parent, propertyName, check, reader);
 }
 
 void SkeletonAnimationLoader::onHandlePropTypeString(
@@ -67,8 +66,7 @@ void SkeletonAnimationLoader::onHandlePropTypeString(
         skeleton->setSkin(string);
         return;
     }
-    NodeV3Loader::onHandlePropTypeString(node, parent, propertyName, string,
-                                         reader);
+    Super::onHandlePropTypeString(node, parent, propertyName, string, reader);
 }
 
 void SkeletonAnimationLoader::onHandlePropTypeFloat(
@@ -79,8 +77,8 @@ void SkeletonAnimationLoader::onHandlePropTypeFloat(
     if (propName == property::time_scale) {
         return skeleton->setTimeScale(floatValue);
     }
-    NodeV3Loader::onHandlePropTypeFloat(node, parent, propertyName, floatValue,
-                                        reader);
+    Super::onHandlePropTypeFloat(node, parent, propertyName, floatValue,
+                                 reader);
 }
 
 void SkeletonAnimationLoader::onHandlePropTypeFloatScale(
@@ -99,8 +97,8 @@ void SkeletonAnimationLoader::onHandlePropTypeFloatScale(
 #endif // EE_SPINE_RUNTIME_V2
         return;
     }
-    NodeV3Loader::onHandlePropTypeFloatScale(node, parent, propertyName,
-                                             floatScale, reader);
+    Super::onHandlePropTypeFloatScale(node, parent, propertyName, floatScale,
+                                      reader);
 }
 
 NS_EE_END

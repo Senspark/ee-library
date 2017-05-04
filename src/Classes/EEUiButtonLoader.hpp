@@ -44,6 +44,9 @@ NS_EE_BEGIN
 /// @see @c cocos2d::ui::Widget::ccWidgetTouchCallback
 /// @see @c cocos2d::ui::Widget::ccWidgetClickCallback
 class UiButtonLoader : public UiWidgetLoader {
+private:
+    using Super = UiWidgetLoader;
+
 public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(UiButtonLoader, loader);
 

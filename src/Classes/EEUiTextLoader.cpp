@@ -48,8 +48,7 @@ void UiTextLoader::onHandlePropTypePoint(cocos2d::Node* node,
         shadowOffset_ = point;
         return;
     }
-    UiWidgetLoader::onHandlePropTypePoint(node, parent, propertyName, point,
-                                          reader);
+    Super::onHandlePropTypePoint(node, parent, propertyName, point, reader);
 }
 
 void UiTextLoader::onHandlePropTypeCheck(cocos2d::Node* node,
@@ -69,8 +68,7 @@ void UiTextLoader::onHandlePropTypeCheck(cocos2d::Node* node,
         outlineEnabled_ = check;
         return;
     }
-    UiWidgetLoader::onHandlePropTypeCheck(node, parent, propertyName, check,
-                                          reader);
+    Super::onHandlePropTypeCheck(node, parent, propertyName, check, reader);
 }
 
 void UiTextLoader::onHandlePropTypeColor3(cocos2d::Node* node,
@@ -91,8 +89,7 @@ void UiTextLoader::onHandlePropTypeColor3(cocos2d::Node* node,
         outlineColor_ = color3B;
         return;
     }
-    UiWidgetLoader::onHandlePropTypeColor3(node, parent, propertyName, color3B,
-                                           reader);
+    Super::onHandlePropTypeColor3(node, parent, propertyName, color3B, reader);
 }
 
 void UiTextLoader::onHandlePropTypeByte(cocos2d::Node* node,
@@ -109,8 +106,7 @@ void UiTextLoader::onHandlePropTypeByte(cocos2d::Node* node,
         outlineOpacity_ = byte;
         return;
     }
-    UiWidgetLoader::onHandlePropTypeByte(node, parent, propertyName, byte,
-                                         reader);
+    Super::onHandlePropTypeByte(node, parent, propertyName, byte, reader);
 }
 
 void UiTextLoader::onHandlePropTypeFontTTF(cocos2d::Node* node,
@@ -123,8 +119,7 @@ void UiTextLoader::onHandlePropTypeFontTTF(cocos2d::Node* node,
     if (propName == property::font_name) {
         return text->setFontName(fontTTF);
     }
-    UiWidgetLoader::onHandlePropTypeFontTTF(node, parent, propertyName, fontTTF,
-                                            reader);
+    Super::onHandlePropTypeFontTTF(node, parent, propertyName, fontTTF, reader);
 }
 
 void UiTextLoader::onHandlePropTypeText(cocos2d::Node* node,
@@ -137,8 +132,7 @@ void UiTextLoader::onHandlePropTypeText(cocos2d::Node* node,
     if (propName == property::string) {
         return uiText->setString(text);
     }
-    UiWidgetLoader::onHandlePropTypeText(node, parent, propertyName, text,
-                                         reader);
+    Super::onHandlePropTypeText(node, parent, propertyName, text, reader);
 }
 
 void UiTextLoader::onHandlePropTypeFloatScale(cocos2d::Node* node,
@@ -151,8 +145,8 @@ void UiTextLoader::onHandlePropTypeFloatScale(cocos2d::Node* node,
     if (propName == property::font_size) {
         return text->setFontSize(floatScale);
     }
-    UiWidgetLoader::onHandlePropTypeFloatScale(node, parent, propertyName,
-                                               floatScale, reader);
+    Super::onHandlePropTypeFloatScale(node, parent, propertyName, floatScale,
+                                      reader);
 }
 
 void UiTextLoader::onHandlePropTypeInteger(cocos2d::Node* node,
@@ -180,8 +174,7 @@ void UiTextLoader::onHandlePropTypeInteger(cocos2d::Node* node,
         }
         return;
     }
-    UiWidgetLoader::onHandlePropTypeInteger(node, parent, propertyName, integer,
-                                            reader);
+    Super::onHandlePropTypeInteger(node, parent, propertyName, integer, reader);
 }
 
 void UiTextLoader::onHandlePropTypeIntegerLabeled(
@@ -197,8 +190,8 @@ void UiTextLoader::onHandlePropTypeIntegerLabeled(
         auto alignment = static_cast<cocos2d::TextVAlignment>(integerLabeled);
         return text->setTextVerticalAlignment(alignment);
     }
-    UiWidgetLoader::onHandlePropTypeIntegerLabeled(node, parent, propertyName,
-                                                   integerLabeled, reader);
+    Super::onHandlePropTypeIntegerLabeled(node, parent, propertyName,
+                                          integerLabeled, reader);
 }
 
 void UiTextLoader::onHandlePropTypeSize(cocos2d::Node* node,
@@ -211,7 +204,6 @@ void UiTextLoader::onHandlePropTypeSize(cocos2d::Node* node,
     if (propName == property::text_area_size) {
         return text->setTextAreaSize(size);
     }
-    UiWidgetLoader::onHandlePropTypeSize(node, parent, propertyName, size,
-                                         reader);
+    Super::onHandlePropTypeSize(node, parent, propertyName, size, reader);
 }
 NS_EE_END

@@ -38,8 +38,7 @@ void NodeV3Loader::onHandlePropTypeCheck(cocos2d::Node* node,
     if (propName == property::cascade_opacity_enabled) {
         return node->setCascadeOpacityEnabled(check);
     }
-    NodeLoader::onHandlePropTypeCheck(node, parent, propertyName, check,
-                                      reader);
+    Super::onHandlePropTypeCheck(node, parent, propertyName, check, reader);
 }
 
 void NodeV3Loader::onHandlePropTypeColor3(cocos2d::Node* node,
@@ -51,8 +50,7 @@ void NodeV3Loader::onHandlePropTypeColor3(cocos2d::Node* node,
     if (propName == property::color) {
         return node->setColor(color3B);
     }
-    NodeLoader::onHandlePropTypeColor3(node, parent, propertyName, color3B,
-                                       reader);
+    Super::onHandlePropTypeColor3(node, parent, propertyName, color3B, reader);
 }
 
 void NodeV3Loader::onHandlePropTypeByte(cocos2d::Node* node,
@@ -64,7 +62,7 @@ void NodeV3Loader::onHandlePropTypeByte(cocos2d::Node* node,
     if (propName == property::opacity) {
         return node->setOpacity(byte);
     }
-    NodeLoader::onHandlePropTypeByte(node, parent, propertyName, byte, reader);
+    Super::onHandlePropTypeByte(node, parent, propertyName, byte, reader);
 }
 
 void NodeV3Loader::onHandlePropTypeInteger(cocos2d::Node* node,
@@ -79,7 +77,6 @@ void NodeV3Loader::onHandlePropTypeInteger(cocos2d::Node* node,
         }
         return;
     }
-    NodeLoader::onHandlePropTypeInteger(node, parent, propertyName, integer,
-                                        reader);
+    Super::onHandlePropTypeInteger(node, parent, propertyName, integer, reader);
 }
 NS_EE_END

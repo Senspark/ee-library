@@ -34,8 +34,7 @@ void UiLayoutLoader::onHandlePropTypeColor3(cocos2d::Node* node,
     if (propName == property::background_color) {
         return layout->setBackGroundColor(color3B);
     }
-    UiWidgetLoader::onHandlePropTypeColor3(node, parent, propertyName, color3B,
-                                           reader);
+    Super::onHandlePropTypeColor3(node, parent, propertyName, color3B, reader);
 }
 
 void UiLayoutLoader::onHandlePropTypeByte(cocos2d::Node* node,
@@ -48,7 +47,6 @@ void UiLayoutLoader::onHandlePropTypeByte(cocos2d::Node* node,
     if (propName == property::background_color_opacity) {
         return layout->setBackGroundColorOpacity(byte);
     }
-    UiWidgetLoader::onHandlePropTypeByte(node, parent, propertyName, byte,
-                                         reader);
+    Super::onHandlePropTypeByte(node, parent, propertyName, byte, reader);
 }
 NS_EE_END

@@ -22,6 +22,9 @@ NS_EE_BEGIN
 ///                                               ee::UiWidgetLoader::loader());
 /// @endcode
 class UiWidgetLoader : public NodeV3Loader {
+private:
+    using Super = NodeV3Loader;
+
 public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(UiWidgetLoader, loader);
 

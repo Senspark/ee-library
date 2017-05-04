@@ -21,6 +21,9 @@ NS_EE_BEGIN
 ///                                               ee::UiLayoutLoader::loader());
 /// @endcode
 class UiLayoutLoader : public UiWidgetLoader {
+private:
+    using Super = UiWidgetLoader;
+
 public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(UiLayoutLoader, loader);
 

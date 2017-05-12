@@ -47,6 +47,7 @@ void ExtraAction::step(float delta) {
 
 Sequence* Sequence::create() {
     auto result = new Sequence();
+    result->autorelease();
     result->initWithTwoActions(ExtraAction::create(), ExtraAction::create());
     return result;
 }

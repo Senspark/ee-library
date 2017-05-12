@@ -21,6 +21,7 @@
 
 #include "EECrytography.hpp"
 #include "EEAction.hpp"
+#include "EEContinuousAction.hpp"
 #include "EEScopeGuard.hpp"
 
 #include "EEButton.hpp"

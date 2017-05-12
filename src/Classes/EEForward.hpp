@@ -19,6 +19,9 @@ template <class Np, class Lp, class... Ts> class GenericLoader;
 template <class T> class DynamicValue;
 template <class T> class Pool;
 
+class Action;
+class ContinuousAction;
+
 namespace detail {
 class ButtonEx;
 } // namespace detail

@@ -11,6 +11,7 @@
 #include "EECommandPool.hpp"
 #include "EEDialogComponent.hpp"
 
+#include <2d/CCLayer.h>
 #include <2d/CCSprite.h>
 #include <base/CCDirector.h>
 #include <ui/UIEditBox/UIEditBox.h>
@@ -39,8 +40,12 @@ bool Console::init() {
     auto whiteSprite = cocos2d::Sprite::create();
     auto editBoxSprite = cocos2d::ui::Scale9Sprite::createWithSpriteFrame(
         whiteSprite->getSpriteFrame());
-    editBoxSprite->setColor(cocos2d::Color3B::BLACK);
-    editBoxSprite->setOpacity(100);
+    editBoxSprite->setVisible(false);
+
+    auto background = cocos2d::LayerColor::create(cocos2d::Color4B::BLACK);
+    background->setContentSize(getContentSize());
+    background->setOpacity(100);
+    addChild(background);
 
     editBox_ = cocos2d::ui::EditBox::create(cocos2d::Size(winSize.width, 50.0f),
                                             editBoxSprite);

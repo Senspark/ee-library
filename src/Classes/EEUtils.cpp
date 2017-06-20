@@ -39,7 +39,8 @@ void resumeAll(cocos2d::Node* node) {
     doRecursively(node, &cocos2d::Node::resume);
 }
 
-cocos2d::Rect getCascadeContentSize(cocos2d::Node* node, std::size_t depth) {
+cocos2d::Rect getCascadeContentSize(const cocos2d::Node* node,
+                                    std::size_t depth) {
     auto&& size = node->getContentSize();
     cocos2d::Rect result{0, 0, size.width, size.height};
     if (depth > 0) {

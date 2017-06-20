@@ -58,6 +58,11 @@ DialogManager* DialogManager::getInstance() {
     return &sharedInstance;
 }
 
+void DialogManager::replaceScene(cocos2d::Scene* scene) {
+    resetDialogGraph();
+    cocos2d::Director::getInstance()->replaceScene(scene);
+}
+
 void DialogManager::pushDialog(Dialog* dialog) {
     pushDialog(dialog, Dialog::TopLevel);
 }
@@ -120,18 +125,24 @@ std::size_t DialogManager::getTopDialogLevel() {
     return 0;
 }
 
+void DialogManager::resetDialogGraph() {
+    dialogStack_.clear();
+    lockingDialog_ = nullptr;
+    currentLevel_ = 0;
+    commandQueue_.clear();
+}
+
 bool DialogManager::updateCurrentScene() {
     auto currentScene = cocos2d::Director::getInstance()->getRunningScene();
     if (currentScene == currentScene_) {
+        // Not reliable: system may use the same memory address for newly
+        // created objects.
         return false;
     }
 
     LOG_FUNC();
     currentScene_ = currentScene;
-    dialogStack_.clear();
-    lockingDialog_ = nullptr;
-    currentLevel_ = 0;
-    commandQueue_.clear();
+    resetDialogGraph();
     return true;
 }
 

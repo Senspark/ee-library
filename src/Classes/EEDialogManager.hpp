@@ -33,6 +33,9 @@ class DialogManager {
 public:
     static DialogManager* getInstance();
 
+    /// Use this instead of cocos2d::Director::getInstance()->replaceScene.
+    void replaceScene(cocos2d::Scene* scene);
+
     /// Attempts to push the given dialog to the top level.
     void pushDialog(Dialog* dialog);
 
@@ -57,6 +60,8 @@ public:
     std::size_t getTopDialogLevel();
 
 private:
+    void resetDialogGraph();
+
     /// Updates the whole dialog graph in the current scene.
     /// @return Whether the current scene has changed.
     bool updateCurrentScene();

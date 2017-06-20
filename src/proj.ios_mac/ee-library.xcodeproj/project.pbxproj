@@ -131,6 +131,8 @@
 		6F8C9EF61E233D65005D4121 /* EESpineFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F8C9EF31E233D65005D4121 /* EESpineFactory.cpp */; };
 		6F8C9EF71E233D65005D4121 /* EESpineFactory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6F8C9EF41E233D65005D4121 /* EESpineFactory.hpp */; };
 		6F8C9EF81E233D65005D4121 /* EESpineFactory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6F8C9EF41E233D65005D4121 /* EESpineFactory.hpp */; };
+		6F8F17B81EF8E46C007AA388 /* EELazyPtr.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6F8F17B51EF8E46C007AA388 /* EELazyPtr.hpp */; };
+		6F8F17B91EF8E46C007AA388 /* EELazyPtr.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6F8F17B51EF8E46C007AA388 /* EELazyPtr.hpp */; };
 		6F9C2FD41D4742A200939859 /* EEDataTraits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C2FD21D4742A200939859 /* EEDataTraits.cpp */; };
 		6F9C2FD51D4742A200939859 /* EEDataTraits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C2FD21D4742A200939859 /* EEDataTraits.cpp */; };
 		6F9C2FD61D4742A200939859 /* EEDataTraits.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6F9C2FD31D4742A200939859 /* EEDataTraits.hpp */; };
@@ -366,6 +368,7 @@
 		6F8460881E518C5100DB7FB3 /* EEClippingRectangleNodeLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEClippingRectangleNodeLoader.hpp; sourceTree = "<group>"; };
 		6F8C9EF31E233D65005D4121 /* EESpineFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EESpineFactory.cpp; sourceTree = "<group>"; };
 		6F8C9EF41E233D65005D4121 /* EESpineFactory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EESpineFactory.hpp; sourceTree = "<group>"; };
+		6F8F17B51EF8E46C007AA388 /* EELazyPtr.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EELazyPtr.hpp; sourceTree = "<group>"; };
 		6F9C2FD21D4742A200939859 /* EEDataTraits.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDataTraits.cpp; sourceTree = "<group>"; };
 		6F9C2FD31D4742A200939859 /* EEDataTraits.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDataTraits.hpp; sourceTree = "<group>"; };
 		6FA658961CCB700B009BC9EB /* EEUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEUtils.cpp; sourceTree = "<group>"; };
@@ -475,6 +478,7 @@
 				6FA658961CCB700B009BC9EB /* EEUtils.cpp */,
 				6C43A7D31BDDDAC300D0597F /* EEUtils.hpp */,
 				6FEC41EA1D9B53C8000B40F2 /* EEPool.hpp */,
+				6F8F17B51EF8E46C007AA388 /* EELazyPtr.hpp */,
 				6FAE05301E9F212000A17C21 /* EEScopeGuard.hpp */,
 				6F2C1C021EC578CF003D7A7C /* action */,
 				6FD64E9F1E9B47010030CDEC /* console */,
@@ -804,6 +808,7 @@
 				6FAE79891D33759D00A0CFB1 /* EEDataInfo.hpp in Headers */,
 				6FD64E9D1E9B45AB0030CDEC /* EEConsole.hpp in Headers */,
 				6FC7D08D1EB07E9000078819 /* EEImageBuilder.hpp in Headers */,
+				6F8F17B81EF8E46C007AA388 /* EELazyPtr.hpp in Headers */,
 				6F9C2FD61D4742A200939859 /* EEDataTraits.hpp in Headers */,
 				6FF4BB561EBAC354000214C1 /* EESpineMacro.hpp in Headers */,
 				6C47AAF81CA4EAE100B3E65E /* EEUiTextLoader.hpp in Headers */,
@@ -869,6 +874,7 @@
 				6F77D7981CE0D734000BA9BE /* EEFlags.hpp in Headers */,
 				6FD64E9E1E9B45AB0030CDEC /* EEConsole.hpp in Headers */,
 				6FC7D08E1EB07E9000078819 /* EEImageBuilder.hpp in Headers */,
+				6F8F17B91EF8E46C007AA388 /* EELazyPtr.hpp in Headers */,
 				6F9C2FD71D4742A200939859 /* EEDataTraits.hpp in Headers */,
 				6FF4BB571EBAC354000214C1 /* EESpineMacro.hpp in Headers */,
 				6F79B6471CCAC0EA0008EFAC /* EEEventListener.hpp in Headers */,

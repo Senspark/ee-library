@@ -9,8 +9,20 @@
 #include "EEUtils.hpp"
 #include "EEImage.hpp"
 
-#include <cocos2d.h>
+#include <2d/CCNode.h>
+#include <2d/CCRenderTexture.h>
+#include <2d/CCTransition.h>
+#include <base/CCDirector.h>
+#include <base/CCEventDispatcher.h>
+#include <base/CCEventListener.h>
+#include <base/CCScheduler.h>
 #include <network/HttpClient.h>
+#include <network/HttpRequest.h>
+#include <network/HttpResponse.h>
+#include <platform/CCImage.h>
+#include <renderer/CCCustomCommand.h>
+#include <renderer/CCRenderer.h>
+#include <renderer/CCTextureCache.h>
 
 NS_EE_BEGIN
 UniqueListener make_unique_listener(cocos2d::EventListener* listener) {

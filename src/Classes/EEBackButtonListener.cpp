@@ -8,7 +8,8 @@
 
 #include "EEBackButtonListener.hpp"
 
-#include <cocos2d.h>
+#include <base/CCDirector.h>
+#include <base/CCEventDispatcher.h>
 
 NS_EE_BEGIN
 NS_DETAIL_BEGIN

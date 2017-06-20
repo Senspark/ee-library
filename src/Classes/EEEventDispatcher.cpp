@@ -8,7 +8,9 @@
 
 #include "EEEventDispatcher.hpp"
 
-#include <cocos2d.h>
+#include <base/CCDirector.h>
+#include <base/CCEventDispatcher.h>
+#include <base/CCEventListener.h>
 
 namespace ee {
 void EventDispatcher::addListener1(cocos2d::EventListener* listener) const {

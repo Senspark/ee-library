@@ -72,9 +72,9 @@ bool Scale9SpriteWithHsv::updateWithSprite(cocos2d::Sprite* sprite,
         p->setUniformLocationWithMatrix4fv(u->location, getHsvMatrix().m, 1);
     });
 #if COCOS2D_VERSION >= 0x00031400
-        setGLProgramState(state);
+    setGLProgramState(state);
 #else // COCOS2D_VERSION >= 0x00031400
-        _scale9Image->setGLProgramState(state);
+    _scale9Image->setGLProgramState(state);
 #endif // COCOS2D_VERSION >= 0x00031400
     return true;
 }

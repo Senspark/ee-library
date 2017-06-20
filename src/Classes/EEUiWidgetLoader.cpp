@@ -9,7 +9,6 @@
 #include "EEUiWidgetLoader.hpp"
 #include "EEUiWidgetCallback.hpp"
 
-#include <cocos2d.h>
 #include <ui/UiWidget.h>
 
 NS_EE_BEGIN

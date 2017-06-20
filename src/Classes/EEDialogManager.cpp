@@ -13,7 +13,10 @@
 #include "EEUtils.hpp"
 #include "EEScopeGuard.hpp"
 
-#include <cocos2d.h>
+#include <2d/CCActionInstant.h>
+#include <2d/CCActionInterval.h>
+#include <2d/CCTransition.h>
+#include <base/CCDirector.h>
 
 namespace ee {
 namespace dialog {

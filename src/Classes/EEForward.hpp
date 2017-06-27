@@ -18,6 +18,10 @@ template <class Np, class Lp, class... Ts> class GenericLoader;
 
 template <class T> class DynamicValue;
 template <class T> class Pool;
+template <class T> class LazyPtr;
+
+class Action;
+class ContinuousAction;
 
 namespace detail {
 class ButtonEx;

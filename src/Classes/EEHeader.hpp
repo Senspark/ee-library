@@ -18,9 +18,11 @@
 #include "EEFlags.hpp"
 #include "EEUtils.hpp"
 #include "EEPool.hpp"
+#include "EELazyPtr.hpp"
 
 #include "EECrytography.hpp"
 #include "EEAction.hpp"
+#include "EEContinuousAction.hpp"
 #include "EEScopeGuard.hpp"
 
 #include "EEButton.hpp"

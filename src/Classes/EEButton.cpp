@@ -11,8 +11,8 @@
 #include "EEDialogComponent.hpp"
 #include "EEScale9SpriteWithHsv.hpp"
 
-#include <cocos2d.h>
-#include <ui/CocosGUI.h>
+#include <2d/CCActionInterval.h>
+#include <2d/CCLabel.h>
 
 NS_EE_BEGIN
 NS_DETAIL_BEGIN

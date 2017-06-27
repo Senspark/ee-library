@@ -9,7 +9,7 @@
 #include "EESpriteWithHsv.hpp"
 #include "EEShader.hpp"
 
-#include <cocos2d.h>
+#include <renderer/CCGLProgramState.h>
 
 namespace ee {
 SpriteWithHsv* SpriteWithHsv::createImpl(const Initializer& initializer) {

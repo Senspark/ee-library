@@ -6,9 +6,9 @@
 //
 //
 
-#include "EECheckBox.hpp"
-
 #include <algorithm>
+
+#include "EECheckBox.hpp"
 
 NS_EE_BEGIN
 NS_DETAIL_BEGIN

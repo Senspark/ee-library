@@ -10,7 +10,11 @@
 #include "EEDialog.hpp"
 #include "EEUtils.hpp"
 
-#include <cocos2d.h>
+#include <2d/CCActionEase.h>
+#include <2d/CCActionInstant.h>
+#include <2d/CCActionInterval.h>
+#include <2d/CCSprite.h>
+#include <base/CCDirector.h>
 
 NS_EE_BEGIN
 Dialog* addHorizontalTransition(Dialog* dialog, float duration, float rate) {

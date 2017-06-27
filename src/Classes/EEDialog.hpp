@@ -15,6 +15,7 @@
 
 #include "EECocos2dxFwd.hpp"
 
+#include <2d/CCAction.h>
 #include <base/CCRefPtr.h>
 #include <ui/UIWidget.h>
 

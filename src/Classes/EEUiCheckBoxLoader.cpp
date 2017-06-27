@@ -8,7 +8,9 @@
 
 #include "EEUiCheckBoxLoader.hpp"
 
-#include <cocos2d.h>
+#include <2d/CCSpriteFrameCache.h>
+#include <base/CCDirector.h>
+#include <renderer/CCTextureCache.h>
 #include <ui/UICheckBox.h>
 
 NS_EE_BEGIN

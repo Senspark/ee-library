@@ -169,7 +169,7 @@ void pauseAll(cocos2d::Node* node);
 void resumeAll(cocos2d::Node* node);
 
 cocos2d::Rect getCascadeContentSize(
-    cocos2d::Node* node,
+    const cocos2d::Node* node,
     std::size_t depth = std::numeric_limits<std::size_t>::max());
 
 /// Checks whether the node is actually visible.

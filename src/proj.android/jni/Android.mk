@@ -9,6 +9,8 @@ LOCAL_CFLAGS += -Wmain -Wmissing-braces -Wmissing-include-dirs -Wparentheses -Ws
 LOCAL_CFLAGS += -Wreturn-type -Waddress -Wmissing-declarations -Wmissing-field-initializers
 LOCAL_CFLAGS += -Wunused-function -Wunused-label -Wuninitialized
 
+LOCAL_CPPFLAGS += -std=c++1z
+
 LOCAL_MODULE := ee_static
 
 LOCAL_MODULE_FILENAME := libee

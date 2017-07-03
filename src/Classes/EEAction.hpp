@@ -14,16 +14,17 @@
 namespace ee {
 class Sequence : public cocos2d::Sequence {
 private:
+    using Self = Sequence;
     using Super = cocos2d::Sequence;
 
 public:
-    static Sequence* create();
+    static Self* create();
 
-    Sequence* delay(float duration);
+    Self* delay(float duration);
 
-    Sequence* then(const std::function<void()>& callback);
+    Self* then(const std::function<void()>& callback);
 
-    Sequence* then(cocos2d::FiniteTimeAction* action);
+    Self* then(cocos2d::FiniteTimeAction* action);
 
 private:
     Sequence();
@@ -33,21 +34,64 @@ private:
 
 class Spawn : public cocos2d::Spawn {
 private:
+    using Self = Spawn;
     using Super = cocos2d::Spawn;
 
 public:
-    static Spawn* create();
+    static Self* create();
 
-    Spawn* delay(float duration);
+    Self* delay(float duration);
 
-    Spawn* with(const std::function<void()>& callback);
+    Self* with(const std::function<void()>& callback);
 
-    Spawn* with(cocos2d::FiniteTimeAction* action);
+    Self* with(cocos2d::FiniteTimeAction* action);
 
 private:
     Spawn();
 
     std::size_t count_;
+};
+
+class RelativeMoveBy : public cocos2d::ActionInterval {
+private:
+    using Self = RelativeMoveBy;
+    using Super = cocos2d::ActionInterval;
+
+public:
+    static Self* create(float duration, const cocos2d::Vec2& delta);
+
+    virtual Self* clone() const override;
+    virtual Self* reverse() const override;
+
+    virtual void startWithTarget(cocos2d::Node* target) override;
+
+    virtual void update(float time) override;
+
+protected:
+    bool initWithDuration(float duration, const cocos2d::Vec2& deltaPosition);
+
+    cocos2d::Vec2 deltaPosition_;
+    cocos2d::Vec2 startPosition_;
+    cocos2d::Vec2 previousPosition_;
+};
+
+class RelativeMoveTo : public RelativeMoveBy {
+private:
+    using Self = RelativeMoveTo;
+    using Super = RelativeMoveBy;
+
+public:
+    static Self* create(float duration, const cocos2d::Vec2& position);
+
+    virtual Self* clone() const override;
+    virtual Self* reverse() const override;
+
+    virtual void startWithTarget(cocos2d::Node* target) override;
+
+protected:
+    bool initWithDuration(float duration, const cocos2d::Vec2& endPosition);
+
+    cocos2d::Vec2 endPosition_;
 };
 } // namespace ee
 

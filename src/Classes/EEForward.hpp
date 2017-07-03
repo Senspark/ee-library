@@ -23,6 +23,11 @@ template <class T> class LazyPtr;
 class Action;
 class ContinuousAction;
 
+class Sequence;
+class Spawn;
+class RelativeMoveBy;
+class RelativeMoveTo;
+
 namespace detail {
 class ButtonEx;
 } // namespace detail

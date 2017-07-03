@@ -115,4 +115,78 @@ Spawn* Spawn::delay(float duration) {
 Spawn* Spawn::with(const std::function<void()>& callback) {
     return with(cocos2d::CallFunc::create(callback));
 }
+
+RelativeMoveBy* RelativeMoveBy::create(float duration,
+                                       const cocos2d::Vec2& delta) {
+    auto result = new RelativeMoveBy();
+    result->initWithDuration(duration, delta);
+    result->autorelease();
+    return result;
+}
+
+bool RelativeMoveBy::initWithDuration(float duration,
+                                      const cocos2d::Vec2& deltaPosition) {
+    if (not Super::initWithDuration(duration)) {
+        return false;
+    }
+    deltaPosition_ = deltaPosition;
+    return true;
+}
+
+RelativeMoveBy* RelativeMoveBy::clone() const {
+    return RelativeMoveBy::create(_duration, deltaPosition_);
+}
+
+RelativeMoveBy* RelativeMoveBy::reverse() const {
+    return RelativeMoveBy::create(_duration, -deltaPosition_);
+}
+
+void RelativeMoveBy::startWithTarget(cocos2d::Node* target) {
+    Super::startWithTarget(target);
+    previousPosition_ = startPosition_ = target->getNormalizedPosition();
+}
+
+void RelativeMoveBy::update(float time) {
+    if (_target == nullptr) {
+        return;
+    }
+
+    auto currentPosition = _target->getNormalizedPosition();
+    auto diff = currentPosition - previousPosition_;
+    startPosition_ += diff;
+    auto newPosition = startPosition_ + deltaPosition_ * time;
+    _target->setNormalizedPosition(newPosition);
+    previousPosition_ = newPosition;
+}
+
+RelativeMoveTo* RelativeMoveTo::create(float duration,
+                                       const cocos2d::Vec2& position) {
+    auto result = new RelativeMoveTo();
+    result->initWithDuration(duration, position);
+    result->autorelease();
+    return result;
+}
+
+bool RelativeMoveTo::initWithDuration(float duration,
+                                      const cocos2d::Vec2& endPosition) {
+    if (not ActionInterval::initWithDuration(duration)) {
+        return false;
+    }
+    endPosition_ = endPosition;
+    return true;
+}
+
+RelativeMoveTo* RelativeMoveTo::clone() const {
+    return RelativeMoveTo::create(_duration, endPosition_);
+}
+
+RelativeMoveTo* RelativeMoveTo::reverse() const {
+    CC_ASSERT(false);
+    return nullptr;
+}
+
+void RelativeMoveTo::startWithTarget(cocos2d::Node* target) {
+    Super::startWithTarget(target);
+    deltaPosition_ = endPosition_ - target->getNormalizedPosition();
+}
 } // namespace ee

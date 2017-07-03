@@ -26,6 +26,27 @@ public:
     Sequence* then(cocos2d::FiniteTimeAction* action);
 
 private:
+    Sequence();
+
+    std::size_t count_;
+};
+
+class Spawn : public cocos2d::Spawn {
+private:
+    using Super = cocos2d::Spawn;
+
+public:
+    static Spawn* create();
+
+    Spawn* delay(float duration);
+
+    Spawn* with(const std::function<void()>& callback);
+
+    Spawn* with(cocos2d::FiniteTimeAction* action);
+
+private:
+    Spawn();
+
     std::size_t count_;
 };
 } // namespace ee

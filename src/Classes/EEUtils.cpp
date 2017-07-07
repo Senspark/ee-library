@@ -90,7 +90,8 @@ bool isActuallyVisible(const cocos2d::Node* node) {
 
 namespace {
 void onCaptured(const std::function<void(cocos2d::Image*)>& afterCaptured) {
-    auto glView = cocos2d::Director::getInstance()->getOpenGLView();
+    auto director = cocos2d::Director::getInstance();
+    auto glView = director->getOpenGLView();
     auto frameSize = glView->getFrameSize();
 
     GLsizei width = static_cast<GLsizei>(frameSize.width);
@@ -100,60 +101,23 @@ void onCaptured(const std::function<void(cocos2d::Image*)>& afterCaptured) {
         auto bufferSize = static_cast<std::size_t>(width * height * 4);
         auto buffer = std::make_unique<GLubyte[]>(bufferSize);
         glPixelStorei(GL_PACK_ALIGNMENT, 1);
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8)
-        // The frame buffer is always created with portrait orientation on
-        // WP8.
-        // So if the current device orientation is landscape,
-        // we need to rotate the frame buffer.
-        auto&& renderTargetSize = glView->getRenderTargetSize();
-        CCASSERT(width * height == static_cast<int>(renderTargetSize.width *
-                                                    renderTargetSize.height),
-                 "The frame size is not matched");
-
-        glReadPixels(0, 0, (int)renderTargetSize.width,
-                     (int)renderTargetSize.height, GL_RGBA, GL_UNSIGNED_BYTE,
-                     buffer.get());
-#else
         glReadPixels(0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE,
                      buffer.get());
-#endif
 
         auto flippedBuffer = std::make_unique<GLubyte[]>(bufferSize);
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8)
-        if (width == static_cast<int>(renderTargetSize.width)) {
-            // The current device orientation is portrait.
-            for (int row = 0; row < height; ++row) {
-                std::memcpy(flippedBuffer.get() +
-                                (height - row - 1) * width * 4,
-                            buffer.get() + row * width * 4, width * 4);
-            }
-        } else {
-            // The current device orientation is landscape.
-            for (int row = 0; row < width; ++row) {
-                for (int col = 0; col < height; ++col) {
-                    *(int*)(flippedBuffer.get() +
-                            (height - col - 1) * width * 4 + row * 4) =
-                        *(int*)(buffer.get() + row * height * 4 + col * 4);
-                }
-            }
-        }
-#else
         for (int row = 0; row < height; ++row) {
             std::memcpy(flippedBuffer.get() + (height - row - 1) * width * 4,
-                        buffer.get() + row * width * 4, (unsigned)width * 4);
+                        buffer.get() + row * width * 4,
+                        static_cast<std::size_t>(width) * 4);
         }
-#endif
+
         auto image = new cocos2d::Image();
         image->initWithRawData(flippedBuffer.get(), width * height * 4, width,
                                height, 8);
         auto guard = make_ref_guard(image);
-        cocos2d::Director::getInstance()
-            ->getScheduler()
-            ->performFunctionInCocosThread(
-                [image, guard, afterCaptured] { afterCaptured(image); });
         image->release();
+        director->getScheduler()->performFunctionInCocosThread(
+            [image, guard, afterCaptured] { afterCaptured(image); });
     } while (false);
 }
 } // namespace
@@ -171,7 +135,7 @@ void captureScreenInPixels(
                    ->getEventDispatcher()
                    ->addCustomEventListener(
                        cocos2d::Director::EVENT_AFTER_DRAW,
-                       [afterCaptured](cocos2d::EventCustom* event) mutable {
+                       [afterCaptured](cocos2d::EventCustom* event) {
                            auto director = cocos2d::Director::getInstance();
                            director->getEventDispatcher()->removeEventListener(
                                listener);

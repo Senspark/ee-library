@@ -30,7 +30,7 @@ void ButtonLoader::onHandlePropTypeFloat(cocos2d::Node* node,
     if (propName == property::pressed_sprite_frame_brightness) {
         return button->pressedStateBrightness(floatValue);
     }
-    UiButtonLoader::onHandlePropTypeFloat(node, parent, propertyName,
-                                          floatValue, reader);
+    Super::onHandlePropTypeFloat(node, parent, propertyName, floatValue,
+                                 reader);
 }
 } // namespace ee

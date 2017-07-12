@@ -11,7 +11,7 @@
 NS_EE_BEGIN
 NS_DETAIL_BEGIN
 UiWidgetCallback* UiWidgetCallback::getInstance() {
-    static UiWidgetCallback sharedInstance;
+    static Self sharedInstance;
     return &sharedInstance;
 }
 

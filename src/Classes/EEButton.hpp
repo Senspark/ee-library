@@ -40,10 +40,11 @@ NS_DETAIL_BEGIN
 /// @endcode
 class ButtonEx : public cocos2d::ui::Button {
 private:
+    using Self = ButtonEx;
     using Super = cocos2d::ui::Button;
 
 public:
-    using Loader = GenericLoader<ButtonEx, UiButtonLoader>;
+    using Loader = GenericLoader<Self, UiButtonLoader>;
 
     using HitTester =
         std::function<bool(cocos2d::Touch* touch, Button* button)>;
@@ -62,7 +63,7 @@ public:
 
     /// Creates an empty Button.
     /// @return An empty Button instance.
-    static ButtonEx* create();
+    static Self* create();
 
     /// Creates a button with custom textures.
     /// @param normalImage      normal state texture name.
@@ -71,10 +72,10 @@ public:
     /// @param texType          texture resource type.
     /// @see @c cocos2d::ui::Button::TextureResType
     /// @return a Button instance.
-    static ButtonEx* create(const std::string& normalImage,
-                            const std::string& selectedImage = "",
-                            const std::string& disableImage = "",
-                            TextureResType texType = TextureResType::LOCAL);
+    static Self* create(const std::string& normalImage,
+                        const std::string& selectedImage = "",
+                        const std::string& disableImage = "",
+                        TextureResType texType = TextureResType::LOCAL);
 
     /// Adds a child to the internal container.
     /// @see @c cocos2d::Node::addChild.
@@ -86,31 +87,33 @@ public:
                           const std::string& name) override;
 
     /// Inherits other @c cocos2d::Node::addChild overloads.
-    using Node::addChild;
+    using Super::addChild;
 
     /// @see @c cocos2d::Node::getChildByTag.
-    virtual Node* getChildByTag(int tag) const override;
+    virtual cocos2d::Node* getChildByTag(int tag) const override;
 
     /// @see @c cocos2d::Node::getChildByName.
-    virtual Node* getChildByName(const std::string& name) const override;
+    virtual cocos2d::Node*
+    getChildByName(const std::string& name) const override;
 
     /// @see @c cocos2d::Node::getChildren.
-    virtual cocos2d::Vector<Node*>& getChildren() override;
+    virtual cocos2d::Vector<cocos2d::Node*>& getChildren() override;
 
     /// @see @c cocos2d::Node::getChildren.
-    virtual const cocos2d::Vector<Node*>& getChildren() const override;
+    virtual const cocos2d::Vector<cocos2d::Node*>& getChildren() const override;
 
     /// @see @c cocos2d::Node::getChildrenCount.
     virtual ssize_t getChildrenCount() const override;
 
     /// @see @c cocos2d::Node::removeChild.
-    virtual void removeChild(Node* child, bool cleanup = true) override;
+    virtual void removeChild(cocos2d::Node* child,
+                             bool cleanup = true) override;
 
     /// @see @c cocos2d::Node::removeAllChildrenWithCleanup.
     virtual void removeAllChildrenWithCleanup(bool cleanup = true) override;
 
     /// @see @c cocos2d::Node::reorderChild.
-    virtual void reorderChild(Node* child, int localZOrder) override;
+    virtual void reorderChild(cocos2d::Node* child, int localZOrder) override;
 
     /// @see @c cocos2d::Node::sortAllChildren.
     virtual void sortAllChildren() override;
@@ -158,10 +161,10 @@ public:
     void setTouchEndedCallback(const TouchCallback& callback);
 
     /// Retrieves the internal container.
-    Widget* getContainer() noexcept;
+    cocos2d::ui::Widget* getContainer() noexcept;
 
     /// Retrieves the internal container (@c const version).
-    const Widget* getContainer() const noexcept;
+    const cocos2d::ui::Widget* getContainer() const noexcept;
 
     Scale9SpriteWithHsv* getRendererNormal() const;
 
@@ -188,8 +191,8 @@ protected:
 
     virtual void adaptRenderers() override;
 
-    virtual Widget* createCloneInstance() override;
-    virtual void copySpecialProperties(Widget* model) override;
+    virtual Self* createCloneInstance() override;
+    virtual void copySpecialProperties(cocos2d::ui::Widget* model) override;
 
     virtual void visit(cocos2d::Renderer* renderer,
                        const cocos2d::Mat4& parentTransform,

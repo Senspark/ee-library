@@ -18,25 +18,28 @@ class SceneSwitcher;
 class ManagedScene;
 
 class ImageBuilder {
+private:
+    using Self = ImageBuilder;
+
 public:
     ImageBuilder();
 
     /// Sets the image name to be loaded.
     /// @param imageName The name of the image.
     /// @return This instance for chaining.
-    ImageBuilder& setImageName(const std::string& imageName);
+    Self& setImageName(const std::string& imageName);
 
     /// Sets the atlas name (.plist) to be loaded.
     /// @param imageName The name of the atlas.
     /// @return This instance for chaining.
-    ImageBuilder& setAtlasName(const std::string& atlasName);
+    Self& setAtlasName(const std::string& atlasName);
 
     /// Sets the data filename (.json) and atlas filename (.atlas) for spine
     /// animation.
-    ImageBuilder& setSpineData(const std::string& dataName,
-                               const std::string& atlasName);
+    Self& setSpineData(const std::string& dataName,
+                       const std::string& atlasName);
 
-    ImageBuilder& setMipmapEnabled(bool enabled);
+    Self& setMipmapEnabled(bool enabled);
 
     /// Sets the minification filter, available values:
     /// - GL_NEAREST
@@ -48,7 +51,7 @@ public:
     /// Default is GL_LINEAR (anti-alias).
     /// @param minFilter Value of the min filter.
     /// @return This instance for chaining.
-    ImageBuilder& setMinFilter(GLuint minFilter);
+    Self& setMinFilter(GLuint minFilter);
 
     /// Sets the magnification filter, available values:
     /// - GL_NEAREST
@@ -56,7 +59,7 @@ public:
     /// Default is GL_LINEAR (anti-alias).
     /// @param magFilter Value of the mag filter.
     /// @return This instance for chaining.
-    ImageBuilder& setMagFilter(GLuint magFilter);
+    Self& setMagFilter(GLuint magFilter);
 
     /// Sets the wrapS value (horizontal axis), available values:
     /// - GL_CLAMP_TO_EDGE
@@ -64,7 +67,7 @@ public:
     /// Default is GL_CLAMP_TO_EDGE.
     /// @param wrapS Value of the wrapS.
     /// @return This instance for chaining.
-    ImageBuilder& setWrapS(GLuint wrapS);
+    Self& setWrapS(GLuint wrapS);
 
     /// Sets the wrapT value (vertical axis), available values:
     /// - GL_CLAMP_TO_EDGE
@@ -72,7 +75,7 @@ public:
     /// Default is GL_CLAMP_TO_EDGE.
     /// @param wrapT Value of the wrapT.
     /// @return This instance for chaining.
-    ImageBuilder& setWrapT(GLuint wrapT);
+    Self& setWrapT(GLuint wrapT);
 
 private:
     friend SceneSwitcher;

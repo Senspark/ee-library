@@ -20,6 +20,8 @@ template <class T> class DynamicValue;
 template <class T> class Pool;
 template <class T> class LazyPtr;
 
+class ScopeGuard;
+
 class Action;
 class ContinuousAction;
 

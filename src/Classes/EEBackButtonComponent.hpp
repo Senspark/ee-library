@@ -17,12 +17,13 @@
 NS_EE_BEGIN
 class BackButtonComponent : public cocos2d::Component {
 private:
+    using Self = BackButtonComponent;
     using Super = cocos2d::Component;
 
 public:
     using BackButtonCallback = std::function<void()>;
 
-    static BackButtonComponent* create(const BackButtonCallback& callback);
+    static Self* create(const BackButtonCallback& callback);
 
     virtual void onAdd() override;
     virtual void onRemove() override;

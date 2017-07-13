@@ -9,6 +9,8 @@
 #ifndef EE_LIBRARY_SCOPE_GUARD_HPP_
 #define EE_LIBRARY_SCOPE_GUARD_HPP_
 
+#include <functional>
+
 namespace ee {
 /// http://stackoverflow.com/questions/10270328/the-simplest-and-neatest-c11-scopeguard
 class ScopeGuard {

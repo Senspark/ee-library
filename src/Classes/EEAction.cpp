@@ -155,6 +155,11 @@ void RelativeMoveBy::update(float time) {
     auto diff = currentPosition - previousPosition_;
     startPosition_ += diff;
     auto newPosition = startPosition_ + deltaPosition_ * time;
+
+    // Force to use normalized position.
+    const auto AlmostZero = cocos2d::Vec2(0.0001f, 0.0001f);
+    _target->setNormalizedPosition(AlmostZero);
+
     _target->setNormalizedPosition(newPosition);
     previousPosition_ = newPosition;
 }

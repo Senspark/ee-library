@@ -20,26 +20,28 @@ NS_EE_BEGIN
 class Scale9SpriteWithHsv : public cocos2d::ui::Scale9Sprite,
                             public HsvProtocol {
 private:
-    using Initializer = std::function<bool(Scale9SpriteWithHsv* instance)>;
+    using Self = Scale9SpriteWithHsv;
+    using Super = cocos2d::ui::Scale9Sprite;
+    using Initializer = std::function<bool(Self* instance)>;
 
-    static Scale9SpriteWithHsv* createImpl(const Initializer& initializer);
+    static Self* createImpl(const Initializer& initializer);
 
 public:
-    static Scale9SpriteWithHsv* create();
+    static Self* create();
 
-    static Scale9SpriteWithHsv* create(const std::string& filename);
+    static Self* create(const std::string& filename);
 
-    static Scale9SpriteWithHsv* create(const std::string& filename,
-                                       const cocos2d::Rect& rect);
+    static Self* create(const std::string& filename, const cocos2d::Rect& rect);
 
-    static Scale9SpriteWithHsv*
-    createWithSpriteFrame(cocos2d::SpriteFrame* spriteFrame);
+    static Self* createWithSpriteFrame(cocos2d::SpriteFrame* spriteFrame);
 
-    static Scale9SpriteWithHsv*
-    createWithSpriteFrameName(const std::string& spriteFrameName);
+    static Self* createWithSpriteFrameName(const std::string& spriteFrameName);
+
+    virtual void
+    setGLProgramState(cocos2d::GLProgramState* glProgramState) override;
 
 protected:
-    using Scale9Sprite::init;
+    virtual bool init() override;
 
     virtual void draw(cocos2d::Renderer* renderer,
                       const cocos2d::Mat4& transform,
@@ -51,7 +53,10 @@ protected:
                                   const cocos2d::Size& originalSize,
                                   const cocos2d::Rect& capInsets) override;
 
-    void initShader();
+private:
+    cocos2d::GLProgramState* createState();
+
+    cocos2d::GLProgramState* customState_;
 };
 NS_EE_END
 

@@ -11,6 +11,7 @@
 
 #include <functional>
 #include <tuple>
+#include <type_traits>
 
 #include "EEUtils.hpp"
 
@@ -29,6 +30,9 @@ std::underlying_type_t<T> convert_enum_to_integer(const T& arg) {
 }
 } // namespace detail
 
+/// @param DataId The data unique ID.
+/// @param Value The returned value type.
+/// @param Keys The format types.
 template <std::size_t DataId, class Value, class... Keys>
 class DataInfo final : public detail::DataInfoBase {
 public:

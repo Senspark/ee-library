@@ -14,8 +14,22 @@
 
 namespace ee {
 namespace detail {
+/// Globally sets a data value.
+/// @param[in] dataId The data unique ID.
+/// @param[in] key The data key.
+/// @param[in] value The data value.
 void set0(std::size_t dataId, const std::string& key, const std::string& value);
+
+/// Globally gets a data value.
+/// @param[in] dataId The data unique ID.
+/// @param]in] key The data key.
+/// @param[out] result The data value.
+/// @return True if result is assigned, false otherwise.
 bool get0(std::size_t dataId, const std::string& key, std::string& result);
+
+/// Globally removes a data value.
+/// @param[in] dataId The data unique ID.
+/// @param[in] key The data key.
 void remove0(std::size_t dataId, const std::string& key);
 } // namespace detail
 
@@ -40,9 +54,9 @@ auto get(Keys&&... keys) {
 template <class DataType,
           class Traits = DataTraits<typename DataType::ValueType>,
           class... Keys>
-void getAndSet(const typename DataType::SetterType& f, Keys&&... keys) {
+void getAndSet(const typename DataType::SetterType& setter, Keys&&... keys) {
     auto current = get<DataType, Traits>(keys...);
-    f(current);
+    setter(current);
     set<DataType, Traits>(current, std::forward<Keys>(keys)...);
 }
 
@@ -51,11 +65,11 @@ template <class DataType,
           class Function, class... Keys,
           class = std::enable_if_t<
               std::is_same<bool, typename DataType::ValueType>::value>>
-void getAndSetIf(bool conditionalValue, Function&& f, Keys&&... keys) {
+void getAndSetIf(bool conditionalValue, Function&& setter, Keys&&... keys) {
     auto current = get<DataType, Traits>(keys...);
     if (current == conditionalValue) {
         current = not conditionalValue;
-        f();
+        setter();
         set<DataType, Traits>(current, std::forward<Keys>(keys)...);
     }
 }
@@ -65,7 +79,10 @@ template <class DataType, class... Keys> void remove(Keys&&... keys) {
                     DataType::createKey(std::forward<Keys>(keys)...));
 }
 
-class DataHandler {
+class DataHandler final {
+private:
+    using Self = DataHandler;
+
 public:
     using SetCallback = std::function<void(
         std::size_t dataId, const std::string& key, const std::string& value)>;
@@ -82,11 +99,17 @@ public:
 
     ~DataHandler();
 
-    DataHandler(const DataHandler& other);
-    DataHandler& operator=(const DataHandler& other) = default;
+    DataHandler(const DataHandler& other) = delete;
+    DataHandler& operator=(const DataHandler& other) = delete;
 
     DataHandler(DataHandler&& other) = delete;
     DataHandler& operator=(DataHandler&& other) = delete;
+
+    /// Sets the dispatch priority for this handler.
+    /// Lower-value priority handlers will dispatch first.
+    /// @param[in] priority The desired priority.
+    /// @return Instance to this.
+    Self& setPriority(int priority);
 
     template <class DataType, class Value, class... Keys>
     [[deprecated]] void set(Value&& value, Keys&&... keys) {
@@ -124,6 +147,10 @@ private:
                              std::string& result);
     friend void detail::remove0(std::size_t dataId, const std::string& key);
 
+    void insertHandler();
+    void eraseHandler();
+
+    bool inserted_;
     int priority_;
 
     SetCallback setCallback_;

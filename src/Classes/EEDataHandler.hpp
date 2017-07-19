@@ -136,9 +136,20 @@ public:
         return remove<DataType>(std::forward<Keys>(keys)...);
     }
 
-    void setCallback(const SetCallback& callback);
-    void setCallback(const GetCallback& callback);
-    void setCallback(const RemoveCallback& callback);
+    /// Sets the SET callback.
+    /// @param[in] callback The desired callback.
+    /// @return Instance to this for chaining.
+    Self& setCallback(const SetCallback& callback);
+
+    /// Sets the GET callback.
+    /// @param[in] callback The desired callback.
+    /// @return Instance to this for chaining.
+    Self& setCallback(const GetCallback& callback);
+
+    /// Sets the REMOVE callback.
+    /// @param[in] callback The desired callback.
+    /// @return Instance to this for chaining.
+    Self& setCallback(const RemoveCallback& callback);
 
 private:
     friend void detail::set0(std::size_t dataId, const std::string& key,

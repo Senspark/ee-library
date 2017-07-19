@@ -139,15 +139,18 @@ DataHandler& DataHandler::setPriority(int priority) {
     return *this;
 }
 
-void DataHandler::setCallback(const SetCallback& callback) {
+DataHandler& DataHandler::setCallback(const SetCallback& callback) {
     setCallback_ = callback;
+    return *this;
 }
 
-void DataHandler::setCallback(const GetCallback& callback) {
+DataHandler& DataHandler::setCallback(const GetCallback& callback) {
     getCallback_ = callback;
+    return *this;
 }
 
-void DataHandler::setCallback(const RemoveCallback& callback) {
+DataHandler& DataHandler::setCallback(const RemoveCallback& callback) {
     removeCallback_ = callback;
+    return *this;
 }
 } // namespace ee

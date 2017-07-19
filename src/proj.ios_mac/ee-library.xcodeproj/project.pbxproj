@@ -166,6 +166,8 @@
 		6FAE79871D33759D00A0CFB1 /* EEDataHandler.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FAE79831D33759D00A0CFB1 /* EEDataHandler.hpp */; };
 		6FAE79891D33759D00A0CFB1 /* EEDataInfo.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FAE79851D33759D00A0CFB1 /* EEDataInfo.hpp */; };
 		6FAE798A1D3375B800A0CFB1 /* EEDataInfo.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FAE79851D33759D00A0CFB1 /* EEDataInfo.hpp */; };
+		6FB3AB001F1F0C1C00EBE5A9 /* EEMeta.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FB3AAFF1F1F0C1C00EBE5A9 /* EEMeta.hpp */; };
+		6FB3AB011F1F0C1C00EBE5A9 /* EEMeta.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FB3AAFF1F1F0C1C00EBE5A9 /* EEMeta.hpp */; };
 		6FB731211D1B926F000B7397 /* EESpriteWithHsvLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FB7311F1D1B926F000B7397 /* EESpriteWithHsvLoader.cpp */; };
 		6FB731221D1B926F000B7397 /* EESpriteWithHsvLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FB7311F1D1B926F000B7397 /* EESpriteWithHsvLoader.cpp */; };
 		6FB731231D1B926F000B7397 /* EESpriteWithHsvLoader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FB731201D1B926F000B7397 /* EESpriteWithHsvLoader.hpp */; };
@@ -381,6 +383,7 @@
 		6FAE79831D33759D00A0CFB1 /* EEDataHandler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDataHandler.hpp; sourceTree = "<group>"; };
 		6FAE79841D33759D00A0CFB1 /* EEDataInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDataInfo.cpp; sourceTree = "<group>"; };
 		6FAE79851D33759D00A0CFB1 /* EEDataInfo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDataInfo.hpp; sourceTree = "<group>"; };
+		6FB3AAFF1F1F0C1C00EBE5A9 /* EEMeta.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEMeta.hpp; sourceTree = "<group>"; };
 		6FB7310B1D1B7A48000B7397 /* EEHSVShader.vert.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EEHSVShader.vert.hpp; sourceTree = "<group>"; };
 		6FB7311F1D1B926F000B7397 /* EESpriteWithHsvLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EESpriteWithHsvLoader.cpp; sourceTree = "<group>"; };
 		6FB731201D1B926F000B7397 /* EESpriteWithHsvLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EESpriteWithHsvLoader.hpp; sourceTree = "<group>"; };
@@ -475,6 +478,7 @@
 				6C43A7B61BDDDAC300D0597F /* EEDynamicValue.cpp */,
 				6C43A7B71BDDDAC300D0597F /* EEDynamicValue.hpp */,
 				6CC3596C1C0C0792007DC4CF /* EEFlags.hpp */,
+				6FB3AAFF1F1F0C1C00EBE5A9 /* EEMeta.hpp */,
 				6FA658961CCB700B009BC9EB /* EEUtils.cpp */,
 				6C43A7D31BDDDAC300D0597F /* EEUtils.hpp */,
 				6FEC41EA1D9B53C8000B40F2 /* EEPool.hpp */,
@@ -807,6 +811,7 @@
 				6FC19ADC1CF84A470002D68B /* EECheckBox.hpp in Headers */,
 				6FAE79891D33759D00A0CFB1 /* EEDataInfo.hpp in Headers */,
 				6FD64E9D1E9B45AB0030CDEC /* EEConsole.hpp in Headers */,
+				6FB3AB001F1F0C1C00EBE5A9 /* EEMeta.hpp in Headers */,
 				6FC7D08D1EB07E9000078819 /* EEImageBuilder.hpp in Headers */,
 				6F8F17B81EF8E46C007AA388 /* EELazyPtr.hpp in Headers */,
 				6F9C2FD61D4742A200939859 /* EEDataTraits.hpp in Headers */,
@@ -873,6 +878,7 @@
 				6F79B6381CCA8FA40008EFAC /* EEUiTextLoader.hpp in Headers */,
 				6F77D7981CE0D734000BA9BE /* EEFlags.hpp in Headers */,
 				6FD64E9E1E9B45AB0030CDEC /* EEConsole.hpp in Headers */,
+				6FB3AB011F1F0C1C00EBE5A9 /* EEMeta.hpp in Headers */,
 				6FC7D08E1EB07E9000078819 /* EEImageBuilder.hpp in Headers */,
 				6F8F17B91EF8E46C007AA388 /* EELazyPtr.hpp in Headers */,
 				6F9C2FD71D4742A200939859 /* EEDataTraits.hpp in Headers */,

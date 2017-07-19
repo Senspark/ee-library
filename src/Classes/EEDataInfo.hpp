@@ -17,8 +17,6 @@
 
 namespace ee {
 namespace detail {
-class DataInfoBase {};
-
 template <class T, class = std::enable_if_t<not std::is_enum<T>::value>>
 const T& convert_enum_to_integer(const T& arg) {
     return arg;
@@ -33,8 +31,7 @@ std::underlying_type_t<T> convert_enum_to_integer(const T& arg) {
 /// @param DataId The data unique ID.
 /// @param Value The returned value type.
 /// @param Keys The format types.
-template <std::size_t DataId, class Value, class... Keys>
-class DataInfo final : public detail::DataInfoBase {
+template <std::size_t DataId, class Value, class... Keys> class DataInfo final {
 public:
     static_assert(not std::is_reference<Value>::value,
                   "Value type must not be a reference type!");

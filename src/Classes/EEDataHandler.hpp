@@ -10,10 +10,38 @@
 #define EE_LIBRARY_DATA_HANDLER_HPP_
 
 #include "EEForward.hpp"
+#include "EEMeta.hpp"
 #include "EEDataTraits.hpp"
 
 namespace ee {
 namespace detail {
+template <class T> struct is_data_info : std::false_type {};
+
+template <std::size_t DataId, class Value, class... Keys>
+struct is_data_info<DataInfo<DataId, Value, Keys...>> : std::true_type {};
+
+template <class T> constexpr bool is_data_info_v = is_data_info<T>::value;
+
+template <class... Args, std::size_t DataId, class Value, class... Keys>
+constexpr bool is_formattable(DataInfo<DataId, Value, Keys...>) {
+    return ((std::is_convertible<Args, Keys>::value ||
+             std::is_constructible<Args, Keys>::value) &&
+            ...);
+}
+
+/// https://stackoverflow.com/questions/22882170/c-compile-time-predicate-to-test-if-a-callable-object-of-type-f-can-be-called
+template <class Traits, class Value, class = void>
+struct is_settable : std::false_type {};
+
+template <class Traits, class Value>
+struct is_settable<Traits, Value,
+                   std::conditional_t<true, void, decltype(Traits::set(
+                                                      std::declval<Value>()))>>
+    : std::true_type {};
+
+template <class Traits, class Value>
+constexpr bool is_settable_v = is_settable<Traits, Value>::value;
+
 /// Globally sets a data value.
 /// @param[in] dataId The data unique ID.
 /// @param[in] key The data key.
@@ -35,15 +63,19 @@ void remove0(std::size_t dataId, const std::string& key);
 
 template <class DataType,
           class Traits = DataTraits<typename DataType::ValueType>, class Value,
-          class... Keys>
+          class... Keys,
+          EE_REQUIRES((detail::is_data_info_v<DataType> &&
+                       detail::is_settable_v<Traits, Value> &&
+                       detail::is_formattable<Keys...>(DataType())))>
 void set(Value&& value, Keys&&... keys) {
     detail::set0(DataType::Id, DataType::createKey(std::forward<Keys>(keys)...),
                  Traits::set(std::forward<Value>(value)));
 }
 
-template <class DataType,
-          class Traits = DataTraits<typename DataType::ValueType>,
-          class... Keys>
+template <
+    class DataType, class Traits = DataTraits<typename DataType::ValueType>,
+    class... Keys, EE_REQUIRES((detail::is_data_info_v<DataType> &&
+                                detail::is_formattable<Keys...>(DataType())))>
 auto get(Keys&&... keys) {
     std::string result;
     detail::get0(DataType::Id, DataType::createKey(std::forward<Keys>(keys)...),
@@ -51,9 +83,10 @@ auto get(Keys&&... keys) {
     return Traits::get(result);
 }
 
-template <class DataType,
-          class Traits = DataTraits<typename DataType::ValueType>,
-          class... Keys>
+template <
+    class DataType, class Traits = DataTraits<typename DataType::ValueType>,
+    class... Keys, EE_REQUIRES((detail::is_data_info_v<DataType> &&
+                                detail::is_formattable<Keys...>(DataType())))>
 void getAndSet(const typename DataType::SetterType& setter, Keys&&... keys) {
     auto current = get<DataType, Traits>(keys...);
     setter(current);

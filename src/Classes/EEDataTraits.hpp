@@ -77,8 +77,6 @@ public:
             std::chrono::duration_cast<T>(value).count());
     }
 
-    static std::string set(Rep value) { return DataTraits<Rep>::set(value); }
-
     static T get(const std::string& value) {
         return T(DataTraits<Rep>::get(value));
     }

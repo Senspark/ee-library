@@ -16,6 +16,16 @@
 #include "EEForward.hpp"
 
 namespace ee {
+/// Deserialize/serialize arithmetic types:
+/// - bool
+/// - int
+/// - long
+/// - long long
+/// - unsigned int
+/// - unsigned long
+/// - unsigned long long
+/// - float
+/// - double
 template <class T>
 struct DataTraits<T, std::enable_if_t<std::is_arithmetic<T>::value>> {
     static std::string set(T value) { return std::to_string(value); };
@@ -23,11 +33,13 @@ struct DataTraits<T, std::enable_if_t<std::is_arithmetic<T>::value>> {
     static T get(const std::string& value);
 };
 
+/// Deserialize/serialize string type.
 template <> struct DataTraits<std::string> {
     static const std::string& set(const std::string& value);
     static const std::string& get(const std::string& value);
 };
 
+/// Deserialize/serialize enum types.
 template <class T>
 struct DataTraits<T, std::enable_if_t<std::is_enum<T>::value>> {
 private:
@@ -48,15 +60,18 @@ template <class T> struct is_duration : std::false_type {};
 
 template <class Rep, class Period>
 struct is_duration<std::chrono::duration<Rep, Period>> : std::true_type {};
+
+template <class T> constexpr bool is_duration_v = is_duration<T>::value;
 } // namespace detail
 
+/// Deserialize/serialize duration types.
 template <class T>
-struct DataTraits<T, std::enable_if_t<detail::is_duration<T>::value>> {
+struct DataTraits<T, std::enable_if_t<detail::is_duration_v<T>>> {
 private:
     using Rep = typename T::rep;
 
 public:
-    template <class U, std::enable_if_t<detail::is_duration<U>::value, int> = 0>
+    template <class U, std::enable_if_t<detail::is_duration_v<U>, int> = 0>
     static std::string set(const U& value) {
         return DataTraits<Rep>::set(
             std::chrono::duration_cast<T>(value).count());

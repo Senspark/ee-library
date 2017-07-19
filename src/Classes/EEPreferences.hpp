@@ -21,6 +21,9 @@ using DataStorage = std::unordered_map<std::string, std::string>;
 class DataHandler;
 
 class Preferences {
+private:
+    using Self = Preferences;
+
 protected:
     enum class Encryption {
         /// No encryption, fastest saving/loading.

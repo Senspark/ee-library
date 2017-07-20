@@ -141,7 +141,7 @@ protected:
     friend DialogManager;
 
     Dialog();
-    ~Dialog();
+    virtual ~Dialog();
 
     virtual bool init() override;
 

@@ -11,6 +11,8 @@
 
 namespace ee {
 namespace detail {
+template <class... Args> using void_t = void;
+
 /// https://stackoverflow.com/questions/39727409/how-to-simplify-complicated-sfinae-syntax-in-pre-c11-c11-14-and-17
 template <long N> struct requires_enum {
     enum class type { none, all };
@@ -20,8 +22,7 @@ template <long N> struct requires_enum {
 #define EE_REQUIRES(...)                                                       \
     ::ee::detail::requires_enum<__LINE__>::type =                              \
         ::ee::detail::requires_enum<__LINE__>::type::none,                     \
-    bool PrivateBool = true,                                                   \
-    typename std::enable_if<PrivateBool && (__VA_ARGS__), int>::type = 0
+    typename std::enable_if<(__VA_ARGS__), int>::type = 0
 // clang-format on
 } // namespace detail
 } // namespace ee

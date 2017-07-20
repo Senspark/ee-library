@@ -18,6 +18,14 @@ namespace dialog {
 const int Dialog::ContainerLocalZOrder = 123456;
 const std::size_t Dialog::TopLevel = 123456;
 
+Dialog::Dialog()
+    : dialogLevel_(0)
+    , isActive_(false)
+    , transitionAction_(nullptr) {
+}
+
+Dialog::~Dialog() = default;
+
 bool Dialog::init() {
     if (not Super::init()) {
         return false;

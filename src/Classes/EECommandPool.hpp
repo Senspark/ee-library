@@ -29,14 +29,16 @@ public:
 } // namespace detail
 
 template <class... Args> class CommandPool : public detail::CommandPoolBase {
+private:
+    using Self = CommandPool;
+    using Super = detail::CommandPoolBase;
+
 public:
     using Function = std::function<void(const Args&... args)>;
     using Placeholder = std::tuple<Args...>;
     using Command = std::pair<ParamType, Function>;
 
-    static std::unique_ptr<CommandPool> create() {
-        return std::unique_ptr<CommandPool>(new CommandPool());
-    }
+    static std::unique_ptr<Self> create() { return std::make_unique<Self>(); }
 
     virtual bool process(const ParamType& params) override {
         for (auto&& command : commands_) {

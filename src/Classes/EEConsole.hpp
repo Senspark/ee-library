@@ -21,14 +21,18 @@ class ConsoleDelegate;
 
 class Console : public cocos2d::ui::Widget {
 private:
+    using Self = Console;
     using Super = cocos2d::ui::Widget;
 
 public:
-    static Console* create();
+    static Self* create();
 
-    Console* addCommandPool(std::unique_ptr<detail::CommandPoolBase> pool);
+    Self* addCommandPool(std::unique_ptr<detail::CommandPoolBase> pool);
 
 protected:
+    Console();
+    ~Console();
+
     virtual bool init() override;
 
     virtual bool onTouchBegan(cocos2d::Touch* touch,

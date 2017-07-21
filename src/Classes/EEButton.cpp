@@ -45,7 +45,7 @@ ButtonEx::ButtonEx()
 ButtonEx::~ButtonEx() = default;
 
 ButtonEx* ButtonEx::create() {
-    auto result = new (std::nothrow) ButtonEx();
+    auto result = new (std::nothrow) Self();
     if (result != nullptr && result->init()) {
         result->autorelease();
     } else {
@@ -58,7 +58,7 @@ ButtonEx* ButtonEx::create(const std::string& normalImage,
                            const std::string& selectedImage,
                            const std::string& disableImage,
                            TextureResType texType) {
-    auto result = new (std::nothrow) ButtonEx();
+    auto result = new (std::nothrow) Self();
     if (result != nullptr &&
         result->init(normalImage, selectedImage, disableImage, texType)) {
         result->autorelease();
@@ -69,32 +69,33 @@ ButtonEx* ButtonEx::create(const std::string& normalImage,
     return result;
 }
 
-void ButtonEx::addChild(Node* child, int localZOrder, int tag) {
+void ButtonEx::addChild(cocos2d::Node* child, int localZOrder, int tag) {
     // Forward to the container.
     container_->addChild(child, localZOrder, tag);
 }
 
-void ButtonEx::addChild(Node* child, int localZOrder, const std::string& name) {
+void ButtonEx::addChild(cocos2d::Node* child, int localZOrder,
+                        const std::string& name) {
     // Forward to the container.
     container_->addChild(child, localZOrder, name);
 }
 
-auto ButtonEx::getChildByTag(int tag) const -> Node * {
+cocos2d::Node* ButtonEx::getChildByTag(int tag) const {
     // Forward to the container.
     return container_->getChildByTag(tag);
 }
 
-auto ButtonEx::getChildByName(const std::string& name) const -> Node * {
+cocos2d::Node* ButtonEx::getChildByName(const std::string& name) const {
     // Forward to the container.
     return container_->getChildByName(name);
 }
 
-auto ButtonEx::getChildren() -> cocos2d::Vector<Node*> & {
+cocos2d::Vector<cocos2d::Node*>& ButtonEx::getChildren() {
     // Forward to the container.
     return container_->getChildren();
 }
 
-auto ButtonEx::getChildren() const -> const cocos2d::Vector<Node*> & {
+const cocos2d::Vector<cocos2d::Node*>& ButtonEx::getChildren() const {
     // Forward to the container.
     return container_->getChildren();
 }
@@ -104,7 +105,7 @@ ssize_t ButtonEx::getChildrenCount() const {
     return container_->getChildrenCount();
 }
 
-void ButtonEx::removeChild(Node* child, bool cleanup) {
+void ButtonEx::removeChild(cocos2d::Node* child, bool cleanup) {
     // Forward to the container.
     container_->removeChild(child, cleanup);
 }
@@ -114,7 +115,7 @@ void ButtonEx::removeAllChildrenWithCleanup(bool cleanup) {
     container_->removeAllChildrenWithCleanup(cleanup);
 }
 
-void ButtonEx::reorderChild(Node* child, int localZOrder) {
+void ButtonEx::reorderChild(cocos2d::Node* child, int localZOrder) {
     if (child == container_) {
         Super::reorderChild(child, localZOrder);
     } else {
@@ -381,12 +382,12 @@ void ButtonEx::adaptRenderers() {
     Super::adaptRenderers();
 }
 
-cocos2d::ui::Widget* ButtonEx::createCloneInstance() {
+ButtonEx* ButtonEx::createCloneInstance() {
     return create();
 }
 
-void ButtonEx::copySpecialProperties(Widget* model) {
-    auto button = dynamic_cast<ButtonEx*>(model);
+void ButtonEx::copySpecialProperties(cocos2d::ui::Widget* model) {
+    auto button = dynamic_cast<Self*>(model);
     if (button != nullptr) {
         Super::copySpecialProperties(model);
         setZoomingDuration(button->getZoomingDuration());

@@ -17,10 +17,11 @@ class ImageBuilder;
 
 class ManagedScene : public cocos2d::Scene {
 private:
+    using Self = ManagedScene;
     using Super = cocos2d::Scene;
 
 public:
-    CREATE_FUNC(ManagedScene);
+    CREATE_FUNC(Self);
 
     virtual ~ManagedScene();
 

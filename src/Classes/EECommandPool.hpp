@@ -29,14 +29,16 @@ public:
 } // namespace detail
 
 template <class... Args> class CommandPool : public detail::CommandPoolBase {
+private:
+    using Self = CommandPool;
+    using Super = detail::CommandPoolBase;
+
 public:
     using Function = std::function<void(const Args&... args)>;
     using Placeholder = std::tuple<Args...>;
     using Command = std::pair<ParamType, Function>;
 
-    static std::unique_ptr<CommandPool> create() {
-        return std::unique_ptr<CommandPool>(new CommandPool());
-    }
+    static std::unique_ptr<Self> create() { return std::make_unique<Self>(); }
 
     virtual bool process(const ParamType& params) override {
         for (auto&& command : commands_) {
@@ -99,7 +101,7 @@ private:
                std::index_sequence<Indices...>) const {
         // https://www.reddit.com/r/cpp/comments/2tffv3/for_each_argumentsean_parent
         [](...) {}(((std::get<Indices>(placeholders) =
-                         ee::DataTraits<Args>::get(params.at(Indices))),
+                         ee::DataTraits<Args>::load(params.at(Indices))),
                     0)...);
     }
 

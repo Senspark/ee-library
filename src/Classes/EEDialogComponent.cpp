@@ -16,7 +16,7 @@ const std::string DialogComponent::DefaultName =
     "___ee_library_dialog_component_";
 
 DialogComponent* DialogComponent::create() {
-    auto result = new DialogComponent();
+    auto result = new Self();
     result->init();
     result->autorelease();
     return result;

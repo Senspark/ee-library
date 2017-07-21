@@ -140,6 +140,9 @@ public:
 protected:
     friend DialogManager;
 
+    Dialog();
+    virtual ~Dialog();
+
     virtual bool init() override;
 
     virtual void onEnter() override;

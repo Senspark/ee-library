@@ -13,8 +13,12 @@
 
 namespace ee {
 class ButtonLoader : public UiButtonLoader {
+private:
+    using Self = ButtonLoader;
+    using Super = UiButtonLoader;
+
 public:
-    CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(ButtonLoader, loader);
+    CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(Self, loader);
 
 protected:
     virtual cocos2d::Node* createNode(cocos2d::Node* parent,

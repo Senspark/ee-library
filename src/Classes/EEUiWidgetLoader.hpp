@@ -23,10 +23,11 @@ NS_EE_BEGIN
 /// @endcode
 class UiWidgetLoader : public NodeV3Loader {
 private:
+    using Self = UiWidgetLoader;
     using Super = NodeV3Loader;
 
 public:
-    CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(UiWidgetLoader, loader);
+    CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(Self, loader);
 
 protected:
     virtual cocos2d::Node* createNode(cocos2d::Node* parent,

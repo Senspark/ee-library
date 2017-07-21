@@ -162,7 +162,7 @@ void SceneSwitcher::onPhaseBegan(Phase phase) {
         _outScene->onExitTransitionDidStart();
         _eventDispatcher->setEnabled(false);
         preActions_.pushBack(cocos2d::CallFunc::create(
-            std::bind(&SceneSwitcher::onPhaseEnded, this, phase)));
+            std::bind(&Self::onPhaseEnded, this, phase)));
         actor_->runAction(cocos2d::Sequence::create(preActions_));
     }
     if (phase == Phase::In) {
@@ -184,8 +184,8 @@ void SceneSwitcher::onPhaseBegan(Phase phase) {
         _inScene->retain();
         _inScene->setVisible(true);
         _inScene->onEnter();
-        postActions_.pushBack(cocos2d::CallFunc::create(
-            std::bind(&SceneSwitcher::finish2, this)));
+        postActions_.pushBack(
+            cocos2d::CallFunc::create(std::bind(&Self::finish2, this)));
         actor_->runAction(cocos2d::Sequence::create(postActions_));
     }
 }
@@ -207,7 +207,7 @@ void SceneSwitcher::onPhaseEnded(Phase phase) {
         // cocos2d::Ref::printLeaks();
 
         actor_->runAction(cocos2d::CallFunc::create(
-            std::bind(&SceneSwitcher::onPhaseBegan, this, Phase::In)));
+            std::bind(&Self::onPhaseBegan, this, Phase::In)));
     }
     if (phase == Phase::In) {
         onPhaseBegan(Phase::Post);
@@ -228,9 +228,9 @@ bool SceneSwitcher::loadNextImage() {
     auto textureCache = _director->getTextureCache();
     auto&& image = images_.at(loadedImageCount_++);
     CC_ASSERT(textureCache->getTextureForKey(image.imageName_) == nullptr);
-    textureCache->addImageAsync(image.imageName_,
-                                std::bind(&SceneSwitcher::onImageLoaded, this,
-                                          std::placeholders::_1, image));
+    textureCache->addImageAsync(
+        image.imageName_,
+        std::bind(&Self::onImageLoaded, this, std::placeholders::_1, image));
     return true;
 }
 
@@ -259,7 +259,7 @@ void SceneSwitcher::onImageLoaded(cocos2d::Texture2D* texture,
 void SceneSwitcher::scheduleSignal() {
     CC_ASSERT(not signaled_);
     CC_ASSERT(inPhaseSignal_);
-    schedule(std::bind(&SceneSwitcher::updateSignal, this), "__update_signal");
+    schedule(std::bind(&Self::updateSignal, this), "__update_signal");
 }
 
 void SceneSwitcher::unscheduleSignal() {
@@ -298,8 +298,7 @@ void SceneSwitcher::finish2() {
 
     // outScene is already released.
 
-    scheduleOnce(std::bind(&SceneSwitcher::setNewScene2, this), 0.0f,
-                 "___new_scene");
+    scheduleOnce(std::bind(&Self::setNewScene2, this), 0.0f, "___new_scene");
 }
 
 void SceneSwitcher::setNewScene2() {

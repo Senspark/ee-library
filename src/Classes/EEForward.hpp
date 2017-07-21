@@ -20,8 +20,15 @@ template <class T> class DynamicValue;
 template <class T> class Pool;
 template <class T> class LazyPtr;
 
+class ScopeGuard;
+
 class Action;
 class ContinuousAction;
+
+class Sequence;
+class Spawn;
+class RelativeMoveBy;
+class RelativeMoveTo;
 
 namespace detail {
 class ButtonEx;
@@ -71,10 +78,13 @@ class SkeletonBoneLoader;
 template <std::size_t Id, class... Args> class EventInfo;
 class EventDispatcher;
 
-template <std::size_t Id, class Value, class... Keys> class DataInfo;
-class DataHandler;
+template <class T, class = void> struct DataTraits;
 
-template <class T, class Enable = void> struct DataTraits;
+template <class... Keys> struct DataFormat;
+
+template <std::size_t Id, class Value, class... Args> struct DataInfo;
+
+class DataHandler;
 } // namespace ee
 
 #endif // EE_LIBRARY_FORWARD_HPP_

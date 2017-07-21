@@ -13,7 +13,7 @@
 NS_EE_BEGIN
 BackButtonComponent*
 BackButtonComponent::create(const BackButtonCallback& callback) {
-    auto result = new (std::nothrow) BackButtonComponent();
+    auto result = new (std::nothrow) Self();
     if (result != nullptr && result->initWithCallback(callback)) {
         result->autorelease();
     } else {
@@ -37,8 +37,8 @@ void BackButtonComponent::onAdd() {
 
     listener_ = cocos2d::EventListenerKeyboard::create();
     listener_->onKeyReleased =
-        std::bind(&BackButtonComponent::onKeyReleased, this,
-                  std::placeholders::_1, std::placeholders::_2);
+        std::bind(&Self::onKeyReleased, this, std::placeholders::_1,
+                  std::placeholders::_2);
 
     cocos2d::Director::getInstance()
         ->getEventDispatcher()

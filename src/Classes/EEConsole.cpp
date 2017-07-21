@@ -18,11 +18,18 @@
 
 namespace ee {
 Console* Console::create() {
-    auto result = new Console();
+    auto result = new Self();
     result->init();
     result->autorelease();
     return result;
 }
+
+Console::Console()
+    : editBox_(nullptr)
+    , editBoxDelegate_(nullptr) {
+}
+
+Console::~Console() = default;
 
 bool Console::init() {
     if (not Super::init()) {
@@ -34,8 +41,7 @@ bool Console::init() {
     setSwallowTouches(true);
     setContentSize(cocos2d::Size(winSize.width, 50.0f));
 
-    editBoxDelegate_ = std::unique_ptr<cocos2d::ui::EditBoxDelegate>(
-        new detail::ConsoleDelegate(this));
+    editBoxDelegate_ = std::make_unique<detail::ConsoleDelegate>(this);
 
     auto whiteSprite = cocos2d::Sprite::create();
     auto editBoxSprite = cocos2d::ui::Scale9Sprite::createWithSpriteFrame(

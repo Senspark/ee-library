@@ -29,6 +29,7 @@ class ImageBuilder;
 /// - in-scene on enter transition did finish.
 class SceneSwitcher : public cocos2d::TransitionScene {
 private:
+    using Self = SceneSwitcher;
     using Super = cocos2d::Scene;
 
 public:
@@ -43,35 +44,34 @@ public:
     /// Sets the in-scene constructor.
     /// Used to constructor the in-scene.
     /// @param constructor The in-scene constructor.
-    SceneSwitcher* setInSceneConstructor(const SceneConstructor& constructor);
+    Self* setInSceneConstructor(const SceneConstructor& constructor);
 
     /// Sets the layer constructor.
     /// Used to constructor a layer in the in-scene.
     /// @param constructor The layer constructor.
-    SceneSwitcher* setInLayerConstructor(const LayerConstructor& constructor);
+    Self* setInLayerConstructor(const LayerConstructor& constructor);
 
-    SceneSwitcher* addImage(const ImageBuilder& builder);
+    Self* addImage(const ImageBuilder& builder);
 
     /// Adds an image for loading in in-phase.
     /// @param imageName The name of the image.
-    SceneSwitcher* addImage(const std::string& imageName);
+    Self* addImage(const std::string& imageName);
 
     /// Adds an atlas for loading in in-phase.
     /// @param plistName The name of the plist file.
     /// @param imageName The name of the corresponding image.
-    SceneSwitcher* addAtlas(const std::string& plistName,
-                            const std::string& imageName);
+    Self* addAtlas(const std::string& plistName, const std::string& imageName);
 
-    SceneSwitcher* setInPhaseSignal(const InPhaseSignal& signal);
+    Self* setInPhaseSignal(const InPhaseSignal& signal);
 
     /// Adds a pre-phase action.
-    SceneSwitcher* addPrePhaseAction(cocos2d::FiniteTimeAction* action);
+    Self* addPrePhaseAction(cocos2d::FiniteTimeAction* action);
 
     /// Adds an in-phase action.
-    SceneSwitcher* addInPhaseAction(cocos2d::FiniteTimeAction* action);
+    Self* addInPhaseAction(cocos2d::FiniteTimeAction* action);
 
     /// Adds a post-phase action.
-    SceneSwitcher* addPostPhaseAction(cocos2d::FiniteTimeAction* action);
+    Self* addPostPhaseAction(cocos2d::FiniteTimeAction* action);
 
     void run();
 

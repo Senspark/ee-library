@@ -36,6 +36,7 @@ class Dialog;
 /// @endcode
 class DialogComponent : public cocos2d::Component {
 private:
+    using Self = DialogComponent;
     using Super = cocos2d::Component;
 
 public:
@@ -44,13 +45,13 @@ public:
 
     static const std::string DefaultName;
 
-    static DialogComponent* create();
+    static Self* create();
 
     void resume(Dialog* dialog);
     void pause(Dialog* dialog);
 
-    DialogComponent* setResumeCallback(const ResumeCallback& callback);
-    DialogComponent* setPauseCallback(const PauseCallback& callback);
+    Self* setResumeCallback(const ResumeCallback& callback);
+    Self* setPauseCallback(const PauseCallback& callback);
 
 private:
     virtual bool init() override;

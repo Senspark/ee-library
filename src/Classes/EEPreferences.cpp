@@ -62,11 +62,11 @@ void Preferences::initializeWithFilename(const std::string& filename) {
     handler_ = std::make_unique<ee::DataHandler>(0);
 
     handler_->setCallback(
-        std::bind(&Preferences::onSaving, this, std::placeholders::_1,
+        std::bind(&Self::onSaving, this, std::placeholders::_1,
                   std::placeholders::_2, std::placeholders::_3));
 
     handler_->setCallback(
-        std::bind(&Preferences::onLoading, this, std::placeholders::_1,
+        std::bind(&Self::onLoading, this, std::placeholders::_1,
                   std::placeholders::_2, std::placeholders::_3));
 
     handler_->setCallback(
@@ -79,8 +79,8 @@ void Preferences::initializeWithFilename(const std::string& filename) {
 
 Preferences::Preferences() {
     cocos2d::Director::getInstance()->getScheduler()->schedule(
-        std::bind(&Preferences::updateData, this), this, 0.0f,
-        CC_REPEAT_FOREVER, 0.0f, false, "update__");
+        std::bind(&Self::updateData, this), this, 0.0f, CC_REPEAT_FOREVER, 0.0f,
+        false, "update__");
 }
 
 Preferences::~Preferences() {
@@ -173,7 +173,9 @@ void Preferences::updateData() {
     }
 }
 
-bool Preferences::merge() { return merge(dirtyData_); }
+bool Preferences::merge() {
+    return merge(dirtyData_);
+}
 
 bool Preferences::merge(DataStorage& data) {
     if (data.empty()) {

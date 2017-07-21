@@ -1257,7 +1257,6 @@
 					"$(SRCROOT)/../cocos2d/cocos/editor-support",
 					"$(SRCROOT)/../cocos2d/extensions",
 					"$(SRCROOT)/../cocos2d/external",
-					"$(SRCROOT)/../../boost_1_60_0",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1328,7 +1327,6 @@
 					"$(SRCROOT)/../cocos2d/cocos/editor-support",
 					"$(SRCROOT)/../cocos2d/extensions",
 					"$(SRCROOT)/../cocos2d/external",
-					"$(SRCROOT)/../../boost_1_60_0",
 				);
 				LLVM_LTO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";

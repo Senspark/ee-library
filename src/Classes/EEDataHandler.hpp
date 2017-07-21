@@ -94,7 +94,6 @@ private:
     void insertHandler();
     void eraseHandler();
 
-    bool inserted_;
     int priority_;
 
     SetCallback setCallback_;

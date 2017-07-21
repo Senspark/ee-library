@@ -14,34 +14,36 @@
 #include "EEDataHandler.hpp"
 #include "EEDataUtils.hpp"
 
+#include <base/ccMacros.h>
+
 namespace ee {
 namespace {
-bool isDispatching_ = false;
+int dispatchingCounter_ = 0;
+int constructingCounter_ = 0;
+
+bool isDispatching() noexcept {
+    return dispatchingCounter_ > 0;
+}
+
+bool isConstructing() noexcept {
+    return constructingCounter_ > 0;
+}
 
 class DispatchGuard {
 public:
-    explicit DispatchGuard(bool& flag)
-        : flag_(flag) {}
-
-    bool lock() {
-        if (flag_) {
-            // The data handler is in dispatch state.
-            assert(false);
-            return false;
-        }
-        flag_ = true;
-        return true;
+    explicit DispatchGuard(int& counter)
+        : counter_(counter) {
+        lock();
     }
 
-    void unlock() {
-        assert(flag_);
-        flag_ = false;
-    }
+    void lock() { ++counter_; }
+
+    void unlock() { --counter_; }
 
     ~DispatchGuard() { unlock(); }
 
 private:
-    bool& flag_;
+    int& counter_;
 };
 
 std::map<int, std::unordered_set<DataHandler*>> handlers_;
@@ -50,10 +52,8 @@ std::map<int, std::unordered_set<DataHandler*>> handlers_;
 namespace detail {
 void set0(std::size_t dataId, const std::string& key,
           const std::string& value) {
-    DispatchGuard guard(isDispatching_);
-    if (not guard.lock()) {
-        return;
-    }
+    CC_ASSERT(not isConstructing());
+    DispatchGuard guard(dispatchingCounter_);
     for (auto&& handlers : handlers_) {
         for (auto&& handler : handlers.second) {
             if (handler->setCallback_) {
@@ -64,10 +64,8 @@ void set0(std::size_t dataId, const std::string& key,
 }
 
 bool get0(std::size_t dataId, const std::string& key, std::string& result) {
-    DispatchGuard guard(isDispatching_);
-    if (not guard.lock()) {
-        return false;
-    }
+    CC_ASSERT(not isConstructing());
+    DispatchGuard guard(dispatchingCounter_);
     for (auto&& handlers : handlers_) {
         for (auto&& handler : handlers.second) {
             if (handler->getCallback_) {
@@ -81,10 +79,8 @@ bool get0(std::size_t dataId, const std::string& key, std::string& result) {
 }
 
 void remove0(std::size_t dataId, const std::string& key) {
-    DispatchGuard guard(isDispatching_);
-    if (not guard.lock()) {
-        return;
-    }
+    CC_ASSERT(not isConstructing());
+    DispatchGuard guard(dispatchingCounter_);
     for (auto&& handlers : handlers_) {
         for (auto&& handler : handlers.second) {
             if (handler->removeCallback_) {
@@ -98,8 +94,7 @@ void remove0(std::size_t dataId, const std::string& key) {
 const int DataHandler::LowestPriority = std::numeric_limits<int>::max();
 
 DataHandler::DataHandler(int priority)
-    : inserted_(false)
-    , priority_(priority) {
+    : priority_(priority) {
     insertHandler();
 }
 
@@ -108,32 +103,20 @@ DataHandler::~DataHandler() {
 }
 
 void DataHandler::insertHandler() {
-    DispatchGuard guard(isDispatching_);
-    if (not guard.lock()) {
-        return;
-    }
-    inserted_ = true;
-    assert(handlers_[priority_].count(this) == 0);
+    CC_ASSERT(not isDispatching());
+    DispatchGuard guard(constructingCounter_);
+    CC_ASSERT(handlers_[priority_].count(this) == 0);
     handlers_[priority_].insert(this);
 }
 
 void DataHandler::eraseHandler() {
-    DispatchGuard guard(isDispatching_);
-    if (not guard.lock()) {
-        return;
-    }
-    if (not inserted_) {
-        return;
-    }
+    CC_ASSERT(not isDispatching());
+    DispatchGuard guard(constructingCounter_);
     assert(handlers_[priority_].count(this) != 0);
     handlers_[priority_].erase(this);
 }
 
 DataHandler& DataHandler::setPriority(int priority) {
-    DispatchGuard guard(isDispatching_);
-    if (not guard.lock()) {
-        return *this;
-    }
     eraseHandler();
     priority_ = priority;
     insertHandler();

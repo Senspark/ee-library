@@ -28,37 +28,37 @@ template <class T> constexpr bool is_data_traits_v = is_data_traits<T>::value;
 /// Checks whether the specified traits type can store the specified value type
 /// to std::string.
 template <class Traits, class Value, class = void>
-struct is_settable : std::false_type {};
+struct can_store : std::false_type {};
 
 template <class Traits, class Value>
-struct is_settable<
+struct can_store<
     Traits, Value,
     std::enable_if_t<std::is_convertible<
-        decltype(Traits::set(std::declval<Value>())), std::string>::value>>
+        decltype(Traits::store(std::declval<Value>())), std::string>::value>>
     : std::true_type {};
 
 template <class Traits, class Value>
-constexpr bool is_settable_v = is_settable<Traits, Value>::value;
+constexpr bool can_store_v = can_store<Traits, Value>::value;
 
 /// Checks whether the specified traits can load the specified value type from
 /// std::string.
 template <class Traits, class Value, class = void>
-struct is_gettable : std::false_type {};
+struct can_load : std::false_type {};
 
 template <class Traits, class Value>
-struct is_gettable<
+struct can_load<
     Traits, Value,
     std::enable_if_t<std::is_convertible<
-        decltype(Traits::get(std::declval<std::string>())), Value>::value>>
+        decltype(Traits::load(std::declval<std::string>())), Value>::value>>
     : std::true_type {};
 
 template <class Traits, class Value>
-constexpr bool is_gettable_v = is_gettable<Traits, Value>::value;
+constexpr bool can_load_v = can_load<Traits, Value>::value;
 
 template <class Traits, class Value>
 constexpr bool is_traits_v = (is_data_traits_v<Traits> ||
-                              (is_settable_v<Traits, Value> &&
-                               is_gettable_v<Traits, Value>));
+                              (can_store_v<Traits, Value> &&
+                               can_load_v<Traits, Value>));
 } // namespace detail
 
 /// Deserialize/serialize arithmetic types:
@@ -73,15 +73,15 @@ constexpr bool is_traits_v = (is_data_traits_v<Traits> ||
 /// - double
 template <class T>
 struct DataTraits<T, std::enable_if_t<std::is_arithmetic<T>::value>> {
-    static std::string set(T value) { return std::to_string(value); };
+    static std::string store(T value) { return std::to_string(value); };
 
-    static T get(const std::string& value);
+    static T load(const std::string& value);
 };
 
 /// Deserialize/serialize string type.
 template <> struct DataTraits<std::string> {
-    static const std::string& set(const std::string& value);
-    static const std::string& get(const std::string& value);
+    static const std::string& store(const std::string& value);
+    static const std::string& load(const std::string& value);
 };
 
 /// Deserialize/serialize enum types.
@@ -91,12 +91,12 @@ private:
     using U = std::underlying_type_t<T>;
 
 public:
-    static std::string set(T value) {
-        return DataTraits<U>::set(static_cast<U>(value));
+    static std::string store(T value) {
+        return DataTraits<U>::store(static_cast<U>(value));
     }
 
-    static T get(const std::string& value) {
-        return static_cast<T>(DataTraits<U>::get(value));
+    static T load(const std::string& value) {
+        return static_cast<T>(DataTraits<U>::load(value));
     }
 };
 
@@ -117,13 +117,13 @@ private:
 
 public:
     template <class U, std::enable_if_t<detail::is_duration_v<U>, int> = 0>
-    static std::string set(const U& value) {
-        return DataTraits<Rep>::set(
+    static std::string store(const U& value) {
+        return DataTraits<Rep>::store(
             std::chrono::duration_cast<T>(value).count());
     }
 
-    static T get(const std::string& value) {
-        return T(DataTraits<Rep>::get(value));
+    static T load(const std::string& value) {
+        return T(DataTraits<Rep>::load(value));
     }
 };
 } // namespace ee

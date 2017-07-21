@@ -161,8 +161,8 @@ public:
     enum { Id = DataId };
 
     using FormatType::createKey;
-    using TraitsType::get;
-    using TraitsType::set;
+    using TraitsType::store;
+    using TraitsType::load;
 };
 } // namespace ee
 

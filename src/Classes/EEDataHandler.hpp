@@ -38,25 +38,25 @@ void remove0(std::size_t dataId, const std::string& key);
 template <class DataType, class Traits = typename DataType::TraitsType,
           class Formatter = typename DataType::FormatType, class Value,
           class... Keys, EE_REQUIRES(detail::is_data_info_v<DataType>),
-          EE_REQUIRES(detail::is_settable_v<Traits, Value>),
+          EE_REQUIRES(detail::can_store_v<Traits, Value>),
           EE_REQUIRES(detail::is_formattable_v<Formatter, Keys...>)>
 void set(Value&& value, Keys&&... keys) {
     detail::set0(DataType::Id,
                  Formatter::createKey(std::forward<Keys>(keys)...),
-                 Traits::set(std::forward<Value>(value)));
+                 Traits::store(std::forward<Value>(value)));
 }
 
 template <class DataType, class Traits = typename DataType::TraitsType,
           class Formatter = typename DataType::FormatType,
           class Value = typename DataType::ValueType, class... Keys,
           EE_REQUIRES(detail::is_data_info_v<DataType>),
-          EE_REQUIRES(detail::is_gettable_v<Traits, Value>),
+          EE_REQUIRES(detail::can_load_v<Traits, Value>),
           EE_REQUIRES(detail::is_formattable_v<Formatter, Keys...>)>
 decltype(auto) get(Keys&&... keys) {
     std::string result;
     detail::get0(DataType::Id,
                  Formatter::createKey(std::forward<Keys>(keys)...), result);
-    return Traits::get(result);
+    return Traits::load(result);
 }
 
 template <class DataType, class Traits = typename DataType::TraitsType,

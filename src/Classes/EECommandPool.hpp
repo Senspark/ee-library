@@ -101,7 +101,7 @@ private:
                std::index_sequence<Indices...>) const {
         // https://www.reddit.com/r/cpp/comments/2tffv3/for_each_argumentsean_parent
         [](...) {}(((std::get<Indices>(placeholders) =
-                         ee::DataTraits<Args>::get(params.at(Indices))),
+                         ee::DataTraits<Args>::load(params.at(Indices))),
                     0)...);
     }
 

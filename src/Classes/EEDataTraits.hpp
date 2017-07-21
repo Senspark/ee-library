@@ -14,53 +14,9 @@
 #include <type_traits>
 
 #include "EEForward.hpp"
-#include "EEMeta.hpp"
+#include "EEDataMeta.hpp"
 
 namespace ee {
-namespace detail {
-template <class T> struct is_data_traits : std::false_type {};
-
-template <class Value>
-struct is_data_traits<DataTraits<Value, void>> : std::true_type {};
-
-template <class T> constexpr bool is_data_traits_v = is_data_traits<T>::value;
-
-/// Checks whether the specified traits type can store the specified value type
-/// to std::string.
-template <class Traits, class Value, class = void>
-struct can_store : std::false_type {};
-
-template <class Traits, class Value>
-struct can_store<
-    Traits, Value,
-    std::enable_if_t<std::is_convertible<
-        decltype(Traits::store(std::declval<Value>())), std::string>::value>>
-    : std::true_type {};
-
-template <class Traits, class Value>
-constexpr bool can_store_v = can_store<Traits, Value>::value;
-
-/// Checks whether the specified traits can load the specified value type from
-/// std::string.
-template <class Traits, class Value, class = void>
-struct can_load : std::false_type {};
-
-template <class Traits, class Value>
-struct can_load<
-    Traits, Value,
-    std::enable_if_t<std::is_convertible<
-        decltype(Traits::load(std::declval<std::string>())), Value>::value>>
-    : std::true_type {};
-
-template <class Traits, class Value>
-constexpr bool can_load_v = can_load<Traits, Value>::value;
-
-template <class Traits, class Value>
-constexpr bool is_traits_v = (is_data_traits_v<Traits> ||
-                              (can_store_v<Traits, Value> &&
-                               can_load_v<Traits, Value>));
-} // namespace detail
-
 /// Deserialize/serialize arithmetic types:
 /// - bool
 /// - int

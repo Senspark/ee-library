@@ -12,6 +12,7 @@
 #include <unordered_set>
 
 #include "EEDataHandler.hpp"
+#include "EEDataUtils.hpp"
 
 namespace ee {
 namespace {

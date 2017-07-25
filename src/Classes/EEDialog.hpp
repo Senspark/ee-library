@@ -34,17 +34,17 @@ namespace dialog {
 ///
 /// When show() is called.
 /// - onDialogWillShow is called.
-///   - invoke all callbacks in addDialogWillShowCallback() (can be overroden).
+///   - invoke all callbacks in addDialogWillShowCallback() (can be overridden).
 /// - onDialogDidShow is called.
-///   - invoke all callbacks in addDialogDidShowCallback() (can be overroden).
+///   - invoke all callbacks in addDialogDidShowCallback() (can be overridden).
 /// - Active (isActive() returns true).
 ///
 /// When hide() is called.
 /// - Inactive (isActive() returns false).
 /// - onDialogWillHide is called.
-///   - invoke all callbacks in addDialogWillHideCallback() (can be overroden).
+///   - invoke all callbacks in addDialogWillHideCallback() (can be overridden).
 /// - onDialogDidHidee is called.
-///   - invoke all callbacks in addDialogDidHideCallback() (can be overroden).
+///   - invoke all callbacks in addDialogDidHideCallback() (can be overridden).
 class Dialog : public cocos2d::ui::Widget {
 private:
     using Self = Dialog;

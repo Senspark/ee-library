@@ -47,26 +47,21 @@ namespace dialog {
 ///   - invoke all callbacks in addDialogDidHideCallback() (can be overroden).
 class Dialog : public cocos2d::ui::Widget {
 private:
+    using Self = Dialog;
     using Super = cocos2d::ui::Widget;
 
 public:
-    using CallbackType = std::function<void(Dialog*)>;
-
-    using TransitionType = cocos2d::FiniteTimeAction;
-    using TransitionRef = cocos2d::RefPtr<TransitionType>;
-
-    template <class... Args>
-    using enable_if_args_are_transition_types = std::enable_if_t<
-        (std::is_base_of<TransitionType,
-                         std::remove_pointer_t<std::decay_t<Args>>>::value &&
-         ...),
-        Dialog*>;
+    using TransitionCallback = std::function<void(Self* sender)>;
+    using TransitionType = cocos2d::RefPtr<cocos2d::FiniteTimeAction>;
 
     static const int ContainerLocalZOrder;
+
+    /// Passes this to @c show method to indicate that this dialog should
+    /// display at the top level.
     static const std::size_t TopLevel;
 
     /// Attempts to show this dialog to the current scene.
-    /// @param level The dialog level to show, should be in range [1, +inf).
+    /// @param[in] level The dialog level to show, should be in range [1, +inf).
     virtual void show(std::size_t level = TopLevel);
 
     /// Attempts to hide this dialog from the current scene.
@@ -81,61 +76,50 @@ public:
     /// Retrieves this dialog's container (const version).
     virtual const cocos2d::Node* getContainer() const;
 
+    /// Sets whether this dialog is active.
+    /// @param[in] active Whether this dialog is active.
     virtual void setActive(bool active);
 
-    /// Whether the user can interact with this dialog.
+    /// Checks whether the user can interact with this dialog.
     bool isActive() const noexcept;
 
-    virtual Dialog* addDialogWillShowCallback(const CallbackType& callback,
-                                              int priority = 0);
+    /// Adds a callback that will invoked when the dialog is about to show.
+    /// @param[in] callback The callback.
+    /// @param[in] priority The priority of the callback.
+    /// @return Instance to this for chaining.
+    Self* addDialogWillShowCallback(const TransitionCallback& callback,
+                                    int priority = 0);
 
-    virtual Dialog* addDialogDidShowCallback(const CallbackType& callback,
-                                             int priority = 0);
+    /// Adds a callback that will invoked when the dialog has shown.
+    /// @param[in] callback The callback.
+    /// @param[in] priority The priority of the callback.
+    /// @return Instance to this for chaining.
+    Self* addDialogDidShowCallback(const TransitionCallback& callback,
+                                   int priority = 0);
 
-    virtual Dialog* addDialogWillHideCallback(const CallbackType& callback,
-                                              int priority = 0);
+    /// Adds a callback that will invoked when the dialog is about to hide.
+    /// @param[in] callback The callback.
+    /// @param[in] priority The priority of the callback.
+    /// @return Instance to this for chaining.
+    Self* addDialogWillHideCallback(const TransitionCallback& callback,
+                                    int priority = 0);
 
-    virtual Dialog* addDialogDidHideCallback(const CallbackType& callback,
-                                             int priority = 0);
+    /// Adds a callback that will invoked when the dialog has hidden.
+    /// @param[in] callback The callback.
+    /// @param[in] priority The priority of the callback.
+    /// @return Instance to this for chaining.
+    Self* addDialogDidHideCallback(const TransitionCallback& callback,
+                                   int priority = 0);
 
-    Dialog*
-    setShowingTransitions(const std::vector<TransitionRef>& transitions);
-    Dialog* setHidingTransitions(const std::vector<TransitionRef>& transitions);
+    /// Adds a transition that will be run when the dialog is showing.
+    /// @param[in] transition The transition.
+    /// @return Instance to this for chaining.
+    Self* addShowingTransition(const TransitionType& transition);
 
-    Dialog*
-    addShowingTransitions(const std::vector<TransitionRef>& transitions);
-    Dialog* addHidingTransitions(const std::vector<TransitionRef>& transitions);
-
-    const std::vector<TransitionRef>& getShowingTransitions() const;
-    const std::vector<TransitionRef>& getHidingTransitions() const;
-
-    template <class... Transitions>
-    enable_if_args_are_transition_types<Transitions...>
-    setShowingTransitions(Transitions&&... transitions) {
-        return setShowingTransitions(
-            {std::forward<Transitions>(transitions)...});
-    }
-
-    template <class... Transitions>
-    enable_if_args_are_transition_types<Transitions...>
-    setHidingTransitions(Transitions&&... transitions) {
-        return setHidingTransitions(
-            {std::forward<Transitions>(transitions)...});
-    }
-
-    template <class... Transitions>
-    enable_if_args_are_transition_types<Transitions...>
-    addShowingTransitions(Transitions&&... transitions) {
-        return addShowingTransitions(
-            {std::forward<Transitions>(transitions)...});
-    }
-
-    template <class... Transitions>
-    enable_if_args_are_transition_types<Transitions...>
-    addHidingTransitions(Transitions&&... transitions) {
-        return addHidingTransitions(
-            {std::forward<Transitions>(transitions)...});
-    }
+    /// Adds a transition that will be run when the dialog is hiding.
+    /// @param[in] transition The transition.
+    /// @return Instance to this for chaining.
+    Self* addHidingTransition(const TransitionType& transition);
 
 protected:
     friend DialogManager;
@@ -156,12 +140,12 @@ protected:
     virtual void onDialogWillHide();
     virtual void onDialogDidHide();
 
-private:
-    using CallbackInfo = std::pair<CallbackType, int>;
-
     virtual bool hitTest(const cocos2d::Point& pt,
                          const cocos2d::Camera* camera,
                          cocos2d::Vec3* p) const override;
+
+private:
+    using CallbackInfo = std::pair<TransitionCallback, int>;
 
     void invokeCallbacks(std::vector<CallbackInfo>& callbacks);
 
@@ -170,13 +154,13 @@ private:
 
     cocos2d::Node* transitionAction_;
 
-    std::vector<TransitionRef> showingTransitions_;
-    std::vector<TransitionRef> hidingTransitions_;
+    std::vector<TransitionType> showingTransitions_;
+    std::vector<TransitionType> hidingTransitions_;
 
-    std::vector<CallbackInfo> onDialogWillShowCallbacks_;
-    std::vector<CallbackInfo> onDialogDidShowCallbacks_;
-    std::vector<CallbackInfo> onDialogWillHideCallbacks_;
-    std::vector<CallbackInfo> onDialogDidHideCallbacks_;
+    std::vector<CallbackInfo> dialogWillShowCallbacks_;
+    std::vector<CallbackInfo> dialogDidShowCallbacks_;
+    std::vector<CallbackInfo> dialogWillHideCallbacks_;
+    std::vector<CallbackInfo> dialogDidHideCallbacks_;
 };
 } // namespace dialog.
 } // namespace ee

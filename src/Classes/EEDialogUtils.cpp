@@ -30,8 +30,8 @@ Dialog* addHorizontalTransition(Dialog* dialog, float duration, float rate) {
     auto moveIn = cocos2d::EaseElasticOut::create(move->clone(), rate);
     auto moveOut = cocos2d::EaseElasticIn::create(move->clone(), rate);
 
-    dialog->addShowingTransitions(moveIn);
-    dialog->addHidingTransitions(moveOut);
+    dialog->addShowingTransition(moveIn);
+    dialog->addHidingTransition(moveOut);
 
     return dialog;
 }

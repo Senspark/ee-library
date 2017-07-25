@@ -11,6 +11,7 @@
 #include "EEDialogCommand.hpp"
 #include "EEDialogComponent.hpp"
 #include "EEUtils.hpp"
+#include "EEAction.hpp"
 #include "EEScopeGuard.hpp"
 
 #include <2d/CCActionInstant.h>
@@ -221,9 +222,9 @@ void DialogManager::pushDialogImmediately(Dialog* dialog, std::size_t level) {
     dialogStack_.emplace_back(dialog);
     parent->addChild(dialog->getContainer(), Dialog::ContainerLocalZOrder);
 
-    cocos2d::Vector<cocos2d::FiniteTimeAction*> actions;
-    for (auto&& action : dialog->getShowingTransitions()) {
-        actions.pushBack(cocos2d::TargetedAction::create(dialog, action));
+    auto sequence = Sequence::create();
+    for (auto&& action : dialog->showingTransitions_) {
+        sequence->then(cocos2d::TargetedAction::create(dialog, action));
     }
 
     auto unlocker = std::make_shared<ScopeGuard>([this, dialog] {
@@ -233,7 +234,7 @@ void DialogManager::pushDialogImmediately(Dialog* dialog, std::size_t level) {
         processCommandQueue();
     });
 
-    actions.pushBack(cocos2d::CallFunc::create([this, dialog, unlocker] {
+    sequence->then([this, dialog, unlocker] {
         if (updateCurrentScene()) {
             unlocker->dismiss();
         } else {
@@ -241,10 +242,10 @@ void DialogManager::pushDialogImmediately(Dialog* dialog, std::size_t level) {
             unlocker->invoke();
             dialog->setActive(true);
         }
-    }));
+    });
 
     dialog->transitionAction_->stopAllActions();
-    dialog->transitionAction_->runAction(cocos2d::Sequence::create(actions));
+    dialog->transitionAction_->runAction(sequence);
 }
 
 void DialogManager::popDialogImmediately(Dialog* dialog) {
@@ -257,9 +258,9 @@ void DialogManager::popDialogImmediately(Dialog* dialog) {
     lock(dialog);
     dialog->onDialogWillHide();
 
-    cocos2d::Vector<cocos2d::FiniteTimeAction*> actions;
-    for (auto&& action : dialog->getHidingTransitions()) {
-        actions.pushBack(cocos2d::TargetedAction::create(dialog, action));
+    auto sequence = Sequence::create();
+    for (auto&& action : dialog->hidingTransitions_) {
+        sequence->then(cocos2d::TargetedAction::create(dialog, action));
     }
 
     auto unlocker = std::make_shared<ScopeGuard>([this, dialog] {
@@ -269,7 +270,7 @@ void DialogManager::popDialogImmediately(Dialog* dialog) {
         processCommandQueue();
     });
 
-    actions.pushBack(cocos2d::CallFunc::create([this, dialog, unlocker] {
+    sequence->then([this, dialog, unlocker] {
         auto container = dialog->getContainer();
         auto realParent = container->getParent();
         container->removeFromParent();
@@ -294,10 +295,10 @@ void DialogManager::popDialogImmediately(Dialog* dialog) {
             dialog->onDialogDidHide();
             unlocker->invoke();
         }
-    }));
+    });
 
     dialog->transitionAction_->stopAllActions();
-    dialog->transitionAction_->runAction(cocos2d::Sequence::create(actions));
+    dialog->transitionAction_->runAction(sequence);
 }
 
 cocos2d::Node* DialogManager::getRunningNode() const {

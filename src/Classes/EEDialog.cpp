@@ -71,27 +71,27 @@ void Dialog::hide() {
     DialogManager::getInstance()->popDialog(this);
 }
 
-Dialog* Dialog::addDialogWillShowCallback(const CallbackType& callback,
+Dialog* Dialog::addDialogWillShowCallback(const TransitionCallback& callback,
                                           int priority) {
-    onDialogWillShowCallbacks_.emplace_back(callback, priority);
+    dialogWillShowCallbacks_.emplace_back(callback, priority);
     return this;
 }
 
-Dialog* Dialog::addDialogDidShowCallback(const CallbackType& callback,
+Dialog* Dialog::addDialogDidShowCallback(const TransitionCallback& callback,
                                          int priority) {
-    onDialogDidShowCallbacks_.emplace_back(callback, priority);
+    dialogDidShowCallbacks_.emplace_back(callback, priority);
     return this;
 }
 
-Dialog* Dialog::addDialogWillHideCallback(const CallbackType& callback,
+Dialog* Dialog::addDialogWillHideCallback(const TransitionCallback& callback,
                                           int priority) {
-    onDialogWillHideCallbacks_.emplace_back(callback, priority);
+    dialogWillHideCallbacks_.emplace_back(callback, priority);
     return this;
 }
 
-Dialog* Dialog::addDialogDidHideCallback(const CallbackType& callback,
+Dialog* Dialog::addDialogDidHideCallback(const TransitionCallback& callback,
                                          int priority) {
-    onDialogDidHideCallbacks_.emplace_back(callback, priority);
+    dialogDidHideCallbacks_.emplace_back(callback, priority);
     return this;
 }
 
@@ -115,29 +115,27 @@ bool Dialog::hitTest(const cocos2d::Point& pt, const cocos2d::Camera* camera,
 
 void Dialog::onDialogWillShow() {
     LOG_FUNC_FORMAT("dialog = %p", this);
-    invokeCallbacks(onDialogWillShowCallbacks_);
+    invokeCallbacks(dialogWillShowCallbacks_);
 }
 
 void Dialog::onDialogDidShow() {
     LOG_FUNC_FORMAT("dialog = %p", this);
-    invokeCallbacks(onDialogDidShowCallbacks_);
+    invokeCallbacks(dialogDidShowCallbacks_);
 }
 
 void Dialog::onDialogWillHide() {
     LOG_FUNC_FORMAT("dialog = %p", this);
-    invokeCallbacks(onDialogWillHideCallbacks_);
+    invokeCallbacks(dialogWillHideCallbacks_);
 }
 
 void Dialog::onDialogDidHide() {
     LOG_FUNC_FORMAT("dialog = %p", this);
-    invokeCallbacks(onDialogDidHideCallbacks_);
+    invokeCallbacks(dialogDidHideCallbacks_);
 }
 
 void Dialog::invokeCallbacks(std::vector<CallbackInfo>& callbacks) {
     std::stable_sort(callbacks.begin(), callbacks.end(), Compare2nd<>());
-
     RefGuard guard(this);
-
     for (auto&& info : callbacks) {
         info.first(this);
     }
@@ -149,40 +147,14 @@ void Dialog::onClickedOutside() {
     }
 }
 
-Dialog*
-Dialog::setShowingTransitions(const std::vector<TransitionRef>& transitions) {
-    showingTransitions_ = transitions;
+Dialog* Dialog::addShowingTransition(const TransitionType& transition) {
+    showingTransitions_.emplace_back(transition);
     return this;
 }
 
-Dialog*
-Dialog::setHidingTransitions(const std::vector<TransitionRef>& transitions) {
-    hidingTransitions_ = transitions;
+Dialog* Dialog::addHidingTransition(const TransitionType& transition) {
+    hidingTransitions_.emplace_back(transition);
     return this;
-}
-
-Dialog*
-Dialog::addShowingTransitions(const std::vector<TransitionRef>& transitions) {
-    showingTransitions_.insert(showingTransitions_.cend(), transitions.cbegin(),
-                               transitions.cend());
-    return this;
-}
-
-Dialog*
-Dialog::addHidingTransitions(const std::vector<TransitionRef>& transitions) {
-    hidingTransitions_.insert(hidingTransitions_.cend(), transitions.cbegin(),
-                              transitions.cend());
-    return this;
-}
-
-auto Dialog::getShowingTransitions() const
-    -> const std::vector<TransitionRef> & {
-    return showingTransitions_;
-}
-
-auto Dialog::getHidingTransitions() const
-    -> const std::vector<TransitionRef> & {
-    return hidingTransitions_;
 }
 } // namespace dialog
 } // namespace ee

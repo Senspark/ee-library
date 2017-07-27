@@ -23,6 +23,7 @@ namespace ee {
 namespace dialog {
 class Dialog;
 class DialogManager;
+class DialogTree;
 } // namespace dialog
 
 using dialog::Dialog;
@@ -123,6 +124,7 @@ public:
 
 protected:
     friend DialogManager;
+    friend DialogTree;
 
     Dialog();
     virtual ~Dialog();

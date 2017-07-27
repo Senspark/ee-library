@@ -52,6 +52,10 @@
 		6F3F009C1F2993F000C054AB /* EELanguageFormatter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F3F00991F2993F000C054AB /* EELanguageFormatter.cpp */; };
 		6F3F009D1F2993F000C054AB /* EELanguageFormatter.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6F3F009A1F2993F000C054AB /* EELanguageFormatter.hpp */; };
 		6F3F009E1F2993F000C054AB /* EELanguageFormatter.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6F3F009A1F2993F000C054AB /* EELanguageFormatter.hpp */; };
+		6F3F00A11F299A8F00C054AB /* EEDialogTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F3F009F1F299A8F00C054AB /* EEDialogTree.cpp */; };
+		6F3F00A21F299A8F00C054AB /* EEDialogTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F3F009F1F299A8F00C054AB /* EEDialogTree.cpp */; };
+		6F3F00A31F299A8F00C054AB /* EEDialogTree.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6F3F00A01F299A8F00C054AB /* EEDialogTree.hpp */; };
+		6F3F00A41F299A8F00C054AB /* EEDialogTree.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6F3F00A01F299A8F00C054AB /* EEDialogTree.hpp */; };
 		6F43002E1F21A60C004B95CF /* EEDataMeta.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6F43002B1F21A60C004B95CF /* EEDataMeta.hpp */; };
 		6F43002F1F21A60C004B95CF /* EEDataMeta.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6F43002B1F21A60C004B95CF /* EEDataMeta.hpp */; };
 		6F48D01C1E9CBBE900342077 /* EESkeletonBone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F48D01A1E9CBBE900342077 /* EESkeletonBone.cpp */; };
@@ -334,6 +338,8 @@
 		6F39F1551CCBBBD10038796D /* EEButton.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEButton.hpp; sourceTree = "<group>"; };
 		6F3F00991F2993F000C054AB /* EELanguageFormatter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EELanguageFormatter.cpp; sourceTree = "<group>"; };
 		6F3F009A1F2993F000C054AB /* EELanguageFormatter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EELanguageFormatter.hpp; sourceTree = "<group>"; };
+		6F3F009F1F299A8F00C054AB /* EEDialogTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDialogTree.cpp; sourceTree = "<group>"; };
+		6F3F00A01F299A8F00C054AB /* EEDialogTree.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDialogTree.hpp; sourceTree = "<group>"; };
 		6F43002B1F21A60C004B95CF /* EEDataMeta.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDataMeta.hpp; sourceTree = "<group>"; };
 		6F48D01A1E9CBBE900342077 /* EESkeletonBone.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EESkeletonBone.cpp; sourceTree = "<group>"; };
 		6F48D01B1E9CBBE900342077 /* EESkeletonBone.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EESkeletonBone.hpp; sourceTree = "<group>"; };
@@ -701,6 +707,8 @@
 				6F5575E91E837F3E00154A18 /* EEDialogComponent.hpp */,
 				6FAC217A1CE3454E000C16CC /* EEDialogGuard.cpp */,
 				6FAC217B1CE3454E000C16CC /* EEDialogGuard.hpp */,
+				6F3F009F1F299A8F00C054AB /* EEDialogTree.cpp */,
+				6F3F00A01F299A8F00C054AB /* EEDialogTree.hpp */,
 				6FB73D311CE45E5800C718D5 /* EEDialogUtils.cpp */,
 				6FB73D321CE45E5800C718D5 /* EEDialogUtils.hpp */,
 			);
@@ -840,6 +848,7 @@
 				6F6EA9321D1D3F5300816BAF /* EEBlurBackground.hpp in Headers */,
 				6FD64EAA1E9B48A60030CDEC /* EEConsoleDelegate.hpp in Headers */,
 				6FB73D351CE45E5800C718D5 /* EEDialogUtils.hpp in Headers */,
+				6F3F00A31F299A8F00C054AB /* EEDialogTree.hpp in Headers */,
 				6C3CAB421C5B5ACF0059A380 /* EEUtils.hpp in Headers */,
 				6F3F009D1F2993F000C054AB /* EELanguageFormatter.hpp in Headers */,
 			);
@@ -913,6 +922,7 @@
 				6F6EA9331D1D3F5300816BAF /* EEBlurBackground.hpp in Headers */,
 				6FD64EAB1E9B48A60030CDEC /* EEConsoleDelegate.hpp in Headers */,
 				6FB73D361CE45E5800C718D5 /* EEDialogUtils.hpp in Headers */,
+				6F3F00A41F299A8F00C054AB /* EEDialogTree.hpp in Headers */,
 				6F79B6281CCA7FD20008EFAC /* EECocos2dxFwd.hpp in Headers */,
 				6F3F009E1F2993F000C054AB /* EELanguageFormatter.hpp in Headers */,
 			);
@@ -1001,6 +1011,7 @@
 				6FC19ADB1CF84A470002D68B /* EECheckBox.cpp in Sources */,
 				6F7F38861D1D5BD000F5893F /* EEBlurBackgroundLoader.cpp in Sources */,
 				6F3F009B1F2993F000C054AB /* EELanguageFormatter.cpp in Sources */,
+				6F3F00A11F299A8F00C054AB /* EEDialogTree.cpp in Sources */,
 				6C468C2C1CA2F0CA00D16594 /* EEUiWidgetCallback.cpp in Sources */,
 				6FC7FAD21D154387005AF2E5 /* EEShader.cpp in Sources */,
 				6FB73D331CE45E5800C718D5 /* EEDialogUtils.cpp in Sources */,
@@ -1066,6 +1077,7 @@
 				6FC19ADD1CF84A470002D68B /* EECheckBox.cpp in Sources */,
 				6F7F38871D1D5BD000F5893F /* EEBlurBackgroundLoader.cpp in Sources */,
 				6F3F009C1F2993F000C054AB /* EELanguageFormatter.cpp in Sources */,
+				6F3F00A21F299A8F00C054AB /* EEDialogTree.cpp in Sources */,
 				6FA658981CCB700B009BC9EB /* EEUtils.cpp in Sources */,
 				6FC7FAD31D154387005AF2E5 /* EEShader.cpp in Sources */,
 				6FB73D341CE45E5800C718D5 /* EEDialogUtils.cpp in Sources */,

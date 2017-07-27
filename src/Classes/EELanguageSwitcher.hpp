@@ -18,13 +18,15 @@
 
 namespace ee {
 class Language;
-class LanguageComponent;
+class LanguageDelegate;
 
 class LanguageSwitcher {
 private:
     using Self = LanguageSwitcher;
 
 public:
+    static const std::string NullKey;
+
     static LanguageSwitcher& getInstance();
 
     void initialize();
@@ -35,6 +37,9 @@ public:
     /// Changes the current language to the specified language.
     /// @param[in] language The desired language.
     void changeLanguage(const Language& language);
+
+    std::string getFormat(const Language& language,
+                          const std::string& key) const;
 
     /// Gets the translated text in the specified language for the specified
     /// key.
@@ -56,15 +61,17 @@ public:
     /// @param[in] filename The filename.
     void loadLanguage(const Language& language, const std::string& filename);
 
-    void addDelegate(LanguageComponent* delegate);
-    // void removeDelega
-
 private:
+    friend LanguageDelegate;
+
     LanguageSwitcher();
     ~LanguageSwitcher();
 
     LanguageSwitcher(const Self&) = delete;
     Self& operator=(const Self&) = delete;
+
+    void addDelegate(const std::shared_ptr<LanguageDelegate>& delegate);
+    void removeDelegate(const std::shared_ptr<LanguageDelegate>& delegate);
 
     std::unique_ptr<Language> currentLanguage_;
 
@@ -74,7 +81,10 @@ private:
 
     std::map<Language, std::map<std::string, std::string>, LanguageComparator>
         dictionaries_;
-    std::set<cocos2d::RefPtr<LanguageComponent>> components_;
+
+    bool locked_;
+    std::set<std::weak_ptr<LanguageDelegate>,
+             std::owner_less<std::weak_ptr<LanguageDelegate>>> delegates_;
 };
 } // namespace ee
 

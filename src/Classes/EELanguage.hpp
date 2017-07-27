@@ -13,11 +13,20 @@
 
 namespace ee {
 class Language {
+private:
+    using Self = Language;
+
 public:
+    static const Self English;
+    static const Self Thailand;
+    static const Self Vietnamese;
+
     const std::string& getCode() const;
 
 private:
-    explicit Language();
+    explicit Language(const std::string& code);
+
+    std::string code_;
 };
 } // namespace ee
 

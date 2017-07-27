@@ -8,20 +8,31 @@
 
 #include "EELanguageSwitcher.hpp"
 #include "EELanguage.hpp"
-#include "EELanguageComponent.hpp"
+#include "EELanguageDelegate.hpp"
 
+#include <base/CCRefPtr.h>
 #include <base/CCValue.h>
 #include <platform/CCFileUtils.h>
 
 namespace ee {
 bool LanguageSwitcher::LanguageComparator::
 operator()(const Language& lhs, const Language& rhs) const {
-    return true;
+    return lhs.getCode() < rhs.getCode();
 }
+
+const std::string LanguageSwitcher::NullKey = "__this_is_a_null_key";
 
 LanguageSwitcher& LanguageSwitcher::getInstance() {
     static Self sharedInstance;
     return sharedInstance;
+}
+
+LanguageSwitcher::LanguageSwitcher() {
+    locked_ = false;
+    currentLanguage_ = std::make_unique<Language>(Language::English);
+}
+
+LanguageSwitcher::~LanguageSwitcher() {
 }
 
 Language LanguageSwitcher::getCurrentLanguage() const {
@@ -29,11 +40,28 @@ Language LanguageSwitcher::getCurrentLanguage() const {
 }
 
 void LanguageSwitcher::changeLanguage(const Language& language) {
-    //
+    CC_ASSERT(not locked_);
+    locked_ = true;
+    currentLanguage_ = std::make_unique<Language>(language);
+    for (auto iter = delegates_.cbegin(); iter != delegates_.cend();) {
+        auto&& delegate = *iter;
+        CC_ASSERT(not delegate.expired());
+        if (delegate.expired()) {
+            iter = delegates_.erase(iter);
+        } else {
+            auto ptr = delegate.lock();
+            ptr->setLanguage(language);
+            ++iter;
+        }
+    }
+    for (auto&& delegate : delegates_) {
+        CC_ASSERT(not delegate.expired());
+    }
+    locked_ = false;
 }
 
-std::string LanguageSwitcher::getText(const Language& language,
-                                      const std::string& key) const {
+std::string LanguageSwitcher::getFormat(const Language& language,
+                                        const std::string& key) const {
     std::string result = "{null}";
     try {
         result = dictionaries_.at(language).at(key);
@@ -41,6 +69,11 @@ std::string LanguageSwitcher::getText(const Language& language,
         CC_ASSERT(false);
     }
     return result;
+}
+
+std::string LanguageSwitcher::getText(const Language& language,
+                                      const std::string& key) const {
+    return getText(language, {});
 }
 
 std::string
@@ -91,5 +124,17 @@ void LanguageSwitcher::loadLanguage(const Language& language,
                                     const std::string& filename) {
     auto map = cocos2d::FileUtils::getInstance()->getValueMapFromFile(filename);
     loadLanguage(language, map);
+}
+
+void LanguageSwitcher::addDelegate(
+    const std::shared_ptr<LanguageDelegate>& delegate) {
+    CC_ASSERT(not locked_);
+    delegates_.insert(delegate);
+}
+
+void LanguageSwitcher::removeDelegate(
+    const std::shared_ptr<LanguageDelegate>& delegate) {
+    CC_ASSERT(not locked_);
+    delegates_.erase(delegate);
 }
 } // namespace ee

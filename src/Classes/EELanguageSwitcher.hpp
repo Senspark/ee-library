@@ -26,8 +26,6 @@ private:
     using Self = LanguageSwitcher;
 
 public:
-    static const std::string NullKey;
-
     static LanguageSwitcher& getInstance();
 
     void initialize();

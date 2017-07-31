@@ -21,7 +21,11 @@ public:
     static const Self Thailand;
     static const Self Vietnamese;
 
+    static Self create(const std::string& code);
+
     const std::string& getCode() const;
+
+    bool operator==(const Self& other) const;
 
 private:
     explicit Language(const std::string& code);

@@ -26,6 +26,8 @@ public:
     LanguageDelegate();
     virtual ~LanguageDelegate();
 
+    const Language& getLanguage() const;
+
     /// Sets the multilingual key.
     /// @param[in] key The multilingual key.
     /// @return Instance to this for chaining.

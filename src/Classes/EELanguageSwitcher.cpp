@@ -21,8 +21,6 @@ operator()(const Language& lhs, const Language& rhs) const {
     return lhs.getCode() < rhs.getCode();
 }
 
-const std::string LanguageSwitcher::NullKey = "__this_is_a_null_key";
-
 LanguageSwitcher& LanguageSwitcher::getInstance() {
     static Self sharedInstance;
     return sharedInstance;

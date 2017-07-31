@@ -12,7 +12,6 @@
 
 namespace ee {
 LanguageDelegate::LanguageDelegate() {
-    setKey(LanguageSwitcher::NullKey);
     auto&& switcher = LanguageSwitcher::getInstance();
     setLanguage(switcher.getCurrentLanguage());
     switcher.addDelegate(this);
@@ -21,6 +20,10 @@ LanguageDelegate::LanguageDelegate() {
 LanguageDelegate::~LanguageDelegate() {
     auto&& switcher = LanguageSwitcher::getInstance();
     switcher.removeDelegate(this);
+}
+
+const Language& LanguageDelegate::getLanguage() const {
+    return *language_;
 }
 
 LanguageDelegate* LanguageDelegate::setKey(const std::string& key) {

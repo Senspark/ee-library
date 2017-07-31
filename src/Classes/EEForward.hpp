@@ -71,6 +71,12 @@ class Scale9SpriteWithHsv;
 class BlurBackground;
 class BlurBackgroundLoader;
 
+class Language;
+class LanguageSwitcher;
+class LanguageDelegate;
+class LanguageFormatter;
+class MultilingualDelegate;
+
 class SkeletonAnimationLoader;
 class SkeletonBone;
 class SkeletonBoneLoader;

@@ -16,22 +16,28 @@
 #include <platform/CCFileUtils.h>
 
 namespace ee {
+namespace {
+std::stack<LanguageSwitcher*> instances;
+static LanguageSwitcher nilInstance;
+} // namespace
+
 bool LanguageSwitcher::LanguageComparator::
 operator()(const Language& lhs, const Language& rhs) const {
     return lhs.getCode() < rhs.getCode();
 }
 
 LanguageSwitcher& LanguageSwitcher::getInstance() {
-    static Self sharedInstance;
-    return sharedInstance;
+    return *instances.top();
 }
 
 LanguageSwitcher::LanguageSwitcher() {
+    instances.push(this);
     locked_ = false;
     currentLanguage_ = std::make_unique<Language>(Language::English);
 }
 
 LanguageSwitcher::~LanguageSwitcher() {
+    instances.pop();
 }
 
 const Language& LanguageSwitcher::getCurrentLanguage() const {

@@ -28,14 +28,15 @@ private:
 public:
     static LanguageSwitcher& getInstance();
 
-    void initialize();
+    LanguageSwitcher();
+    virtual ~LanguageSwitcher();
 
     /// Gets the current language.
-    const Language& getCurrentLanguage() const;
+    virtual const Language& getCurrentLanguage() const;
 
     /// Changes the current language to the specified language.
     /// @param[in] language The desired language.
-    void changeLanguage(const Language& language);
+    virtual void changeLanguage(const Language& language);
 
     const LanguageFormatter& getFormatter(const Language& language,
                                           const std::string& key) const;
@@ -69,9 +70,6 @@ public:
 
 private:
     friend LanguageDelegate;
-
-    LanguageSwitcher();
-    ~LanguageSwitcher();
 
     LanguageSwitcher(const Self&) = delete;
     Self& operator=(const Self&) = delete;

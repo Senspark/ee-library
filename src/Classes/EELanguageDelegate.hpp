@@ -16,27 +16,15 @@
 namespace ee {
 class Language;
 
-class LanguageDelegate : public std::enable_shared_from_this<LanguageDelegate> {
+class LanguageDelegate {
 private:
     using Self = LanguageDelegate;
 
 public:
     using TextCallback = std::function<void(const std::string& text)>;
 
-    /// Creates a language delegate.
-    static std::shared_ptr<Self> create();
-
-    /// Sets the text using the specified key and the current language.
-    /// @param[in] key The multilingual key.
-    /// @return Instance to this for chaining.
-    Self* setText(const std::string& key);
-
-    /// Sets the text using the specified key, format arguments and the current
-    /// language.
-    /// @param[in] key The multilingual key.
-    /// @param[in] args The format arguments.
-    /// @return Instance to this for chaining.
-    Self* setText(const std::string& key, const std::vector<std::string>& args);
+    LanguageDelegate();
+    virtual ~LanguageDelegate();
 
     /// Sets the multilingual key.
     /// @param[in] key The multilingual key.
@@ -59,16 +47,11 @@ public:
     Self* setTextCallback(const TextCallback& callback);
 
 protected:
-    class Deleter;
-
-    LanguageDelegate();
-    ~LanguageDelegate();
-
-private:
     std::unique_ptr<Language> language_;
     std::unique_ptr<std::string> key_;
     std::vector<std::string> args_;
 
+private:
     TextCallback textCallback_;
 
     void updateText();

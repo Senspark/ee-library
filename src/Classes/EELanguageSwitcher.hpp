@@ -19,6 +19,7 @@
 namespace ee {
 class Language;
 class LanguageDelegate;
+class LanguageFormatter;
 
 class LanguageSwitcher {
 private:
@@ -32,14 +33,21 @@ public:
     void initialize();
 
     /// Gets the current language.
-    Language getCurrentLanguage() const;
+    const Language& getCurrentLanguage() const;
 
     /// Changes the current language to the specified language.
     /// @param[in] language The desired language.
     void changeLanguage(const Language& language);
 
-    std::string getFormat(const Language& language,
-                          const std::string& key) const;
+    const LanguageFormatter& getFormatter(const Language& language,
+                                          const std::string& key) const;
+
+    /// Gets the format string for the specified language and key.
+    /// @param[in] language The desired language.
+    /// @param[in] key The desired key.
+    /// @return The format string.
+    const std::string& getFormat(const Language& language,
+                                 const std::string& key) const;
 
     /// Gets the translated text in the specified language for the specified
     /// key.
@@ -70,8 +78,8 @@ private:
     LanguageSwitcher(const Self&) = delete;
     Self& operator=(const Self&) = delete;
 
-    void addDelegate(const std::shared_ptr<LanguageDelegate>& delegate);
-    void removeDelegate(const std::shared_ptr<LanguageDelegate>& delegate);
+    void addDelegate(LanguageDelegate* delegate);
+    void removeDelegate(LanguageDelegate* delegate);
 
     std::unique_ptr<Language> currentLanguage_;
 
@@ -79,12 +87,11 @@ private:
         bool operator()(const Language& lhs, const Language& rhs) const;
     };
 
-    std::map<Language, std::map<std::string, std::string>, LanguageComparator>
-        dictionaries_;
+    std::map<Language, std::map<std::string, LanguageFormatter>,
+             LanguageComparator> dictionaries_;
 
     bool locked_;
-    std::set<std::weak_ptr<LanguageDelegate>,
-             std::owner_less<std::weak_ptr<LanguageDelegate>>> delegates_;
+    std::set<LanguageDelegate*> delegates_;
 };
 } // namespace ee
 

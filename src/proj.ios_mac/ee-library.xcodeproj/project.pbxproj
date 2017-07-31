@@ -161,6 +161,10 @@
 		6F9C2FD51D4742A200939859 /* EEDataTraits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C2FD21D4742A200939859 /* EEDataTraits.cpp */; };
 		6F9C2FD61D4742A200939859 /* EEDataTraits.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6F9C2FD31D4742A200939859 /* EEDataTraits.hpp */; };
 		6F9C2FD71D4742A200939859 /* EEDataTraits.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6F9C2FD31D4742A200939859 /* EEDataTraits.hpp */; };
+		6F9DE5911F2ED8D500CBCB83 /* EEMultilingualDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F9DE58F1F2ED8D500CBCB83 /* EEMultilingualDelegate.cpp */; };
+		6F9DE5921F2ED8D500CBCB83 /* EEMultilingualDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F9DE58F1F2ED8D500CBCB83 /* EEMultilingualDelegate.cpp */; };
+		6F9DE5931F2ED8D500CBCB83 /* EEMultilingualDelegate.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6F9DE5901F2ED8D500CBCB83 /* EEMultilingualDelegate.hpp */; };
+		6F9DE5941F2ED8D500CBCB83 /* EEMultilingualDelegate.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6F9DE5901F2ED8D500CBCB83 /* EEMultilingualDelegate.hpp */; };
 		6FA6588C1CCB5C0B009BC9EB /* EEImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C7A9AC71BDB841A00199AC0 /* EEImage.cpp */; };
 		6FA6588D1CCB5C0B009BC9EB /* EEImage.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6C32DC3D1BD67074007613F9 /* EEImage.hpp */; };
 		6FA6588E1CCB5C0B009BC9EB /* EEBoxBlur1D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C32DC431BD67791007613F9 /* EEBoxBlur1D.cpp */; };
@@ -376,6 +380,8 @@
 		6F8F17B51EF8E46C007AA388 /* EELazyPtr.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EELazyPtr.hpp; sourceTree = "<group>"; };
 		6F9C2FD21D4742A200939859 /* EEDataTraits.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDataTraits.cpp; sourceTree = "<group>"; };
 		6F9C2FD31D4742A200939859 /* EEDataTraits.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDataTraits.hpp; sourceTree = "<group>"; };
+		6F9DE58F1F2ED8D500CBCB83 /* EEMultilingualDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEMultilingualDelegate.cpp; sourceTree = "<group>"; };
+		6F9DE5901F2ED8D500CBCB83 /* EEMultilingualDelegate.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEMultilingualDelegate.hpp; sourceTree = "<group>"; };
 		6FA658961CCB700B009BC9EB /* EEUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEUtils.cpp; sourceTree = "<group>"; };
 		6FAC21741CE33425000C16CC /* EEDialogCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDialogCommand.cpp; sourceTree = "<group>"; };
 		6FAC21751CE33425000C16CC /* EEDialogCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDialogCommand.hpp; sourceTree = "<group>"; };
@@ -637,6 +643,8 @@
 				6F302A6F1F21E944005415AE /* EELanguageDelegate.hpp */,
 				6F3F00991F2993F000C054AB /* EELanguageFormatter.cpp */,
 				6F3F009A1F2993F000C054AB /* EELanguageFormatter.hpp */,
+				6F9DE58F1F2ED8D500CBCB83 /* EEMultilingualDelegate.cpp */,
+				6F9DE5901F2ED8D500CBCB83 /* EEMultilingualDelegate.hpp */,
 			);
 			name = multilingual;
 			sourceTree = "<group>";
@@ -784,6 +792,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F9DE5931F2ED8D500CBCB83 /* EEMultilingualDelegate.hpp in Headers */,
 				6F5575EC1E837F3E00154A18 /* EEDialogComponent.hpp in Headers */,
 				6F2C1C071EC578F3003D7A7C /* EEContinuousAction.hpp in Headers */,
 				6C4A4A581CA153E500E72D89 /* EEUiButtonLoader.hpp in Headers */,
@@ -858,6 +867,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F9DE5941F2ED8D500CBCB83 /* EEMultilingualDelegate.hpp in Headers */,
 				6F5575ED1E837F3E00154A18 /* EEDialogComponent.hpp in Headers */,
 				6F2C1C081EC578F3003D7A7C /* EEContinuousAction.hpp in Headers */,
 				6F79DC831CCE5CBA00BDA20F /* EECrytography.hpp in Headers */,
@@ -1067,6 +1077,7 @@
 				6F302A641F21E245005415AE /* EELanguage.cpp in Sources */,
 				6F633F981EADA3CB004C37C1 /* EEManagedScene.cpp in Sources */,
 				6F6EA9301D1D3F5300816BAF /* EEBlurBackground.cpp in Sources */,
+				6F9DE5911F2ED8D500CBCB83 /* EEMultilingualDelegate.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1133,6 +1144,7 @@
 				6F302A651F21E245005415AE /* EELanguage.cpp in Sources */,
 				6F633F991EADA3CB004C37C1 /* EEManagedScene.cpp in Sources */,
 				6F6EA9311D1D3F5300816BAF /* EEBlurBackground.cpp in Sources */,
+				6F9DE5921F2ED8D500CBCB83 /* EEMultilingualDelegate.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,7 @@
 #include "EELanguageSwitcher.hpp"
 #include "EELanguage.hpp"
 #include "EELanguageDelegate.hpp"
+#include "EELanguageFormatter.hpp"
 
 #include <base/CCRefPtr.h>
 #include <base/CCValue.h>
@@ -35,7 +36,7 @@ LanguageSwitcher::LanguageSwitcher() {
 LanguageSwitcher::~LanguageSwitcher() {
 }
 
-Language LanguageSwitcher::getCurrentLanguage() const {
+const Language& LanguageSwitcher::getCurrentLanguage() const {
     return *currentLanguage_;
 }
 
@@ -43,32 +44,29 @@ void LanguageSwitcher::changeLanguage(const Language& language) {
     CC_ASSERT(not locked_);
     locked_ = true;
     currentLanguage_ = std::make_unique<Language>(language);
-    for (auto iter = delegates_.cbegin(); iter != delegates_.cend();) {
-        auto&& delegate = *iter;
-        CC_ASSERT(not delegate.expired());
-        if (delegate.expired()) {
-            iter = delegates_.erase(iter);
-        } else {
-            auto ptr = delegate.lock();
-            ptr->setLanguage(language);
-            ++iter;
-        }
-    }
     for (auto&& delegate : delegates_) {
-        CC_ASSERT(not delegate.expired());
+        delegate->setLanguage(language);
     }
     locked_ = false;
 }
 
-std::string LanguageSwitcher::getFormat(const Language& language,
-                                        const std::string& key) const {
-    std::string result = "{null}";
+const LanguageFormatter&
+LanguageSwitcher::getFormatter(const Language& language,
+                               const std::string& key) const {
     try {
-        result = dictionaries_.at(language).at(key);
+        auto&& result = dictionaries_.at(language).at(key);
+        return result;
     } catch (const std::out_of_range& ex) {
         CC_ASSERT(false);
+        static const LanguageFormatter nil("{null}");
+        return nil;
     }
-    return result;
+}
+
+const std::string& LanguageSwitcher::getFormat(const Language& language,
+                                               const std::string& key) const {
+    auto&& formatter = getFormatter(language, key);
+    return formatter.getFormat();
 }
 
 std::string LanguageSwitcher::getText(const Language& language,
@@ -79,35 +77,8 @@ std::string LanguageSwitcher::getText(const Language& language,
 std::string
 LanguageSwitcher::getText(const Language& language, const std::string& key,
                           const std::vector<std::string>& args) const {
-    auto format = getText(language, key);
-
-    std::size_t token_index = 0;
-    std::size_t char_index = 0;
-    std::string result;
-
-    while (char_index < format.size()) {
-        if (format[char_index] == '%') {
-            if (char_index + 1 < format.size() &&
-                format[char_index + 1] == '%') {
-                // Two consecutive %.
-                result.push_back('%');
-                char_index += 2;
-            } else {
-                if (token_index < args.size()) {
-                    // Replace % with a token.
-                    result += args[token_index];
-                    ++char_index;
-                    ++token_index;
-                } else {
-                    CC_ASSERT(false);
-                }
-            }
-        } else {
-            result.push_back(format[char_index]);
-            ++char_index;
-        }
-    }
-
+    auto&& formatter = getFormatter(language, key);
+    auto result = formatter.format(args);
     return result;
 }
 
@@ -116,7 +87,8 @@ void LanguageSwitcher::loadLanguage(const Language& language,
     for (auto&& elt : map) {
         auto&& key = elt.first;
         auto&& text = elt.second.asString();
-        dictionaries_[language][key] = text;
+        auto formatter = LanguageFormatter(text);
+        dictionaries_[language].emplace(key, std::move(formatter));
     }
 }
 
@@ -126,14 +98,12 @@ void LanguageSwitcher::loadLanguage(const Language& language,
     loadLanguage(language, map);
 }
 
-void LanguageSwitcher::addDelegate(
-    const std::shared_ptr<LanguageDelegate>& delegate) {
+void LanguageSwitcher::addDelegate(LanguageDelegate* delegate) {
     CC_ASSERT(not locked_);
     delegates_.insert(delegate);
 }
 
-void LanguageSwitcher::removeDelegate(
-    const std::shared_ptr<LanguageDelegate>& delegate) {
+void LanguageSwitcher::removeDelegate(LanguageDelegate* delegate) {
     CC_ASSERT(not locked_);
     delegates_.erase(delegate);
 }

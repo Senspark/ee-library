@@ -39,7 +39,7 @@ public:
 
     CREATE_FUNC(SceneSwitcher);
 
-    virtual ~SceneSwitcher();
+    virtual ~SceneSwitcher() override;
 
     /// Sets the in-scene constructor.
     /// Used to constructor the in-scene.

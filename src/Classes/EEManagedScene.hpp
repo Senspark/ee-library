@@ -23,7 +23,7 @@ private:
 public:
     CREATE_FUNC(Self);
 
-    virtual ~ManagedScene();
+    virtual ~ManagedScene() override;
 
 protected:
     virtual bool init() override;

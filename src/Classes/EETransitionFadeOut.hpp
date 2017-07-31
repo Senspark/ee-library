@@ -30,7 +30,7 @@ public:
 
 protected:
     TransitionFadeOut() = default;
-    virtual ~TransitionFadeOut() = default;
+    virtual ~TransitionFadeOut() override = default;
 
     bool initWithDuration(float duration, cocos2d::Scene* scene,
                           const cocos2d::Color3B& color);

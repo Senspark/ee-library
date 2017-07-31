@@ -59,7 +59,7 @@ public:
     ButtonEx();
 
     /// Default destructor.
-    virtual ~ButtonEx();
+    virtual ~ButtonEx() override;
 
     /// Creates an empty Button.
     /// @return An empty Button instance.

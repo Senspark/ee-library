@@ -31,7 +31,7 @@ public:
 
 protected:
     Console();
-    virtual ~Console();
+    virtual ~Console() override;
 
     virtual bool init() override;
 

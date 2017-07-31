@@ -127,7 +127,7 @@ protected:
     friend DialogTree;
 
     Dialog();
-    virtual ~Dialog();
+    virtual ~Dialog() override;
 
     virtual bool init() override;
 

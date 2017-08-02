@@ -52,7 +52,10 @@ template <class DataType, class Traits = typename DataType::TraitsType,
           EE_REQUIRES(detail::is_data_info_v<DataType>),
           EE_REQUIRES(detail::can_load_v<Traits, Value>),
           EE_REQUIRES(detail::is_formattable_v<Formatter, Keys...>)>
-decltype(auto) get(Keys&&... keys) {
+Value get(Keys&&... keys) {
+    // Return type must not be decltype(auto) because
+    // DataTraits<std::string>::load returns const std::string& would result a
+    // segment fault.
     std::string result;
     detail::get0(DataType::Id,
                  Formatter::createKey(std::forward<Keys>(keys)...), result);

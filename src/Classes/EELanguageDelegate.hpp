@@ -51,7 +51,7 @@ public:
 protected:
     std::unique_ptr<Language> language_;
     std::unique_ptr<std::string> key_;
-    std::vector<std::string> args_;
+    std::unique_ptr<std::vector<std::string>> args_;
 
 private:
     TextCallback textCallback_;

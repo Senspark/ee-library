@@ -7,8 +7,6 @@
 //
 
 #include "EEMultilingualDelegate.hpp"
-#include "EELanguageSwitcher.hpp"
-#include "EELanguageFormatter.hpp"
 
 #include <2d/CCNode.h>
 #include <base/CCValue.h>
@@ -32,13 +30,6 @@ bool MultilingualDelegate::onAssignCCBCustomProperty(
         if (name == "multilingual_key") {
             CC_ASSERT(value.getType() == cocos2d::Value::Type::STRING);
             auto key = value.asString();
-
-            auto&& switcher = LanguageSwitcher::getInstance();
-            auto formatter = switcher.getFormatter(key);
-
-            std::vector<std::string> emptyTokens(formatter.getPlaceholders(),
-                                                 "");
-            setFormat(emptyTokens);
             setKey(key);
         }
     }

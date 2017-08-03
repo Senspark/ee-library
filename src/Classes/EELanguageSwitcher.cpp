@@ -93,7 +93,7 @@ std::string Self::getText(const std::string& key,
 
 std::string Self::getText(const Language& language,
                           const std::string& key) const {
-    return getText(language, {});
+    return getText(language, key, {});
 }
 
 std::string Self::getText(const Language& language, const std::string& key,

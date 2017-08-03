@@ -21,30 +21,32 @@ std::stack<LanguageSwitcher*> instances;
 static LanguageSwitcher nilInstance;
 } // namespace
 
-bool LanguageSwitcher::LanguageComparator::
-operator()(const Language& lhs, const Language& rhs) const {
+using Self = LanguageSwitcher;
+
+bool Self::LanguageComparator::operator()(const Language& lhs,
+                                          const Language& rhs) const {
     return lhs.getCode() < rhs.getCode();
 }
 
-LanguageSwitcher& LanguageSwitcher::getInstance() {
+Self& Self::getInstance() {
     return *instances.top();
 }
 
-LanguageSwitcher::LanguageSwitcher() {
+Self::LanguageSwitcher() {
     instances.push(this);
     locked_ = false;
     currentLanguage_ = std::make_unique<Language>(Language::English);
 }
 
-LanguageSwitcher::~LanguageSwitcher() {
+Self::~LanguageSwitcher() {
     instances.pop();
 }
 
-const Language& LanguageSwitcher::getCurrentLanguage() const {
+const Language& Self::getCurrentLanguage() const {
     return *currentLanguage_;
 }
 
-void LanguageSwitcher::changeLanguage(const Language& language) {
+void Self::changeLanguage(const Language& language) {
     CC_ASSERT(not locked_);
     locked_ = true;
     currentLanguage_ = std::make_unique<Language>(language);
@@ -54,9 +56,12 @@ void LanguageSwitcher::changeLanguage(const Language& language) {
     locked_ = false;
 }
 
-const LanguageFormatter&
-LanguageSwitcher::getFormatter(const Language& language,
-                               const std::string& key) const {
+const LanguageFormatter& Self::getFormatter(const std::string& key) const {
+    return getFormatter(getCurrentLanguage(), key);
+}
+
+const LanguageFormatter& Self::getFormatter(const Language& language,
+                                            const std::string& key) const {
     try {
         auto&& result = dictionaries_.at(language).at(key);
         return result;
@@ -67,27 +72,39 @@ LanguageSwitcher::getFormatter(const Language& language,
     }
 }
 
-const std::string& LanguageSwitcher::getFormat(const Language& language,
-                                               const std::string& key) const {
+const std::string& Self::getFormat(const std::string& key) const {
+    return getFormat(getCurrentLanguage(), key);
+}
+
+const std::string& Self::getFormat(const Language& language,
+                                   const std::string& key) const {
     auto&& formatter = getFormatter(language, key);
     return formatter.getFormat();
 }
 
-std::string LanguageSwitcher::getText(const Language& language,
-                                      const std::string& key) const {
+std::string Self::getText(const std::string& key) const {
+    return getText(getCurrentLanguage(), key);
+}
+
+std::string Self::getText(const std::string& key,
+                          const std::vector<std::string>& args) const {
+    return getText(getCurrentLanguage(), key, args);
+}
+
+std::string Self::getText(const Language& language,
+                          const std::string& key) const {
     return getText(language, {});
 }
 
-std::string
-LanguageSwitcher::getText(const Language& language, const std::string& key,
+std::string Self::getText(const Language& language, const std::string& key,
                           const std::vector<std::string>& args) const {
     auto&& formatter = getFormatter(language, key);
     auto result = formatter.format(args);
     return result;
 }
 
-void LanguageSwitcher::loadLanguage(const Language& language,
-                                    const cocos2d::ValueMap& map) {
+void Self::loadLanguage(const Language& language,
+                        const cocos2d::ValueMap& map) {
     for (auto&& elt : map) {
         auto&& key = elt.first;
         auto&& text = elt.second.asString();
@@ -96,18 +113,17 @@ void LanguageSwitcher::loadLanguage(const Language& language,
     }
 }
 
-void LanguageSwitcher::loadLanguage(const Language& language,
-                                    const std::string& filename) {
+void Self::loadLanguage(const Language& language, const std::string& filename) {
     auto map = cocos2d::FileUtils::getInstance()->getValueMapFromFile(filename);
     loadLanguage(language, map);
 }
 
-void LanguageSwitcher::addDelegate(LanguageDelegate* delegate) {
+void Self::addDelegate(LanguageDelegate* delegate) {
     CC_ASSERT(not locked_);
     delegates_.insert(delegate);
 }
 
-void LanguageSwitcher::removeDelegate(LanguageDelegate* delegate) {
+void Self::removeDelegate(LanguageDelegate* delegate) {
     CC_ASSERT(not locked_);
     delegates_.erase(delegate);
 }

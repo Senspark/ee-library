@@ -34,8 +34,7 @@ bool MultilingualDelegate::onAssignCCBCustomProperty(
             auto key = value.asString();
 
             auto&& switcher = LanguageSwitcher::getInstance();
-            auto formatter =
-                switcher.getFormatter(switcher.getCurrentLanguage(), key);
+            auto formatter = switcher.getFormatter(key);
 
             std::vector<std::string> emptyTokens(formatter.getPlaceholders(),
                                                  "");

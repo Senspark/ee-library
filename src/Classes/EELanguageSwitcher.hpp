@@ -38,8 +38,22 @@ public:
     /// @param[in] language The desired language.
     virtual void changeLanguage(const Language& language);
 
+    /// Gets the formatter for the current language and the specified key.
+    /// @param[in] key The multilingual key.
+    /// @return The formatter.
+    const LanguageFormatter& getFormatter(const std::string& key) const;
+
+    /// Gets the formatter for the specified language and key.
+    /// @param[in] language The desired language.
+    /// @param[in] key The multilingual key.
+    /// @return The formatter.
     const LanguageFormatter& getFormatter(const Language& language,
                                           const std::string& key) const;
+
+    /// Gets the format string for the current language and the specified key.
+    /// @param[in] key The desired key.
+    /// @return The format string.
+    const std::string& getFormat(const std::string& key) const;
 
     /// Gets the format string for the specified language and key.
     /// @param[in] language The desired language.
@@ -47,6 +61,14 @@ public:
     /// @return The format string.
     const std::string& getFormat(const Language& language,
                                  const std::string& key) const;
+
+    /// Gets the translated text in the current language for the specified key.
+    /// @param[in] key The text's key.
+    /// @return The translated text.
+    std::string getText(const std::string& key) const;
+
+    std::string getText(const std::string& key,
+                        const std::vector<std::string>& args) const;
 
     /// Gets the translated text in the specified language for the specified
     /// key.

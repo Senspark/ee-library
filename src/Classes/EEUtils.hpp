@@ -68,6 +68,57 @@ template <class... Args> std::string toString(Args&&... args) {
     return ss.str();
 }
 
+/// Instead of:
+/// @code
+/// MyClass* MyClass::create(int param) {
+///     auto result = new (std::nothrow) MyClass();
+///     if (result != nullptr && result->initWithParam(param)) {
+///         result->autorelease();
+///     } else {
+///         CC_SAFE_DELETE(result);
+///     }
+///     return result;
+/// }
+/// @endcode
+/// Use:
+/// @code
+/// MyClass* MyClass::create(int param) {
+///     return ee::createInstance<MyClass>(
+///         std::bind(&MyClass::initWithParam, std::placeholders::_1, param));
+/// }
+/// @endcode
+/// Or:
+/// @code
+/// MyClass* MyClass::create(int param) {
+///     return ee::createInstance<MyClass>([&](MyClass* instance) {
+///         return instance->initWithParam(param);
+///     });
+/// }
+/// @endcode
+template <class T, class Initializer = std::function<bool(T* instance)>>
+T* createInstance(const Initializer& initializer) {
+    auto instance = new (std::nothrow) T();
+    if (instance != nullptr && initializer(instance)) {
+        instance->autorelease();
+    } else {
+        CC_SAFE_DELETE(instance);
+    }
+    return instance;
+}
+
+/// Like above but use function member pointer.
+/// Example:
+/// @code
+/// MyClass* MyClass::create(int param) {
+///     return ee::createInstance(&MyClass::initWithParam, param);
+/// }
+/// @endcode
+template <class R, class T, class... Args>
+T* createInstance(R T::*f, Args&&... args) {
+    return ::ee::createInstance<T>(
+        std::bind(f, std::placeholders::_1, std::forward<Args>(args)...));
+}
+
 /// http://stackoverflow.com/questions/19053351/how-do-i-use-a-custom-deleter-with-a-stdunique-ptr-member
 template <class T>
 using deleted_unique_ptr = std::unique_ptr<T, std::function<void(T*)>>;

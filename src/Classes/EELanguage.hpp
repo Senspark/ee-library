@@ -20,6 +20,7 @@ public:
     static const Self English;
     static const Self Thailand;
     static const Self Vietnamese;
+    static const Self Russian;
 
     static Self create(const std::string& code);
 

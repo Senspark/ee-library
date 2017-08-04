@@ -12,6 +12,7 @@ namespace ee {
 const Language Language::English("en");
 const Language Language::Thailand("th");
 const Language Language::Vietnamese("vi");
+const Language Language::Russian("ru");
 
 Language Language::create(const std::string& code) {
     return Language(code);

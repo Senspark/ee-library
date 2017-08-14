@@ -6,6 +6,8 @@
 //
 //
 
+#include <stack>
+
 #include "EELanguageSwitcher.hpp"
 #include "EELanguage.hpp"
 #include "EELanguageDelegate.hpp"

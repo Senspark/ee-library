@@ -7,7 +7,7 @@
 //
 
 #include "EEScale9SpriteWithHsv.hpp"
-#include "EEShader.hpp"
+#include "EEShaderUtils.hpp"
 
 #include <cocos2d.h>
 
@@ -98,7 +98,7 @@ void Scale9SpriteWithHsv::draw(cocos2d::Renderer* renderer,
 }
 
 cocos2d::GLProgramState* Scale9SpriteWithHsv::createState() {
-    auto prog = Shader::getInstance()->createHsvProgram();
+    auto prog = ShaderUtils::getInstance()->createHsvProgram();
     auto state = cocos2d::GLProgramState::create(prog);
     state->setUniformCallback("u_hsv", [this](cocos2d::GLProgram* p,
                                               cocos2d::Uniform* u) {

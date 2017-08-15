@@ -232,10 +232,18 @@
 		6FC7D08C1EB07E9000078819 /* EEImageBuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC7D0891EB07E9000078819 /* EEImageBuilder.cpp */; };
 		6FC7D08D1EB07E9000078819 /* EEImageBuilder.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC7D08A1EB07E9000078819 /* EEImageBuilder.hpp */; };
 		6FC7D08E1EB07E9000078819 /* EEImageBuilder.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC7D08A1EB07E9000078819 /* EEImageBuilder.hpp */; };
-		6FC7FAD21D154387005AF2E5 /* EEShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC7FAD01D154387005AF2E5 /* EEShader.cpp */; };
-		6FC7FAD31D154387005AF2E5 /* EEShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC7FAD01D154387005AF2E5 /* EEShader.cpp */; };
-		6FC7FAD41D154387005AF2E5 /* EEShader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC7FAD11D154387005AF2E5 /* EEShader.hpp */; };
-		6FC7FAD51D154387005AF2E5 /* EEShader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC7FAD11D154387005AF2E5 /* EEShader.hpp */; };
+		6FC7FAD21D154387005AF2E5 /* EEShaderUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC7FAD01D154387005AF2E5 /* EEShaderUtils.cpp */; };
+		6FC7FAD31D154387005AF2E5 /* EEShaderUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC7FAD01D154387005AF2E5 /* EEShaderUtils.cpp */; };
+		6FC7FAD41D154387005AF2E5 /* EEShaderUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC7FAD11D154387005AF2E5 /* EEShaderUtils.hpp */; };
+		6FC7FAD51D154387005AF2E5 /* EEShaderUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC7FAD11D154387005AF2E5 /* EEShaderUtils.hpp */; };
+		6FC919951F42E82700C71164 /* EEShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC919931F42E82700C71164 /* EEShader.cpp */; };
+		6FC919961F42E82700C71164 /* EEShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC919931F42E82700C71164 /* EEShader.cpp */; };
+		6FC919971F42E82700C71164 /* EEShader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC919941F42E82700C71164 /* EEShader.hpp */; };
+		6FC919981F42E82700C71164 /* EEShader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC919941F42E82700C71164 /* EEShader.hpp */; };
+		6FC9199B1F42E85900C71164 /* EEShaderManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC919991F42E85900C71164 /* EEShaderManager.cpp */; };
+		6FC9199C1F42E85900C71164 /* EEShaderManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FC919991F42E85900C71164 /* EEShaderManager.cpp */; };
+		6FC9199D1F42E85900C71164 /* EEShaderManager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC9199A1F42E85900C71164 /* EEShaderManager.hpp */; };
+		6FC9199E1F42E85900C71164 /* EEShaderManager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FC9199A1F42E85900C71164 /* EEShaderManager.hpp */; };
 		6FCDDC421CD9981800DF8095 /* EEUiWidgetCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C468C2A1CA2F0CA00D16594 /* EEUiWidgetCallback.cpp */; };
 		6FD294771CE1CBF9009ECBFA /* EENodeV3Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FD294751CE1CBF9009ECBFA /* EENodeV3Loader.cpp */; };
 		6FD294781CE1CBF9009ECBFA /* EENodeV3Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FD294751CE1CBF9009ECBFA /* EENodeV3Loader.cpp */; };
@@ -415,8 +423,12 @@
 		6FC276BC1DBDA666008282B6 /* EEHsvProtocol.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEHsvProtocol.hpp; sourceTree = "<group>"; };
 		6FC7D0891EB07E9000078819 /* EEImageBuilder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEImageBuilder.cpp; sourceTree = "<group>"; };
 		6FC7D08A1EB07E9000078819 /* EEImageBuilder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEImageBuilder.hpp; sourceTree = "<group>"; };
-		6FC7FAD01D154387005AF2E5 /* EEShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEShader.cpp; sourceTree = "<group>"; };
-		6FC7FAD11D154387005AF2E5 /* EEShader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEShader.hpp; sourceTree = "<group>"; };
+		6FC7FAD01D154387005AF2E5 /* EEShaderUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEShaderUtils.cpp; sourceTree = "<group>"; };
+		6FC7FAD11D154387005AF2E5 /* EEShaderUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEShaderUtils.hpp; sourceTree = "<group>"; };
+		6FC919931F42E82700C71164 /* EEShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEShader.cpp; sourceTree = "<group>"; };
+		6FC919941F42E82700C71164 /* EEShader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEShader.hpp; sourceTree = "<group>"; };
+		6FC919991F42E85900C71164 /* EEShaderManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEShaderManager.cpp; sourceTree = "<group>"; };
+		6FC9199A1F42E85900C71164 /* EEShaderManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEShaderManager.hpp; sourceTree = "<group>"; };
 		6FD294751CE1CBF9009ECBFA /* EENodeV3Loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EENodeV3Loader.cpp; sourceTree = "<group>"; };
 		6FD294761CE1CBF9009ECBFA /* EENodeV3Loader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EENodeV3Loader.hpp; sourceTree = "<group>"; };
 		6FD2948E1CE1D95B009ECBFA /* EEUiLayoutLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEUiLayoutLoader.cpp; sourceTree = "<group>"; };
@@ -759,8 +771,12 @@
 		6FB731521D1BD418000B7397 /* shader */ = {
 			isa = PBXGroup;
 			children = (
-				6FC7FAD01D154387005AF2E5 /* EEShader.cpp */,
-				6FC7FAD11D154387005AF2E5 /* EEShader.hpp */,
+				6FC919931F42E82700C71164 /* EEShader.cpp */,
+				6FC919941F42E82700C71164 /* EEShader.hpp */,
+				6FC919991F42E85900C71164 /* EEShaderManager.cpp */,
+				6FC9199A1F42E85900C71164 /* EEShaderManager.hpp */,
+				6FC7FAD01D154387005AF2E5 /* EEShaderUtils.cpp */,
+				6FC7FAD11D154387005AF2E5 /* EEShaderUtils.hpp */,
 				6FB7310B1D1B7A48000B7397 /* EEHSVShader.vert.hpp */,
 				6F552B5D1D1AAA950077991C /* EEHSVShader.frag.hpp */,
 				6FC276BB1DBDA666008282B6 /* EEHsvProtocol.cpp */,
@@ -830,6 +846,7 @@
 				6C3CAB3E1C5B5ABB0059A380 /* EEHeader.hpp in Headers */,
 				6C3CAB3F1C5B5AC00059A380 /* EEMacro.hpp in Headers */,
 				6F6A872D1D2E4E9400DE745F /* EEEventDispatcher.hpp in Headers */,
+				6FC919971F42E82700C71164 /* EEShader.hpp in Headers */,
 				6FAE79871D33759D00A0CFB1 /* EEDataHandler.hpp in Headers */,
 				6F5D03D61E12647600F432F3 /* EEBackButtonComponent.hpp in Headers */,
 				6FD294791CE1CBF9009ECBFA /* EENodeV3Loader.hpp in Headers */,
@@ -857,12 +874,13 @@
 				6C47AAF81CA4EAE100B3E65E /* EEUiTextLoader.hpp in Headers */,
 				6F79B6401CCAA2D70008EFAC /* EEBackButtonListener.hpp in Headers */,
 				6C42EF451C85449F0062C2C6 /* EEDynamicValue.hpp in Headers */,
+				6FC9199D1F42E85900C71164 /* EEShaderManager.hpp in Headers */,
 				6C3849231CA230750020B858 /* EEEvent.hpp in Headers */,
 				6FBEDB9D1D1A93430038E335 /* EESpriteWithHsv.hpp in Headers */,
 				6FD64EA41E9B47220030CDEC /* EECommandPool.hpp in Headers */,
 				6F302A661F21E245005415AE /* EELanguage.hpp in Headers */,
 				6FAC217E1CE3454E000C16CC /* EEDialogGuard.hpp in Headers */,
-				6FC7FAD41D154387005AF2E5 /* EEShader.hpp in Headers */,
+				6FC7FAD41D154387005AF2E5 /* EEShaderUtils.hpp in Headers */,
 				6F79DC821CCE5CB900BDA20F /* EECrytography.hpp in Headers */,
 				6F8C9EF71E233D65005D4121 /* EESpineFactory.hpp in Headers */,
 				6FAE05331E9F212000A17C21 /* EEScopeGuard.hpp in Headers */,
@@ -906,6 +924,7 @@
 				6FA6588D1CCB5C0B009BC9EB /* EEImage.hpp in Headers */,
 				6F79B6461CCAC0E90008EFAC /* EEEvent.hpp in Headers */,
 				6FD2947A1CE1CBF9009ECBFA /* EENodeV3Loader.hpp in Headers */,
+				6FC919981F42E82700C71164 /* EEShader.hpp in Headers */,
 				6F6A872E1D2E4E9400DE745F /* EEEventDispatcher.hpp in Headers */,
 				6F5D03D71E12647600F432F3 /* EEBackButtonComponent.hpp in Headers */,
 				6F39F1591CCBBBD10038796D /* EEButton.hpp in Headers */,
@@ -933,8 +952,9 @@
 				6F79B6471CCAC0EA0008EFAC /* EEEventListener.hpp in Headers */,
 				6F6B54091D41B58700F13CA9 /* EEDataHandler.hpp in Headers */,
 				6FBEDB9E1D1A93430038E335 /* EESpriteWithHsv.hpp in Headers */,
+				6FC9199E1F42E85900C71164 /* EEShaderManager.hpp in Headers */,
 				6FAC217F1CE3454E000C16CC /* EEDialogGuard.hpp in Headers */,
-				6FC7FAD51D154387005AF2E5 /* EEShader.hpp in Headers */,
+				6FC7FAD51D154387005AF2E5 /* EEShaderUtils.hpp in Headers */,
 				6FD64EA51E9B47220030CDEC /* EECommandPool.hpp in Headers */,
 				6F302A671F21E245005415AE /* EELanguage.hpp in Headers */,
 				6F79B6411CCAA2D70008EFAC /* EEBackButtonListener.hpp in Headers */,
@@ -1040,8 +1060,9 @@
 				6F7F38861D1D5BD000F5893F /* EEBlurBackgroundLoader.cpp in Sources */,
 				6F3F009B1F2993F000C054AB /* EELanguageFormatter.cpp in Sources */,
 				6F3F00A11F299A8F00C054AB /* EEDialogTree.cpp in Sources */,
+				6FC919951F42E82700C71164 /* EEShader.cpp in Sources */,
 				6C468C2C1CA2F0CA00D16594 /* EEUiWidgetCallback.cpp in Sources */,
-				6FC7FAD21D154387005AF2E5 /* EEShader.cpp in Sources */,
+				6FC7FAD21D154387005AF2E5 /* EEShaderUtils.cpp in Sources */,
 				6FB73D331CE45E5800C718D5 /* EEDialogUtils.cpp in Sources */,
 				6F6269571DBDBA7400A93689 /* EEButtonLoader.cpp in Sources */,
 				6FC7D08B1EB07E9000078819 /* EEImageBuilder.cpp in Sources */,
@@ -1090,6 +1111,7 @@
 				6FA658941CCB5C0C009BC9EB /* EEBoxBlur2D.cpp in Sources */,
 				6F39F1561CCBBBD10038796D /* EEButton.cpp in Sources */,
 				6FA658911CCB5C0C009BC9EB /* EEImage.cpp in Sources */,
+				6FC9199B1F42E85900C71164 /* EEShaderManager.cpp in Sources */,
 				6F302A701F21E944005415AE /* EELanguageDelegate.cpp in Sources */,
 				6F48D01C1E9CBBE900342077 /* EESkeletonBone.cpp in Sources */,
 				6F5D03D41E12647600F432F3 /* EEBackButtonComponent.cpp in Sources */,
@@ -1108,8 +1130,9 @@
 				6F7F38871D1D5BD000F5893F /* EEBlurBackgroundLoader.cpp in Sources */,
 				6F3F009C1F2993F000C054AB /* EELanguageFormatter.cpp in Sources */,
 				6F3F00A21F299A8F00C054AB /* EEDialogTree.cpp in Sources */,
+				6FC919961F42E82700C71164 /* EEShader.cpp in Sources */,
 				6FA658981CCB700B009BC9EB /* EEUtils.cpp in Sources */,
-				6FC7FAD31D154387005AF2E5 /* EEShader.cpp in Sources */,
+				6FC7FAD31D154387005AF2E5 /* EEShaderUtils.cpp in Sources */,
 				6FB73D341CE45E5800C718D5 /* EEDialogUtils.cpp in Sources */,
 				6F6269581DBDBA7400A93689 /* EEButtonLoader.cpp in Sources */,
 				6FC7D08C1EB07E9000078819 /* EEImageBuilder.cpp in Sources */,
@@ -1158,6 +1181,7 @@
 				6FA6588F1CCB5C0B009BC9EB /* EEBoxBlur2D.cpp in Sources */,
 				6FCDDC421CD9981800DF8095 /* EEUiWidgetCallback.cpp in Sources */,
 				6F79B6431CCAA2D90008EFAC /* EEBackButtonListener.cpp in Sources */,
+				6FC9199C1F42E85900C71164 /* EEShaderManager.cpp in Sources */,
 				6F302A711F21E944005415AE /* EELanguageDelegate.cpp in Sources */,
 				6F48D01D1E9CBBE900342077 /* EESkeletonBone.cpp in Sources */,
 				6F5D03D51E12647600F432F3 /* EEBackButtonComponent.cpp in Sources */,

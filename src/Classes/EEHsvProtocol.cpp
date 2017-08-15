@@ -7,7 +7,7 @@
 //
 
 #include "EEHsvProtocol.hpp"
-#include "EEShader.hpp"
+#include "EEShaderUtils.hpp"
 
 namespace ee {
 HsvProtocol::HsvProtocol() {
@@ -55,7 +55,9 @@ void HsvProtocol::setContrast(float contrast) {
     matrixDirty_ = contrastMatrixDirty_ = true;
 }
 
-const cocos2d::Mat4& HsvProtocol::getHsvMatrix() const { return hsvMatrix_; }
+const cocos2d::Mat4& HsvProtocol::getHsvMatrix() const {
+    return hsvMatrix_;
+}
 
 bool HsvProtocol::updateMatrix() {
     updateHueMatrix();
@@ -78,28 +80,28 @@ bool HsvProtocol::updateMatrix() {
 void HsvProtocol::updateHueMatrix() {
     if (hueMatrixDirty_) {
         hueMatrixDirty_ = false;
-        hueMatrix_ = Shader::createHueMatrix(hue_);
+        hueMatrix_ = ShaderUtils::createHueMatrix(hue_);
     }
 }
 
 void HsvProtocol::updateSaturationMatrix() {
     if (saturationMatrixDirty_) {
         saturationMatrixDirty_ = false;
-        saturationMatrix_ = Shader::createSaturationMatrix(saturation_);
+        saturationMatrix_ = ShaderUtils::createSaturationMatrix(saturation_);
     }
 }
 
 void HsvProtocol::updateBrightnessMatrix() {
     if (brightnessMatrixDirty_) {
         brightnessMatrixDirty_ = false;
-        brightnessMatrix_ = Shader::createBrightnessMatrix(brightness_);
+        brightnessMatrix_ = ShaderUtils::createBrightnessMatrix(brightness_);
     }
 }
 
 void HsvProtocol::updateContrastMatrix() {
     if (contrastMatrixDirty_) {
         contrastMatrixDirty_ = false;
-        contrastMatrix_ = Shader::createContrastMatrix(contrast_);
+        contrastMatrix_ = ShaderUtils::createContrastMatrix(contrast_);
     }
 }
 } // namespace ee

@@ -7,7 +7,7 @@
 //
 
 #include "EESpriteWithHsv.hpp"
-#include "EEShader.hpp"
+#include "EEShaderUtils.hpp"
 
 #include <renderer/CCGLProgramState.h>
 
@@ -75,7 +75,7 @@ bool SpriteWithHsv::initWithTexture(cocos2d::Texture2D* texture,
 }
 
 void SpriteWithHsv::initShader() {
-    auto prog = Shader::getInstance()->createHsvProgram();
+    auto prog = ShaderUtils::getInstance()->createHsvProgram();
     setGLProgram(prog);
 }
 

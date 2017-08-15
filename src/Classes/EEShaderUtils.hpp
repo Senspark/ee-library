@@ -6,16 +6,16 @@
 //
 //
 
-#ifndef EE_LIBRARY_SHADER_HPP_
-#define EE_LIBRARY_SHADER_HPP_
+#ifndef EE_LIBRARY_SHADER_UTILS_HPP
+#define EE_LIBRARY_SHADER_UTILS_HPP
 
 #include "EEMacro.hpp"
 #include "EECocos2dxFwd.hpp"
 
 namespace ee {
-class Shader {
+class ShaderUtils {
 public:
-    static Shader* getInstance();
+    static ShaderUtils* getInstance();
 
     cocos2d::GLProgram* createHsvProgram();
 
@@ -77,8 +77,8 @@ public:
     static cocos2d::Mat4 createHueMatrix(float degree);
 
 private:
-    Shader();
-    ~Shader();
+    ShaderUtils();
+    ~ShaderUtils();
 
     static cocos2d::GLProgram*
     createBlurProgram(bool isVertical, float dimension, int blurRadius,
@@ -99,4 +99,4 @@ private:
 };
 } // namespace ee
 
-#endif /* EE_LIBRARY_SHADER_HPP_ */
+#endif /* EE_LIBRARY_SHADER_UTILS_HPP */

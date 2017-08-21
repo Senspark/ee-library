@@ -12,41 +12,36 @@
 #include "EEHsvProtocol.hpp"
 
 #include <2d/CCSprite.h>
-#include <math/Mat4.h>
 
 namespace ee {
 class SpriteWithHsvLoader;
 
 class SpriteWithHsv : public cocos2d::Sprite, public HsvProtocol {
 private:
-    using Initializer = std::function<bool(SpriteWithHsv* instance)>;
-
-    static SpriteWithHsv* createImpl(const Initializer& initializer);
+    using Self = SpriteWithHsv;
+    using Super = cocos2d::Sprite;
 
 public:
     using Loader = SpriteWithHsvLoader;
 
-    static SpriteWithHsv* create();
+    static Self* create();
 
-    static SpriteWithHsv* create(const std::string& filename);
+    static Self* create(const std::string& filename);
 
-    static SpriteWithHsv* create(const std::string& filename,
-                                 const cocos2d::Rect& rect);
+    static Self* create(const std::string& filename, const cocos2d::Rect& rect);
 
-    static SpriteWithHsv* createWithTexture(cocos2d::Texture2D* texture);
+    static Self* createWithTexture(cocos2d::Texture2D* texture);
 
-    static SpriteWithHsv* createWithTexture(cocos2d::Texture2D* texture,
-                                            const cocos2d::Rect& rect,
-                                            bool rotated = false);
+    static Self* createWithTexture(cocos2d::Texture2D* texture,
+                                   const cocos2d::Rect& rect,
+                                   bool rotated = false);
 
-    static SpriteWithHsv*
-    createWithSpriteFrame(cocos2d::SpriteFrame* spriteFrame);
+    static Self* createWithSpriteFrame(cocos2d::SpriteFrame* spriteFrame);
 
-    static SpriteWithHsv*
-    createWithSpriteFrameName(const std::string& spriteFrameName);
+    static Self* createWithSpriteFrameName(const std::string& spriteFrameName);
 
 protected:
-    using Sprite::initWithTexture;
+    using Super::initWithTexture;
 
     virtual bool initWithTexture(cocos2d::Texture2D* texture,
                                  const cocos2d::Rect& rect,

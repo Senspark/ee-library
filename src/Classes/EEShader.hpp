@@ -12,18 +12,28 @@
 #include "EECocos2dxFwd.hpp"
 
 namespace ee {
+/// Wraps a shader and automatically rebinds when the renderer is recreated on
+/// Android.
 class Shader final {
 private:
     using Self = Shader;
 
 public:
+    /// Creates a shader.
+    /// @param[in] name The program name.
+    /// @param[in] vertex The vertex shader content.
+    /// @param[in] fragment The fragment shader content.
     static std::unique_ptr<Self> create(const std::string& name,
                                         const std::string& vertex,
                                         const std::string& fragment);
 
     ~Shader();
 
+    /// Gets the GL program.
+    /// Automatically creates one if it has not created.
     cocos2d::GLProgram* getProgram() const;
+
+    /// Creates a GL program state.
     cocos2d::GLProgramState* createProgramState() const;
 
 protected:

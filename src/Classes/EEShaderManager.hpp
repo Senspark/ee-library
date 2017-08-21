@@ -30,10 +30,21 @@ public:
     ShaderManager(const Self&) = delete;
     Self& operator=(const Self&) = delete;
 
+    /// Adds a shader.
+    /// @param[in] name The program name.
+    /// @param[in] vertex The vertex shader content.
+    /// @param[in] fragment The fragment shader content.
     void addShader(const std::string& name, const std::string& vertex,
                    const std::string& fragment);
 
+    /// Gets the GL program.
+    /// @param[in] name The program name.
+    /// @return nullptr if the program doesn't exist.
     cocos2d::GLProgram* getProgram(const std::string& name) const;
+
+    /// Creates a GL program state.
+    /// @param[in] name The program name.
+    /// @return nullptr if the program doesn't exist.
     cocos2d::GLProgramState* createProgramState(const std::string& name) const;
 
 private:

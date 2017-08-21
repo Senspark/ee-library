@@ -80,28 +80,28 @@ bool HsvProtocol::updateMatrix() {
 void HsvProtocol::updateHueMatrix() {
     if (hueMatrixDirty_) {
         hueMatrixDirty_ = false;
-        hueMatrix_ = ShaderUtils::createHueMatrix(hue_);
+        hueMatrix_ = createHueMatrix(hue_);
     }
 }
 
 void HsvProtocol::updateSaturationMatrix() {
     if (saturationMatrixDirty_) {
         saturationMatrixDirty_ = false;
-        saturationMatrix_ = ShaderUtils::createSaturationMatrix(saturation_);
+        saturationMatrix_ = createSaturationMatrix(saturation_);
     }
 }
 
 void HsvProtocol::updateBrightnessMatrix() {
     if (brightnessMatrixDirty_) {
         brightnessMatrixDirty_ = false;
-        brightnessMatrix_ = ShaderUtils::createBrightnessMatrix(brightness_);
+        brightnessMatrix_ = createBrightnessMatrix(brightness_);
     }
 }
 
 void HsvProtocol::updateContrastMatrix() {
     if (contrastMatrixDirty_) {
         contrastMatrixDirty_ = false;
-        contrastMatrix_ = ShaderUtils::createContrastMatrix(contrast_);
+        contrastMatrix_ = createContrastMatrix(contrast_);
     }
 }
 } // namespace ee

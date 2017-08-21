@@ -9,22 +9,17 @@
 #ifndef EE_LIBRARY_SCALE9SPRITE_WITH_HSV_HPP_
 #define EE_LIBRARY_SCALE9SPRITE_WITH_HSV_HPP_
 
-#include "EEMacro.hpp"
 #include "EEForward.hpp"
 #include "EEHsvProtocol.hpp"
 
 #include <ui/UIScale9Sprite.h>
-#include <math/Mat4.h>
 
-NS_EE_BEGIN
+namespace ee {
 class Scale9SpriteWithHsv : public cocos2d::ui::Scale9Sprite,
                             public HsvProtocol {
 private:
     using Self = Scale9SpriteWithHsv;
     using Super = cocos2d::ui::Scale9Sprite;
-    using Initializer = std::function<bool(Self* instance)>;
-
-    static Self* createImpl(const Initializer& initializer);
 
 public:
     static Self* create();
@@ -58,6 +53,6 @@ private:
 
     cocos2d::GLProgramState* customState_;
 };
-NS_EE_END
+} // namespace ee
 
 #endif /* EE_LIBRARY_SCALE9SPRITE_WITH_HSV_HPP_ */

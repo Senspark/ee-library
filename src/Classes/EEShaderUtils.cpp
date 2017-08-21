@@ -8,34 +8,34 @@
 
 #include <iomanip>
 
+#include "EEShaderManager.hpp"
 #include "EEShaderUtils.hpp"
 #include "EEUtils.hpp"
 
-#include <base/CCEventType.h>
-#include <base/CCEventListenerCustom.h>
 #include <base/CCDirector.h>
 #include <base/CCEventDispatcher.h>
+#include <base/CCEventListenerCustom.h>
+#include <base/CCEventType.h>
 #include <renderer/CCGLProgram.h>
 #include <renderer/CCGLProgramCache.h>
 
-NS_EE_BEGIN
-NS_ANONYMOUS_BEGIN
+namespace ee {
+namespace constants {
 constexpr const float rwgt = 0.3086f;
 constexpr const float gwgt = 0.6094f;
 constexpr const float bwgt = 0.0820f;
-NS_ANONYMOUS_END
+} // namespace constants
 
-cocos2d::Mat4 ShaderUtils::createShearZMatrix(float dx, float dy) {
+cocos2d::Mat4 createShearZMatrix(float dx, float dy) {
     auto mat = cocos2d::Mat4::IDENTITY;
     mat.m[2] = dx;
     mat.m[6] = dy;
     return mat;
 }
 
-void ShaderUtils::transformRGB(const cocos2d::Mat4& mat, float red, float green,
-                               float blue, float& transformedRed,
-                               float& transformedGreen,
-                               float& transformedBlue) {
+void transformRGB(const cocos2d::Mat4& mat, float red, float green, float blue,
+                  float& transformedRed, float& transformedGreen,
+                  float& transformedBlue) {
     float r = red * mat.m[0] + green * mat.m[4] + blue * mat.m[8] + mat.m[12];
     float g = red * mat.m[1] + green * mat.m[5] + blue * mat.m[9] + mat.m[13];
     float b = red * mat.m[2] + green * mat.m[6] + blue * mat.m[10] + mat.m[14];
@@ -45,12 +45,11 @@ void ShaderUtils::transformRGB(const cocos2d::Mat4& mat, float red, float green,
     transformedBlue = b;
 }
 
-cocos2d::Mat4 ShaderUtils::createContrastMatrix(float contrast) {
+cocos2d::Mat4 createContrastMatrix(float contrast) {
     return createContrastMatrix(contrast, contrast, contrast);
 }
 
-cocos2d::Mat4 ShaderUtils::createContrastMatrix(float red, float green,
-                                                float blue) {
+cocos2d::Mat4 createContrastMatrix(float red, float green, float blue) {
     auto mat =
         createBrightnessMatrix((1 - red) / 2, (1 - green) / 2, (1 - blue) / 2);
     mat.m[0] = red;
@@ -59,38 +58,37 @@ cocos2d::Mat4 ShaderUtils::createContrastMatrix(float red, float green,
     return mat;
 }
 
-cocos2d::Mat4 ShaderUtils::createSaturationMatrix(float saturation) {
+cocos2d::Mat4 createSaturationMatrix(float saturation) {
     auto mat = cocos2d::Mat4::ZERO;
 
-    mat.m[0] = (1.0f - saturation) * rwgt + saturation;
-    mat.m[1] = (1.0f - saturation) * rwgt;
-    mat.m[2] = (1.0f - saturation) * rwgt;
+    mat.m[0] = (1.0f - saturation) * constants::rwgt + saturation;
+    mat.m[1] = (1.0f - saturation) * constants::rwgt;
+    mat.m[2] = (1.0f - saturation) * constants::rwgt;
 
-    mat.m[4] = (1.0f - saturation) * gwgt;
-    mat.m[5] = (1.0f - saturation) * gwgt + saturation;
-    mat.m[6] = (1.0f - saturation) * gwgt;
+    mat.m[4] = (1.0f - saturation) * constants::gwgt;
+    mat.m[5] = (1.0f - saturation) * constants::gwgt + saturation;
+    mat.m[6] = (1.0f - saturation) * constants::gwgt;
 
-    mat.m[8] = (1.0f - saturation) * bwgt;
-    mat.m[9] = (1.0f - saturation) * bwgt;
-    mat.m[10] = (1.0f - saturation) * bwgt + saturation;
+    mat.m[8] = (1.0f - saturation) * constants::bwgt;
+    mat.m[9] = (1.0f - saturation) * constants::bwgt;
+    mat.m[10] = (1.0f - saturation) * constants::bwgt + saturation;
 
     mat.m[15] = 1.0f;
 
     return mat;
 }
 
-cocos2d::Mat4 ShaderUtils::createBrightnessMatrix(float brightness) {
+cocos2d::Mat4 createBrightnessMatrix(float brightness) {
     return createBrightnessMatrix(brightness, brightness, brightness);
 }
 
-cocos2d::Mat4 ShaderUtils::createBrightnessMatrix(float red, float green,
-                                                  float blue) {
+cocos2d::Mat4 createBrightnessMatrix(float red, float green, float blue) {
     cocos2d::Mat4 mat;
     cocos2d::Mat4::createTranslation(red, green, blue, &mat);
     return mat;
 }
 
-cocos2d::Mat4 ShaderUtils::createHueMatrix(float degree) {
+cocos2d::Mat4 createHueMatrix(float degree) {
     auto mat = cocos2d::Mat4::IDENTITY;
 
     cocos2d::Mat4 temp;
@@ -108,7 +106,8 @@ cocos2d::Mat4 ShaderUtils::createHueMatrix(float degree) {
 
     // Shear the space to make the luminance plane horizontal.
     float lx, ly, lz;
-    transformRGB(mat, rwgt, gwgt, bwgt, lx, ly, lz);
+    transformRGB(mat, constants::rwgt, constants::gwgt, constants::bwgt, lx, ly,
+                 lz);
 
     float zsx = lx / lz;
     float zsy = ly / lz;
@@ -138,51 +137,21 @@ cocos2d::Mat4 ShaderUtils::createHueMatrix(float degree) {
     return mat;
 }
 
-namespace shader {
-constexpr auto hsv_program = "ee_hsv_program";
-} // namespace shader
+namespace program {
+constexpr auto hsv = "ee_hsv_program";
+} // namespace program
 
-#include "EEHSVShader.vert.hpp"
-#include "EEHSVShader.frag.hpp"
+#include "EEHSVShader.frag"
+#include "EEHSVShader.vert"
 
-ShaderUtils* ShaderUtils::getInstance() {
-    static ShaderUtils sharedInstance;
-    return &sharedInstance;
-}
-
-ShaderUtils::ShaderUtils() {
-    backgroundListener_ = cocos2d::EventListenerCustom::create(
-        EVENT_RENDERER_RECREATED, std::bind([] {
-            auto cache = cocos2d::GLProgramCache::getInstance();
-            auto p = cache->getGLProgram(shader::hsv_program);
-            if (p != nullptr) {
-                p->reset();
-                p->initWithByteArrays(ee_hsv_shader_vert, ee_hsv_shader_frag);
-                p->link();
-                p->updateUniforms();
-            }
-        }));
-    cocos2d::Director::getInstance()
-        ->getEventDispatcher()
-        ->addEventListenerWithFixedPriority(backgroundListener_, -1);
-}
-
-ShaderUtils::~ShaderUtils() {
-    cocos2d::Director::getInstance()->getEventDispatcher()->removeEventListener(
-        backgroundListener_);
-}
-
-cocos2d::GLProgram* ShaderUtils::createHsvProgram() {
-    auto cache = cocos2d::GLProgramCache::getInstance();
-    auto p = cache->getGLProgram(shader::hsv_program);
-    if (p == nullptr) {
-        p = cocos2d::GLProgram::createWithByteArrays(ee_hsv_shader_vert,
-                                                     ee_hsv_shader_frag);
-        cache->addGLProgram(p, shader::hsv_program);
-    }
-
-    CC_ASSERT(p != nullptr);
-    return p;
+cocos2d::GLProgramState* createHsvProgramState() {
+    static struct local {
+        local() {
+            ShaderManager::getInstance().addShader(
+                program::hsv, ee_hsv_shader_vert, ee_hsv_shader_frag);
+        }
+    } initializer;
+    return ShaderManager::getInstance().createProgramState(program::hsv);
 }
 
 /*

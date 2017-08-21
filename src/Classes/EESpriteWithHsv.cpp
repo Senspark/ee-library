@@ -8,81 +8,68 @@
 
 #include "EESpriteWithHsv.hpp"
 #include "EEShaderUtils.hpp"
+#include "EEUtils.hpp"
 
 #include <renderer/CCGLProgramState.h>
 
 namespace ee {
-SpriteWithHsv* SpriteWithHsv::createImpl(const Initializer& initializer) {
-    auto result = new (std::nothrow) SpriteWithHsv();
-    if (result != nullptr && initializer(result)) {
-        result->autorelease();
-    } else {
-        CC_SAFE_DELETE(result);
-    }
-    return result;
+using Self = SpriteWithHsv;
+
+Self* Self::create() {
+    return createInstance<Self>(std::bind(&Self::init, std::placeholders::_1));
 }
 
-SpriteWithHsv* SpriteWithHsv::create() {
-    return createImpl(std::bind(&SpriteWithHsv::init, std::placeholders::_1));
+Self* Self::create(const std::string& filename) {
+    return createInstance<Self>(
+        [&](Self* instance) { return instance->initWithFile(filename); });
 }
 
-SpriteWithHsv* SpriteWithHsv::create(const std::string& filename) {
-    return createImpl([&](SpriteWithHsv* instance) {
-        return instance->initWithFile(filename);
-    });
+Self* Self::create(const std::string& filename, const cocos2d::Rect& rect) {
+    return createInstance<Self>(
+        [&](Self* instance) { return instance->initWithFile(filename, rect); });
 }
 
-SpriteWithHsv* SpriteWithHsv::create(const std::string& filename,
-                                     const cocos2d::Rect& rect) {
-    return createImpl([&](SpriteWithHsv* instance) {
-        return instance->initWithFile(filename, rect);
-    });
+Self* Self::createWithTexture(cocos2d::Texture2D* texture) {
+    return createInstance<Self>(
+        [&](Self* instance) { return instance->initWithTexture(texture); });
 }
 
-SpriteWithHsv* SpriteWithHsv::createWithTexture(cocos2d::Texture2D* texture) {
-    return createImpl([&](SpriteWithHsv* instance) {
-        return instance->initWithTexture(texture);
-    });
-}
-
-SpriteWithHsv* SpriteWithHsv::createWithTexture(cocos2d::Texture2D* texture,
-                                                const cocos2d::Rect& rect,
-                                                bool rotated) {
-    return createImpl([&](SpriteWithHsv* instance) {
+Self* Self::createWithTexture(cocos2d::Texture2D* texture,
+                              const cocos2d::Rect& rect, bool rotated) {
+    return createInstance<Self>([&](Self* instance) {
         return instance->initWithTexture(texture, rect, rotated);
     });
 }
 
-SpriteWithHsv*
-SpriteWithHsv::createWithSpriteFrame(cocos2d::SpriteFrame* spriteFrame) {
-    return createImpl(std::bind(&SpriteWithHsv::initWithSpriteFrame,
-                                std::placeholders::_1, spriteFrame));
+Self* Self::createWithSpriteFrame(cocos2d::SpriteFrame* spriteFrame) {
+    return createInstance<Self>(std::bind(&Self::initWithSpriteFrame,
+                                          std::placeholders::_1, spriteFrame));
 }
 
-SpriteWithHsv*
-SpriteWithHsv::createWithSpriteFrameName(const std::string& spriteFrameName) {
-    return createImpl(std::bind(&SpriteWithHsv::initWithSpriteFrameName,
-                                std::placeholders::_1, spriteFrameName));
+Self* Self::createWithSpriteFrameName(const std::string& spriteFrameName) {
+    return createInstance<Self>(std::bind(&Self::initWithSpriteFrameName,
+                                          std::placeholders::_1,
+                                          spriteFrameName));
 }
 
-bool SpriteWithHsv::initWithTexture(cocos2d::Texture2D* texture,
-                                    const cocos2d::Rect& rect, bool rotated) {
-    if (not Sprite::initWithTexture(texture, rect, rotated)) {
+bool Self::initWithTexture(cocos2d::Texture2D* texture,
+                           const cocos2d::Rect& rect, bool rotated) {
+    if (not Super::initWithTexture(texture, rect, rotated)) {
         return false;
     }
     initShader();
     return true;
 }
 
-void SpriteWithHsv::initShader() {
-    auto prog = ShaderUtils::getInstance()->createHsvProgram();
-    setGLProgram(prog);
+void Self::initShader() {
+    auto state = createHsvProgramState();
+    setGLProgramState(state);
 }
 
-void SpriteWithHsv::draw(cocos2d::Renderer* renderer,
-                         const cocos2d::Mat4& transform, std::uint32_t flags) {
+void Self::draw(cocos2d::Renderer* renderer, const cocos2d::Mat4& transform,
+                std::uint32_t flags) {
     updateMatrix();
-    Sprite::draw(renderer, transform, flags);
+    Super::draw(renderer, transform, flags);
 }
 
 bool SpriteWithHsv::updateMatrix() {

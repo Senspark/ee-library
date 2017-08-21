@@ -363,7 +363,7 @@
 		6F48D01B1E9CBBE900342077 /* EESkeletonBone.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EESkeletonBone.hpp; sourceTree = "<group>"; };
 		6F48D0201E9CBE5500342077 /* EESkeletonBoneLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EESkeletonBoneLoader.cpp; sourceTree = "<group>"; };
 		6F48D0211E9CBE5500342077 /* EESkeletonBoneLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EESkeletonBoneLoader.hpp; sourceTree = "<group>"; };
-		6F552B5D1D1AAA950077991C /* EEHSVShader.frag.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EEHSVShader.frag.hpp; sourceTree = "<group>"; };
+		6F552B5D1D1AAA950077991C /* EEHsvShader.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = EEHsvShader.frag; sourceTree = "<group>"; };
 		6F5575E81E837F3E00154A18 /* EEDialogComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDialogComponent.cpp; sourceTree = "<group>"; };
 		6F5575E91E837F3E00154A18 /* EEDialogComponent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDialogComponent.hpp; sourceTree = "<group>"; };
 		6F584F891F205E0F00001AD2 /* EEDataUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDataUtils.cpp; sourceTree = "<group>"; };
@@ -406,7 +406,7 @@
 		6FAE79831D33759D00A0CFB1 /* EEDataHandler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDataHandler.hpp; sourceTree = "<group>"; };
 		6FAE79851D33759D00A0CFB1 /* EEDataInfo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEDataInfo.hpp; sourceTree = "<group>"; };
 		6FB3AAFF1F1F0C1C00EBE5A9 /* EEMeta.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEMeta.hpp; sourceTree = "<group>"; };
-		6FB7310B1D1B7A48000B7397 /* EEHSVShader.vert.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EEHSVShader.vert.hpp; sourceTree = "<group>"; };
+		6FB7310B1D1B7A48000B7397 /* EEHsvShader.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = EEHsvShader.vert; sourceTree = "<group>"; };
 		6FB7311F1D1B926F000B7397 /* EESpriteWithHsvLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EESpriteWithHsvLoader.cpp; sourceTree = "<group>"; };
 		6FB731201D1B926F000B7397 /* EESpriteWithHsvLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EESpriteWithHsvLoader.hpp; sourceTree = "<group>"; };
 		6FB73D311CE45E5800C718D5 /* EEDialogUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEDialogUtils.cpp; sourceTree = "<group>"; };
@@ -777,8 +777,8 @@
 				6FC9199A1F42E85900C71164 /* EEShaderManager.hpp */,
 				6FC7FAD01D154387005AF2E5 /* EEShaderUtils.cpp */,
 				6FC7FAD11D154387005AF2E5 /* EEShaderUtils.hpp */,
-				6FB7310B1D1B7A48000B7397 /* EEHSVShader.vert.hpp */,
-				6F552B5D1D1AAA950077991C /* EEHSVShader.frag.hpp */,
+				6FB7310B1D1B7A48000B7397 /* EEHsvShader.vert */,
+				6F552B5D1D1AAA950077991C /* EEHsvShader.frag */,
 				6FC276BB1DBDA666008282B6 /* EEHsvProtocol.cpp */,
 				6FC276BC1DBDA666008282B6 /* EEHsvProtocol.hpp */,
 				6FBEDB991D1A93430038E335 /* EESpriteWithHsv.cpp */,

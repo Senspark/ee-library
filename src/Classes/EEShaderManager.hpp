@@ -37,6 +37,10 @@ public:
     void addShader(const std::string& name, const std::string& vertex,
                    const std::string& fragment);
 
+    /// Checks whether the specified program is added.
+    /// @param[in] name The program name.
+    bool isAdded(const std::string& name) const;
+
     /// Gets the GL program.
     /// @param[in] name The program name.
     /// @return nullptr if the program doesn't exist.

@@ -61,37 +61,27 @@ cocos2d::Mat4 createHueMatrix(float degree);
 
 cocos2d::GLProgramState* createHsvProgramState();
 
-cocos2d::GLProgram* createHorizontalBlurProgram(float width, int blurRadius,
+/// Creates a horizontal blur GL program.
+/// @param[in] width The width of the texture in pixels.
+/// @param[in] blurRadius The blur range in pixels.
+/// @param[in] useLinearSampling Whether or not to use linear sampling,
+/// effective only when blurRadius is even.
+/// @param[in] sigma How strong the blur is.
+cocos2d::GLProgram* createHorizontalBlurProgram(std::size_t width,
+                                                std::size_t blurRadius,
                                                 bool useLinearSampling,
                                                 float sigma);
 
-cocos2d::GLProgram* createVerticalBlurProgram(float height, int blurRadius,
+/// Creates a vertical blur GL program.
+/// @param[in] height The height of the texture in pixels.
+/// @param[in] blurRadius The blur range in pixels.
+/// @param[in] useLinearSampling Whether or not to use linear sampling,
+/// effective only when blurRadius is even.
+/// @param[in] sigma How strong the blur is.
+cocos2d::GLProgram* createVerticalBlurProgram(std::size_t height,
+                                              std::size_t blurRadius,
                                               bool useLinearSampling,
                                               float sigma);
-
-class ShaderUtils {
-public:
-    static ShaderUtils* getInstance();
-
-private:
-    ShaderUtils();
-    ~ShaderUtils();
-
-    static cocos2d::GLProgram*
-    createBlurProgram(bool isVertical, float dimension, int blurRadius,
-                      bool useLinearSampling, float sigma);
-
-    static std::string createBlurVertexShader(bool isVertical, float dimension,
-                                              int blurRadius,
-                                              bool useLinearSampling,
-                                              float sigma);
-
-    static std::string createBlurFragmentShader(int blurRadius,
-                                                bool useLinearSampling,
-                                                float sigma);
-
-    static float gaussianFunction(float x, float sigma);
-};
 } // namespace ee
 
 #endif /* EE_LIBRARY_SHADER_UTILS_HPP */

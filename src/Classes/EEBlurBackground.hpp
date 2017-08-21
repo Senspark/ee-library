@@ -9,56 +9,66 @@
 #ifndef EE_LIBRARY_BLUR_BACKGROUND_HPP_
 #define EE_LIBRARY_BLUR_BACKGROUND_HPP_
 
-/*
-#include "EEMacro.hpp"
 #include "EECocos2dxFwd.hpp"
 
 #include <2d/CCNode.h>
 
-NS_EE_BEGIN
+namespace ee {
 class BlurBackground : public cocos2d::Node {
+private:
+    using Self = BlurBackground;
+    using Super = cocos2d::Node;
+
 public:
-    CREATE_FUNC(BlurBackground);
-    
+    CREATE_FUNC(Self);
+
+    /// Sets the render scale.
+    /// Smaller value offers better performace but more blurry.
+    /// Default is 1.0f.
+    /// @param[in] scale Render scale.
     void setRenderScale(float scale);
-    
+
+    /// Sets the blur strength.
+    /// Default is 2.0f.
+    /// @param[in] sigma
     void setSigma(float sigma);
-    
-    void setBlurRadius(int radius);
-    
-    void setUseLinearSampling(bool use);
-    
+
+    /// Default is 4.
+    void setBlurRadius(std::size_t radius);
+
+    /// Default is false.
+    void setLinearSamplingEnabled(bool enabled);
+
 protected:
     virtual bool init() override;
-    
+
     virtual void update(float delta) override;
-    
+
     virtual void visit(cocos2d::Renderer* renderer,
                        const cocos2d::Mat4& parentTransforms,
                        std::uint32_t parentFlags) override;
-    
+
     void updateRenderers();
-    
+
     void createRenderers();
-    
+
     void resetRenderers();
-    
+
     void configHorizontalRenderer();
-    
+
     void configVerticalRenderer();
-    
+
     float renderScale_;
     float sigma_;
-    int blurRadius_;
+    std::size_t blurRadius_;
     bool useLinearSampling_;
-    
+
     bool rendererInitialized_;
     bool rendererDirty_;
-    
+
     cocos2d::RenderTexture* verticalRenderer_;
     cocos2d::RenderTexture* horizontalRenderer_;
 };
-NS_EE_END
- */
+} // namespace ee
 
 #endif /* EE_LIBRARY_BLUR_BACKGROUND_HPP_ */

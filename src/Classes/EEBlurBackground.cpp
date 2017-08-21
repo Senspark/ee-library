@@ -6,19 +6,16 @@
 //
 //
 
-/*
-
 #include "EEBlurBackground.hpp"
-#include "EEShader.hpp"
+#include "EEShaderUtils.hpp"
 
-#include <cocos2d.h>
+#include <2d/CCRenderTexture.h>
+#include <base/CCDirector.h>
+#include <renderer/CCRenderer.h>
 
-NS_EE_BEGIN
-NS_ANONYMOUS_BEGIN
-
-NS_ANONYMOUS_END
+namespace ee {
 bool BlurBackground::init() {
-    if (Node::init() == false) {
+    if (Super::init() == false) {
         return false;
     }
 
@@ -42,7 +39,7 @@ void BlurBackground::updateRenderers() {
 }
 
 void BlurBackground::createRenderers() {
-    CC_ASSERT(rendererInitialized_ == false);
+    CC_ASSERT(not rendererInitialized_);
     CC_ASSERT(horizontalRenderer_ == nullptr);
     CC_ASSERT(verticalRenderer_ == nullptr);
 
@@ -95,9 +92,10 @@ void BlurBackground::configHorizontalRenderer() {
     auto sprite = horizontalRenderer_->getSprite();
     auto texture = sprite->getTexture();
 
-    float textureWidth = texture->getContentSizeInPixels().width;
+    auto textureWidth =
+        static_cast<std::size_t>(texture->getContentSizeInPixels().width);
 
-    sprite->setGLProgram(Shader::createHorizontalBlurProgram(
+    sprite->setGLProgram(createHorizontalBlurProgram(
         textureWidth, blurRadius_, useLinearSampling_, sigma_));
     sprite->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
 }
@@ -117,10 +115,11 @@ void BlurBackground::configVerticalRenderer() {
         texture->setAliasTexParameters();
     }
 
-    float textureHeight = texture->getContentSizeInPixels().height;
+    auto textureHeight =
+        static_cast<std::size_t>(texture->getContentSizeInPixels().height);
 
-    sprite->setGLProgram(Shader::createVerticalBlurProgram(
-        textureHeight, blurRadius_, useLinearSampling_, sigma_));
+    sprite->setGLProgram(createVerticalBlurProgram(textureHeight, blurRadius_,
+                                                   useLinearSampling_, sigma_));
     sprite->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
 }
 
@@ -132,7 +131,7 @@ void BlurBackground::setRenderScale(float scale) {
     rendererDirty_ = true;
 }
 
-void BlurBackground::setBlurRadius(int radius) {
+void BlurBackground::setBlurRadius(std::size_t radius) {
     if (blurRadius_ == radius) {
         return;
     }
@@ -148,11 +147,11 @@ void BlurBackground::setSigma(float sigma) {
     rendererDirty_ = true;
 }
 
-void BlurBackground::setUseLinearSampling(bool use) {
-    if (useLinearSampling_ == use) {
+void BlurBackground::setLinearSamplingEnabled(bool enabled) {
+    if (useLinearSampling_ == enabled) {
         return;
     }
-    useLinearSampling_ = use;
+    useLinearSampling_ = enabled;
     rendererDirty_ = true;
 }
 
@@ -181,8 +180,6 @@ void BlurBackground::update(float delta) {
 void BlurBackground::visit(cocos2d::Renderer* renderer,
                            const cocos2d::Mat4& parentTransforms,
                            std::uint32_t parentFlags) {
-    Node::visit(renderer, parentTransforms, parentFlags);
+    Super::visit(renderer, parentTransforms, parentFlags);
 }
-NS_EE_END
-
-*/
+} // namespace ee

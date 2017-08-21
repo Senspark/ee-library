@@ -20,11 +20,15 @@ ShaderManager& ShaderManager::getInstance() {
 void ShaderManager::addShader(const std::string& name,
                               const std::string& vertex,
                               const std::string& fragment) {
-    if (shaders_.count(name)) {
+    if (isAdded(name)) {
         CC_ASSERT(false);
         return;
     }
     shaders_.emplace(name, Shader::create(name, vertex, fragment));
+}
+
+bool ShaderManager::isAdded(const std::string& name) const {
+    return shaders_.count(name) != 0;
 }
 
 cocos2d::GLProgram* ShaderManager::getProgram(const std::string& name) const {

@@ -12,9 +12,9 @@
 #include <base/CCEventDispatcher.h>
 #include <base/CCEventListenerCustom.h>
 #include <base/CCEventType.h>
-#include <renderer/CCGLProgramState.h>
-#include <renderer/CCGLProgramCache.h>
 #include <renderer/CCGLProgram.h>
+#include <renderer/CCGLProgramCache.h>
+#include <renderer/CCGLProgramState.h>
 
 namespace ee {
 std::unique_ptr<Shader> Shader::create(const std::string& name,

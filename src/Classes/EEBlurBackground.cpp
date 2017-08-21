@@ -50,6 +50,7 @@ void BlurBackground::createRenderers() {
 
     int width = static_cast<int>(std::ceil(renderSize.width));
     int height = static_cast<int>(std::ceil(renderSize.height));
+    renderSize_ = cocos2d::Size(width, height);
 
     horizontalRenderer_ = cocos2d::RenderTexture::create(
         width, height, cocos2d::Texture2D::PixelFormat::RGBA8888,
@@ -92,6 +93,12 @@ void BlurBackground::configHorizontalRenderer() {
     auto sprite = horizontalRenderer_->getSprite();
     auto texture = sprite->getTexture();
 
+    if (renderScale_ / CC_CONTENT_SCALE_FACTOR() < 1.0f) {
+        texture->setAntiAliasTexParameters();
+    } else {
+        texture->setAliasTexParameters();
+    }
+
     auto textureWidth =
         static_cast<std::size_t>(texture->getContentSizeInPixels().width);
 
@@ -101,7 +108,12 @@ void BlurBackground::configHorizontalRenderer() {
 }
 
 void BlurBackground::configVerticalRenderer() {
-    verticalRenderer_->setScale(CC_CONTENT_SCALE_FACTOR() / renderScale_);
+    // Not precise.
+    // verticalRenderer_->setScale(CC_CONTENT_SCALE_FACTOR() / renderScale_);
+
+    auto&& winSize = _director->getWinSize();
+    verticalRenderer_->setScale(winSize.width / renderSize_.width,
+                                winSize.height / renderSize_.height);
 
     auto sprite = verticalRenderer_->getSprite();
     auto texture = sprite->getTexture();

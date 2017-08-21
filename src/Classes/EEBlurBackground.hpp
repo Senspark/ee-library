@@ -66,6 +66,7 @@ protected:
     bool rendererInitialized_;
     bool rendererDirty_;
 
+    cocos2d::Size renderSize_;
     cocos2d::RenderTexture* verticalRenderer_;
     cocos2d::RenderTexture* horizontalRenderer_;
 };

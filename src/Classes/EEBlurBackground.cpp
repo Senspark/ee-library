@@ -55,9 +55,12 @@ void Self::createRenderers() {
     renderSize_ = cocos2d::Size(width, height);
 
     auto createRenderer = [=] {
-        return cocos2d::RenderTexture::create(
+        auto renderer = cocos2d::RenderTexture::create(
             width, height, cocos2d::Texture2D::PixelFormat::RGBA8888,
             GL_DEPTH24_STENCIL8);
+        renderer->setCascadeColorEnabled(true);
+        renderer->setCascadeOpacityEnabled(true);
+        return renderer;
     };
 
     horizontalRenderer_ = createRenderer();

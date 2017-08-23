@@ -14,7 +14,9 @@
 #include <renderer/CCRenderer.h>
 
 namespace ee {
-bool BlurBackground::init() {
+using Self = BlurBackground;
+
+bool Self::init() {
     if (Super::init() == false) {
         return false;
     }
@@ -30,7 +32,7 @@ bool BlurBackground::init() {
     return true;
 }
 
-void BlurBackground::updateRenderers() {
+void Self::updateRenderers() {
     if (rendererDirty_) {
         rendererDirty_ = false;
         resetRenderers();
@@ -38,7 +40,7 @@ void BlurBackground::updateRenderers() {
     }
 }
 
-void BlurBackground::createRenderers() {
+void Self::createRenderers() {
     CC_ASSERT(not rendererInitialized_);
     CC_ASSERT(horizontalRenderer_ == nullptr);
     CC_ASSERT(verticalRenderer_ == nullptr);
@@ -46,22 +48,23 @@ void BlurBackground::createRenderers() {
     auto&& winSize = _director->getWinSize();
     setContentSize(winSize);
 
-    auto renderSize = winSize * renderScale_ / CC_CONTENT_SCALE_FACTOR();
+    auto renderSize = winSize * renderScale_;
 
     int width = static_cast<int>(std::ceil(renderSize.width));
     int height = static_cast<int>(std::ceil(renderSize.height));
     renderSize_ = cocos2d::Size(width, height);
 
-    horizontalRenderer_ = cocos2d::RenderTexture::create(
-        width, height, cocos2d::Texture2D::PixelFormat::RGBA8888,
-        GL_DEPTH24_STENCIL8);
+    auto createRenderer = [=] {
+        return cocos2d::RenderTexture::create(
+            width, height, cocos2d::Texture2D::PixelFormat::RGBA8888,
+            GL_DEPTH24_STENCIL8);
+    };
 
-    verticalRenderer_ = cocos2d::RenderTexture::create(
-        width, height, cocos2d::Texture2D::PixelFormat::RGBA8888,
-        GL_DEPTH24_STENCIL8);
+    horizontalRenderer_ = createRenderer();
+    verticalRenderer_ = createRenderer();
 
-    configHorizontalRenderer();
-    configVerticalRenderer();
+    configHorizontalRenderer(horizontalRenderer_);
+    configVerticalRenderer(verticalRenderer_);
 
     addChild(horizontalRenderer_, -1);
     addChild(verticalRenderer_, -1);
@@ -69,7 +72,7 @@ void BlurBackground::createRenderers() {
     rendererInitialized_ = true;
 }
 
-void BlurBackground::resetRenderers() {
+void Self::resetRenderers() {
     if (rendererInitialized_ == false) {
         return;
     }
@@ -86,19 +89,25 @@ void BlurBackground::resetRenderers() {
     rendererInitialized_ = false;
 }
 
-void BlurBackground::configHorizontalRenderer() {
-    horizontalRenderer_->setKeepMatrix(true);
-    horizontalRenderer_->setVisible(false);
-
-    auto sprite = horizontalRenderer_->getSprite();
+void Self::configRenderer(cocos2d::RenderTexture* renderer) {
+    auto sprite = renderer->getSprite();
     auto texture = sprite->getTexture();
 
-    if (renderScale_ / CC_CONTENT_SCALE_FACTOR() < 1.0f) {
+    if (renderScale_ < 1.0f) {
         texture->setAntiAliasTexParameters();
     } else {
         texture->setAliasTexParameters();
     }
+}
 
+void Self::configHorizontalRenderer(cocos2d::RenderTexture* renderer) {
+    configRenderer(renderer);
+
+    renderer->setKeepMatrix(true);
+    renderer->setVisible(false);
+
+    auto sprite = renderer->getSprite();
+    auto texture = sprite->getTexture();
     auto textureWidth =
         static_cast<std::size_t>(texture->getContentSizeInPixels().width);
 
@@ -107,25 +116,19 @@ void BlurBackground::configHorizontalRenderer() {
     sprite->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
 }
 
-void BlurBackground::configVerticalRenderer() {
+void Self::configVerticalRenderer(cocos2d::RenderTexture* renderer) {
     // Not precise.
-    // verticalRenderer_->setScale(CC_CONTENT_SCALE_FACTOR() / renderScale_);
+    // renderer->setScale(CC_CONTENT_SCALE_FACTOR() / renderScale_);
+    configRenderer(renderer);
+
+    renderer->setKeepMatrix(false);
 
     auto&& winSize = _director->getWinSize();
-    verticalRenderer_->setScale(winSize.width / renderSize_.width,
-                                winSize.height / renderSize_.height);
+    renderer->setScale(winSize.width / renderSize_.width,
+                       winSize.height / renderSize_.height);
 
-    auto sprite = verticalRenderer_->getSprite();
+    auto sprite = renderer->getSprite();
     auto texture = sprite->getTexture();
-
-    if (renderScale_ / CC_CONTENT_SCALE_FACTOR() < 1.0f) {
-        // Enable anti-alias because downsampling is used.
-        // If anti-alias is not enabled, the resulting sprite will be blocky.
-        texture->setAntiAliasTexParameters();
-    } else {
-        // Disable anti-alias.
-        texture->setAliasTexParameters();
-    }
 
     auto textureHeight =
         static_cast<std::size_t>(texture->getContentSizeInPixels().height);
@@ -135,63 +138,81 @@ void BlurBackground::configVerticalRenderer() {
     sprite->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
 }
 
-void BlurBackground::setRenderScale(float scale) {
+Self* Self::setRenderScale(float scale) {
     if (renderScale_ == scale) {
-        return;
+        return this;
     }
     renderScale_ = scale;
     rendererDirty_ = true;
+    return this;
 }
 
-void BlurBackground::setBlurRadius(std::size_t radius) {
+Self* Self::setBlurRadius(std::size_t radius) {
     if (blurRadius_ == radius) {
-        return;
+        return this;
     }
     blurRadius_ = radius;
     rendererDirty_ = true;
+    return this;
 }
 
-void BlurBackground::setSigma(float sigma) {
+Self* Self::setSigma(float sigma) {
     if (sigma_ == sigma) {
-        return;
+        return this;
     }
     sigma_ = sigma;
     rendererDirty_ = true;
+    return this;
 }
 
-void BlurBackground::setLinearSamplingEnabled(bool enabled) {
+Self* Self::setLinearSamplingEnabled(bool enabled) {
     if (useLinearSampling_ == enabled) {
-        return;
+        return this;
     }
     useLinearSampling_ = enabled;
     rendererDirty_ = true;
+    return this;
 }
 
-void BlurBackground::update(float delta) {
+Self* Self::setAutoRender(bool enabled) {
+    if (enabled) {
+        scheduleUpdate();
+    } else {
+        unscheduleUpdate();
+    }
+    return this;
+}
+
+Self* Self::render() {
+    updateRenderers();
+
+    setVisible(false);
+    horizontalRenderer_->beginWithClear(0, 0, 0, 0);
+
+    auto scene = _director->getRunningScene();
+    scene->visit();
+
+    horizontalRenderer_->end();
+    setVisible(true);
+
+    verticalRenderer_->beginWithClear(0, 0, 0, 0);
+    horizontalRenderer_->getSprite()->visit();
+    verticalRenderer_->end();
+
+    // Force render immediately to prevent crashs when switching scenes.
+    _director->getRenderer()->render();
+    return this;
+}
+
+void Self::update(float delta) {
     if (isVisible()) {
-        updateRenderers();
-
-        setVisible(false);
-        horizontalRenderer_->beginWithClear(0, 0, 0, 0);
-
-        auto scene = _director->getRunningScene();
-        scene->visit();
-
-        horizontalRenderer_->end();
-        setVisible(true);
-
-        verticalRenderer_->beginWithClear(0, 0, 0, 0);
-        horizontalRenderer_->getSprite()->visit();
-        verticalRenderer_->end();
-
-        // Force render immediately to prevent crashs when switching scenes.
-        _director->getRenderer()->render();
+        render();
     }
 }
 
-void BlurBackground::visit(cocos2d::Renderer* renderer,
-                           const cocos2d::Mat4& parentTransforms,
-                           std::uint32_t parentFlags) {
+void Self::visit(cocos2d::Renderer* renderer,
+                 const cocos2d::Mat4& parentTransforms,
+                 std::uint32_t parentFlags) {
     Super::visit(renderer, parentTransforms, parentFlags);
 }
 } // namespace ee

@@ -26,18 +26,25 @@ public:
     /// Smaller value offers better performace but more blurry.
     /// Default is 1.0f.
     /// @param[in] scale Render scale.
-    void setRenderScale(float scale);
+    Self* setRenderScale(float scale);
 
     /// Sets the blur strength.
     /// Default is 2.0f.
     /// @param[in] sigma
-    void setSigma(float sigma);
+    Self* setSigma(float sigma);
 
     /// Default is 4.
-    void setBlurRadius(std::size_t radius);
+    Self* setBlurRadius(std::size_t radius);
 
     /// Default is false.
-    void setLinearSamplingEnabled(bool enabled);
+    Self* setLinearSamplingEnabled(bool enabled);
+
+    /// Sets whether to dynamically blur the screen.
+    /// Default is true.
+    Self* setAutoRender(bool enabled);
+
+    /// Updates the blurred screen immediately.
+    Self* render();
 
 protected:
     virtual bool init() override;
@@ -54,9 +61,11 @@ protected:
 
     void resetRenderers();
 
-    void configHorizontalRenderer();
+    void configRenderer(cocos2d::RenderTexture* renderer);
 
-    void configVerticalRenderer();
+    void configHorizontalRenderer(cocos2d::RenderTexture* renderer);
+
+    void configVerticalRenderer(cocos2d::RenderTexture* renderer);
 
     float renderScale_;
     float sigma_;

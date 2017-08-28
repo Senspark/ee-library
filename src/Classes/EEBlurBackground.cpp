@@ -50,6 +50,9 @@ void Self::createRenderers() {
 
     auto renderSize = winSize * renderScale_;
 
+    // Make blur consistent between different content scale factors.
+    renderSize = renderSize / CC_CONTENT_SCALE_FACTOR();
+
     int width = static_cast<int>(std::ceil(renderSize.width));
     int height = static_cast<int>(std::ceil(renderSize.height));
     renderSize_ = cocos2d::Size(width, height);

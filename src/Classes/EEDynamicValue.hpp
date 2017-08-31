@@ -12,9 +12,7 @@
 #include <cstdint>
 #include <memory>
 
-#include "EEMacro.hpp"
-
-NS_EE_BEGIN
+namespace ee {
 namespace detail {
 template <class T, std::size_t Size = sizeof(T)> struct dynamic_value_storage;
 
@@ -31,48 +29,51 @@ template <class T> struct dynamic_value_storage<T, 8> {
 
 /// Utility class to store a value that dynamically changes.
 ///
-/// Useful for anticheating.
+/// Used for anticheating.
 template <class T> class DynamicValue final {
+private:
+    using Self = DynamicValue;
+
 public:
     ~DynamicValue() = default;
 
     DynamicValue(T value = T());
 
-    DynamicValue(const DynamicValue& other);
-    DynamicValue(DynamicValue&& other) = default;
+    DynamicValue(const Self& other);
+    DynamicValue(Self&& other) = default;
 
-    DynamicValue& operator=(const DynamicValue& other);
-    DynamicValue& operator=(DynamicValue&& other) = default;
+    Self& operator=(const Self& other);
+    Self& operator=(Self&& other) = default;
 
     /// Retrieves the value.
     T get() const;
 
     /// Assigns value.
-    DynamicValue& set(T value);
+    Self& set(T value);
 
     /// Add a value.
-    DynamicValue& add(T amount);
+    Self& add(T amount);
 
-    DynamicValue& subtract(T amount);
+    Self& subtract(T amount);
 
     /// Implicit conversion.
     operator T() const;
 
-    DynamicValue& operator=(T value);
-    DynamicValue& operator+=(T value);
-    DynamicValue& operator-=(T value);
+    Self& operator=(T value);
+    Self& operator+=(T value);
+    Self& operator-=(T value);
 
     /// Post-increment operator.
-    DynamicValue operator++(int);
+    Self operator++(int);
 
     /// Post-decrement operator.
-    DynamicValue operator--(int);
+    Self operator--(int);
 
     /// Pre-increment operator.
-    DynamicValue& operator++();
+    Self& operator++();
 
     /// Pre-decrement operator.
-    DynamicValue& operator--();
+    Self& operator--();
 
 private:
     using storage_type =
@@ -81,6 +82,6 @@ private:
     std::unique_ptr<storage_type> value_;
     std::unique_ptr<storage_type> random_;
 };
-NS_EE_END
+} // namespace ee
 
 #endif /* EE_LIBRARY_DYNAMIC_VALUE_HPP_ */

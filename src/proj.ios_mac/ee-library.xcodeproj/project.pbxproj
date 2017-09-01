@@ -107,6 +107,10 @@
 		6F6EA9311D1D3F5300816BAF /* EEBlurBackground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F6EA92E1D1D3F5300816BAF /* EEBlurBackground.cpp */; };
 		6F6EA9321D1D3F5300816BAF /* EEBlurBackground.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6F6EA92F1D1D3F5300816BAF /* EEBlurBackground.hpp */; };
 		6F6EA9331D1D3F5300816BAF /* EEBlurBackground.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6F6EA92F1D1D3F5300816BAF /* EEBlurBackground.hpp */; };
+		6F7071141F595FE1000C3894 /* EEClippingRectangleNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F7071121F595FE1000C3894 /* EEClippingRectangleNode.cpp */; };
+		6F7071151F595FE1000C3894 /* EEClippingRectangleNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F7071121F595FE1000C3894 /* EEClippingRectangleNode.cpp */; };
+		6F7071161F595FE1000C3894 /* EEClippingRectangleNode.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6F7071131F595FE1000C3894 /* EEClippingRectangleNode.hpp */; };
+		6F7071171F595FE1000C3894 /* EEClippingRectangleNode.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6F7071131F595FE1000C3894 /* EEClippingRectangleNode.hpp */; };
 		6F72C5AE1EA9E82D00622353 /* EETransitionFadeOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C3D4AF71C0D37F0001A09DF /* EETransitionFadeOut.cpp */; };
 		6F72C5AF1EA9E82D00622353 /* EETransitionFadeOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C3D4AF71C0D37F0001A09DF /* EETransitionFadeOut.cpp */; };
 		6F72C5BE1EAA0B0700622353 /* EESceneSwitcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F72C5BC1EAA0B0700622353 /* EESceneSwitcher.cpp */; };
@@ -381,6 +385,8 @@
 		6F6A87301D2E4F4400DE745F /* EEEventInfoV2.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEEventInfoV2.hpp; sourceTree = "<group>"; };
 		6F6EA92E1D1D3F5300816BAF /* EEBlurBackground.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEBlurBackground.cpp; sourceTree = "<group>"; };
 		6F6EA92F1D1D3F5300816BAF /* EEBlurBackground.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEBlurBackground.hpp; sourceTree = "<group>"; };
+		6F7071121F595FE1000C3894 /* EEClippingRectangleNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEClippingRectangleNode.cpp; sourceTree = "<group>"; };
+		6F7071131F595FE1000C3894 /* EEClippingRectangleNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEClippingRectangleNode.hpp; sourceTree = "<group>"; };
 		6F72C5BC1EAA0B0700622353 /* EESceneSwitcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EESceneSwitcher.cpp; sourceTree = "<group>"; };
 		6F72C5BD1EAA0B0700622353 /* EESceneSwitcher.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EESceneSwitcher.hpp; sourceTree = "<group>"; };
 		6F7F38841D1D5BD000F5893F /* EEBlurBackgroundLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EEBlurBackgroundLoader.cpp; sourceTree = "<group>"; };
@@ -576,6 +582,8 @@
 				6FD294761CE1CBF9009ECBFA /* EENodeV3Loader.hpp */,
 				6F8460871E518C5100DB7FB3 /* EEClippingRectangleNodeLoader.cpp */,
 				6F8460881E518C5100DB7FB3 /* EEClippingRectangleNodeLoader.hpp */,
+				6F7071121F595FE1000C3894 /* EEClippingRectangleNode.cpp */,
+				6F7071131F595FE1000C3894 /* EEClippingRectangleNode.hpp */,
 			);
 			name = ui;
 			sourceTree = "<group>";
@@ -860,6 +868,7 @@
 				6FC19AD51CF83F9A0002D68B /* EEUiCheckBoxLoader.hpp in Headers */,
 				6C42EF461C8547660062C2C6 /* EEEventInfoV1.hpp in Headers */,
 				6F48D0241E9CBE5500342077 /* EESkeletonBoneLoader.hpp in Headers */,
+				6F7071161F595FE1000C3894 /* EEClippingRectangleNode.hpp in Headers */,
 				6F292E511F306C6400E8338F /* EEPoolUtils.hpp in Headers */,
 				6F77D7971CE0D733000BA9BE /* EEFlags.hpp in Headers */,
 				6F39F1581CCBBBD10038796D /* EEButton.hpp in Headers */,
@@ -938,6 +947,7 @@
 				6F79B6341CCA8F9A0008EFAC /* EEUiWidgetCallback.hpp in Headers */,
 				6F79B62D1CCA7FE00008EFAC /* EEDynamicValue.hpp in Headers */,
 				6F48D0251E9CBE5500342077 /* EESkeletonBoneLoader.hpp in Headers */,
+				6F7071171F595FE1000C3894 /* EEClippingRectangleNode.hpp in Headers */,
 				6F292E521F306C6400E8338F /* EEPoolUtils.hpp in Headers */,
 				6FC19ADE1CF84A470002D68B /* EECheckBox.hpp in Headers */,
 				6F79B6291CCA7FD50008EFAC /* EEForward.hpp in Headers */,
@@ -1095,6 +1105,7 @@
 				6C47FE4A1CA1B7EF00FEF3BC /* EEEventInfoV1.cpp in Sources */,
 				6F17FAAC1CF29D5500CFCD14 /* EESkeletonAnimationLoader.cpp in Sources */,
 				6F6B540B1D41B58D00F13CA9 /* EEDataHandler.cpp in Sources */,
+				6F7071141F595FE1000C3894 /* EEClippingRectangleNode.cpp in Sources */,
 				6F72C5BE1EAA0B0700622353 /* EESceneSwitcher.cpp in Sources */,
 				6FD64EA21E9B47220030CDEC /* EECommandPool.cpp in Sources */,
 				6FE287EB1EB34B8D0079BAAE /* EEMd5.cpp in Sources */,
@@ -1165,6 +1176,7 @@
 				6F17FAAD1CF29D5500CFCD14 /* EESkeletonAnimationLoader.cpp in Sources */,
 				6F79B6441CCAC0E50008EFAC /* EEEventInfoV1.cpp in Sources */,
 				6F6B540A1D41B58D00F13CA9 /* EEDataHandler.cpp in Sources */,
+				6F7071151F595FE1000C3894 /* EEClippingRectangleNode.cpp in Sources */,
 				6F72C5BF1EAA0B0700622353 /* EESceneSwitcher.cpp in Sources */,
 				6FD64EA31E9B47220030CDEC /* EECommandPool.cpp in Sources */,
 				6FE287EC1EB34B8D0079BAAE /* EEMd5.cpp in Sources */,

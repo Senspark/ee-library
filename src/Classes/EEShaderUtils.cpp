@@ -16,7 +16,8 @@
 #include <base/CCEventDispatcher.h>
 #include <base/CCEventListenerCustom.h>
 #include <base/CCEventType.h>
-#include <base/ccUTF8.h>
+#include <base/ccUTF8.h> // cocos2d::StringUtils::format (cocos2d-x 3.15)
+#include <deprecated/CCString.h> // cocos2d::StringUtils::format (cocos2d-x 3.10)
 #include <renderer/CCGLProgram.h>
 #include <renderer/CCGLProgramCache.h>
 

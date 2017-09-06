@@ -13,6 +13,7 @@
 
 #include <2d/CCActionInterval.h>
 #include <2d/CCLabel.h>
+#include <base/CCRefPtr.h>
 
 NS_EE_BEGIN
 NS_DETAIL_BEGIN
@@ -152,6 +153,7 @@ bool ButtonEx::hitTest(const cocos2d::Point& point,
 bool ButtonEx::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event) {
     CC_ASSERT(currentTouch_ == nullptr);
     CC_ASSERT(currentEvent_ == nullptr);
+    auto guard = make_ref_guard(this);
     currentTouch_ = touch;
     currentEvent_ = event;
     bool result = Super::onTouchBegan(touch, event);
@@ -166,6 +168,7 @@ void ButtonEx::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event) {
     }
     CC_ASSERT(currentTouch_ == nullptr);
     CC_ASSERT(currentEvent_ == nullptr);
+    auto guard = make_ref_guard(this);
     currentTouch_ = touch;
     currentEvent_ = event;
     Super::onTouchMoved(touch, event);
@@ -176,6 +179,7 @@ void ButtonEx::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event) {
 void ButtonEx::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) {
     CC_ASSERT(currentTouch_ == nullptr);
     CC_ASSERT(currentEvent_ == nullptr);
+    auto guard = make_ref_guard(this);
     currentTouch_ = touch;
     currentEvent_ = event;
     Super::onTouchEnded(touch, event);

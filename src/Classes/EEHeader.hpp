@@ -60,10 +60,10 @@
 
 #include "EEButtonLoader.hpp"
 
-#include "EESpriteWithHSV.hpp"
-#include "EESpriteWithHSVLoader.hpp"
+#include "EESpriteWithHsv.hpp"
+#include "EESpriteWithHsvLoader.hpp"
 
-#include "EEScale9SpriteWithHSV.hpp"
+#include "EEScale9SpriteWithHsv.hpp"
 
 #include "EEBlurBackground.hpp"
 #include "EEBlurBackgroundLoader.hpp"

@@ -16,7 +16,7 @@
 #include "EECocos2dxFwd.hpp"
 #include "EEForward.hpp"
 
-#include <ui/UiButton.h>
+#include <ui/UIButton.h>
 
 NS_EE_BEGIN
 NS_DETAIL_BEGIN

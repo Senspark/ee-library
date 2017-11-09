@@ -143,8 +143,8 @@ namespace program {
 constexpr auto hsv = "ee_hsv_program";
 } // namespace program
 
-#include "EEHSVShader.frag"
-#include "EEHSVShader.vert"
+#include "EEHsvShader.frag"
+#include "EEHsvShader.vert"
 
 cocos2d::GLProgramState* createHsvProgramState() {
     auto&& manager = ShaderManager::getInstance();

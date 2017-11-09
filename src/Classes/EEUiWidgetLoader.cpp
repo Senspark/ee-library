@@ -9,7 +9,7 @@
 #include "EEUiWidgetLoader.hpp"
 #include "EEUiWidgetCallback.hpp"
 
-#include <ui/UiWidget.h>
+#include <ui/UIWidget.h>
 
 NS_EE_BEGIN
 namespace property {

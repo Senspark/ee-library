@@ -39,6 +39,9 @@ public:
     static Self* createWithSpriteFrame(cocos2d::SpriteFrame* spriteFrame);
 
     static Self* createWithSpriteFrameName(const std::string& spriteFrameName);
+    
+    virtual void
+    setGLProgramState(cocos2d::GLProgramState* glProgramState) override;
 
 protected:
     using Super::initWithTexture;
@@ -54,6 +57,11 @@ protected:
     virtual bool updateMatrix() override;
 
     void initShader();
+    
+private:
+    cocos2d::GLProgramState* createState();
+    
+    cocos2d::GLProgramState* customState_;
 };
 } // namespace ee
 

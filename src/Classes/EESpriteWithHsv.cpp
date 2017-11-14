@@ -10,6 +10,7 @@
 #include "EEShaderUtils.hpp"
 #include "EEUtils.hpp"
 
+#include <cocos2d.h>
 #include <renderer/CCGLProgramState.h>
 
 namespace ee {
@@ -62,9 +63,19 @@ bool Self::initWithTexture(cocos2d::Texture2D* texture,
 }
 
 void Self::initShader() {
-    auto state = createHsvProgramState();
-    setGLProgramState(state);
+    customState_ = createHsvProgramState();
+    setGLProgramState(customState_);
 }
+    
+void Self::setGLProgramState(cocos2d::GLProgramState* glProgramState) {
+#if COCOS2D_VERSION >= 0x00031400
+    if (glProgramState != customState_) {
+        return;
+    }
+#endif // COCOS2D_VERSION >= 0x00031400
+    Super::setGLProgramState(glProgramState);
+}
+
 
 void Self::draw(cocos2d::Renderer* renderer, const cocos2d::Mat4& transform,
                 std::uint32_t flags) {

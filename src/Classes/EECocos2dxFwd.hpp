@@ -27,8 +27,10 @@ class Layer;
 class LayerColor;
 class Scene;
 class Transition;
+class ProgressTimer;
 class Menu;
 class MenuItem;
+class MenuItemImage;
 class ClippingRectangleNode;
 class ClippingNode;
 class ParticleSystem;
@@ -36,9 +38,13 @@ class ParticleSystemQuad;
 class Animation;
 class Sprite;
 class SpriteFrame;
+class SpriteBatchNode;
 class Image;
 class Texture2D;
 class RenderTexture;
+
+struct _ttfConfig;
+using TTFConfig = _ttfConfig;
 
 class Action;
 class ActionInstant;
@@ -87,7 +93,11 @@ class Touch;
 
 class Ref;
 
-template <class T> class RefPtr;
+template <class T>
+class RefPtr;
+
+template <class T>
+class Vector;
 
 class Value;
 using ValueMap = std::unordered_map<std::string, Value>;
@@ -124,7 +134,8 @@ class Mat3;
 class Mat4;
 
 class Size;
-class Rect;
+class Rect;    
+class Color3B;
 
 class GLProgram;
 class GLProgramState;
@@ -152,6 +163,13 @@ class EditBox;
 class EditBoxDelegate;
 class TextField;
 } // namespace ui
+} // namespace cocos2d
+
+namespace cocos2d {
+namespace network {
+class HttpClient;
+class HttpResponse;
+} // namespace network
 } // namespace cocos2d
 
 namespace cocosbuilder {

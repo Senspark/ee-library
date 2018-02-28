@@ -135,7 +135,7 @@ class Mat4;
 
 class Size;
 class Rect;    
-class Color3B;
+struct Color3B;
 
 class GLProgram;
 class GLProgramState;

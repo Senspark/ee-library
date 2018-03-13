@@ -13,6 +13,10 @@
 #include <2d/CCParticleSystemQuad.h>
 #include <2d/CCSpriteFrameCache.h>
 
+#include <2d/CCSprite.h>
+
+auto __y = new cocos2d::Sprite();
+
 namespace ee {
 namespace detail {
 class ParticleWithCleanup : public cocos2d::ParticleSystemQuad {

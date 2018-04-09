@@ -136,6 +136,8 @@ class Mat4;
 class Size;
 class Rect;    
 struct Color3B;
+struct Color4F;
+struct BlendFunc;
 
 class GLProgram;
 class GLProgramState;
@@ -173,6 +175,9 @@ class HttpResponse;
 } // namespace cocos2d
 
 namespace cocosbuilder {
+struct BlockData;
+struct BlockControlData;
+    
 class CCBReader;
 class NodeLoaderLibrary;
 class NodeLoader;

@@ -42,6 +42,9 @@ Self* Self::createWithSpriteFrameName(const std::string& spriteFrameName) {
     });
 }
 
+Self::Scale9SpriteWithHsv()
+    : customState_(nullptr) {}
+
 bool Self::init() {
     if (not Super::init()) {
         return false;

@@ -15,11 +15,15 @@
 #include <renderer/CCTextureCache.h>
 
 namespace ee {
+using Self = ManagedScene;
+
+Self::ManagedScene()
+    : unloaded_(false) {}
+
 bool ManagedScene::init() {
     if (not Super::init()) {
         return false;
     }
-    unloaded_ = false;
     return true;
 }
 

@@ -77,6 +77,8 @@ public:
 
 protected:
     enum class Phase { None, Pre, In, Post };
+    
+    SceneSwitcher();
 
     virtual bool init() override;
 

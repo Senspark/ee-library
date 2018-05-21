@@ -37,7 +37,7 @@ private:
 public:
     ~DynamicValue() = default;
 
-    DynamicValue(T value = T());
+    explicit DynamicValue(T value = T());
 
     DynamicValue(const Self& other);
     DynamicValue(Self&& other) = default;

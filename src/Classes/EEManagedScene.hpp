@@ -26,6 +26,8 @@ public:
     virtual ~ManagedScene() override;
 
 protected:
+    ManagedScene();
+    
     virtual bool init() override;
 
     virtual void onEnter() override;

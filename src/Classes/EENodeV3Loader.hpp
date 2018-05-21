@@ -29,6 +29,8 @@ public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(NodeV3Loader, loader);
 
 protected:
+    NodeV3Loader();
+    
     virtual cocos2d::Node* createNode(cocos2d::Node* parent,
                                       cocosbuilder::CCBReader* reader) override;
 

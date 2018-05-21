@@ -46,6 +46,11 @@ public:
 protected:
     using Super::initWithTexture;
 
+    template <class T, class Initializer>
+    friend T* createInstance(const Initializer& initializer);
+
+    SpriteWithHsv();
+
     virtual bool initWithTexture(cocos2d::Texture2D* texture,
                                  const cocos2d::Rect& rect,
                                  bool rotated) override;

@@ -25,6 +25,8 @@ public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(UiCheckBoxLoader, loader);
 
 protected:
+    UiCheckBoxLoader();
+    
     virtual cocos2d::Node* createNode(cocos2d::Node* parent,
                                       cocosbuilder::CCBReader* reader) override;
 

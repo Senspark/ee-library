@@ -45,7 +45,7 @@
 #include "EEBackButtonListener.hpp"
 
 #include "EEEventDispatcher.hpp"
-#include "EEEventInfoV2.hpp"
+#include "EEEventInfo.hpp"
 
 #include "EEImage.hpp"
 

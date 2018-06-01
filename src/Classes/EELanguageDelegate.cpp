@@ -7,33 +7,34 @@
 //
 
 #include "EELanguageDelegate.hpp"
+
 #include "EELanguage.hpp"
-#include "EELanguageSwitcher.hpp"
 #include "EELanguageFormatter.hpp"
+#include "EELanguageSwitcher.hpp"
 
 namespace ee {
-LanguageDelegate::LanguageDelegate() {
-    auto&& switcher = LanguageSwitcher::getInstance();
-    setLanguage(switcher.getCurrentLanguage());
-    switcher.addDelegate(this);
+using Self = LanguageDelegate;
+
+Self::LanguageDelegate(LanguageSwitcher& switcher)
+    : switcher_(switcher) {
+    setLanguage(switcher_.getCurrentLanguage());
+    switcher_.addDelegate(this);
 }
 
-LanguageDelegate::~LanguageDelegate() {
-    auto&& switcher = LanguageSwitcher::getInstance();
-    switcher.removeDelegate(this);
+Self::~LanguageDelegate() {
+    switcher_.removeDelegate(this);
 }
 
-const Language& LanguageDelegate::getLanguage() const {
+const Language& Self::getLanguage() const {
     return *language_;
 }
 
-LanguageDelegate* LanguageDelegate::setKey(const std::string& key) {
+Self* Self::setKey(const std::string& key) {
     if (key_ && *key_ != key) {
         args_.reset();
     }
     key_ = std::make_unique<std::string>(key);
-    auto&& switcher = LanguageSwitcher::getInstance();
-    auto&& formatter = switcher.getFormatter(key);
+    auto&& formatter = switcher_.getFormatter(key);
     if (formatter.getPlaceholders() == 0) {
         // Empty format.
         setFormat({});
@@ -43,27 +44,25 @@ LanguageDelegate* LanguageDelegate::setKey(const std::string& key) {
     return this;
 }
 
-LanguageDelegate*
-LanguageDelegate::setFormat(const std::vector<std::string>& args) {
+Self* Self::setFormat(const std::vector<std::string>& args) {
     args_ = std::make_unique<std::vector<std::string>>(args);
     updateText();
     return this;
 }
 
-LanguageDelegate* LanguageDelegate::setLanguage(const Language& language) {
+Self* Self::setLanguage(const Language& language) {
     language_ = std::make_unique<Language>(language);
     updateText();
     return this;
 }
 
-LanguageDelegate*
-LanguageDelegate::setTextCallback(const TextCallback& callback) {
+Self* Self::setTextCallback(const TextCallback& callback) {
     textCallback_ = callback;
     updateText();
     return this;
 }
 
-void LanguageDelegate::updateText() {
+void Self::updateText() {
     if (not textCallback_) {
         return;
     }
@@ -76,8 +75,7 @@ void LanguageDelegate::updateText() {
     if (not args_) {
         return;
     }
-    auto&& switcher = LanguageSwitcher::getInstance();
-    auto text = switcher.getText(*language_, *key_, *args_);
+    auto text = switcher_.getText(*language_, *key_, *args_);
     textCallback_(text);
 }
 } // namespace ee

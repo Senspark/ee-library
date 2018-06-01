@@ -10,8 +10,8 @@
 #define EE_LIBRARY_LANGUAGE_SWITCHER_HPP
 
 #include <map>
-#include <string>
 #include <set>
+#include <string>
 #include <vector>
 
 #include <EECocos2dxFwd.hpp>
@@ -26,8 +26,6 @@ private:
     using Self = LanguageSwitcher;
 
 public:
-    static LanguageSwitcher& getInstance();
-
     LanguageSwitcher();
     virtual ~LanguageSwitcher();
 
@@ -106,7 +104,8 @@ private:
     };
 
     std::map<Language, std::map<std::string, LanguageFormatter>,
-             LanguageComparator> dictionaries_;
+             LanguageComparator>
+        dictionaries_;
 
     bool locked_;
     std::set<LanguageDelegate*> delegates_;

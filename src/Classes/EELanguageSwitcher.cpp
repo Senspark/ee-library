@@ -6,23 +6,19 @@
 //
 //
 
-#include <stack>
-
 #include "EELanguageSwitcher.hpp"
-#include "EELanguage.hpp"
-#include "EELanguageDelegate.hpp"
-#include "EELanguageFormatter.hpp"
+
+#include <stack>
 
 #include <base/CCRefPtr.h>
 #include <base/CCValue.h>
 #include <platform/CCFileUtils.h>
 
-namespace ee {
-namespace {
-std::stack<LanguageSwitcher*> instances;
-static LanguageSwitcher nilInstance;
-} // namespace
+#include "EELanguage.hpp"
+#include "EELanguageDelegate.hpp"
+#include "EELanguageFormatter.hpp"
 
+namespace ee {
 using Self = LanguageSwitcher;
 
 bool Self::LanguageComparator::operator()(const Language& lhs,
@@ -30,19 +26,12 @@ bool Self::LanguageComparator::operator()(const Language& lhs,
     return lhs.getCode() < rhs.getCode();
 }
 
-Self& Self::getInstance() {
-    return *instances.top();
-}
-
 Self::LanguageSwitcher() {
-    instances.push(this);
     locked_ = false;
     currentLanguage_ = std::make_unique<Language>(Language::English);
 }
 
-Self::~LanguageSwitcher() {
-    instances.pop();
-}
+Self::~LanguageSwitcher() {}
 
 const Language& Self::getCurrentLanguage() const {
     return *currentLanguage_;

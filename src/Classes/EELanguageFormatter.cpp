@@ -11,11 +11,13 @@
 #include <platform/CCPlatformMacros.h>
 
 namespace ee {
-LanguageFormatter::LanguageFormatter(const std::string& format) {
+using Self = LanguageFormatter;
+
+Self::LanguageFormatter(const std::string& format) {
     setFormat(format);
 }
 
-void LanguageFormatter::setFormat(const std::string& format) {
+void Self::setFormat(const std::string& format) {
     raw_ = format;
     tokens_.clear();
 
@@ -53,12 +55,11 @@ void LanguageFormatter::setFormat(const std::string& format) {
     }
 }
 
-std::string LanguageFormatter::format() const {
+std::string Self::format() const {
     return format({});
 }
 
-std::string
-LanguageFormatter::format(const std::vector<std::string>& args) const {
+std::string Self::format(const std::vector<std::string>& args) const {
     if (placeholders_ != args.size()) {
         CC_ASSERT(false);
         return "_invalid_argument";

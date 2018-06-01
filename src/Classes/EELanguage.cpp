@@ -9,6 +9,7 @@
 #include "EELanguage.hpp"
 
 namespace ee {
+namespace language {
 using Self = Language;
 
 const Self Self::English("en");
@@ -30,4 +31,5 @@ const std::string& Self::getCode() const {
 bool Self::operator==(const Self& other) const {
     return code_ == other.code_;
 }
+} // namespace language
 } // namespace ee

@@ -13,15 +13,16 @@
 #include "EELanguageFormatter.hpp"
 
 namespace ee {
-using Self = LanguageDelegate;
+namespace language {
+using Self = Delegate;
 
-Self::LanguageDelegate()
+Self::Delegate()
     : switcher_(nullptr) {
     static int id = 0; // Unique ID for each language delegate.
     id_ = std::to_string(id++);
 }
 
-Self::~LanguageDelegate() {
+Self::~Delegate() {
     if (switcher_ != nullptr) {
         switcher_->removeObserver(id_);
     }
@@ -35,7 +36,7 @@ const Language& Self::getLanguage() const {
     return nil;
 }
 
-Self* Self::setSwitcher(ILanguageSwitcher& switcher) {
+Self* Self::setSwitcher(ISwitcher& switcher) {
     if (switcher_ != nullptr) {
         // Remove observer from old switcher.
         switcher_->removeObserver(id_);
@@ -100,4 +101,5 @@ void Self::updateText() {
     auto&& text = formatter.format(*args_);
     textCallback_(text);
 }
+} // namespace language
 } // namespace ee

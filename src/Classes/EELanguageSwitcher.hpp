@@ -18,15 +18,16 @@
 #include "EEILanguageSwitcher.hpp"
 
 namespace ee {
-class LanguageFormatter;
+namespace language {
+class Formatter;
 
-class LanguageSwitcher : public ILanguageSwitcher {
+class Switcher : public ISwitcher {
 private:
-    using Self = LanguageSwitcher;
+    using Self = Switcher;
 
 public:
-    LanguageSwitcher();
-    virtual ~LanguageSwitcher();
+    Switcher();
+    virtual ~Switcher();
 
     /// @see Super.
     virtual const Language& getCurrentLanguage() const override;
@@ -35,7 +36,7 @@ public:
     virtual void changeLanguage(const Language& language) override;
 
     /// @see Super.
-    virtual const LanguageFormatter&
+    virtual const Formatter&
     getFormatter(const Language& language,
                  const std::string& key) const override;
 
@@ -58,13 +59,13 @@ private:
         bool operator()(const Language& lhs, const Language& rhs) const;
     };
 
-    std::map<Language, std::map<std::string, LanguageFormatter>,
-             LanguageComparator>
+    std::map<Language, std::map<std::string, Formatter>, LanguageComparator>
         dictionaries_;
 
     bool locked_;
     std::map<std::string, Observer> observers_;
 };
+} // namespace language
 } // namespace ee
 
 #endif /* EE_LIBRARY_LANGUAGE_SWITCHER_HPP */

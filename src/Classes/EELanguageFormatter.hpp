@@ -13,14 +13,15 @@
 #include <vector>
 
 namespace ee {
-class LanguageFormatter {
+namespace language {
+class Formatter {
 private:
-    using Self = LanguageFormatter;
+    using Self = Formatter;
 
 public:
     /// Constructs a language formatter.
     /// @param[in] format The input format string.
-    explicit LanguageFormatter(const std::string& format);
+    explicit Formatter(const std::string& format);
 
     const std::string& getFormat() const { return raw_; }
 
@@ -45,6 +46,7 @@ private:
     std::size_t placeholders_;
     std::vector<std::string> tokens_;
 };
+} // namespace language
 } // namespace ee
 
 #endif /* EE_LIBRARY_LANGUAGE_FORMATTER_HPP */

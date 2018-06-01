@@ -10,6 +10,7 @@
 #define EE_LIBRARY_MULTILINGUAL_DELEGATE_HPP
 
 #include "EECocos2dxFwd.hpp"
+#include "EEForward.hpp"
 #include "EELanguageDelegate.hpp"
 
 #include <platform/CCPlatformDefine.h> // CC_DLL
@@ -18,8 +19,6 @@
 #include <cocosbuilder/CCNodeLoaderListener.h>
 
 namespace ee {
-class LanguageSwitcher;
-
 /// = LanguageDelegate + CocosBuilder.
 class MultilingualDelegate : public LanguageDelegate,
                              public cocosbuilder::NodeLoaderListener,

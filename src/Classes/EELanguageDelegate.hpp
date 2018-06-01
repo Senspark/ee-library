@@ -14,24 +14,25 @@
 #include <vector>
 
 namespace ee {
+namespace language {
 class Language;
-class ILanguageSwitcher;
+class ISwitcher;
 
-class LanguageDelegate {
+class Delegate {
 private:
-    using Self = LanguageDelegate;
+    using Self = Delegate;
 
 public:
     using TextCallback = std::function<void(const std::string& text)>;
 
-    LanguageDelegate();
-    virtual ~LanguageDelegate();
+    Delegate();
+    virtual ~Delegate();
 
     const Language& getLanguage() const;
 
     /// Sets the associated language switcher.
     /// @return Instance to this for method chaining.
-    Self* setSwitcher(ILanguageSwitcher& switcher);
+    Self* setSwitcher(ISwitcher& switcher);
 
     /// Sets the multilingual key.
     /// @param[in] key The multilingual key.
@@ -63,8 +64,9 @@ private:
 
     std::string id_;
     TextCallback textCallback_;
-    ILanguageSwitcher* switcher_;
+    ISwitcher* switcher_;
 };
+} // namespace language
 } // namespace ee
 
 #endif /* EE_LIBRARY_LANGUAGE_DELEGATE_HPP */

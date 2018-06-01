@@ -11,9 +11,10 @@
 #include <platform/CCPlatformMacros.h>
 
 namespace ee {
-using Self = LanguageFormatter;
+namespace language {
+using Self = Formatter;
 
-Self::LanguageFormatter(const std::string& format) {
+Self::Formatter(const std::string& format) {
     setFormat(format);
 }
 
@@ -84,4 +85,5 @@ std::string Self::format(const std::vector<std::string>& args) const {
     }
     return result;
 }
+} // namespace language
 } // namespace ee

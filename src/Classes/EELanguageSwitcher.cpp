@@ -15,19 +15,20 @@
 #include "EELanguageFormatter.hpp"
 
 namespace ee {
-using Self = LanguageSwitcher;
+namespace language {
+using Self = Switcher;
 
 bool Self::LanguageComparator::operator()(const Language& lhs,
                                           const Language& rhs) const {
     return lhs.getCode() < rhs.getCode();
 }
 
-Self::LanguageSwitcher() {
+Self::Switcher() {
     locked_ = false;
     currentLanguage_ = std::make_unique<Language>(Language::English);
 }
 
-Self::~LanguageSwitcher() {}
+Self::~Switcher() {}
 
 const Language& Self::getCurrentLanguage() const {
     return *currentLanguage_;
@@ -43,14 +44,14 @@ void Self::changeLanguage(const Language& language) {
     locked_ = false;
 }
 
-const LanguageFormatter& Self::getFormatter(const Language& language,
-                                            const std::string& key) const {
+const Formatter& Self::getFormatter(const Language& language,
+                                    const std::string& key) const {
     try {
         auto&& result = dictionaries_.at(language).at(key);
         return result;
     } catch (const std::out_of_range& ex) {
         CC_ASSERT(false);
-        static const LanguageFormatter nil("{null}");
+        static const Formatter nil("{null}");
         return nil;
     }
 }
@@ -78,8 +79,9 @@ void Self::loadLanguage(const Language& language,
     for (auto&& elt : map) {
         auto&& key = elt.first;
         auto&& text = elt.second.asString();
-        auto formatter = LanguageFormatter(text);
+        auto formatter = Formatter(text);
         dictionaries_[language].emplace(key, std::move(formatter));
     }
 }
+} // namespace language
 } // namespace ee

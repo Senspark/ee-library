@@ -71,12 +71,20 @@ class Scale9SpriteWithHsv;
 class BlurBackground;
 class BlurBackgroundLoader;
 
+namespace language {
 class Language;
-class ILanguageSwitcher;
-class LanguageSwitcher;
-class LanguageDelegate;
-class LanguageFormatter;
+class ISwitcher;
+class Switcher;
+class Delegate;
+class Formatter;
 class MultilingualDelegate;
+} // namespace language
+
+using Language = language::Language;
+using ILanguageSwitcher = language::ISwitcher;
+using LanguageSwitcher = language::Switcher;
+using LanguageDelegate = language::Delegate;
+using LanguageFormatter = language::Formatter;
 
 class SkeletonAnimationLoader;
 class SkeletonBone;

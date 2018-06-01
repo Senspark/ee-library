@@ -8,11 +8,7 @@
 
 #include "EELanguageSwitcher.hpp"
 
-#include <stack>
-
-#include <base/CCRefPtr.h>
 #include <base/CCValue.h>
-#include <platform/CCFileUtils.h>
 
 #include "EELanguage.hpp"
 #include "EELanguageDelegate.hpp"
@@ -41,14 +37,10 @@ void Self::changeLanguage(const Language& language) {
     CC_ASSERT(not locked_);
     locked_ = true;
     currentLanguage_ = std::make_unique<Language>(language);
-    for (auto&& delegate : delegates_) {
-        delegate->setLanguage(language);
+    for (auto&& [key, observer] : observers_) {
+        observer(language);
     }
     locked_ = false;
-}
-
-const LanguageFormatter& Self::getFormatter(const std::string& key) const {
-    return getFormatter(getCurrentLanguage(), key);
 }
 
 const LanguageFormatter& Self::getFormatter(const Language& language,
@@ -63,35 +55,22 @@ const LanguageFormatter& Self::getFormatter(const Language& language,
     }
 }
 
-const std::string& Self::getFormat(const std::string& key) const {
-    return getFormat(getCurrentLanguage(), key);
+bool Self::addObserver(const std::string& key, const Observer& observer) {
+    CC_ASSERT(not locked_);
+    if (observers_.count(key) != 0) {
+        return false;
+    }
+    observers_.emplace(key, observer);
+    return true;
 }
 
-const std::string& Self::getFormat(const Language& language,
-                                   const std::string& key) const {
-    auto&& formatter = getFormatter(language, key);
-    return formatter.getFormat();
-}
-
-std::string Self::getText(const std::string& key) const {
-    return getText(getCurrentLanguage(), key);
-}
-
-std::string Self::getText(const std::string& key,
-                          const std::vector<std::string>& args) const {
-    return getText(getCurrentLanguage(), key, args);
-}
-
-std::string Self::getText(const Language& language,
-                          const std::string& key) const {
-    return getText(language, key, {});
-}
-
-std::string Self::getText(const Language& language, const std::string& key,
-                          const std::vector<std::string>& args) const {
-    auto&& formatter = getFormatter(language, key);
-    auto result = formatter.format(args);
-    return result;
+bool Self::removeObserver(const std::string& key) {
+    CC_ASSERT(not locked_);
+    if (observers_.count(key) == 0) {
+        return false;
+    }
+    observers_.erase(key);
+    return true;
 }
 
 void Self::loadLanguage(const Language& language,
@@ -102,20 +81,5 @@ void Self::loadLanguage(const Language& language,
         auto formatter = LanguageFormatter(text);
         dictionaries_[language].emplace(key, std::move(formatter));
     }
-}
-
-void Self::loadLanguage(const Language& language, const std::string& filename) {
-    auto map = cocos2d::FileUtils::getInstance()->getValueMapFromFile(filename);
-    loadLanguage(language, map);
-}
-
-void Self::addDelegate(LanguageDelegate* delegate) {
-    CC_ASSERT(not locked_);
-    delegates_.insert(delegate);
-}
-
-void Self::removeDelegate(LanguageDelegate* delegate) {
-    CC_ASSERT(not locked_);
-    delegates_.erase(delegate);
 }
 } // namespace ee

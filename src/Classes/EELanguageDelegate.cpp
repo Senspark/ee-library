@@ -8,21 +8,26 @@
 
 #include "EELanguageDelegate.hpp"
 
+#include "EEILanguageSwitcher.hpp"
 #include "EELanguage.hpp"
 #include "EELanguageFormatter.hpp"
-#include "EELanguageSwitcher.hpp"
 
 namespace ee {
 using Self = LanguageDelegate;
 
-Self::LanguageDelegate(LanguageSwitcher& switcher)
+Self::LanguageDelegate(ILanguageSwitcher& switcher)
     : switcher_(switcher) {
+    static int id = 0;
+    id_ = std::to_string(id++);
     setLanguage(switcher_.getCurrentLanguage());
-    switcher_.addDelegate(this);
+    switcher_.addObserver(id_,
+                          [this](const Language& language) { //
+                              setLanguage(language);
+                          });
 }
 
 Self::~LanguageDelegate() {
-    switcher_.removeDelegate(this);
+    switcher_.removeObserver(id_);
 }
 
 const Language& Self::getLanguage() const {
@@ -34,7 +39,7 @@ Self* Self::setKey(const std::string& key) {
         args_.reset();
     }
     key_ = std::make_unique<std::string>(key);
-    auto&& formatter = switcher_.getFormatter(key);
+    auto&& formatter = switcher_.getFormatter(getLanguage(), key);
     if (formatter.getPlaceholders() == 0) {
         // Empty format.
         setFormat({});
@@ -75,7 +80,8 @@ void Self::updateText() {
     if (not args_) {
         return;
     }
-    auto text = switcher_.getText(*language_, *key_, *args_);
+    auto&& formatter = switcher_.getFormatter(getLanguage(), *key_);
+    auto&& text = formatter.format(*args_);
     textCallback_(text);
 }
 } // namespace ee

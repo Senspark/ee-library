@@ -15,7 +15,7 @@
 
 namespace ee {
 class Language;
-class LanguageSwitcher;
+class ILanguageSwitcher;
 
 class LanguageDelegate {
 private:
@@ -24,7 +24,7 @@ private:
 public:
     using TextCallback = std::function<void(const std::string& text)>;
 
-    explicit LanguageDelegate(LanguageSwitcher& switcher);
+    explicit LanguageDelegate(ILanguageSwitcher& switcher);
 
     virtual ~LanguageDelegate();
 
@@ -58,8 +58,9 @@ protected:
 private:
     void updateText();
 
+    std::string id_;
     TextCallback textCallback_;
-    LanguageSwitcher& switcher_;
+    ILanguageSwitcher& switcher_;
 };
 } // namespace ee
 

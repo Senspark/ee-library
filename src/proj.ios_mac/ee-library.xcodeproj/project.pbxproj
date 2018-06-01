@@ -275,6 +275,8 @@
 		6FEC41EE1D9B53C8000B40F2 /* EEPool.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FEC41EA1D9B53C8000B40F2 /* EEPool.hpp */; };
 		6FF4BB561EBAC354000214C1 /* EESpineMacro.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FF4BB531EBAC354000214C1 /* EESpineMacro.hpp */; };
 		6FF4BB571EBAC354000214C1 /* EESpineMacro.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 6FF4BB531EBAC354000214C1 /* EESpineMacro.hpp */; };
+		ADE2703A20C12F61007D76B1 /* EEILanguageSwitcher.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ADE2703920C12F61007D76B1 /* EEILanguageSwitcher.hpp */; };
+		ADE2703B20C12F61007D76B1 /* EEILanguageSwitcher.hpp in Headers */ = {isa = PBXBuildFile; fileRef = ADE2703920C12F61007D76B1 /* EEILanguageSwitcher.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -432,6 +434,7 @@
 		6FE569D81E63C9FC001E1F80 /* EEPreferences.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEPreferences.hpp; sourceTree = "<group>"; };
 		6FEC41EA1D9B53C8000B40F2 /* EEPool.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EEPool.hpp; sourceTree = "<group>"; };
 		6FF4BB531EBAC354000214C1 /* EESpineMacro.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EESpineMacro.hpp; sourceTree = "<group>"; };
+		ADE2703920C12F61007D76B1 /* EEILanguageSwitcher.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EEILanguageSwitcher.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -609,12 +612,13 @@
 			children = (
 				6F302A621F21E245005415AE /* EELanguage.cpp */,
 				6F302A631F21E245005415AE /* EELanguage.hpp */,
-				6F302A5C1F21E1F6005415AE /* EELanguageSwitcher.cpp */,
-				6F302A5D1F21E1F6005415AE /* EELanguageSwitcher.hpp */,
 				6F302A6E1F21E944005415AE /* EELanguageDelegate.cpp */,
 				6F302A6F1F21E944005415AE /* EELanguageDelegate.hpp */,
 				6F3F00991F2993F000C054AB /* EELanguageFormatter.cpp */,
 				6F3F009A1F2993F000C054AB /* EELanguageFormatter.hpp */,
+				ADE2703920C12F61007D76B1 /* EEILanguageSwitcher.hpp */,
+				6F302A5C1F21E1F6005415AE /* EELanguageSwitcher.cpp */,
+				6F302A5D1F21E1F6005415AE /* EELanguageSwitcher.hpp */,
 				6F9DE58F1F2ED8D500CBCB83 /* EEMultilingualDelegate.cpp */,
 				6F9DE5901F2ED8D500CBCB83 /* EEMultilingualDelegate.hpp */,
 			);
@@ -817,6 +821,7 @@
 				6FF4BB561EBAC354000214C1 /* EESpineMacro.hpp in Headers */,
 				6C47AAF81CA4EAE100B3E65E /* EEUiTextLoader.hpp in Headers */,
 				6F79B6401CCAA2D70008EFAC /* EEBackButtonListener.hpp in Headers */,
+				ADE2703A20C12F61007D76B1 /* EEILanguageSwitcher.hpp in Headers */,
 				6C42EF451C85449F0062C2C6 /* EEDynamicValue.hpp in Headers */,
 				6FC9199D1F42E85900C71164 /* EEShaderManager.hpp in Headers */,
 				6C3849231CA230750020B858 /* EEEvent.hpp in Headers */,
@@ -895,6 +900,7 @@
 				6FF4BB571EBAC354000214C1 /* EESpineMacro.hpp in Headers */,
 				6F79B6471CCAC0EA0008EFAC /* EEEventListener.hpp in Headers */,
 				6F6B54091D41B58700F13CA9 /* EEDataHandler.hpp in Headers */,
+				ADE2703B20C12F61007D76B1 /* EEILanguageSwitcher.hpp in Headers */,
 				6FBEDB9E1D1A93430038E335 /* EESpriteWithHsv.hpp in Headers */,
 				6FC9199E1F42E85900C71164 /* EEShaderManager.hpp in Headers */,
 				6FAC217F1CE3454E000C16CC /* EEDialogGuard.hpp in Headers */,

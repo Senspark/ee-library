@@ -15,23 +15,39 @@
 namespace ee {
 using Self = LanguageDelegate;
 
-Self::LanguageDelegate(ILanguageSwitcher& switcher)
-    : switcher_(switcher) {
-    static int id = 0;
+Self::LanguageDelegate()
+    : switcher_(nullptr) {
+    static int id = 0; // Unique ID for each language delegate.
     id_ = std::to_string(id++);
-    setLanguage(switcher_.getCurrentLanguage());
-    switcher_.addObserver(id_,
-                          [this](const Language& language) { //
-                              setLanguage(language);
-                          });
 }
 
 Self::~LanguageDelegate() {
-    switcher_.removeObserver(id_);
+    if (switcher_ != nullptr) {
+        switcher_->removeObserver(id_);
+    }
 }
 
 const Language& Self::getLanguage() const {
-    return *language_;
+    if (language_) {
+        return *language_;
+    }
+    static auto nil = Language::create("_nil_");
+    return nil;
+}
+
+Self* Self::setSwitcher(ILanguageSwitcher& switcher) {
+    if (switcher_ != nullptr) {
+        // Remove observer from old switcher.
+        switcher_->removeObserver(id_);
+    }
+    switcher_ = std::addressof(switcher);
+    setLanguage(switcher_->getCurrentLanguage());
+    // Add observer to the new switcher.
+    switcher_->addObserver(id_,
+                           [this](const Language& language) { //
+                               setLanguage(language);
+                           });
+    return this;
 }
 
 Self* Self::setKey(const std::string& key) {
@@ -39,7 +55,7 @@ Self* Self::setKey(const std::string& key) {
         args_.reset();
     }
     key_ = std::make_unique<std::string>(key);
-    auto&& formatter = switcher_.getFormatter(getLanguage(), key);
+    auto&& formatter = switcher_->getFormatter(getLanguage(), key);
     if (formatter.getPlaceholders() == 0) {
         // Empty format.
         setFormat({});
@@ -80,7 +96,7 @@ void Self::updateText() {
     if (not args_) {
         return;
     }
-    auto&& formatter = switcher_.getFormatter(getLanguage(), *key_);
+    auto&& formatter = switcher_->getFormatter(getLanguage(), *key_);
     auto&& text = formatter.format(*args_);
     textCallback_(text);
 }

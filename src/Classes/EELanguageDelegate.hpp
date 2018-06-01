@@ -24,30 +24,33 @@ private:
 public:
     using TextCallback = std::function<void(const std::string& text)>;
 
-    explicit LanguageDelegate(ILanguageSwitcher& switcher);
-
+    LanguageDelegate();
     virtual ~LanguageDelegate();
 
     const Language& getLanguage() const;
 
+    /// Sets the associated language switcher.
+    /// @return Instance to this for method chaining.
+    Self* setSwitcher(ILanguageSwitcher& switcher);
+
     /// Sets the multilingual key.
     /// @param[in] key The multilingual key.
-    /// @return Instance to this for chaining.
+    /// @return Instance to this for method chaining.
     Self* setKey(const std::string& key);
 
     /// Sets the format arguments.
     /// @param[in] args The format arguments.
-    /// @return Instance to this for chaining.
+    /// @return Instance to this for method chaining.
     Self* setFormat(const std::vector<std::string>& args);
 
     /// Sets the display language.
     /// @param[in] language The desired language.
-    /// @return Instance to this for chaining.
+    /// @return Instance to this for method chaining.
     Self* setLanguage(const Language& language);
 
     /// Sets the text callback.
     /// @param[in] callback The desired callback.
-    /// @return Instance to this for chaining.
+    /// @return Instance to this for method chaining.
     Self* setTextCallback(const TextCallback& callback);
 
 protected:
@@ -60,7 +63,7 @@ private:
 
     std::string id_;
     TextCallback textCallback_;
-    ILanguageSwitcher& switcher_;
+    ILanguageSwitcher* switcher_;
 };
 } // namespace ee
 

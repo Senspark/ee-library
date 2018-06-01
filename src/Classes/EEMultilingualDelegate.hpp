@@ -29,9 +29,6 @@ private:
     using Super = LanguageDelegate;
 
 public:
-    explicit MultilingualDelegate(LanguageSwitcher& switcher);
-    virtual ~MultilingualDelegate() override;
-
 protected:
     virtual void onNodeLoaded(cocos2d::Node* node,
                               cocosbuilder::NodeLoader* nodeLoader) override;

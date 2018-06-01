@@ -72,6 +72,7 @@ class BlurBackground;
 class BlurBackgroundLoader;
 
 class Language;
+class ILanguageSwitcher;
 class LanguageSwitcher;
 class LanguageDelegate;
 class LanguageFormatter;

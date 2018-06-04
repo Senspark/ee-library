@@ -14,8 +14,10 @@
 #include <limits>
 #include <sstream>
 
-#include "EEMacro.hpp"
+#include <platform/CCPlatformMacros.h> // CC_SAFE_DELETE
+
 #include "EECocos2dxFwd.hpp"
+#include "EEMacro.hpp"
 
 NS_EE_BEGIN
 /// Reference guard.

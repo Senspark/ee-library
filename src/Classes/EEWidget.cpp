@@ -41,7 +41,7 @@ bool Self::init() {
     container_->setPosition(cocos2d::Point::ZERO);
     container_->setSizeType(SizeType::ABSOLUTE);
     container_->setContentSize(cocos2d::Size::ZERO);
-    container_->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
+    container_->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE);
     addProtectedChild(container_, std::numeric_limits<int>::min());
     return true;
 }
@@ -165,23 +165,17 @@ void Self::onSizeChanged() {
 
 void Self::updateInset() {
     auto position = cocos2d::Point(insetLeft_, insetBottom_);
-    container_->setPosition(position);
-
     auto size = cocos2d::Size(
         std::max(0.0f, getContentSize().width - insetLeft_ - insetRight_),
         std::max(0.0f, getContentSize().height - insetTop_ - insetBottom_));
+    container_->setPosition(position + size / 2);
     container_->setContentSize(size);
 
 #ifndef NDEBUG
     drawNode_->clear();
-    drawNode_->drawRect(
-        cocos2d::Point::ZERO,
-        cocos2d::Point(getContentSize().width, getContentSize().height),
-        cocos2d::Color4F::BLUE);
-    drawNode_->drawRect(container_->getPosition(),
-                        container_->getPosition() +
-                            container_->getContentSize(),
-                        cocos2d::Color4F::RED);
+    drawNode_->drawRect(cocos2d::Point::ZERO, getContentSize(),
+                        cocos2d::Color4F::BLUE);
+    drawNode_->drawRect(position, position + size, cocos2d::Color4F::RED);
 #endif // NDEBUG
 }
 } // namespace ui

@@ -86,6 +86,16 @@ using LanguageSwitcher = language::Switcher;
 using LanguageDelegate = language::Delegate;
 using LanguageFormatter = language::Formatter;
 
+namespace ui {
+class Widget;
+class WidgetLoader;
+class WidgetContainerLoader;
+} // namespace ui
+
+using ui::Widget;
+using ui::WidgetContainerLoader;
+using ui::WidgetLoader;
+
 class SkeletonAnimationLoader;
 class SkeletonBone;
 class SkeletonBoneLoader;

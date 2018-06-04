@@ -41,7 +41,9 @@ void Self::onHandlePropTypeFloat(cocos2d::Node* node_, cocos2d::Node* parent,
         return node->setInsetRight(value);
     }
     if (name == property::inset_bottom) {
-        return node->setInsetBottom(value);
+        node->setInsetBottom(value);
+        node->magicEnabled_ = true;
+        return;
     }
     Super::onHandlePropTypeFloat(node_, parent, name_, value, reader);
 }

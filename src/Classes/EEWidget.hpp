@@ -8,13 +8,17 @@
 #ifndef EE_LIBRARY_WIDGET_HPP
 #define EE_LIBRARY_WIDGET_HPP
 
+#include <platform/CCPlatformConfig.h> // CC_DLL
+
+#include <cocosbuilder/CCNodeLoaderListener.h>
 #include <ui/UIWidget.h>
 
 #include "EEForward.hpp"
 
 namespace ee {
 namespace ui {
-class Widget : public cocos2d::ui::Widget {
+class Widget : public cocos2d::ui::Widget,
+               public cocosbuilder::NodeLoaderListener {
 private:
     using Self = Widget;
     using Super = cocos2d::ui::Widget;
@@ -60,7 +64,7 @@ public:
     void setInsetTop(float inset);
     void setInsetRight(float inset);
     void setInsetBottom(float inset);
-    
+
     const cocos2d::Size& getInnerContentSize() const;
 
 protected:
@@ -69,17 +73,27 @@ protected:
     virtual void onEnter() override;
     virtual void onExit() override;
 
+    virtual void onNodeLoaded(cocos2d::Node* node,
+                              cocosbuilder::NodeLoader* nodeLoader) override;
+
     virtual void onSizeChanged() override;
     void updateInset();
 
 private:
+    friend WidgetLoader;
+
+    bool magicEnabled_;
+
     float insetLeft_;
     float insetTop_;
     float insetRight_;
     float insetBottom_;
 
     cocos2d::ui::Widget* container_;
-    cocos2d::LayerColor* layer_;
+
+#ifndef NDEBUG
+    cocos2d::DrawNode* drawNode_;
+#endif // NDEBUG
 };
 } // namespace ui
 } // namespace ee

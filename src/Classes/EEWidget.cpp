@@ -8,7 +8,9 @@
 #include "EEUtils.hpp"
 #include "EEWidget.hpp"
 
-#include <2d/CCLayer.h>
+#ifndef NDEBUG
+#include <2d/CCDrawNode.h>
+#endif // NDEBUG
 
 namespace ee {
 namespace ui {
@@ -22,8 +24,13 @@ bool Self::init() {
     if (not Super::init()) {
         return false;
     }
-    layer_ = cocos2d::LayerColor::create(cocos2d::Color4B::BLUE);
-    addProtectedChild(layer_, std::numeric_limits<int>::min());
+    magicEnabled_ = false;
+
+#ifndef NDEBUG
+    drawNode_ = cocos2d::DrawNode::create();
+    drawNode_->setVisible(false);
+    addProtectedChild(drawNode_, std::numeric_limits<int>::min());
+#endif // NDEBUG
 
     container_ = cocos2d::ui::Widget::create();
     container_->ignoreContentAdaptWithSize(false);
@@ -45,6 +52,12 @@ void Self::onEnter() {
 
 void Self::onExit() {
     Super::onExit();
+}
+
+void Self::onNodeLoaded(cocos2d::Node* node,
+                        cocosbuilder::NodeLoader* nodeLoader) {
+    CC_ASSERT(magicEnabled_);
+    magicEnabled_ = false;
 }
 
 void Self::addChild(cocos2d::Node* child, int localZOrder, int tag) {
@@ -108,6 +121,9 @@ void Self::setCascadeOpacityEnabled(bool enabled) {
 }
 
 const cocos2d::Size& Self::getContentSize() const {
+    if (magicEnabled_) {
+        return container_->getContentSize();
+    }
     return Super::getContentSize();
 }
 
@@ -145,7 +161,6 @@ const cocos2d::Size& Self::getInnerContentSize() const {
 void Self::onSizeChanged() {
     Super::onSizeChanged();
     updateInset();
-    layer_->setContentSize(getContentSize());
 }
 
 void Self::updateInset() {
@@ -156,6 +171,18 @@ void Self::updateInset() {
         std::max(0.0f, getContentSize().width - insetLeft_ - insetRight_),
         std::max(0.0f, getContentSize().height - insetTop_ - insetBottom_));
     container_->setContentSize(size);
+
+#ifndef NDEBUG
+    drawNode_->clear();
+    drawNode_->drawRect(
+        cocos2d::Point::ZERO,
+        cocos2d::Point(getContentSize().width, getContentSize().height),
+        cocos2d::Color4F::BLUE);
+    drawNode_->drawRect(container_->getPosition(),
+                        container_->getPosition() +
+                            container_->getContentSize(),
+                        cocos2d::Color4F::RED);
+#endif // NDEBUG
 }
 } // namespace ui
 } // namespace ee

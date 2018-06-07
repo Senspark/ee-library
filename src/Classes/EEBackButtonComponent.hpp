@@ -29,6 +29,8 @@ public:
     virtual void onRemove() override;
 
 protected:
+    BackButtonComponent();
+    
     virtual bool initWithCallback(const BackButtonCallback& callback);
 
 private:

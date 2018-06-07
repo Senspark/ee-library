@@ -15,6 +15,8 @@
 #include <ui/UIButton.h>
 
 NS_EE_BEGIN
+using Self = UiButtonLoader;
+
 namespace property {
 constexpr auto pressed_action_enabled = "pressedActionEnabled";
 constexpr auto zoom_scale = "zoomScale";
@@ -41,6 +43,10 @@ cocos2d::Node* UiButtonLoader::createNode(cocos2d::Node* parent,
     auto result = cocos2d::ui::Button::create();
     return result;
 }
+
+Self::UiButtonLoader()
+    : spriteFrameEnabled_(false)
+    , textureResType_(cocos2d::ui::Widget::TextureResType::LOCAL) {}
 
 cocos2d::SpriteFrame* UiButtonLoader::parsePropTypeSpriteFrame(
     cocos2d::Node* node, cocos2d::Node* parent, cocosbuilder::CCBReader* reader,

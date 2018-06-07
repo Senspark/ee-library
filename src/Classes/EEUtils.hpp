@@ -14,8 +14,10 @@
 #include <limits>
 #include <sstream>
 
-#include "EEMacro.hpp"
+#include <platform/CCPlatformMacros.h> // CC_SAFE_DELETE
+
 #include "EECocos2dxFwd.hpp"
+#include "EEMacro.hpp"
 
 NS_EE_BEGIN
 /// Reference guard.
@@ -115,8 +117,8 @@ T* createInstance(const Initializer& initializer) {
 /// @endcode
 template <class R, class T, class... Args>
 T* createInstance(R T::*f, Args&&... args) {
-    return ::ee::createInstance<T>(
-        std::bind(f, std::placeholders::_1, std::forward<Args>(args)...));
+    return ::ee::createInstance<T>(std::bind(
+        f, std::placeholders::_1, std::ref(std::forward<Args>(args))...));
 }
 
 /// http://stackoverflow.com/questions/19053351/how-do-i-use-a-custom-deleter-with-a-stdunique-ptr-member

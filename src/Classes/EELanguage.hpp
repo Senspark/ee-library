@@ -12,6 +12,7 @@
 #include <string>
 
 namespace ee {
+namespace language {
 class Language {
 private:
     using Self = Language;
@@ -33,6 +34,7 @@ private:
 
     std::string code_;
 };
+} // namespace language
 } // namespace ee
 
 #endif /* EE_LIBRARY_LANGUAGE_HPP */

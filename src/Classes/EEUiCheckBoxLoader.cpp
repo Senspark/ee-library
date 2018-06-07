@@ -14,6 +14,8 @@
 #include <ui/UICheckBox.h>
 
 NS_EE_BEGIN
+using Self = UiCheckBoxLoader;
+
 namespace property {
 constexpr const char* selected = "selected";
 constexpr const char* zoom_scale = "zoomScale";
@@ -40,6 +42,10 @@ constexpr const char* pressed_background_sprite_frame =
 constexpr const char* disabled_background_sprite_frame =
     "disabledBackgroundSpriteFrame";
 } // namespace property.
+
+Self::UiCheckBoxLoader()
+    : spriteFrameEnabled_(false)
+    , textureResType_(cocos2d::ui::Widget::TextureResType::LOCAL) {}
 
 cocos2d::Node* UiCheckBoxLoader::createNode(cocos2d::Node* parent,
                                             cocosbuilder::CCBReader* reader) {

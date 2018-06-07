@@ -10,107 +10,62 @@
 #define EE_LIBRARY_LANGUAGE_SWITCHER_HPP
 
 #include <map>
-#include <string>
 #include <set>
+#include <string>
 #include <vector>
 
-#include <EECocos2dxFwd.hpp>
+#include "EECocos2dxFwd.hpp"
+#include "EEILanguageSwitcher.hpp"
 
 namespace ee {
-class Language;
-class LanguageDelegate;
-class LanguageFormatter;
+namespace language {
+class Formatter;
 
-class LanguageSwitcher {
+class Switcher : public ISwitcher {
 private:
-    using Self = LanguageSwitcher;
+    using Self = Switcher;
 
 public:
-    static LanguageSwitcher& getInstance();
+    Switcher();
+    virtual ~Switcher();
 
-    LanguageSwitcher();
-    virtual ~LanguageSwitcher();
+    /// @see Super.
+    virtual const Language& getCurrentLanguage() const override;
 
-    /// Gets the current language.
-    virtual const Language& getCurrentLanguage() const;
+    /// @see Super.
+    virtual void changeLanguage(const Language& language) override;
 
-    /// Changes the current language to the specified language.
-    /// @param[in] language The desired language.
-    virtual void changeLanguage(const Language& language);
+    /// @see Super.
+    virtual const Formatter&
+    getFormatter(const Language& language,
+                 const std::string& key) const override;
 
-    /// Gets the formatter for the current language and the specified key.
-    /// @param[in] key The multilingual key.
-    /// @return The formatter.
-    const LanguageFormatter& getFormatter(const std::string& key) const;
+    /// @see Super.
+    virtual bool addObserver(const std::string& key,
+                             const Observer& observer) override;
 
-    /// Gets the formatter for the specified language and key.
-    /// @param[in] language The desired language.
-    /// @param[in] key The multilingual key.
-    /// @return The formatter.
-    const LanguageFormatter& getFormatter(const Language& language,
-                                          const std::string& key) const;
-
-    /// Gets the format string for the current language and the specified key.
-    /// @param[in] key The desired key.
-    /// @return The format string.
-    const std::string& getFormat(const std::string& key) const;
-
-    /// Gets the format string for the specified language and key.
-    /// @param[in] language The desired language.
-    /// @param[in] key The desired key.
-    /// @return The format string.
-    const std::string& getFormat(const Language& language,
-                                 const std::string& key) const;
-
-    /// Gets the translated text in the current language for the specified key.
-    /// @param[in] key The text's key.
-    /// @return The translated text.
-    std::string getText(const std::string& key) const;
-
-    std::string getText(const std::string& key,
-                        const std::vector<std::string>& args) const;
-
-    /// Gets the translated text in the specified language for the specified
-    /// key.
-    /// @param[in] language The desired language.
-    /// @param[in] key The text's key.
-    /// @return The translated text.
-    std::string getText(const Language& language, const std::string& key) const;
-
-    std::string getText(const Language& language, const std::string& key,
-                        const std::vector<std::string>& args) const;
+    /// @see Super.
+    virtual bool removeObserver(const std::string& key) override;
 
     /// Loads the specified language from the specified map.
     /// @param[in] language The language to load.
     /// @param[in] map The map which contains the language dictionary.
     void loadLanguage(const Language& language, const cocos2d::ValueMap& map);
 
-    /// Loads the specified language from the specified file.
-    /// @param[in] language The language to load.
-    /// @param[in] filename The filename.
-    void loadLanguage(const Language& language, const std::string& filename);
-
 private:
-    friend LanguageDelegate;
-
-    LanguageSwitcher(const Self&) = delete;
-    Self& operator=(const Self&) = delete;
-
-    void addDelegate(LanguageDelegate* delegate);
-    void removeDelegate(LanguageDelegate* delegate);
-
     std::unique_ptr<Language> currentLanguage_;
 
     struct LanguageComparator {
         bool operator()(const Language& lhs, const Language& rhs) const;
     };
 
-    std::map<Language, std::map<std::string, LanguageFormatter>,
-             LanguageComparator> dictionaries_;
+    std::map<Language, std::map<std::string, Formatter>, LanguageComparator>
+        dictionaries_;
 
     bool locked_;
-    std::set<LanguageDelegate*> delegates_;
+    std::map<std::string, Observer> observers_;
 };
+} // namespace language
 } // namespace ee
 
 #endif /* EE_LIBRARY_LANGUAGE_SWITCHER_HPP */

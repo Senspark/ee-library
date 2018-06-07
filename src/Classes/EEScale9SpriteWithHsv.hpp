@@ -36,6 +36,11 @@ public:
     setGLProgramState(cocos2d::GLProgramState* glProgramState) override;
 
 protected:
+    template <class T, class Initializer>
+    friend T* createInstance(const Initializer& initializer);
+
+    Scale9SpriteWithHsv();
+
     virtual bool init() override;
 
     virtual void draw(cocos2d::Renderer* renderer,

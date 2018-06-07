@@ -38,6 +38,7 @@ ButtonEx::ButtonEx()
     : saturation_(1.0f)
     , brightness_(0.0f)
     , zoomingDuration_(0.05f)
+    , zoomingAction_(nullptr)
     , currentTouch_(nullptr)
     , currentEvent_(nullptr)
     , container_(nullptr) {

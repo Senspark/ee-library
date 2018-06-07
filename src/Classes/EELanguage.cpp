@@ -9,24 +9,27 @@
 #include "EELanguage.hpp"
 
 namespace ee {
-const Language Language::English("en");
-const Language Language::Thailand("th");
-const Language Language::Vietnamese("vi");
-const Language Language::Russian("ru");
+namespace language {
+using Self = Language;
 
-Language Language::create(const std::string& code) {
-    return Language(code);
+const Self Self::English("en");
+const Self Self::Thailand("th");
+const Self Self::Vietnamese("vi");
+const Self Self::Russian("ru");
+
+Self Self::create(const std::string& code) {
+    return Self(code);
 }
 
-Language::Language(const std::string& code)
-    : code_(code) {
-}
+Self::Language(const std::string& code)
+    : code_(code) {}
 
-const std::string& Language::getCode() const {
+const std::string& Self::getCode() const {
     return code_;
 }
 
-bool Language::operator==(const Self& other) const {
+bool Self::operator==(const Self& other) const {
     return code_ == other.code_;
 }
+} // namespace language
 } // namespace ee

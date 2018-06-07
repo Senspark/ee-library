@@ -175,7 +175,7 @@ bool DialogTree::processPopCommand(Dialog* dialog, std::size_t level) {
     if (level == Dialog::TopLevel || level == currentLevel_) {
         if (dialog != getTopDialog()) {
             // Attempted to pop not the top dialog!!!
-            CC_ASSERT(false);
+//            CC_ASSERT(false);
             return false;
         }
         popDialogImmediately(dialog);
@@ -188,7 +188,7 @@ bool DialogTree::pushCommand(const Command& command) {
     for (auto&& cmd : commandQueue_) {
         if (cmd.type == command.type && cmd.dialog == command.dialog) {
             // Command alreay exists!!!.
-            CC_ASSERT(false);
+//            CC_ASSERT(false);
             return false;
         }
     }

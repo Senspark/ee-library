@@ -26,6 +26,8 @@ public:
     virtual void setParent(cocos2d::Node* parent) override;
 
 protected:
+    SkeletonBone();
+    
     virtual bool init() override;
 
     virtual void onEnter() override;

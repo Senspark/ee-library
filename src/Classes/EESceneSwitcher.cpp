@@ -18,6 +18,16 @@
 #include <renderer/CCTextureCache.h>
 
 namespace ee {
+using Self = SceneSwitcher;
+
+Self::SceneSwitcher()
+    : phase_(Phase::None)
+    , imagesLoaded_(true)
+    , inActionsDone_(true)
+    , loadedImageCount_(0)
+    , signaled_(true)
+    , actor_(nullptr) {}
+
 SceneSwitcher::~SceneSwitcher() {
     CCLOG("%s: %p", __PRETTY_FUNCTION__, this);
 }
@@ -26,11 +36,6 @@ bool SceneSwitcher::init() {
     if (not Super::init()) {
         return false;
     }
-    phase_ = Phase::None;
-    imagesLoaded_ = true;
-    inActionsDone_ = true;
-    loadedImageCount_ = 0;
-    signaled_ = true;
     actor_ = cocos2d::Node::create();
     actor_->setVisible(false);
     addChild(actor_);

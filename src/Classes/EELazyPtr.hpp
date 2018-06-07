@@ -25,8 +25,8 @@ private:
                   "Value type must be derived from cocos2d::Ref");
 
 public:
-    LazyPtr(Pointer ptr) {
-        ptr_ = ptr;
+    LazyPtr(Pointer ptr)
+        : ptr_(ptr) {
         ptr_->retain();
     }
 
@@ -37,8 +37,8 @@ public:
         }
     }
 
-    LazyPtr(LazyPtr&& other) {
-        ptr_ = other.ptr_;
+    LazyPtr(LazyPtr&& other)
+        : ptr_(other.ptr_) {
         other.ptr_ = nullptr;
     }
 

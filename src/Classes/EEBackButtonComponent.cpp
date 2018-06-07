@@ -11,6 +11,11 @@
 #include <cocos2d.h>
 
 NS_EE_BEGIN
+using Self = BackButtonComponent;
+
+Self::BackButtonComponent()
+    : listener_(nullptr) {}
+
 BackButtonComponent*
 BackButtonComponent::create(const BackButtonCallback& callback) {
     auto result = new (std::nothrow) Self();

@@ -12,6 +12,11 @@
 #include <spine/SkeletonAnimation.h>
 
 namespace ee {
+using Self = SkeletonBone;
+
+Self::SkeletonBone()
+    : parentSkeleton_(nullptr) {}
+
 bool SkeletonBone::init() {
     if (not Super::init()) {
         return false;

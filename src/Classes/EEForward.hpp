@@ -14,11 +14,15 @@
 /// Forward ee library classes.
 
 namespace ee {
-template <class Np, class Lp, class... Ts> class GenericLoader;
+template <class Np, class Lp, class... Ts>
+class GenericLoader;
 
-template <class T> class DynamicValue;
-template <class T> class Pool;
-template <class T> class LazyPtr;
+template <class T>
+class DynamicValue;
+template <class T>
+class Pool;
+template <class T>
+class LazyPtr;
 
 class ScopeGuard;
 
@@ -52,7 +56,8 @@ class BackButtonComponent;
 
 class Console;
 
-template <class T> class BackButtonListener;
+template <class T>
+class BackButtonListener;
 
 class NodeV3Loader;
 class UiWidgetLoader;
@@ -71,24 +76,45 @@ class Scale9SpriteWithHsv;
 class BlurBackground;
 class BlurBackgroundLoader;
 
+namespace language {
 class Language;
-class LanguageSwitcher;
-class LanguageDelegate;
-class LanguageFormatter;
+class ISwitcher;
+class Switcher;
+class Delegate;
+class Formatter;
 class MultilingualDelegate;
+} // namespace language
+
+using Language = language::Language;
+using ILanguageSwitcher = language::ISwitcher;
+using LanguageSwitcher = language::Switcher;
+using LanguageDelegate = language::Delegate;
+using LanguageFormatter = language::Formatter;
+
+namespace ui {
+class Widget;
+class WidgetLoader;
+} // namespace ui
+
+using ui::Widget;
+using ui::WidgetLoader;
 
 class SkeletonAnimationLoader;
 class SkeletonBone;
 class SkeletonBoneLoader;
 
-template <std::size_t Id, class... Args> class EventInfo;
+template <std::size_t Id, class... Args>
+class EventInfo;
 class EventDispatcher;
 
-template <class T, class = void> struct DataTraits;
+template <class T, class = void>
+struct DataTraits;
 
-template <class... Keys> struct DataFormat;
+template <class... Keys>
+struct DataFormat;
 
-template <std::size_t Id, class Value, class... Args> struct DataInfo;
+template <std::size_t Id, class Value, class... Args>
+struct DataInfo;
 
 class DataHandler;
 } // namespace ee

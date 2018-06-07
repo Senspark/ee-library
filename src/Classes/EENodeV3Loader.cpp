@@ -9,6 +9,8 @@
 #include "EENodeV3Loader.hpp"
 
 NS_EE_BEGIN
+using Self = NodeV3Loader;
+
 namespace property {
 constexpr const char* local_z_order_overridden = "localZOrderOverridden";
 constexpr const char* local_z_order = "localZOrder";
@@ -17,6 +19,9 @@ constexpr const char* opacity = "opacity";
 constexpr const char* cascade_color_enabled = "cascadeColorEnabled";
 constexpr const char* cascade_opacity_enabled = "cascadeOpacityEnabled";
 } // namespace property.
+
+Self::NodeV3Loader()
+    : localZOrderOverridden_(false) {}
 
 cocos2d::Node* NodeV3Loader::createNode(cocos2d::Node* parent,
                                         cocosbuilder::CCBReader* reader) {

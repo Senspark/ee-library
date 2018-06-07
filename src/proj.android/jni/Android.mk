@@ -15,7 +15,7 @@ LOCAL_MODULE := ee_static
 
 LOCAL_MODULE_FILENAME := libee
 
-LOCAL_SRC_FILES := ${shell find $(LOCAL_PATH)/../../Classes -name "*.cpp" ! -name "__*.cpp" -print}
+LOCAL_SRC_FILES := ${shell find $(LOCAL_PATH)/../../Classes -name "*.cpp" -print}
                    
 LOCAL_C_INCLUDES := \
 $(LOCAL_PATH)/../../Classes \

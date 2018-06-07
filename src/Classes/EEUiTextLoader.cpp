@@ -11,6 +11,8 @@
 #include <ui/UIText.h>
 
 NS_EE_BEGIN
+using Self = UiTextLoader;
+
 namespace property {
 constexpr const char* font_name = "fontName";
 constexpr const char* font_size = "fontSize";
@@ -37,6 +39,14 @@ cocos2d::Node* UiTextLoader::createNode(cocos2d::Node* parent,
                                         cocosbuilder::CCBReader* reader) {
     return cocos2d::ui::Text::create();
 }
+
+Self::UiTextLoader()
+    : shadowEnabled_(false)
+    , shadowOpacity_(0)
+    , shadowBlurRadius_(0)
+    , outlineEnabled_(false)
+    , outlineOpacity_(0)
+    , outlineSize_(0) {}
 
 void UiTextLoader::onHandlePropTypePoint(cocos2d::Node* node,
                                          cocos2d::Node* parent,

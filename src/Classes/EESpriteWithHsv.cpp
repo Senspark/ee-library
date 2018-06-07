@@ -53,6 +53,9 @@ Self* Self::createWithSpriteFrameName(const std::string& spriteFrameName) {
                                           spriteFrameName));
 }
 
+Self::SpriteWithHsv()
+    : customState_(nullptr) {}
+
 bool Self::initWithTexture(cocos2d::Texture2D* texture,
                            const cocos2d::Rect& rect, bool rotated) {
     if (not Super::initWithTexture(texture, rect, rotated)) {

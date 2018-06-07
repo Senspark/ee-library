@@ -13,7 +13,7 @@
 #include <vector>
 
 #include "EEEvent.hpp"
-#include "EEEventInfoV2.hpp"
+#include "EEEventInfo.hpp"
 #include "EEEventListener.hpp"
 #include "EEUtils.hpp"
 

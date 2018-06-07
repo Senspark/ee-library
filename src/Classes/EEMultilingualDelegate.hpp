@@ -9,18 +9,24 @@
 #ifndef EE_LIBRARY_MULTILINGUAL_DELEGATE_HPP
 #define EE_LIBRARY_MULTILINGUAL_DELEGATE_HPP
 
+#include "EECocos2dxFwd.hpp"
+#include "EEForward.hpp"
 #include "EELanguageDelegate.hpp"
 
-#include <EECocos2dxFwd.hpp>
 #include <platform/CCPlatformDefine.h> // CC_DLL
-#include <cocosbuilder/CCNodeLoaderListener.h>
+
 #include <cocosbuilder/CCBMemberVariableAssigner.h>
+#include <cocosbuilder/CCNodeLoaderListener.h>
 
 namespace ee {
 /// = LanguageDelegate + CocosBuilder.
 class MultilingualDelegate : public LanguageDelegate,
                              public cocosbuilder::NodeLoaderListener,
                              public cocosbuilder::CCBMemberVariableAssigner {
+private:
+    using Self = MultilingualDelegate;
+    using Super = LanguageDelegate;
+
 public:
 protected:
     virtual void onNodeLoaded(cocos2d::Node* node,

@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef EE_LIBRARY_EVENT_INFO_V2_HPP_
-#define EE_LIBRARY_EVENT_INFO_V2_HPP_
+#ifndef EE_LIBRARY_EVENT_INFO_HPP
+#define EE_LIBRARY_EVENT_INFO_HPP
 
 #include <functional>
 #include <string>
@@ -33,4 +33,4 @@ public:
 };
 } // namespace ee
 
-#endif /* EE_LIBRARY_EVENT_INFO_V2_HPP_ */
+#endif /* EE_LIBRARY_EVENT_INFO_HPP */

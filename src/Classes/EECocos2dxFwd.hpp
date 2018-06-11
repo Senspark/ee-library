@@ -134,7 +134,7 @@ class Mat3;
 class Mat4;
 
 class Size;
-class Rect;    
+class Rect;
 struct Color3B;
 struct Color4F;
 struct BlendFunc;
@@ -164,6 +164,7 @@ class Widget;
 class EditBox;
 class EditBoxDelegate;
 class TextField;
+class Layout;
 } // namespace ui
 } // namespace cocos2d
 
@@ -177,7 +178,7 @@ class HttpResponse;
 namespace cocosbuilder {
 struct BlockData;
 struct BlockControlData;
-    
+
 class CCBReader;
 class NodeLoaderLibrary;
 class NodeLoader;
@@ -191,6 +192,8 @@ class LayerColorLoader;
 class LayerGradientLoader;
 class ScrollViewLoader;
 class ParticleSystemQuadLoader;
+class CCBMemberVariableAssigner;
+class CCBSelectorResolver;
 } // namespace cocosbuilder
 
 namespace spine {

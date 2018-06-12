@@ -35,7 +35,7 @@ public:
     using size_type = std::size_t;
 
     explicit Pool(const constructor& ctor, const destructor& dtor = nullptr)
-        : Pool(ctor, dtor, [this](const_pointer instance) {
+        : Pool(ctor, dtor, [](const_pointer instance) {
             return instance->getReferenceCount() == 1;
         }) {}
 

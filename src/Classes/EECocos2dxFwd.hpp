@@ -14,6 +14,8 @@
 #include <string>
 #include <unordered_map>
 
+#include <platform/CCPlatformDefine.h> // For CC_DLL
+
 enum class ResolutionPolicy;
 
 namespace cocos2d {

@@ -15,6 +15,8 @@
 
 namespace ee {
 namespace dialog {
+using Self = Dialog;
+
 const int Dialog::ContainerLocalZOrder = 123456;
 const std::size_t Dialog::TopLevel = 123456;
 
@@ -36,7 +38,7 @@ bool Dialog::init() {
     addProtectedChild(transitionAction_);
 
     setActive(false);
-    addClickEventListener(CC_CALLBACK_0(Dialog::onClickedOutside, this));
+    addClickEventListener(CC_CALLBACK_0(Self::onPressed, this));
     return true;
 }
 
@@ -109,8 +111,8 @@ bool Dialog::isActive() const noexcept {
 
 bool Dialog::hitTest(const cocos2d::Point& pt, const cocos2d::Camera* camera,
                      cocos2d::Vec3* p) const {
-    // Test outside.
-    return not Super::hitTest(pt, camera, p);
+    // Swallow all touches.
+    return true;
 }
 
 void Dialog::onDialogWillShow() {
@@ -144,6 +146,14 @@ void Dialog::invokeCallbacks(std::vector<CallbackInfo>& callbacks) {
 void Dialog::onClickedOutside() {
     if (isActive()) {
         hide();
+    }
+}
+
+void Self::onPressed() {
+    auto&& position = convertToNodeSpace(getTouchEndPosition());
+    cocos2d::Rect bounds(cocos2d::Point::ZERO, getContentSize());
+    if (not bounds.containsPoint(position)) {
+        onClickedOutside();
     }
 }
 

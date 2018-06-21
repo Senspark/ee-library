@@ -53,7 +53,6 @@ set(LIB_SRC
     src/Classes/EETransitionFadeOut.cpp
     src/Classes/EEButton.cpp
     src/Classes/EEMd5.cpp
-    src/Classes/EEEventInfoV1.cpp
     src/Classes/EEBackButtonListener.cpp
     src/Classes/EEPreferences.cpp
     src/Classes/EEUiLayoutLoader.cpp
@@ -63,6 +62,7 @@ set(LIB_SRC
     src/Classes/EECrc.cpp
     src/Classes/EEBoxBlur2D.cpp
     src/Classes/EEPoolUtils.cpp
+    src/Classes/EEWidget.cpp
     src/Classes/EENodeV3Loader.cpp
     src/Classes/EEDialogUtils.cpp
     src/Classes/EELanguageSwitcher.cpp
@@ -76,6 +76,7 @@ set(LIB_SRC
     src/Classes/EESpriteWithHsv.cpp
     src/Classes/EEManagedScene.cpp
     src/Classes/EESkeletonBoneLoader.cpp
+    src/Classes/EEWidgetLoader.cpp
     src/Classes/EEDialog.cpp
     src/Classes/EECheckBox.cpp
     src/Classes/EECommandPool.cpp
@@ -91,22 +92,22 @@ set(LIB_HEADERS
     src/Classes/EESpriteWithHsv.hpp
     src/Classes/EEManagedScene.hpp
     src/Classes/EESkeletonBoneLoader.hpp
+    src/Classes/EEWidgetLoader.hpp
     src/Classes/EEHeader.hpp
     src/Classes/EEDialog.hpp
     src/Classes/EECheckBox.hpp
     src/Classes/EECommandPool.hpp
     src/Classes/EEButton.hpp
     src/Classes/EECocos2dxFwd.hpp
-    src/Classes/EEEventInfoV1.hpp
     src/Classes/EEEventListener.hpp
     src/Classes/EEBackButtonListener.hpp
     src/Classes/EEUiLayoutLoader.hpp
     src/Classes/EEPreferences.hpp
     src/Classes/EESpineFactory.hpp
     src/Classes/EEShaderManager.hpp
-    src/Classes/EEEventInfoV2.hpp
     src/Classes/EELanguage.hpp
     src/Classes/EEPoolUtils.hpp
+    src/Classes/EEWidget.hpp
     src/Classes/EEDialogUtils.hpp
     src/Classes/EENodeV3Loader.hpp
     src/Classes/EELanguageSwitcher.hpp
@@ -115,6 +116,7 @@ set(LIB_HEADERS
     src/Classes/EEMultilingualDelegate.hpp
     src/Classes/EEUiButtonLoader.hpp
     src/Classes/EEConsoleDelegate.hpp
+    src/Classes/EEILanguageSwitcher.hpp
     src/Classes/EELanguageFormatter.hpp
     src/Classes/EEAction.hpp
     src/Classes/EEScale9SpriteWithHsv.hpp
@@ -124,6 +126,7 @@ set(LIB_HEADERS
     src/Classes/EEUiWidgetCallback.hpp
     src/Classes/EEDialogTree.hpp
     src/Classes/EEDialogManager.hpp
+    src/Classes/EEEventInfo.hpp
     src/Classes/EEDynamicValue.hpp
     src/Classes/EELazyPtr.hpp
     src/Classes/EEBackButtonComponent.hpp

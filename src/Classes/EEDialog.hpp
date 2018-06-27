@@ -150,6 +150,7 @@ private:
     using CallbackInfo = std::pair<TransitionCallback, int>;
 
     void invokeCallbacks(std::vector<CallbackInfo>& callbacks);
+    void onPressed();
 
     std::size_t dialogLevel_;
     bool isActive_;

@@ -172,3 +172,9 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     src/Classes
     src/Classes/experimental
 )
+
+set_target_properties(${PROJECT_NAME}
+  PROPERTIES
+  ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+  LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+)

@@ -16,6 +16,15 @@ const Self Self::English("en");
 const Self Self::Thailand("th");
 const Self Self::Vietnamese("vi");
 const Self Self::Russian("ru");
+const Self Self::Japan("jp");
+const Self Self::Indonesia("id");
+const Self Self::Frane("fr");
+const Self Self::China("cn");
+const Self Self::Korean("kr");
+const Self Self::Portuguese("br");
+const Self Self::Italya("it");
+const Self Self::German("de");
+const Self Self::Spanish("es");
 
 Self Self::create(const std::string& code) {
     return Self(code);

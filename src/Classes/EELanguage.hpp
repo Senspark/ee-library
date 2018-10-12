@@ -22,6 +22,15 @@ public:
     static const Self Thailand;
     static const Self Vietnamese;
     static const Self Russian;
+    static const Self Japan;
+    static const Self Indonesia;
+    static const Self Frane;
+    static const Self China;
+    static const Self Korean;
+    static const Self Portuguese;
+    static const Self Italya;
+    static const Self German;
+    static const Self Spanish;
 
     static Self create(const std::string& code);
 
